@@ -1,0 +1,23 @@
+{
+    "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
+    "namespace": "BVCItems",
+    "items": {
+        "includes": [
+            {
+                "name": "templates",
+                "path": "/sitecore/Templates/Project/BVC",
+                "allowedPushOperations": "CreateUpdateAndDelete"
+            },
+			{
+                "name": "contentRoot",
+                "path": "/sitecore/content/BVC",
+                "allowedPushOperations": "CreateUpdateAndDelete"
+            },
+			{
+                "name": "media",
+                "path": "/sitecore/Media Library/Project/BVC",
+                "allowedPushOperations": "CreateUpdateAndDelete"
+            }
+        ]
+    }
+}
