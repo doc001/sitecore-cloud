@@ -1,23 +1,59 @@
-# Sitecore JSS Next.js Sample Application
+# BVC Sitecore JSS Next.JS Application
 
-[Documentation (Experience Platform)](https://doc.sitecore.com/xp/en/developers/hd/21/sitecore-headless-development/sitecore-javascript-rendering-sdk--jss--for-next-js.html)
+## PREREQUISITES
+You must have the following software components on your workstation:
 
-[Documentation (XM Cloud)](https://doc.sitecore.com/xmc/en/developers/xm-cloud/sitecore-javascript-rendering-sdk--jss--for-next-js.html)
+1. Windows PowerShell
+
+2. Latest version of NVM https://github.com/coreybutler/nvm-windows#readme
+
+3. The current long-term support (LTS) version of Node.js. Check your installed version with `node -v` https://nodejs.org/ (v18 as of project start)
+
+4. Intall JSS CLI Global Install `npm install -g @sitecore-jss/sitecore-jss-cli`
+
+## QUICK START - FIRST RUN/SETUP {#frist-run}
+Change the working directory of your terminal to the *<REPOROOT>/src/bvcrendering* directory.
+
+1. Intall the solution
+
+    ```ps1
+    npm install
+    ```
+
+2. Run the solution
+
+    ```ps1
+    npm run start
+    ```
+
+3. Run Storybook
+
+    ``` ps1
+    npm run storybook
+    ```
 
 
+## QUICK START - ONGOING USE {#ongoing}
+Change the working directory of your terminal to the *<REPOROOT>/src/bvcrendering* directory.
+1. Run the solution
 
-install nvm on machine
+    ```ps1
+    cd bvcrendering
 
+    npm run start
+    ```
 
-jss CLI global install
-npm install -g @sitecore-jss/sitecore-jss-cli
+2. Run Storybook
 
+    ``` ps1
+    npm run storybook
+    ```
 
+***
 
-npm install
+# RESOURCES
++ [Documentation (Experience Platform)](https://doc.sitecore.com/xp/en/developers/hd/21/sitecore-headless-development/sitecore-javascript-rendering-sdk--jss--for-next-js.html)
 
++ [Documentation (XM Cloud)](https://doc.sitecore.com/xmc/en/developers/xm-cloud/sitecore-javascript-rendering-sdk--jss--for-next-js.html)
 
-
-npm run start
-
-[Sitecore Search](https://developers.sitecorecloud.io/search-sdk/react/2.x/storybook/index.html?path=/docs/introduction-introduction--page)
++ [Sitecore Search](https://developers.sitecorecloud.io/search-sdk/react/2.x/storybook/index.html?path=/docs/introduction-introduction--page)
