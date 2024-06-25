@@ -12,7 +12,7 @@ You must have the following software components on your workstation:
 4. Intall JSS CLI Global Install `npm install -g @sitecore-jss/sitecore-jss-cli`
 
 ## QUICK START - FIRST RUN/SETUP {#frist-run}
-Change the working directory of your terminal to the *<REPOROOT>/src/bvcrendering* directory.
+Change the working directory of your terminal to the _<REPOROOT>/src/bvcrendering_ directory.
 
 1. Intall the solution
 
@@ -32,9 +32,14 @@ Change the working directory of your terminal to the *<REPOROOT>/src/bvcrenderin
     npm run storybook
     ```
 
+    The following commands are available for Storybook:
+    - `storybook` runs Storybook and launches http://localhost:6006 
+    - `build-storybook`
+    - `generate-stories`
+
 
 ## QUICK START - ONGOING USE {#ongoing}
-Change the working directory of your terminal to the *<REPOROOT>/src/bvcrendering* directory.
+Change the working directory of your terminal to the _<REPOROOT>/src/bvcrendering_ directory.
 1. Run the solution
 
     ```ps1
@@ -49,7 +54,12 @@ Change the working directory of your terminal to the *<REPOROOT>/src/bvcrenderin
     npm run storybook
     ```
 
+    The following commands are available for Storybook:
+    - `storybook` runs Storybook and launches http://localhost:6006 
+    - `build-storybook`
+
 ***
+
 
 # RESOURCES
 + [Documentation (Experience Platform)](https://doc.sitecore.com/xp/en/developers/hd/21/sitecore-headless-development/sitecore-javascript-rendering-sdk--jss--for-next-js.html)

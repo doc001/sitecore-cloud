@@ -44,7 +44,7 @@ Alternatively, if you have started it with Non-Sucking Service Manager, stop it 
 ## QUICK START - FIRST RUN/SETUP  {#frist-run}
 These steps for the first run/setup of the solution on your local development environment. If you have already run these steps, please proceed to [QUICK START - ONGOING USE](#ongoing)
 
-1. In an *ADMIN* terminal, run:
+1. In an _ADMIN_ terminal, run:
 
     ```ps1
     .\init.ps1 -InitEnv -LicenseXmlPath "C:\<PATHTOLICENSE>\license.xml" -AdminPassword "<DESIREDADMINPASSWORD>"
@@ -71,7 +71,7 @@ These steps for the first run/setup of the solution on your local development en
 
 
 ## QUICK START - ONGOING USE {#ongoing}
-1. In and *ADMIN* terminal, run:
+1. In and _ADMIN_ terminal, run:
 
     ```ps1
     .\up.ps1
@@ -88,11 +88,10 @@ These steps for the first run/setup of the solution on your local development en
 > If you have to reset the state of your containers, you can run the \docker\clean.ps1 script. It clears all mounted data and the deployed/copied build output. After running the .\docker\clean.ps1 script, you must rebuild search indexes.
 
 
-
 # SERIALIZATION
 Item serialization CLI options below.
 
-The "default" environment is defined *<REPODIR>/.sitecore/user.json* this file does not sync with the repo and is unique for each developer. There are steps to add the XM Cloud environments to this file for direct connection situations.
+The "default" environment is defined _<REPODIR>/.sitecore/user.json_ this file does not sync with the repo and is unique for each developer. There are steps to add the XM Cloud environments to this file for direct connection situations.
 
 ## PULL Serialize changes from the "default" environment (local docker)
 When you make changes on your local to the base items to sync back to the repo
@@ -106,6 +105,46 @@ When new changes come in from the repo and need to be sync'ed into your local en
 dotnet sitecore ser push --environment-name default
 ```
 
+## CONNECT XM Cloud TO YOUR LOCAL FOR SERIALIZATION (Not Required)
+1. Go into the [XM Cloud portal](https://portal.sitecorecloud.io) and proceed to the **Project** -> **_Development_** -> **Details** section and pull the **Environment ID** value
+
+2. In Terminal run `dotnet sitecore clou environment connect --allow-write -id <ENVIRONMENTID>`
+
+3. This will connect the Development environment to your local instance and create a new record in the _user.json_ file. If you want to connect the other environments - not recommended - follow the same steps above, but instead of _Development_ load the others.
+
+4. The pull and push serialize insturctions above will be used the same for XM Cloud, just change the `--environment-name` to match your target synced with the _user.json_ file.
+
+
+# CHANGE _Pages_ EDITOR TO WORK LOCALLY
+1. In your browser, navigate to the [XM Cloud Pages application](https://pages.sitecorecloud.io/).
+
+2. Open the developer tools console of your browser and find the local storage section. The location differs between browsers:
+
+    - For Chrome and Edge, open the **Application** panel. In the **Storage** section, expand the Local Storage section.
+
+    - For Firefox, open the **Storage** panel, and expand the **Local Storage** section.
+
+3. In the Local Storage panel, click the entry for XM Cloud Pages https://pages.sitecorecloud.io to reveal the local storage entries.
+
+4. Create a new entry by adding a new row with the following values:
+
+    - Key: **Sitecore.Pages.LocalXmCloudUrl**.
+
+    - Value: the URL of your local XM Cloud instance. For example, https://xmcloudcm.localhost/.
+
+5. Verify that your local XM Cloud instance is configured to connect with XM Cloud Pages. If correctly configured, your XM Cloud instance has the following environment variables:
+
+    ```
+    SITECORE_Pages_Client_Host=https://pages.sitecorecloud.io
+    SITECORE_Pages_CORS_Allowed_Origins=pages.sitecorecloud.io
+    SITECORE_GRAPHQL_CORS=*.sitecorecloud.io
+    ```
+
+6. Refresh the https://pages.sitecorecloud.io page to see your local front-end application.
+
+> **Note**
+> If you get a _401_ error, click **Home** and log in again if prompted.
+
 
 # FRONT END
-Please refer to the README.md under *<REPODIR>/src/bvcrendering* for the front end React/Next.JS and Storybook instructions.
+Please refer to the README.md under _<REPODIR>/src/bvcrendering_ for the front end React/Next.JS and Storybook instructions.
