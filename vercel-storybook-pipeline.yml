@@ -6,8 +6,9 @@ pool:
  
 steps:
 - task: vercel-deployment-task@1
+  name: 'BVC XMCloud - Deploy Storybook to Vercel'
   inputs:
     vercelProjectId: 'prj_bZVAIV66pW9Nha2GMna5fpsh5C3Z'
-    vercelOrgId: 'xNY5I6EpY8cvUM2b4VqOeUgk'
+    vercelOrgId: 'team_2JEOL5JOKnZWIwE21mo5gzzA'
     vercelToken: $(VERCEL_TOKEN)
-    production: true
+    production: false
