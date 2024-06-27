@@ -1,12 +1,12 @@
 trigger:
-- develop
+- none
  
 pool:
   vmImage: ubuntu-latest
  
 steps:
 - task: vercel-deployment-task@1
-  name: 'DeployStorybookToVercel'
+  displayName: 'Deploy Storybook To Vercel'
   inputs:
     vercelProjectId: 'prj_bZVAIV66pW9Nha2GMna5fpsh5C3Z'
     vercelOrgId: 'team_2JEOL5JOKnZWIwE21mo5gzzA'
