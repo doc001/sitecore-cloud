@@ -7,7 +7,22 @@ You must have the following software components on your workstation:
 
 2. Latest version of NVM https://github.com/coreybutler/nvm-windows#readme
 
-3. The current long-term support (LTS) version of Node.js. Check your installed version with `node -v` https://nodejs.org/ (v18 as of project start)
+3. The current long-term support (LTS) version of Node.js. Check your installed version with `node -v` https://nodejs.org/ (v20 as of project start)
+
+    - If you do not have node installed then use `nvm install 20.10.0`
+
+    - If you do have node installed, but it is a later version, run:
+
+    ```ps1
+    nvm install 20.10.0
+    ```
+
+    ```ps1
+    nvm use 20.10.0
+    ```
+
+    This installs version 20.10.0 and switches to it.
+    If you need to switch between versions for other projects you can use the command, `nvm use <VERSIONNUMBER>`
 
 4. Intall JSS CLI Global Install `npm install -g @sitecore-jss/sitecore-jss-cli`
 
