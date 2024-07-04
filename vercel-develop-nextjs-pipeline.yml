@@ -1,0 +1,14 @@
+trigger:
+- none
+ 
+pool:
+  vmImage: ubuntu-latest
+ 
+steps:
+- task: vercel-deployment-task@1
+  displayName: 'Deploy NextJS To Vercel'
+  inputs:
+    vercelProjectId: 'prj_TIT1ldBQgYt12jt1GE428WsKgXza'
+    vercelOrgId: 'team_2JEOL5JOKnZWIwE21mo5gzzA'
+    vercelToken: $(VERCEL_TOKEN)
+    production: true
