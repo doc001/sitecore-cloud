@@ -2,7 +2,6 @@ import type { AppProps } from 'next/app';
 import { I18nProvider } from 'next-localization';
 import { SitecorePageProps } from 'lib/page-props';
 import Bootstrap from 'src/Bootstrap';
-
 import 'assets/main.scss';
 
 function App({ Component, pageProps }: AppProps<SitecorePageProps>): JSX.Element {
