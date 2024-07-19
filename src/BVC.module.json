@@ -1,22 +1,12 @@
 {
     "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
-    "namespace": "BVC",
+    "namespace": "RenderingHost",
     "items": {
-       "includes": [
+        "includes": [
             {
-                "name": "templates",
-                "path": "/sitecore/Templates/Project/BVC",
-                "allowedPushOperations": "CreateUpdateAndDelete"
-            },
-            {
-                "name": "contentRoot",
-                "path": "/sitecore/content",
-                "allowedPushOperations": "CreateUpdateAndDelete"
-            },
-            {
-                "name": "media",
-                "path": "/sitecore/Media Library/Project/BVC",
-                "allowedPushOperations": "CreateUpdateAndDelete"
+                "name": "DefaultRenderingHost",
+                "path": "/sitecore/system/Settings/Services/Rendering Hosts/Default",
+                "scope": "singleItem"
             }
         ]
     }
