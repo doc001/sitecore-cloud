@@ -6,27 +6,32 @@
         {
             "name": "templatesProject",
             "path": "/sitecore/templates/Project/BVC",
-            "allowedPushOperations": "CreateUpdateAndDelete"
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
         },
         {
             "name": "templatesFeature",
             "path": "/sitecore/templates/Feature/BVC",
-            "allowedPushOperations": "CreateUpdateAndDelete"
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
         },
         {
             "name": "branchesProject",
             "path": "/sitecore/templates/Branches/Project/BVC",
-            "allowedPushOperations": "CreateUpdateAndDelete"
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
         },
         {
             "name": "branchesFeature",
             "path": "/sitecore/templates/Branches/Feature/BVC",
-            "allowedPushOperations": "CreateUpdateAndDelete"
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
         },
         {
             "name": "modules",
             "path": "/sitecore/system/Settings/Feature/BVC",
-            "allowedPushOperations": "CreateUpdateAndDelete"
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
         },           
         {
           "name": "projectMediaFolders",
@@ -47,22 +52,26 @@
         {
             "name": "layoutsProject",
             "path": "/sitecore/Layout/Layouts/Project/BVC",
-            "allowedPushOperations": "CreateUpdateAndDelete"
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
         },
         {
             "name": "layoutsFeature",
             "path": "/sitecore/Layout/Layouts/Feature/BVC",
-            "allowedPushOperations": "CreateUpdateAndDelete"
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
         },
         {
           "name": "projectRenderings",
           "path": "/sitecore/Layout/Renderings/Project/BVC",
-          "allowedPushOperations": "CreateUpdateAndDelete"
+          "allowedPushOperations": "CreateUpdateAndDelete",
+          "scope": "ItemAndDescendants"
         },
         {
           "name": "projectPlaceholderSettings",
           "path": "/sitecore/Layout/Placeholder Settings/Project/BVC",
-          "allowedPushOperations": "CreateUpdateAndDelete"
+          "allowedPushOperations": "CreateUpdateAndDelete",
+          "scope": "ItemAndDescendants"
         },
         {
           "name": "tenantRoot",
