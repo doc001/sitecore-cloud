@@ -1,14 +1,14 @@
 {
     "deployItems": {
       "modules": [
-        "Project.*"
+        "./src/Project.*"
       ]
     },
     "buildTargets": [
       "BVCXmCloud.sln"
     ],
     "renderingHosts": {
-      "xmcloudpreview": {
+      "BVC": {
         "path": "./src/bvcrendering",
         "nodeVersion": "20.10.0",
         "jssDeploymentSecret": "110F1C44A496B45478640DD36F80C18C9",
