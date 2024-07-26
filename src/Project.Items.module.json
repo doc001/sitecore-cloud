@@ -16,6 +16,11 @@
             "scope": "ItemAndDescendants"
         },
         {
+            "name": "templatesFoundation",
+            "path": "/sitecore/templates/Foundation/BVC",
+            "allowedPushOperations": "CreateUpdateAndDelete"
+        },
+        {
             "name": "branchesProject",
             "path": "/sitecore/templates/Branches/Project/BVC",
             "allowedPushOperations": "CreateUpdateAndDelete",
@@ -66,6 +71,11 @@
           "path": "/sitecore/Layout/Renderings/Project/BVC",
           "allowedPushOperations": "CreateUpdateAndDelete",
           "scope": "ItemAndDescendants"
+        },
+        {
+          "name": "featureRenderings",
+          "path": "/sitecore/layout/Renderings/Feature/BVC",
+          "allowedPushOperations": "CreateUpdateAndDelete"
         },
         {
           "name": "projectPlaceholderSettings",
