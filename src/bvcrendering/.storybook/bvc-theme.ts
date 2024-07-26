@@ -8,7 +8,7 @@ export default create({
 
   brandTitle: 'Bow Valley College Storybook',
   brandUrl: 'https://bowvalleycollege.ca',
-  brandImage: 'https://storybook.js.org/images/placeholders/350x150.png',
+  brandImage: 'bvc_logo.svg',
   brandTarget: '_self',
 
   //
