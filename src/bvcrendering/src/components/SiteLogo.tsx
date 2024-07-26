@@ -10,9 +10,9 @@ import {
 } from '@sitecore-jss/sitecore-jss-nextjs';
 
 interface Fields {
-  Image: ImageField;
-  ImageCaption: Field<string>;
-  TargetUrl: LinkField;
+  siteLogoImage: ImageField;
+  siteLogoCaption: Field<string>;
+  siteLogoLink: LinkField;
 }
 
 export type ImageProps = {
@@ -32,23 +32,23 @@ export const Default = (props: ImageProps): JSX.Element => {
   const { sitecoreContext } = useSitecoreContext();
 
   if (props.fields) {
-    const Image = () => <JssImage field={props.fields.Image} />;
+    const Image = () => <JssImage field={props.fields.siteLogoImage} />;
     const id = props.params.RenderingIdentifier;
 
     return (
       <div className={`component image ${props.params.styles}`} id={id ? id : undefined}>
         <div className="component-content">
-          {sitecoreContext.pageState === 'edit' || !props.fields.TargetUrl?.value?.href ? (
+          {sitecoreContext.pageState === 'edit' || !props.fields.siteLogoLink?.value?.href ? (
             <Image />
           ) : (
-            <JssLink field={props.fields.TargetUrl}>
+            <JssLink field={props.fields.siteLogoLink}>
               <Image />
             </JssLink>
           )}
           <Text
             tag="span"
             className="image-caption field-imagecaption"
-            field={props.fields.ImageCaption}
+            field={props.fields.siteLogoCaption}
           />
         </div>
       </div>
