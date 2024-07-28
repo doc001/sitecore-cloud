@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Image as JssImage,
   Link as JssLink,
-  ImageField,
+  ImageFieldValue,
   Field,
   LinkField,
   Text,
@@ -10,7 +10,7 @@ import {
 } from '@sitecore-jss/sitecore-jss-nextjs';
 
 interface Fields {
-  siteLogoImage: ImageField;
+  siteLogoImage: ImageFieldValue;
   siteLogoCaption: Field<string>;
   siteLogoLink: LinkField;
 }
