@@ -1,0 +1,14 @@
+{
+    "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
+    "namespace": "System.Items",
+    "items": {
+        "includes": [
+        {
+            "name": "modules",
+            "path": "/sitecore/system/Settings/Feature/BVC",
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
+        }
+      ]
+    }
+  }
