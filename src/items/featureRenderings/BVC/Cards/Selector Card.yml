@@ -12,7 +12,7 @@ SharedFields:
   Value: Office/32x32/document_selection.png
 - ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
   Hint: Datasource Template
-  Value: /sitecore/templates/Feature/BVC/Cards/Selector Card
+  Value: /sitecore/templates/Feature/BVC/Cards/Selector Card List
 - ID: "7d8ae35f-9ed1-43b5-96a2-0a5f040d4e4e"
   Hint: Open Properties after Add
   Value: 0
@@ -24,7 +24,7 @@ SharedFields:
   Value: "{04874E93-F93E-4151-B651-15234977CEF7}"
 - ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
   Hint: Datasource Location
-  Value: "query:$site/*[@@name='Data']//*[@@templatename='Selector Card Folder']|query:$sharedSites/*[@@name='Data']//*[@@templatename='Selector Card Folder']"
+  Value: "query:$site/*[@@name='Data']//*[@@templateid='{C9CA9637-D7F9-4C11-963D-FA4A23A9D105}']|query:$sharedSites/*[@@name='Data']//*[@@templateid='{C9CA9637-D7F9-4C11-963D-FA4A23A9D105}']"
 - ID: "c39a90ce-0035-41bb-90f6-3c8a6ea87797"
   Hint: AddFieldEditorButton
   Value: 
@@ -74,14 +74,14 @@ Languages:
         sitecore\JssImport
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "22fe2795-4468-4c87-8168-daece491bed7"
+      Value: "2e9f2734-a656-4d01-9d91-af123c20d56f"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240731T163642Z
+      Value: 20240731T211131Z
 - Language: "ja-JP"
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
