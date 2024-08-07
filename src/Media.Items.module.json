@@ -1,0 +1,24 @@
+{
+    "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
+    "namespace": "Media.Items",
+    "items": {
+        "includes": [ 
+        {
+          "name": "projectMediaFolders",
+          "path": "/sitecore/Media Library/Project/BVC",
+          "rules": [
+            {
+              "path": "/shared",
+              "scope": "SingleItem",
+              "allowedPushOperations": "CreateOnly"
+            },
+            {
+              "path": "/BVC",
+              "scope": "SingleItem",
+              "allowedPushOperations": "CreateOnly"
+            }
+          ]
+        }
+      ]
+    }
+  }
