@@ -18,13 +18,13 @@ SharedFields:
   Value: 0
 - ID: "9c6106ea-7a5a-48e2-8cad-f0f693b1e2d4"
   Hint: __Read Only
-  Value: 0
+  Value: 
 - ID: "a77e8568-1ab3-44f1-a664-b7c37ec7810d"
   Hint: Parameters Template
   Value: "{85806D56-E5B9-4A66-8233-4F7ACC8BD555}"
 - ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
   Hint: Datasource Location
-  Value: "query:$site/*[@@name='Data']/*[@@templatename='Hero Banner Folder']|query:$sharedSites/*[@@name='Data']/*[@@templatename='Hero Banner Folder']"
+  Value: "query:$site/*[@@name='Data']//*[@@templatename='Hero Banner Folder']|query:$sharedSites/*[@@name='Data']/*[@@templatename='Hero Banner Folder']"
 - ID: "c39a90ce-0035-41bb-90f6-3c8a6ea87797"
   Hint: AddFieldEditorButton
   Value: 
@@ -74,14 +74,14 @@ Languages:
         sitecore\JssImport
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "55bebcf1-4d6a-458d-8f7c-887c43b95bcf"
+      Value: "92317e05-a491-4878-9e9f-d1effeed03b6"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240726T192739Z
+      Value: 20240808T203436Z
 - Language: "ja-JP"
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
