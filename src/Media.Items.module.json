@@ -17,6 +17,16 @@
               "path": "/BVC",
               "scope": "SingleItem",
               "allowedPushOperations": "CreateOnly"
+            },
+            {
+              "path": "/BVC/Sitemaps",
+              "scope": "ItemAndDescendants",
+              "allowedPushOperations": "CreateUpdateAndDelete"
+            },
+            {
+              "path": "/BVC/System",
+              "scope": "SingleItem",
+              "allowedPushOperations": "CreateOnly"
             }
           ]
         }
