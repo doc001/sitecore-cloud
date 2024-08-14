@@ -1,5 +1,14 @@
 {
-    
+    "deployItems": {
+      "modules": [
+        "Renderinghost",
+        "Templates.Items",
+        "Layout.Items",
+        "System.Items",
+        "Media.Items",
+        "Content.Items"
+      ]
+    },
     "buildTargets": [
       "BVCXmCloud.sln"
     ],
