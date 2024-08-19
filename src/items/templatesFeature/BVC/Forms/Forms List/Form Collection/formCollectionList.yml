@@ -1,30 +1,30 @@
 ﻿---
-ID: "64733761-69e2-450d-8c0d-8a5cd0047af4"
-Parent: "ab2456e4-ee0e-45e8-a983-8ea467e19ed5"
+ID: "c56dc9d1-a36f-4688-bf2a-43778026f8be"
+Parent: "af0c4c9d-adff-466b-a08d-61e4f21dba14"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
-Path: /sitecore/templates/Feature/BVC/Forms/Newsletter Form Item/Newsletter Form/formAccountName
+Path: /sitecore/templates/Feature/BVC/Forms/Forms List/Form Collection/formCollectionList
 SharedFields:
+- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
+  Hint: Source
+  Value: "query:/sitecore/content/BVC/BVC/Data/Forms//*[@@templateid='{F100E617-390C-4630-BC05-584282780CD1}']"
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
-  Value: "Single-Line Text"
+  Value: Multilist
 - ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
   Hint: __Sortorder
-  Value: 200
+  Value: 100
 Languages:
 - Language: en
   Fields:
   - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
     Hint: Title
-    Value: Form Account Name
-  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
-    Hint: __Display name
-    Value: Form Account Name
+    Value: Form Collection List
   Versions:
   - Version: 1
     Fields:
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
-      Value: 20240718T173157Z
+      Value: 20240819T201004Z
     - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
       Hint: __Owner
       Value: |
@@ -35,11 +35,11 @@ Languages:
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "54efdf6c-9080-4dc4-8d0f-a6b3b7874c55"
+      Value: "8eff9788-34e5-486d-8b79-1529f9a7bac0"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240718T180802Z
+      Value: 20240819T202418Z
