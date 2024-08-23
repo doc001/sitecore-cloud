@@ -32,11 +32,6 @@
             "allowedPushOperations": "CreateOnly"
           },
           {
-            "path": "/Data",
-            "scope": "SingleItem",
-            "allowedPushOperations": "CreateAndUpdate"
-          },
-          {
             "path": "/Presentation",
             "scope": "ItemAndDescendants",
             "allowedPushOperations": "CreateAndUpdate"
@@ -55,6 +50,8 @@
       {
         "name": "siteData",
         "path": "/sitecore/content/BVC/BVC/Data",
+        "scope": "ItemAndDescendants",
+        "allowedPushOperations": "CreateAndUpdate",
         "rules": [
           {
             "path": "/Basic Content",
