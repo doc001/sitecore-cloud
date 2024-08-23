@@ -4,6 +4,9 @@ Parent: "d43ce62c-f9c2-47c7-9718-f367a84974f0"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/Feature/BVC/BasicContent/Banner Item/Banner Content/heroStyle
 SharedFields:
+- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
+  Hint: Source
+  Value: "query:/sitecore/content/BVC/BVC/Settings//*[@@templateid=='{32D8E0F0-D43A-46AF-9752-31DA9731B435}']"
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
   Value: "Single-Line Text"
@@ -15,10 +18,10 @@ Languages:
   Fields:
   - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
     Hint: Title
-    Value: Hero Styles
+    Value: Banner Style
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
     Hint: __Display name
-    Value: Hero Style
+    Value: Banner Style
   Versions:
   - Version: 1
     Fields:
@@ -35,11 +38,11 @@ Languages:
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "88138d31-f15a-4892-9394-c3f5313f3ac5"
+      Value: "a21639b4-43d7-4e81-b868-f3a02a0e3b60"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240819T214002Z
+      Value: 20240820T212427Z

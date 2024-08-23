@@ -28,12 +28,12 @@
           },
           {
             "path": "/Data",
-            "scope": "ItemAndChildren",
+            "scope": "SingleItem",
             "allowedPushOperations": "CreateAndUpdate"
           },
           {
             "path": "/Dictionary",
-            "scope": "ItemAndChildren",
+            "scope": "ItemAndDescendants",
             "allowedPushOperations": "CreateOnly"
           },
           {
@@ -42,13 +42,8 @@
             "allowedPushOperations": "CreateAndUpdate"
           },
           {
-            "path": "/Settings/Site Grouping",
-            "scope": "ItemAndDescendants",
-            "allowedPushOperations": "CreateOnly"
-          },
-          {
             "path": "/Settings",
-            "scope": "ItemAndChildren",
+            "scope": "ItemAndDescendants",
             "allowedPushOperations": "CreateAndUpdate"
           },
           {
@@ -84,17 +79,6 @@
           {
             "path": "*",
             "scope": "Ignored"
-          }
-        ]
-      },
-      {
-        "name": "settings",
-        "path": "/sitecore/content/BVC/BVC/Settings",
-        "rules": [
-          {
-            "path": "/HTML Tags",
-            "scope": "ItemAndChildren",
-            "allowedPushOperations": "CreateAndUpdate"
           }
         ]
       }
