@@ -29,7 +29,7 @@
           {
             "path": "/Data",
             "scope": "SingleItem",
-            "allowedPushOperations": "CreateAndUpdate"
+            "allowedPushOperations": "CreateOnly"
           },
           {
             "path": "/Dictionary",
@@ -73,6 +73,11 @@
           },
           {
             "path": "/Site Navigation",
+            "scope": "ItemAndChildren",
+            "allowedPushOperations": "CreateAndUpdate"
+          },
+          {
+            "path": "/Videos",
             "scope": "ItemAndChildren",
             "allowedPushOperations": "CreateAndUpdate"
           },
