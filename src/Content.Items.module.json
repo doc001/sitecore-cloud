@@ -27,14 +27,14 @@
             "allowedPushOperations": "CreateAndUpdate"
           },
           {
-            "path": "/Data",
-            "scope": "SingleItem",
-            "allowedPushOperations": "CreateOnly"
-          },
-          {
             "path": "/Dictionary",
             "scope": "ItemAndDescendants",
             "allowedPushOperations": "CreateOnly"
+          },
+          {
+            "path": "/Data",
+            "scope": "SingleItem",
+            "allowedPushOperations": "CreateAndUpdate"
           },
           {
             "path": "/Presentation",
@@ -53,7 +53,7 @@
         ]
       },
       {
-        "name": "data",
+        "name": "siteData",
         "path": "/sitecore/content/BVC/BVC/Data",
         "rules": [
           {
