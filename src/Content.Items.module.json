@@ -79,6 +79,11 @@
             "allowedPushOperations": "CreateAndUpdate"
           },
           {
+            "path": "/Search",
+            "scope": "ItemAndChildren",
+            "allowedPushOperations": "CreateAndUpdate"
+          },
+          {
             "path": "*",
             "scope": "Ignored"
           }
