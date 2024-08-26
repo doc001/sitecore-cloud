@@ -18,13 +18,13 @@ SharedFields:
   Value: 0
 - ID: "9c6106ea-7a5a-48e2-8cad-f0f693b1e2d4"
   Hint: __Read Only
-  Value: 0
+  Value: 
 - ID: "a77e8568-1ab3-44f1-a664-b7c37ec7810d"
   Hint: Parameters Template
   Value: "{CF268E07-EB2A-43B7-A443-578FB3450AD9}"
 - ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
   Hint: Datasource Location
-  Value: "query:$site/*[@@name='Data']/*[@@templatename='Header Search Folder']|query:$sharedSites/*[@@name='Data']/*[@@templatename='Header Search Folder']"
+  Value: "query:$site//*[@@templateid='{41AD6563-D037-4199-9CE7-69BDAA414DA2}']|query:$sharedSites/*[@@name='Data']//*[@@templateid='{41AD6563-D037-4199-9CE7-69BDAA414DA2}']"
 - ID: "c39a90ce-0035-41bb-90f6-3c8a6ea87797"
   Hint: AddFieldEditorButton
   Value: 
@@ -74,14 +74,14 @@ Languages:
         sitecore\JssImport
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "e1ec5fa9-effa-4cd3-b42f-1e1fc22e5abb"
+      Value: "53b40f0e-f426-4942-840d-6f3935a611da"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240718T210525Z
+      Value: 20240826T203042Z
 - Language: "ja-JP"
   Fields:
   - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
