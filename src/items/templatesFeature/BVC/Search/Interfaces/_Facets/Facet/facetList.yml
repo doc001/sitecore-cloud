@@ -4,6 +4,9 @@ Parent: "dd675dee-ad2d-443e-a451-1afb95e0ae0c"
 Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
 Path: /sitecore/templates/Feature/BVC/Search/Interfaces/_Facets/Facet/facetList
 SharedFields:
+- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
+  Hint: Source
+  Value: "query:/sitecore/content/BVC/BVC/Data//*[@@templateid='{6E920AB5-BBC3-42C3-B774-607AFCF61EFB}']"
 - ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
   Hint: Type
   Value: Multilist
@@ -12,6 +15,10 @@ SharedFields:
   Value: 100
 Languages:
 - Language: en
+  Fields:
+  - ID: "19a69332-a23e-4e70-8d16-b2640cb24cc8"
+    Hint: Title
+    Value: Facet List
   Versions:
   - Version: 1
     Fields:
@@ -28,11 +35,11 @@ Languages:
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "f6b860f4-9d88-4210-a649-5467809346e0"
+      Value: "00befb54-f211-48c6-8900-e7b3e850787b"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\jpulleri@bowvalleycollege.ca
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20240823T185731Z
+      Value: 20240826T170116Z
