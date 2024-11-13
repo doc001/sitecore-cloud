@@ -1,0 +1,38 @@
+{
+    "$schema": "../.sitecore/schemas/ModuleFile.schema.json",
+    "namespace": "Templates.Items",
+    "references": [ "RenderingHost" ],
+    "items": {
+        "includes": [
+        {
+            "name": "templatesProject",
+            "path": "/sitecore/templates/Project/BVC",
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
+        },
+        {
+            "name": "templatesFeature",
+            "path": "/sitecore/templates/Feature/BVC",
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
+        },
+        {
+            "name": "templatesFoundation",
+            "path": "/sitecore/templates/Foundation/BVC",
+            "allowedPushOperations": "CreateUpdateAndDelete"
+        },
+        {
+            "name": "branchesProject",
+            "path": "/sitecore/templates/Branches/Project/BVC",
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
+        },
+        {
+            "name": "branchesFeature",
+            "path": "/sitecore/templates/Branches/Feature/BVC",
+            "allowedPushOperations": "CreateUpdateAndDelete",
+            "scope": "ItemAndDescendants"
+        }
+      ]
+    }
+  }

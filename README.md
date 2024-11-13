@@ -1,27 +1,165 @@
-# XM Cloud Starter Kit (Next JS)
+# BVC Solution
 
-## QUICK START
+## PREREQUISITES
+You must have the following software components on your workstation:
 
-1. In an ADMIN terminal:
+1. A valid Sitecore license file.
+
+2. Windows PowerShell
+
+3. The current long-term support (LTS) version of Node.js. Check your installed version with `node -v` https://nodejs.org/ (v20 as of project start)
+
+    - If you do not have node installed then use `nvm install 20.10.0`
+
+    - If you do have node installed, but it is a later version, run:
 
     ```ps1
-    .\init.ps1 -InitEnv -LicenseXmlPath "C:\path\to\license.xml" -AdminPassword "DesiredAdminPassword"
+    nvm install 20.10.0
     ```
+
+    ```ps1
+    nvm use 20.10.0
+    ```
+
+    This installs version 20.10.0 and switches to it.
+    If you need to switch between versions for other projects you can use the command, `nvm use <VERSIONNUMBER>`
+    
+4. .NET Core 6.0 SDK (check your installed version with the `dotnet --version` command). https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+
+5. Visual Studio 2022. https://visualstudio.microsoft.com/downloads/
+
+6. Docker for Windows, with Windows Containers enabled. https://docs.docker.com/docker-for-windows/install/ (Version 4.18)
+
+7. Any required components for using Sitecore Containers. https://doc.sitecore.com/xmc/en/developers/xm-cloud/preparing-to-run-the-xm-cloud-foundation-template-locally.html
+
+### PREP BEFORE FIRST RUN
+
+Before starting the containers, you must ensure the necessary ports are accessible.
+
+To prepare the environment for running the solution:
+
+Open PowerShell with administrator privileges.
+
+Check if you have the Internet Information Server (IIS) running on port 443:
+`Get-Process -Id (Get-NetTCPConnection -LocalPort 443).OwningProcess`
+
+If you do, you must stop it:
+`iisreset /stop`
+
+Check if you have Apache Solr or any other service running on port 8984:
+`Get-Process -Id (Get-NetTCPConnection -LocalPort 8984).OwningProcess`
+
+If you do, you must stop it:
+`Stop-Service -Name "<the name of your service>"`
+
+Alternatively, if you have started it with Non-Sucking Service Manager, stop it with the following command:
+`nssm stop "<the name of your service>"`
+
+
+## QUICK START - FIRST RUN/SETUP  {#frist-run}
+These steps for the first run/setup of the solution on your local development environment. If you have already run these steps, please proceed to [QUICK START - ONGOING USE](#ongoing)
+
+1. In an _ADMIN_ terminal, run:
+
+    ```ps1
+    .\init.ps1 -InitEnv -LicenseXmlPath "C:\<PATHTOLICENSE>\license.xml" -AdminPassword "<DESIREDADMINPASSWORD>"
+    ```
+
+    This sets your admin password for your local instance and tells it where to find the license file during each run.
+
+    There will be a notice at the bottom of the terminal window. For the first run it is recommended to perform the command they provide to register the certificate with your local machine to avoid any HTTPS errors when running the instance.
 
 2. Restart your terminal and run:
 
     ```ps1
     .\up.ps1
     ```
+    When prompted, in your browser, log in to the Sitecore XM instance and accept the device authorization.
+    If you are a member of multiple organizations, select the organization for the current project.
+    Wait for the startup script to open browser tabs for the rendered site and the Sitecore Launchpad.
 
-3. Follow the instructions to [deploy to XM Cloud](#deploy-to-xmcloud)
+3. When finsihed, Shutdown docker instance:
 
-4. Create Edge token and [query from edge](#query-edge)
-
-*** 
-
-## About this Solution
-This solution is designed to help developers learn and get started quickly
-with XMCLoud + SXA.
+    ```ps1
+    .\down.ps1
+    ```
 
 
+## QUICK START - ONGOING USE {#ongoing}
+1. In and _ADMIN_ terminal, run:
+
+    ```ps1
+    .\up.ps1
+    ```
+
+2. When finsihed, Shutdown docker instance:
+
+    ```ps1
+    .\down.ps1
+    ```
+
+> :warning: **Important**
+> 
+> If you have to reset the state of your containers, you can run the \docker\clean.ps1 script. It clears all mounted data and the deployed/copied build output. After running the .\docker\clean.ps1 script, you must rebuild search indexes.
+
+
+# SERIALIZATION
+Item serialization CLI options below.
+
+The "default" environment is defined _<REPODIR>/.sitecore/user.json_ this file does not sync with the repo and is unique for each developer. There are steps to add the XM Cloud environments to this file for direct connection situations.
+
+## PULL Serialize changes from the "default" environment (local docker)
+When you make changes on your local to the base items to sync back to the repo
+```ps1
+dotnet sitecore ser pull --environment-name default
+```
+
+## PUSH Serialize changes from the repo to "default" environment (local docker)
+When new changes come in from the repo and need to be sync'ed into your local env
+```ps1
+dotnet sitecore ser push --environment-name default
+```
+
+## CONNECT XM Cloud TO YOUR LOCAL FOR SERIALIZATION (Not Required)
+1. Go into the [XM Cloud portal](https://portal.sitecorecloud.io) and proceed to the **Project** -> **_Development_** -> **Details** section and pull the **Environment ID** value
+
+2. In Terminal run `dotnet sitecore clou environment connect --allow-write -id <ENVIRONMENTID>`
+
+3. This will connect the Development environment to your local instance and create a new record in the _user.json_ file. If you want to connect the other environments - not recommended - follow the same steps above, but instead of _Development_ load the others.
+
+4. The pull and push serialize insturctions above will be used the same for XM Cloud, just change the `--environment-name` to match your target synced with the _user.json_ file.
+
+
+# CHANGE _Pages_ EDITOR TO WORK LOCALLY
+1. In your browser, navigate to the [XM Cloud Pages application](https://pages.sitecorecloud.io/).
+
+2. Open the developer tools console of your browser and find the local storage section. The location differs between browsers:
+
+    - For Chrome and Edge, open the **Application** panel. In the **Storage** section, expand the Local Storage section.
+
+    - For Firefox, open the **Storage** panel, and expand the **Local Storage** section.
+
+3. In the Local Storage panel, click the entry for XM Cloud Pages https://pages.sitecorecloud.io to reveal the local storage entries.
+
+4. Create a new entry by adding a new row with the following values:
+
+    - Key: **Sitecore.Pages.LocalXmCloudUrl**.
+
+    - Value: the URL of your local XM Cloud instance. For example, https://xmcloudcm.localhost/.
+
+5. Verify that your local XM Cloud instance is configured to connect with XM Cloud Pages. If correctly configured, your XM Cloud instance has the following environment variables:
+
+    ```
+    SITECORE_Pages_Client_Host=https://pages.sitecorecloud.io
+    SITECORE_Pages_CORS_Allowed_Origins=pages.sitecorecloud.io
+    SITECORE_GRAPHQL_CORS=*.sitecorecloud.io
+    ```
+
+6. Refresh the https://pages.sitecorecloud.io page to see your local front-end application.
+
+> **Note**
+> If you get a _401_ error, click **Home** and log in again if prompted.
+
+
+# FRONT END
+Please refer to the README.md under _<REPODIR>/src/bvcrendering_ for the front end React/Next.JS and Storybook instructions.
