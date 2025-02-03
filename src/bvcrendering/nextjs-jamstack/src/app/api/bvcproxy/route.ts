@@ -69,7 +69,7 @@ async function getMsToken(): Promise<string> {
 
     if (!response.ok) {
       const errorData = await response.json() as APIError;
-      throw new Error(errorData.error_description || 'Failed to get access token');
+      throw new Error(errorData.error_description ?? 'Failed to get access token');
     }
 
     const data = await response.json() as TokenResponse;
