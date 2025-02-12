@@ -1,17 +1,25 @@
-// Config object to be passed to Msal on creation
+/**
+ * Configuration object to be passed to MSAL instance on creation. 
+ * For a full list of MSAL.js configuration parameters, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
+ */
 const msalConfig = {
     auth: {
-        clientId: "b5c2e510-4a17-4feb-b219-e55aa5b74144",
-        Secret: "tN-8Q~_6b_jtV-tOYGkihFLayonH_Q1VGUezXcxK",
-        authority:  "https://login.microsoftonline.com/8f11c6f4-648e-4c0c-bb99-96e8408a8e2a",
+
+        clientId: "74ec0abb-7354-4176-9a9e-e9886b631c78", // This is the ONLY mandatory field that you need to supply
+        // WORKFORCE TENANT
+        authority: "https://login.microsoftonline.com/8f11c6f4-648e-4c0c-bb99-96e8408a8e2a", //  Replace the placeholder with your tenant info
+        // EXTERNAL TENANT
+        // authority: "https://Enter_the_Tenant_Subdomain_Here.ciamlogin.com/", // Replace the placeholder with your tenant subdomain
+        redirectUri: 'https://bvc-new-test.webflow.io/checkout-page', // You must register this URI on App Registration. Defaults to window.location.href e.g. http://localhost:3000/
+        navigateToLoginRequestUrl: true, // If "true", will navigate back to the original request location before processing the auth code response.
     },
     cache: {
-        cacheLocation: "sessionStorage", // This configures where your cache will be stored
-        storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
+        cacheLocation: 'sessionStorage', // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO.
+        storeAuthStateInCookie: false, // set this to true if you have to support IE
     },
     system: {
         loggerOptions: {
-            logLevel: msal.LogLevel.Trace,
             loggerCallback: (level, message, containsPii) => {
                 if (containsPii) {
                     return;
@@ -29,40 +37,36 @@ const msalConfig = {
                     case msal.LogLevel.Warning:
                         console.warn(message);
                         return;
-                    default:
-                        console.log(message);
-                        return;
                 }
             },
         },
     },
-    telemetry: {
-        application: {
-            appName: "MSAL Browser V2 Default Sample",
-            appVersion: "1.0.0",
-        },
-    },
 };
 
-// Add here scopes for id token to be used at MS Identity Platform endpoints.
+/**
+ * Scopes you add here will be prompted for user consent during sign-in.
+ * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
+ * For more information about OIDC scopes, visit: 
+ * https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview#openid-connect-scopes
+ */
 const loginRequest = {
-    scopes: ["User.Read"],
+    scopes: [],
 };
 
-// Add here the endpoints for MS Graph API services you would like to use.
-const graphConfig = {
-    graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
-    graphMailEndpoint: "https://graph.microsoft.com/v1.0/me/messages",
-};
+/**
+ * An optional silentRequest object can be used to achieve silent SSO
+ * between applications by providing a "login_hint" property.
+ */
 
-// Add here scopes for access token to be used at MS Graph API endpoints.
-const tokenRequest = {
-    scopes: ["Mail.Read"],
-    forceRefresh: false, // Set this to "true" to skip a cached token and go to the server to get a new token
-};
+// const silentRequest = {
+//   scopes: ["openid", "profile"],
+//   loginHint: "example@domain.net"
+// };
 
-const silentRequest = {
-    scopes: ["openid", "profile", "User.Read", "Mail.Read"],
-};
-
-const logoutRequest = {};
+// exporting config object for jest
+if (typeof exports !== 'undefined') {
+    module.exports = {
+        msalConfig: msalConfig,
+        loginRequest: loginRequest,
+    };
+}
