@@ -22,12 +22,21 @@ interface APIError {
 }
 
 // API Configuration remains the same
+// const API_CONFIG: APIConfig = {
+//   TENANT_ID: '8f11c6f4-648e-4c0c-bb99-96e8408a8e2a',
+//   CLIENT_ID: 'd961fcdb-4e7e-4298-af79-48f237caaf28',
+//   CLIENT_SECRET: 'kTv8Q~tL7.GeeFM.exnobRiP6BqtCHgaerywQbQI',
+//   SCOPE: 'api://a4cfac5e-d4c2-4452-bf83-cdc5f8df0daa/.default',
+//   BASE_URL: 'https://devapi.bvc.dev/extended-edu-registration/v1'
+// };
+
+// API Configuration remains the same
 const API_CONFIG: APIConfig = {
   TENANT_ID: '8f11c6f4-648e-4c0c-bb99-96e8408a8e2a',
-  CLIENT_ID: 'd961fcdb-4e7e-4298-af79-48f237caaf28',
-  CLIENT_SECRET: 'kTv8Q~tL7.GeeFM.exnobRiP6BqtCHgaerywQbQI',
-  SCOPE: 'api://a4cfac5e-d4c2-4452-bf83-cdc5f8df0daa/.default',
-  BASE_URL: 'https://devapi.bvc.dev/extended-edu-registration/v1'
+  CLIENT_ID: '10cc8ef6-137a-4560-8a2b-1d414f3dd0c7',
+  CLIENT_SECRET: 'SzJ8Q~xLZRSklU8B0~seCt6rx-WbnHD4olXp4ag~',
+  SCOPE: 'api://8bc87c2f-0b25-4ea9-917e-53169be361d3/.default',
+  BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
 };
 
 const corsHeaders: HeadersInit = {
