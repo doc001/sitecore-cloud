@@ -1,32 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // Type definitions
-// interface APIConfig {
-//   BASE_URL: string;
-// }
+interface APIConfig {
+  BASE_URL: string;
+}
 
 // // API Configuration
 // const API_CONFIG: APIConfig = {
 //   BASE_URL: 'https://devapi.bvc.dev/extended-edu-registration/v1'
 // };
 
-// API Config
-interface APIConfig {
-  TENANT_ID: string;
-  CLIENT_ID: string;
-  CLIENT_SECRET: string;
-  SCOPE: string;
-  BASE_URL: string;
-}
-
-// API Configuration remains the same
+// API Configuration
 const API_CONFIG: APIConfig = {
-  TENANT_ID: '8f11c6f4-648e-4c0c-bb99-96e8408a8e2a',
-  CLIENT_ID: '10cc8ef6-137a-4560-8a2b-1d414f3dd0c7',
-  CLIENT_SECRET: 'SzJ8Q~xLZRSklU8B0~seCt6rx-WbnHD4olXp4ag~',
-  SCOPE: 'api://8bc87c2f-0b25-4ea9-917e-53169be361d3/.default',
   BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
 };
+
+// API Config
+// interface APIConfig {
+//   TENANT_ID: string;
+//   CLIENT_ID: string;
+//   CLIENT_SECRET: string;
+//   SCOPE: string;
+//   BASE_URL: string;
+// }
+
+// API Configuration remains the same
+// const API_CONFIG: APIConfig = {
+//   TENANT_ID: '8f11c6f4-648e-4c0c-bb99-96e8408a8e2a',
+//   CLIENT_ID: '10cc8ef6-137a-4560-8a2b-1d414f3dd0c7',
+//   CLIENT_SECRET: 'SzJ8Q~xLZRSklU8B0~seCt6rx-WbnHD4olXp4ag~',
+//   SCOPE: 'api://8bc87c2f-0b25-4ea9-917e-53169be361d3/.default',
+//   BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
+// };
 
 
 const corsHeaders: HeadersInit = {
