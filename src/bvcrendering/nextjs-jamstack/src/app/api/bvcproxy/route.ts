@@ -10,6 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 //   BASE_URL: 'https://devapi.bvc.dev/extended-edu-registration/v1'
 // };
 
+// API Config
 interface APIConfig {
   TENANT_ID: string;
   CLIENT_ID: string;
