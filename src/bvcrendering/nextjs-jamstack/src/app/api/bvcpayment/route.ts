@@ -100,8 +100,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    // Create a new URL for the API endpoint
-    const apiUrl = new URL(`${API_CONFIG.BASE_URL}/${endpoint}`);
+    // Special handling for payment/submit-payment endpoint
+    let apiUrl: URL;
+    
+    if (endpoint === 'sitecorexm.api/payment/submit-payment') {
+      apiUrl = new URL(`${API_CONFIG.BASE_URL}/sitecorexm.api/payment/submit-payment`);
+    } else {
+      apiUrl = new URL(`${API_CONFIG.BASE_URL}/${endpoint}`);
+    }
     
     // Copy all URL parameters except 'endpoint'
     searchParams.forEach((value, key) => {
@@ -158,7 +164,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     // Special handling for payment URLs
-    if (endpoint.includes('payment/submit-payment') && data.result && data.result.paymentUrl) {
+    if (endpoint === 'sitecorexm.api/payment/submit-payment' && data.result && data.result.paymentUrl) {
       console.log('Payment URL found in response:', data.result.paymentUrl);
     }
 
