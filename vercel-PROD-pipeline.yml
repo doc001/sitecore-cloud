@@ -6,7 +6,7 @@ pool:
  
 steps:
 - task: vercel-deployment-task@1
-  displayName: 'Deploy Storybook To Vercel'
+  displayName: 'Deploy NextJS to Vercel'
   inputs:
     vercelProjectId: 'prj_7dJ0FTDK9627Q88VQUjCaj05GMar'
     vercelOrgId: 'team_2JEOL5JOKnZWIwE21mo5gzzA'
