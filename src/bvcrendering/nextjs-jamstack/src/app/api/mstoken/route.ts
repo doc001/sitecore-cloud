@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// const TENANT_ID = '8f11c6f4-648e-4c0c-bb99-96e8408a8e2a';
+// const CLIENT_ID = 'd961fcdb-4e7e-4298-af79-48f237caaf28';
+// const CLIENT_SECRET = 'kTv8Q~tL7.GeeFM.exnobRiP6BqtCHgaerywQbQI';
+// const SCOPE = 'api://a4cfac5e-d4c2-4452-bf83-cdc5f8df0daa/.default';
+
+// PROD
 const TENANT_ID = '8f11c6f4-648e-4c0c-bb99-96e8408a8e2a';
-const CLIENT_ID = 'd961fcdb-4e7e-4298-af79-48f237caaf28';
-const CLIENT_SECRET = 'kTv8Q~tL7.GeeFM.exnobRiP6BqtCHgaerywQbQI';
-const SCOPE = 'api://a4cfac5e-d4c2-4452-bf83-cdc5f8df0daa/.default';
+const CLIENT_ID = '10cc8ef6-137a-4560-8a2b-1d414f3dd0c7';
+const CLIENT_SECRET = 'SzJ8Q~xLZRSklU8B0~seCt6rx-WbnHD4olXp4ag~';
+const SCOPE = 'api://8bc87c2f-0b25-4ea9-917e-53169be361d3/.default';
 
 // Enable CORS
 export async function OPTIONS(request: NextRequest) {
