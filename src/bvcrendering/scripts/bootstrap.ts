@@ -23,4 +23,4 @@ import './generate-component-builder';
 /*
   META DATA GENERATION
 */
-import './generate-metadata';
+// import './generate-metadata';
