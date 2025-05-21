@@ -1,0 +1,14 @@
+trigger:
+- develop
+ 
+pool:
+  vmImage: ubuntu-latest
+ 
+steps:
+- task: vercel-deployment-task@1
+  displayName: 'Deploy Storybook To Vercel'
+  inputs:
+    vercelProjectId: 'prj_FnnUuSAxd3w683SKCNHZCPXwM4S3'
+    vercelOrgId: 'team_2JEOL5JOKnZWIwE21mo5gzzA'
+    vercelToken: $(VERCEL_TOKEN)
+    production: true
