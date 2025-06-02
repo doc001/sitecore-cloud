@@ -22,9 +22,10 @@ const nextConfig: NextConfig = {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',
   },
-
    // Trailing slash for static hosting compatibility
    trailingSlash: true,
+   skipTrailingSlashRedirect: true,
+   distDir: 'out',
 
 };
 
