@@ -1,0 +1,273 @@
+/* components/HeroHomeSection.module.css */
+/**
+ * Hero Home Section CSS Module
+ * 
+ * These styles are specific to the HeroHomeSection component
+ * and leverage the CSS variables defined in globals.css
+ */
+
+/* Main hero section styling */
+.c-hero__home {
+  min-height: 90vh;
+  background-image: linear-gradient(220deg, var(--color-navy-100), var(--color-blue-100) 50%, var(--color-purple-100));
+  background-size: 2650px;
+  background-position: 69% 82%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-8) var(--spacing-4);
+  overflow: hidden; /* Ensure video doesn't overflow */
+}
+
+/* Video background */
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* YouTube video background */
+.youtube-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* Prevents interactions with the iframe */
+  overflow: hidden;
+}
+
+.youtube-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  /* Make the iframe larger to cover the container */
+  min-width: 150%; 
+  min-height: 150%;
+}
+
+/* Ensure proper aspect ratio for the videos */
+@media (min-aspect-ratio: 16/9) {
+  .youtube-iframe {
+    /* Height based on width */
+    height: 56.25vw; /* 9/16 = 0.5625 */
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .youtube-iframe {
+    /* Width based on height */
+    width: 177.78vh; /* 16/9 = 1.7778 */
+  }
+}
+
+/* Overlay for better text readability */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(3, 26, 98, 0.6), rgba(3, 26, 98, 0.2));
+  z-index: 1;
+}
+
+/* Message container */
+.c-message {
+  width: 100%;
+  padding: 0 10%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-8);
+  position: relative;
+  z-index: 2; /* Above overlay */
+}
+
+/* Grid layout */
+.c-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  height: 100%;
+}
+
+/* Spacer at the bottom */
+.c-bottom__spacer {
+  margin-bottom: var(--spacing-8);
+}
+
+/* Typography styles */
+.white-font {
+  color: var(--color-white);
+}
+
+.xxl {
+  font-size: var(--font-size-6xl);
+  line-height: 1.1;
+  font-weight: 600;
+  margin-bottom: var(--spacing-2);
+}
+
+.xxxl {
+  font-size: var(--font-size-9xl);
+  line-height: 1;
+  font-weight: 700;
+  margin-bottom: var(--spacing-4);
+  background-image: linear-gradient(99deg, var(--color-white), var(--color-neutral-10));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Transparent button style */
+.c-button__transparent {
+  border: 2px solid var(--color-white);
+  color: var(--color-white);
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+}
+
+.c-button__transparent:hover {
+  background-color: var(--color-white);
+  color: var(--color-navy-100);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animated-text h2 {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animated-text h1 {
+  animation: fadeInUp 0.8s ease-out 0.2s;
+  animation-fill-mode: both;
+}
+
+.animated-text h3 {
+  animation: fadeInUp 0.8s ease-out 0.4s;
+  animation-fill-mode: both;
+}
+
+.button-animated {
+  animation: fadeIn 1s ease-out 0.6s;
+  animation-fill-mode: both;
+}
+
+
+/* Responsive adjustments */
+
+@media (min-width: 640px) {
+  .c-hero__home {
+    min-height: 70vh;
+    padding: var(--spacing-6) var(--spacing-2);
+  }
+  
+  .xxl {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .xxxl {
+    font-size: var(--font-size-7xl);
+  }
+  
+  .c-message {
+    padding: var(--spacing-4);
+  }
+}
+
+@media (min-width: 768px) {
+  .c-hero__home {
+    min-height: 70vh;
+    padding: var(--spacing-6) var(--spacing-2);
+  }
+  
+  .xxl {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .xxxl {
+    font-size: var(--font-size-7xl);
+  }
+  
+  .c-message {
+    padding: var(--spacing-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .c-hero__home {
+    min-height: 70vh;
+    padding: var(--spacing-6) var(--spacing-2);
+    background-position: 65% 75%;
+    background-size: 2460px;
+  }
+  
+  .xxl {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .xxxl {
+    font-size: var(--font-size-7xl);
+  }
+  
+  .c-message {
+    padding: var(--spacing-4);
+  }
+}
+
+@media (min-width: 1536px) {
+  .c-hero__home {
+    min-height: 95vh;
+    padding: var(--spacing-6) var(--spacing-2);
+  }
+  
+  .xxl {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .xxxl {
+    font-size: var(--font-size-7xl);
+  }
+  
+  .c-message {
+    padding: var(--spacing-4);
+  }
+}

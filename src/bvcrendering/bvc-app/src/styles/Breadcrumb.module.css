@@ -1,0 +1,146 @@
+/* components/Breadcrumb/Breadcrumb.module.css */
+
+/* Base container with background styling */
+.breadcrumbsBackground {
+    color: var(--color-white);
+    width: 100%;
+    padding: var(--spacing-3) 0;
+    background-color: var(--color-purple-100);
+    background-image:
+    linear-gradient(
+      220deg, 
+      var(--color-navy-100),
+      rgba(0, 0, 0, 0.4)
+    );
+  }
+
+  /* Background variants */
+  .general {
+    background-color: var(--color-neutral-5);
+  }
+  
+  .program {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                      linear-gradient(220deg, rgb(0, 163, 255), rgb(106, 76, 215) 50%, rgb(3, 26, 98));
+    color: var(--color-white);
+  }
+  
+  .ecommerce {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                     linear-gradient(220deg, var(--color-orange-100), var(--color-blue-100) 51%, var(--color-navy-100));
+    color: var(--color-white);
+  }
+  
+  .openStudies {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+                     linear-gradient(220deg, var(--color-orange-100), var(--color-purple-100));
+    color: var(--color-white);
+  }
+  
+  /* Container width matches the box-width-1280 class */
+  .containerWidth {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+  }
+  
+  @media (min-width: 1024px) {
+    .containerWidth {
+      height: auto;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+  
+  /* Breadcrumb wrapper for the navigation items */
+  .breadcrumbWrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-1);
+    font-size: var(--font-size-sm);
+  }
+  
+  /* Home icon styling */
+  .breadcrumbIcon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-white);
+    text-decoration: none;
+    font-family: 'Material Icons';
+    font-size: var(--font-size-lg);
+    transition: color 0.2s ease;
+  }
+  
+  .breadcrumbIcon:hover {
+    color: var(--color-orange-100);
+  }
+  
+  /* Program and other dark variants need white links */
+  .program .breadcrumbIcon, 
+  .ecommerce .breadcrumbIcon,
+  .openStudies .breadcrumbIcon {
+    color: var(--color-white);
+  }
+  
+  /* Separator styling */
+  .breadcrumbSeparator {
+    color: var(--color-white);
+    font-size: var(--font-size-sm);
+  }
+  
+  .program .breadcrumbSeparator, 
+  .ecommerce .breadcrumbSeparator,
+  .openStudies .breadcrumbSeparator {
+    color: var(--color-white);
+    opacity: 0.7;
+  }
+  
+  /* Link styling */
+  .breadcrumbLink {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.2s ease;
+  }
+  
+  .breadcrumbLink:hover {
+    color: var(--color-purple-100);
+    text-decoration: none;
+  }
+  
+  .program .breadcrumbLink, 
+  .ecommerce .breadcrumbLink,
+  .openStudies .breadcrumbLink {
+    color: var(--color-white);
+  }
+  
+  /* Current page (non-link) styling */
+  .breadcrumbNoLink {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-white);
+    font-size: var(--font-size-sm);
+    text-decoration: underline;
+  }
+  
+  .program .breadcrumbNoLink, 
+  .ecommerce .breadcrumbNoLink,
+  .openStudies .breadcrumbNoLink {
+    color: var(--color-white);
+    opacity: 0.8;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .breadcrumbWrapper {
+      font-size: var(--font-size-xs);
+    }
+    
+    .breadcrumbIcon {
+      font-size: var(--font-size-base);
+    }
+  }
