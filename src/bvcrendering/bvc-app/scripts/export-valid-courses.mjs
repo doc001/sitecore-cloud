@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config({ path: '.env.local' });
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env.local" });
 
 import { GraphQLClient, gql } from 'graphql-request';
 import { writeFileSync } from 'fs';

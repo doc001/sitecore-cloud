@@ -16,8 +16,16 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    
+    optimizeCss: true,
   },
+  compiler: {
+    // Remove console logs in production
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+
+   // Trailing slash for static hosting compatibility
+   trailingSlash: true,
+
 };
 
 export default withFlowbiteReact(nextConfig);

@@ -12,7 +12,6 @@
     "generateMap": "node scripts/generateSiSData.mjs",
     "generateCourseData": "node scripts/buildCoursesComplete.mjs",
     "build": "npm run generateCourses && npm run generateMap && npm run generateCourseData && next build"
-
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
@@ -21,6 +20,7 @@
     "axios": "^1.9.0",
     "cheerio": "^1.0.0",
     "clsx": "^2.1.1",
+    "critters": "^0.0.23",
     "dotenv": "^16.5.0",
     "flowbite-react": "^0.11.7",
     "framer-motion": "^12.10.4",

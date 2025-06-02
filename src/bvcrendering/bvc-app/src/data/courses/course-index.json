@@ -1,76 +1,15 @@
 {
   "metadata": {
-    "generatedAt": "2025-06-01T23:30:43.234Z",
+    "generatedAt": "2025-06-02T18:22:56.278Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Course Index",
-    "totalCourses": 32
+    "totalCourses": 20
   },
   "courses": [
     {
       "sisID": "ACCT9101",
       "name": "Financial Accounting - Introduction",
       "fileName": "course-ACCT9101.json",
-      "summary": {
-        "totalSections": 8,
-        "totalFees": 9,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 8,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "ACCT9102",
-      "name": "Financial Accounting - Intermediate",
-      "fileName": "course-ACCT9102.json",
-      "summary": {
-        "totalSections": 5,
-        "totalFees": 5,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 5,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "ACCT9103",
-      "name": "Financial Accounting - Advanced",
-      "fileName": "course-ACCT9103.json",
-      "summary": {
-        "totalSections": 4,
-        "totalFees": 4,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 4,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "ACCT9201",
-      "name": "Budget and Financial Reports",
-      "fileName": "course-ACCT9201.json",
       "summary": {
         "totalSections": 3,
         "totalFees": 3,
@@ -88,14 +27,74 @@
       }
     },
     {
+      "sisID": "ACCT9102",
+      "name": "Financial Accounting - Intermediate",
+      "fileName": "course-ACCT9102.json",
+      "summary": {
+        "totalSections": 2,
+        "totalFees": 2,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 2,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "ACCT9103",
+      "name": "Financial Accounting - Advanced",
+      "fileName": "course-ACCT9103.json",
+      "summary": {
+        "totalSections": 2,
+        "totalFees": 2,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 2,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "ACCT9201",
+      "name": "Budget and Financial Reports",
+      "fileName": "course-ACCT9201.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 1,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
       "sisID": "ACCT9401",
       "name": "QuickBooks Introduction",
       "fileName": "course-ACCT9401.json",
       "summary": {
-        "totalSections": 7,
-        "totalFees": 7,
+        "totalSections": 3,
+        "totalFees": 3,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 7,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -111,66 +110,6 @@
       "sisID": "ACCT9402",
       "name": "Quickbooks Advanced",
       "fileName": "course-ACCT9402.json",
-      "summary": {
-        "totalSections": 4,
-        "totalFees": 4,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 4,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "ACCT9403",
-      "name": "Sage 50 Premium Accounting Level I",
-      "fileName": "course-ACCT9403.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 1,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "ACCT9404",
-      "name": "Sage 50 Premium Accounting Level II",
-      "fileName": "course-ACCT9404.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 1,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "COMP9201",
-      "name": "Microsoft Word - Introduction",
-      "fileName": "course-COMP9201.json",
       "summary": {
         "totalSections": 2,
         "totalFees": 2,
@@ -192,10 +131,10 @@
       "name": "Microsoft Word - Core",
       "fileName": "course-COMP9202.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 2,
+        "totalSections": 1,
+        "totalFees": 1,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 2,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -212,10 +151,10 @@
       "name": "Microsoft Excel - Introduction",
       "fileName": "course-COMP9301.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 3,
+        "totalSections": 1,
+        "totalFees": 1,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 3,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -231,26 +170,6 @@
       "sisID": "COMP9302",
       "name": "Microsoft Excel - Core",
       "fileName": "course-COMP9302.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "COMP9303",
-      "name": "Microsoft Excel - Expert",
-      "fileName": "course-COMP9303.json",
       "summary": {
         "totalSections": 1,
         "totalFees": 1,
@@ -272,36 +191,16 @@
       "name": "Basic Life Support CPR",
       "fileName": "course-FACP9101.json",
       "summary": {
-        "totalSections": 14,
-        "totalFees": 28,
-        "totalTimeBlocks": 14,
-        "sectionsWithFees": 14,
+        "totalSections": 7,
+        "totalFees": 14,
+        "totalTimeBlocks": 7,
+        "sectionsWithFees": 7,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
         "containers": [
           "Fees",
           "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "HMSV9102",
-      "name": "Personal Support Skills for Caregivers",
-      "fileName": "course-HMSV9102.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
         ],
         "feeTypes": [
           "Tuition"
@@ -313,120 +212,15 @@
       "name": "Understanding and Applying the DSM-5-TR in Healthcare Practice",
       "fileName": "course-HMSV9503.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 3,
+        "totalSections": 1,
+        "totalFees": 1,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 3,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
         "containers": [
           "Fees"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "HRES9208",
-      "name": "Payroll Fundamentals I",
-      "fileName": "course-HRES9208.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "HRES9209",
-      "name": "Payroll Fundamentals II",
-      "fileName": "course-HRES9209.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "HRES9306",
-      "name": "Payroll Compliance Legislation",
-      "fileName": "course-HRES9306.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "MMPR9101",
-      "name": "An Integrated Strategy for Maintenance Management",
-      "fileName": "course-MMPR9101.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "MMPR9102",
-      "name": "Production and Operations Management for Maintenance Manager",
-      "fileName": "course-MMPR9102.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
         ],
         "feeTypes": [
           "Tuition"
@@ -455,56 +249,14 @@
       }
     },
     {
-      "sisID": "MMPR9105",
-      "name": "Maintenance Strategy Development",
-      "fileName": "course-MMPR9105.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "MMPR9107",
-      "name": "Maintenance Information Management",
-      "fileName": "course-MMPR9107.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Tuition"
-        ]
-      }
-    },
-    {
       "sisID": "NURS9204",
       "name": "Intramuscular And Intradermal Injections",
       "fileName": "course-NURS9204.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 6,
-        "totalTimeBlocks": 3,
-        "sectionsWithFees": 3,
+        "totalSections": 1,
+        "totalFees": 2,
+        "totalTimeBlocks": 1,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -522,10 +274,10 @@
       "name": "Intravenous Initiation, Infusion and Medication Administration",
       "fileName": "course-NURS9213.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 6,
-        "totalTimeBlocks": 3,
-        "sectionsWithFees": 3,
+        "totalSections": 2,
+        "totalFees": 4,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -543,10 +295,10 @@
       "name": "Leadership for Licensed Practical Nurses",
       "fileName": "course-NURS9502.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 3,
+        "totalSections": 1,
+        "totalFees": 1,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 3,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -563,10 +315,10 @@
       "name": "Phlebotomy",
       "fileName": "course-NURS9504.json",
       "summary": {
-        "totalSections": 7,
-        "totalFees": 14,
-        "totalTimeBlocks": 7,
-        "sectionsWithFees": 7,
+        "totalSections": 3,
+        "totalFees": 6,
+        "totalTimeBlocks": 3,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -584,10 +336,10 @@
       "name": "Fundamentals of Real Estate",
       "fileName": "course-RELE9101.json",
       "summary": {
-        "totalSections": 6,
-        "totalFees": 6,
+        "totalSections": 2,
+        "totalFees": 2,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 6,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -604,10 +356,10 @@
       "name": "Practice of Commercial Real Estate",
       "fileName": "course-RELE9202.json",
       "summary": {
-        "totalSections": 6,
-        "totalFees": 6,
+        "totalSections": 2,
+        "totalFees": 2,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 6,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -624,10 +376,10 @@
       "name": "Practice of Property Management",
       "fileName": "course-RELE9204.json",
       "summary": {
-        "totalSections": 6,
-        "totalFees": 6,
+        "totalSections": 2,
+        "totalFees": 2,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 6,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -644,10 +396,10 @@
       "name": "N95 Mask Fitting",
       "fileName": "course-SAFT9406.json",
       "summary": {
-        "totalSections": 36,
-        "totalFees": 72,
-        "totalTimeBlocks": 36,
-        "sectionsWithFees": 36,
+        "totalSections": 16,
+        "totalFees": 32,
+        "totalTimeBlocks": 16,
+        "sectionsWithFees": 16,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
