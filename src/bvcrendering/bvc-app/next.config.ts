@@ -25,7 +25,6 @@ const nextConfig: NextConfig = {
    // Trailing slash for static hosting compatibility
    trailingSlash: true,
    skipTrailingSlashRedirect: true,
-   distDir: 'out',
 
 };
 
