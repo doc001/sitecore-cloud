@@ -8,7 +8,7 @@ export default function CourseGrid({ courses }: { courses: Course[] }) {
       <div className="text-base text-neutral-60">
         Showing <span className="text-[color:var(--color-blue-100)]">{courses.length}</span> results of <span className="text-[color:var(--color-blue-100)]">{courses.length}</span> items.
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {courses.map((course, index) => (
           <div key={index} className="rounded-lg border border-neutral-20 p-6 shadow-sm">
             <p className="text-sm font-medium text-neutral-60 mb-2">{course.area}</p>

@@ -113,10 +113,10 @@ export interface ProgramLink {
   // Applicant profile type
 export type ApplicantProfileType = 
 | 'i-am-a-first-year-student'
-| 'I-need-academic-upgrading'
-| 'I-am-an-international-student'
-| 'I-am-a-transfer-student'
-| 'I-am-a-returning-student';
+| 'i-need-academic-upgrading'
+| 'i-am-an-international-student'
+| 'i-am-a-transfer-student'
+| 'i-am-a-returning-student';
 
 // Profile information type
 export interface ProfileInfo {
@@ -130,7 +130,7 @@ description: string[];
 // Mapping of profiles to their information
 export const PROFILE_INFO_MAP: Record<ApplicantProfileType, ProfileInfo> = {
 'i-am-a-first-year-student': {
-  title: 'First-Year Student Application',
+  title: 'I am first year student',
   subtitle: 'Take your first step into higher education with our comprehensive support',
   backgroundImage: '/images/backgrounds/first-year-students.jpg',
   requirements: [
@@ -146,7 +146,7 @@ export const PROFILE_INFO_MAP: Record<ApplicantProfileType, ProfileInfo> = {
     'Our comprehensive first-year program is designed to help you transition smoothly into university life while providing the foundation for your academic success.'
   ]
 },
-'I-need-academic-upgrading': {
+'i-need-academic-upgrading': {
   title: 'Academic Upgrading',
   subtitle: 'Improve your qualifications and prepare for further education',
   backgroundImage: '/images/backgrounds/academic-upgrading.jpg',
@@ -162,7 +162,7 @@ export const PROFILE_INFO_MAP: Record<ApplicantProfileType, ProfileInfo> = {
     'Whether you need to complete high school requirements or enhance specific subject knowledge, we offer flexible pathways to help you achieve your goals.'
   ]
 },
-'I-am-an-international-student': {
+'i-am-an-international-student': {
   title: 'International Student Application',
   subtitle: 'Begin your global education journey with our diverse programs',
   backgroundImage: '/images/backgrounds/international-students.jpg',
@@ -179,7 +179,7 @@ export const PROFILE_INFO_MAP: Record<ApplicantProfileType, ProfileInfo> = {
     'We provide comprehensive support services to help you navigate the application process, visa requirements, and transition to studying in a new country.'
   ]
 },
-'I-am-a-transfer-student': {
+'i-am-a-transfer-student': {
   title: 'Transfer Student Application',
   subtitle: 'Continue your academic path seamlessly with our transfer programs',
   backgroundImage: '/images/backgrounds/transfer-students.jpg',
@@ -195,7 +195,7 @@ export const PROFILE_INFO_MAP: Record<ApplicantProfileType, ProfileInfo> = {
     'Our transfer credit assessment team will work with you to evaluate your previous coursework and apply it toward your degree requirements.'
   ]
 },
-'I-am-a-returning-student': {
+'i-am-a-returning-student': {
   title: 'Returning Student Application',
   subtitle: 'Welcome back! Pick up where you left off and complete your education',
   backgroundImage: '/images/backgrounds/returning-students.jpg',
