@@ -4,12 +4,10 @@
   "framework": null,
   "functions": {
     "api/bvcpayment.mjs": {
-      "maxDuration": 30,
-      "runtime": "vercel/nodejs18.x"
+      "maxDuration": 30
     },
     "api/auth-token.mjs": {
-      "maxDuration": 15,
-      "runtime": "vercel/nodejs18.x"
+      "maxDuration": 15
     }
   },
   "headers": [
