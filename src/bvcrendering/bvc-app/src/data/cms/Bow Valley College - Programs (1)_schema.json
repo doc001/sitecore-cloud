@@ -1,0 +1,214 @@
+{
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "Name": {
+        "type": "string"
+      },
+      "Slug": {
+        "type": "string"
+      },
+      "Collection ID": {
+        "type": "string"
+      },
+      "Locale ID": {
+        "type": "string"
+      },
+      "Item ID": {
+        "type": "string"
+      },
+      "Archived": {
+        "type": "boolean"
+      },
+      "Draft": {
+        "type": "boolean"
+      },
+      "Created On": {
+        "type": "string"
+      },
+      "Updated On": {
+        "type": "string"
+      },
+      "Published On": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Code": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Short description": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Program Description": {
+        "type": "string"
+      },
+      "Program type": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Duration": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Availabe intakes": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "PGWP": {
+        "type": "boolean"
+      },
+      "School": {
+        "type": "string"
+      },
+      "Program area": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Course delivery": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Courses HTML": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Tuition fees": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Additional fees": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Requirements": {
+        "type": "null"
+      },
+      "Admin req": {
+        "type": "string"
+      },
+      "Category": {
+        "type": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "Apply Button is English Learing Skill": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "Name",
+      "Slug",
+      "Collection ID",
+      "Locale ID",
+      "Item ID",
+      "Archived",
+      "Draft",
+      "Created On",
+      "Updated On",
+      "Program Description",
+      "PGWP",
+      "School",
+      "Admin req",
+      "Apply Button is English Learing Skill"
+    ]
+  }
+}

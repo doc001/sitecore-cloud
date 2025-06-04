@@ -15,19 +15,19 @@ export default function NotFound() {
       title: 'First-Year Student'
     },
     {
-      slug: 'I-need-academic-upgrading',
+      slug: 'i-need-academic-upgrading',
       title: 'Academic Upgrading'
     },
     {
-      slug: 'I-am-an-international-student',
+      slug: 'i-am-an-international-student',
       title: 'International Student'
     },
     {
-      slug: 'I-am-a-transfer-student',
+      slug: 'i-am-a-transfer-student',
       title: 'Transfer Student'
     },
     {
-      slug: 'I-am-a-returning-student',
+      slug: 'i-am-a-returning-student',
       title: 'Returning Student'
     }
   ];

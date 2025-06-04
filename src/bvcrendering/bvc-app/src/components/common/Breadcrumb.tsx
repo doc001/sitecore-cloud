@@ -6,7 +6,7 @@ import styles from '@/styles/Breadcrumb.module.css';
 /**
  * Interface for a breadcrumb item
  * @param label - The text to display for the breadcrumb
- * @param href - The URL the breadcrumb should link to (optional for current page)
+ * @param href - The URL the breadcrumb should link to (optional for non-clickable items)
  * @param isCurrentPage - Whether this breadcrumb represents the current page
  */
 export interface BreadcrumbItem {
@@ -18,8 +18,8 @@ export interface BreadcrumbItem {
 /**
  * Props for the Breadcrumb component
  * @param items - Array of breadcrumb items to display
- * @param variant - Visual style variant of the breadcrumb (default is "general")
- * @param showHomeIcon - Whether to show the home icon at the start (defaults to true)
+ * @param variant - Visual style variant of the breadcrumb
+ * @param showHomeIcon - Whether to show the home icon at the start
  */
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
@@ -28,12 +28,22 @@ interface BreadcrumbProps {
 }
 
 /**
- * Breadcrumb component for navigation hierarchy
+ * Enhanced Breadcrumb component for navigation hierarchy - App Router Compatible
  * 
- * Displays a trail of links showing the navigation path from home to current page
- * - Always shows a "Home" link at the beginning if showHomeIcon is true
- * - Uses ">" as a separator between items
- * - Current page is shown without a link
+ * REVERSED LOGIC:
+ * - Home icon: Always a link
+ * - First item in array: NOT a link (just text)
+ * - Middle items: Links
+ * - Last item (current page): IS a link
+ * 
+ * DYNAMIC ROUTE SUPPORT:
+ * - Integrates with profile types from types/index.ts
+ * - Uses actual profile titles instead of URL segments
+ * - Maintains proper href links for all clickable items
+ * 
+ * SSG COMPATIBLE:
+ * - Server Component by default in App Router
+ * - Renders at build time for static generation
  */
 const Breadcrumb: React.FC<BreadcrumbProps> = ({
   items,
@@ -51,29 +61,38 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
           {showHomeIcon && (
             <>
               <Link href="/" className={styles.breadcrumbIcon}>
-                home
+                <span className="material-icon">home</span>
               </Link>
               <div className={styles.breadcrumbSeparator}>&gt;</div>
             </>
           )}
-
+          
           {/* Map through breadcrumb items */}
           {breadcrumbItems.map((item, index) => {
             const isLast = index === breadcrumbItems.length - 1;
+            const isFirst = index === 0;
+            const totalItems = breadcrumbItems.length;
             
-            // Render differently based on whether item is current page or a link
+            // REVERSED LOGIC: Determine if this item should be a link or not
+            let shouldBeLink = true;
+            
+            // Rule: If it's the first item AND there are multiple items, it should NOT be a link
+            if (isFirst && totalItems > 1) {
+              shouldBeLink = false;
+            }
+            
             return (
               <React.Fragment key={`${item.label}-${index}`}>
-                {/* If it's the current page or explicitly marked as current, don't make it a link */}
-                {(isLast || item.isCurrentPage) ? (
+                {shouldBeLink && item.href ? (
+                  /* Render as link - only if it should be a link AND has href */
+                  <Link href={item.href} className={styles.breadcrumbLink}>
+                    {item.label}
+                  </Link>
+                ) : (
+                  /* Render as plain text - for first item or items without href */
                   <div className={styles.breadcrumbNoLink}>
                     {item.label}
                   </div>
-                ) : (
-                  /* Otherwise it's a clickable link */
-                  <Link href={item.href || '#'} className={styles.breadcrumbLink}>
-                    {item.label}
-                  </Link>
                 )}
                 
                 {/* Add separator if not the last item */}
