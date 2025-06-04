@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "generatedAt": "2025-06-04T05:36:56.192Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "MMPR9103",
+    "courseName": "Human Resources Management for Maintenance Manager"
+  },
+  "course": {
+    "id": "B96F8950944A4CE9B2E934AE56363DBD",
+    "sisID": "MMPR9103",
+    "name": "Human Resources Management for Maintenance Manager",
+    "children": [
+      {
+        "id": "35BF97F7BE8D4CCD870A7B2F718A5473",
+        "name": "25MAYMNOS91",
+        "sisID": "220596",
+        "courseName": "",
+        "deliveryTypeId": "{B28CFCEF-E867-4297-85CC-0DDEAC9B3104}",
+        "campusId": "{405455B3-8716-44E4-8557-08E9D06C07A8}",
+        "deliveryType": {
+          "id": "B28CFCEFE867429785CC0DDEAC9B3104",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
+        "campus": {
+          "id": "405455B3871644E4855708E9D06C07A8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "30",
+        "registrationStart": "20250211T000000",
+        "registrationEnd": "20250521T235959",
+        "startDate": "20250523T000000",
+        "endDate": "20250614T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeType": {
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "925.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "530A1",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "10AEB9DAEBBD4DAEAD4644FF08ED8502",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20240101T165000",
+              "startTime": "20240101T080000",
+              "sisId": "530A1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201736Z",
+              "Updated": "20241021T201736Z"
+            },
+            "day": "5"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 2,
+      "totalTimeBlocks": 1,
+      "sectionsWithFees": 1
+    }
+  }
+}

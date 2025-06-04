@@ -6,14 +6,14 @@ interface APIConfig {
 }
 
 // // API Configuration
-// const API_CONFIG: APIConfig = {
-//   BASE_URL: 'https://devapi.bvc.dev/extended-edu-registration/v1'
-// };
+const API_CONFIG: APIConfig = {
+  BASE_URL: 'https://devapi.bvc.dev/extended-edu-registration/v1'
+};
 
 // API Configuration
-const API_CONFIG: APIConfig = {
-  BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
-};
+// const API_CONFIG: APIConfig = {
+//   BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
+// };
 
 // API Config
 // interface APIConfig {

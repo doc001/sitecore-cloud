@@ -5,10 +5,15 @@ interface APIConfig {
   BASE_URL: string;
 }
 
-// API Configuration
+// API Configuration DEV
 const API_CONFIG: APIConfig = {
-  BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
+  BASE_URL: 'https://devapi.bvc.dev/extended-edu-registration/v1'
 };
+
+// API Configuration PROD
+// const API_CONFIG: APIConfig = {
+//   BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
+// };
 
 const corsHeaders: HeadersInit = {
   'Access-Control-Allow-Origin': '*',

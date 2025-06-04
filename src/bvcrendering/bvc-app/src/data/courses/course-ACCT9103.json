@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "generatedAt": "2025-06-04T05:36:48.342Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "ACCT9103",
+    "courseName": "Financial Accounting - Advanced"
+  },
+  "course": {
+    "id": "9DC6855CE214464DBC1F6B511B6E6DCF",
+    "sisID": "ACCT9103",
+    "name": "Financial Accounting - Advanced",
+    "children": [
+      {
+        "id": "42D858BCB48A4E32A0A6B85F5559A350",
+        "name": "25AUGMNOA92",
+        "sisID": "220503",
+        "courseName": "",
+        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
+        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
+        "deliveryType": {
+          "id": "73DB4BB37C194BADBB66CE697687EADE",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0C49C6D7F256468491C327526460556B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "40",
+        "registrationStart": "20250120T000000",
+        "registrationEnd": "20250812T235959",
+        "startDate": "20250813T000000",
+        "endDate": "20251213T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeType": {
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "475.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "C33E66DA58D744EB84A5E16FE1206A9F",
+        "name": "25JUNMNOA91",
+        "sisID": "220500",
+        "courseName": "",
+        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
+        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
+        "deliveryType": {
+          "id": "73DB4BB37C194BADBB66CE697687EADE",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0C49C6D7F256468491C327526460556B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "40",
+        "registrationStart": "20250120T000000",
+        "registrationEnd": "20250610T235959",
+        "startDate": "20250611T000000",
+        "endDate": "20251011T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeType": {
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "475.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 2,
+      "totalFees": 2,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 2
+    }
+  }
+}

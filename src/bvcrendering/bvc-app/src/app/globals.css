@@ -1,0 +1,436 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../../.flowbite-react/class-list.json";
+
+:root {
+  /* Background Colors */
+  --background: var(--color-white);
+  --foreground: var(--color-neutral-80);
+
+  /* Colors */
+  --color-blue-100: #00a3ff;
+  --color-navy-100: #031a62;
+  --color-purple-100: #6a4cd7;
+  --color-orange-100: #ff8700;
+  --color-red-100: #ff003a;
+  --color-white: #ffffff;
+  
+  /* Neutral */
+  --color-neutral-90: #191919;
+  --color-neutral-80: #333333;
+  --color-neutral-70: #4c4c4c;
+  --color-neutral-60: #666666;
+  --color-neutral-50: #7f7f7f;
+  --color-neutral-40: #999999;
+  --color-neutral-30: #b2b2b2;
+  --color-neutral-20: #cccccc;
+  --color-neutral-10: #e5e5e5;
+  --color-neutral-5: #f2f2f2;
+
+  /* Text Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.75rem;
+  --font-size-4xl: 2rem;
+  --font-size-5xl: 2.25rem;
+  --font-size-6xl: 2.5rem;
+  --font-size-7xl: 3rem;
+  --font-size-8xl: 3.5rem;
+  --font-size-9xl: 4rem;
+
+  /* Spacing (Fixed) */
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+
+  /* Spacing (Viewport) */
+  --spacing-vw-5: 5vw;
+  --spacing-vw-10: 10vw;
+  --spacing-vw-20: 20vw;
+  --spacing-vw-70: 70vw;
+  --spacing-vw-80: 80vw;
+
+  --spacing-vh-5: 5vh;
+  --spacing-vh-10: 10vh;
+  --spacing-vh-20: 20vh;
+  --spacing-vh-70: 70vh;
+  --spacing-vh-80: 80vh;
+
+  /* Navy 100 transparencies */
+  --navy--100-tr-10: rgba(3, 25, 97, 0.1); /* 10% */
+  --navy--100-tr-20: rgba(3, 25, 97, 0.2);
+  --navy--100-tr-30: rgba(3, 25, 97, 0.3);
+  --navy--100-tr-40: rgba(3, 25, 97, 0.4);
+  --navy--100-tr-50: rgba(3, 25, 97, 0.5);
+  --navy--100-tr-60: rgba(3, 25, 97, 0.6);
+  --navy--100-tr-70: rgba(3, 25, 97, 0.7);
+  --navy--100-tr-80: rgba(3, 25, 97, 0.8);
+  --navy--100-tr-90: rgba(3, 25, 97, 0.9);
+
+  /* Purple 100 transparencies */
+  --purple--100-tr-10: #6a4cd71a;
+  --purple--100-tr-20: #6a4cd733;
+  --purple--100-tr-30: #6a4cd74d;
+  --purple--100-tr-40: #6a4cd766;
+  --purple--100-tr-50: #6a4cd780;
+  --purple--100-tr-60: #6a4cd799;
+  --purple--100-tr-70: #6a4cd7b3;
+  --purple--100-tr-80: #6a4cd7cc;
+  --purple--100-tr-90: #6a4cd7e6;
+
+  /* Red 100 transparencies */
+  --red--100-tr-10: #ff003a1a;
+  --red--100-tr-20: #ff003a33;
+  --red--100-tr-30: #ff003a4d;
+  --red--100-tr-40: #ff003a66;
+  --red--100-tr-50: #ff003a80;
+  --red--100-tr-60: #ff003a99;
+  --red--100-tr-70: #ff003ab3;
+  --red--100-tr-80: #ff003acc;
+  --red--100-tr-90: #ff003ae6;
+
+  /* Orange 100 transparencies */
+  --orange--100-tr-10: #ff87001a;
+  --orange--100-tr-20: #ff870033;
+  --orange--100-tr-30: #ff87004d;
+  --orange--100-tr-40: #ff870066;
+  --orange--100-tr-50: #ff870080;
+  --orange--100-tr-60: #ff870099;
+  --orange--100-tr-70: #ff8700b3;
+  --orange--100-tr-80: #ff8700cc;
+  --orange--100-tr-90: #ff8700e6;
+
+  /* Blue 100 transparencies */
+  --blue--100-tr-10: #00a3ff1a;
+  --blue--100-tr-20: #00a3ff33;
+  --blue--100-tr-30: #00a3ff4d;
+  --blue--100-tr-40: #00a3ff66;
+  --blue--100-tr-50: #00a3ff80;
+  --blue--100-tr-60: #00a3ff99;
+  --blue--100-tr-70: #00a3ffb3;
+  --blue--100-tr-80: #00a3ffcc;
+  --blue--100-tr-90: #00a3ffe6;
+  
+}
+
+@layer utilities {
+  .gradient-text-purple {
+    @apply inline-block text-transparent bg-clip-text;
+    background-image: linear-gradient(
+      to right,
+      var(--color-purple-100),
+      var(--color-red-100)
+    );
+  }
+
+  .gradient-text-blue {
+    @apply inline-block text-transparent bg-clip-text;
+    background-image: linear-gradient(
+      to right,
+      var(--color-purple-100),
+      var(--color-blue-100)
+    );
+  }
+
+  .bg-program-gradient {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      linear-gradient(220deg, rgb(0, 163, 255), rgb(106, 76, 215) 50%, rgb(3, 26, 98));
+  }
+  .bg-hero-ecommerce {
+    background-image:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      linear-gradient(220deg, var(--color-orange-100), var(--color-blue-100) 51%, var(--color-navy-100));
+  }
+  .bg-hero-open-studies {
+    background-image:
+      linear-gradient(to bottom, var(--neutral-tr--neutral-tr-20), var(--neutral-tr--neutral-tr-20)),
+      linear-gradient(220deg, var(--orange--orange-100), var(--orange--orange-100) 0%, var(--purple--purple-100));
+  }
+  .text-stack-gradient {
+    background-image: linear-gradient(99deg, var(--purple--purple-100) 23%, var(--red--red-100));
+  }
+  .bg-divider-all-colors {
+    background-image: linear-gradient(90deg, #031a62, #6a4cd7 29%, #ff003a 55%, #ff8700 77%, #00a3ff);
+    height: 6px;
+  }
+
+  /* Sample spacing using viewport units */
+  .p-vw-5 { padding: var(--spacing-vw-5); }
+  .p-vh-10 { padding: var(--spacing-vh-10); }
+  .mt-vw-10 { margin-top: var(--spacing-vw-10); }
+
+  .container-layout {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: var(--max-w-screen-3xl); /* Using CSS variable as fallback */
+    padding-top: 2.5rem; /* py-10 */
+    padding-bottom: 2.5rem; /* py-10 */
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+
+  .menu-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: var(--max-w-screen-3xl); /* Using CSS variable as fallback */
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
+  @media (min-width: 640px) {
+    .container-layout {
+      padding-left: 8%;
+      padding-right: 8%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container-layout {
+      padding-left: 8%;
+      padding-right: 8%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-layout {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+  
+  @media (min-width: 1536px) {
+    .container-layout {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+}
+
+@layer components {
+  /* Base icon styles */
+  .material-icon,
+  .material-icon-outlined,
+  .material-icon-round,
+  .material-icon-sharp,
+  .material-icon-two-tone {
+    @apply font-normal normal-case inline-block select-none;
+  }
+  
+  /* Font family mappings */
+  .material-icon {
+    @apply font-['Material_Icons'];
+  }
+  
+  .material-icon-outlined {
+    @apply font-['Material_Icons_Outlined'];
+  }
+  
+  .material-icon-round {
+    @apply font-['Material_Icons_Round'];
+  }
+  
+  .material-icon-sharp {
+    @apply font-['Material_Icons_Sharp'];
+  }
+  
+  .material-icon-two-tone {
+    @apply font-['Material_Icons_Two_Tone'];
+  }
+  
+  /* Icon sizes */
+  .icon-xs {
+    @apply text-sm;
+  }
+  
+  .icon-sm {
+    @apply text-base;
+  }
+  
+  .icon-md {
+    @apply text-xl;
+  }
+  
+  .icon-lg {
+    @apply text-2xl;
+  }
+  
+  .icon-xl {
+    @apply text-3xl;
+  }
+  
+  /* Alignment utility */
+  .icon-align {
+    @apply align-middle;
+  }
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Poppins";
+  --font-display: "Poppins";
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "poppins", Helvetica, sans-serif;
+}
+
+@media (max-width: 767px) {
+  /* DivMagic Note: Tailwind does not support max-width. We will fix this soon. */
+
+  #div-1 {
+    height: 64px !important;
+  }
+  #div-2 {
+    padding: 0px !important;
+  }
+  #div-3 {
+    display: block !important; width: 158px !important; height: 80px !important; position: relative !important;
+  }
+  #img-1 {
+    max-width: 120px !important;
+  }
+  #div-4 {
+    width: 64px !important; height: 64px !important;
+  }
+  #img-2 {
+    width: 20px !important; height: 20px !important;
+  }
+  #div-5 {
+    width: 64px !important; height: 64px !important;
+  }
+  #img-3 {
+    width: 20px !important; height: 20px !important;
+  }
+  #div-6 {
+    padding-top: 90px !important; padding-right: 16px !important; padding-bottom: 16px !important; padding-left: 16px !important;
+  }
+  #div-8 {
+    padding-left: 10px !important; padding-right: 10px !important;
+  }
+  #input-1 {
+    padding: 14px !important;
+  }
+}
+@media (max-width: 477px) {
+  /* DivMagic Note: Tailwind does not support max-width. We will fix this soon. */
+
+  #div-1 {
+    width: 100vw !important;
+  }
+  #div-2 {
+    display: flex !important; justify-content: space-between !important; align-items: center !important; height: 100% !important; padding: 0px !important; margin: 0px !important;
+  }
+  #img-1 {
+    max-width: 140px !important; margin-left: 20px !important; margin-top: 6px !important;
+  }
+  #div-4 {
+    width: 64px !important; height: 64px !important;
+  }
+  #img-2 {
+    width: 28px !important; height: 28px !important;
+  }
+  #div-5 {
+    width: 64px !important; height: 64px !important;
+  }
+  #img-3 {
+    width: 28px !important; height: 28px !important;
+  }
+  #div-6 {
+    display: none !important;
+  }
+  #input-1 {
+    padding: 12px !important;
+  }
+}
+@media (max-width: 991px) {
+  /* DivMagic Note: Tailwind does not support max-width. We will fix this soon. */
+
+  #div-2 {
+    padding-top: 0px !important; padding-right: 20px !important; padding-bottom: 0px !important; padding-left: 20px !important;
+  }
+  #img-1 {
+    max-width: 140px !important; left: 12px !important; margin-top: 6px !important;
+  }
+  #div-6 {
+    padding-top: 100px !important; padding-right: 20px !important; padding-bottom: 20px !important; padding-left: 20px !important;
+  }
+  #div-7 {
+    display: block !important; padding-top: 100px !important; padding-right: 20px !important; padding-bottom: 20px !important; padding-left: 20px !important;
+  }
+  #div-8 {
+    max-width: 728px !important; width: 100% !important;
+  }
+  #form-1 {
+    width: 100% !important;
+  }
+}
+@media (max-width: 479px) {
+  /* DivMagic Note: Tailwind does not support max-width. We will fix this soon. */
+
+  #a-1 {
+    display: block !important;
+  }
+  #a-2 {
+    display: block !important;
+  }
+  #a-3 {
+    display: block !important;
+  }
+  #a-4 {
+    display: block !important;
+  }
+  #a-5 {
+    display: block !important;
+  }
+  #a-6 {
+    display: block !important;
+  }
+  #a-7 {
+    display: block !important;
+  }
+  #a-8 {
+    display: block !important;
+  }
+  #a-9 {
+    display: block !important;
+  }
+  #a-10 {
+    display: block !important;
+  }
+  #a-11 {
+    display: block !important;
+  }
+  #div-8 {
+    max-width: none !important;
+  }
+  #a-12 {
+    display: block !important;
+  }
+  #a-13 {
+    display: block !important;
+  }
+  #a-14 {
+    display: block !important;
+  }
+  #a-15 {
+    display: block !important;
+  }
+}

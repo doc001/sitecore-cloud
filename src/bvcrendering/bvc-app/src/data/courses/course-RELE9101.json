@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "generatedAt": "2025-06-04T05:37:00.337Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "RELE9101",
+    "courseName": "Fundamentals of Real Estate"
+  },
+  "course": {
+    "id": "5C2D7BE307BC4B658A927298575CE6C3",
+    "sisID": "RELE9101",
+    "name": "Fundamentals of Real Estate",
+    "children": [
+      {
+        "id": "557EB5BC544B4E06A8C4C1E53987B39B",
+        "name": "25AUGMNOA94",
+        "sisID": "220558",
+        "courseName": "",
+        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
+        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
+        "deliveryType": {
+          "id": "73DB4BB37C194BADBB66CE697687EADE",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0C49C6D7F256468491C327526460556B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "110",
+        "registrationStart": "20250131T000000",
+        "registrationEnd": "20250804T235959",
+        "startDate": "20250813T000000",
+        "endDate": "20260213T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeType": {
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "650.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "87EC5DA477EE444AB2C969E6D038720D",
+        "name": "25JULMNOA93",
+        "sisID": "220555",
+        "courseName": "",
+        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
+        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
+        "deliveryType": {
+          "id": "73DB4BB37C194BADBB66CE697687EADE",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0C49C6D7F256468491C327526460556B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "110",
+        "registrationStart": "20250131T000000",
+        "registrationEnd": "20250701T235959",
+        "startDate": "20250709T000000",
+        "endDate": "20260109T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeType": {
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "650.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 2,
+      "totalFees": 2,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 2
+    }
+  }
+}

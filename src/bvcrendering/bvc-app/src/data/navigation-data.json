@@ -1,0 +1,863 @@
+{
+    "menuConfig": {
+      "logos": {
+        "white": "https://cdn.prod.website-files.com/66be0b9180565f007da847e9/6761c683e17277dd60e2d404_66be0b9180565f007da847f7_Logo%20BVC%20White.svg",
+        "color": "https://cdn.prod.website-files.com/66be0b9180565f007da847e9/6761c68481619685ca0a1137_66be0b9180565f007da847f7_Logo%20BVC%20Color.svg"
+      },
+      "icons": {
+        "search": "https://cdn.prod.website-files.com/66be0b9180565f007da847e9/66be0b9180565f007da847f6_search_24dp.svg",
+        "menu": "https://cdn.prod.website-files.com/66be0b9180565f007da847e9/66be0b9180565f007da847f5_menu_icon.svg",
+        "close": "https://cdn.prod.website-files.com/66be0b9180565f007da847e9/66be0b9180565f007da847f4_close_icon.svg"
+      },
+      "socialMedia": {
+        "facebook": "https://cdn.prod.website-files.com/66a28fdfe76f2f849d7b00f3/66aa4df7a5b405433135eafb_icon_facebook.svg",
+        "instagram": "https://cdn.prod.website-files.com/66a28fdfe76f2f849d7b00f3/66aa4df6a5b405433135e9ec_icon_instagram.svg",
+        "twitter": "https://cdn.prod.website-files.com/66a28fdfe76f2f849d7b00f3/67e7193d527e350d80ea3faf_icon_x.svg",
+        "linkedin": "https://cdn.prod.website-files.com/66a28fdfe76f2f849d7b00f3/66aa4df6a5b405433135eaa7_icon_linkedin.svg",
+        "youtube": "https://cdn.prod.website-files.com/66a28fdfe76f2f849d7b00f3/67ca26ce6ac4c272d2c8fce6_youtube.svg"
+      }
+    },
+    "navigationData": {
+      "mainMenu": {
+        "tabs": [
+          {
+            "id": "study",
+            "label": "Study",
+            "isActive": true,
+            "submenus": [
+              {
+                "id": "programs-and-courses",
+                "label": "Programs & Courses",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Programs & Courses",
+                    "links": [
+                      {
+                        "label": "Find a Program",
+                        "url": "/program-list",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "How to Apply",
+                        "url": "/apply/ready-to-apply",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Financial Aid & Awards",
+                        "url": "/apply/financial/overview",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Why Bow Valley College",
+                        "url": "https://choose.bowvalleycollege.ca",
+                        "isExternal": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "areas-of-interest",
+                "label": "By Area of Interest",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Programs and Courses",
+                    "links": [
+                      {
+                        "label": "Business",
+                        "url": "/program-areas/business",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Entertainment Arts",
+                        "url": "/program-areas/entertainment-arts",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Technology",
+                        "url": "/program-areas/technology",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Health & Wellness",
+                        "url": "/program-areas/health-wellness",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Community Studies",
+                        "url": "/program-areas/community-studies",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Academic Upgrading",
+                        "url": "/program-areas/academic-upgrading",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "University Transfer",
+                        "url": "/programs/university-transfer",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Open Studies",
+                        "url": "/programs/open-studies",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "professional-development",
+                "label": "Professional Development",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Professional Development",
+                    "links": [
+                      {
+                        "label": "Overview",
+                        "url": "/study/professional-development-overview",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Extended Education",
+                        "url": "/study/extended-education",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Pivot-Ed Micro-Credentials",
+                        "url": "https://pivot-ed.bowvalleycollege.ca/",
+                        "isExternal": true
+                      },
+                      {
+                        "label": "Corporate Training",
+                        "url": "/study/corporate-training",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "tuition-and-fees",
+                "label": "Tuition & Fees",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Tuition & Fees",
+                    "links": [
+                      {
+                        "label": "Overview",
+                        "url": "/study/tuition-and-fees",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Domestic Tuition & Fees",
+                        "url": "/study/tuition-and-fees/domestic",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "International Tuition & Fees",
+                        "url": "/study/tuition-and-fees/international",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Paying Your Tuition & Fees",
+                        "url": "/study/tuition-and-fees/how-to-pay-your-fees",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "high-school",
+                "label": "High School",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "High School",
+                    "links": [
+                      {
+                        "label": "Preparing for College",
+                        "url": "/apply/i-am-ready/high-school/preparing-for-college",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "How to Apply",
+                        "url": "/apply/i-am-ready/i-am-a-first-year-student",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Dual Credits",
+                        "url": "/apply/i-am-ready/high-school/dual-credit",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Provincial High School Equivalencies",
+                        "url": "/apply/i-am-ready/high-school/provincial-high-school-equivalencies",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "international-students",
+                "label": "International Students",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Programs & Courses",
+                    "links": [
+                      {
+                        "label": "Why Bow Valley College",
+                        "url": "https://choose.bowvalleycollege.ca/",
+                        "isExternal": true
+                      },
+                      {
+                        "label": "Future International Students",
+                        "url": "/apply/i-am-ready/international/future-international-students",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Programs & Courses",
+                        "url": "/program-list",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "How to Apply",
+                        "url": "/apply/i-am-ready/i-am-an-international-student",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Plan Your Arrival",
+                        "url": "/apply/i-am-ready/international/plan-your-arrival",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "International Success Advisors",
+                        "url": "/apply/i-am-ready/international/international-success-advisors",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "apply",
+            "label": "Apply",
+            "isActive": true,
+            "submenus": [
+              {
+                "id": "ready-to-apply",
+                "label": "Ready to Apply",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Ready to Apply",
+                    "links": [
+                      {
+                        "label": "I am ready to apply",
+                        "url": "/apply/ready-to-apply",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "I am a first-year student",
+                        "url": "/apply/i-am-ready/i-am-a-first-year-student",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "I need academic upgrading",
+                        "url": "/apply/i-am-ready/i-need-academic-upgrading",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "I want professional development",
+                        "url": "/apply/i-am-ready/professional-development",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "I am an international student",
+                        "url": "/apply/i-am-ready/i-am-an-international-student",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Learn or improve my English",
+                        "url": "/apply/i-am-ready/english-language-skills",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "I am a transfer student",
+                        "url": "/apply/i-am-ready/i-am-a-transfer-student",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "dates-deadlines",
+                "label": "Dates & Deadlines",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Dates & Deadlines",
+                    "links": [
+                      {
+                        "label": "Academic Calendar",
+                        "url": "/academic-calendar",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Important Dates",
+                        "url": "/apply/dates-and-deadlines/important-dates",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "my-application",
+                "label": "My Application",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "My Application",
+                    "links": [
+                      {
+                        "label": "Application FAQs",
+                        "url": "/apply/my-application/application-faqs",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "What to expect after applying",
+                        "url": "/apply/my-application/what-to-expect",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Admission & Placement Test",
+                        "url": "/apply/my-application/admissions-and-placement-test",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Alternative Entry ",
+                        "url": "/apply/my-application/alternative-entry",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "financial-support",
+                "label": "Financial Support",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Financial Support",
+                    "links": [
+                      {
+                        "label": "Overview",
+                        "url": "/apply/financial/overview",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Financial Aid",
+                        "url": "/apply/financial/financial-aid",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Funding Information for Indigenous Students",
+                        "url": "/apply/financial/funding-information-for-indigenous-students",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Awards",
+                        "url": "/apply/financial/awards",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Canada-Alberta Job Grant",
+                        "url": "/apply/financial/canada-alberta-job-grant",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Centre for Financial Empowerment",
+                        "url": "/apply/financial/centre-for-financial-empowerment",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "student-life",
+            "label": "Student Life",
+            "isActive": true,
+            "submenus": [
+              {
+                "id": "campus-life",
+                "label": "Campus Life",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Campus Life",
+                    "links": [
+                      {
+                        "label": "Campus Spaces",
+                        "url": "/student-life/campus-life/campus-spaces",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Campus Directions",
+                        "url": "/student-life/campus-life/campus-directions",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Living in Calgary",
+                        "url": "/apply/calgary-life",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Library",
+                        "url": "https://bowvalleycollege.libguides.com/homepage",
+                        "isExternal": true
+                      },
+                      {
+                        "label": "Bookstore",
+                        "url": "https://www.bkstr.com/bowvalleystore/home",
+                        "isExternal": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "student-support",
+                "label": "Student Support",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Student Support",
+                    "links": [
+                      {
+                        "label": "Academic Services",
+                        "url": "/student-life/student-services/academic-services",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Financial Aid & Awards",
+                        "url": "/apply/financial/overview",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Health & Wellness",
+                        "url": "/student-life/student-services/student-health-wellness",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Accessibility Services",
+                        "url": "/student-life/student-services/accessibility-services",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "caree-employment",
+                "label": "Career & Employment",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Career & Employment",
+                    "links": [
+                      {
+                        "label": "Career Coaching",
+                        "url": "/student-life/career-and-employment/career-coaching",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Career Services",
+                        "url": "/student-life/career-and-employment/career-services",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Directions for immigrants",
+                        "url": "https://directionsforimmigrants.ca/",
+                        "isExternal": true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "community",
+                "label": "Community",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Community",
+                    "links": [
+                      {
+                        "label": "Students' Association (SABVC)",
+                        "url": "https://www.sabvc.ca/",
+                        "isExternal": true
+                      },
+                      {
+                        "label": "Equity, Diversity, & Inclusion",
+                        "url": "/student-life/community/equity-diversity-and-inclusion",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Student Engagement",
+                        "url": "/student-life/community/student-engagement",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "graduation-convocation",
+                "label": "Graduation & Convocation",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Graduation & Convocation",
+                    "links": [
+                      {
+                        "label": "Convocation",
+                        "url": "/student-life/graduation-and-convocation/convocation",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Convocation Videos",
+                        "url": "https://www.youtube.com/watch?v=RjBFyHBma9Y&list=PLdD0Db9GcooW4TCsm-lRbPJJZD1lWFtuM&ab_channel=BowValleyCollege",
+                        "isExternal": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "applied-research",
+            "label": "Applied Research",
+            "isActive": true,
+            "submenus": [
+              {
+                "id": "about",
+                "label": "About",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "about",
+                    "links": [
+                      {
+                        "label": "Overview",
+                        "url": "/applied-research/about/overview",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Research Facilities",
+                        "url": "/applied-research/about/research-facilities",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "our-pillars",
+                "label": "Our Pillars",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Our Pillars",
+                    "links": [
+                      {
+                        "label": "Health & Health Technology",
+                        "url": "/applied-research/our-pillars/health-and-health-technology",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Educational Technology",
+                        "url": "/applied-research/our-pillars/educational-technology",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Social Innovation",
+                        "url": "/applied-research/our-pillars/social-innovation",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Entertainment Arts",
+                        "url": "/applied-research/our-pillars/entertainment-arts",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "get-involved",
+                "label": "Get Involved",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Get Involved",
+                    "links": [
+                      {
+                        "label": "Partner with us",
+                        "url": "/applied-research/get-involved#w-tabs-3-data-w-pane-0",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Become a research assistant",
+                        "url": "/applied-research/get-involved#w-tabs-3-data-w-pane-1",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "about-us",
+            "label": "About Us",
+            "isActive": true,
+            "submenus": [
+              {
+                "id": "get-to-know-us",
+                "label": "Get to know us",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Get to know us",
+                    "links": [
+                      {
+                        "label": "Our History",
+                        "url": "/about-us/get-to-know-us/our-history",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Our Campus",
+                        "url": "/about-us/get-to-know-us/our-campus",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "our-organization",
+                "label": "Our Organization",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Our Organization",
+                    "links": [
+                      {
+                        "label": "Strategic Plan",
+                        "url": "https://strategy.bowvalleycollege.ca/",
+                        "isExternal": true
+                      },
+                      {
+                        "label": "Publications",
+                        "url": "/about-us/our-organization/publications",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Sustainability Office",
+                        "url": "/about-us/our-organization/sustainability-office",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Join our team",
+                        "url": "/about-us/our-organization/join-our-team",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Policies & Compliance",
+                        "url": "/about-us/our-organization/policies-and-compliance",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "executive-offices-governance",
+                "label": "Executive Offices & Governance",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Executive Offices & Governance",
+                    "links": [
+                      {
+                        "label": "Office of the President",
+                        "url": "/about-us/governance/presidents-office",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Board of Governors",
+                        "url": "/about-us/governance/board-of-governors",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "ConfidenceLine",
+                        "url": "/about-us/governance/confidenceline",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "schools",
+                "label": "Schools",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Schools",
+                    "links": [
+                      {
+                        "label": "Chiu School of Business",
+                        "url": "/schools/chiu-school-of-business",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Community Studies",
+                        "url": "/schools/school-of-community-studies",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Foundational Learning",
+                        "url": "/schools/school-of-foundational-learning",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Health & Wellness",
+                        "url": "/schools/school-of-health-and-wellness",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Center of Entertainment Arts",
+                        "url": "https://cea.bowvalleycollege.ca",
+                        "isExternal": true
+                      },
+                      {
+                        "label": "Technology",
+                        "url": "/schools/school-of-technology",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "news-events",
+                "label": "News & Events",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "News & Events",
+                    "links": [
+                      {
+                        "label": "All our News & Events",
+                        "url": "/about-us/news-and-events",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "News",
+                        "url": "/about-us/news",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Events",
+                        "url": "/about-us/events",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "contact-us",
+                "label": "Contact us",
+                "isActive": true,
+                "items": [
+                  {
+                    "title": "Contact us",
+                    "links": [
+                      {
+                        "label": "For High School & Agency Staff",
+                        "url": "/about-us/contact-us/for-high-school-and-agency-staff",
+                        "isExternal": false
+                      },
+                      {
+                        "label": "Authorized Agent Representatives & Overseas Agents",
+                        "url": "/about-us/contact-us/authorized-agent-representatives",
+                        "isExternal": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "quickLinks": {
+        "sections": [
+          {
+            "title": "Quick links",
+            "links": [
+              {
+                "label": "Alumni",
+                "url": "/alumni",
+                "isExternal": false
+              },
+              {
+                "label": "Partners & Donors",
+                "url": "https://inspire.bowvalleycollege.ca",
+                "isExternal": true
+              },
+              {
+                "label": "RGO Library",
+                "url": "https://bowvalleycollege.libguides.com/homepage",
+                "isExternal": true
+              },
+              {
+                "label": "Login to D2L",
+                "url": "https://d2l.bowvalleycollege.ca/d2l/loginh/",
+                "isExternal": true
+              },
+              {
+                "label": "Login to MyBVC",
+                "url": "https://mybvc.ca",
+                "isExternal": true
+              },
+              {
+                "label": "Choose Bow Valley College",
+                "url": "https://choose.bowvalleycollege.ca/",
+                "isExternal": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }

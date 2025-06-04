@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "generatedAt": "2025-06-04T05:36:55.604Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "HMSV9503",
+    "courseName": "Understanding and Applying the DSM-5-TR in Healthcare Practice"
+  },
+  "course": {
+    "id": "12A68368CE744655A4033DB870C6BB34",
+    "sisID": "HMSV9503",
+    "name": "Understanding and Applying the DSM-5-TR in Healthcare Practice",
+    "children": [
+      {
+        "id": "773A21BEC2BF4270A46CC73D1E72DA99",
+        "name": "25JULMNOA94",
+        "sisID": "220444",
+        "courseName": "",
+        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
+        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
+        "deliveryType": {
+          "id": "73DB4BB37C194BADBB66CE697687EADE",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0C49C6D7F256468491C327526460556B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250115T000000",
+        "registrationEnd": "20250708T235959",
+        "startDate": "20250709T000000",
+        "endDate": "20251109T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeType": {
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "429.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 1,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}

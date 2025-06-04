@@ -1,0 +1,117 @@
+/* components/PathSelectionSection.module.css */
+/**
+ * Path Selection Section CSS Module
+ * 
+ * These styles are specific to the PathSelectionSection component
+ * and leverage the CSS variables defined in globals.css
+ */
+
+/* Main section styling */
+.c-box-neutral10 {
+    background-color: var(--color-neutral-10);
+    position: relative;
+    width: 100%;
+    padding-bottom: var(--spacing-8);
+  }
+  
+  /* Colored divider at the top */
+  .c-divider__all-colors {
+    width: 100%;
+    height: 6px;
+    margin-bottom: var(--spacing-6);
+  }
+  
+  /* Grid layout styling */
+  .c-box-neutral10__stack3x2 {
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+  
+  /* Heading styles */
+  .c-box-n10__stack-h2 {
+    color: var(--color-neutral-80);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  
+  .c-box-n10__stack-h4 {
+    color: var(--color-neutral-80);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  
+  .c-box-n10__stack-h5 {
+    color: var(--color-neutral-70);
+    line-height: 1.2;
+    font-weight: 500;
+  }
+  
+  /* Box with blue-purple gradient */
+  .box-gradient-bp {
+    background-image: linear-gradient(
+      to right bottom,
+      var(--color-purple-100),
+      var(--color-blue-100)
+    );
+    padding: 0;
+    border-radius: 12px;
+    border: 3px solid var(--color-white);
+  }
+
+  .box-gradient-bp:hover {
+    border: 3px solid transparent;
+    cursor: pointer;
+  }
+  
+  /* White box inside gradient box */
+  .box-white-select-your-path {
+    background-color: var(--color-white);
+    border-radius: 6px;
+    height: 100%;
+   
+  }
+  
+  .box-white-select-your-path:hover {
+
+  }
+  
+  /* Button with gradient */
+  .c-button__grad-pb {
+    background-image: linear-gradient(
+      to right,
+      var(--color-purple-100),
+      var(--color-blue-100)
+    );
+    background-clip: border-box;
+    color: var(--color-white);
+    border-radius: 6px;
+    padding: var(--spacing-3) var(--spacing-6);
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  .c-button__grad-pb:hover {
+    background-image: linear-gradient(156deg, var(--color-purple-100), var(--color-blue-100));
+    -webkit-text-fill-color: inherit;
+    background-clip: border-box;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .c-box-neutral10__stack3x2 {
+      padding: var(--spacing-4);
+    }
+    
+    .c-box-n10__stack-h2 {
+      font-size: var(--font-size-2xl);
+    }
+    
+    .c-box-n10__stack-h4 {
+      font-size: var(--font-size-xl);
+    }
+    
+    .c-box-n10__stack-h5 {
+      font-size: var(--font-size-lg);
+    }
+  }
