@@ -5,11 +5,11 @@
   "functions": {
     "api/bvcpayment.mjs": {
       "maxDuration": 30,
-      "runtime": "nodejs18.x"
+      "runtime": "vercel/nodejs18.x"
     },
     "api/auth-token.mjs": {
       "maxDuration": 15,
-      "runtime": "nodejs18.x"
+      "runtime": "vercel/nodejs18.x"
     }
   },
   "headers": [
