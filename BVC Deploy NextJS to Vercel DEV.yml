@@ -8,5 +8,5 @@ steps:
 - script: |
     npm install -g vercel
     cd src/nextjs-jamstack
-    vercel --token $(VERCEL_TOKEN) --prod --yes
+    vercel deploy --cwd ./ --prod --yes --token $(VERCEL_TOKEN) --confirm
   displayName: 'Deploy DEV to Vercel NextJS JAMStack (via CLI)'
