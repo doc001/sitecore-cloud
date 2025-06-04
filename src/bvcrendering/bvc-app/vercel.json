@@ -3,11 +3,8 @@
   "outputDirectory": "out",
   "framework": null,
   "functions": {
-    "api/bvcpayment.mjs": {
+    "api/*.mjs": {
       "maxDuration": 30
-    },
-    "api/auth-token.mjs": {
-      "maxDuration": 15
     }
   },
   "headers": [
@@ -25,22 +22,8 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization"
-        },
-        {
-          "key": "Access-Control-Max-Age",
-          "value": "86400"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/bvcpayment",
-      "destination": "/api/bvcpayment.mjs"
-    },
-    {
-      "source": "/api/auth-token",
-      "destination": "/api/auth-token.mjs"
     }
   ]
 }
