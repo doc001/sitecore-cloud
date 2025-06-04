@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import ProgramList from '@/components/pages/ProgramList';
-import programsData from '@/data/cms/programs.json' with { type: 'json' };
+import programsData from '@/data/cms/Programs.json' with { type: 'json' };
 
 // TypeScript interface for Program data structure
 export interface Program {
