@@ -1,12 +1,17 @@
 {
+  "name": "bvc-monorepo",
   "private": true,
   "workspaces": [
     "src/bvcrendering",
-    "src/bvc-app/",
-    "src/nextjs-jamstack"
+    "src/nextjs-jamstack",
+    "src/bvc-app"
   ],
-
+  "scripts": {
+    "build:rendering": "npm --workspace=src/bvcrendering run build",
+    "build:jamstack": "npm --workspace=src/nextjs-jamstack run build",
+    "build:bvcapp": "npm --workspace=src/bvc-app run build"
+  },
   "devDependencies": {
-    "turbo": "^2.5.4"
+    "turbo": "^1.11.0"
   }
 }
