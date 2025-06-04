@@ -1,21 +1,14 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
-- main
-
+- doc-dev
+ 
 pool:
   vmImage: ubuntu-latest
-
+ 
 steps:
-- task: NodeTool@0
+- task: vercel-deployment-task@1
+  displayName: 'Deploy DEV To Vercel NextJS JAMStack'
   inputs:
-    versionSpec: '20.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    vercelProjectId: 'prj_i30Db0tZeJUTWA0gsHkACOGuP7cH'
+    vercelOrgId: 'team_2JEOL5JOKnZWIwE21mo5gzzA'
+    vercelToken: $(VERCEL_TOKEN)
+    production: true
