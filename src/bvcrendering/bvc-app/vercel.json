@@ -2,11 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "out",
   "framework": null,
-  "functions": {
-    "api/*.mjs": {
-      "maxDuration": 30
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
