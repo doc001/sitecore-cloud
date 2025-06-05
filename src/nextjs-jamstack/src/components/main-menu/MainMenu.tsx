@@ -115,16 +115,7 @@ const MainMenu = () => {
                       }`}
                     >
                       <span>{link.title}</span>
-                      {link.items && (
-                        <ChevronRight
-                          className={`h-4 w-4 transform transition-all duration-200
-                        ${
-                          selectedSubmenu?.title === link.title
-                            ? "rotate-90 opacity-100"
-                            : "opacity-0 group-hover:opacity-100"
-                        }`}
-                        />
-                      )}
+                      
                     </a>
                   ))}
                 </div>
@@ -144,8 +135,7 @@ const MainMenu = () => {
                       className="group flex items-center justify-between text-gray-600 hover:text-blue-500"
                     >
                       <span>{link.title}</span>
-                      <ChevronRight className="h-4 w-4 transform opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
-                    </a>
+                      </a>
                   ))}
                 </div>
               </div>
@@ -167,7 +157,7 @@ const MainMenu = () => {
                       className="group flex items-center space-x-2 text-gray-600 hover:text-blue-500"
                     >
                       <span>{item.title}</span>
-                      <ChevronRight className="h-4 w-4 transform transition-transform group-hover:translate-x-1" />
+                      
                     </a>
                   ))}
                 </div>
