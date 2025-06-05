@@ -1,0 +1,17 @@
+{
+  "projects": [
+    {
+      "name": "bvc-uat",
+      "source": "src/bvc-app",
+      "framework": "nextjs",
+      "buildCommand": "cd ../.. && npm run build -- --filter=bvc-app",
+      "outputDirectory": "src/bvc-app/out"
+    },
+    {
+      "name": "nextjs-jamstack-dev", 
+      "source": "src/nextjs-jamstack",
+      "framework": "nextjs",
+      "buildCommand": "cd ../.. && npm run build -- --filter=nextjs-jamstack"
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import withFlowbiteReact from "flowbite-react/plugin/nextjs";
 
 const nextConfig: NextConfig = {
   output: "export",
+  distDir: "out",
   typescript: {
     ignoreBuildErrors: true,
   },
