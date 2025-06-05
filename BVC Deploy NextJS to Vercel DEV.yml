@@ -1,5 +1,5 @@
 trigger:
-- doc-dev
+- none
 
 pool:
   vmImage: ubuntu-latest
@@ -8,5 +8,5 @@ steps:
 - script: |
     npm install -g vercel
     cd src/nextjs-jamstack
-    vercel deploy --cwd ./ --prod --yes --token $(VERCEL_TOKEN) --confirm
+    vercel deploy --cwd ./ --prod --yes --token $(VERCEL_TOKEN) --yes
   displayName: 'Deploy DEV to Vercel NextJS JAMStack (via CLI)'
