@@ -15,14 +15,26 @@ const API_CONFIG: APIConfig = {
 //   BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
 // };
 
+// Enhanced CORS headers to handle all common client headers
 const corsHeaders: HeadersInit = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+  // FIXED: Added all common headers that browsers/Webflow might send
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With, Accept, Origin, Cache-Control, X-File-Name',
+  'Access-Control-Max-Age': '86400', // Cache preflight for 24 hours
+  'Vary': 'Origin'
 };
 
 export async function OPTIONS(request: NextRequest): Promise<NextResponse> {
-  return NextResponse.json({}, { headers: corsHeaders });
+  // Log the preflight request for debugging
+  console.log('OPTIONS preflight request from:', request.headers.get('origin'));
+  console.log('Requested headers:', request.headers.get('access-control-request-headers'));
+  console.log('Requested method:', request.headers.get('access-control-request-method'));
+
+  return new NextResponse(null, { 
+    status: 200, // Changed from default to explicit 200
+    headers: corsHeaders 
+  });
 }
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
@@ -30,6 +42,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const { searchParams } = new URL(request.url);
     const endpoint = searchParams.get('endpoint');
     const token = request.headers.get('Authorization');
+
+    console.log('GET request from:', request.headers.get('origin'));
+    console.log('Endpoint requested:', endpoint);
 
     if (!endpoint) {
       return NextResponse.json(
@@ -58,7 +73,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const response = await fetch(apiUrl.toString(), {
       headers: {
         'Authorization': token,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'User-Agent': 'BVC-Proxy/1.0'
       }
     });
 
@@ -90,6 +106,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const { searchParams } = new URL(request.url);
     const endpoint = searchParams.get('endpoint');
     const token = request.headers.get('Authorization');
+
+    console.log('POST request from:', request.headers.get('origin'));
+    console.log('Endpoint requested:', endpoint);
 
     if (!endpoint) {
       return NextResponse.json(
@@ -141,7 +160,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       method: 'POST',
       headers: {
         'Authorization': token,
-        'accept': 'text/plain'
+        'accept': 'text/plain',
+        'User-Agent': 'BVC-Proxy/1.0'
       }
     };
     
@@ -185,4 +205,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       { status: 500, headers: corsHeaders }
     );
   }
+}
+
+// Optional: Add a health check endpoint
+export async function HEAD(request: NextRequest): Promise<NextResponse> {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      ...corsHeaders,
+      'X-Proxy-Status': 'healthy',
+      'X-API-Base': API_CONFIG.BASE_URL
+    }
+  });
 }
