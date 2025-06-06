@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "flowbite-react patch",
     "generateCourses": "node scripts/export-valid-courses.mjs",
     "generateMap": "node scripts/generateSiSData.mjs",
     "generateCourseData": "node scripts/buildCoursesComplete.mjs",
+    "bvcapp-scripts": "npm run generateCourses && npm run generateMap && npm run generateCourseData",
     "build": "npm run generateCourses && npm run generateMap && npm run generateCourseData && next build"
   },
   "dependencies": {
