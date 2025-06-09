@@ -168,13 +168,17 @@ const CourseTable = ({ courses, additionalText }: { courses: CourseTableData[]; 
 
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '').trim();
 
-export default async function ProgramPage({ params }: { params: { slug: string } }) {
-   // Get breadcrumb data for the current page using navigation structure
-  const breadcrumbItems = await getBreadcrumbData('/program-list');
-
-  const programData = await getProgramData(params.slug);
-
+export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
+  // Await params before using them (Next.js 15+ requirement)
+  const { slug } = await params;
+  
+  // Get program data first
+  const programData = await getProgramData(slug);
+  
   if (!programData) notFound();
+  
+  // Get breadcrumb data for the current program page
+  const breadcrumbItems = await getBreadcrumbData(`/programs/${slug}`);
 
   const coursesData = parseCoursesData(programData["Courses HTML"]);
   const tuitionData = parseTuitionData(programData["Tuition fees"]);
@@ -183,126 +187,55 @@ export default async function ProgramPage({ params }: { params: { slug: string }
   return (
     <div className="min-h-screen bg-background">
       {/* Page Header Section */}
-<section className="mx-auto bg-program-gradient pt-32 pb-24">
-    <div className="md:flex md:items-center md:gap-x-10 md:px-[10%]">
-        <div className="mx-auto md:max-w-4/6 md:mx-0 md:flex-auto">
+      <section className="mx-auto bg-program-gradient pt-32 pb-24">
+        <div className="md:flex md:items-center md:px-[10%]">
+          <div className="px-6 mx-auto md:px-0 md:mx-0 md:flex-auto">
             <h1 className="text-pretty text-6xl font-semibold text-white">{stripHtml(programData["Name"])}</h1>
             <p className="mt-20 text-pretty text-lg font-light text-white sm:text-xl/8">{stripHtml(programData["Short description"])}</p>
-        </div>
-        <div className="mt-20 md:max-w-[380px] md:mt-0 md:shrink-0 md:grow grid grid-flow-col justify-items-end">
+          </div>
+          <div className="px-6 mt-20 md:px-0 md:max-w-[380px] md:mt-0 md:shrink-0 md:grow justify-end-safe">
             <div className="bg-[var(--color-purple-100)] text-md text-white">
-                <div className="grid grid-cols-2 gap-6 p-6">
-                    <div className="font-semibold">
-                        <p>Credential:</p>
-                    </div>
-                    <div className="text-white">
-                        <p>{stripHtml(programData["Program type"])}</p>
-                    </div>
-                    <div className="font-semibold">
-                        <p>Program length:</p>
-                    </div>
-                    <div className="text-white">
-                        <p>{stripHtml(programData["Duration"])}</p>
-                    </div>
-                    <div className="font-semibold">
-                        <p>Area:</p>
-                    </div>
-                    <div className="text-white">
-                        <p>{stripHtml(programData["Program area"])}</p>
-                    </div>
-                    <div className="font-semibold">
-                        <p>School:</p>
-                    </div>
-                    <div className="text-white">
-                        <p>{stripHtml(programData["School"])}</p>
-                    </div>
-                    <div className="font-semibold">
-                        <p>Post-Graduation Work Permit:</p>
-                    </div>
-                    <p>{stripHtml(programData["PGWP"])}</p>
+              <div className="grid grid-cols-2 gap-6 p-6">
+                <div className="font-semibold">
+                  <p>Credential:</p>
                 </div>
+                <div className="text-white">
+                  <p>{stripHtml(programData["Program type"])}</p>
+                </div>
+                <div className="font-semibold">
+                  <p>Program length:</p>
+                </div>
+                <div className="text-white">
+                  <p>{stripHtml(programData["Duration"])}</p>
+                </div>
+                <div className="font-semibold">
+                  <p>Area:</p>
+                </div>
+                <div className="text-white">
+                  <p>{stripHtml(programData["Program area"])}</p>
+                </div>
+                <div className="font-semibold">
+                  <p>School:</p>
+                </div>
+                <div className="text-white">
+                  <p>{stripHtml(programData["School"])}</p>
+                </div>
+                <div className="font-semibold">
+                  <p>Post-Graduation Work Permit:</p>
+                </div>
+                <p>{stripHtml(programData["PGWP"])}</p>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</section>
-      
+      </section>
+
+      {/* Breadcrumb Navigation - Using the reusable component */}
       <Breadcrumb 
         items={breadcrumbItems} 
         variant="program"
         showHomeIcon={true}
       />
-
-    <div className="text-zinc-800 gap-x-11 auto-cols-fr grid-cols-[938.1px_234.525px] grid-rows-[161.88rem] justify-center pb-5 gap-y-5 grid">
-      <main className="items-start flex-col justify-start flex">
-        {/* About */}
-        <section id="About" className="items-start border-b-slate-400 border-b-2 flex-col justify-start pb-8 border-dashed">
-          <h3 className="text-blue-950 text-4xl font-semibold">About</h3>
-          <p>{stripHtml(programData["Program Description"])}</p>
-        </section>
-
-        {/* Admission Requirements */}
-        <section id="Admission-and-requirements" className="items-start border-b-slate-400 border-b-2 flex-col justify-start pb-8 border-dashed">
-          <h3 className="text-blue-950 text-4xl font-semibold">Admission requirements</h3>
-          {/* Admission content (same as your original) */}
-          {/* For brevity, insert your full JSX here */}
-        </section>
-
-        {/* Available Intakes */}
-        <section id="Available-intakes" className="items-start flex-col justify-start mb-8">
-          <h3 className="text-blue-950 text-4xl font-semibold">Available intakes</h3>
-          {/* Intake data table */}
-          {/* Insert your JSX here */}
-        </section>
-
-        {/* Tuition and Fees */}
-        <section id="Tuition-and-Fees" className="items-start flex-col justify-start mb-8">
-          <h3 className="text-blue-950 text-4xl font-semibold">Tuition and fees</h3>
-          {/* Tuition data table */}
-          {/* Insert your JSX here */}
-        </section>
-
-        {/* Courses */}
-        <section id="Courses">
-          <h3 className="text-blue-950 text-4xl font-semibold">Courses</h3>
-          <div className="items-stretch auto-cols-fr grid-cols-[469.05px_469.05px] grid-rows-[1.75rem] justify-center pb-3 grid">
-            <div className="items-stretch float-left justify-center justify-self-start flex">
-              <p className="text-indigo-600 text-2xl pl-2">hide_source</p> Zero Textbook Cost
-            </div>
-            <div className="items-stretch justify-center justify-self-end flex">
-              <p className="text-indigo-600 text-2xl pl-2">move_down</p> Course is eligible for PLAR
-            </div>
-          </div>
-          <div>
-            {coursesData.map((termData) => (
-              <div key={termData.termNumber} className="mb-3">
-                <button className="text-white bg-sky-500 bg-[linear-gradient(101deg,_rgba(3,_26,_98,_0.4),_rgba(255,_255,_255,_0.2))] cursor-pointer py-1 pl-4 pr-1.5 inline-block w-full h-10">
-                  Term {termData.termNumber}
-                </button>
-                <CourseTable courses={termData.courses} additionalText={termData.additionalText} />
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      {/* Sidebar */}
-      <aside className="items-start flex-col justify-start flex">
-        <nav className="bg-zinc-100 items-stretch flex-col float-right pb-6 px-4 pt-4 sticky z-[200] top-4">
-          <div className="text-blue-950 font-medium">{programData.Name}</div>
-          <a className="text-indigo-900 flex-col text-sm py-1 pl-2 pr-1 flex" href="#About">About</a>
-          <a className="text-indigo-900 flex-col text-sm py-1 pl-2 pr-1 flex" href="#Admission-and-requirements">Admissions</a>
-          <a className="text-indigo-900 flex-col text-sm py-1 pl-2 pr-1 flex" href="#Available-intakes">Available intakes</a>
-          <a className="text-indigo-900 flex-col text-sm py-1 pl-2 pr-1 flex" href="#Tuition-and-Fees">Tuition and fees</a>
-          <a className="text-indigo-900 flex-col text-sm py-1 pl-2 pr-1 flex" href="#Courses">Courses</a>
-          <Link
-            href="/apply/ready-to-apply"
-            className="text-white bg-blue-500 bg-[linear-gradient(90deg,_rgb(106,_76,_215),_rgb(0,_163,_255))] font-medium py-3 px-5 rounded-lg mt-4"
-          >
-            I am ready to apply
-          </Link>
-        </nav>
-      </aside>
-    </div>
     </div>
   );
 }
@@ -314,8 +247,9 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 }
 
 // Metadata for SEO
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const programData = await getProgramData(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const programData = await getProgramData(slug);
 
   if (!programData) {
     return {

@@ -15,7 +15,7 @@ function HeaderTop() {
     return (
         <>
             <section className='w-full fixed z-40 h-20'>
-                <nav className='container-layout h-20 flex flex-row justify-between'>
+                <nav className='h-20 flex flex-row justify-between md:px-[10%]'>
                     <HeaderLogo />
                     <div className='self-end w-auto flex flex-row items-center h-full py-0 pb-0'>
                         <button

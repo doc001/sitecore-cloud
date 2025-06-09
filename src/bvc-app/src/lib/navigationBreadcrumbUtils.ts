@@ -1,24 +1,16 @@
 // lib/navigationBreadcrumbUtils.ts
 import { BreadcrumbItem } from '@/components/common/Breadcrumb';
-import breadcrumbsConfig from '@/data/static/navigation-breadcrumbs.json' with { type: 'json' };
-import navigationData from '@/data/navigation-data.json' with { type: 'json' };
-import programsData from '@/data/cms/Programs.json' with { type: 'json' };
 
 /**
  * Interface for the navigation-based breadcrumb configuration
  */
 interface NavigationBreadcrumbConfig {
   static: { [path: string]: BreadcrumbItem[] };
-  patterns: {
-    [pattern: string]: {
-      template: BreadcrumbItem[];
-      dataSource: string;
-      mapping: { [key: string]: string };
-    };
-  };
-  fallbacks: {
-    segments: { [segment: string]: string };
-    tabMapping: { [tab: string]: string };
+  metadata?: {
+    generatedAt?: string;
+    version?: string;
+    source?: string;
+    totalRoutes?: number;
   };
 }
 
@@ -42,37 +34,82 @@ interface NavigationTab {
   }>;
 }
 
+// Cache for loaded data
+let breadcrumbsConfig: NavigationBreadcrumbConfig | null = null;
+let navigationData: any = null;
+let programsData: any[] = [];
+
 /**
- * Type-safe access to breadcrumb and navigation configuration
+ * Load configuration data with error handling
  */
-const config = breadcrumbsConfig as NavigationBreadcrumbConfig;
-const navData = navigationData.navigationData.mainMenu;
+async function loadConfigData() {
+  if (breadcrumbsConfig && navigationData) {
+    return { breadcrumbsConfig, navigationData, programsData };
+  }
+
+  try {
+    // Try to load breadcrumbs config
+    try {
+      const breadcrumbsModule = await import('@/data/static/navigation-breadcrumbs.json');
+      breadcrumbsConfig = breadcrumbsModule.default || breadcrumbsModule;
+    } catch (error) {
+      console.warn('Could not load navigation-breadcrumbs.json, using fallback');
+      breadcrumbsConfig = {
+        static: {
+          'home': [{ label: 'Home', href: '/', isCurrentPage: true }]
+        }
+      };
+    }
+
+    // Try to load navigation data
+    try {
+      const navModule = await import('@/data/navigation-data.json');
+      navigationData = navModule.default || navModule;
+    } catch (error) {
+      console.warn('Could not load navigation-data.json');
+      navigationData = { navigationData: { mainMenu: { tabs: [] } } };
+    }
+
+    // Try to load programs data
+    try {
+      const programsModule = await import('@/data/cms/Programs.json');
+      programsData = programsModule.default || programsModule;
+      if (!Array.isArray(programsData)) {
+        programsData = [];
+      }
+    } catch (error) {
+      console.warn('Could not load Programs.json');
+      programsData = [];
+    }
+
+  } catch (error) {
+    console.error('Error loading configuration data:', error);
+    breadcrumbsConfig = { static: {} };
+    navigationData = { navigationData: { mainMenu: { tabs: [] } } };
+    programsData = [];
+  }
+
+  return { breadcrumbsConfig, navigationData, programsData };
+}
 
 /**
  * Get breadcrumb data for a specific path using navigation structure
- * 
- * This function uses the navigation-data.json to intelligently map
- * URLs to their proper navigation hierarchy and generate breadcrumbs.
  * 
  * @param path - The current page path
  * @returns Array of breadcrumb items following navigation structure
  */
 export async function getBreadcrumbData(path: string): Promise<BreadcrumbItem[]> {
+  const { breadcrumbsConfig: config } = await loadConfigData();
+  
   // Remove leading/trailing slashes and normalize
   const normalizedPath = path.replace(/^\/|\/$/g, '');
   
   // 1. Try exact match from static config first (fastest)
-  if (config.static[normalizedPath]) {
+  if (config?.static?.[normalizedPath]) {
     return config.static[normalizedPath];
   }
   
-  // 2. Try to find the path in navigation data
-  const navBreadcrumbs = findNavigationBreadcrumbs(normalizedPath);
-  if (navBreadcrumbs) {
-    return navBreadcrumbs;
-  }
-  
-  // 3. Check for dynamic program routes
+  // 2. Check for dynamic program routes
   if (normalizedPath.startsWith('programs/') || normalizedPath.startsWith('program-areas/')) {
     const programBreadcrumbs = await handleProgramRoutes(normalizedPath);
     if (programBreadcrumbs) {
@@ -80,111 +117,21 @@ export async function getBreadcrumbData(path: string): Promise<BreadcrumbItem[]>
     }
   }
   
-  // 4. Fall back to pattern-based generation
+  // 3. Fall back to pattern-based generation
   return generateFallbackBreadcrumbs(normalizedPath);
-}
-
-/**
- * Find breadcrumbs by searching through navigation data
- */
-function findNavigationBreadcrumbs(path: string): BreadcrumbItem[] | null {
-  const targetUrl = `/${path}`;
-  
-  // Search through all navigation tabs and submenus
-  for (const tab of navData.tabs) {
-    for (const submenu of tab.submenus) {
-      for (const itemGroup of submenu.items) {
-        for (const link of itemGroup.links) {
-          if (link.url === targetUrl && !link.isExternal) {
-            // Found the link, generate breadcrumb hierarchy
-            return generateNavigationBreadcrumb(tab, submenu, link);
-          }
-        }
-      }
-    }
-  }
-  
-  return null;
-}
-
-/**
- * Generate breadcrumb from navigation hierarchy
- */
-function generateNavigationBreadcrumb(
-  tab: NavigationTab, 
-  submenu: any, 
-  link: any
-): BreadcrumbItem[] {
-  const breadcrumbs: BreadcrumbItem[] = [];
-  
-  // Add tab as first item (no link - following reversed logic)
-  breadcrumbs.push({
-    label: tab.label
-  });
-  
-  // Add submenu if it's different from the tab and not a direct tab link
-  if (submenu.label !== tab.label && !isDirectTabLink(link.url, tab.id)) {
-    breadcrumbs.push({
-      label: submenu.label,
-      href: getSubmenuHref(submenu, tab)
-    });
-  }
-  
-  // Add current page (with link - following reversed logic)
-  breadcrumbs.push({
-    label: link.label,
-    href: link.url,
-    isCurrentPage: true
-  });
-  
-  return breadcrumbs;
-}
-
-/**
- * Check if a URL is a direct tab link (like /apply, /study)
- */
-function isDirectTabLink(url: string, tabId: string): boolean {
-  const directTabUrls: { [key: string]: string[] } = {
-    'study': ['/study'],
-    'apply': ['/apply'],
-    'student-life': ['/student-life'],
-    'applied-research': ['/applied-research'],
-    'about-us': ['/about-us']
-  };
-  
-  return directTabUrls[tabId]?.includes(url) || false;
-}
-
-/**
- * Generate submenu href based on submenu content
- */
-function getSubmenuHref(submenu: any, tab: NavigationTab): string | undefined {
-  // For some submenus, we might want to return a category page URL
-  // This is contextual based on the site structure
-  
-  const submenuMappings: { [key: string]: string } = {
-    'professional-development': '/study/professional-development-overview',
-    'tuition-and-fees': '/study/tuition-and-fees',
-    'ready-to-apply': '/apply/ready-to-apply',
-    'financial-support': '/apply/financial/overview',
-    'student-support': '/student-life/student-services',
-    'our-organization': '/about-us/our-organization',
-    'news-events': '/about-us/news-and-events'
-  };
-  
-  return submenuMappings[submenu.id];
 }
 
 /**
  * Handle program-specific routes with CMS data integration
  */
 async function handleProgramRoutes(path: string): Promise<BreadcrumbItem[] | null> {
+  const { programsData } = await loadConfigData();
   const segments = path.split('/');
   
   // Handle individual program pages: programs/[slug]
   if (segments[0] === 'programs' && segments.length === 2) {
     const programSlug = segments[1];
-    const program = findProgramBySlug(programSlug);
+    const program = findProgramBySlug(programSlug, programsData);
     
     if (program) {
       return [
@@ -201,7 +148,7 @@ async function handleProgramRoutes(path: string): Promise<BreadcrumbItem[] | nul
   // Handle program area pages: program-areas/[area]/[slug]
   if (segments[0] === 'program-areas' && segments.length === 3) {
     const [, areaSlug, programSlug] = segments;
-    const program = findProgramBySlug(programSlug);
+    const program = findProgramBySlug(programSlug, programsData);
     
     if (program) {
       const areaLabel = getAreaLabel(areaSlug);
@@ -237,6 +184,19 @@ async function handleProgramRoutes(path: string): Promise<BreadcrumbItem[] | nul
 }
 
 /**
+ * Find program data by slug from CMS
+ */
+function findProgramBySlug(slug: string, programs: any[]) {
+  if (!Array.isArray(programs)) return null;
+  
+  return programs.find((program: any) => 
+    program?.Slug === slug && 
+    program?.Archived === 'false' && 
+    program?.Draft === 'false'
+  );
+}
+
+/**
  * Get human-readable label for program area
  */
 function getAreaLabel(areaSlug: string): string {
@@ -253,26 +213,26 @@ function getAreaLabel(areaSlug: string): string {
 }
 
 /**
- * Find program data by slug from CMS
- */
-function findProgramBySlug(slug: string) {
-  return programsData.find((program: any) => 
-    program.Slug === slug && 
-    program.Archived === 'false' && 
-    program.Draft === 'false'
-  );
-}
-
-/**
- * Convert URL segment to readable label using fallback mapping
+ * Convert URL segment to readable label
  */
 function segmentToLabel(segment: string): string {
-  // Check fallback mapping first
-  if (config.fallbacks.segments[segment]) {
-    return config.fallbacks.segments[segment];
+  const specialCases: { [key: string]: string } = {
+    'program-list': 'Find a Program',
+    'health-wellness': 'Health & Wellness',
+    'entertainment-arts': 'Entertainment Arts',
+    'community-studies': 'Community Studies',
+    'academic-upgrading': 'Academic Upgrading',
+    'university-transfer': 'University Transfer',
+    'open-studies': 'Open Studies',
+    'student-life': 'Student Life',
+    'applied-research': 'Applied Research',
+    'about-us': 'About Us'
+  };
+  
+  if (specialCases[segment]) {
+    return specialCases[segment];
   }
   
-  // Default conversion
   return segment
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -280,7 +240,7 @@ function segmentToLabel(segment: string): string {
 }
 
 /**
- * Generate breadcrumbs when no static or navigation match is found
+ * Generate breadcrumbs when no static match is found
  */
 function generateFallbackBreadcrumbs(path: string): BreadcrumbItem[] {
   if (!path) {
@@ -348,7 +308,7 @@ function determineTabFromPath(firstSegment: string): string | null {
     'applied-research': 'Applied Research',
     'about-us': 'About Us',
     'schools': 'About Us',
-    'alumni': 'Alumni' // Special case - standalone
+    'alumni': 'Alumni'
   };
   
   return pathToTabMapping[firstSegment] || null;
@@ -357,8 +317,9 @@ function determineTabFromPath(firstSegment: string): string | null {
 /**
  * Get all available static routes for sitemap generation
  */
-export function getAllStaticBreadcrumbRoutes(): string[] {
-  return Object.keys(config.static);
+export async function getAllStaticBreadcrumbRoutes(): Promise<string[]> {
+  const { breadcrumbsConfig: config } = await loadConfigData();
+  return Object.keys(config?.static || {});
 }
 
 /**
@@ -366,8 +327,9 @@ export function getAllStaticBreadcrumbRoutes(): string[] {
  * Only works with static routes - use for SSG page generation
  */
 export function getBreadcrumbDataSync(path: string): BreadcrumbItem[] | null {
-  const normalizedPath = path.replace(/^\/|\/$/g, '');
-  return config.static[normalizedPath] || null;
+  // This function cannot work with async imports
+  // Return null to indicate async loading is needed
+  return null;
 }
 
 /**
@@ -469,23 +431,35 @@ export function validateBreadcrumbStructure(items: BreadcrumbItem[]): boolean {
 /**
  * Get navigation context for a given path
  */
-export function getNavigationContext(path: string): {
+export async function getNavigationContext(path: string): Promise<{
   tab?: string;
   submenu?: string;
   isExternalLink?: boolean;
-} | null {
+} | null> {
+  const { navigationData } = await loadConfigData();
+  
+  if (!navigationData?.navigationData?.mainMenu?.tabs) {
+    return null;
+  }
+  
   const targetUrl = `/${path.replace(/^\/|\/$/g, '')}`;
   
-  for (const tab of navData.tabs) {
-    for (const submenu of tab.submenus) {
-      for (const itemGroup of submenu.items) {
-        for (const link of itemGroup.links) {
-          if (link.url === targetUrl) {
-            return {
-              tab: tab.label,
-              submenu: submenu.label,
-              isExternalLink: link.isExternal
-            };
+  for (const tab of navigationData.navigationData.mainMenu.tabs) {
+    if (tab.submenus) {
+      for (const submenu of tab.submenus) {
+        if (submenu.items) {
+          for (const itemGroup of submenu.items) {
+            if (itemGroup.links) {
+              for (const link of itemGroup.links) {
+                if (link.url === targetUrl) {
+                  return {
+                    tab: tab.label,
+                    submenu: submenu.label,
+                    isExternalLink: link.isExternal
+                  };
+                }
+              }
+            }
           }
         }
       }
@@ -498,17 +472,19 @@ export function getNavigationContext(path: string): {
 /**
  * Development helper to check if a path has static breadcrumbs
  */
-export function hasStaticBreadcrumbs(path: string): boolean {
+export async function hasStaticBreadcrumbs(path: string): Promise<boolean> {
+  const { breadcrumbsConfig: config } = await loadConfigData();
   const normalizedPath = path.replace(/^\/|\/$/g, '');
-  return !!config.static[normalizedPath];
+  return !!(config?.static?.[normalizedPath]);
 }
 
 /**
  * Get navigation-based breadcrumb configuration for debugging
  */
-export function getBreadcrumbConfig() {
+export async function getBreadcrumbConfig() {
+  const { breadcrumbsConfig: config, navigationData } = await loadConfigData();
   return {
     config,
-    navigationData: navData
+    navigationData
   };
 }
