@@ -262,7 +262,7 @@ export default function ProgramList({ programs }: ProgramListProps): React.JSX.E
                     </p>
                   </div>
                   {program.pgwp && (
-                    <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full ml-2 flex-shrink-0">
+                    <span className="bg-(--color-navy-100) text-white text-xs font-medium px-2 py-1 rounded-full ml-2 flex-shrink-0">
                       PGWP
                     </span>
                   )}

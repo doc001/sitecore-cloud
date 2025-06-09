@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import ProgramList from '@/components/pages/ProgramList';
+import Breadcrumb from '@/components/common/Breadcrumb';
+import { getBreadcrumbData } from '@/lib/navigationBreadcrumbUtils';
 import programsData from '@/data/cms/Programs.json' with { type: 'json' };
 
 // TypeScript interface for Program data structure
@@ -54,7 +56,10 @@ export const metadata: Metadata = {
  * 
  * @returns {React.JSX.Element} The program list page
  */
-export default function ProgramListPage(): React.JSX.Element {
+export default async function ProgramListPage(): Promise<React.JSX.Element> {
+  // Get breadcrumb data for the current page using navigation structure
+  const breadcrumbItems = await getBreadcrumbData('/program-list');
+  
   // Filter out archived and draft programs to show only published content
   const publishedPrograms: Program[] = programsData.filter((program: Program) => {
     return program.Archived === 'false' && program.Draft === 'false';
@@ -77,34 +82,22 @@ export default function ProgramListPage(): React.JSX.Element {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Header Section */}
-      <section className="bg-program-gradient text-white py-16">
+      <section className="bg-program-gradient text-white py-32">
         <div className="container-layout">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Our Programs
-            </h1>
-            <p className="text-xl md:text-2xl font-light opacity-90">
-              Discover your path to success with our diverse range of programs designed to prepare you for today's dynamic workforce.
-            </p>
+          <div className="mx-auto">
+            <h4 className="text-6xl font-semibold mb-6">
+              Find a Program
+            </h4>
           </div>
         </div>
       </section>
 
-      {/* Breadcrumb Navigation */}
-      <section className="bg-neutral-5 py-4">
-        <div className="container-layout">
-          <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm">
-            <a 
-              href="/" 
-              className="text-neutral-60 hover:text-blue-100 transition-colors duration-200"
-            >
-              Home
-            </a>
-            <span className="text-neutral-40">/</span>
-            <span className="text-neutral-80 font-medium">Programs</span>
-          </nav>
-        </div>
-      </section>
+      {/* Breadcrumb Navigation - Using the reusable component */}
+      <Breadcrumb 
+        items={breadcrumbItems} 
+        variant="program"
+        showHomeIcon={true}
+      />
 
       {/* Main Content Section */}
       <main className="container-layout">
