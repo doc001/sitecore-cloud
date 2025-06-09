@@ -183,18 +183,48 @@ export default async function ProgramPage({ params }: { params: { slug: string }
   return (
     <div className="min-h-screen bg-background">
       {/* Page Header Section */}
-      <section className="bg-program-gradient text-white py-32">
-        <div className="container-layout">
-          <div className="mx-auto">
-            <h4 className="text-6xl font-semibold mb-6">
-              {stripHtml(programData["Name"])}
-            </h4>
-            <p className="text-2xl max-w-6/12 py-9">
-              {stripHtml(programData["Short description"])}
-            </p>
-          </div>
+<section className="mx-auto bg-program-gradient pt-32 pb-24">
+    <div className="md:flex md:items-center md:gap-x-10 md:px-[10%]">
+        <div className="mx-auto md:max-w-4/6 md:mx-0 md:flex-auto">
+            <h1 className="text-pretty text-6xl font-semibold text-white">{stripHtml(programData["Name"])}</h1>
+            <p className="mt-20 text-pretty text-lg font-light text-white sm:text-xl/8">{stripHtml(programData["Short description"])}</p>
         </div>
-      </section>
+        <div className="mt-20 md:max-w-[380px] md:mt-0 md:shrink-0 md:grow grid grid-flow-col justify-items-end">
+            <div className="bg-[var(--color-purple-100)] text-md text-white">
+                <div className="grid grid-cols-2 gap-6 p-6">
+                    <div className="font-semibold">
+                        <p>Credential:</p>
+                    </div>
+                    <div className="text-white">
+                        <p>{stripHtml(programData["Program type"])}</p>
+                    </div>
+                    <div className="font-semibold">
+                        <p>Program length:</p>
+                    </div>
+                    <div className="text-white">
+                        <p>{stripHtml(programData["Duration"])}</p>
+                    </div>
+                    <div className="font-semibold">
+                        <p>Area:</p>
+                    </div>
+                    <div className="text-white">
+                        <p>{stripHtml(programData["Program area"])}</p>
+                    </div>
+                    <div className="font-semibold">
+                        <p>School:</p>
+                    </div>
+                    <div className="text-white">
+                        <p>{stripHtml(programData["School"])}</p>
+                    </div>
+                    <div className="font-semibold">
+                        <p>Post-Graduation Work Permit:</p>
+                    </div>
+                    <p>{stripHtml(programData["PGWP"])}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
       
       <Breadcrumb 
         items={breadcrumbItems} 
