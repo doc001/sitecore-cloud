@@ -1,0 +1,20 @@
+{
+  "name": "bvc-monorepo",
+  "private": true,
+  "packageManager": "npm@11.4.1",
+  "workspaces": [
+    "src/nextjs-jamstack",
+    "src/bvc-app"
+  ],
+  "scripts": {
+    "build:rendering": "turbo run build --filter=bvcrendering",
+    "build:jamstack": "turbo run build --filter=nextjs-jamstack",
+    "build:bvcapp": "turbo run build --filter=bvc-app",
+    "build": "turbo run build",
+    "deploy:jamstack": "cd src/nextjs-jamstack && vercel --scope=bvc-marketing-its --prod",
+    "deploy:bvcapp": "cd src/bvc-app && vercel --scope=bvc-marketing-its --prod"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  }
+}

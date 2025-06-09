@@ -1,0 +1,90 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [],
+  "headers": [],
+  "dynamicRoutes": [
+    {
+      "page": "/apply/i-am-ready/[slug]",
+      "regex": "^/apply/i\\-am\\-ready/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/apply/i\\-am\\-ready/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/study/extended-education/courses/[sisID]",
+      "regex": "^/study/extended\\-education/courses/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPsisID": "nxtPsisID"
+      },
+      "namedRegex": "^/study/extended\\-education/courses/(?<nxtPsisID>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/study/open-studies/courses/[sisID]",
+      "regex": "^/study/open\\-studies/courses/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPsisID": "nxtPsisID"
+      },
+      "namedRegex": "^/study/open\\-studies/courses/(?<nxtPsisID>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/apply/ready-to-apply",
+      "regex": "^/apply/ready\\-to\\-apply(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/apply/ready\\-to\\-apply(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/program-list",
+      "regex": "^/program\\-list(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/program\\-list(?:/)?$"
+    },
+    {
+      "page": "/study/extended-education",
+      "regex": "^/study/extended\\-education(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/study/extended\\-education(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "Next-Router-Segment-Prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "rewrites": []
+}
