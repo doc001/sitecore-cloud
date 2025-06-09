@@ -1,0 +1,85 @@
+/* [project]/src/styles/_PathSelectionSection.module.css [app-client] (css) */
+._PathSelectionSection-module__Tbcy1q__c-box-neutral10 {
+  background-color: var(--color-neutral-10);
+  width: 100%;
+  padding-bottom: var(--spacing-8);
+  position: relative;
+}
+
+._PathSelectionSection-module__Tbcy1q__c-divider__all-colors {
+  width: 100%;
+  height: 6px;
+  margin-bottom: var(--spacing-6);
+}
+
+._PathSelectionSection-module__Tbcy1q__c-box-neutral10__stack3x2 {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+._PathSelectionSection-module__Tbcy1q__c-box-n10__stack-h2, ._PathSelectionSection-module__Tbcy1q__c-box-n10__stack-h4 {
+  color: var(--color-neutral-80);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+._PathSelectionSection-module__Tbcy1q__c-box-n10__stack-h5 {
+  color: var(--color-neutral-70);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+._PathSelectionSection-module__Tbcy1q__box-gradient-bp {
+  background-image: linear-gradient(to right bottom, var(--color-purple-100), var(--color-blue-100));
+  border: 3px solid var(--color-white);
+  border-radius: 12px;
+  padding: 0;
+}
+
+._PathSelectionSection-module__Tbcy1q__box-gradient-bp:hover {
+  cursor: pointer;
+  border: 3px solid #0000;
+}
+
+._PathSelectionSection-module__Tbcy1q__box-white-select-your-path {
+  background-color: var(--color-white);
+  border-radius: 6px;
+  height: 100%;
+}
+
+._PathSelectionSection-module__Tbcy1q__c-button__grad-pb {
+  background-image: linear-gradient(to right, var(--color-purple-100), var(--color-blue-100));
+  color: var(--color-white);
+  padding: var(--spacing-3) var(--spacing-6);
+  text-align: center;
+  background-clip: border-box;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+._PathSelectionSection-module__Tbcy1q__c-button__grad-pb:hover {
+  background-image: linear-gradient(156deg, var(--color-purple-100), var(--color-blue-100));
+  -webkit-text-fill-color: inherit;
+  background-clip: border-box;
+}
+
+@media (width <= 768px) {
+  ._PathSelectionSection-module__Tbcy1q__c-box-neutral10__stack3x2 {
+    padding: var(--spacing-4);
+  }
+
+  ._PathSelectionSection-module__Tbcy1q__c-box-n10__stack-h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  ._PathSelectionSection-module__Tbcy1q__c-box-n10__stack-h4 {
+    font-size: var(--font-size-xl);
+  }
+
+  ._PathSelectionSection-module__Tbcy1q__c-box-n10__stack-h5 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/*# sourceMappingURL=src_styles__PathSelectionSection_module_css_f9ee138c._.single.css.map*/

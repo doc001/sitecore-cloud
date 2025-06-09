@@ -1,0 +1,168 @@
+/* [project]/src/styles/_GradientHeroSection.module.css [app-client] (css) */
+._GradientHeroSection-module__sHDqWG__c-gradient-nbp {
+  background-image: linear-gradient(#0006, #0006), linear-gradient(220deg, var(--color-blue-100), var(--color-purple-100) 50%, var(--color-navy-100));
+  padding: var(--spacing-16) var(--spacing-8);
+}
+
+._GradientHeroSection-module__sHDqWG__is-25 {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 25vh;
+  display: flex;
+}
+
+._GradientHeroSection-module__sHDqWG__is-50 {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 50vh;
+  display: flex;
+}
+
+._GradientHeroSection-module__sHDqWG__is-75 {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 75vh;
+  display: flex;
+}
+
+._GradientHeroSection-module__sHDqWG__is-100 {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+._GradientHeroSection-module__sHDqWG__c-blue-gradient__h2 {
+  color: var(--color-white);
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+
+/* [project]/src/styles/Breadcrumb.module.css [app-client] (css) */
+.Breadcrumb-module__V6xoSW__breadcrumbsBackground {
+  color: var(--color-white);
+  width: 100%;
+  padding: var(--spacing-3) 0;
+  background-color: var(--color-purple-100);
+  background-image: linear-gradient(220deg, var(--color-navy-100), #0006);
+}
+
+.Breadcrumb-module__V6xoSW__general {
+  background-color: var(--color-neutral-5);
+}
+
+.Breadcrumb-module__V6xoSW__program {
+  color: var(--color-white);
+  background-image: linear-gradient(#0006, #0006), linear-gradient(220deg, #00a3ff, #6a4cd7 50%, #031a62);
+}
+
+.Breadcrumb-module__V6xoSW__ecommerce {
+  background-image: linear-gradient(to bottom, #0006, #0006), linear-gradient(220deg, var(--color-orange-100), var(--color-blue-100) 51%, var(--color-navy-100));
+  color: var(--color-white);
+}
+
+.Breadcrumb-module__V6xoSW__openStudies {
+  background-image: linear-gradient(to bottom, #0003, #0003), linear-gradient(220deg, var(--color-orange-100), var(--color-purple-100));
+  color: var(--color-white);
+}
+
+.Breadcrumb-module__V6xoSW__containerWidth {
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  display: flex;
+}
+
+@media (width >= 1024px) {
+  .Breadcrumb-module__V6xoSW__containerWidth {
+    height: auto;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+.Breadcrumb-module__V6xoSW__breadcrumbWrapper {
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.Breadcrumb-module__V6xoSW__breadcrumbIcon {
+  color: var(--color-white);
+  font-family: Material Icons;
+  font-size: var(--font-size-lg);
+  align-items: center;
+  text-decoration: none;
+  transition: color .2s;
+  display: inline-flex;
+}
+
+.Breadcrumb-module__V6xoSW__breadcrumbIcon:hover {
+  color: var(--color-orange-100);
+}
+
+.Breadcrumb-module__V6xoSW__program .Breadcrumb-module__V6xoSW__breadcrumbIcon, .Breadcrumb-module__V6xoSW__ecommerce .Breadcrumb-module__V6xoSW__breadcrumbIcon, .Breadcrumb-module__V6xoSW__openStudies .Breadcrumb-module__V6xoSW__breadcrumbIcon {
+  color: var(--color-white);
+}
+
+.Breadcrumb-module__V6xoSW__breadcrumbSeparator {
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+}
+
+.Breadcrumb-module__V6xoSW__program .Breadcrumb-module__V6xoSW__breadcrumbSeparator, .Breadcrumb-module__V6xoSW__ecommerce .Breadcrumb-module__V6xoSW__breadcrumbSeparator, .Breadcrumb-module__V6xoSW__openStudies .Breadcrumb-module__V6xoSW__breadcrumbSeparator {
+  color: var(--color-white);
+  opacity: .7;
+}
+
+.Breadcrumb-module__V6xoSW__breadcrumbLink {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.Breadcrumb-module__V6xoSW__breadcrumbLink:hover {
+  color: var(--color-purple-100);
+  text-decoration: none;
+}
+
+.Breadcrumb-module__V6xoSW__program .Breadcrumb-module__V6xoSW__breadcrumbLink, .Breadcrumb-module__V6xoSW__ecommerce .Breadcrumb-module__V6xoSW__breadcrumbLink, .Breadcrumb-module__V6xoSW__openStudies .Breadcrumb-module__V6xoSW__breadcrumbLink {
+  color: var(--color-white);
+}
+
+.Breadcrumb-module__V6xoSW__breadcrumbNoLink {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  text-decoration: underline;
+}
+
+.Breadcrumb-module__V6xoSW__program .Breadcrumb-module__V6xoSW__breadcrumbNoLink, .Breadcrumb-module__V6xoSW__ecommerce .Breadcrumb-module__V6xoSW__breadcrumbNoLink, .Breadcrumb-module__V6xoSW__openStudies .Breadcrumb-module__V6xoSW__breadcrumbNoLink {
+  color: var(--color-white);
+  opacity: .8;
+}
+
+@media (width <= 640px) {
+  .Breadcrumb-module__V6xoSW__breadcrumbWrapper {
+    font-size: var(--font-size-xs);
+  }
+
+  .Breadcrumb-module__V6xoSW__breadcrumbIcon {
+    font-size: var(--font-size-base);
+  }
+}
+
+
+/*# sourceMappingURL=src_styles_d81af6cd._.css.map*/
