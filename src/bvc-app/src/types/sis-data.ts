@@ -1,5 +1,5 @@
 // Auto-generated TypeScript definitions for SIS data
-// Generated at: 2025-06-09T18:43:42.451Z
+// Generated at: 2025-06-10T14:49:33.588Z
 
 export interface SisItem {
   id: string;

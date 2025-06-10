@@ -18,6 +18,7 @@
     "generateCourses": "node scripts/export-valid-courses.mjs",
     "generateMap": "node scripts/generateSiSData.mjs",
     "generateCourseData": "node scripts/buildCoursesComplete.mjs",
+    "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
     "bvcapp-scripts": "npm run generateCourses && npm run generateMap && npm run generateCourseData && npm run generateNavigationBreadcrumbs",
     "build": "npm run generateCourses && npm run generateMap && npm run generateCourseData && next build"

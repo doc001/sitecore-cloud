@@ -1,31 +1,31 @@
 {
   "metadata": {
-    "generatedAt": "2025-06-09T18:43:49.967Z",
+    "generatedAt": "2025-06-10T14:49:47.237Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "COMP9302",
     "courseName": "Microsoft Excel - Core"
   },
   "course": {
-    "id": "E07C1411EB8B409EBD91741AAF0A62F4",
+    "id": "6397CC0B4B7D4800A70EB936070FED43",
     "sisID": "COMP9302",
     "name": "Microsoft Excel - Core",
     "children": [
       {
-        "id": "A674178343204B71B8BB87E9E16C9A96",
+        "id": "50694A6348434DEEBF72C526311B39D4",
         "name": "25JULMNOA91",
         "sisID": "220487",
         "courseName": "",
-        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
-        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
         "deliveryType": {
-          "id": "73DB4BB37C194BADBB66CE697687EADE",
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
           "name": "Online - Asynchronous",
           "displayName": "Online - Asynchronous",
           "slug": "online-asynchronous"
         },
         "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
@@ -40,9 +40,61 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
             "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "375.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "AAF533A81BD04C7683844C03C3ACD5F7",
+        "name": "25OCTMNOA91",
+        "sisID": "221363",
+        "courseName": "",
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "30",
+        "registrationStart": "20250424T000000",
+        "registrationEnd": "20251007T235959",
+        "startDate": "20251008T000000",
+        "endDate": "20251218T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -65,10 +117,10 @@
       }
     ],
     "summary": {
-      "totalSections": 1,
-      "totalFees": 1,
+      "totalSections": 2,
+      "totalFees": 2,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      "sectionsWithFees": 2
     }
   }
 }
