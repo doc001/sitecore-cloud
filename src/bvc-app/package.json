@@ -21,7 +21,7 @@
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
     "bvcapp-scripts": "npm run generateCourses && npm run generateMap && npm run generateCourseData && npm run generateNavigationBreadcrumbs",
-    "build": "npm run generateCourses && npm run generateMap && npm run generateCourseData && next build"
+    "build": "npm run bvcapp-scripts && next build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
