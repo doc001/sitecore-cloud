@@ -16,11 +16,13 @@
     "predev": "npm run breadcrumbs:build",
     "postinstall": "flowbite-react patch",
     "generateCourses": "node scripts/export-valid-courses.mjs",
+    "generateOpenStudies": "node scripts/export-os-valid-courses.mjs",
     "generateMap": "node scripts/generateSiSData.mjs",
     "generateCourseData": "node scripts/buildCoursesComplete.mjs",
+    "generateOpenStudiesData": "node scripts/buildCoursesOpenStudiesComplete.mjs",
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
-    "bvcapp-scripts": "npm run generateCourses && npm run generateMap && npm run generateCourseData && npm run generateNavigationBreadcrumbs",
+    "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs",
     "build": "npm run bvcapp-scripts && next build"
   },
   "dependencies": {

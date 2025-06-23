@@ -744,7 +744,7 @@ function resolveFeeType(id) {
  * Get comprehensive course data with full pagination support
  */
 async function getCourseDataByPath(sisID) {
-  const coursePath = `/sitecore/content/BVC/BVC/Data/SisData/Courses/${sisID}`;
+  const coursePath = `/sitecore/content/BVC/BVC/Data/SisData/Credit Courses/${sisID}`;
   
   console.log(`  📂 Processing course: ${coursePath}`);
   
@@ -783,7 +783,7 @@ async function getCourseDataByPath(sisID) {
     const campusResolved = resolveCampus(section.campus?.value);
 
     // Get fees for this specific section with full pagination
-    const feesPath = `/sitecore/content/BVC/BVC/Data/SisData/Courses/${sisID}/${section.name}`;
+    const feesPath = `/sitecore/content/BVC/BVC/Data/SisData/Credit Courses/${sisID}/${section.name}`;
     const fees = await fetchAllFeesWithPagination(feesPath, sisID, section.name);
 
     const enhancedSection = {
