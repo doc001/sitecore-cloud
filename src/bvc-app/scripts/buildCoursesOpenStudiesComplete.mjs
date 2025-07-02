@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// scripts/buildCoursesComplete.mjs
+// scripts/export-os-valid-courses.mjs
 
 /**
  * Complete working course data builder for Sitecore XMC
@@ -36,6 +36,7 @@ const GET_COURSE_SECTIONS_PAGINATED = /* GraphQL */ `
     item(path: $coursePath, language: "en") {
       id
       name: field(name: "Name") { value }
+      credits: field(name: "Credits") { value }
       children(first: $first, after: $after) {
         results {
           id
@@ -66,6 +67,7 @@ const GET_COURSE_SECTIONS_BATCH = /* GraphQL */ `
     item(path: $coursePath, language: "en") {
       id
       name: field(name: "Name") { value }
+      credits: field(name: "Credits") { value }
       children(first: $first) {
         results {
           id
@@ -92,6 +94,7 @@ const GET_COURSE_SECTIONS_BASIC = /* GraphQL */ `
     item(path: $coursePath, language: "en") {
       id
       name: field(name: "Name") { value }
+      credits: field(name: "Credits") { value }
       children {
         results {
           id
@@ -236,6 +239,29 @@ function normalizeId(id) {
   const cleaned = id.replace(/[{}]/g, '').trim();
   
   return cleaned;
+}
+
+/**
+ * Clean up credits value - remove floating point decimals if they're .0
+ * Examples: "3.0" -> "3", "4.5" -> "4.5", "3" -> "3"
+ */
+function normalizeCredits(credits) {
+  if (!credits) return '';
+  
+  const trimmed = credits.toString().trim();
+  
+  // If it's a number with .0, remove the .0
+  if (trimmed.includes('.')) {
+    const parsed = parseFloat(trimmed);
+    // If it's a whole number (like 3.0), return as integer string
+    if (parsed % 1 === 0) {
+      return parsed.toString().split('.')[0];
+    }
+    // Otherwise keep the decimal (like 4.5)
+    return parsed.toString();
+  }
+  
+  return trimmed;
 }
 
 /**
@@ -792,9 +818,9 @@ async function getCourseDataByPath(sisID) {
       sisID: section.sisID?.value || '',
       courseName: section.courseName?.value || '',
       
-      // Original ID values
-      deliveryTypeId: section.deliveryType?.value || '',
-      campusId: section.campus?.value || '',
+      // Original ID values (normalized)
+      deliveryTypeId: normalizeId(section.deliveryType?.value) || '',
+      campusId: normalizeId(section.campus?.value) || '',
       
       // Resolved lookup values
       deliveryType: deliveryTypeResolved ? {
@@ -837,6 +863,7 @@ async function getCourseDataByPath(sisID) {
     id: courseRoot.id,
     sisID: sisID,
     name: courseRoot.name?.value || sisID,
+    credits: normalizeCredits(courseRoot.credits?.value || ''),
     children: enhancedChildren,
     summary: {
       totalSections: enhancedChildren.length,
@@ -1124,7 +1151,7 @@ async function buildAllCoursesComplete() {
       generatedAt: new Date().toISOString(),
       version: "4.0.0",
       source: "Sitecore XMC GraphQL - Complete Solution with Individual Files",
-      note: "Individual course files are available in /courses/ directory",
+      note: "Individual course files are available in /oScourses/ directory",
       paginationSettings: {
         pageSize: PAGE_SIZE,
         largeBatchSize: LARGE_BATCH_SIZE,
@@ -1180,14 +1207,14 @@ async function buildAllCoursesComplete() {
   console.log(`   📁 src/data/`);
   console.log(`   ├── coursesData.json (main combined file)`);
   console.log(`   ├── summary-stats.json (statistics)`);
-  console.log(`   └── courses/`);
+  console.log(`   └── oScourses/`);
   console.log(`       ├── course-index.json (course list with summaries)`);
   console.log(`       ├── course-{sisID}.json (individual course files)`);
   console.log(`       └── ... (${stats.individualFiles.generated.length} total course files)`);
   
   console.log(`\n🔧 SSG Usage Examples:`);
-  console.log(`   • Load specific course: import courseData from '@/data/courses/course-ACCT101.json'`);
-  console.log(`   • Get course list: import courseIndex from '@/data/courses/course-index.json'`);
+  console.log(`   • Load specific course: import courseData from '@/data/oScourses/course-ACCT101.json'`);
+  console.log(`   • Get course list: import courseIndex from '@/data/oScourses/course-index.json'`);
   console.log(`   • Load statistics: import stats from '@/data/summary-stats.json'`);
   console.log(`   • Main data: import allCourses from '@/data/coursesData.json'`);
   

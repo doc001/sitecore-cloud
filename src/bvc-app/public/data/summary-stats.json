@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "generatedAt": "2025-07-01T04:12:01.696Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Summary Statistics"
+  },
+  "overview": {
+    "totalCourses": 5,
+    "totalSections": 6,
+    "totalFees": 17,
+    "totalTimeBlocks": 5,
+    "successRate": "100.0%"
+  },
+  "courseDistribution": {
+    "coursesWithManySection": 0,
+    "coursesWithManyFees": 0,
+    "coursesWithTimeBlocks": 5,
+    "maxSectionsInCourse": 2,
+    "maxFeesInCourse": 5,
+    "maxTimeBlocksInCourse": 1
+  },
+  "lookupResolution": {
+    "resolvedDeliveryTypes": 6,
+    "resolvedCampuses": 6,
+    "resolvedFeeTypes": 12,
+    "resolvedTimeBlocks": 5
+  },
+  "paginationUsage": {
+    "coursesRequiringPagination": 0,
+    "sectionsRequiringPagination": 0,
+    "feesRequiringPagination": 0
+  },
+  "containerTypes": [
+    "Fees",
+    "TimeBlock"
+  ],
+  "feeTypes": [
+    "International Tuition",
+    "Tuition"
+  ]
+}
