@@ -1,11 +1,33 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-01T04:12:01.696Z",
+    "generatedAt": "2025-07-07T15:30:25.363Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Course Index",
-    "totalCourses": 5
+    "totalCourses": 6
   },
   "courses": [
+    {
+      "sisID": "ACCT1103",
+      "name": "Introduction to Financial Accounting",
+      "fileName": "course-ACCT1103.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 4,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": true,
+        "containers": [
+          "Fees",
+          "TimeBlock"
+        ],
+        "feeTypes": [
+          "International Tuition",
+          "Tuition"
+        ]
+      }
+    },
     {
       "sisID": "COMM1101",
       "name": "Interpersonal Relationships And Communication Skills",

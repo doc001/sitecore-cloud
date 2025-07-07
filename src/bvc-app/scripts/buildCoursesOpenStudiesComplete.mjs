@@ -265,6 +265,19 @@ function normalizeCredits(credits) {
 }
 
 /**
+ * Sanitize fee item names by removing underscores and normalizing
+ * Examples: "morning_session_1" -> "morning session 1", "lab_fee_2" -> "lab fee 2"
+ */
+function sanitizeFeeItemName(feeItemName) {
+  if (!feeItemName) return '';
+  
+  return feeItemName
+    .replace(/_/g, ' ')           // Replace underscores with spaces
+    .replace(/\s+/g, ' ')         // Replace multiple spaces with single space
+    .trim();                      // Remove leading/trailing whitespace
+}
+
+/**
  * Enhanced lookup function that tries multiple ID formats
  */
 function findInLookup(lookupCategory, id) {
@@ -303,42 +316,81 @@ function findInLookup(lookupCategory, id) {
 /**
  * Find TimeBlock data by various lookup methods
  * Tries: byId, byName (exact), byName (case-insensitive), and sisId field matching
+ * Now includes fee item name sanitization
  */
 function findTimeBlockData(timeBlockIdentifier) {
   if (!timeBlockIdentifier || !lookupData.lookups?.timeBlocks) return null;
   
   const timeBlocks = lookupData.lookups.timeBlocks;
   
-  // Method 1: Try direct ID lookup
+  // Sanitize the identifier if it looks like a fee item name (contains underscores)
+  const sanitizedIdentifier = timeBlockIdentifier.includes('_') 
+    ? sanitizeFeeItemName(timeBlockIdentifier)
+    : timeBlockIdentifier;
+  
+  // Method 1: Try direct ID lookup (original identifier)
   let timeBlockData = findInLookup(timeBlocks, timeBlockIdentifier);
   if (timeBlockData) {
     return timeBlockData;
   }
   
-  // Method 2: Try name-based lookup (exact match)
+  // Method 2: Try direct ID lookup (sanitized identifier if different)
+  if (sanitizedIdentifier !== timeBlockIdentifier) {
+    timeBlockData = findInLookup(timeBlocks, sanitizedIdentifier);
+    if (timeBlockData) {
+      return timeBlockData;
+    }
+  }
+  
+  // Method 3: Try name-based lookup (original)
   if (timeBlocks.byName?.[timeBlockIdentifier.toLowerCase()]) {
     return timeBlocks.byName[timeBlockIdentifier.toLowerCase()];
   }
   
-  // Method 3: Try slug-based lookup
+  // Method 4: Try name-based lookup (sanitized)
+  if (timeBlocks.byName?.[sanitizedIdentifier.toLowerCase()]) {
+    return timeBlocks.byName[sanitizedIdentifier.toLowerCase()];
+  }
+  
+  // Method 5: Try slug-based lookup (original)
   if (timeBlocks.bySlug?.[timeBlockIdentifier.toLowerCase()]) {
     return timeBlocks.bySlug[timeBlockIdentifier.toLowerCase()];
   }
   
-  // Method 4: Search through all timeBlocks for sisId field match
+  // Method 6: Try slug-based lookup (sanitized)
+  if (timeBlocks.bySlug?.[sanitizedIdentifier.toLowerCase()]) {
+    return timeBlocks.bySlug[sanitizedIdentifier.toLowerCase()];
+  }
+  
+  // Method 7: Search through all timeBlocks for sisId field match
   for (const timeBlock of Object.values(timeBlocks.byId || {})) {
-    // Check if the timeBlock has a sisId field that matches
+    // Check if the timeBlock has a sisId field that matches (original)
     if (timeBlock.fields?.sisId === timeBlockIdentifier) {
       return timeBlock;
     }
     
-    // Also check name match (case-insensitive)
+    // Check if the timeBlock has a sisId field that matches (sanitized)
+    if (timeBlock.fields?.sisId === sanitizedIdentifier) {
+      return timeBlock;
+    }
+    
+    // Also check name match (case-insensitive, original)
     if (timeBlock.name?.toLowerCase() === timeBlockIdentifier.toLowerCase()) {
       return timeBlock;
     }
     
-    // Check displayName match
+    // Also check name match (case-insensitive, sanitized)
+    if (timeBlock.name?.toLowerCase() === sanitizedIdentifier.toLowerCase()) {
+      return timeBlock;
+    }
+    
+    // Check displayName match (original)
     if (timeBlock.displayName?.toLowerCase() === timeBlockIdentifier.toLowerCase()) {
+      return timeBlock;
+    }
+    
+    // Check displayName match (sanitized)
+    if (timeBlock.displayName?.toLowerCase() === sanitizedIdentifier.toLowerCase()) {
       return timeBlock;
     }
   }
@@ -350,33 +402,56 @@ function findTimeBlockData(timeBlockIdentifier) {
  * Process TimeBlock data from lookup and format for output
  */
 function processTimeBlockData(timeBlockIdentifier, feeItemName) {
+  // First, try to find existing TimeBlock data
   const timeBlockData = findTimeBlockData(timeBlockIdentifier || feeItemName);
   
-  if (!timeBlockData) {
-    console.warn(`⚠️  TimeBlock not found for identifier: "${timeBlockIdentifier || feeItemName}"`);
-    return null;
+  if (timeBlockData) {
+    // Extract fields from the found timeBlock data
+    const fields = timeBlockData.fields || {};
+    
+    return {
+      id: timeBlockData.id,
+      name: timeBlockData.name,
+      displayName: timeBlockData.displayName,
+      endTime: fields.endTime || '',
+      startTime: fields.startTime || '',
+      sisId: fields.sisId || timeBlockData.name || '',
+      created: fields.created || '',
+      updated: fields.updated || '',
+      // Include any other fields that might be present
+      ...Object.keys(fields).reduce((acc, key) => {
+        if (!['endTime', 'startTime', 'sisId', 'created', 'updated'].includes(key)) {
+          acc[key] = fields[key];
+        }
+        return acc;
+      }, {})
+    };
   }
   
-  // Extract fields from the timeBlock data
-  const fields = timeBlockData.fields || {};
+  // If no TimeBlock data found, create a fallback TimeBlock using the fee item name
+  if (feeItemName) {
+    // Clean the fee item name - remove underscores and normalize
+    const cleanedName = feeItemName.replace(/_/g, ' ').trim();
+    const fallbackSisId = feeItemName.replace(/_/g, '');
+    
+    console.warn(`⚠️  TimeBlock not found for identifier: "${timeBlockIdentifier || feeItemName}", creating fallback TimeBlock`);
+    
+    return {
+      id: null, // No ID since this is a fallback
+      name: cleanedName,
+      displayName: cleanedName,
+      endTime: '',
+      startTime: '',
+      sisId: fallbackSisId,
+      created: '',
+      updated: '',
+      isFallback: true // Flag to indicate this is a generated fallback
+    };
+  }
   
-  return {
-    id: timeBlockData.id,
-    name: timeBlockData.name,
-    displayName: timeBlockData.displayName,
-    endTime: fields.endTime || '',
-    startTime: fields.startTime || '',
-    sisId: fields.sisId || timeBlockData.name || '',
-    created: fields.created || '',
-    updated: fields.updated || '',
-    // Include any other fields that might be present
-    ...Object.keys(fields).reduce((acc, key) => {
-      if (!['endTime', 'startTime', 'sisId', 'created', 'updated'].includes(key)) {
-        acc[key] = fields[key];
-      }
-      return acc;
-    }, {})
-  };
+  // If we have neither identifier nor fee item name, return null
+  console.warn(`⚠️  No TimeBlock identifier or fee item name provided`);
+  return null;
 }
 
 /**
@@ -561,56 +636,28 @@ async function fetchFeeItemsFromContainer(containerPath, containerName, sisID, s
 
 /**
  * Fetch all fee containers and their items with comprehensive pagination
+ * SIMPLIFIED VERSION - Reduced nesting to avoid GraphQL depth limits
  */
 async function fetchAllFeesWithPagination(feesPath, sisID, sectionName) {
   console.log(`      💰 Fetching fees with pagination: ${feesPath}`);
   
   const allFees = [];
-  let hasNext = true;
-  let cursor = null;
-  let totalFetched = 0;
-  let pageCount = 0;
+  
+  // First, try a simple direct query to get fee containers
+  try {
+    const data = await executeGraphQLQuery(
+      GET_FEES_BASIC,
+      { coursePath: feesPath },
+      `basic fees for ${sisID}/${sectionName}`
+    );
 
-  // First, get all fee containers with pagination
-  while (hasNext && totalFetched < MAX_ITEMS) {
-    pageCount++;
-    try {
-      const variables = {
-        coursePath: feesPath,
-        first: PAGE_SIZE,
-        ...(cursor && { after: cursor })
-      };
-
-      const data = await executeGraphQLQuery(
-        GET_FEE_CONTAINERS_PAGINATED,
-        variables,
-        `fee containers page ${pageCount} for ${sisID}/${sectionName}`
-      );
-
-      if (!data?.item?.children) {
-        break;
-      }
-
-      const { results, pageInfo } = data.item.children;
-
-      if (results && results.length > 0) {
-        console.log(`        📂 Page ${pageCount}: ${results.length} fee containers`);
-        
-        // Process each fee container
-        for (const container of results) {
-          const containerPath = `${feesPath}/${container.name}`;
-          
-          // Fetch all fee items from this container with pagination
-          const feeItems = await fetchFeeItemsFromContainer(
-            containerPath, 
-            container.name, 
-            sisID, 
-            sectionName
-          );
-          
-          // Process fee items into our format
-          for (const feeItem of feeItems) {
-            const feeTypeId = feeItem.FeeType?.value || '';
+    if (data?.item?.children?.results) {
+      console.log(`        📂 Found ${data.item.children.results.length} fee containers`);
+      
+      for (const container of data.item.children.results) {
+        if (container.children?.results) {
+          for (const feeItem of container.children.results) {
+            const feeTypeId = normalizeId(feeItem.FeeType?.value) || '';
             const amount = feeItem.Amount?.value || '';
             const timeBlock = feeItem.TimeBlock?.value || '';
             const day = feeItem.Day?.value || '';
@@ -621,7 +668,8 @@ async function fetchAllFeesWithPagination(feesPath, sisID, sectionName) {
             const feeObject = {
               containerName: container.name,
               feeItemName: feeItem.name,
-              feeTypeId: feeTypeId,
+              feeItemNameSanitized: sanitizeFeeItemName(feeItem.name), // Add sanitized version
+              feeTypeId: normalizeId(feeTypeId),
               feeType: feeTypeResolved ? {
                 id: feeTypeResolved.id,
                 name: feeTypeResolved.name,
@@ -629,7 +677,7 @@ async function fetchAllFeesWithPagination(feesPath, sisID, sectionName) {
                 slug: feeTypeResolved.slug
               } : null,
               amount: amount,
-              timeBlock: null, // Will be populated below if container is TimeBlock
+              timeBlock: null,
               day: day
             };
             
@@ -642,94 +690,27 @@ async function fetchAllFeesWithPagination(feesPath, sisID, sectionName) {
               
               if (timeBlockData) {
                 feeObject.timeBlock = timeBlockData;
-                console.log(`          ✅ TimeBlock mapped: ${timeBlockData.sisId} (${timeBlockData.startTime} - ${timeBlockData.endTime})`);
-              } else {
-                console.warn(`          ⚠️  TimeBlock data not found for: ${feeItem.name} / ${timeBlock}`);
+                if (timeBlockData.isFallback) {
+                  console.log(`          ⚠️  Using fallback TimeBlock: ${timeBlockData.name}`);
+                } else {
+                  console.log(`          ✅ TimeBlock mapped: ${timeBlockData.sisId} (${timeBlockData.startTime} - ${timeBlockData.endTime})`);
+                }
               }
             }
             
             allFees.push(feeObject);
           }
         }
-        
-        totalFetched += results.length;
       }
-
-      hasNext = pageInfo?.hasNext === true;
-      cursor = pageInfo?.endCursor || null;
-
-      if (!cursor && hasNext) {
-        hasNext = false;
-      }
-
-      if (!results || results.length === 0) {
-        hasNext = false;
-      }
-
-    } catch (error) {
-      console.error(`      ❌ Error fetching fee containers page ${pageCount}: ${error.message}`);
-      break;
-    }
-  }
-
-  // If pagination failed, try basic query as fallback
-  if (allFees.length === 0) {
-    console.log(`      🔄 Fee pagination failed, trying basic fetch...`);
-    
-    try {
-      const data = await executeGraphQLQuery(
-        GET_FEES_BASIC,
-        { coursePath: feesPath },
-        `basic fees for ${sisID}/${sectionName}`
-      );
-
-      if (data?.item?.children?.results) {
-        for (const container of data.item.children.results) {
-          if (container.children?.results) {
-            for (const feeItem of container.children.results) {
-              const feeTypeId = feeItem.FeeType?.value || '';
-              const amount = feeItem.Amount?.value || '';
-              const timeBlock = feeItem.TimeBlock?.value || '';
-              const day = feeItem.Day?.value || '';
-              
-              const feeTypeResolved = resolveFeeType(feeTypeId);
-              
-              // Enhanced fee object with TimeBlock mapping
-              const feeObject = {
-                containerName: container.name,
-                feeItemName: feeItem.name,
-                feeTypeId: feeTypeId,
-                feeType: feeTypeResolved ? {
-                  id: feeTypeResolved.id,
-                  name: feeTypeResolved.name,
-                  displayName: feeTypeResolved.displayName,
-                  slug: feeTypeResolved.slug
-                } : null,
-                amount: amount,
-                timeBlock: null,
-                day: day
-              };
-              
-              // Special handling for TimeBlock containers
-              if (container.name.toLowerCase() === 'timeblock') {
-                const timeBlockData = processTimeBlockData(timeBlock, feeItem.name);
-                if (timeBlockData) {
-                  feeObject.timeBlock = timeBlockData;
-                }
-              }
-              
-              allFees.push(feeObject);
-            }
-          }
-        }
-        console.log(`      ✅ Basic fees fetch succeeded with ${allFees.length} fees`);
-      }
-    } catch (basicError) {
+      console.log(`      ✅ Basic fees fetch succeeded with ${allFees.length} fees`);
+    } else {
       console.log(`      ⚠️  No fees found at ${feesPath}`);
     }
+  } catch (basicError) {
+    console.log(`      ⚠️  No fees found at ${feesPath}: ${basicError.message}`);
   }
 
-  console.log(`      ✅ Total fees retrieved: ${allFees.length} (used ${pageCount} container page requests)`);
+  console.log(`      ✅ Total fees retrieved: ${allFees.length}`);
   return allFees;
 }
 

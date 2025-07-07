@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-01T04:11:29.711Z",
+    "generatedAt": "2025-07-07T17:16:51.695Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "FACP9101",
@@ -181,79 +181,6 @@
         "registrationEnd": "20251212T235959",
         "startDate": "20251213T000000",
         "endDate": "20251213T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "120.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "290D1",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "127E1FD241734FF6912234654969FBA2",
-              "name": "290D1",
-              "displayName": "290D1",
-              "endTime": "20250101T135000",
-              "startTime": "20250101T090000",
-              "sisId": "290D1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160302Z",
-              "Updated": "20250520T160303Z"
-            },
-            "day": "6"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 1
-        }
-      },
-      {
-        "id": "686F2462EEBD4B759C984B46897F2796",
-        "name": "25JULMNFS95",
-        "sisID": "219882",
-        "courseName": "",
-        "deliveryTypeId": "{AB98C091-3E88-437F-8E21-3869FAB80C8B}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "5",
-        "registrationStart": "20250115T000000",
-        "registrationEnd": "20250704T235959",
-        "startDate": "20250705T000000",
-        "endDate": "20250705T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -889,10 +816,10 @@
       }
     ],
     "summary": {
-      "totalSections": 12,
-      "totalFees": 24,
-      "totalTimeBlocks": 12,
-      "sectionsWithFees": 12
+      "totalSections": 11,
+      "totalFees": 22,
+      "totalTimeBlocks": 11,
+      "sectionsWithFees": 11
     }
   }
 }
