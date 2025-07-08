@@ -1,19 +1,19 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-07T15:30:23.388Z",
+    "generatedAt": "2025-07-07T21:06:16.798Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ENGL1201",
     "courseName": "English Composition"
   },
   "course": {
-    "id": "63974B3059624E8288E2F09D942DB888",
+    "id": "412FE0F01C55492BBE771C94D7C21E86",
     "sisID": "ENGL1201",
     "name": "English Composition",
     "credits": "3",
     "children": [
       {
-        "id": "1E197C05E4B44AE6B09456DC7AFF7F7F",
+        "id": "C2D87EA07C7A459F9C9E8AC15A7EBE8C",
         "name": "25JULMNOA52",
         "sisID": "220522",
         "courseName": "",
@@ -41,7 +41,8 @@
           {
             "containerName": "Fees",
             "feeItemName": "International Tuition",
-            "feeTypeId": "{DDA077EB-99A5-45BB-B655-1D31EBCE63FB}",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
             "feeType": {
               "id": "DDA077EB99A545BBB6551D31EBCE63FB",
               "name": "International Tuition",
@@ -55,7 +56,8 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
             "feeType": {
               "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
@@ -69,7 +71,8 @@
           {
             "containerName": "TimeBlock",
             "feeItemName": "170S1",
-            "feeTypeId": "",
+            "feeItemNameSanitized": "170S1",
+            "feeTypeId": null,
             "feeType": null,
             "amount": "",
             "timeBlock": {
@@ -101,7 +104,7 @@
         }
       },
       {
-        "id": "FD4614CC65B64DD0B3F618421157633A",
+        "id": "0A61CD35D73E4F61B744B1EA27144D94",
         "name": "25JULMNOA62",
         "sisID": "219578",
         "courseName": "",
@@ -129,7 +132,8 @@
           {
             "containerName": "Fees",
             "feeItemName": "International Tuition",
-            "feeTypeId": "{DDA077EB-99A5-45BB-B655-1D31EBCE63FB}",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
             "feeType": {
               "id": "DDA077EB99A545BBB6551D31EBCE63FB",
               "name": "International Tuition",
@@ -143,7 +147,8 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
             "feeType": {
               "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
@@ -166,13 +171,2316 @@
           ],
           "timeBlockCount": 0
         }
+      },
+      {
+        "id": "C2D78556609A430F8D853DE6E3576191",
+        "name": "25SEPMNFS30",
+        "sisID": "221470",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1",
+            "feeItemNameSanitized": "170A1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
+            },
+            "day": "5"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "4FCFD4D32F2B46ACB45326396E1B426D",
+        "name": "25SEPMNFS31",
+        "sisID": "221471",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170C1",
+            "feeItemNameSanitized": "170C1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "0F0D6DEF22D24946BF1E141D41B6CF94",
+              "name": "170C1",
+              "displayName": "170C1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T110000",
+              "sisId": "170C1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160239Z",
+              "Updated": "20250520T160239Z"
+            },
+            "day": "4"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "7C47F678BCC342C4AE4E7970CA1CB027",
+        "name": "25SEPMNFS33",
+        "sisID": "221473",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1",
+            "feeItemNameSanitized": "170A1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
+            },
+            "day": "5"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "62794865303E49FFB7B8B03EAEE971EE",
+        "name": "25SEPMNFS34",
+        "sisID": "221474",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80C1",
+            "feeItemNameSanitized": "80C1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "88AD566DAC9446D2B0F18C0B3810E554",
+              "name": "80C1",
+              "displayName": "80C1",
+              "endTime": "20250101T122000",
+              "startTime": "20250101T110000",
+              "sisId": "80C1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160249Z",
+              "Updated": "20250520T160250Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "15D8B9DE0C2842758908EFB8D8EDA9F3",
+        "name": "25SEPMNFS35",
+        "sisID": "221475",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80B1",
+            "feeItemNameSanitized": "80B1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D192DBCD36C549CD83B4EE04A97458E5",
+              "name": "80B1",
+              "displayName": "80B1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T093000",
+              "sisId": "80B1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160249Z",
+              "Updated": "20250520T160249Z"
+            },
+            "day": "5"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "69EF2C46268B4FF28346722957220C11",
+        "name": "25SEPMNFS37",
+        "sisID": "221477",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1",
+            "feeItemNameSanitized": "170A1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
+            },
+            "day": "1"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "6FF02A87EF2F4B3698DBF7B7462B7B58",
+        "name": "25SEPMNFS38",
+        "sisID": "221478",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170C1",
+            "feeItemNameSanitized": "170C1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "0F0D6DEF22D24946BF1E141D41B6CF94",
+              "name": "170C1",
+              "displayName": "170C1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T110000",
+              "sisId": "170C1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160239Z",
+              "Updated": "20250520T160239Z"
+            },
+            "day": "5"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "2CE0F7C025EF4DB8BC3BBCBBDC2928CF",
+        "name": "25SEPMNFS39",
+        "sisID": "221479",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170C1",
+            "feeItemNameSanitized": "170C1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "0F0D6DEF22D24946BF1E141D41B6CF94",
+              "name": "170C1",
+              "displayName": "170C1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T110000",
+              "sisId": "170C1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160239Z",
+              "Updated": "20250520T160239Z"
+            },
+            "day": "3"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "00276A9702744A67824AC44EC21B3944",
+        "name": "25SEPMNFS40",
+        "sisID": "221481",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1",
+            "feeItemNameSanitized": "170A1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "8BE11E5B3C0D471EBB1D4B10200B0753",
+        "name": "25SEPMNFS42",
+        "sisID": "221483",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1",
+            "feeItemNameSanitized": "170A1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "4E58FA1E85D94ED58B907C3F9CE98440",
+        "name": "25SEPMNFS43",
+        "sisID": "221484",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170C1",
+            "feeItemNameSanitized": "170C1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "0F0D6DEF22D24946BF1E141D41B6CF94",
+              "name": "170C1",
+              "displayName": "170C1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T110000",
+              "sisId": "170C1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160239Z",
+              "Updated": "20250520T160239Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "7CBED84B255845ABB5046D96A1E2A88F",
+        "name": "25SEPMNFS44",
+        "sisID": "221485",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170C1",
+            "feeItemNameSanitized": "170C1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "0F0D6DEF22D24946BF1E141D41B6CF94",
+              "name": "170C1",
+              "displayName": "170C1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T110000",
+              "sisId": "170C1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160239Z",
+              "Updated": "20250520T160239Z"
+            },
+            "day": "4"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "D49A73B018F64C9B9787BA8758B757AC",
+        "name": "25SEPMNFS45",
+        "sisID": "221486",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1",
+            "feeItemNameSanitized": "170A1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
+            },
+            "day": "1"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "06D96B2854F54FE9BAAE083A622419E2",
+        "name": "25SEPMNOA60",
+        "sisID": "221495",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "174D9AACA59B42F891C917DAF2F79AC0",
+        "name": "25SEPMNOA61",
+        "sisID": "221496",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "FD17F814794841A98565A4A5FC766321",
+        "name": "25SEPMNOA62",
+        "sisID": "221497",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "0B444A38087846ACAA7CFA51B4398DCA",
+        "name": "25SEPMNOA63",
+        "sisID": "221498",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "DCE7DB0AFA4C4D6B9F09C4181DF5C34F",
+        "name": "25SEPMNOA64",
+        "sisID": "221499",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "9C7DF38F2A8B4D7D9E87BF8DDA4FA702",
+        "name": "25SEPMNOA65",
+        "sisID": "221500",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "03355A6D11714820A1563ED6BAAA7CD5",
+        "name": "25SEPMNOA66",
+        "sisID": "221501",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "2D0B71EC4C9D4702A8FDCF35A084216B",
+        "name": "25SEPMNOA70",
+        "sisID": "221502",
+        "courseName": "",
+        "deliveryTypeId": "2307E4CB-966D-4945-9B56-5069D6A015A3",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "2307E4CB966D49459B565069D6A015A3",
+          "name": "Online - Synchronous - Asynchronous",
+          "displayName": "Online - Synchronous - Asynchronous",
+          "slug": "online-synchronous-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1",
+            "feeItemNameSanitized": "170S1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20250101T205000",
+              "startTime": "20250101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20250520T160305Z"
+            },
+            "day": "1"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "23EF3B4842E54700A3B37F023242F5A0",
+        "name": "25SEPMNOS50",
+        "sisID": "221487",
+        "courseName": "",
+        "deliveryTypeId": "38A52F87-E8A6-4739-8DD6-DC29A3FDA55F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1",
+            "feeItemNameSanitized": "170S1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20250101T205000",
+              "startTime": "20250101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20250520T160305Z"
+            },
+            "day": "1"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "D304786EB7F24B43B9A869AF69652701",
+        "name": "25SEPMNOS51",
+        "sisID": "221488",
+        "courseName": "",
+        "deliveryTypeId": "38A52F87-E8A6-4739-8DD6-DC29A3FDA55F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1",
+            "feeItemNameSanitized": "170S1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20250101T205000",
+              "startTime": "20250101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20250520T160305Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "4F1206B68DAA4BD7B02A59A26720595B",
+        "name": "25SEPMNOS52",
+        "sisID": "221489",
+        "courseName": "",
+        "deliveryTypeId": "38A52F87-E8A6-4739-8DD6-DC29A3FDA55F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1",
+            "feeItemNameSanitized": "170S1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20250101T205000",
+              "startTime": "20250101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20250520T160305Z"
+            },
+            "day": "3"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "5FBA5017A02341689E0EDF338D7C8822",
+        "name": "25SEPMNOS53",
+        "sisID": "221490",
+        "courseName": "",
+        "deliveryTypeId": "38A52F87-E8A6-4739-8DD6-DC29A3FDA55F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1",
+            "feeItemNameSanitized": "170S1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20250101T205000",
+              "startTime": "20250101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20250520T160305Z"
+            },
+            "day": "4"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "B9D18E7542984E97AF6EDA7B476207BB",
+        "name": "25SEPMNOS54",
+        "sisID": "221491",
+        "courseName": "",
+        "deliveryTypeId": "38A52F87-E8A6-4739-8DD6-DC29A3FDA55F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1",
+            "feeItemNameSanitized": "170S1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20250101T205000",
+              "startTime": "20250101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20250520T160305Z"
+            },
+            "day": "3"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "5A0AEFF618A24397A23C8E1064C13774",
+        "name": "25SEPMNOS55",
+        "sisID": "221492",
+        "courseName": "",
+        "deliveryTypeId": "38A52F87-E8A6-4739-8DD6-DC29A3FDA55F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250602T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1",
+            "feeItemNameSanitized": "170A1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
+            },
+            "day": "5"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 5,
-      "totalTimeBlocks": 1,
-      "sectionsWithFees": 2
+      "totalSections": 29,
+      "totalFees": 79,
+      "totalTimeBlocks": 21,
+      "sectionsWithFees": 29
     }
   }
 }
