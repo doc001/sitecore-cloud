@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-07T21:05:39.432Z",
+    "generatedAt": "2025-07-09T18:18:35.504Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9204",
@@ -11,79 +11,6 @@
     "sisID": "NURS9204",
     "name": "Intramuscular And Intradermal Injections",
     "children": [
-      {
-        "id": "88FD1A19FAD64C658A10361A9BC5EFBA",
-        "name": "25JULMNBA92",
-        "sisID": "219891",
-        "courseName": "",
-        "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "B15831A51AA34904BA96EAA5086F90B7",
-          "name": "Blended - Asynchronous",
-          "displayName": "Blended - Asynchronous",
-          "slug": "blended-asynchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "7",
-        "registrationStart": "20250115T000000",
-        "registrationEnd": "20250708T235959",
-        "startDate": "20250709T000000",
-        "endDate": "20250719T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "239.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170G1",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "9FB521F6736D4322BFB903A1FB8554AD",
-              "name": "170G1",
-              "displayName": "170G1",
-              "endTime": "20250101T115000",
-              "startTime": "20250101T090000",
-              "sisId": "170G1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20250520T160238Z"
-            },
-            "day": "6"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 1
-        }
-      },
       {
         "id": "FF983134221B4764AB3DD3EA90CAEB89",
         "name": "25OCTMNBA92",
@@ -232,10 +159,10 @@
       }
     ],
     "summary": {
-      "totalSections": 3,
-      "totalFees": 6,
-      "totalTimeBlocks": 3,
-      "sectionsWithFees": 3
+      "totalSections": 2,
+      "totalFees": 4,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 2
     }
   }
 }

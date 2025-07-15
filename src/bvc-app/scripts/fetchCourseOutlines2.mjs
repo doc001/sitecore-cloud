@@ -1,24 +1,9 @@
 // File: ./scripts/fetchCourseOutlines.mjs
 // Description: Fetch all Course Outline items under the specified Sitecore path,
 //              retrieve selected fields, and save as JSON to ./src/data/course-outlines.
-//              Loads environment variables from both `local.env` and `.env.local` via dotenv.
-//              Fixed to work with Sitecore XMC GraphQL API limitations.
-
-// Usage:
-//   1. Ensure you have Node.js 18+ (supports global fetch).
-//   2. Install dependencies if you haven't already:
-//        npm install dotenv
-//   3. Create a `local.env` (or `.env.local`) at project root containing:
-//        SITECORE_GRAPHQL_ENDPOINT=https://xmc-bowvalleyco2df9-bowvalleyco2779-development2348.sitecorecloud.io/sitecore/api/graph/edge/
-//        SC_APIKEY=7A236BA0-B9F9-4DC8-8731-5D9F2F2A58D2
-//   4. From project root, run:
-//        node ./scripts/fetchCourseOutlines.mjs
-//        node ./scripts/fetchCourseOutlines.mjs --resume    (to resume from cursor)
-//        node ./scripts/fetchCourseOutlines.mjs --no-break  (continue on errors)
-//   5. Output JSON will be written to ./src/data/course-outlines/courseOutlines.json
+//              Enhanced with both path-based and ID-based .ashx URL generation.
 
 import dotenv from "dotenv";
-// Load from local.env first, then fall back to .env.local
 dotenv.config({ path: "./local.env" });
 dotenv.config({ path: "./.env.local" });
 
@@ -29,25 +14,18 @@ import path from "path";
 // CONFIGURATION
 // ---------------------------------------------------------
 
-// 1. GraphQL endpoint for Sitecore XM Cloud Delivery API
 const GRAPHQL_ENDPOINT = process.env.SITECORE_GRAPHQL_ENDPOINT;
 if (!GRAPHQL_ENDPOINT) {
-  console.error(
-    "✖ Please set SITECORE_GRAPHQL_ENDPOINT in local.env or .env.local."
-  );
+  console.error("✖ Please set SITECORE_GRAPHQL_ENDPOINT in local.env or .env.local.");
   process.exit(1);
 }
 
-// 2. API key / token header (loaded from environment)
 const API_KEY = process.env.SC_APIKEY || "";
-
-// 3. Root folder path whose children we want to enumerate
 const ROOT_ITEM_PATH = "/sitecore/content/BVC/BVC/Data/CMSData/CourseOutlines";
 
-// 4. Desired field names to extract from each CourseOutlineDocument
 const FIELD_NAMES = [
   "Academic Year",
-  "EffectiveTermEnd",
+  "EffectiveTermEnd", 
   "SchoolName",
   "Course Code",
   "CourseName",
@@ -57,33 +35,67 @@ const FIELD_NAMES = [
   "File Path",
 ];
 
-// 5. Base URL for your Sitecore instance (for PDF URLs)
 const SITECORE_BASE_URL = process.env.SITECORE_GRAPHQL_ENDPOINT?.replace('/sitecore/api/graph/edge/', '') || 
-  'https://xmc-bowvalleyco2df9-bowvalleyco2779-development2348.sitecorecloud.io';
+  'https://xmc-bowvalleyco85c9-bowvalleyco672b-productiona2d5.sitecorecloud.io';
 
-// 6. Destination file path (relative to project root)
 const OUTPUT_DIR = "./src/data/course-outlines";
 const OUTPUT_FILE = "courseOutlines.json";
 const CURSOR_FILE = "fetchCursor.json";
-
-// 7. Batch size for processing (to avoid memory issues with large datasets)
 const BATCH_SIZE = 50;
 
-// 8. Command line arguments
 const SHOULD_RESUME = process.argv.includes('--resume');
 const NO_BREAK_ON_ERROR = process.argv.includes('--no-break');
 
 // ---------------------------------------------------------
-// HELPER FUNCTIONS
+// URL GENERATION FUNCTIONS
 // ---------------------------------------------------------
 
 /**
- * Helper to perform a GraphQL request to Sitecore XM Cloud.
- * Uses the `sc_apikey` header for authentication if provided.
- * @param {string} query - The GraphQL query string.
- * @param {object} variables - Query variables (if any).
- * @returns {Promise<any>} - Parsed JSON response from GraphQL.
+ * Convert Sitecore media library path to accessible URL
  */
+function convertMediaPathToUrl(mediaPath) {
+  if (!mediaPath || typeof mediaPath !== 'string') return null;
+  
+  let cleanPath = mediaPath.replace(/^\/sitecore\/media library/i, '');
+  if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+  
+  return `${SITECORE_BASE_URL}/-/media${cleanPath}`;
+}
+
+/**
+ * Generate .ashx URL using item ID (the working pattern you discovered)
+ */
+function generateAshxUrlFromId(itemId) {
+  if (!itemId) return null;
+  
+  const cleanId = itemId.replace(/[{}]/g, '').toUpperCase();
+  return `${SITECORE_BASE_URL}/sitecore/shell/themes/standard/-/media/${cleanId}.ashx`;
+}
+
+/**
+ * Generate comprehensive URL options for a course outline item
+ */
+function generateAllUrlOptions(itemId, filePath) {
+  const urls = {
+    // ID-based URLs (usually more reliable)
+    idAshx: generateAshxUrlFromId(itemId),
+    idAshxInline: generateAshxUrlFromId(itemId) + '?disposition=inline',
+    idAshxWithKey: generateAshxUrlFromId(itemId) + `?sc_apikey=${API_KEY}`,
+    idAshxInlineWithKey: generateAshxUrlFromId(itemId) + `?disposition=inline&sc_apikey=${API_KEY}`,
+    
+    // Path-based URLs (if File Path is available)
+    pathBased: filePath ? convertMediaPathToUrl(filePath) : null,
+    pathBasedInline: filePath ? convertMediaPathToUrl(filePath) + '?disposition=inline' : null,
+  };
+  
+  // Remove null values
+  return Object.fromEntries(Object.entries(urls).filter(([_, v]) => v !== null));
+}
+
+// ---------------------------------------------------------
+// GRAPHQL FUNCTIONS
+// ---------------------------------------------------------
+
 async function runGraphQL(query, variables = {}) {
   const headers = {
     "Content-Type": "application/json",
@@ -92,7 +104,7 @@ async function runGraphQL(query, variables = {}) {
 
   try {
     const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: "POST",
+      method: "POST", 
       headers,
       body: JSON.stringify({ query, variables }),
     });
@@ -113,16 +125,11 @@ async function runGraphQL(query, variables = {}) {
   }
 }
 
-/**
- * Fetch all direct children under a given item path, handling pagination (20 items per page).
- * @returns {Promise<Array<{ id: string; name: string; path: string }>>}
- */
 async function fetchAllChildren() {
   const children = [];
   let hasNextPage = true;
   let endCursor = null;
 
-  // Fixed query for Sitecore XMC GraphQL API
   const QUERY_CHILDREN = `
     query GetChildren($path: String!, $first: Int!, $after: String) {
       item(path: $path, language: "en") {
@@ -150,7 +157,7 @@ async function fetchAllChildren() {
     
     const variables = {
       path: ROOT_ITEM_PATH,
-      first: 20, // Sitecore XMC limit
+      first: 20,
       after: endCursor,
     };
 
@@ -172,14 +179,7 @@ async function fetchAllChildren() {
   return children;
 }
 
-/**
- * Fetch the specified fields for a single item by path.
- * @param {string} itemPath
- * @param {string} itemName
- * @returns {Promise<Record<string, any>>} - An object mapping FIELD_NAMES to their values.
- */
 async function fetchFieldsForItem(itemPath, itemName) {
-  // Simple query without MediaItem type - just get basic fields
   const QUERY_FIELDS = `
     query GetFields($path: String!) {
       item(path: $path, language: "en") {
@@ -201,9 +201,8 @@ async function fetchFieldsForItem(itemPath, itemName) {
     }
 
     const allFields = data.item.fields;
-
-    // Build a map from field name -> value/jsonValue
     const fieldMap = {};
+    
     for (const field of allFields) {
       fieldMap[field.name] = {
         value: field.value,
@@ -211,7 +210,6 @@ async function fetchFieldsForItem(itemPath, itemName) {
       };
     }
 
-    // Only keep desired fields; if missing, set both to null
     const result = {};
     for (const fname of FIELD_NAMES) {
       if (fieldMap[fname] !== undefined) {
@@ -234,9 +232,6 @@ async function fetchFieldsForItem(itemPath, itemName) {
   }
 }
 
-/**
- * Create empty fields result for items that can't be fetched
- */
 function createEmptyFieldsResult() {
   const result = {};
   for (const fname of FIELD_NAMES) {
@@ -245,50 +240,10 @@ function createEmptyFieldsResult() {
   return result;
 }
 
-/**
- * Convert Sitecore media library path to accessible URL
- * @param {string} mediaPath - The media library path from Sitecore
- * @returns {string} - The accessible URL for the media item
- */
-// function convertMediaPathToUrl(mediaPath) {
-//   if (!mediaPath || typeof mediaPath !== 'string') {
-//     return null;
-//   }
+// ---------------------------------------------------------
+// FILE SYSTEM FUNCTIONS
+// ---------------------------------------------------------
 
-//   // Remove /sitecore/media library prefix and convert to URL
-//   let cleanPath = mediaPath.replace(/^\/sitecore\/media library/i, '');
-  
-//   // Ensure path starts with /
-//   if (!cleanPath.startsWith('/')) {
-//     cleanPath = '/' + cleanPath;
-//   }
-  
-//   // Construct the media URL - most common pattern for Sitecore XM Cloud
-//   return `${SITECORE_BASE_URL}/-/media${cleanPath}`;
-// }
-function convertMediaPathToUrl(mediaPath) {
-  if (!mediaPath || typeof mediaPath !== 'string') {
-    return null;
-  }
-
-  // Remove /sitecore/media library prefix and convert to URL
-  let cleanPath = mediaPath.replace(/^\/sitecore\/media library/i, '');
-  
-  // Ensure path starts with /
-  if (!cleanPath.startsWith('/')) {
-    cleanPath = '/' + cleanPath;
-  }
-  
-  // Replace spaces with %20 (and handle other common characters if needed)
-  const encodedPath = cleanPath.replace(/ /g, '%20');
-  
-  // Construct the media URL
-  return `${SITECORE_BASE_URL}/-/media${encodedPath}`;
-}
-
-/**
- * Ensure the output directory exists (create if missing).
- */
 async function ensureOutputDir() {
   const dirPath = path.resolve(OUTPUT_DIR);
   try {
@@ -298,9 +253,6 @@ async function ensureOutputDir() {
   }
 }
 
-/**
- * Save progress cursor to resume processing if interrupted
- */
 async function saveCursor(processedCount, totalCount) {
   const cursorData = {
     processedCount,
@@ -312,23 +264,20 @@ async function saveCursor(processedCount, totalCount) {
   await fs.writeFile(cursorPath, JSON.stringify(cursorData, null, 2), "utf-8");
 }
 
-/**
- * Load progress cursor to resume processing
- */
 async function loadCursor() {
   try {
     const cursorPath = path.resolve(OUTPUT_DIR, CURSOR_FILE);
     const cursorData = await fs.readFile(cursorPath, "utf-8");
     return JSON.parse(cursorData);
   } catch {
-    return null; // No cursor file exists
+    return null;
   }
 }
 
+// ---------------------------------------------------------
+// MAIN PROCESSING
+// ---------------------------------------------------------
 
-/**
- * Process items in batches to avoid memory issues and provide progress updates
- */
 async function processItemsInBatches(children, startIndex = 0) {
   const outlines = [];
   const totalItems = children.length;
@@ -349,37 +298,39 @@ async function processItemsInBatches(children, startIndex = 0) {
       try {
         const fieldsData = await fetchFieldsForItem(itemPath, name);
 
-        // Generate PDF URL from File Path field if it exists
-        let pdfUrl = null;
-        const filePathField = fieldsData["File Path"];
-        if (filePathField && filePathField.value) {
-          pdfUrl = convertMediaPathToUrl(filePathField.value);
-        }
+        // Get File Path for URL generation
+        const filePath = fieldsData["File Path"]?.value;
+        
+        // Generate all possible URL options
+        const urlOptions = generateAllUrlOptions(id, filePath);
 
-        // Build a JSON-friendly object for this outline
+        // Build the final object
         outlines.push({
           id,
           name,
           path: itemPath,
           fields: fieldsData,
-          pdfUrl: pdfUrl, // Direct PDF URL for convenience
+          
+          // URL options for accessing the PDF
+          urls: urlOptions,
+          
+          // Recommended URLs (prioritize ID-based .ashx)
+          recommendedUrl: urlOptions.idAshxInline || urlOptions.idAshx,
+          fallbackUrl: urlOptions.pathBasedInline || urlOptions.pathBased,
         });
 
       } catch (error) {
         console.error(`❌ FATAL ERROR processing item "${name}": ${error.message}`);
         console.error(`🛑 Stopping at item ${i + outlines.length + 1} of ${totalItems}`);
         
-        // Save progress before stopping
         await saveCursor(i + outlines.length, totalItems);
         throw error;
       }
     }
 
-    // Save progress after each successful batch
     await saveCursor(i + batch.length, totalItems);
     console.log(`   ✅ Batch ${batchNumber} completed successfully`);
     
-    // Small delay to be nice to the API
     await new Promise(resolve => setTimeout(resolve, 100));
   }
 
@@ -395,14 +346,11 @@ async function processItemsInBatches(children, startIndex = 0) {
     console.log("🚀 Starting Course Outlines data fetch...");
     console.log("🔍 Fetching all Course Outline children under:", ROOT_ITEM_PATH);
     
-    // Show command line options
     if (SHOULD_RESUME) console.log("📍 Resume mode: ON");
     if (NO_BREAK_ON_ERROR) console.log("🛑 No break on error: ON");
     
-    // Ensure output directory exists first
     await ensureOutputDir();
     
-    // Check if we have a previous cursor to resume from
     const cursor = await loadCursor();
     let startIndex = 0;
     
@@ -416,7 +364,6 @@ async function processItemsInBatches(children, startIndex = 0) {
       }
     }
 
-    // Fetch all children
     const children = await fetchAllChildren();
     console.log(`→ Retrieved ${children.length} child items.`);
 
@@ -425,25 +372,31 @@ async function processItemsInBatches(children, startIndex = 0) {
       return;
     }
 
-    // Process items in batches
     const outlines = await processItemsInBatches(children, startIndex);
 
-    // Write final JSON file
     const outputPath = path.resolve(OUTPUT_DIR, OUTPUT_FILE);
     await fs.writeFile(outputPath, JSON.stringify(outlines, null, 2), "utf-8");
     
-    // Clean up cursor file on successful completion
     try {
       const cursorPath = path.resolve(OUTPUT_DIR, CURSOR_FILE);
       await fs.unlink(cursorPath);
       console.log("🧹 Cleaned up progress cursor file");
     } catch {
-      // Cursor file might not exist, that's fine
+      // Fine if cursor file doesn't exist
     }
 
     console.log(`✅ Course outlines data saved to: ${outputPath}`);
     console.log(`📊 Total items processed: ${outlines.length}`);
     console.log(`🎉 Fetch completed successfully!`);
+    
+    // Show example URLs
+    if (outlines.length > 0) {
+      const example = outlines[0];
+      console.log(`\n📄 Example URLs for "${example.name}":`);
+      console.log(`🔗 Recommended: ${example.recommendedUrl}`);
+      console.log(`🔗 Fallback: ${example.fallbackUrl || 'N/A'}`);
+      console.log(`\n💡 Test URLs with: node ./scripts/testAshxUrls.mjs ${example.id}`);
+    }
     
   } catch (err) {
     console.error("\n❌ SCRIPT FAILED:");
@@ -451,7 +404,7 @@ async function processItemsInBatches(children, startIndex = 0) {
     console.error("\n💡 Recovery options:");
     console.error("  - Use --resume flag to continue from where the script left off");
     console.error("  - Use --no-break flag to continue processing even on errors");
-    console.error("  - Check your network connection and Sitecore API access");
+    console.error("  - Test URLs with: node ./scripts/testAshxUrls.mjs --sample");
     process.exit(1);
   }
 })();

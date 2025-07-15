@@ -59,7 +59,7 @@ const FIELD_NAMES = [
 
 // 5. Base URL for your Sitecore instance (for PDF URLs)
 const SITECORE_BASE_URL = process.env.SITECORE_GRAPHQL_ENDPOINT?.replace('/sitecore/api/graph/edge/', '') || 
-  'https://xmc-bowvalleyco2df9-bowvalleyco2779-development2348.sitecorecloud.io';
+  'https://xmc-bowvalleyco85c9-bowvalleyco672b-productiona2d5.sitecorecloud.io';
 
 // 6. Destination file path (relative to project root)
 const OUTPUT_DIR = "./src/data/course-outlines";
