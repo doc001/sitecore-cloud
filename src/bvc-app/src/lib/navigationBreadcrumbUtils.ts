@@ -72,7 +72,7 @@ async function loadConfigData() {
 
     // Try to load programs data
     try {
-      const programsModule = await import('@/data/cms/Programs.json');
+      const programsModule = await import('@/data/cms/programs.json');
       programsData = programsModule.default || programsModule;
       if (!Array.isArray(programsData)) {
         programsData = [];

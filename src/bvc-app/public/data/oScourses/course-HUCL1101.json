@@ -1,10 +1,6 @@
 {
   "metadata": {
-<<<<<<< HEAD
-    "generatedAt": "2025-07-09T18:19:24.261Z",
-=======
-    "generatedAt": "2025-07-09T02:30:24.264Z",
->>>>>>> bc9d86be03755ee4572eb77f6f04ca2cf60da51b
+    "generatedAt": "2025-07-17T19:01:38.549Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "HUCL1101",
@@ -16,97 +12,6 @@
     "name": "Professional Practice and Communication in Health Care",
     "credits": "3",
     "children": [
-      {
-        "id": "0868469DD96545D5857252C23A1FED9F",
-        "name": "25JULMNFS3",
-        "sisID": "219668",
-        "courseName": "",
-        "deliveryTypeId": "ABC04E65-44BA-4B4E-93F0-253D06605553",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "ABC04E6544BA4B4E93F0253D06605553",
-          "name": "Hyflex",
-          "displayName": "Hyflex",
-          "slug": "hyflex"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "20250205T000000",
-        "registrationEnd": "20250708T235959",
-        "startDate": "20250702T000000",
-        "endDate": "20250822T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1146.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "486.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170D1",
-            "feeItemNameSanitized": "170D1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "02B609D10C554008A87627F5B38B2F48",
-              "name": "170D1",
-              "displayName": "170D1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T123000",
-              "sisId": "170D1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160239Z",
-              "Updated": "20250520T160239Z"
-            },
-            "day": "2"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 1
-        }
-      },
       {
         "id": "6A4C8E94DBF6463E90D4CDF491CAC4BF",
         "name": "25SEPMNFS1",
@@ -451,10 +356,10 @@
       }
     ],
     "summary": {
-      "totalSections": 5,
-      "totalFees": 14,
-      "totalTimeBlocks": 4,
-      "sectionsWithFees": 5
+      "totalSections": 4,
+      "totalFees": 11,
+      "totalTimeBlocks": 3,
+      "sectionsWithFees": 4
     }
   }
 }

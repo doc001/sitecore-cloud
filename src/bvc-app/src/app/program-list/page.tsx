@@ -4,35 +4,58 @@ import Breadcrumb from '@/components/common/Breadcrumb';
 import { getBreadcrumbData } from '@/lib/navigationBreadcrumbUtils';
 import programsData from '@/data/cms/Programs.json' with { type: 'json' };
 
-// TypeScript interface for Program data structure
-export interface Program {
-  Name: string;
-  Slug: string;
-  'Collection ID': string;
-  'Locale ID': string;
-  'Item ID': string;
-  Archived: string;
-  Draft: string;
-  'Created On': string;
-  'Updated On': string;
-  'Published On': string;
-  Code: string;
-  'Short description': string;
-  'Program Description': string;
-  'Program type': string;
-  Duration: string;
-  'Availabe intakes': string;
-  PGWP: string;
-  School: string;
-  'Program area': string;
-  'Course delivery': string;
-  'Courses HTML': string;
-  'Tuition fees': string;
-  'Additional fees': string;
-  Requirements: string;
-  'Admin req': string;
-  Category: string;
-  'Apply Button is English Learing Skill': string;
+// TypeScript interface for the new Webflow CMS data structure
+export interface WebflowProgram {
+  id: string;
+  cmsLocaleId: string;
+  lastPublished: string;
+  lastUpdated: string;
+  createdOn: string;
+  isArchived: boolean;
+  isDraft: boolean;
+  fieldData: {
+    name: string;
+    slug?: string;
+    code?: string;
+    'short-description'?: string;
+    'program-description'?: string;
+    'program-type'?: string;
+    duration?: string;
+    'availabe-intakes-2'?: string[];
+    pgwp?: boolean;
+    school?: string;
+    'program-area'?: string;
+    'course-delivery'?: string;
+    'courses-code'?: string;
+    'tuition-fees'?: string;
+    'additional-fees'?: string;
+    requirements?: string;
+    'admin-req'?: string;
+    category?: string;
+    'apply-button-is-english-learing-skill'?: boolean;
+    'has-intl-offerings'?: boolean;
+    'has-zero-textbook-cost'?: boolean;
+    'apply-button-is-first-year-student'?: boolean;
+  };
+}
+
+// Interface for the root JSON structure
+export interface ProgramsDataStructure {
+  items: WebflowProgram[];
+}
+
+// Transformed program interface for display (matching ProgramList component expectations)
+export interface TransformedProgram {
+  name: string;
+  programType: string;
+  availableIntakes: string; // Changed from string[] to string to match ProgramList component
+  slug: string;
+  shortDescription: string;
+  duration: string;
+  code: string;
+  school: string;
+  programArea: string;
+  pgwp: boolean;
 }
 
 // Metadata for SEO and page information
@@ -60,24 +83,34 @@ export default async function ProgramListPage(): Promise<React.JSX.Element> {
   // Get breadcrumb data for the current page using navigation structure
   const breadcrumbItems = await getBreadcrumbData('/program-list');
   
+  // Cast the imported data to the correct type
+  const typedProgramsData = programsData as ProgramsDataStructure;
+  
   // Filter out archived and draft programs to show only published content
-  const publishedPrograms: Program[] = programsData.filter((program: Program) => {
-    return program.Archived === 'false' && program.Draft === 'false';
+  const publishedPrograms: WebflowProgram[] = typedProgramsData.items.filter((program: WebflowProgram) => {
+    return !program.isArchived && !program.isDraft;
   });
 
   // Transform programs data to include only the fields we need for initial display
-  const programsForDisplay = publishedPrograms.map((program: Program) => ({
-    name: program.Name,
-    programType: program['Program type'],
-    availableIntakes: program['Availabe intakes'],
-    slug: program.Slug,
-    shortDescription: program['Short description'],
-    duration: program.Duration,
-    code: program.Code,
-    school: program.School,
-    programArea: program['Program area'],
-    pgwp: program.PGWP === 'true'
+  const programsForDisplay: TransformedProgram[] = publishedPrograms.map((program: WebflowProgram) => ({
+    name: program.fieldData.name || 'Untitled Program',
+    programType: program.fieldData['program-type'] || 'Not specified',
+    availableIntakes: Array.isArray(program.fieldData['availabe-intakes-2']) 
+      ? program.fieldData['availabe-intakes-2'].join(', ') 
+      : 'No intakes specified', // Convert array to comma-separated string
+    slug: program.fieldData.slug || program.id,
+    shortDescription: program.fieldData['short-description'] || 'No description available',
+    duration: program.fieldData.duration || 'Duration not specified',
+    code: program.fieldData.code || 'No code',
+    school: program.fieldData.school || 'School not specified',
+    programArea: program.fieldData['program-area'] || 'Area not specified',
+    pgwp: program.fieldData.pgwp || false
   }));
+
+  // Filter out programs with essential missing data (optional safety check)
+  const validPrograms = programsForDisplay.filter(program => 
+    program.name && program.name !== 'Untitled Program'
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -117,26 +150,26 @@ export default async function ProgramListPage(): Promise<React.JSX.Element> {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white p-6 rounded-lg shadow-sm border border-neutral-10">
               <div className="text-3xl font-bold text-blue-100 mb-2">
-                {programsForDisplay.length}
+                {validPrograms.length}
               </div>
               <div className="text-neutral-60">Total Programs</div>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm border border-neutral-10">
               <div className="text-3xl font-bold text-purple-100 mb-2">
-                {new Set(programsForDisplay.map(p => p.school)).size}
+                {new Set(validPrograms.map(p => p.school).filter(school => school && school !== 'School not specified')).size}
               </div>
               <div className="text-neutral-60">Schools</div>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm border border-neutral-10">
               <div className="text-3xl font-bold text-orange-100 mb-2">
-                {new Set(programsForDisplay.map(p => p.programType)).size}
+                {new Set(validPrograms.map(p => p.programType).filter(type => type && type !== 'Not specified')).size}
               </div>
               <div className="text-neutral-60">Program Types</div>
             </div>
           </div>
 
           {/* Program List Component */}
-          <ProgramList programs={programsForDisplay} />
+          <ProgramList programs={validPrograms} />
         </div>
       </main>
     </div>
