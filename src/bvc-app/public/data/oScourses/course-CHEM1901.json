@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-17T19:01:19.377Z",
+    "generatedAt": "2025-07-19T19:21:45.734Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "CHEM1901",
@@ -70,6 +70,27 @@
           },
           {
             "containerName": "TimeBlock",
+            "feeItemName": "11546621",
+            "feeItemNameSanitized": "11546621",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D9943AD95CCD4AFD8C5ED725F9BA9EC7",
+              "name": "80D1",
+              "displayName": "80D1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T123000",
+              "sisId": "80D1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160249Z",
+              "Updated": "20250520T160249Z"
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
             "feeItemName": "170H1",
             "feeItemNameSanitized": "170H1",
             "feeTypeId": null,
@@ -112,7 +133,7 @@
           }
         ],
         "feesSummary": {
-          "totalFees": 4,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -121,14 +142,14 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 2
+          "timeBlockCount": 3
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
+      "totalFees": 5,
+      "totalTimeBlocks": 3,
       "sectionsWithFees": 1
     }
   }

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-17T19:01:52.043Z",
+    "generatedAt": "2025-07-19T19:22:23.951Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "PHYS1900",
@@ -70,6 +70,27 @@
           },
           {
             "containerName": "TimeBlock",
+            "feeItemName": "11546711",
+            "feeItemNameSanitized": "11546711",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "1E0B47F057784526A3B105445EBC32CF",
+              "name": "80E1",
+              "displayName": "80E1",
+              "endTime": "20250101T152000",
+              "startTime": "20250101T140000",
+              "sisId": "80E1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160257Z",
+              "Updated": "20250520T160257Z"
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
             "feeItemName": "170G1",
             "feeItemNameSanitized": "170G1",
             "feeTypeId": null,
@@ -112,7 +133,7 @@
           }
         ],
         "feesSummary": {
-          "totalFees": 4,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -121,14 +142,14 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 2
+          "timeBlockCount": 3
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
+      "totalFees": 5,
+      "totalTimeBlocks": 3,
       "sectionsWithFees": 1
     }
   }

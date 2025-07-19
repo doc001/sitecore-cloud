@@ -34,6 +34,47 @@ interface NavigationTab {
   }>;
 }
 
+/**
+ * Interface for the new Webflow CMS program structure
+ */
+interface WebflowProgram {
+  id: string;
+  cmsLocaleId: string;
+  lastPublished: string;
+  lastUpdated: string;
+  createdOn: string;
+  isArchived: boolean;
+  isDraft: boolean;
+  fieldData: {
+    name: string;
+    slug?: string;
+    code?: string;
+    'short-description'?: string;
+    'program-description'?: string;
+    'program-type'?: string;
+    duration?: string;
+    'availabe-intakes-2'?: string[];
+    pgwp?: boolean;
+    school?: string;
+    'program-area'?: string;
+    'course-delivery'?: string;
+    'courses-code'?: string;
+    'tuition-fees'?: string;
+    'additional-fees'?: string;
+    requirements?: string;
+    'admin-req'?: string;
+    category?: string;
+    'apply-button-is-english-learing-skill'?: boolean;
+  };
+}
+
+/**
+ * Interface for the programs data structure
+ */
+interface ProgramsDataStructure {
+  items: WebflowProgram[];
+}
+
 // Cache for loaded data
 let breadcrumbsConfig: NavigationBreadcrumbConfig | null = null;
 let navigationData: any = null;
@@ -70,15 +111,22 @@ async function loadConfigData() {
       navigationData = { navigationData: { mainMenu: { tabs: [] } } };
     }
 
-    // Try to load programs data
+    // Try to load programs data - Updated for new Webflow structure
     try {
       const programsModule = await import('@/data/cms/programs.json');
-      programsData = programsModule.default || programsModule;
-      if (!Array.isArray(programsData)) {
+      const rawData = programsModule.default || programsModule;
+      
+      // Handle new Webflow structure - extract items array
+      if (rawData && rawData.items && Array.isArray(rawData.items)) {
+        programsData = rawData.items;
+      } else if (Array.isArray(rawData)) {
+        // Handle old flat structure (fallback)
+        programsData = rawData;
+      } else {
         programsData = [];
       }
     } catch (error) {
-      console.warn('Could not load Programs.json');
+      console.warn('Could not load Programs.json:', error);
       programsData = [];
     }
 
@@ -134,11 +182,15 @@ async function handleProgramRoutes(path: string): Promise<BreadcrumbItem[] | nul
     const program = findProgramBySlug(programSlug, programsData);
     
     if (program) {
+      // Handle both new and old data structures
+      const programName = program.fieldData?.name || program.Name || 'Unknown Program';
+      const programSlug = program.fieldData?.slug || program.Slug || segments[1];
+      
       return [
         { label: 'Study' }, // Tab - no link
         { 
-          label: program.Name, 
-          href: `/programs/${program.Slug}`, 
+          label: programName, 
+          href: `/programs/${programSlug}`, 
           isCurrentPage: true 
         }
       ];
@@ -152,13 +204,16 @@ async function handleProgramRoutes(path: string): Promise<BreadcrumbItem[] | nul
     
     if (program) {
       const areaLabel = getAreaLabel(areaSlug);
+      // Handle both new and old data structures
+      const programName = program.fieldData?.name || program.Name || 'Unknown Program';
+      const programSlugForUrl = program.fieldData?.slug || program.Slug || programSlug;
       
       return [
         { label: 'Study' }, // Tab - no link
         { label: areaLabel, href: `/program-areas/${areaSlug}` },
         { 
-          label: program.Name, 
-          href: `/program-areas/${areaSlug}/${program.Slug}`, 
+          label: programName, 
+          href: `/program-areas/${areaSlug}/${programSlugForUrl}`, 
           isCurrentPage: true 
         }
       ];
@@ -184,16 +239,23 @@ async function handleProgramRoutes(path: string): Promise<BreadcrumbItem[] | nul
 }
 
 /**
- * Find program data by slug from CMS
+ * Find program data by slug from CMS (updated for new Webflow structure)
  */
 function findProgramBySlug(slug: string, programs: any[]) {
   if (!Array.isArray(programs)) return null;
   
-  return programs.find((program: any) => 
-    program?.Slug === slug && 
-    program?.Archived === 'false' && 
-    program?.Draft === 'false'
-  );
+  return programs.find((program: any) => {
+    // Handle new Webflow CMS structure
+    if (program?.fieldData) {
+      return program.fieldData.slug === slug && 
+             !program.isArchived && 
+             !program.isDraft;
+    }
+    // Handle old flat structure (fallback)
+    return program?.Slug === slug && 
+           program?.Archived === 'false' && 
+           program?.Draft === 'false';
+  });
 }
 
 /**

@@ -10,7 +10,12 @@ const __dirname = path.dirname(__filename);
 const API_KEY = '1de0a54766cd85198cd74190cf1a5f9fcbb8b1654ddc380900e87ecceaffb88f';
 const BASE_URL = 'https://api.webflow.com/v2';
 const SITE_ID = '66a28fdfe76f2f849d7b00f3';
-const PROGRAMS_COLLECTION_ID = '66e850bcbf766fccf5d09a24';
+const PROGRAMS_COLLECTION_ID = '67e1d2cf8ff92fb037384df3'; 
+
+// 67e1d2cf8ff92fb037384df3 Open Studies
+// 678557c6de5ecf01f3e67171 Extended Ed
+// 66e850bcbf766fccf5d09a24 Programs
+// 66e88fcaccaaf351c8156d0f Program Areas
 
 // Ensure data directory exists
 const dataDir = path.join(__dirname, '../src/data/cms');
@@ -93,16 +98,17 @@ async function fetchCollectionItems(siteId, collectionId) {
  * Save data to JSON file
  */
 function saveToFile(data, filename) {
-  const filePath = path.join(dataDir, `${filename}.json`);
-  
-  try {
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-    console.log(`✅ Data saved to: ${filePath}`);
-    console.log(`📄 File size: ${fs.statSync(filePath).size} bytes`);
-  } catch (error) {
-    console.error('❌ Error saving file:', error);
-    throw error;
-  }
+    const lowercase_filename = filename.toLowerCase(); // Use toLowerCase() for JavaScript
+    const filePath = path.join(dataDir, `${lowercase_filename}.json`);
+    
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        console.log(`✅ Data saved to: ${filePath}`);
+        console.log(`📄 File size: ${fs.statSync(filePath).size} bytes`);
+    } catch (error) {
+        console.error('❌ Error saving file:', error);
+        throw error;
+    }
 }
 
 /**

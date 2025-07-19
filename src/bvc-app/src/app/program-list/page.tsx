@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import ProgramList from '@/components/pages/ProgramList';
 import Breadcrumb from '@/components/common/Breadcrumb';
 import { getBreadcrumbData } from '@/lib/navigationBreadcrumbUtils';
-import programsData from '@/data/cms/Programs.json' with { type: 'json' };
+import programsData from '@/data/cms/programs.json' with { type: 'json' };
 
 // TypeScript interface for the new Webflow CMS data structure
 export interface WebflowProgram {
