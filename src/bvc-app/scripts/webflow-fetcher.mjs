@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 const API_KEY = '1de0a54766cd85198cd74190cf1a5f9fcbb8b1654ddc380900e87ecceaffb88f';
 const BASE_URL = 'https://api.webflow.com/v2';
 const SITE_ID = '66a28fdfe76f2f849d7b00f3';
-const PROGRAMS_COLLECTION_ID = '67e1d2cf8ff92fb037384df3'; 
+const PROGRAMS_COLLECTION_ID = '66e850bcbf766fccf5d09a24'; 
 
 // 67e1d2cf8ff92fb037384df3 Open Studies
 // 678557c6de5ecf01f3e67171 Extended Ed
