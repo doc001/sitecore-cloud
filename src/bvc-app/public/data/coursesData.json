@@ -1,10 +1,6 @@
 {
   "metadata": {
-<<<<<<< HEAD
-    "generatedAt": "2025-07-24T16:30:41.896Z",
-=======
-    "generatedAt": "2025-07-27T15:44:43.389Z",
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
+    "generatedAt": "2025-07-28T20:47:45.562Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Complete Solution with Individual Files",
     "note": "Individual course files are available in /oScourses/ directory",
@@ -25,24 +21,6 @@
       ]
     },
     "stats": {
-<<<<<<< HEAD
-      "totalCourses": 69,
-      "totalSections": 222,
-      "totalFees": 707,
-      "totalTimeBlocks": 263,
-      "successes": 69,
-      "failures": 0,
-      "resolvedDeliveryTypes": 222,
-      "resolvedCampuses": 222,
-      "resolvedFeeTypes": 444,
-      "resolvedTimeBlocks": 263,
-      "coursesWithManySection": 2,
-      "coursesWithManyFees": 1,
-      "coursesWithTimeBlocks": 64,
-      "maxSectionsInCourse": 27,
-      "maxFeesInCourse": 76,
-      "maxTimeBlocksInCourse": 22,
-=======
       "totalCourses": 70,
       "totalSections": 220,
       "totalFees": 629,
@@ -59,7 +37,6 @@
       "maxSectionsInCourse": 27,
       "maxFeesInCourse": 74,
       "maxTimeBlocksInCourse": 20,
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
       "paginationUsage": {
         "coursesRequiringPagination": 2,
         "sectionsRequiringPagination": 0,
@@ -118,6 +95,7 @@
           "course-MGMT1302.json",
           "course-MGMT1401.json",
           "course-MGMT1402.json",
+          "course-MGMT1501.json",
           "course-MGMT1601.json",
           "course-MGMT2301.json",
           "course-MGMT2503.json",
@@ -1950,30 +1928,6 @@
             },
             {
               "containerName": "TimeBlock",
-<<<<<<< HEAD
-              "feeItemName": "11546607",
-              "feeItemNameSanitized": "11546607",
-              "feeTypeId": null,
-              "feeType": null,
-              "amount": "",
-              "timeBlock": {
-                "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-                "name": "170S1",
-                "displayName": "170S1",
-                "endTime": "20250101T205000",
-                "startTime": "20250101T180000",
-                "sisId": "170S1",
-                "created": "",
-                "updated": "",
-                "Created": "20250520T160305Z",
-                "Updated": "20250520T160305Z"
-              },
-              "day": "1"
-            },
-            {
-              "containerName": "TimeBlock",
-=======
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
               "feeItemName": "170S1",
               "feeItemNameSanitized": "170S1",
               "feeTypeId": null,
@@ -6434,22 +6388,6 @@
           }
         },
         {
-<<<<<<< HEAD
-          "id": "2DA9E0DC359F4AD287C75A37D0AA3F57",
-          "name": "25SEPMNFS41",
-          "sisID": "221482",
-          "courseName": "",
-          "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-          "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-          "deliveryType": {
-            "id": "AB98C0913E88437F8E213869FAB80C8B",
-            "name": "Face to Face - Synchronous",
-            "displayName": "Face to Face - Synchronous",
-            "slug": "face-to-face-synchronous"
-          },
-          "campus": {
-            "id": "6329B28E895741AAA5A709A4EB50C9AE",
-=======
           "id": "A6AB4BC046364ADDB3145B6ED0FFEC76",
           "name": "25SEPMNFS40",
           "sisID": "221481",
@@ -6459,7 +6397,6 @@
           "deliveryType": null,
           "campus": {
             "id": "405455B3871644E4855708E9D06C07A8",
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
             "name": "Calgary Downtown Campus",
             "displayName": "Calgary Downtown Campus",
             "slug": "calgary-downtown-campus"
@@ -6475,15 +6412,9 @@
               "containerName": "Fees",
               "feeItemName": "International Tuition",
               "feeItemNameSanitized": "International Tuition",
-<<<<<<< HEAD
-              "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-              "feeType": {
-                "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-=======
               "feeTypeId": "E0BE9D7C-5E42-4089-91EF-13819B30B907",
               "feeType": {
                 "id": "E0BE9D7C5E42408991EF13819B30B907",
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
                 "name": "International Tuition",
                 "displayName": "International Tuition",
                 "slug": "international-tuition"
@@ -6496,15 +6427,9 @@
               "containerName": "Fees",
               "feeItemName": "Tuition",
               "feeItemNameSanitized": "Tuition",
-<<<<<<< HEAD
-              "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-              "feeType": {
-                "id": "1351EB1B28D645AEA28EA8442152E100",
-=======
               "feeTypeId": "3782604D-B5FA-4864-8E5B-C2AE0333753F",
               "feeType": {
                 "id": "3782604DB5FA48648E5BC2AE0333753F",
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
                 "name": "Tuition",
                 "displayName": "Tuition",
                 "slug": "tuition"
@@ -6515,31 +6440,12 @@
             },
             {
               "containerName": "TimeBlock",
-<<<<<<< HEAD
-              "feeItemName": "170C1",
-              "feeItemNameSanitized": "170C1",
-=======
               "feeItemName": "170A1",
               "feeItemNameSanitized": "170A1",
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
               "feeTypeId": null,
               "feeType": null,
               "amount": "",
               "timeBlock": {
-<<<<<<< HEAD
-                "id": "0F0D6DEF22D24946BF1E141D41B6CF94",
-                "name": "170C1",
-                "displayName": "170C1",
-                "endTime": "20250101T135000",
-                "startTime": "20250101T110000",
-                "sisId": "170C1",
-                "created": "",
-                "updated": "",
-                "Created": "20250520T160239Z",
-                "Updated": "20250520T160239Z"
-              },
-              "day": "3"
-=======
                 "id": "13746D609B4C4BC688FA5DCFAD9D436C",
                 "name": "170A1",
                 "displayName": "170A1",
@@ -6552,7 +6458,6 @@
                 "Updated": "20241021T201708Z"
               },
               "day": "2"
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
             }
           ],
           "feesSummary": {
@@ -6569,11 +6474,7 @@
           }
         },
         {
-<<<<<<< HEAD
-          "id": "8BE11E5B3C0D471EBB1D4B10200B0753",
-=======
           "id": "8F9B1404204444E69E05A611D2E4081B",
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
           "name": "25SEPMNFS42",
           "sisID": "221483",
           "courseName": "",
@@ -7793,8 +7694,6 @@
             ],
             "timeBlockCount": 1
           }
-<<<<<<< HEAD
-=======
         },
         {
           "id": "080E20E71F0A4296879C7B6106238115",
@@ -7967,18 +7866,12 @@
             ],
             "timeBlockCount": 1
           }
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
         }
       ],
       "summary": {
         "totalSections": 27,
-<<<<<<< HEAD
-        "totalFees": 76,
-        "totalTimeBlocks": 22,
-=======
         "totalFees": 74,
         "totalTimeBlocks": 20,
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
         "sectionsWithFees": 27
       }
     },
@@ -14709,9 +14602,6 @@
       }
     },
     {
-<<<<<<< HEAD
-      "id": "9F0F58654E4D427193AA86F9FF409F7E",
-=======
       "id": "BFD678BC7F204C72B6DB3A374F88F84D",
       "sisID": "MGMT1501",
       "name": "Business Mathematics",
@@ -14813,7 +14703,6 @@
     },
     {
       "id": "4A54B80857FB420987BD4B3F2E9B663D",
->>>>>>> 854c78b (Jul28 - Trying to get the repo)
       "sisID": "MGMT1601",
       "name": "Business Law",
       "credits": "3",
