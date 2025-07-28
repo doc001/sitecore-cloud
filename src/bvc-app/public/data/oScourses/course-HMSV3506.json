@@ -1,32 +1,31 @@
 {
   "metadata": {
+<<<<<<< HEAD
     "generatedAt": "2025-07-24T16:30:11.621Z",
+=======
+    "generatedAt": "2025-07-27T15:44:18.872Z",
+>>>>>>> 854c78b (Jul28 - Trying to get the repo)
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "HMSV3506",
     "courseName": "Managing and the Canadian Health System"
   },
   "course": {
-    "id": "4844AE0868674FD4BA8C4966E0EDE28D",
+    "id": "9BBCD9A12DEF47D58557796CB7FE2DB3",
     "sisID": "HMSV3506",
     "name": "Managing and the Canadian Health System",
     "credits": "3",
     "children": [
       {
-        "id": "4A45358FF99F4C3D8DBE5F1AB4D3A1A7",
+        "id": "BF1585C538994554AEDA4F1D97594ABD",
         "name": "25SEPMNBS21",
         "sisID": "222160",
         "courseName": "",
-        "deliveryTypeId": "8980B6F5-107D-497F-8FC4-27F7C467F55D",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "8980B6F5107D497F8FC427F7C467F55D",
-          "name": "Blended - Synchronous",
-          "displayName": "Blended - Synchronous",
-          "slug": "blended-synchronous"
-        },
+        "deliveryTypeId": "817EEDFE-852A-42E8-A406-64B3D58429FB",
+        "campusId": "405455B3-8716-44E4-8557-08E9D06C07A8",
+        "deliveryType": null,
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "id": "405455B3871644E4855708E9D06C07A8",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -42,9 +41,9 @@
             "containerName": "Fees",
             "feeItemName": "International Tuition",
             "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeTypeId": "E0BE9D7C-5E42-4089-91EF-13819B30B907",
             "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "id": "E0BE9D7C5E42408991EF13819B30B907",
               "name": "International Tuition",
               "displayName": "International Tuition",
               "slug": "international-tuition"
@@ -57,9 +56,9 @@
             "containerName": "Fees",
             "feeItemName": "Tuition",
             "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeTypeId": "3782604D-B5FA-4864-8E5B-C2AE0333753F",
             "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -76,16 +75,16 @@
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "0F0D6DEF22D24946BF1E141D41B6CF94",
+              "id": "D650C48AFBA04B1C99D424458D47F2A7",
               "name": "170C1",
               "displayName": "170C1",
-              "endTime": "20250101T135000",
-              "startTime": "20250101T110000",
+              "endTime": "20240101T135000",
+              "startTime": "20240101T110000",
               "sisId": "170C1",
               "created": "",
               "updated": "",
-              "Created": "20250520T160239Z",
-              "Updated": "20250520T160239Z"
+              "Created": "20241021T201709Z",
+              "Updated": "20241021T201709Z"
             },
             "day": "4"
           }

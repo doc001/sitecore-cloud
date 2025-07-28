@@ -1,31 +1,34 @@
 {
   "metadata": {
+<<<<<<< HEAD
     "generatedAt": "2025-07-24T16:29:28.257Z",
+=======
+    "generatedAt": "2025-07-27T15:43:47.389Z",
+>>>>>>> 854c78b (Jul28 - Trying to get the repo)
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9213",
     "courseName": "Intravenous Initiation, Infusion and Medication Administration"
   },
   "course": {
-    "id": "9F2C2970422A4117BE3772659899EC7F",
+    "id": "216F6C10B7BD48699F5F3A82C1A11D0A",
     "sisID": "NURS9213",
     "name": "Intravenous Initiation, Infusion and Medication Administration",
     "children": [
       {
+<<<<<<< HEAD
         "id": "23C483D65CF44B729A066A431412A970",
+=======
+        "id": "767DA08C8A684F489EE6803D15B50BA8",
+>>>>>>> 854c78b (Jul28 - Trying to get the repo)
         "name": "25NOVMNBA92",
         "sisID": "221928",
         "courseName": "",
-        "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "B15831A51AA34904BA96EAA5086F90B7",
-          "name": "Blended - Asynchronous",
-          "displayName": "Blended - Asynchronous",
-          "slug": "blended-asynchronous"
-        },
+        "deliveryTypeId": "{E4534043-1779-4F72-8AE8-275ED1982879}",
+        "campusId": "{405455B3-8716-44E4-8557-08E9D06C07A8}",
+        "deliveryType": null,
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "id": "405455B3871644E4855708E9D06C07A8",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -40,9 +43,9 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
             "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -58,16 +61,16 @@
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "8E56F6B722974559892D3103E5E5D3F2",
+              "id": "217587BD633744CCA3710605F091EA03",
               "name": "380A1",
               "displayName": "380A1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T090000",
+              "endTime": "20240101T152000",
+              "startTime": "20240101T090000",
               "sisId": "380A1",
               "created": "",
               "updated": "",
-              "Created": "20250520T160320Z",
-              "Updated": "20250520T160320Z"
+              "Created": "20241021T201747Z",
+              "Updated": "20241021T201747Z"
             },
             "day": "6"
           }
@@ -85,20 +88,15 @@
         }
       },
       {
-        "id": "28BE87671298466FB330DE225C39B854",
+        "id": "7340F93ED1B146ECAD18C89A52E188E7",
         "name": "25SEPMNBA91",
         "sisID": "221927",
         "courseName": "",
-        "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "B15831A51AA34904BA96EAA5086F90B7",
-          "name": "Blended - Asynchronous",
-          "displayName": "Blended - Asynchronous",
-          "slug": "blended-asynchronous"
-        },
+        "deliveryTypeId": "{E4534043-1779-4F72-8AE8-275ED1982879}",
+        "campusId": "{405455B3-8716-44E4-8557-08E9D06C07A8}",
+        "deliveryType": null,
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "id": "405455B3871644E4855708E9D06C07A8",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -113,9 +111,9 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
             "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -131,16 +129,16 @@
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "8E56F6B722974559892D3103E5E5D3F2",
+              "id": "217587BD633744CCA3710605F091EA03",
               "name": "380A1",
               "displayName": "380A1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T090000",
+              "endTime": "20240101T152000",
+              "startTime": "20240101T090000",
               "sisId": "380A1",
               "created": "",
               "updated": "",
-              "Created": "20250520T160320Z",
-              "Updated": "20250520T160320Z"
+              "Created": "20241021T201747Z",
+              "Updated": "20241021T201747Z"
             },
             "day": "6"
           }
