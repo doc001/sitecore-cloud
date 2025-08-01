@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-01T02:27:36.141Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "DESN2201",
+    "courseName": "Introduction to Web Design for Digital Marketing"
+  },
+  "course": {
+    "id": "439CB40424E44C51A66DADD1882EFCEC",
+    "sisID": "DESN2201",
+    "name": "Introduction to Web Design for Digital Marketing",
+    "credits": "3",
+    "children": [
+      {
+        "id": "D7ED668BE289416FBE97B449E3749C59",
+        "name": "25SEPMNFS1",
+        "sisID": "221602",
+        "courseName": "",
+        "deliveryTypeId": "BA1DDBDD-475F-4B21-B5E8-495253E06314",
+        "campusId": "405455B3-8716-44E4-8557-08E9D06C07A8",
+        "deliveryType": null,
+        "campus": {
+          "id": "405455B3871644E4855708E9D06C07A8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250604T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251218T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "E0BE9D7C-5E42-4089-91EF-13819B30B907",
+            "feeType": {
+              "id": "E0BE9D7C5E42408991EF13819B30B907",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "1894.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "3782604D-B5FA-4864-8E5B-C2AE0333753F",
+            "feeType": {
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "780.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170B1",
+            "feeItemNameSanitized": "170B1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "8916D3E1AB094D54807CFBABB190E465",
+              "name": "170B1",
+              "displayName": "170B1",
+              "endTime": "20240101T122000",
+              "startTime": "20240101T093000",
+              "sisId": "170B1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201709Z",
+              "Updated": "20241021T201709Z"
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170B1-11563143",
+            "feeItemNameSanitized": "170B1-11563143",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "8916D3E1AB094D54807CFBABB190E465",
+              "name": "170B1",
+              "displayName": "170B1",
+              "endTime": "20240101T122000",
+              "startTime": "20240101T093000",
+              "sisId": "170B1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201709Z",
+              "Updated": "20241021T201709Z"
+            },
+            "day": "3"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 4,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 2
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 4,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 1
+    }
+  }
+}
