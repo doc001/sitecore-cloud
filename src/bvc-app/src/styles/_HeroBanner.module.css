@@ -1,0 +1,71 @@
+/* components/HeroBanner/HeroBanner.module.css */
+
+/**
+ * Hero Banner Styles
+ * Responsive background settings for mobile and desktop
+ * Uses CSS custom properties from globals.css
+ */
+
+.heroBanner {
+  /* Base styles */
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  position: relative;
+  
+  /* Mobile-first approach */
+  /* Mobile: 90vh height with specific positioning */
+  height: 90vh;
+  background-position: 0 0, 67% 100%, 0 0;
+  background-size: auto, auto, auto;
+  
+  /* Center background as fallback */
+  background-position: center;
+  
+  /* Optional: Add overlay for better text readability */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+  
+  /* Ensure content is above overlay */
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* Desktop styles - min-width: 768px (md breakpoint) */
+@media (min-width: 768px) {
+  .heroBanner {
+    /* Desktop: 590px max height with different positioning */
+    height: auto;
+    max-height: 480px;
+    min-height: 480px;
+    background-position: 65% 75%;
+    background-size: 2400px;
+  }
+}
+
+/* Large desktop optimization - min-width: 1024px (lg breakpoint) */
+@media (min-width: 1024px) {
+  .heroBanner {
+    /* Maintain desktop settings but ensure proper scaling */
+    background-size: 2400px;
+    background-position: 65% 75%;
+  }
+}
+
+/* Extra large screens - min-width: 1536px (2xl breakpoint) */
+@media (min-width: 1536px) {
+  .heroBanner {
+    /* Scale background appropriately for very large screens */
+    background-size: 2800px;
+    background-position: 65% 75%;
+  }
+}

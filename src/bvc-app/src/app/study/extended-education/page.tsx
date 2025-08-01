@@ -1,6 +1,9 @@
 // src/app/study/extended-education/courses/page.tsx
 import Link from "next/link";
 import { getCourseStatistics, type CourseSummary } from "@/lib/courseUtils";
+import Breadcrumb from '@/components/common/Breadcrumb';
+import { getBreadcrumbData } from '@/lib/navigationBreadcrumbUtils';
+
 
 // Static generation for the courses landing page
 export const dynamic = 'force-static';
@@ -10,7 +13,7 @@ export const dynamic = 'force-static';
  */
 export async function generateMetadata() {
   const stats = getCourseStatistics();
-  
+
   return {
     title: 'Extended Education Courses - Course Catalog',
     description: `Browse ${stats.availableCourses} available extended education courses. Find course sections, schedules, and fees.`,
@@ -30,6 +33,8 @@ export default function CoursesLandingPage() {
   const availableCourses = stats.courses.filter(c => c.hasValidData);
   const unavailableCourses = stats.courses.filter(c => !c.hasValidData);
 
+
+  
   return (
     <div className="container-layout min-h-screen">
       {/* Header Section */}
@@ -64,7 +69,12 @@ export default function CoursesLandingPage() {
           </div>
         </div>
       </header>
-
+      {/* Breadcrumb Navigation - Using the reusable component */}
+      {/* <Breadcrumb 
+        items={breadcrumbItems} 
+        variant="program"
+        showHomeIcon={true}
+      /> */}
       {/* Available Courses Section */}
       <main>
         <section className="mb-12">

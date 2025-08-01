@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-28T20:47:01.258Z",
+    "generatedAt": "2025-08-01T02:01:03.231Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ADMN1101",
@@ -83,10 +83,52 @@
               "Updated": "20241021T201721Z"
             },
             "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80C1-11563130",
+            "feeItemNameSanitized": "80C1-11563130",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F962A361464E4A669DE276EDA77DBEA3",
+              "name": "80C1",
+              "displayName": "80C1",
+              "endTime": "20240101T122000",
+              "startTime": "20240101T110000",
+              "sisId": "80C1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201721Z",
+              "Updated": "20241021T201721Z"
+            },
+            "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80C1-11563131",
+            "feeItemNameSanitized": "80C1-11563131",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F962A361464E4A669DE276EDA77DBEA3",
+              "name": "80C1",
+              "displayName": "80C1",
+              "endTime": "20240101T122000",
+              "startTime": "20240101T110000",
+              "sisId": "80C1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201721Z",
+              "Updated": "20241021T201721Z"
+            },
+            "day": "4"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -95,7 +137,7 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 3
         }
       },
       {
@@ -165,8 +207,8 @@
     ],
     "summary": {
       "totalSections": 2,
-      "totalFees": 5,
-      "totalTimeBlocks": 1,
+      "totalFees": 7,
+      "totalTimeBlocks": 3,
       "sectionsWithFees": 2
     }
   }

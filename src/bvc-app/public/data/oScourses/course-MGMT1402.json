@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-28T20:47:33.162Z",
+    "generatedAt": "2025-08-01T02:01:33.554Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "MGMT1402",
@@ -83,10 +83,52 @@
               "Updated": "20241021T201720Z"
             },
             "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80A1-11563318",
+            "feeItemNameSanitized": "80A1-11563318",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "5CF4A08BC61447588D049084D7D9558B",
+              "name": "80A1",
+              "displayName": "80A1",
+              "endTime": "20240101T092000",
+              "startTime": "20240101T080000",
+              "sisId": "80A1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201720Z",
+              "Updated": "20241021T201720Z"
+            },
+            "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80A1-11563319",
+            "feeItemNameSanitized": "80A1-11563319",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "5CF4A08BC61447588D049084D7D9558B",
+              "name": "80A1",
+              "displayName": "80A1",
+              "endTime": "20240101T092000",
+              "startTime": "20240101T080000",
+              "sisId": "80A1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201720Z",
+              "Updated": "20241021T201720Z"
+            },
+            "day": "4"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -95,7 +137,7 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 3
         }
       },
       {
@@ -169,10 +211,52 @@
               "Updated": "20241021T201721Z"
             },
             "day": "1"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80B1-11563316",
+            "feeItemNameSanitized": "80B1-11563316",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "FA30168422A243FFADE8AF7A86CDA014",
+              "name": "80B1",
+              "displayName": "80B1",
+              "endTime": "20240101T105000",
+              "startTime": "20240101T093000",
+              "sisId": "80B1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201721Z",
+              "Updated": "20241021T201721Z"
+            },
+            "day": "1"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80B1-11563317",
+            "feeItemNameSanitized": "80B1-11563317",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "FA30168422A243FFADE8AF7A86CDA014",
+              "name": "80B1",
+              "displayName": "80B1",
+              "endTime": "20240101T105000",
+              "startTime": "20240101T093000",
+              "sisId": "80B1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201721Z",
+              "Updated": "20241021T201721Z"
+            },
+            "day": "3"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -181,14 +265,14 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 3
         }
       }
     ],
     "summary": {
       "totalSections": 2,
-      "totalFees": 6,
-      "totalTimeBlocks": 2,
+      "totalFees": 10,
+      "totalTimeBlocks": 6,
       "sectionsWithFees": 2
     }
   }

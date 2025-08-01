@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-28T20:47:37.276Z",
+    "generatedAt": "2025-08-01T02:01:37.493Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "POSC1201",
@@ -83,10 +83,31 @@
               "Updated": "20241021T201709Z"
             },
             "day": "5"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170B1-11563061",
+            "feeItemNameSanitized": "170B1-11563061",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "8916D3E1AB094D54807CFBABB190E465",
+              "name": "170B1",
+              "displayName": "170B1",
+              "endTime": "20240101T122000",
+              "startTime": "20240101T093000",
+              "sisId": "170B1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201709Z",
+              "Updated": "20241021T201709Z"
+            },
+            "day": "5"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 4,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -95,7 +116,7 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 2
         }
       },
       {
@@ -169,10 +190,31 @@
               "Updated": "20241021T201708Z"
             },
             "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1-11563062",
+            "feeItemNameSanitized": "170A1-11563062",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "13746D609B4C4BC688FA5DCFAD9D436C",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20240101T105000",
+              "startTime": "20240101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201708Z",
+              "Updated": "20241021T201708Z"
+            },
+            "day": "2"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 4,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -181,14 +223,14 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 2
         }
       }
     ],
     "summary": {
       "totalSections": 2,
-      "totalFees": 6,
-      "totalTimeBlocks": 2,
+      "totalFees": 8,
+      "totalTimeBlocks": 4,
       "sectionsWithFees": 2
     }
   }

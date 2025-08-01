@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-07-28T20:47:40.198Z",
+    "generatedAt": "2025-08-01T02:01:40.222Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "SCMT2201",
@@ -83,10 +83,31 @@
               "Updated": "20241021T201736Z"
             },
             "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170K1-11563426",
+            "feeItemNameSanitized": "170K1-11563426",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "93DAFB931C5C4C25937561CDD498F36C",
+              "name": "170K1",
+              "displayName": "170K1",
+              "endTime": "20240101T195000",
+              "startTime": "20240101T170000",
+              "sisId": "170K1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201736Z",
+              "Updated": "20241021T201736Z"
+            },
+            "day": "4"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 4,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -95,7 +116,7 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 2
         }
       },
       {
@@ -169,10 +190,52 @@
               "Updated": "20241021T201720Z"
             },
             "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80A1-11563422",
+            "feeItemNameSanitized": "80A1-11563422",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "5CF4A08BC61447588D049084D7D9558B",
+              "name": "80A1",
+              "displayName": "80A1",
+              "endTime": "20240101T092000",
+              "startTime": "20240101T080000",
+              "sisId": "80A1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201720Z",
+              "Updated": "20241021T201720Z"
+            },
+            "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80A1-11563423",
+            "feeItemNameSanitized": "80A1-11563423",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "5CF4A08BC61447588D049084D7D9558B",
+              "name": "80A1",
+              "displayName": "80A1",
+              "endTime": "20240101T092000",
+              "startTime": "20240101T080000",
+              "sisId": "80A1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201720Z",
+              "Updated": "20241021T201720Z"
+            },
+            "day": "4"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -181,7 +244,7 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 3
         }
       },
       {
@@ -255,10 +318,52 @@
               "Updated": "20241021T201721Z"
             },
             "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80C1-11563424",
+            "feeItemNameSanitized": "80C1-11563424",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F962A361464E4A669DE276EDA77DBEA3",
+              "name": "80C1",
+              "displayName": "80C1",
+              "endTime": "20240101T122000",
+              "startTime": "20240101T110000",
+              "sisId": "80C1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201721Z",
+              "Updated": "20241021T201721Z"
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80C1-11563425",
+            "feeItemNameSanitized": "80C1-11563425",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "F962A361464E4A669DE276EDA77DBEA3",
+              "name": "80C1",
+              "displayName": "80C1",
+              "endTime": "20240101T122000",
+              "startTime": "20240101T110000",
+              "sisId": "80C1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201721Z",
+              "Updated": "20241021T201721Z"
+            },
+            "day": "1"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -267,14 +372,14 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 3
         }
       }
     ],
     "summary": {
       "totalSections": 3,
-      "totalFees": 9,
-      "totalTimeBlocks": 3,
+      "totalFees": 14,
+      "totalTimeBlocks": 8,
       "sectionsWithFees": 3
     }
   }

@@ -3,6 +3,9 @@ import ProgramList from '@/components/pages/ProgramList';
 import Breadcrumb from '@/components/common/Breadcrumb';
 import { getBreadcrumbData } from '@/lib/navigationBreadcrumbUtils';
 import programsData from '@/data/cms/programs.json' with { type: 'json' };
+import HeroBanner from '@/components/HeroBanner/HeroBanner';
+import heroBannerData from '@/data/banners/heroBannerData.json';
+
 
 // TypeScript interface for the new Webflow CMS data structure
 export interface WebflowProgram {
@@ -112,18 +115,19 @@ export default async function ProgramListPage(): Promise<React.JSX.Element> {
     program.name && program.name !== 'Untitled Program'
   );
 
+  const { programs } = heroBannerData.herobanners;
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Page Header Section */}
-      <section className="bg-program-gradient text-white py-32">
-        <div className="container-layout">
-          <div className="mx-auto">
-            <h4 className="text-6xl font-semibold mb-6">
-              Find a Program
-            </h4>
-          </div>
-        </div>
-      </section>
+      {/* Hero Banner Section */}
+      <HeroBanner
+        backgroundImage={programs.backgroundImage}
+        heading={programs.heading}
+        subheading={programs.subheading}
+        description={programs.description}
+        ctaText={programs.ctaText}
+        ctaLink={programs.ctaLink}
+      />
 
       {/* Breadcrumb Navigation - Using the reusable component */}
       <Breadcrumb 
