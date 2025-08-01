@@ -26,12 +26,12 @@ const possiblePaths = {
     path.join(process.cwd(), 'src/data/navigation-data.json')
   ],
   programsData: [
-    path.join(__dirname, '../Programs.json'),
-    path.join(__dirname, '../src/data/Programs.json'),
-    path.join(__dirname, '../src/data/cms/Programs.json'),
-    path.join(__dirname, '../data/Programs.json'),
-    path.join(process.cwd(), 'Programs.json'),
-    path.join(process.cwd(), 'src/data/Programs.json')
+    path.join(__dirname, '../programs.json'),
+    path.join(__dirname, '../src/data/programs.json'),
+    path.join(__dirname, '../src/data/cms/programs.json'),
+    path.join(__dirname, '../data/programs.json'),
+    path.join(process.cwd(), 'programs.json'),
+    path.join(process.cwd(), 'src/data/programs.json')
   ]
 };
 
@@ -58,7 +58,7 @@ async function generateBreadcrumbs() {
   try {
     // Find the input files
     const navigationPath = findFile(possiblePaths.navigationData, 'navigation-data.json');
-    const programsPath = findFile(possiblePaths.programsData, 'Programs.json');
+    const programsPath = findFile(possiblePaths.programsData, 'programs.json');
     
     if (!navigationPath) {
       console.error('❌ navigation-data.json not found. Please ensure the file exists.');

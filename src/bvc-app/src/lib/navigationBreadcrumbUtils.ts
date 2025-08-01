@@ -126,7 +126,7 @@ async function loadConfigData() {
         programsData = [];
       }
     } catch (error) {
-      console.warn('Could not load Programs.json:', error);
+      console.warn('Could not load programs.json:', error);
       programsData = [];
     }
 

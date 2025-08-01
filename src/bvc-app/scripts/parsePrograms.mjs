@@ -11,7 +11,7 @@ function stripHtml(html = '') {
 }
 
 async function main() {
-  const inputPath = path.resolve(projectRoot, 'src/data/cms/Programs.json');
+  const inputPath = path.resolve(projectRoot, 'src/data/cms/programs.json');
   const outputPath = path.resolve(projectRoot, 'src/data/cms/programs.parsed.json');
 
   const json = JSON.parse(await fs.readFile(inputPath, 'utf-8'));
