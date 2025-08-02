@@ -1,26 +1,31 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-01T02:27:03.139Z",
+    "generatedAt": "2025-08-02T03:20:48.205Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "COMP9302",
     "courseName": "Microsoft Excel - Core"
   },
   "course": {
-    "id": "2004DAC7A86A4B309E58F3D893A315BF",
+    "id": "6397CC0B4B7D4800A70EB936070FED43",
     "sisID": "COMP9302",
     "name": "Microsoft Excel - Core",
     "children": [
       {
-        "id": "D1FD8080A87D4AAA98EB250AA2C56E95",
+        "id": "AAF533A81BD04C7683844C03C3ACD5F7",
         "name": "25OCTMNOA91",
         "sisID": "221363",
         "courseName": "",
-        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
-        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
-        "deliveryType": null,
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
         "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
@@ -35,9 +40,9 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
             "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"

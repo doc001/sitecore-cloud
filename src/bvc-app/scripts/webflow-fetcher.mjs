@@ -1,222 +1,152 @@
+// /scripts/fetch-webflow-collections.mjs
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env.local" });
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Get current directory for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Configuration
-const API_KEY = '1de0a54766cd85198cd74190cf1a5f9fcbb8b1654ddc380900e87ecceaffb88f';
+const API_KEY = process.env.WEBFLOW_API_KEY;
+if (!API_KEY) throw new Error('WEBFLOW_API_KEY not set in environment');
+
 const BASE_URL = 'https://api.webflow.com/v2';
-const SITE_ID = '66a28fdfe76f2f849d7b00f3';
-const PROGRAMS_COLLECTION_ID = '66e850bcbf766fccf5d09a24'; 
+const SITE_ID = '66a28fdfe76f2f849d7b00f3'; // Your Webflow site ID
 
-// 67e1d2cf8ff92fb037384df3 Open Studies
-// 678557c6de5ecf01f3e67171 Extended Ed
-// 66e850bcbf766fccf5d09a24 Programs
-// 66e88fcaccaaf351c8156d0f Program Areas
+const COLLECTIONS = [
+  { name: 'Program types', id: '66e8483e5367131c8c1f157b' },
+  { name: 'Program Statuses', id: '66e84b7f466a2e7548256e3f' },
+  { name: 'Programs', id: '66e850bcbf766fccf5d09a24' },
+  { name: 'Program Durations', id: '66e8515285e71591257e50e7' },
+  { name: 'Course deliveries', id: '66e852a4f42d06efa20d814c' },
+  { name: 'Program Availability Configs', id: '66e8607c8f4c0cd9dfcca131' },
+  { name: 'Program areas', id: '66e88fcaccaaf351c8156d0f' },
+  { name: 'Schools', id: '66e890cab0dd0249a4c7ad82' },
+  { name: 'Type of students', id: '66e8adaefe12c30c6dca95e6' },
+  { name: 'Program intakes', id: '66eae6dfc341b44c0a951b5b' },
+  { name: 'Campus', id: '66f1cb8ef83c26d5b34af98e' },
+  { name: 'Stories', id: '67225d976a61a68d0d0e854f' },
+  { name: 'News Categories', id: '672293fb904c75aa96335bdf' },
+  { name: 'Events', id: '6757269f57edc764774784c2' },
+  { name: 'Event types', id: '675726c1bb3125627441bb99' },
+  { name: 'Events Locations', id: '67572b02b022226963da679d' },
+  { name: 'Videos', id: '6765bc6f2f11625e349abe7a' },
+  { name: 'Programs Additional Fees', id: '677ef16e3d99788155da70d8' },
+  { name: 'Program Courses And Tuitions Fees Per Terms', id: '677ef3666371605a8d79568a' },
+  { name: 'Requirements', id: '678185f41faebc4d71871ef3' },
+  { name: 'Requirement categories', id: '678189f13151e8c1822d3a7f' },
+  { name: 'Program Term Numbers', id: '678541ef844f17a7fce0ce02' },
+  { name: 'Courses', id: '678557c6de5ecf01f3e67171' },
+  { name: 'Members', id: '67897827e6895f9780f07a2f' },
+  { name: 'Members Rols', id: '6789783f36e0c7bd37222809' },
+  { name: 'Departments', id: '67897f34540641a435594d98' },
+  { name: 'Course offerings', id: '67b8ea8feb02295cdaa6a09f' },
+  { name: 'Course time blocks', id: '67b8ef2c0a226c19e547bf14' },
+  { name: 'Course day of the weeks', id: '67b8ef6dc1d1ab190e08e34a' },
+  { name: 'Programs and Courses categories', id: '67bcb184c582a29c9d1a90b8' },
+  { name: 'Ar-categories', id: '67c62389e4a2b04fee5a9b06' },
+  { name: 'Ar projects', id: '67c62bcd692042204d413ec6' },
+  { name: 'Ar partners', id: '67c65b8f6cb8b28d80a365ab' },
+  { name: 'Ar funders', id: '67c66701c2455cc33078d634' },
+  { name: 'Extended Educations', id: '67d84b77a7c14e2dc1660666' },
+  { name: 'Open Studies', id: '67e1d2cf8ff92fb037384df3' },
+  { name: 'News Releases', id: '67f038358c7264210a1af77f' },
+  { name: 'Course Delivery Modes', id: '684c49815fb58405337262cb' },
+  { name: 'Extended Education Certifcates', id: '685c6f21298c5a6ec507ef85' },
+  { name: 'News Release Authors', id: '688151625e3f7d9e59600a37' }
+];
 
-// Ensure data directory exists
 const dataDir = path.join(__dirname, '../src/data/cms');
-console.log(`📂 Data directory: ${dataDir}`);
-
 if (!fs.existsSync(dataDir)) {
-  console.log('🔨 Creating data directory...');
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
 /**
- * Get collection info to determine the collection name
+ * Cleans collection name for safe file names.
  */
-async function getCollectionInfo(siteId, collectionId) {
-  const url = `${BASE_URL}/sites/${siteId}/collections/${collectionId}`;
-  
-  console.log(`🔍 Fetching collection info from: ${url}`);
-  
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    console.log(`📡 Collection info response status: ${response.status}`);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`❌ API Error Response: ${errorText}`);
-      throw new Error(`Failed to fetch collection info: ${response.status} ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    console.log(`✅ Collection info retrieved: ${data.displayName || data.slug}`);
-    return data;
-  } catch (error) {
-    console.error('❌ Error fetching collection info:', error);
-    throw error;
-  }
+function cleanFilename(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 /**
- * Fetch all items from a Webflow collection
- */
-async function fetchCollectionItems(siteId, collectionId) {
-  const url = `${BASE_URL}/sites/${siteId}/collections/${collectionId}/items`;
-  
-  console.log(`🔍 Fetching items from: ${url}`);
-  
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    console.log(`📡 Items response status: ${response.status}`);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`❌ API Error Response: ${errorText}`);
-      throw new Error(`Failed to fetch collection items: ${response.status} ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    console.log(`✅ Items retrieved: ${data.items?.length || 0} items`);
-    return data;
-  } catch (error) {
-    console.error('❌ Error fetching collection items:', error);
-    throw error;
-  }
-}
-
-/**
- * Save data to JSON file
+ * Save data as pretty JSON
  */
 function saveToFile(data, filename) {
-    const lowercase_filename = filename.toLowerCase(); // Use toLowerCase() for JavaScript
-    const filePath = path.join(dataDir, `${lowercase_filename}.json`);
-    
-    try {
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-        console.log(`✅ Data saved to: ${filePath}`);
-        console.log(`📄 File size: ${fs.statSync(filePath).size} bytes`);
-    } catch (error) {
-        console.error('❌ Error saving file:', error);
-        throw error;
-    }
+  const filePath = path.join(dataDir, `${filename}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  console.log(`✅ Saved to ${filePath} (${fs.statSync(filePath).size} bytes)`);
 }
 
 /**
- * List all collections in a site
+ * Fetches ALL items in a collection (handles pagination)
  */
-async function listCollections(siteId) {
-  const url = `${BASE_URL}/sites/${siteId}/collections`;
-  
-  console.log(`🔍 Listing collections from: ${url}`);
-  
-  try {
-    const response = await fetch(url, {
+async function fetchAllCollectionItems(siteId, collectionId) {
+  let allItems = [];
+  let offset = 0;
+  const limit = 100;
+  let total = Infinity;
+  const url = `${BASE_URL}/sites/${siteId}/collections/${collectionId}/items`;
+
+  do {
+    const pageUrl = `${url}?offset=${offset}&limit=${limit}`;
+    const resp = await fetch(pageUrl, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
         'Content-Type': 'application/json'
       }
     });
-
-    console.log(`📡 Collections response status: ${response.status}`);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`❌ API Error Response: ${errorText}`);
-      throw new Error(`Failed to list collections: ${response.status} ${response.statusText}`);
+    if (!resp.ok) {
+      const errorText = await resp.text();
+      throw new Error(`Failed to fetch items: ${resp.status} ${resp.statusText} - ${errorText}`);
     }
+    const data = await resp.json();
+    allItems.push(...(data.items ?? []));
+    offset += (data.items?.length ?? 0);
+    total = data.pagination?.total ?? allItems.length;
+    if ((data.items?.length ?? 0) === 0) break; // Defensive: avoid infinite loop
+  } while (allItems.length < total);
 
-    const data = await response.json();
-    console.log(`✅ Found ${data.collections?.length || 0} collections`);
-    
-    // List all collections with their IDs
-    if (data.collections) {
-      console.log(`📋 Available collections:`);
-      data.collections.forEach(collection => {
-        console.log(`  - ${collection.displayName || collection.slug} (ID: ${collection.id})`);
-      });
-    }
-    
-    return data;
-  } catch (error) {
-    console.error('❌ Error listing collections:', error);
-    throw error;
-  }
+  return { items: allItems };
 }
 
 /**
- * Main function to fetch and save collection data
+ * Fetches, logs, and saves all collections.
  */
-async function fetchAndSaveCollection(siteId = SITE_ID, collectionId = PROGRAMS_COLLECTION_ID) {
-  try {
-    console.log(`🚀 Starting Webflow data fetch...`);
-    console.log(`🌐 Site ID: ${siteId}`);
-    console.log(`📁 Collection ID: ${collectionId}`);
-    
-    // First, list all collections to see what's available
-    console.log(`🔍 Checking available collections...`);
-    const collectionsData = await listCollections(siteId);
-    
-    // Check if our target collection exists
-    const targetCollection = collectionsData.collections?.find(col => col.id === collectionId);
-    
-    if (!targetCollection) {
-      console.error(`❌ Collection ${collectionId} not found in site ${siteId}`);
-      console.log(`💡 Available collections listed above. Please use one of those collection IDs.`);
-      process.exit(1);
+async function fetchAllCollections(siteId = SITE_ID, collections = COLLECTIONS) {
+  console.log(`🌐 Site ID: ${siteId}`);
+  for (const { name, id } of collections) {
+    console.log(`\n🚀 Fetching collection: "${name}" (ID: ${id})`);
+    try {
+      const data = await fetchAllCollectionItems(siteId, id);
+      const filename = cleanFilename(name);
+      saveToFile(data, filename);
+      console.log(`🎉 Finished: "${name}" (${data.items.length} items)\n`);
+    } catch (err) {
+      console.error(`❌ Failed: "${name}" —`, err.message);
+      continue; // Move to the next collection
     }
-    
-    const collectionName = targetCollection.displayName || targetCollection.slug || 'unknown-collection';
-    console.log(`✅ Found target collection: "${collectionName}"`);
-    
-    console.log(`📊 Fetching items from "${collectionName}" collection...`);
-    
-    // Fetch all items from the collection
-    const itemsData = await fetchCollectionItems(siteId, collectionId);
-    
-    console.log(`📊 Found ${itemsData.items?.length || 0} items`);
-    
-    // Create a clean filename from collection name
-    const cleanFilename = collectionName
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
-    
-    // Save the data
-    saveToFile(itemsData, cleanFilename);
-    
-    console.log(`🎉 Successfully processed collection: ${collectionName}`);
-    return itemsData;
-    
-  } catch (error) {
-    console.error('❌ Error processing collection:', error);
-    console.error('Stack trace:', error.stack);
-    process.exit(1);
   }
+  console.log('✨ All collections processed.');
 }
 
-// Export for use in other modules
-export { fetchAndSaveCollection, fetchCollectionItems, getCollectionInfo, listCollections };
+// Entrypoint: Only runs if executed, not imported
+if (import.meta.url === `file://${process.argv[1]}`) {
+  (async () => {
+    try {
+      await fetchAllCollections();
+      process.exit(0);
+    } catch (err) {
+      console.error('💥 Script failed:', err);
+      process.exit(1);
+    }
+  })();
+}
 
-// Always run the main function
-console.log('🚀 Starting Webflow data fetch...');
-fetchAndSaveCollection()
-  .then(() => {
-    console.log('✨ Process completed successfully!');
-    process.exit(0);
-  })
-  .catch((error) => {
-    console.error('💥 Process failed:', error);
-    process.exit(1);
-  });
+// Export for optional usage in other scripts (if needed)
+export { fetchAllCollections, fetchAllCollectionItems };

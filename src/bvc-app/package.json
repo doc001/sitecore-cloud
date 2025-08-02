@@ -16,6 +16,7 @@
     "predev": "npm run breadcrumbs:build",
     "prelaunch:build": "node scripts/copy-folders.mjs",
     "postinstall": "flowbite-react patch",
+    "getWebflowData": "node scripts/webflow-fetcher.mjs",
     "generateCourses": "node scripts/export-valid-courses.mjs",
     "generateOpenStudies": "node scripts/export-os-valid-courses.mjs",
     "generateMap": "node scripts/generateSiSData.mjs",
