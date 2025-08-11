@@ -1,32 +1,27 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-03T03:28:00.720Z",
+    "generatedAt": "2025-08-03T07:06:35.280Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "COMM3201",
     "courseName": "Intercultural Communication"
   },
   "course": {
-    "id": "ED857F9B24FE4764A21A5AF6FCA87B2D",
+    "id": "078B405CB5D94C508746142A4AE09173",
     "sisID": "COMM3201",
     "name": "Intercultural Communication",
     "credits": "3",
     "children": [
       {
-        "id": "6AF62F3BBAEE4C059A2A1A1D716B74CE",
+        "id": "1C3C3CA30CD1443B91500899DAF5535A",
         "name": "25SEPMNBS21",
         "sisID": "221958",
         "courseName": "",
-        "deliveryTypeId": "8980B6F5-107D-497F-8FC4-27F7C467F55D",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "8980B6F5107D497F8FC427F7C467F55D",
-          "name": "Blended - Synchronous",
-          "displayName": "Blended - Synchronous",
-          "slug": "blended-synchronous"
-        },
+        "deliveryTypeId": "817EEDFE-852A-42E8-A406-64B3D58429FB",
+        "campusId": "405455B3-8716-44E4-8557-08E9D06C07A8",
+        "deliveryType": null,
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "id": "405455B3871644E4855708E9D06C07A8",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -42,9 +37,9 @@
             "containerName": "Fees",
             "feeItemName": "International Tuition",
             "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeTypeId": "E0BE9D7C-5E42-4089-91EF-13819B30B907",
             "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "id": "E0BE9D7C5E42408991EF13819B30B907",
               "name": "International Tuition",
               "displayName": "International Tuition",
               "slug": "international-tuition"
@@ -57,9 +52,9 @@
             "containerName": "Fees",
             "feeItemName": "Tuition",
             "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeTypeId": "3782604D-B5FA-4864-8E5B-C2AE0333753F",
             "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "id": "3782604DB5FA48648E5BC2AE0333753F",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -76,22 +71,43 @@
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "F7A9D455F118456A895A91A34CB8D5D6",
+              "id": "13746D609B4C4BC688FA5DCFAD9D436C",
               "name": "170A1",
               "displayName": "170A1",
-              "endTime": "20250101T105000",
-              "startTime": "20250101T080000",
+              "endTime": "20240101T105000",
+              "startTime": "20240101T080000",
               "sisId": "170A1",
               "created": "",
               "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20250520T160238Z"
+              "Created": "20241021T201708Z",
+              "Updated": "20241021T201708Z"
+            },
+            "day": "1"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170A1-11563641",
+            "feeItemNameSanitized": "170A1-11563641",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "13746D609B4C4BC688FA5DCFAD9D436C",
+              "name": "170A1",
+              "displayName": "170A1",
+              "endTime": "20240101T105000",
+              "startTime": "20240101T080000",
+              "sisId": "170A1",
+              "created": "",
+              "updated": "",
+              "Created": "20241021T201708Z",
+              "Updated": "20241021T201708Z"
             },
             "day": "1"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 4,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -100,14 +116,14 @@
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 2
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 3,
-      "totalTimeBlocks": 1,
+      "totalFees": 4,
+      "totalTimeBlocks": 2,
       "sectionsWithFees": 1
     }
   }
