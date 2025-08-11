@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-03T07:04:57.202Z",
+    "generatedAt": "2025-08-11T15:45:32.862Z",
     "version": "2.0.0",
     "source": "Sitecore XMC GraphQL",
     "pageSize": 20,
@@ -10,22 +10,22 @@
     "deliveryTypes": {
       "items": [
         {
-          "id": "7E131DCD7ABB4532A55F33F5B9C9A96B",
+          "id": "ADF7050C93C94AA99868E60FC0B4ABAE",
           "name": "Any-time Online",
           "displayName": "Any-time Online",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Any-time Online",
           "template": "Delivery Type",
           "slug": "any-time-online",
           "fields": {
-            "sisId": "ATOL",
+            "sisId": "4",
             "name": "Any-time Online",
-            "Created": "20250515T014502Z",
-            "Updated": "20250515T014503Z"
+            "Created": "20250807T002640Z",
+            "Updated": "20250807T002640Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "ATOL"
+              "value": "4"
             },
             {
               "name": "Name",
@@ -37,11 +37,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014502Z"
+              "value": "20250807T002640Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014503Z"
+              "value": "20250807T002640Z"
             },
             {
               "name": "__Semantics",
@@ -50,7 +50,7 @@
           ]
         },
         {
-          "id": "4D5745FC62A946BFB48031F8DC085934",
+          "id": "F0E64A6A353F43A2B0DFDA4041C4CD46",
           "name": "AudioVideo Based Instruction",
           "displayName": "AudioVideo Based Instruction",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/AudioVideo Based Instruction",
@@ -59,8 +59,8 @@
           "fields": {
             "sisId": "5",
             "name": "Audio/Video Based Instruction",
-            "Created": "20250721T151328Z",
-            "Updated": "20250721T151329Z"
+            "Created": "20250807T002641Z",
+            "Updated": "20250807T002641Z"
           },
           "rawFields": [
             {
@@ -77,11 +77,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151328Z"
+              "value": "20250807T002641Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151329Z"
+              "value": "20250807T002641Z"
             },
             {
               "name": "__Semantics",
@@ -90,22 +90,22 @@
           ]
         },
         {
-          "id": "A8BCDCD2C6354D53A23865624FC222AF",
+          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
           "name": "Blended",
           "displayName": "Blended",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended",
           "template": "Delivery Type",
           "slug": "blended",
           "fields": {
-            "sisId": "OT",
+            "sisId": "17",
             "name": "Blended",
-            "Created": "20250515T014511Z",
-            "Updated": "20250515T014511Z"
+            "Created": "20250807T002641Z",
+            "Updated": "20250807T002641Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "OT"
+              "value": "17"
             },
             {
               "name": "Name",
@@ -117,11 +117,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014511Z"
+              "value": "20250807T002641Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014511Z"
+              "value": "20250807T002641Z"
             },
             {
               "name": "__Semantics",
@@ -130,167 +130,7 @@
           ]
         },
         {
-          "id": "35C75BE745104271BA20BCD140F00408",
-          "name": "Blended - Asynchronous",
-          "displayName": "Blended - Asynchronous",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended - Asynchronous",
-          "template": "Delivery Type",
-          "slug": "blended-asynchronous",
-          "fields": {
-            "sisId": "BA",
-            "name": "Blended - Asynchronous",
-            "Created": "20250723T010018Z",
-            "Updated": "20250723T010018Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "BA"
-            },
-            {
-              "name": "Name",
-              "value": "Blended - Asynchronous"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010018Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010018Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "58891D1E72D9435C88D94EAB0B656719",
-          "name": "Blended - Self-Paced",
-          "displayName": "Blended - Self-Paced",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended - Self-Paced",
-          "template": "Delivery Type",
-          "slug": "blended-self-paced",
-          "fields": {
-            "sisId": "BP",
-            "name": "Blended - Self-Paced",
-            "Created": "20250723T010019Z",
-            "Updated": "20250723T010019Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "BP"
-            },
-            {
-              "name": "Name",
-              "value": "Blended - Self-Paced"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010019Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010019Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "FEDFF3D228B84D1A9491B7A50D770E29",
-          "name": "Blended - Synchronous",
-          "displayName": "Blended - Synchronous",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended - Synchronous",
-          "template": "Delivery Type",
-          "slug": "blended-synchronous",
-          "fields": {
-            "sisId": "BS",
-            "name": "Blended - Synchronous",
-            "Created": "20250723T010018Z",
-            "Updated": "20250723T010018Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "BS"
-            },
-            {
-              "name": "Name",
-              "value": "Blended - Synchronous"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010018Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010018Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "BEFADA677585473B9B3AF5ABE2B1E740",
-          "name": "Blended - Synchronous - Asynchronous",
-          "displayName": "Blended - Synchronous - Asynchronous",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended - Synchronous - Asynchronous",
-          "template": "Delivery Type",
-          "slug": "blended-synchronous-asynchronous",
-          "fields": {
-            "sisId": "BAS",
-            "name": "Blended - Synchronous - Asynchronous",
-            "Created": "20250723T010019Z",
-            "Updated": "20250723T010019Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "BAS"
-            },
-            {
-              "name": "Name",
-              "value": "Blended - Synchronous - Asynchronous"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010019Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010019Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "F2276F66B7614E13AC0A3A6EFB1C05AD",
+          "id": "9469E42FE6CC4F3AA2DE5BC582A34999",
           "name": "Blended Asynchronous",
           "displayName": "Blended Asynchronous",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended Asynchronous",
@@ -299,8 +139,8 @@
           "fields": {
             "sisId": "35",
             "name": "Blended, Asynchronous",
-            "Created": "20250721T151329Z",
-            "Updated": "20250721T151329Z"
+            "Created": "20250807T002642Z",
+            "Updated": "20250807T002642Z"
           },
           "rawFields": [
             {
@@ -317,11 +157,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151329Z"
+              "value": "20250807T002642Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151329Z"
+              "value": "20250807T002642Z"
             },
             {
               "name": "__Semantics",
@@ -330,7 +170,7 @@
           ]
         },
         {
-          "id": "819898E0955F4F6694379E4B76A66A15",
+          "id": "8D506E28A13E4699AF6D54BF3E4FD553",
           "name": "Blended Self-Paced",
           "displayName": "Blended Self-Paced",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended Self-Paced",
@@ -339,8 +179,8 @@
           "fields": {
             "sisId": "34",
             "name": "Blended, Self-Paced",
-            "Created": "20250721T151330Z",
-            "Updated": "20250721T151330Z"
+            "Created": "20250807T002642Z",
+            "Updated": "20250807T002643Z"
           },
           "rawFields": [
             {
@@ -357,11 +197,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151330Z"
+              "value": "20250807T002642Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151330Z"
+              "value": "20250807T002643Z"
             },
             {
               "name": "__Semantics",
@@ -370,7 +210,7 @@
           ]
         },
         {
-          "id": "C7FC66BAF3EB4817B2B4772DB440F94B",
+          "id": "9D355918E4214486ACFCB8E64823C5EF",
           "name": "Blended Synchronous",
           "displayName": "Blended Synchronous",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended Synchronous",
@@ -379,8 +219,8 @@
           "fields": {
             "sisId": "26",
             "name": "Blended, Synchronous",
-            "Created": "20250721T151331Z",
-            "Updated": "20250721T151331Z"
+            "Created": "20250807T002643Z",
+            "Updated": "20250807T002643Z"
           },
           "rawFields": [
             {
@@ -397,11 +237,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151331Z"
+              "value": "20250807T002643Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151331Z"
+              "value": "20250807T002643Z"
             },
             {
               "name": "__Semantics",
@@ -410,7 +250,7 @@
           ]
         },
         {
-          "id": "4D40EB298BA84BDDBC6746AF3BAB7A8A",
+          "id": "AB98226EEC8F4AF9A2C802F9E391D8D7",
           "name": "Blended Synchronous Asynchronous",
           "displayName": "Blended Synchronous Asynchronous",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Blended Synchronous Asynchronous",
@@ -419,8 +259,8 @@
           "fields": {
             "sisId": "25",
             "name": "Blended, Synchronous, Asynchronous",
-            "Created": "20250721T151332Z",
-            "Updated": "20250721T151332Z"
+            "Created": "20250807T002643Z",
+            "Updated": "20250807T002644Z"
           },
           "rawFields": [
             {
@@ -437,11 +277,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151332Z"
+              "value": "20250807T002643Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151332Z"
+              "value": "20250807T002644Z"
             },
             {
               "name": "__Semantics",
@@ -450,22 +290,22 @@
           ]
         },
         {
-          "id": "9B1CF30652F64DECB5ECC8D85E3E66F2",
+          "id": "96232DD0566749639F949ABFF9B3E5FD",
           "name": "BVC Online",
           "displayName": "BVC Online",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/BVC Online",
           "template": "Delivery Type",
           "slug": "bvc-online",
           "fields": {
-            "sisId": "CML",
+            "sisId": "9",
             "name": "BVC Online",
-            "Created": "20250515T014506Z",
-            "Updated": "20250515T014506Z"
+            "Created": "20250807T002644Z",
+            "Updated": "20250807T002644Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "CML"
+              "value": "9"
             },
             {
               "name": "Name",
@@ -477,11 +317,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014506Z"
+              "value": "20250807T002644Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014506Z"
+              "value": "20250807T002644Z"
             },
             {
               "name": "__Semantics",
@@ -490,22 +330,22 @@
           ]
         },
         {
-          "id": "EA5763D927944625BB2F2647D5699EC4",
+          "id": "B38740DABAF248E6AA159507BC7EDFC6",
           "name": "Challenge",
           "displayName": "Challenge",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Challenge",
           "template": "Delivery Type",
           "slug": "challenge",
           "fields": {
-            "sisId": "CHALLENGE",
+            "sisId": "8",
             "name": "Challenge",
-            "Created": "20250515T014505Z",
-            "Updated": "20250515T014505Z"
+            "Created": "20250807T002644Z",
+            "Updated": "20250807T002645Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "CHALLENGE"
+              "value": "8"
             },
             {
               "name": "Name",
@@ -517,11 +357,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014505Z"
+              "value": "20250807T002644Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014505Z"
+              "value": "20250807T002645Z"
             },
             {
               "name": "__Semantics",
@@ -530,22 +370,22 @@
           ]
         },
         {
-          "id": "0905C82B8F1E48AF95AC65C1BF12C636",
+          "id": "4773C629459B46F9A70478BEC70CF10B",
           "name": "Combined Online",
           "displayName": "Combined Online",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Combined Online",
           "template": "Delivery Type",
           "slug": "combined-online",
           "fields": {
-            "sisId": "COOL",
+            "sisId": "10",
             "name": "Combined Online",
-            "Created": "20250515T014506Z",
-            "Updated": "20250515T014506Z"
+            "Created": "20250807T002645Z",
+            "Updated": "20250807T002645Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "COOL"
+              "value": "10"
             },
             {
               "name": "Name",
@@ -557,11 +397,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014506Z"
+              "value": "20250807T002645Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014506Z"
+              "value": "20250807T002645Z"
             },
             {
               "name": "__Semantics",
@@ -570,7 +410,7 @@
           ]
         },
         {
-          "id": "41618E86BD394490B1EDEFD0D5C2BB3F",
+          "id": "ED37A18598D94DB59A16247BB40D94A5",
           "name": "Computer Assisted Instruction",
           "displayName": "Computer Assisted Instruction",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Computer Assisted Instruction",
@@ -579,8 +419,8 @@
           "fields": {
             "sisId": "6",
             "name": "Computer Assisted Instruction",
-            "Created": "20250721T151333Z",
-            "Updated": "20250721T151333Z"
+            "Created": "20250807T002646Z",
+            "Updated": "20250807T002646Z"
           },
           "rawFields": [
             {
@@ -597,11 +437,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151333Z"
+              "value": "20250807T002646Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151333Z"
+              "value": "20250807T002646Z"
             },
             {
               "name": "__Semantics",
@@ -610,7 +450,7 @@
           ]
         },
         {
-          "id": "EEEF38F3DC6247BBB62C281D780FDD32",
+          "id": "EA8728FA88CA40D8952FD33543367F92",
           "name": "Correspondence Based Instruction",
           "displayName": "Correspondence Based Instruction",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Correspondence Based Instruction",
@@ -619,8 +459,8 @@
           "fields": {
             "sisId": "7",
             "name": "Correspondence Based Instruction",
-            "Created": "20250721T151334Z",
-            "Updated": "20250721T151334Z"
+            "Created": "20250807T002646Z",
+            "Updated": "20250807T002646Z"
           },
           "rawFields": [
             {
@@ -637,11 +477,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151334Z"
+              "value": "20250807T002646Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151334Z"
+              "value": "20250807T002646Z"
             },
             {
               "name": "__Semantics",
@@ -650,7 +490,7 @@
           ]
         },
         {
-          "id": "A2E74BE5FBF84F83B387FF95F58B5C0A",
+          "id": "B68D7E4E42484941A5B91F7DF93373B5",
           "name": "Distributed Learning ecampus 2",
           "displayName": "Distributed Learning ecampus 2",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Distributed Learning ecampus 2",
@@ -659,8 +499,8 @@
           "fields": {
             "sisId": "13",
             "name": "Distributed Learning ecampus 2",
-            "Created": "20250721T151335Z",
-            "Updated": "20250721T151335Z"
+            "Created": "20250807T002646Z",
+            "Updated": "20250807T002647Z"
           },
           "rawFields": [
             {
@@ -677,11 +517,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151335Z"
+              "value": "20250807T002646Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151335Z"
+              "value": "20250807T002647Z"
             },
             {
               "name": "__Semantics",
@@ -690,7 +530,7 @@
           ]
         },
         {
-          "id": "B3D73CB170454D848A219CE03C3F74DD",
+          "id": "35F76417CC184F849D96F3EFD623DE50",
           "name": "ECampus Alberta - online learning",
           "displayName": "ECampus Alberta - online learning",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/ECampus Alberta - online learning",
@@ -699,8 +539,8 @@
           "fields": {
             "sisId": "11",
             "name": "ECampus Alberta - online learning",
-            "Created": "20250721T151335Z",
-            "Updated": "20250721T151335Z"
+            "Created": "20250807T002647Z",
+            "Updated": "20250807T002647Z"
           },
           "rawFields": [
             {
@@ -717,11 +557,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151335Z"
+              "value": "20250807T002647Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151335Z"
+              "value": "20250807T002647Z"
             },
             {
               "name": "__Semantics",
@@ -730,22 +570,22 @@
           ]
         },
         {
-          "id": "569BE56818874672BD33519B2AD26191",
+          "id": "714A63AB1DF341A88BA51B71D618633C",
           "name": "eCampusAlberta Online",
           "displayName": "eCampusAlberta Online",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/eCampusAlberta Online",
           "template": "Delivery Type",
           "slug": "ecampusalberta-online",
           "fields": {
-            "sisId": "ECAMPUS1",
+            "sisId": "12",
             "name": "eCampusAlberta Online",
-            "Created": "20250515T014507Z",
-            "Updated": "20250515T014507Z"
+            "Created": "20250807T002647Z",
+            "Updated": "20250807T002648Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "ECAMPUS1"
+              "value": "12"
             },
             {
               "name": "Name",
@@ -757,11 +597,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014507Z"
+              "value": "20250807T002647Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014507Z"
+              "value": "20250807T002648Z"
             },
             {
               "name": "__Semantics",
@@ -770,87 +610,7 @@
           ]
         },
         {
-          "id": "5024E6FACC5A473E9C3C8259F9EDF289",
-          "name": "Face to Face - Self-Paced",
-          "displayName": "Face to Face - Self-Paced",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Face to Face - Self-Paced",
-          "template": "Delivery Type",
-          "slug": "face-to-face-self-paced",
-          "fields": {
-            "sisId": "FP",
-            "name": "Face to Face - Self-Paced",
-            "Created": "20250723T010020Z",
-            "Updated": "20250723T010021Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "FP"
-            },
-            {
-              "name": "Name",
-              "value": "Face to Face - Self-Paced"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010020Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010021Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "CEF61B72EDB145C2B607214F70F19BE3",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Face to Face - Synchronous",
-          "template": "Delivery Type",
-          "slug": "face-to-face-synchronous",
-          "fields": {
-            "sisId": "FS",
-            "name": "Face to Face - Synchronous",
-            "Created": "20250723T010020Z",
-            "Updated": "20250723T010020Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "FS"
-            },
-            {
-              "name": "Name",
-              "value": "Face to Face - Synchronous"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010020Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010020Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "90D51991FBDB45C9A6892EBA7E2DB1DE",
+          "id": "E5A8D32B7F2F4761A1290D8C0B3A4199",
           "name": "Face to Face Self-Paced",
           "displayName": "Face to Face Self-Paced",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Face to Face Self-Paced",
@@ -859,8 +619,8 @@
           "fields": {
             "sisId": "32",
             "name": "Face to Face, Self-Paced",
-            "Created": "20250721T151336Z",
-            "Updated": "20250721T151336Z"
+            "Created": "20250807T002648Z",
+            "Updated": "20250807T002648Z"
           },
           "rawFields": [
             {
@@ -877,11 +637,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151336Z"
+              "value": "20250807T002648Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151336Z"
+              "value": "20250807T002648Z"
             },
             {
               "name": "__Semantics",
@@ -890,7 +650,7 @@
           ]
         },
         {
-          "id": "1B1EF81B3C7941C0B179D0AB6C0ABBBC",
+          "id": "8B3A79D203B7450E9C266F33122C0115",
           "name": "Face to Face Synchronous",
           "displayName": "Face to Face Synchronous",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Face to Face Synchronous",
@@ -899,8 +659,8 @@
           "fields": {
             "sisId": "33",
             "name": "Face to Face, Synchronous",
-            "Created": "20250721T151337Z",
-            "Updated": "20250721T151337Z"
+            "Created": "20250807T002648Z",
+            "Updated": "20250807T002649Z"
           },
           "rawFields": [
             {
@@ -917,11 +677,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151337Z"
+              "value": "20250807T002648Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151337Z"
+              "value": "20250807T002649Z"
             },
             {
               "name": "__Semantics",
@@ -930,22 +690,22 @@
           ]
         },
         {
-          "id": "9799B95A6F424370BCAB9E4E4F3DC5E5",
+          "id": "AD813F5CBCED45448145DEF6E461BA34",
           "name": "Flexclass",
           "displayName": "Flexclass",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Flexclass",
           "template": "Delivery Type",
           "slug": "flexclass",
           "fields": {
-            "sisId": "SP",
+            "sisId": "19",
             "name": "Flexclass",
-            "Created": "20250515T014512Z",
-            "Updated": "20250515T014512Z"
+            "Created": "20250807T002649Z",
+            "Updated": "20250807T002649Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "SP"
+              "value": "19"
             },
             {
               "name": "Name",
@@ -957,11 +717,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014512Z"
+              "value": "20250807T002649Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014512Z"
+              "value": "20250807T002649Z"
             },
             {
               "name": "__Semantics",
@@ -970,22 +730,22 @@
           ]
         },
         {
-          "id": "7488E1B03CCC4113A6F45A5685AACD0A",
+          "id": "28E547A58237414681B5A9351857992E",
           "name": "Home Study",
           "displayName": "Home Study",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Home Study",
           "template": "Delivery Type",
           "slug": "home-study",
           "fields": {
-            "sisId": "HOME",
+            "sisId": "15",
             "name": "Home Study",
-            "Created": "20250515T014509Z",
-            "Updated": "20250515T014509Z"
+            "Created": "20250807T002649Z",
+            "Updated": "20250807T002650Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "HOME"
+              "value": "15"
             },
             {
               "name": "Name",
@@ -997,11 +757,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014509Z"
+              "value": "20250807T002649Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014509Z"
+              "value": "20250807T002650Z"
             },
             {
               "name": "__Semantics",
@@ -1010,22 +770,22 @@
           ]
         },
         {
-          "id": "EB54662B5CA74E478DC6D3B3502531E0",
+          "id": "F41B640EC07E4449A68AE922DC06FA78",
           "name": "Hyflex",
           "displayName": "Hyflex",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Hyflex",
           "template": "Delivery Type",
           "slug": "hyflex",
           "fields": {
-            "sisId": "HF",
+            "sisId": "14",
             "name": "Hyflex",
-            "Created": "20250515T014508Z",
-            "Updated": "20250515T014508Z"
+            "Created": "20250807T002650Z",
+            "Updated": "20250807T002650Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "HF"
+              "value": "14"
             },
             {
               "name": "Name",
@@ -1037,11 +797,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014508Z"
+              "value": "20250807T002650Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014508Z"
+              "value": "20250807T002650Z"
             },
             {
               "name": "__Semantics",
@@ -1050,22 +810,22 @@
           ]
         },
         {
-          "id": "3784ADEDF5044069AD5472719982D31A",
+          "id": "5FDE7DCC09154386BD611FF6CF640FBE",
           "name": "In Class",
           "displayName": "In Class",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/In Class",
           "template": "Delivery Type",
           "slug": "in-class",
           "fields": {
-            "sisId": "TRAD",
+            "sisId": "20",
             "name": "In Class",
-            "Created": "20250515T014513Z",
-            "Updated": "20250515T014513Z"
+            "Created": "20250807T002650Z",
+            "Updated": "20250807T002650Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "TRAD"
+              "value": "20"
             },
             {
               "name": "Name",
@@ -1077,11 +837,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014513Z"
+              "value": "20250807T002650Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014513Z"
+              "value": "20250807T002650Z"
             },
             {
               "name": "__Semantics",
@@ -1090,7 +850,7 @@
           ]
         },
         {
-          "id": "3E582F2CF575488799E8D5774A485B18",
+          "id": "4AD7BA5CDF904DA7968E4C031AD324A7",
           "name": "Micro-Credential Assessment",
           "displayName": "Micro-Credential Assessment",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Micro-Credential Assessment",
@@ -1099,8 +859,8 @@
           "fields": {
             "sisId": "24",
             "name": "Micro-Credential Assessment",
-            "Created": "20250721T151338Z",
-            "Updated": "20250721T151338Z"
+            "Created": "20250807T002651Z",
+            "Updated": "20250807T002651Z"
           },
           "rawFields": [
             {
@@ -1117,11 +877,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151338Z"
+              "value": "20250807T002651Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151338Z"
+              "value": "20250807T002651Z"
             },
             {
               "name": "__Semantics",
@@ -1130,7 +890,7 @@
           ]
         },
         {
-          "id": "8FCC6AAFEFAC48B2ACA6FE180D37BF8D",
+          "id": "301A6B2C1C6D4F5F979F9120BAFBCAAD",
           "name": "Mixed",
           "displayName": "Mixed",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Mixed",
@@ -1139,8 +899,8 @@
           "fields": {
             "sisId": "3",
             "name": "Mixed",
-            "Created": "20250721T151339Z",
-            "Updated": "20250721T151339Z"
+            "Created": "20250807T002651Z",
+            "Updated": "20250807T002651Z"
           },
           "rawFields": [
             {
@@ -1157,11 +917,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151339Z"
+              "value": "20250807T002651Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151339Z"
+              "value": "20250807T002651Z"
             },
             {
               "name": "__Semantics",
@@ -1170,7 +930,7 @@
           ]
         },
         {
-          "id": "327F9CC3FC324DBE95C37CEA051A8BF1",
+          "id": "014F1E2968C5410AA8E4F1939F73C7E2",
           "name": "Off-Site",
           "displayName": "Off-Site",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Off-Site",
@@ -1179,8 +939,8 @@
           "fields": {
             "sisId": "28",
             "name": "Off-Site",
-            "Created": "20250721T184119Z",
-            "Updated": "20250721T184119Z"
+            "Created": "20250807T002652Z",
+            "Updated": "20250807T002652Z"
           },
           "rawFields": [
             {
@@ -1197,11 +957,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T184119Z"
+              "value": "20250807T002652Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T184119Z"
+              "value": "20250807T002652Z"
             },
             {
               "name": "__Semantics",
@@ -1210,167 +970,7 @@
           ]
         },
         {
-          "id": "A82B2B20E5A6407194080EB756EB3163",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online - Asynchronous",
-          "template": "Delivery Type",
-          "slug": "online-asynchronous",
-          "fields": {
-            "sisId": "OA",
-            "name": "Online - Asynchronous",
-            "Created": "20250723T010021Z",
-            "Updated": "20250723T010022Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "OA"
-            },
-            {
-              "name": "Name",
-              "value": "Online - Asynchronous"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010021Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010022Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "97614D1489B3431DA8D7F86CF1E191AA",
-          "name": "Online - Self-Paced",
-          "displayName": "Online - Self-Paced",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online - Self-Paced",
-          "template": "Delivery Type",
-          "slug": "online-self-paced",
-          "fields": {
-            "sisId": "OP",
-            "name": "Online - Self-Paced",
-            "Created": "20250723T010022Z",
-            "Updated": "20250723T010022Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "OP"
-            },
-            {
-              "name": "Name",
-              "value": "Online - Self-Paced"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010022Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010022Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "BBA3F8D3D7B14E8CBF62B973924E4972",
-          "name": "Online - Synchronous",
-          "displayName": "Online - Synchronous",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online - Synchronous",
-          "template": "Delivery Type",
-          "slug": "online-synchronous",
-          "fields": {
-            "sisId": "OS",
-            "name": "Online - Synchronous",
-            "Created": "20250723T010021Z",
-            "Updated": "20250723T010021Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "OS"
-            },
-            {
-              "name": "Name",
-              "value": "Online - Synchronous"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010021Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010021Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "9E33C3C9027F44419CF177E1FCE78B48",
-          "name": "Online - Synchronous - Asynchronous",
-          "displayName": "Online - Synchronous - Asynchronous",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online - Synchronous - Asynchronous",
-          "template": "Delivery Type",
-          "slug": "online-synchronous-asynchronous",
-          "fields": {
-            "sisId": "OAS",
-            "name": "Online - Synchronous - Asynchronous",
-            "Created": "20250723T010022Z",
-            "Updated": "20250723T010023Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "OAS"
-            },
-            {
-              "name": "Name",
-              "value": "Online - Synchronous - Asynchronous"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250723T010022Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250723T010023Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "E4FA2A1499B94DD8BA453D7379C807B4",
+          "id": "A3E8C32FB6BF4641A3C14590D90EE7EB",
           "name": "Online Asynchronous",
           "displayName": "Online Asynchronous",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online Asynchronous",
@@ -1379,8 +979,8 @@
           "fields": {
             "sisId": "30",
             "name": "Online, Asynchronous",
-            "Created": "20250721T151339Z",
-            "Updated": "20250721T151339Z"
+            "Created": "20250807T002652Z",
+            "Updated": "20250807T002653Z"
           },
           "rawFields": [
             {
@@ -1397,11 +997,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151339Z"
+              "value": "20250807T002652Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151339Z"
+              "value": "20250807T002653Z"
             },
             {
               "name": "__Semantics",
@@ -1410,7 +1010,7 @@
           ]
         },
         {
-          "id": "FB2A0DA0FC994CF6BC09F5968391DA3E",
+          "id": "883D7EFDBABE43BDB73ADCDD071CFE4F",
           "name": "Online Self-Paced",
           "displayName": "Online Self-Paced",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online Self-Paced",
@@ -1419,8 +1019,8 @@
           "fields": {
             "sisId": "29",
             "name": "Online, Self-Paced",
-            "Created": "20250721T151340Z",
-            "Updated": "20250721T151340Z"
+            "Created": "20250807T002653Z",
+            "Updated": "20250807T002653Z"
           },
           "rawFields": [
             {
@@ -1437,11 +1037,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151340Z"
+              "value": "20250807T002653Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151340Z"
+              "value": "20250807T002653Z"
             },
             {
               "name": "__Semantics",
@@ -1450,7 +1050,7 @@
           ]
         },
         {
-          "id": "60FF9539E9FC44A7B9CE0B2F72B0D535",
+          "id": "2201F58652244378BE22F6449AE7B7C8",
           "name": "Online Synchronous",
           "displayName": "Online Synchronous",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online Synchronous",
@@ -1459,8 +1059,8 @@
           "fields": {
             "sisId": "31",
             "name": "Online, Synchronous",
-            "Created": "20250721T151340Z",
-            "Updated": "20250721T151341Z"
+            "Created": "20250807T002653Z",
+            "Updated": "20250807T002653Z"
           },
           "rawFields": [
             {
@@ -1477,11 +1077,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151340Z"
+              "value": "20250807T002653Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151341Z"
+              "value": "20250807T002653Z"
             },
             {
               "name": "__Semantics",
@@ -1490,7 +1090,7 @@
           ]
         },
         {
-          "id": "B7A5A78BD1E94DEFB42A736F8DF71E32",
+          "id": "F16E0A5D6C524CC7A83134E51A6581DF",
           "name": "Online Synchronous Asynchronous",
           "displayName": "Online Synchronous Asynchronous",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Online Synchronous Asynchronous",
@@ -1499,8 +1099,8 @@
           "fields": {
             "sisId": "27",
             "name": "Online, Synchronous, Asynchronous",
-            "Created": "20250721T151341Z",
-            "Updated": "20250721T151341Z"
+            "Created": "20250807T002654Z",
+            "Updated": "20250807T002654Z"
           },
           "rawFields": [
             {
@@ -1517,11 +1117,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151341Z"
+              "value": "20250807T002654Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151341Z"
+              "value": "20250807T002654Z"
             },
             {
               "name": "__Semantics",
@@ -1530,22 +1130,22 @@
           ]
         },
         {
-          "id": "49CE2E7ECAB842FCA862DC90BD433DD9",
+          "id": "A1CE4E07D8D140399EDCC198031652A1",
           "name": "Real-time Online",
           "displayName": "Real-time Online",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Real-time Online",
           "template": "Delivery Type",
           "slug": "real-time-online",
           "fields": {
-            "sisId": "RTOL",
+            "sisId": "18",
             "name": "Real-time Online",
-            "Created": "20250515T014512Z",
-            "Updated": "20250515T014512Z"
+            "Created": "20250807T002654Z",
+            "Updated": "20250807T002654Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "RTOL"
+              "value": "18"
             },
             {
               "name": "Name",
@@ -1557,11 +1157,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014512Z"
+              "value": "20250807T002654Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014512Z"
+              "value": "20250807T002654Z"
             },
             {
               "name": "__Semantics",
@@ -1570,7 +1170,7 @@
           ]
         },
         {
-          "id": "4B2129EA5B994670B402D0294B3DD384",
+          "id": "6F7BAB3646044373A4437F9F15CADE10",
           "name": "Teleconferencing  Videoconferencing",
           "displayName": "Teleconferencing  Videoconferencing",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Teleconferencing  Videoconferencing",
@@ -1579,8 +1179,8 @@
           "fields": {
             "sisId": "22",
             "name": "Teleconferencing / Videoconferencing",
-            "Created": "20250721T151342Z",
-            "Updated": "20250721T151342Z"
+            "Created": "20250807T002655Z",
+            "Updated": "20250807T002655Z"
           },
           "rawFields": [
             {
@@ -1597,11 +1197,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151342Z"
+              "value": "20250807T002655Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151342Z"
+              "value": "20250807T002655Z"
             },
             {
               "name": "__Semantics",
@@ -1610,22 +1210,22 @@
           ]
         },
         {
-          "id": "CCD4F94380FE416A8BF0383464DE0950",
+          "id": "36EAC1075B624131B43EEEE3160D64BC",
           "name": "Traditional and Self Paced",
           "displayName": "Traditional and Self Paced",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Traditional and Self Paced",
           "template": "Delivery Type",
           "slug": "traditional-and-self-paced",
           "fields": {
-            "sisId": "TRAX",
+            "sisId": "21",
             "name": "Traditional and Self Paced",
-            "Created": "20250515T014513Z",
-            "Updated": "20250515T014513Z"
+            "Created": "20250807T002655Z",
+            "Updated": "20250807T002655Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "TRAX"
+              "value": "21"
             },
             {
               "name": "Name",
@@ -1637,11 +1237,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250515T014513Z"
+              "value": "20250807T002655Z"
             },
             {
               "name": "__Updated",
-              "value": "20250515T014513Z"
+              "value": "20250807T002655Z"
             },
             {
               "name": "__Semantics",
@@ -1650,7 +1250,7 @@
           ]
         },
         {
-          "id": "6E80A480CCF94381AAC8205D752453B6",
+          "id": "B8736BECAF6C427DB2045D8CC015528A",
           "name": "Work Experience",
           "displayName": "Work Experience",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Delivery Types/Work Experience",
@@ -1659,8 +1259,8 @@
           "fields": {
             "sisId": "23",
             "name": "Work Experience",
-            "Created": "20250721T151343Z",
-            "Updated": "20250721T151343Z"
+            "Created": "20250807T002656Z",
+            "Updated": "20250807T002656Z"
           },
           "rawFields": [
             {
@@ -1677,11 +1277,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250721T151343Z"
+              "value": "20250807T002656Z"
             },
             {
               "name": "__Updated",
-              "value": "20250721T151343Z"
+              "value": "20250807T002656Z"
             },
             {
               "name": "__Semantics",
@@ -1690,33 +1290,33 @@
           ]
         }
       ],
-      "count": 42,
-      "lastUpdated": "2025-08-03T07:04:58.361Z"
+      "count": 32,
+      "lastUpdated": "2025-08-11T15:45:33.267Z"
     },
     "campuses": {
       "items": [
         {
-          "id": "89054573FCA94114B61DB26BDCF6E245",
+          "id": "7AA9BAA9EFC3419A85B1F0D71C8B46F7",
           "name": "Airdrie",
           "displayName": "Airdrie",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Airdrie",
           "template": "Campus",
           "slug": "airdrie",
           "fields": {
-            "sisId": "AIRDRIE",
+            "sisId": "1",
             "name": "Airdrie",
             "province": "AB",
             "country": "Canada",
-            "address": "Provincial Courthouse                   #121, 104 - 1st Avenue NW",
+            "address": "Provincial Courthouse #121, 104 - 1st Avenue NW",
             "city": "Airdrie",
             "postalCode": "T4B 0R2",
-            "Created": "20241021T211543Z",
-            "Updated": "20241021T211543Z"
+            "Created": "20250807T002205Z",
+            "Updated": "20250807T002205Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "AIRDRIE"
+              "value": "1"
             },
             {
               "name": "Name",
@@ -1732,7 +1332,7 @@
             },
             {
               "name": "Address",
-              "value": "Provincial Courthouse                   #121, 104 - 1st Avenue NW"
+              "value": "Provincial Courthouse #121, 104 - 1st Avenue NW"
             },
             {
               "name": "City",
@@ -1748,11 +1348,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211543Z"
+              "value": "20250807T002205Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211543Z"
+              "value": "20250807T002205Z"
             },
             {
               "name": "__Semantics",
@@ -1761,27 +1361,22 @@
           ]
         },
         {
-          "id": "6A6DA3AEB4BE45A381B48B5087369F9D",
+          "id": "F6F70489CE5748649668855B3430EA0F",
           "name": "Banff",
           "displayName": "Banff",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Banff",
           "template": "Campus",
           "slug": "banff",
           "fields": {
-            "sisId": "BANFF",
+            "sisId": "8",
             "name": "Banff",
-            "province": "AB",
-            "country": "Canada",
-            "address": "Wolf & Bear Mall 229 Bear Street",
-            "city": "Banff",
-            "postalCode": "T1L 1A9",
-            "Created": "20241021T211543Z",
-            "Updated": "20241021T211544Z"
+            "Created": "20250807T002208Z",
+            "Updated": "20250807T002208Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "BANFF"
+              "value": "8"
             },
             {
               "name": "Name",
@@ -1789,23 +1384,23 @@
             },
             {
               "name": "Province",
-              "value": "AB"
+              "value": ""
             },
             {
               "name": "Country",
-              "value": "Canada"
+              "value": ""
             },
             {
               "name": "Address",
-              "value": "Wolf & Bear Mall 229 Bear Street"
+              "value": ""
             },
             {
               "name": "City",
-              "value": "Banff"
+              "value": ""
             },
             {
               "name": "Postal Code",
-              "value": "T1L 1A9"
+              "value": ""
             },
             {
               "name": "__Sortorder",
@@ -1813,11 +1408,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211543Z"
+              "value": "20250807T002208Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211544Z"
+              "value": "20250807T002208Z"
             },
             {
               "name": "__Semantics",
@@ -1826,7 +1421,7 @@
           ]
         },
         {
-          "id": "7E1A917FFA154ACCBF67378B9F17DD58",
+          "id": "3DC1FDF06B144B9A99C048FE703BA110",
           "name": "Calgary",
           "displayName": "Calgary",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Calgary",
@@ -1835,8 +1430,8 @@
           "fields": {
             "sisId": "20",
             "name": "Calgary",
-            "Created": "20250722T193549Z",
-            "Updated": "20250722T193549Z"
+            "Created": "20250807T002209Z",
+            "Updated": "20250807T002209Z"
           },
           "rawFields": [
             {
@@ -1873,11 +1468,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250722T193549Z"
+              "value": "20250807T002209Z"
             },
             {
               "name": "__Updated",
-              "value": "20250722T193549Z"
+              "value": "20250807T002209Z"
             },
             {
               "name": "__Semantics",
@@ -1886,157 +1481,26 @@
           ]
         },
         {
-          "id": "1ABEA0404A8A41609ED05CF4BF5C2ABE",
-          "name": "Calgary Downtown - Rocky Mountain Plaza",
-          "displayName": "Calgary Downtown - Rocky Mountain Plaza",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Calgary Downtown - Rocky Mountain Plaza",
-          "template": "Campus",
-          "slug": "calgary-downtown-rocky-mountain-plaza",
-          "fields": {
-            "sisId": "RMP",
-            "name": "Calgary Downtown - Rocky Mountain Plaza",
-            "province": "AB",
-            "country": "Canada",
-            "address": "345 - 6 Avenue SE",
-            "city": "Calgary",
-            "postalCode": "T2G 4V1",
-            "Created": "20250417T180209Z",
-            "Updated": "20250417T180210Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "RMP"
-            },
-            {
-              "name": "Name",
-              "value": "Calgary Downtown - Rocky Mountain Plaza"
-            },
-            {
-              "name": "Province",
-              "value": "AB"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "345 - 6 Avenue SE"
-            },
-            {
-              "name": "City",
-              "value": "Calgary"
-            },
-            {
-              "name": "Postal Code",
-              "value": "T2G 4V1"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250417T180209Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250417T180210Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "63F1CB30993E4849827034C6ADFE7F8B",
-          "name": "Calgary Downtown - West Campus",
-          "displayName": "Calgary Downtown - West Campus",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Calgary Downtown - West Campus",
-          "template": "Campus",
-          "slug": "calgary-downtown-west-campus",
-          "fields": {
-            "sisId": "WEST",
-            "name": "Calgary Downtown - West Campus",
-            "province": "AB",
-            "country": "Canada",
-            "address": "345 - 6 Avenue SE",
-            "city": "Calgary",
-            "postalCode": "T2G 4V1",
-            "Created": "20250417T180713Z",
-            "Updated": "20250417T180713Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "WEST"
-            },
-            {
-              "name": "Name",
-              "value": "Calgary Downtown - West Campus"
-            },
-            {
-              "name": "Province",
-              "value": "AB"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "345 - 6 Avenue SE"
-            },
-            {
-              "name": "City",
-              "value": "Calgary"
-            },
-            {
-              "name": "Postal Code",
-              "value": "T2G 4V1"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250417T180713Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250417T180713Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "405455B3871644E4855708E9D06C07A8",
+          "id": "7245E3E2E6334A7787A615D908F774B8",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Calgary Downtown Campus",
           "template": "Campus",
           "slug": "calgary-downtown-campus",
           "fields": {
-            "sisId": "MN",
+            "sisId": "4",
             "name": "Calgary Downtown Campus",
             "province": "AB",
             "country": "Canada",
-            "address": "345 - 6 Avenue SE",
             "city": "Calgary",
             "postalCode": "T2G 4V1",
-            "Created": "20241021T211547Z",
-            "Updated": "20241021T211547Z"
+            "Created": "20250807T002207Z",
+            "Updated": "20250807T002207Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "MN"
+              "value": "4"
             },
             {
               "name": "Name",
@@ -2052,7 +1516,7 @@
             },
             {
               "name": "Address",
-              "value": "345 - 6 Avenue SE"
+              "value": ""
             },
             {
               "name": "City",
@@ -2068,11 +1532,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211547Z"
+              "value": "20250807T002207Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211547Z"
+              "value": "20250807T002207Z"
             },
             {
               "name": "__Semantics",
@@ -2081,222 +1545,27 @@
           ]
         },
         {
-          "id": "F0B833FD7C414CD4B0EF53BDA4D52E22",
-          "name": "Calgary Downtown North",
-          "displayName": "Calgary Downtown North",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Calgary Downtown North",
-          "template": "Campus",
-          "slug": "calgary-downtown-north",
-          "fields": {
-            "sisId": "NORTH",
-            "name": "Calgary Downtown North",
-            "province": "AB",
-            "country": "Canada",
-            "address": "345 - 6 Avenue SE",
-            "city": "Calgary",
-            "postalCode": "T2G 4V1",
-            "Created": "20250417T180711Z",
-            "Updated": "20250417T180711Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "NORTH"
-            },
-            {
-              "name": "Name",
-              "value": "Calgary Downtown North"
-            },
-            {
-              "name": "Province",
-              "value": "AB"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "345 - 6 Avenue SE"
-            },
-            {
-              "name": "City",
-              "value": "Calgary"
-            },
-            {
-              "name": "Postal Code",
-              "value": "T2G 4V1"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250417T180711Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250417T180711Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "8C77A6CB2FBE419CB0CC102BC8F8B6AC",
-          "name": "Calgary Downtown South",
-          "displayName": "Calgary Downtown South",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Calgary Downtown South",
-          "template": "Campus",
-          "slug": "calgary-downtown-south",
-          "fields": {
-            "sisId": "SOUTH",
-            "name": "Calgary Downtown South",
-            "province": "AB",
-            "country": "Canada",
-            "address": "345 - 6 Avenue SE",
-            "city": "Calgary",
-            "postalCode": "T2G 4V1",
-            "Created": "20250417T180712Z",
-            "Updated": "20250506T222555Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "SOUTH"
-            },
-            {
-              "name": "Name",
-              "value": "Calgary Downtown South"
-            },
-            {
-              "name": "Province",
-              "value": "AB"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "345 - 6 Avenue SE"
-            },
-            {
-              "name": "City",
-              "value": "Calgary"
-            },
-            {
-              "name": "Postal Code",
-              "value": "T2G 4V1"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250417T180712Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250506T222555Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "1B2E2EAE03E445E48FFD22C8F177D985",
-          "name": "Canmore",
-          "displayName": "Canmore",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Canmore",
-          "template": "Campus",
-          "slug": "canmore",
-          "fields": {
-            "sisId": "CANMORE",
-            "name": "Canmore",
-            "province": "AB",
-            "country": "Canada",
-            "address": "Provincial Building                     800 Railway Avenue",
-            "city": "Canmore",
-            "postalCode": "T1W 1P1",
-            "Created": "20241021T211544Z",
-            "Updated": "20241021T211544Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "CANMORE"
-            },
-            {
-              "name": "Name",
-              "value": "Canmore"
-            },
-            {
-              "name": "Province",
-              "value": "AB"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "Provincial Building                     800 Railway Avenue"
-            },
-            {
-              "name": "City",
-              "value": "Canmore"
-            },
-            {
-              "name": "Postal Code",
-              "value": "T1W 1P1"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20241021T211544Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20241021T211544Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "52E763DEEC8746608050217958FF877B",
+          "id": "EC1DB9EEF3104509B3D13D197D0423A6",
           "name": "Cochrane",
           "displayName": "Cochrane",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Cochrane",
           "template": "Campus",
           "slug": "cochrane",
           "fields": {
-            "sisId": "COCHRANE",
+            "sisId": "2",
             "name": "Cochrane",
             "province": "AB",
             "country": "Canada",
-            "address": "209 2 Ave W",
+            "address": "305 1 Street E",
             "city": "Cochrane",
-            "postalCode": "T4C 1B2",
-            "Created": "20241021T211545Z",
-            "Updated": "20241021T211545Z"
+            "postalCode": "T4C 1Z3",
+            "Created": "20250807T002205Z",
+            "Updated": "20250807T002206Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "COCHRANE"
+              "value": "2"
             },
             {
               "name": "Name",
@@ -2312,7 +1581,7 @@
             },
             {
               "name": "Address",
-              "value": "209 2 Ave W"
+              "value": "305 1 Street E"
             },
             {
               "name": "City",
@@ -2320,7 +1589,7 @@
             },
             {
               "name": "Postal Code",
-              "value": "T4C 1B2"
+              "value": "T4C 1Z3"
             },
             {
               "name": "__Sortorder",
@@ -2328,11 +1597,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211545Z"
+              "value": "20250807T002205Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211545Z"
+              "value": "20250807T002206Z"
             },
             {
               "name": "__Semantics",
@@ -2341,22 +1610,22 @@
           ]
         },
         {
-          "id": "0C49C6D7F256468491C327526460556B",
+          "id": "1097807A22D442E79DA45F8A34088BCE",
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Distance Learning",
           "template": "Campus",
           "slug": "distance-learning",
           "fields": {
-            "sisId": "DISTANCE",
+            "sisId": "35",
             "name": "Distance Learning",
-            "Created": "20241021T211545Z",
-            "Updated": "20241021T211545Z"
+            "Created": "20250807T002209Z",
+            "Updated": "20250807T002210Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "DISTANCE"
+              "value": "35"
             },
             {
               "name": "Name",
@@ -2388,11 +1657,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211545Z"
+              "value": "20250807T002209Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211545Z"
+              "value": "20250807T002210Z"
             },
             {
               "name": "__Semantics",
@@ -2401,92 +1670,27 @@
           ]
         },
         {
-          "id": "F4D1F9C4273E455A8F6C7F07BE1989CD",
-          "name": "Franklin",
-          "displayName": "Franklin",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Franklin",
-          "template": "Campus",
-          "slug": "franklin",
-          "fields": {
-            "sisId": "FRANKLIN",
-            "name": "Franklin",
-            "province": "AB",
-            "country": "Canada",
-            "address": "2700 3 Avenue SE                        Main Floor of the Devry Institute",
-            "city": "Calgary",
-            "postalCode": "T2A 7W4",
-            "Created": "20241021T211546Z",
-            "Updated": "20241021T211546Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "FRANKLIN"
-            },
-            {
-              "name": "Name",
-              "value": "Franklin"
-            },
-            {
-              "name": "Province",
-              "value": "AB"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "2700 3 Avenue SE                        Main Floor of the Devry Institute"
-            },
-            {
-              "name": "City",
-              "value": "Calgary"
-            },
-            {
-              "name": "Postal Code",
-              "value": "T2A 7W4"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20241021T211546Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20241021T211546Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "CAE6D05777E148FCA61E785ECE6B11A3",
+          "id": "D200EE69FC7F45DE92B04175354828B4",
           "name": "High River",
           "displayName": "High River",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/High River",
           "template": "Campus",
           "slug": "high-river",
           "fields": {
-            "sisId": "HIGHRIVER",
+            "sisId": "3",
             "name": "High River",
             "province": "AB",
             "country": "Canada",
-            "address": "2nd Floor 710 Centre Street SE",
-            "city": "High River",
+            "address": "710 Centre Street SE",
+            "city": "High River ",
             "postalCode": "T1V 0H3",
-            "Created": "20241021T211546Z",
-            "Updated": "20241021T211546Z"
+            "Created": "20250807T002206Z",
+            "Updated": "20250807T002206Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "HIGHRIVER"
+              "value": "3"
             },
             {
               "name": "Name",
@@ -2502,11 +1706,11 @@
             },
             {
               "name": "Address",
-              "value": "2nd Floor 710 Centre Street SE"
+              "value": "710 Centre Street SE"
             },
             {
               "name": "City",
-              "value": "High River"
+              "value": "High River "
             },
             {
               "name": "Postal Code",
@@ -2518,11 +1722,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211546Z"
+              "value": "20250807T002206Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211546Z"
+              "value": "20250807T002206Z"
             },
             {
               "name": "__Semantics",
@@ -2531,27 +1735,27 @@
           ]
         },
         {
-          "id": "40EE5FDCB1DD42C3B7F2BB924E839DD4",
+          "id": "915982A5C1F74E5DA10C73BF23C843D4",
           "name": "Okotoks",
           "displayName": "Okotoks",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Okotoks",
           "template": "Campus",
           "slug": "okotoks",
           "fields": {
-            "sisId": "OKOTOKS",
+            "sisId": "5",
             "name": "Okotoks",
             "province": "AB",
             "country": "Canada",
             "address": "11 Elizabeth Street",
             "city": "Okotoks",
             "postalCode": "T1S 1A8",
-            "Created": "20241021T211548Z",
-            "Updated": "20241021T211548Z"
+            "Created": "20250807T002207Z",
+            "Updated": "20250807T002207Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "OKOTOKS"
+              "value": "5"
             },
             {
               "name": "Name",
@@ -2583,11 +1787,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211548Z"
+              "value": "20250807T002207Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211548Z"
+              "value": "20250807T002207Z"
             },
             {
               "name": "__Semantics",
@@ -2596,7 +1800,7 @@
           ]
         },
         {
-          "id": "86549A8B0E8646FA927C6FB16D85F50E",
+          "id": "4EA3862A6E3942519021EEBCD4ADC2EF",
           "name": "Online",
           "displayName": "Online",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Online",
@@ -2606,8 +1810,8 @@
             "sisId": "103",
             "name": "Online",
             "postalCode": "T2G 4V1",
-            "Created": "20250722T193551Z",
-            "Updated": "20250722T193551Z"
+            "Created": "20250807T002212Z",
+            "Updated": "20250807T002212Z"
           },
           "rawFields": [
             {
@@ -2644,11 +1848,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250722T193551Z"
+              "value": "20250807T002212Z"
             },
             {
               "name": "__Updated",
-              "value": "20250722T193551Z"
+              "value": "20250807T002212Z"
             },
             {
               "name": "__Semantics",
@@ -2657,26 +1861,23 @@
           ]
         },
         {
-          "id": "6100201F8DAB4C22BDA64C1DD9072DF4",
+          "id": "0C4492E5988346B79203983953EC25CA",
           "name": "Regional",
           "displayName": "Regional",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Regional",
           "template": "Campus",
           "slug": "regional",
           "fields": {
-            "sisId": "REGIONAL",
+            "sisId": "101",
             "name": "Regional",
-            "province": "AB",
-            "country": "Canada",
-            "city": "Airdrie",
             "postalCode": "T4B 0R2",
-            "Created": "20241021T211548Z",
-            "Updated": "20241021T211548Z"
+            "Created": "20250807T002212Z",
+            "Updated": "20250807T002212Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "REGIONAL"
+              "value": "101"
             },
             {
               "name": "Name",
@@ -2684,11 +1885,11 @@
             },
             {
               "name": "Province",
-              "value": "AB"
+              "value": ""
             },
             {
               "name": "Country",
-              "value": "Canada"
+              "value": ""
             },
             {
               "name": "Address",
@@ -2696,7 +1897,7 @@
             },
             {
               "name": "City",
-              "value": "Airdrie"
+              "value": ""
             },
             {
               "name": "Postal Code",
@@ -2708,11 +1909,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211548Z"
+              "value": "20250807T002212Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211548Z"
+              "value": "20250807T002212Z"
             },
             {
               "name": "__Semantics",
@@ -2721,7 +1922,7 @@
           ]
         },
         {
-          "id": "DD12A77162EF4A6383C0FEFE73FC28BF",
+          "id": "1E25674D58F8497CA3AF463F43A956F1",
           "name": "Rural",
           "displayName": "Rural",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Rural",
@@ -2730,8 +1931,8 @@
           "fields": {
             "sisId": "104",
             "name": "Rural",
-            "Created": "20250722T193552Z",
-            "Updated": "20250722T193552Z"
+            "Created": "20250807T002213Z",
+            "Updated": "20250807T002213Z"
           },
           "rawFields": [
             {
@@ -2768,11 +1969,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250722T193552Z"
+              "value": "20250807T002213Z"
             },
             {
               "name": "__Updated",
-              "value": "20250722T193552Z"
+              "value": "20250807T002213Z"
             },
             {
               "name": "__Semantics",
@@ -2781,27 +1982,27 @@
           ]
         },
         {
-          "id": "20395732EFC34B9F92A9163A98F78CFE",
+          "id": "3502481AC555477FA58E54297925F284",
           "name": "Strathmore",
           "displayName": "Strathmore",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Strathmore",
           "template": "Campus",
           "slug": "strathmore",
           "fields": {
-            "sisId": "STRATHMORE",
+            "sisId": "6",
             "name": "Strathmore",
             "province": "AB",
             "country": "Canada",
-            "address": "85 Lakeside Blvd",
+            "address": "#1 320 2 Street",
             "city": "Strathmore",
-            "postalCode": "T1P 1A1",
-            "Created": "20241021T211550Z",
-            "Updated": "20241021T211550Z"
+            "postalCode": "T1P 1K3",
+            "Created": "20250807T002208Z",
+            "Updated": "20250807T002208Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "STRATHMORE"
+              "value": "6"
             },
             {
               "name": "Name",
@@ -2817,7 +2018,7 @@
             },
             {
               "name": "Address",
-              "value": "85 Lakeside Blvd"
+              "value": "#1 320 2 Street"
             },
             {
               "name": "City",
@@ -2825,7 +2026,7 @@
             },
             {
               "name": "Postal Code",
-              "value": "T1P 1A1"
+              "value": "T1P 1K3"
             },
             {
               "name": "__Sortorder",
@@ -2833,11 +2034,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211550Z"
+              "value": "20250807T002208Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211550Z"
+              "value": "20250807T002208Z"
             },
             {
               "name": "__Semantics",
@@ -2846,23 +2047,22 @@
           ]
         },
         {
-          "id": "8E2CA6D1D6564FF0BD50CE922B2EAFB6",
+          "id": "5DB99420DFD34A7BB52F7693369F2F1C",
           "name": "Three Gorges Medical College",
           "displayName": "Three Gorges Medical College",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Three Gorges Medical College",
           "template": "Campus",
           "slug": "three-gorges-medical-college",
           "fields": {
-            "sisId": "TGMC",
+            "sisId": "85",
             "name": "Three Gorges Medical College",
-            "country": "China",
-            "Created": "20241021T211550Z",
-            "Updated": "20241021T211550Z"
+            "Created": "20250807T002210Z",
+            "Updated": "20250807T002210Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "TGMC"
+              "value": "85"
             },
             {
               "name": "Name",
@@ -2874,7 +2074,7 @@
             },
             {
               "name": "Country",
-              "value": "China"
+              "value": ""
             },
             {
               "name": "Address",
@@ -2894,11 +2094,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211550Z"
+              "value": "20250807T002210Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211550Z"
+              "value": "20250807T002210Z"
             },
             {
               "name": "__Semantics",
@@ -2907,27 +2107,22 @@
           ]
         },
         {
-          "id": "70C17E23202D41AEAE4DDFA7D3F363B9",
+          "id": "8FD84167A8D54A47A4BB63E69657CC85",
           "name": "Three Hills",
           "displayName": "Three Hills",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Three Hills",
           "template": "Campus",
           "slug": "three-hills",
           "fields": {
-            "sisId": "THREEHILLS",
+            "sisId": "86",
             "name": "Three Hills",
-            "province": "AB",
-            "country": "Canada",
-            "address": "Box 4000",
-            "city": "Three Hills",
-            "postalCode": "T0M 2N0",
-            "Created": "20241021T211551Z",
-            "Updated": "20241021T211551Z"
+            "Created": "20250807T002210Z",
+            "Updated": "20250807T002211Z"
           },
           "rawFields": [
             {
               "name": "SisId",
-              "value": "THREEHILLS"
+              "value": "86"
             },
             {
               "name": "Name",
@@ -2935,23 +2130,23 @@
             },
             {
               "name": "Province",
-              "value": "AB"
+              "value": ""
             },
             {
               "name": "Country",
-              "value": "Canada"
+              "value": ""
             },
             {
               "name": "Address",
-              "value": "Box 4000"
+              "value": ""
             },
             {
               "name": "City",
-              "value": "Three Hills"
+              "value": ""
             },
             {
               "name": "Postal Code",
-              "value": "T0M 2N0"
+              "value": ""
             },
             {
               "name": "__Sortorder",
@@ -2959,11 +2154,11 @@
             },
             {
               "name": "__Created",
-              "value": "20241021T211551Z"
+              "value": "20250807T002210Z"
             },
             {
               "name": "__Updated",
-              "value": "20241021T211551Z"
+              "value": "20250807T002211Z"
             },
             {
               "name": "__Semantics",
@@ -2972,72 +2167,7 @@
           ]
         },
         {
-          "id": "582DA01D241640E4806FB112A5E748A2",
-          "name": "Village Square Library VE",
-          "displayName": "Village Square Library VE",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Village Square Library VE",
-          "template": "Campus",
-          "slug": "village-square-library-ve",
-          "fields": {
-            "sisId": "VILLAGESQUAR",
-            "name": "Village Square Library (VE)",
-            "province": "AB",
-            "country": "Canada",
-            "address": "345 - 6 Avenue SE",
-            "city": "Calgary",
-            "postalCode": "T2G 4V1",
-            "Created": "20250516T174300Z",
-            "Updated": "20250516T174300Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "VILLAGESQUAR"
-            },
-            {
-              "name": "Name",
-              "value": "Village Square Library (VE)"
-            },
-            {
-              "name": "Province",
-              "value": "AB"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "345 - 6 Avenue SE"
-            },
-            {
-              "name": "City",
-              "value": "Calgary"
-            },
-            {
-              "name": "Postal Code",
-              "value": "T2G 4V1"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250516T174300Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250516T174300Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "C7658E62AC284F979C19BA406DE55A7D",
+          "id": "92BC7926689944459C5B0F53FECFAEB1",
           "name": "Yukon",
           "displayName": "Yukon",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Yukon",
@@ -3046,8 +2176,8 @@
           "fields": {
             "sisId": "100",
             "name": "Yukon",
-            "Created": "20250722T193550Z",
-            "Updated": "20250722T193550Z"
+            "Created": "20250807T002211Z",
+            "Updated": "20250807T002211Z"
           },
           "rawFields": [
             {
@@ -3084,76 +2214,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250722T193550Z"
+              "value": "20250807T002211Z"
             },
             {
               "name": "__Updated",
-              "value": "20250722T193550Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "71CE39ACA09D48FAADEFECE633B5E53D",
-          "name": "Yukon College",
-          "displayName": "Yukon College",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Campuses/Yukon College",
-          "template": "Campus",
-          "slug": "yukon-college",
-          "fields": {
-            "sisId": "YC",
-            "name": "Yukon College",
-            "province": "YT",
-            "country": "Canada",
-            "address": "500 College Drive  PO Box 2799",
-            "city": "Whitehorse",
-            "postalCode": "Y1A 5K4",
-            "Created": "20241021T211552Z",
-            "Updated": "20241021T211552Z"
-          },
-          "rawFields": [
-            {
-              "name": "SisId",
-              "value": "YC"
-            },
-            {
-              "name": "Name",
-              "value": "Yukon College"
-            },
-            {
-              "name": "Province",
-              "value": "YT"
-            },
-            {
-              "name": "Country",
-              "value": "Canada"
-            },
-            {
-              "name": "Address",
-              "value": "500 College Drive  PO Box 2799"
-            },
-            {
-              "name": "City",
-              "value": "Whitehorse"
-            },
-            {
-              "name": "Postal Code",
-              "value": "Y1A 5K4"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20241021T211552Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20241021T211552Z"
+              "value": "20250807T002211Z"
             },
             {
               "name": "__Semantics",
@@ -3162,13 +2227,13 @@
           ]
         }
       ],
-      "count": 23,
-      "lastUpdated": "2025-08-03T07:04:58.888Z"
+      "count": 15,
+      "lastUpdated": "2025-08-11T15:45:33.427Z"
     },
     "feeTypes": {
       "items": [
         {
-          "id": "F6539121495840E7924265CEE96569AF",
+          "id": "322363D788AD48BFBCEA0AE4C2968482",
           "name": "Domestic",
           "displayName": "Domestic",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Fee Types/Domestic",
@@ -3176,8 +2241,8 @@
           "slug": "domestic",
           "fields": {
             "name": "Domestic",
-            "Created": "20250723T164820Z",
-            "Updated": "20250723T164821Z"
+            "Created": "20250807T002657Z",
+            "Updated": "20250807T002657Z"
           },
           "rawFields": [
             {
@@ -3190,11 +2255,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250723T164820Z"
+              "value": "20250807T002657Z"
             },
             {
               "name": "__Updated",
-              "value": "20250723T164821Z"
+              "value": "20250807T002657Z"
             },
             {
               "name": "__Semantics",
@@ -3203,7 +2268,7 @@
           ]
         },
         {
-          "id": "A2239A20F0A9432797023F072F4FFF09",
+          "id": "5EFBBB9E078D46AA83FBC798D4FA6DB6",
           "name": "International",
           "displayName": "International",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Fee Types/International",
@@ -3211,8 +2276,8 @@
           "slug": "international",
           "fields": {
             "name": "International",
-            "Created": "20250723T164821Z",
-            "Updated": "20250723T164821Z"
+            "Created": "20250807T002657Z",
+            "Updated": "20250807T002657Z"
           },
           "rawFields": [
             {
@@ -3225,11 +2290,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250723T164821Z"
+              "value": "20250807T002657Z"
             },
             {
               "name": "__Updated",
-              "value": "20250723T164821Z"
+              "value": "20250807T002657Z"
             },
             {
               "name": "__Semantics",
@@ -3238,42 +2303,7 @@
           ]
         },
         {
-          "id": "E0BE9D7C5E42408991EF13819B30B907",
-          "name": "International Tuition",
-          "displayName": "International Tuition",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Fee Types/International Tuition",
-          "template": "Fee Type",
-          "slug": "international-tuition",
-          "fields": {
-            "name": "International Tuition",
-            "Created": "20250516T153935Z",
-            "Updated": "20250516T153936Z"
-          },
-          "rawFields": [
-            {
-              "name": "Name",
-              "value": "International Tuition"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250516T153935Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250516T153936Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "257D53B8302A452AAFCF9A2BEAC3ACB8",
+          "id": "CA31E0406EC34AB3BFBB113A37A38F46",
           "name": "LINC",
           "displayName": "LINC",
           "path": "/sitecore/content/BVC/BVC/Data/SisData/Fee Types/LINC",
@@ -3281,8 +2311,8 @@
           "slug": "linc",
           "fields": {
             "name": "LINC",
-            "Created": "20250723T164822Z",
-            "Updated": "20250723T164822Z"
+            "Created": "20250807T002657Z",
+            "Updated": "20250807T002658Z"
           },
           "rawFields": [
             {
@@ -3295,81 +2325,11 @@
             },
             {
               "name": "__Created",
-              "value": "20250723T164822Z"
+              "value": "20250807T002657Z"
             },
             {
               "name": "__Updated",
-              "value": "20250723T164822Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "DC01F29D630B4B38BF91773916F48E3A",
-          "name": "Materials Fee",
-          "displayName": "Materials Fee",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Fee Types/Materials Fee",
-          "template": "Fee Type",
-          "slug": "materials-fee",
-          "fields": {
-            "name": "Materials Fee",
-            "Created": "20250516T153936Z",
-            "Updated": "20250516T153936Z"
-          },
-          "rawFields": [
-            {
-              "name": "Name",
-              "value": "Materials Fee"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250516T153936Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250516T153936Z"
-            },
-            {
-              "name": "__Semantics",
-              "value": ""
-            }
-          ]
-        },
-        {
-          "id": "3782604DB5FA48648E5BC2AE0333753F",
-          "name": "Tuition",
-          "displayName": "Tuition",
-          "path": "/sitecore/content/BVC/BVC/Data/SisData/Fee Types/Tuition",
-          "template": "Fee Type",
-          "slug": "tuition",
-          "fields": {
-            "name": "Tuition",
-            "Created": "20250516T153937Z",
-            "Updated": "20250516T153937Z"
-          },
-          "rawFields": [
-            {
-              "name": "Name",
-              "value": "Tuition"
-            },
-            {
-              "name": "__Sortorder",
-              "value": ""
-            },
-            {
-              "name": "__Created",
-              "value": "20250516T153937Z"
-            },
-            {
-              "name": "__Updated",
-              "value": "20250516T153937Z"
+              "value": "20250807T002658Z"
             },
             {
               "name": "__Semantics",
@@ -3378,8 +2338,8 @@
           ]
         }
       ],
-      "count": 6,
-      "lastUpdated": "2025-08-03T07:04:59.138Z"
+      "count": 3,
+      "lastUpdated": "2025-08-11T15:45:33.531Z"
     },
     "timeBlocks": {
       "items": [
@@ -26515,7 +25475,7 @@
         }
       ],
       "count": 514,
-      "lastUpdated": "2025-08-03T07:05:05.963Z"
+      "lastUpdated": "2025-08-11T15:45:36.919Z"
     }
   }
 }

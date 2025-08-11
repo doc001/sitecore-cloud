@@ -1,23 +1,49 @@
-// src/app/study/extended-education/courses/[sisID]/page.tsx
+// src/app/study/open-studies/courses/[sisID]/page.tsx
 import { notFound } from "next/navigation";
 import { readFileSync } from "fs";
 import { join } from "path";
-import validCourses from "@/data/osValidCourses.json";
 
-// Static generation - no revalidation needed for static files
+// Import the valid courses JSON - make sure this path is correct
+const osValidCourses: string[] = require("@/data/osValidCourses.json");
+
+// Ensure static generation
 export const dynamic = 'force-static';
+export const dynamicParams = false;
 
 /**
- * Generate static params for all valid course SIS IDs
- * This ensures all courses get pre-built at build time
+ * CRITICAL: generateStaticParams must be exported and return all valid params
+ * This function runs at BUILD TIME to determine which pages to pre-generate
  */
-export async function generateStaticParams(): Promise<{ sisID: string }[]> {
-  // validCourses.json should be an array of strings (e.g. ["ACCT9101", "MATH101", ...])
-  return (validCourses as string[]).map((sisID) => ({ sisID }));
+export async function generateStaticParams() {
+  console.log('🚀 generateStaticParams called');
+  console.log('📋 Valid courses:', osValidCourses);
+  
+  // Validate the imported data
+  if (!Array.isArray(osValidCourses)) {
+    console.error('❌ osValidCourses is not an array:', typeof osValidCourses);
+    return [];
+  }
+
+  if (osValidCourses.length === 0) {
+    console.warn('⚠️ No valid courses found');
+    return [];
+  }
+
+  // Generate the static params
+  const params = osValidCourses.map((sisID) => {
+    if (!sisID || typeof sisID !== 'string') {
+      console.warn('⚠️ Invalid sisID:', sisID);
+      return null;
+    }
+    return { sisID: String(sisID) };
+  }).filter((param): param is { sisID: string } => param !== null);
+
+  console.log(`✅ Generated ${params.length} static params:`, params.slice(0, 5));
+  return params;
 }
 
 /**
- * Interface definitions for better type safety
+ * Interface definitions
  */
 interface CourseData {
   metadata: {
@@ -102,13 +128,12 @@ interface Fee {
 }
 
 /**
- * Utility function to format dates for display
+ * Utility functions
  */
 function formatDate(dateString: string): string {
   if (!dateString) return "N/A";
   
   try {
-    // Handle Sitecore format: 20250813T000000
     const year = dateString.substring(0, 4);
     const month = dateString.substring(4, 6);
     const day = dateString.substring(6, 8);
@@ -124,9 +149,6 @@ function formatDate(dateString: string): string {
   }
 }
 
-/**
- * Convert day number to day name
- */
 function convertDayNumberToName(dayNumber: string | number): string {
   const dayMap: { [key: string]: string } = {
     '1': 'Monday',
@@ -140,23 +162,16 @@ function convertDayNumberToName(dayNumber: string | number): string {
   return dayMap[dayNumber.toString()] || `Day ${dayNumber}`;
 }
 
-/**
- * Convert Sitecore time format to readable time with MST
- * Example: 20240101T090000 -> 9:00 AM MST
- */
 function formatTimeBlock(timeString: string): string {
   if (!timeString || !timeString.includes('T')) return timeString;
   
   try {
-    // Extract time portion after 'T'
     const timePortion = timeString.split('T')[1];
     if (!timePortion || timePortion.length < 6) return timeString;
     
-    // Parse hours, minutes, seconds
     const hours = parseInt(timePortion.substring(0, 2));
     const minutes = parseInt(timePortion.substring(2, 4));
     
-    // Convert to 12-hour format
     const period = hours >= 12 ? 'PM' : 'AM';
     const displayHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
     const displayMinutes = minutes > 0 ? `:${minutes.toString().padStart(2, '0')}` : '';
@@ -167,13 +182,9 @@ function formatTimeBlock(timeString: string): string {
   }
 }
 
-/**
- * Find tuition fee from the fees array (only looks at "Fees" containers)
- */
 function findTuitionFee(fees: Fee[]): Fee | null {
   if (!fees || fees.length === 0) return null;
 
-  // Only look at actual fee entries, not TimeBlock entries
   const actualFees = fees.filter(fee => 
     fee.containerName === 'Fees' && 
     fee.amount && 
@@ -182,22 +193,15 @@ function findTuitionFee(fees: Fee[]): Fee | null {
 
   if (actualFees.length === 0) return null;
 
-  // Look for tuition-related entries
   const tuitionFee = actualFees.find(fee => 
     fee.feeType?.slug?.toLowerCase().includes('tuition') ||
     fee.feeType?.name?.toLowerCase().includes('tuition') ||
     fee.feeItemName?.toLowerCase().includes('tuition')
   );
 
-  if (tuitionFee) return tuitionFee;
-
-  // Return the first fee with an amount if no specific tuition found
-  return actualFees[0];
+  return tuitionFee || actualFees[0];
 }
 
-/**
- * Find time block information from TimeBlock containers
- */
 function findTimeBlockInfo(fees: Fee[]): { day: string; startTime: string; endTime: string } | null {
   const timeBlockEntry = fees.find(fee => 
     fee.containerName === 'TimeBlock' && 
@@ -215,9 +219,6 @@ function findTimeBlockInfo(fees: Fee[]): { day: string; startTime: string; endTi
   };
 }
 
-/**
- * Calculate total fees for a course offering (only from "Fees" containers)
- */
 function calculateTotalFees(fees: Fee[]): number {
   return fees
     .filter(fee => fee.containerName === 'Fees')
@@ -227,61 +228,72 @@ function calculateTotalFees(fees: Fee[]): number {
     }, 0);
 }
 
-/**
- * Check if a fee amount is valid (non-zero and numeric)
- */
 function isValidFeeAmount(amount: string): boolean {
   const numAmount = parseFloat(amount);
   return !isNaN(numAmount) && numAmount > 0;
 }
 
 /**
- * Load course data from static JSON file
- * Optimized for SSG builds with better error handling
+ * Load course data - enhanced with better error handling
  */
 function loadCourseData(sisID: string): CourseData | null {
   try {
-    // Use absolute path for better reliability in SSG builds
-    const filePath = join(process.cwd(), 'src', 'data', 'courses', `course-${sisID}.json`);
-    const fileContent = readFileSync(filePath, 'utf8');
-    const parsedData = JSON.parse(fileContent) as CourseData;
+    console.log(`🔍 Loading course data for sisID: ${sisID}`);
     
-    // Validate essential data structure
-    if (!parsedData?.course?.sisID || parsedData.course.sisID !== sisID) {
-      console.warn(`SIS ID mismatch in file for ${sisID}`);
+    const filePath = join(process.cwd(), 'src', 'data', 'oScourses', `course-${sisID}.json`);
+    console.log(`📁 Looking for file: ${filePath}`);
+    
+    const fileContent = readFileSync(filePath, 'utf8');
+    
+    if (!fileContent.trim()) {
+      console.error(`❌ Empty file for course ${sisID}`);
       return null;
     }
+
+    const parsedData = JSON.parse(fileContent) as CourseData;
     
+    if (!parsedData?.course?.sisID) {
+      console.error(`❌ Invalid course data structure for ${sisID}`);
+      return null;
+    }
+
+    if (parsedData.course.sisID !== sisID) {
+      console.warn(`⚠️ SIS ID mismatch for ${sisID}. Expected: ${sisID}, Found: ${parsedData.course.sisID}`);
+    }
+    
+    console.log(`✅ Successfully loaded course data for ${sisID}`);
     return parsedData;
   } catch (error) {
-    // Only log in development to avoid build noise
-    if (process.env.NODE_ENV === 'development') {
-      console.error(`Failed to load course data for ${sisID}:`, error);
-    }
+    console.error(`❌ Failed to load course data for ${sisID}:`, error);
     return null;
   }
 }
 
 /**
- * Main page component - now using static JSON data
- * Optimized for SSG builds with Vercel deployment
+ * Main page component
  */
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ sisID: string }>;
-}) {
-  const { sisID } = await params;
+export default function CoursePage({ params }: { params: { sisID: string } }) {
+  console.log('🔄 CoursePage render started');
+  
+  const { sisID } = params;
+  console.log(`🎯 Rendering course page for sisID: ${sisID}`);
 
-  // Load course data from static JSON file
+  // Validate sisID is in our allowed list
+  if (!osValidCourses.includes(sisID)) {
+    console.warn(`⚠️ sisID ${sisID} not in valid courses list`);
+    return notFound();
+  }
+
+  // Load course data
   const courseData = loadCourseData(sisID);
 
-  // Enhanced validation for SSG builds
   if (!courseData?.course?.children?.length) {
+    console.warn(`⚠️ No course data or children found for ${sisID}`);
     return notFound();
   }
 
   const { course } = courseData;
+  console.log(`✅ Rendering course: ${course.name} with ${course.children.length} offerings`);
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
@@ -320,7 +332,6 @@ export default async function Page({
         
         <div className="space-y-6">
           {course.children.map((offering) => {
-            // Get tuition fee and time block information
             const tuitionFee = findTuitionFee(offering.fees);
             const timeBlockInfo = findTimeBlockInfo(offering.fees);
             const totalFees = calculateTotalFees(offering.fees);
@@ -401,7 +412,6 @@ export default async function Page({
                           <span className="text-sm text-gray-500">({tuitionFee.feeItemName})</span>
                         )}
                         
-                        {/* Time Block and Day Information */}
                         {timeBlockInfo && (
                           <div className="mt-2 space-y-1 text-sm">
                             {timeBlockInfo.day && (
@@ -514,33 +524,6 @@ export default async function Page({
                       </div>
                     )}
                   </div>
-                )}
-
-                {/* Debug Information (only in development) */}
-                {process.env.NODE_ENV === 'development' && (
-                  <details className="mt-4 text-xs text-gray-400">
-                    <summary className="cursor-pointer">Debug: Fee & TimeBlock Structure</summary>
-                    <div className="mt-2 space-y-2">
-                      <div>
-                        <strong>Tuition Fee:</strong>
-                        <pre className="p-2 bg-gray-100 rounded text-xs overflow-auto">
-                          {JSON.stringify(tuitionFee, null, 2)}
-                        </pre>
-                      </div>
-                      <div>
-                        <strong>Time Block Info:</strong>
-                        <pre className="p-2 bg-gray-100 rounded text-xs overflow-auto">
-                          {JSON.stringify(timeBlockInfo, null, 2)}
-                        </pre>
-                      </div>
-                      <div>
-                        <strong>All Fees:</strong>
-                        <pre className="p-2 bg-gray-100 rounded text-xs overflow-auto">
-                          {JSON.stringify(offering.fees, null, 2)}
-                        </pre>
-                      </div>
-                    </div>
-                  </details>
                 )}
               </div>
             );
