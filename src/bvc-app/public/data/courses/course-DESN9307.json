@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-13T17:57:10.279Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "DESN9307",
+    "courseName": "Digital Twin Design: People"
+  },
+  "course": {
+    "id": "3507C606FEA54692AE45FF853B2A4506",
+    "sisID": "DESN9307",
+    "name": "Digital Twin Design: People",
+    "children": [
+      {
+        "id": "D221AC57A52443CF9CC18B9759643ED0",
+        "name": "25AUGMNFS91",
+        "sisID": "222854",
+        "courseName": "",
+        "deliveryTypeId": "{AB98C091-3E88-437F-8E21-3869FAB80C8B}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "18",
+        "registrationStart": "20250808T000000",
+        "registrationEnd": "20250818T235959",
+        "startDate": "20250819T000000",
+        "endDate": "20250904T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "500.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "120N",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "758E7F88A97A456BA7CD834B04F2CAE3",
+              "name": "120N",
+              "displayName": "120N",
+              "endTime": "20250101T180000",
+              "startTime": "20250101T160000",
+              "sisId": "120N",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160051Z",
+              "Updated": "20250520T160051Z"
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "120Q",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "26E2ECD8351B4C2DB7D38135FD13334C",
+              "name": "120Q",
+              "displayName": "120Q",
+              "endTime": "20250101T170000",
+              "startTime": "20250101T150000",
+              "sisId": "120Q",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160100Z",
+              "Updated": "20250520T160100Z"
+            },
+            "day": "4"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 2
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 3,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 1
+    }
+  }
+}

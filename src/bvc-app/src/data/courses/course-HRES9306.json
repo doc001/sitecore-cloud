@@ -1,43 +1,48 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-03T07:05:41.917Z",
+    "generatedAt": "2025-08-13T17:57:17.220Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "HRES9306",
     "courseName": "Payroll Compliance Legislation"
   },
   "course": {
-    "id": "A4507F77D0F34360BBF29C3308282313",
+    "id": "4BB1B5FAFD1F411B89272C011839F034",
     "sisID": "HRES9306",
     "name": "Payroll Compliance Legislation",
     "children": [
       {
-        "id": "6B1F6D27BDE64BBBB57A38AD6C5BC8B5",
+        "id": "AD9140CA7D434A44A156B8647410E645",
         "name": "25SEPMNOS91",
         "sisID": "221924",
         "courseName": "",
-        "deliveryTypeId": "{B28CFCEF-E867-4297-85CC-0DDEAC9B3104}",
-        "campusId": "{405455B3-8716-44E4-8557-08E9D06C07A8}",
-        "deliveryType": null,
+        "deliveryTypeId": "{38A52F87-E8A6-4739-8DD6-DC29A3FDA55F}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
+          "name": "Online - Synchronous",
+          "displayName": "Online - Synchronous",
+          "slug": "online-synchronous"
+        },
         "campus": {
-          "id": "405455B3871644E4855708E9D06C07A8",
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
         },
         "hours": "39",
-        "registrationStart": "20250424T000000",
-        "registrationEnd": "20250826T235959",
-        "startDate": "20250903T000000",
-        "endDate": "20251126T000000",
+        "registrationStart": "20250424T000000Z",
+        "registrationEnd": "20250826T235959Z",
+        "startDate": "20250910T000000Z",
+        "endDate": "20251203T000000Z",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
             "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -53,7 +58,7 @@
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "191D75EE237747E9B6881F9927A46303",
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
               "name": "170S1",
               "displayName": "170S1",
               "endTime": "20250101T205000",
@@ -61,8 +66,8 @@
               "sisId": "170S1",
               "created": "",
               "updated": "",
-              "Created": "20250409T232346Z",
-              "Updated": "20250409T232346Z"
+              "Created": "20250520T160305Z",
+              "Updated": "20250520T160305Z"
             },
             "day": "3"
           }

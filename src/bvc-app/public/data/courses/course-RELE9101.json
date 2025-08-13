@@ -1,73 +1,31 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-03T07:06:00.402Z",
+    "generatedAt": "2025-08-13T17:57:26.273Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "RELE9101",
     "courseName": "Fundamentals of Real Estate"
   },
   "course": {
-    "id": "384D9712806C47118B6E5BA002AA793D",
+    "id": "3C4F9DAFD846429799DD036C19AEAD09",
     "sisID": "RELE9101",
     "name": "Fundamentals of Real Estate",
     "children": [
       {
-        "id": "94F8A5F11A5D42A8B74D76B0B44A1C5B",
-        "name": "25AUGMNOA94",
-        "sisID": "220558",
-        "courseName": "",
-        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
-        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
-        "deliveryType": null,
-        "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "110",
-        "registrationStart": "20250131T000000",
-        "registrationEnd": "20250804T235959",
-        "startDate": "20250813T000000",
-        "endDate": "20260213T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
-            "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "650.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "7270538CDA0E4CEBB9900C8B9EEFE43E",
+        "id": "C2D4EF10685B40869408520336069D2F",
         "name": "25DECMNOA94",
         "sisID": "221403",
         "courseName": "",
-        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
-        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
-        "deliveryType": null,
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
         "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
@@ -82,9 +40,9 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
             "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -106,15 +64,20 @@
         }
       },
       {
-        "id": "05332BFA333C4E2EA1D468590674A3F4",
+        "id": "76C219D7C87849388EC636E73535D06E",
         "name": "25NOVMNOA93",
         "sisID": "221399",
         "courseName": "",
-        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
-        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
-        "deliveryType": null,
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
         "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
@@ -129,9 +92,9 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
             "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -153,15 +116,20 @@
         }
       },
       {
-        "id": "D704E2509E0E433C89E238C19FF3B15B",
+        "id": "A6BD4A68851A4B95A83EE87193F62AF2",
         "name": "25OCTMNOA92",
         "sisID": "221395",
         "courseName": "",
-        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
-        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
-        "deliveryType": null,
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
         "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
@@ -176,9 +144,9 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
             "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -200,15 +168,20 @@
         }
       },
       {
-        "id": "B150BA914F9E47968FF1729ACD650CCE",
+        "id": "4AC963BBF79542189FA1CCC574B00C0C",
         "name": "25SEPMNOA91",
         "sisID": "221392",
         "courseName": "",
-        "deliveryTypeId": "{73DB4BB3-7C19-4BAD-BB66-CE697687EADE}",
-        "campusId": "{0C49C6D7-F256-4684-91C3-27526460556B}",
-        "deliveryType": null,
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
         "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
@@ -223,9 +196,9 @@
           {
             "containerName": "Fees",
             "feeItemName": "Tuition",
-            "feeTypeId": "{3782604D-B5FA-4864-8E5B-C2AE0333753F}",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
             "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
+              "id": "1351EB1B28D645AEA28EA8442152E100",
               "name": "Tuition",
               "displayName": "Tuition",
               "slug": "tuition"
@@ -248,10 +221,10 @@
       }
     ],
     "summary": {
-      "totalSections": 5,
-      "totalFees": 5,
+      "totalSections": 4,
+      "totalFees": 4,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 5
+      "sectionsWithFees": 4
     }
   }
 }
