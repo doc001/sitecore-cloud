@@ -2,9 +2,8 @@
 // scripts/buildCoursesComplete.mjs
 
 /**
- * Complete working course data builder for Sitecore XMC
+ * Complete working Extended Education Courses data builder for Sitecore XMC
  * Enhanced with proper pagination support and TimeBlock mapping
- * Uses correct Sitecore XMC GraphQL schema (hasNext, endCursor, default 10 items)
  * Includes lookup resolution and comprehensive fee data with nested pagination
  * Maps TimeBlock data from sis-data-lookup.json when containerName is "TimeBlock"
  */

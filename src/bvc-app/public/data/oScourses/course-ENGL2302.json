@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-13T17:57:53.122Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "ENGL2302",
+    "courseName": "Crime Narrative"
+  },
+  "course": {
+    "id": "7DCDB3C916D7444385C71A18B295662E",
+    "sisID": "ENGL2302",
+    "name": "Crime Narrative",
+    "credits": "3",
+    "children": [
+      {
+        "id": "9A985D9F35EE4651B0358113DEF8A623",
+        "name": "25SEPMNFS1",
+        "sisID": "221504",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250603T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "11546688",
+            "feeItemNameSanitized": "11546688",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D192DBCD36C549CD83B4EE04A97458E5",
+              "name": "80B1",
+              "displayName": "80B1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T093000",
+              "sisId": "80B1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160249Z",
+              "Updated": "20250520T160249Z"
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80B1",
+            "feeItemNameSanitized": "80B1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D192DBCD36C549CD83B4EE04A97458E5",
+              "name": "80B1",
+              "displayName": "80B1",
+              "endTime": "20250101T105000",
+              "startTime": "20250101T093000",
+              "sisId": "80B1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160249Z",
+              "Updated": "20250520T160249Z"
+            },
+            "day": "3"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 4,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 2
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 4,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 1
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-15T19:37:47.504Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "IIAD9201",
+    "courseName": "Supervisory Skills in Intercultural Teams"
+  },
+  "course": {
+    "id": "D1F8BA3623FD438BB7B4D30B9035DD0E",
+    "sisID": "IIAD9201",
+    "name": "Supervisory Skills in Intercultural Teams",
+    "children": [
+      {
+        "id": "ADFDB14710114C368A0AA5C479BAB843",
+        "name": "IIAD9201-208447",
+        "sisID": "IIAD9201-208447",
+        "courseName": "",
+        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
+        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryType": {
+          "id": "4773C629459B46F9A70478BEC70CF10B",
+          "name": "Combined Online",
+          "displayName": "Combined Online",
+          "slug": "combined-online"
+        },
+        "campus": {
+          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "12",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20230327T060000",
+        "endDate": "20230423T060000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeType": {
+              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "658.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 1,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}

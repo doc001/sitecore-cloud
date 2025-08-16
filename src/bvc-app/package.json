@@ -14,13 +14,18 @@
     "breadcrumbs:all": "node scripts/generateNavigationBreadcrumbs.mjs all",
     "prebuild": "npm run breadcrumbs:all",
     "predev": "npm run breadcrumbs:build",
+    "prelaunch:build": "node scripts/copy-folders.mjs",
     "postinstall": "flowbite-react patch",
+    "getWebflowData": "node scripts/fetch-webflow-collections.mjs",
     "generateCourses": "node scripts/export-valid-courses.mjs",
+    "generateOpenStudies": "node scripts/export-os-valid-courses.mjs",
     "generateMap": "node scripts/generateSiSData.mjs",
     "generateCourseData": "node scripts/buildCoursesComplete.mjs",
+    "generateOpenStudiesData": "node scripts/buildCoursesOpenStudiesComplete.mjs",
+    "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
-    "bvcapp-scripts": "npm run generateCourses && npm run generateMap && npm run generateCourseData && npm run generateNavigationBreadcrumbs",
-    "build": "npm run generateCourses && npm run generateMap && npm run generateCourseData && next build"
+    "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run prelaunch:build",
+    "build": "npm run bvcapp-scripts && next build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
@@ -55,6 +60,7 @@
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.8",
     "ts-node": "^10.9.2",
+    "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   }
 }

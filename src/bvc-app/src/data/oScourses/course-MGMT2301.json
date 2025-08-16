@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-13T17:58:10.866Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "MGMT2301",
+    "courseName": "Microsoft Excel"
+  },
+  "course": {
+    "id": "2348EACC0FE6497E8B808C1149E1330F",
+    "sisID": "MGMT2301",
+    "name": "Microsoft Excel",
+    "credits": "3",
+    "children": [
+      {
+        "id": "772A4D0853B2402BA7DA55D0093F6B45",
+        "name": "25SEPMNOA41",
+        "sisID": "221767",
+        "courseName": "",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20250604T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251218T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "1676.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "612.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 2,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}

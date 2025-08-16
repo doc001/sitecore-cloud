@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-15T19:38:20.186Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "NURS9216",
+    "courseName": "Practical Application of Essential Nursing Skills for Canadian Nurses"
+  },
+  "course": {
+    "id": "A251FEE3ACD241B18D275C36D405F813",
+    "sisID": "NURS9216",
+    "name": "Practical Application of Essential Nursing Skills for Canadian Nurses",
+    "children": [
+      {
+        "id": "5598D4FDDD814F37974B385D4D61BDC4",
+        "name": "NURS9216-217749",
+        "sisID": "NURS9216-217749",
+        "courseName": "",
+        "deliveryTypeId": "{5FDE7DCC-0915-4386-BD61-1FF6CF640FBE}",
+        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryType": {
+          "id": "5FDE7DCC09154386BD611FF6CF640FBE",
+          "name": "In Class",
+          "displayName": "In Class",
+          "slug": "in-class"
+        },
+        "campus": {
+          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "64",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20240813T060000",
+        "endDate": "20240827T060000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeType": {
+              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "658.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 1,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}

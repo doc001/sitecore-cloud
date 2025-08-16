@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-13T17:57:40.843Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "CHEM1901",
+    "courseName": "General Chemistry: Structure and Bonding"
+  },
+  "course": {
+    "id": "90F82B17009B4A50936DC9186813AFE1",
+    "sisID": "CHEM1901",
+    "name": "General Chemistry: Structure and Bonding",
+    "credits": "4",
+    "children": [
+      {
+        "id": "DA64832B31B34730866289F78D4ACAF8",
+        "name": "25SEPMNFS1",
+        "sisID": "221431",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "60",
+        "registrationStart": "20250603T000000",
+        "registrationEnd": "20250911T235959",
+        "startDate": "20250902T000000",
+        "endDate": "20251215T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "2112.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "708.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "11546621",
+            "feeItemNameSanitized": "11546621",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D9943AD95CCD4AFD8C5ED725F9BA9EC7",
+              "name": "80D1",
+              "displayName": "80D1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T123000",
+              "sisId": "80D1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160249Z",
+              "Updated": "20250520T160249Z"
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170H1",
+            "feeItemNameSanitized": "170H1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "BC752DDE245949C5BA2D7800895DDFCB",
+              "name": "170H1",
+              "displayName": "170H1",
+              "endTime": "20250101T155000",
+              "startTime": "20250101T130000",
+              "sisId": "170H1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160239Z",
+              "Updated": "20250520T160240Z"
+            },
+            "day": "5"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "80D1",
+            "feeItemNameSanitized": "80D1",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D9943AD95CCD4AFD8C5ED725F9BA9EC7",
+              "name": "80D1",
+              "displayName": "80D1",
+              "endTime": "20250101T135000",
+              "startTime": "20250101T123000",
+              "sisId": "80D1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160249Z",
+              "Updated": "20250520T160249Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 5,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 3
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 5,
+      "totalTimeBlocks": 3,
+      "sectionsWithFees": 1
+    }
+  }
+}

@@ -1,5 +1,3 @@
-// components/pages/Home.tsx
-
 'use client';
 
 import React from 'react';
