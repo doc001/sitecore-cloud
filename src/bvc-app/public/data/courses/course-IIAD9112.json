@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-15T19:37:47.057Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "IIAD9112",
+    "courseName": "Skills Enhancement for Newcomers - Communication"
+  },
+  "course": {
+    "id": "9655B53759B84DA4AD2E97B8F927568E",
+    "sisID": "IIAD9112",
+    "name": "Skills Enhancement for Newcomers - Communication",
+    "children": [
+      {
+        "id": "C8F6204F7BE6450A9F514E8AAEEA9D34",
+        "name": "IIAD9112-217119",
+        "sisID": "IIAD9112-217119",
+        "courseName": "",
+        "deliveryTypeId": "{883D7EFD-BABE-43BD-B73A-DCDD071CFE4F}",
+        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryType": {
+          "id": "883D7EFDBABE43BDB73ADCDD071CFE4F",
+          "name": "Online Self-Paced",
+          "displayName": "Online Self-Paced",
+          "slug": "online-self-paced"
+        },
+        "campus": {
+          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "20",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20240903T060000",
+        "endDate": "20241216T070000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeType": {
+              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "658.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "0683CE42891E4D38A9479C439AA3BB93",
+        "name": "IIAD9112-217618",
+        "sisID": "IIAD9112-217618",
+        "courseName": "",
+        "deliveryTypeId": "{ADF7050C-93C9-4AA9-9868-E60FC0B4ABAE}",
+        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryType": {
+          "id": "ADF7050C93C94AA99868E60FC0B4ABAE",
+          "name": "Any-time Online",
+          "displayName": "Any-time Online",
+          "slug": "any-time-online"
+        },
+        "campus": {
+          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "20",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20240507T060000",
+        "endDate": "20240819T060000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeType": {
+              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "658.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 2,
+      "totalFees": 2,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 2
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-15T19:37:03.717Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "ELLA9891",
+    "courseName": "LINC for Work"
+  },
+  "course": {
+    "id": "7AD2E549DB704E8AA4241B0EA55984B8",
+    "sisID": "ELLA9891",
+    "name": "LINC for Work",
+    "children": [
+      {
+        "id": "AB12AFBA061D421DA1B502769DB25781",
+        "name": "ELLA9891-214309",
+        "sisID": "ELLA9891-214309",
+        "courseName": "",
+        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
+        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryType": {
+          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
+          "name": "Blended",
+          "displayName": "Blended",
+          "slug": "blended"
+        },
+        "campus": {
+          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "10",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20240101T070000",
+        "endDate": "20240331T060000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeType": {
+              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "658.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "9EEA54D5CA164F37A04E2C080C7CED56",
+        "name": "ELLA9891-214310",
+        "sisID": "ELLA9891-214310",
+        "courseName": "",
+        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
+        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryType": {
+          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
+          "name": "Blended",
+          "displayName": "Blended",
+          "slug": "blended"
+        },
+        "campus": {
+          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "10",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20240401T060000",
+        "endDate": "20250331T060000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeType": {
+              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "658.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 2,
+      "totalFees": 2,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 2
+    }
+  }
+}

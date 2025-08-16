@@ -12,7 +12,7 @@ const SCOPE = 'api://a4cfac5e-d4c2-4452-bf83-cdc5f8df0daa/.default';
 const ALLOWED_ORIGINS = [
   'https://bvc-dev.webflow.io',
   'https://bvc-test-jun.webflow.io',
-  'https://your-production-site.webflow.io', // Add your production domain
+  'https://bvc-test-aug.webflow.io',
   'http://localhost:3000', // For local development
   'https://nextjs-jamstack-dev.vercel.app' // Your own domain
 ];

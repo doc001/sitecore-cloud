@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "generatedAt": "2025-08-15T19:36:43.150Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "DATA9103",
+    "courseName": "Database Theory"
+  },
+  "course": {
+    "id": "B24279D2104D46609D5E4077258F85F4",
+    "sisID": "DATA9103",
+    "name": "Database Theory",
+    "children": [
+      {
+        "id": "40C14A1542504C5CBE861BC250BD8AA5",
+        "name": "DATA9103-207283",
+        "sisID": "DATA9103-207283",
+        "courseName": "",
+        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
+        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryType": {
+          "id": "4773C629459B46F9A70478BEC70CF10B",
+          "name": "Combined Online",
+          "displayName": "Combined Online",
+          "slug": "combined-online"
+        },
+        "campus": {
+          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "22",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20220920T060000",
+        "endDate": "20220929T060000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeType": {
+              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "658.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 1,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}
