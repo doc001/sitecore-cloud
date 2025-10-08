@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-13T17:57:21.723Z",
+    "generatedAt": "2025-10-08T20:32:47.050Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9204",
@@ -12,9 +12,9 @@
     "name": "Intramuscular And Intradermal Injections",
     "children": [
       {
-        "id": "FF983134221B4764AB3DD3EA90CAEB89",
-        "name": "25OCTMNBA92",
-        "sisID": "221926",
+        "id": "7289244CCF4F4EB0BE1EA66C4E4802DD",
+        "name": "25NOVMNBA93",
+        "sisID": "224172",
         "courseName": "",
         "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
         "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
@@ -32,9 +32,9 @@
         },
         "hours": "7",
         "registrationStart": "20250424T000000",
-        "registrationEnd": "20251019T235959",
-        "startDate": "20251020T000000",
-        "endDate": "20251101T000000",
+        "registrationEnd": "20251109T235959",
+        "startDate": "20251110T000000",
+        "endDate": "20251122T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -53,7 +53,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170G1",
+            "feeItemName": "170G1-11905542",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -85,9 +85,9 @@
         }
       },
       {
-        "id": "1A3E0B79790945CB9A004BF0D372D814",
-        "name": "25SEPMNBA91",
-        "sisID": "221925",
+        "id": "C11C647929524F278ED274EB4B0CB1B8",
+        "name": "26APRMNBA92",
+        "sisID": "223373",
         "courseName": "",
         "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
         "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
@@ -104,10 +104,10 @@
           "slug": "calgary-downtown-campus"
         },
         "hours": "7",
-        "registrationStart": "20250424T000000",
-        "registrationEnd": "20250907T235959",
-        "startDate": "20250908T000000",
-        "endDate": "20250920T000000",
+        "registrationStart": "20250918T000000",
+        "registrationEnd": "20260407T235959",
+        "startDate": "20260408T000000",
+        "endDate": "20260418T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -120,27 +120,100 @@
               "displayName": "Tuition",
               "slug": "tuition"
             },
-            "amount": "239.000",
+            "amount": "249.000",
             "timeBlock": null,
             "day": ""
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170G1",
+            "feeItemName": "180C-11910578",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "9FB521F6736D4322BFB903A1FB8554AD",
-              "name": "170G1",
-              "displayName": "170G1",
-              "endTime": "20250101T115000",
+              "id": "C0AD7869C4CD49E681B9BADAA3676407",
+              "name": "180C",
+              "displayName": "180C",
+              "endTime": "20250101T120000",
               "startTime": "20250101T090000",
-              "sisId": "170G1",
+              "sisId": "180C",
               "created": "",
               "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20250520T160238Z"
+              "Created": "20250520T160024Z",
+              "Updated": "20250520T160024Z"
+            },
+            "day": "6"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "9574BBFED5E846D2BDA5FAE3014CEA98",
+        "name": "26MARMNBA91",
+        "sisID": "223372",
+        "courseName": "",
+        "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "B15831A51AA34904BA96EAA5086F90B7",
+          "name": "Blended - Asynchronous",
+          "displayName": "Blended - Asynchronous",
+          "slug": "blended-asynchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "7",
+        "registrationStart": "20250918T000000",
+        "registrationEnd": "20260310T235959",
+        "startDate": "20260318T000000",
+        "endDate": "20260328T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "249.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "180C-11910577",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "C0AD7869C4CD49E681B9BADAA3676407",
+              "name": "180C",
+              "displayName": "180C",
+              "endTime": "20250101T120000",
+              "startTime": "20250101T090000",
+              "sisId": "180C",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160024Z",
+              "Updated": "20250520T160024Z"
             },
             "day": "6"
           }
@@ -159,10 +232,10 @@
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 2
+      "totalSections": 3,
+      "totalFees": 6,
+      "totalTimeBlocks": 3,
+      "sectionsWithFees": 3
     }
   }
 }

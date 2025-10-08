@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-13T17:57:23.372Z",
+    "generatedAt": "2025-10-08T20:32:49.453Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9502",
@@ -64,9 +64,61 @@
         }
       },
       {
-        "id": "45F2C86AB8D34B3DA4731C2715375088",
-        "name": "25SEPMNOA91",
-        "sisID": "221416",
+        "id": "D26DB7F54E304FCFA90207DA28D0F0E7",
+        "name": "26APRMNOA92",
+        "sisID": "223377",
+        "courseName": "",
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20250919T000000",
+        "registrationEnd": "20260407T235959",
+        "startDate": "20260408T000000",
+        "endDate": "20260808T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "429.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "CDAED4AF47F546DBAA05C619B76FA1BC",
+        "name": "26FEBMNOA91",
+        "sisID": "223376",
         "courseName": "",
         "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
         "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
@@ -83,10 +135,10 @@
           "slug": "distance-learning"
         },
         "hours": "45",
-        "registrationStart": "20250424T000000",
-        "registrationEnd": "20250909T235959",
-        "startDate": "20250910T000000",
-        "endDate": "20260110T000000",
+        "registrationStart": "20250919T000000",
+        "registrationEnd": "20260210T235959",
+        "startDate": "20260211T000000",
+        "endDate": "20260611T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -117,10 +169,10 @@
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 2,
+      "totalSections": 3,
+      "totalFees": 3,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      "sectionsWithFees": 3
     }
   }
 }

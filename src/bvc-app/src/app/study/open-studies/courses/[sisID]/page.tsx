@@ -1,45 +1,106 @@
 // src/app/study/open-studies/courses/[sisID]/page.tsx
 import { notFound } from "next/navigation";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 
-// Import the valid courses JSON - make sure this path is correct
-const osValidCourses: string[] = require("@/data/osValidCourses.json");
-
-// Ensure static generation
+// Static generation configuration
 export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 /**
- * CRITICAL: generateStaticParams must be exported and return all valid params
- * This function runs at BUILD TIME to determine which pages to pre-generate
+ * Safely load and validate the course list with fallback handling
+ * Returns a fallback course ID if the main list is empty or invalid
  */
-export async function generateStaticParams() {
-  console.log('🚀 generateStaticParams called');
-  console.log('📋 Valid courses:', osValidCourses);
-  
-  // Validate the imported data
-  if (!Array.isArray(osValidCourses)) {
-    console.error('❌ osValidCourses is not an array:', typeof osValidCourses);
-    return [];
-  }
-
-  if (osValidCourses.length === 0) {
-    console.warn('⚠️ No valid courses found');
-    return [];
-  }
-
-  // Generate the static params
-  const params = osValidCourses.map((sisID) => {
-    if (!sisID || typeof sisID !== 'string') {
-      console.warn('⚠️ Invalid sisID:', sisID);
-      return null;
+function loadValidCoursesWithFallback(): { courses: string[], hasFallback: boolean } {
+  try {
+    const filePath = join(process.cwd(), 'src', 'data', 'osValidCourses.json');
+    
+    // Check if file exists
+    if (!existsSync(filePath)) {
+      console.warn('⚠️ osValidCourses.json not found, using fallback');
+      return { courses: ['no-courses-available'], hasFallback: true };
     }
-    return { sisID: String(sisID) };
-  }).filter((param): param is { sisID: string } => param !== null);
 
-  console.log(`✅ Generated ${params.length} static params:`, params.slice(0, 5));
+    const fileContent = readFileSync(filePath, 'utf8');
+    
+    // Check if file is empty
+    if (!fileContent.trim()) {
+      console.warn('⚠️ osValidCourses.json is empty, using fallback');
+      return { courses: ['no-courses-available'], hasFallback: true };
+    }
+
+    const validCourses = JSON.parse(fileContent);
+
+    // Validate structure
+    if (!Array.isArray(validCourses)) {
+      console.error('❌ osValidCourses.json is not an array, using fallback');
+      return { courses: ['no-courses-available'], hasFallback: true };
+    }
+
+    // Filter out invalid entries
+    const filteredCourses = validCourses.filter(course => 
+      course && typeof course === 'string' && course.trim().length > 0
+    );
+
+    if (filteredCourses.length === 0) {
+      console.warn('⚠️ No valid courses found in osValidCourses.json, using fallback');
+      return { courses: ['no-courses-available'], hasFallback: true };
+    }
+
+    console.log(`✅ Loaded ${filteredCourses.length} valid courses for SSG`);
+    return { courses: filteredCourses, hasFallback: false };
+
+  } catch (error) {
+    console.error('❌ Error loading osValidCourses.json, using fallback:', error);
+    return { courses: ['no-courses-available'], hasFallback: true };
+  }
+}
+
+/**
+ * Generate static params with fallback support
+ * Always returns at least one param to allow build to succeed
+ */
+export async function generateStaticParams(): Promise<{ sisID: string }[]> {
+  console.log('🚀 generateStaticParams called for course pages');
+  
+  const { courses, hasFallback } = loadValidCoursesWithFallback();
+
+  if (hasFallback) {
+    console.log('📦 Using fallback page for empty course data');
+  }
+
+  // Generate params - will always have at least one entry
+  const params = courses.map((sisID) => ({ sisID: sisID.trim() }));
+
+  console.log(`📦 Generated ${params.length} static params for course pages`);
   return params;
+}
+
+/**
+ * Create fallback course data for when no courses are available
+ */
+function createFallbackCourseData(): CourseData {
+  return {
+    metadata: {
+      generatedAt: new Date().toISOString(),
+      version: "1.0.0",
+      source: "fallback",
+      sisID: "no-courses-available",
+      courseName: "No Courses Available"
+    },
+    course: {
+      id: "fallback-course",
+      sisID: "no-courses-available",
+      name: "Course Information Currently Unavailable",
+      children: [],
+      summary: {
+        totalSections: 0,
+        totalFees: 0,
+        totalTimeBlocks: 0,
+        sectionsWithFees: 0
+      }
+    }
+  };
 }
 
 /**
@@ -234,19 +295,26 @@ function isValidFeeAmount(amount: string): boolean {
 }
 
 /**
- * Load course data - enhanced with better error handling
+ * Load course data with fallback support
  */
 function loadCourseData(sisID: string): CourseData | null {
+  // Handle fallback case
+  if (sisID === 'no-courses-available') {
+    return createFallbackCourseData();
+  }
+
   try {
-    console.log(`🔍 Loading course data for sisID: ${sisID}`);
-    
     const filePath = join(process.cwd(), 'src', 'data', 'oScourses', `course-${sisID}.json`);
-    console.log(`📁 Looking for file: ${filePath}`);
     
+    if (!existsSync(filePath)) {
+      console.error(`❌ Course data file not found: course-${sisID}.json`);
+      return null;
+    }
+
     const fileContent = readFileSync(filePath, 'utf8');
     
     if (!fileContent.trim()) {
-      console.error(`❌ Empty file for course ${sisID}`);
+      console.error(`❌ Course data file is empty: course-${sisID}.json`);
       return null;
     }
 
@@ -257,11 +325,11 @@ function loadCourseData(sisID: string): CourseData | null {
       return null;
     }
 
-    if (parsedData.course.sisID !== sisID) {
-      console.warn(`⚠️ SIS ID mismatch for ${sisID}. Expected: ${sisID}, Found: ${parsedData.course.sisID}`);
+    if (!parsedData.course.children || !Array.isArray(parsedData.course.children)) {
+      console.error(`❌ No course offerings found for ${sisID}`);
+      return null;
     }
     
-    console.log(`✅ Successfully loaded course data for ${sisID}`);
     return parsedData;
   } catch (error) {
     console.error(`❌ Failed to load course data for ${sisID}:`, error);
@@ -270,17 +338,137 @@ function loadCourseData(sisID: string): CourseData | null {
 }
 
 /**
- * Main page component
+ * Fallback page component for when no courses are available
  */
-export default function CoursePage({ params }: { params: { sisID: string } }) {
-  console.log('🔄 CoursePage render started');
-  
-  const { sisID } = params;
-  console.log(`🎯 Rendering course page for sisID: ${sisID}`);
+function NoCoursesAvailablePage() {
+  return (
+    <div className="p-8 max-w-6xl mx-auto">
+      <div className="text-center py-16">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+            <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            No Courses Available
+          </h1>
+          
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Course information is currently being updated. Please check back later for available course offerings.
+          </p>
+        </div>
+
+        {/* Information Cards */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+            <div className="text-blue-600 mb-3">
+              <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Coming Soon</h3>
+            <p className="text-gray-600 text-sm">
+              New courses are being added regularly. Check back for updates.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+            <div className="text-green-600 mb-3">
+              <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Stay Informed</h3>
+            <p className="text-gray-600 text-sm">
+              Sign up for notifications about new course offerings and registration dates.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+            <div className="text-purple-600 mb-3">
+              <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                      d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Need Help?</h3>
+            <p className="text-gray-600 text-sm">
+              Contact our academic advisors for guidance on course planning and registration.
+            </p>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="bg-gray-50 rounded-lg p-8 max-w-3xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+            What You Can Do Now
+          </h2>
+          
+          <div className="space-y-4 text-left">
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">1</div>
+              <div>
+                <h3 className="font-medium text-gray-900">Browse Other Programs</h3>
+                <p className="text-gray-600 text-sm">Explore our other academic programs and offerings while course data is being updated.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">2</div>
+              <div>
+                <h3 className="font-medium text-gray-900">Contact Academic Services</h3>
+                <p className="text-gray-600 text-sm">Speak with an advisor about your academic goals and course planning.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">3</div>
+              <div>
+                <h3 className="font-medium text-gray-900">Check Back Later</h3>
+                <p className="text-gray-600 text-sm">Course information is updated regularly. Please visit again soon.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-12 pt-6 border-t border-gray-200 text-sm text-gray-500 text-center">
+        <p>
+          Page generated: {new Date().toLocaleString()} | 
+          Status: Course data updating | 
+          Check back for updates
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Main page component with fallback support
+ */
+export default async function CoursePage({
+  params,
+}: {
+  params: Promise<{ sisID: string }>;
+}) {
+  const { sisID } = await params;
+
+  // Handle fallback case - show "no courses available" page
+  if (sisID === 'no-courses-available') {
+    return <NoCoursesAvailablePage />;
+  }
 
   // Validate sisID is in our allowed list
-  if (!osValidCourses.includes(sisID)) {
-    console.warn(`⚠️ sisID ${sisID} not in valid courses list`);
+  const { courses } = loadValidCoursesWithFallback();
+  if (!courses.includes(sisID)) {
+    console.warn(`⚠️ Requested sisID ${sisID} not in valid courses list`);
     return notFound();
   }
 
@@ -288,12 +476,11 @@ export default function CoursePage({ params }: { params: { sisID: string } }) {
   const courseData = loadCourseData(sisID);
 
   if (!courseData?.course?.children?.length) {
-    console.warn(`⚠️ No course data or children found for ${sisID}`);
+    console.warn(`⚠️ No valid course data found for ${sisID}`);
     return notFound();
   }
 
   const { course } = courseData;
-  console.log(`✅ Rendering course: ${course.name} with ${course.children.length} offerings`);
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
