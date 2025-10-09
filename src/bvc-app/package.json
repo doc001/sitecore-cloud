@@ -14,7 +14,7 @@
     "breadcrumbs:all": "node scripts/generateNavigationBreadcrumbs.mjs all",
     "prebuild": "npm run breadcrumbs:all",
     "predev": "npm run breadcrumbs:build",
-    "prelaunch:build": "node scripts/copy-folders.mjs",
+    "prelaunch:build": "npm run createCourses && node scripts/copy-folders.mjs",
     "postinstall": "flowbite-react patch",
     "getWebflowData": "node scripts/fetch-webflow-collections.mjs",
     "parsePrograms": "node scripts/parsePrograms.mjs",
@@ -27,7 +27,7 @@
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
     "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run prelaunch:build",
-    "build": "npm run bvcapp-scripts && npm run createCourses && next build"
+    "build": "npm run bvcapp-scripts && next build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
