@@ -15,6 +15,7 @@
     "deploy:bvcapp": "cd src/bvc-app && vercel --scope=bvc-marketing-its --prod"
   },
   "devDependencies": {
+    "node-schedule": "^2.1.1",
     "turbo": "^2.5.4"
   }
 }
