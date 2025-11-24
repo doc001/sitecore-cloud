@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generatedAt": "2025-11-12T22:20:55.498Z",
+    "generatedAt": "2025-11-24T17:16:44.776Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Course Index",
-    "totalCourses": 67
+    "totalCourses": 69
   },
   "courses": [
     {
@@ -209,10 +209,10 @@
       "name": "Interpersonal Relationships And Communication Skills",
       "fileName": "course-COMM1101.json",
       "summary": {
-        "totalSections": 9,
-        "totalFees": 25,
-        "totalTimeBlocks": 7,
-        "sectionsWithFees": 9,
+        "totalSections": 11,
+        "totalFees": 30,
+        "totalTimeBlocks": 8,
+        "sectionsWithFees": 11,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -385,10 +385,10 @@
       "name": "English Composition",
       "fileName": "course-ENGL1201.json",
       "summary": {
-        "totalSections": 10,
-        "totalFees": 29,
+        "totalSections": 12,
+        "totalFees": 33,
         "totalTimeBlocks": 9,
-        "sectionsWithFees": 10,
+        "sectionsWithFees": 12,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -554,14 +554,58 @@
       }
     },
     {
+      "sisID": "HMSV3201",
+      "name": "Program Design and Evaluation",
+      "fileName": "course-HMSV3201.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 3,
+        "totalTimeBlocks": 1,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": true,
+        "containers": [
+          "Fees",
+          "TimeBlock"
+        ],
+        "feeTypes": [
+          "International Tuition",
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "HMSV3501",
+      "name": "Case Management",
+      "fileName": "course-HMSV3501.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 3,
+        "totalTimeBlocks": 1,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": true,
+        "containers": [
+          "Fees",
+          "TimeBlock"
+        ],
+        "feeTypes": [
+          "International Tuition",
+          "Tuition"
+        ]
+      }
+    },
+    {
       "sisID": "HRES1101",
       "name": "Organizational Behaviour",
       "fileName": "course-HRES1101.json",
       "summary": {
-        "totalSections": 8,
-        "totalFees": 25,
-        "totalTimeBlocks": 9,
-        "sectionsWithFees": 8,
+        "totalSections": 6,
+        "totalFees": 20,
+        "totalTimeBlocks": 8,
+        "sectionsWithFees": 6,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -580,10 +624,10 @@
       "name": "Introduction to Human Resources",
       "fileName": "course-HRES2201.json",
       "summary": {
-        "totalSections": 6,
-        "totalFees": 19,
-        "totalTimeBlocks": 7,
-        "sectionsWithFees": 6,
+        "totalSections": 5,
+        "totalFees": 16,
+        "totalTimeBlocks": 6,
+        "sectionsWithFees": 5,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -667,10 +711,10 @@
       "name": "Introduction to Indigenous Studies",
       "fileName": "course-INDG1101.json",
       "summary": {
-        "totalSections": 14,
-        "totalFees": 36,
+        "totalSections": 15,
+        "totalFees": 38,
         "totalTimeBlocks": 8,
-        "sectionsWithFees": 14,
+        "sectionsWithFees": 15,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -887,10 +931,10 @@
       "name": "Introduction to Management",
       "fileName": "course-MGMT1101.json",
       "summary": {
-        "totalSections": 7,
-        "totalFees": 23,
-        "totalTimeBlocks": 9,
-        "sectionsWithFees": 7,
+        "totalSections": 4,
+        "totalFees": 12,
+        "totalTimeBlocks": 4,
+        "sectionsWithFees": 4,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -909,10 +953,10 @@
       "name": "Introduction to Organizations and Sustainability",
       "fileName": "course-MGMT1102.json",
       "summary": {
-        "totalSections": 6,
-        "totalFees": 19,
-        "totalTimeBlocks": 7,
-        "sectionsWithFees": 6,
+        "totalSections": 5,
+        "totalFees": 16,
+        "totalTimeBlocks": 6,
+        "sectionsWithFees": 5,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -931,10 +975,10 @@
       "name": "Business Communication",
       "fileName": "course-MGMT1201.json",
       "summary": {
-        "totalSections": 11,
-        "totalFees": 37,
-        "totalTimeBlocks": 15,
-        "sectionsWithFees": 11,
+        "totalSections": 9,
+        "totalFees": 30,
+        "totalTimeBlocks": 12,
+        "sectionsWithFees": 9,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -1105,10 +1149,10 @@
       "name": "Introduction to Marketing",
       "fileName": "course-MKTG1101.json",
       "summary": {
-        "totalSections": 7,
-        "totalFees": 23,
-        "totalTimeBlocks": 9,
-        "sectionsWithFees": 7,
+        "totalSections": 4,
+        "totalFees": 14,
+        "totalTimeBlocks": 6,
+        "sectionsWithFees": 4,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -1347,10 +1391,10 @@
       "name": "Sociology of the Family",
       "fileName": "course-SOCI1201.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 6,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 2,
+        "totalSections": 3,
+        "totalFees": 9,
+        "totalTimeBlocks": 3,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
