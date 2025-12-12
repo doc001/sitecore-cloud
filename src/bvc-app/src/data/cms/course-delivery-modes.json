@@ -9,14 +9,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Blended Asynchronous (BA)",
-        "slug": "blended-asynchronous-ba",
         "code": "BA",
         "description": "Students and instructors participate online and meet in a classroom. There are no specific meeting times.",
         "material-icon-symbol": "jamboard_kiosk",
-        "how": "Instructor-led",
+        "where": "Online or classroom",
         "when": "Any time",
-        "where": "Online or classroom"
+        "how": "Instructor-led",
+        "name": "Blended Asynchronous (BA)",
+        "slug": "blended-asynchronous-ba"
       }
     },
     {
@@ -28,14 +28,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Online, Asynchronous (OA)",
-        "slug": "online-asynchronous",
         "code": "OA",
         "description": "Students and instructors participate online. There are no set meeting times.",
-        "when": "Any time",
+        "material-icon-symbol": "captive_portal",
         "where": "Online",
+        "when": "Any time",
         "how": "Instructor-led",
-        "material-icon-symbol": "captive_portal"
+        "name": "Online, Asynchronous (OA)",
+        "slug": "online-asynchronous"
       }
     },
     {
@@ -47,15 +47,15 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Off-Site (OC)",
-        "slug": "off-site",
         "code": "OC",
         "description": "*Students participate in scheduled activity at a non-College site. May include clinical, practicum, work experience, field work, or similar components.",
-        "when": "Scheduled Time",
+        "material-icon-symbol": "home_work",
         "where": "Non-College Site",
+        "when": "Scheduled Time",
         "how": "Mentored",
         "international-student-disclaimer": "*International Students: Acceptable option to fulfill IRCC in-person delivery mode requirement.",
-        "material-icon-symbol": "home_work"
+        "name": "Off-Site (OC)",
+        "slug": "off-site"
       }
     },
     {
@@ -67,14 +67,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Online, Synchronous (OS)",
-        "slug": "online-synchronous",
         "code": "OS",
         "description": "Students and instructors meet online at specific times. Students attend class from any place.",
-        "how": "Instructor-led",
-        "when": "Scheduled time",
+        "material-icon-symbol": "frame_person_mic",
         "where": "Online ",
-        "material-icon-symbol": "frame_person_mic"
+        "when": "Scheduled time",
+        "how": "Instructor-led",
+        "name": "Online, Synchronous (OS)",
+        "slug": "online-synchronous"
       }
     },
     {
@@ -86,14 +86,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Face to Face Self-Paced (FP)",
-        "slug": "face-to-face-self-paced",
         "code": "FP",
         "description": "Students and instructors meet in a classroom at a specific time. Each student does their own work at their own speed.",
+        "material-icon-symbol": "person",
         "where": "Classroom",
-        "how": "Self-paced & Instructor-supported ",
         "when": "Scheduled time",
-        "material-icon-symbol": "person"
+        "how": "Self-paced & Instructor-supported ",
+        "name": "Face to Face Self-Paced (FP)",
+        "slug": "face-to-face-self-paced"
       }
     },
     {
@@ -105,14 +105,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Face to Face, Synchronous (FS)",
-        "slug": "face-to-face-synchronous",
         "code": "FS",
         "description": "Students and instructors meet in a classroom at a specific time.",
+        "material-icon-symbol": "co_present",
         "where": "Classroom",
-        "how": "Instructor-led",
         "when": "Scheduled time",
-        "material-icon-symbol": "co_present"
+        "how": "Instructor-led",
+        "name": "Face to Face, Synchronous (FS)",
+        "slug": "face-to-face-synchronous"
       }
     },
     {
@@ -124,15 +124,15 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Hyflex (HFX)",
-        "slug": "hyflex",
         "code": "HFX",
         "description": "*Students and instructors participate online and meet in a classroom at specific times. Students learn by joining meetings online or in the classroom or by viewing recordings.",
-        "how": "Instructor-led",
-        "when": "Online and classroom at the same time",
+        "material-icon-symbol": "globe_book",
         "where": "Online and classroom at the same time",
+        "when": "Online and classroom at the same time",
+        "how": "Instructor-led",
         "international-student-disclaimer": "*International Students: Acceptable option to fulfill IRCC in-person delivery mode requirement.",
-        "material-icon-symbol": "globe_book"
+        "name": "Hyflex (HFX)",
+        "slug": "hyflex"
       }
     },
     {
@@ -144,14 +144,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Blended, Self-Paced (BP)",
-        "slug": "blended-self-paced",
         "code": "BP",
         "description": "Students and instructors participate online and meet in classrooms. Each student does their own work at their own speed. Students and instructors may arrange specific meeting times.",
-        "how": "Self-paced & Instructor-supported",
-        "when": "Any time",
+        "material-icon-symbol": "hangout_video",
         "where": "Online or classroom",
-        "material-icon-symbol": "hangout_video"
+        "when": "Any time",
+        "how": "Self-paced & Instructor-supported",
+        "name": "Blended, Self-Paced (BP)",
+        "slug": "blended-self-paced"
       }
     },
     {
@@ -163,15 +163,15 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Blended, Synchronous (BS)",
-        "slug": "blended-synchronous",
         "code": "BS",
         "description": "*Students and instructors participate online and meet in a classroom. There are specific meeting times.",
-        "when": "Scheduled time",
+        "material-icon-symbol": "sync_desktop",
         "where": "Online or classroom",
+        "when": "Scheduled time",
         "how": "Instructor-led",
         "international-student-disclaimer": "*International Students: Acceptable option to fulfill IRCC in-person delivery mode requirement.",
-        "material-icon-symbol": "sync_desktop"
+        "name": "Blended, Synchronous (BS)",
+        "slug": "blended-synchronous"
       }
     },
     {
@@ -183,14 +183,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Online, Synchronous, Asynchronous (OAS)",
-        "slug": "online-synchronous-asynchronous",
         "code": "OAS",
         "description": "Students and instructors participate online. There are some specific meeting times.",
-        "how": " Instructor-led",
-        "when": "Scheduled time for course activities",
+        "material-icon-symbol": "support_agent",
         "where": "Online",
-        "material-icon-symbol": "support_agent"
+        "when": "Scheduled time for course activities",
+        "how": " Instructor-led",
+        "name": "Online, Synchronous, Asynchronous (OAS)",
+        "slug": "online-synchronous-asynchronous"
       }
     },
     {
@@ -202,14 +202,14 @@
       "isArchived": false,
       "isDraft": false,
       "fieldData": {
-        "name": "Online, Self-Paced (OP)",
-        "slug": "online-self-paced",
         "code": "OP",
         "description": "Students and instructors participate online. There are no specific meeting times. Each student does their own work at their own speed.",
-        "when": "Any time",
+        "material-icon-symbol": "desktop_windows",
         "where": "Online",
+        "when": "Any time",
         "how": "Self-paced & Instructor-supported",
-        "material-icon-symbol": "desktop_windows"
+        "name": "Online, Self-Paced (OP)",
+        "slug": "online-self-paced"
       }
     }
   ]

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-11-24T17:16:07.619Z",
+    "generatedAt": "2025-12-09T23:16:07.473Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ENGL1201",
@@ -70,8 +70,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170B1-12060476",
-            "feeItemNameSanitized": "170B1-12060476",
+            "feeItemName": "170B1-12116472",
+            "feeItemNameSanitized": "170B1-12116472",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -161,8 +161,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170E1-12060477",
-            "feeItemNameSanitized": "170E1-12060477",
+            "feeItemName": "170E1-12116473",
+            "feeItemNameSanitized": "170E1-12116473",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -252,8 +252,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170C1-12060478",
-            "feeItemNameSanitized": "170C1-12060478",
+            "feeItemName": "170C1-12116474",
+            "feeItemNameSanitized": "170C1-12116474",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -268,6 +268,97 @@
               "updated": "",
               "Created": "20250520T160239Z",
               "Updated": "20250520T160239Z"
+            },
+            "day": "5"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "D0EA3891473E41BA8E47DEA5E467B6A3",
+        "name": "26JANMNFS33",
+        "sisID": "225136",
+        "courseName": "",
+        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
+        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "45",
+        "registrationStart": "20251002T000000",
+        "registrationEnd": "20260116T235959",
+        "startDate": "20260107T000000",
+        "endDate": "20260421T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "975.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170B1-12116475",
+            "feeItemNameSanitized": "170B1-12116475",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "2ABB683D20BE4DDF8D96B37EF9DD8370",
+              "name": "170B1",
+              "displayName": "170B1",
+              "endTime": "20250101T122000",
+              "startTime": "20250101T093000",
+              "sisId": "170B1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20250520T160238Z"
             },
             "day": "5"
           }
@@ -550,8 +641,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170S1-12060484",
-            "feeItemNameSanitized": "170S1-12060484",
+            "feeItemName": "170S1-12116481",
+            "feeItemNameSanitized": "170S1-12116481",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -571,8 +662,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170S1-12060485",
-            "feeItemNameSanitized": "170S1-12060485",
+            "feeItemName": "170S1-12116482",
+            "feeItemNameSanitized": "170S1-12116482",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -592,8 +683,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170S1-12060486",
-            "feeItemNameSanitized": "170S1-12060486",
+            "feeItemName": "170S1-12116483",
+            "feeItemNameSanitized": "170S1-12116483",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -613,8 +704,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170S1-12060487",
-            "feeItemNameSanitized": "170S1-12060487",
+            "feeItemName": "170S1-12116484",
+            "feeItemNameSanitized": "170S1-12116484",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -704,8 +795,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170S1-12060480",
-            "feeItemNameSanitized": "170S1-12060480",
+            "feeItemName": "170S1-12116477",
+            "feeItemNameSanitized": "170S1-12116477",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -795,8 +886,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170S1-12060481",
-            "feeItemNameSanitized": "170S1-12060481",
+            "feeItemName": "170S1-12116478",
+            "feeItemNameSanitized": "170S1-12116478",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -1037,10 +1128,10 @@
       }
     ],
     "summary": {
-      "totalSections": 12,
-      "totalFees": 33,
-      "totalTimeBlocks": 9,
-      "sectionsWithFees": 12
+      "totalSections": 13,
+      "totalFees": 36,
+      "totalTimeBlocks": 10,
+      "sectionsWithFees": 13
     }
   }
 }
