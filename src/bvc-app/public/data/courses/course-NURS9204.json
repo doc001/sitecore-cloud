@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-12-09T23:15:33.382Z",
+    "generatedAt": "2026-01-06T15:29:48.160Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9204",
@@ -53,7 +53,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "180C-12117027",
+            "feeItemName": "180C-12180653",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -61,13 +61,86 @@
               "id": "C0AD7869C4CD49E681B9BADAA3676407",
               "name": "180C",
               "displayName": "180C",
-              "endTime": "20250101T120000",
-              "startTime": "20250101T090000",
+              "endTime": "20260101T120000",
+              "startTime": "20260101T090000",
               "sisId": "180C",
               "created": "",
               "updated": "",
               "Created": "20250520T160024Z",
-              "Updated": "20250520T160024Z"
+              "Updated": "20260101T070011Z"
+            },
+            "day": "6"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "7898673498E24DCD8B8258FF6E970A62",
+        "name": "26JULMNBA92",
+        "sisID": "224620",
+        "courseName": "",
+        "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "B15831A51AA34904BA96EAA5086F90B7",
+          "name": "Blended - Asynchronous",
+          "displayName": "Blended - Asynchronous",
+          "slug": "blended-asynchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "7",
+        "registrationStart": "20251211T000000",
+        "registrationEnd": "20260707T235959",
+        "startDate": "20260708T000000",
+        "endDate": "20260718T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "249.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170G1-12160712",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "9FB521F6736D4322BFB903A1FB8554AD",
+              "name": "170G1",
+              "displayName": "170G1",
+              "endTime": "20260101T115000",
+              "startTime": "20260101T090000",
+              "sisId": "170G1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20260101T070113Z"
             },
             "day": "6"
           }
@@ -126,7 +199,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "180C-12117026",
+            "feeItemName": "180C-12180652",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -134,13 +207,86 @@
               "id": "C0AD7869C4CD49E681B9BADAA3676407",
               "name": "180C",
               "displayName": "180C",
-              "endTime": "20250101T120000",
-              "startTime": "20250101T090000",
+              "endTime": "20260101T120000",
+              "startTime": "20260101T090000",
               "sisId": "180C",
               "created": "",
               "updated": "",
               "Created": "20250520T160024Z",
-              "Updated": "20250520T160024Z"
+              "Updated": "20260101T070011Z"
+            },
+            "day": "6"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
+        "id": "473F50C9AD6D412E93452816505E8F9B",
+        "name": "26MAYMNBA91",
+        "sisID": "224619",
+        "courseName": "",
+        "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "B15831A51AA34904BA96EAA5086F90B7",
+          "name": "Blended - Asynchronous",
+          "displayName": "Blended - Asynchronous",
+          "slug": "blended-asynchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "7",
+        "registrationStart": "20251211T000000",
+        "registrationEnd": "20260512T235959",
+        "startDate": "20260513T000000",
+        "endDate": "20260523T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "249.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170G1-12160711",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "9FB521F6736D4322BFB903A1FB8554AD",
+              "name": "170G1",
+              "displayName": "170G1",
+              "endTime": "20260101T115000",
+              "startTime": "20260101T090000",
+              "sisId": "170G1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160238Z",
+              "Updated": "20260101T070113Z"
             },
             "day": "6"
           }
@@ -159,10 +305,10 @@
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 2
+      "totalSections": 4,
+      "totalFees": 8,
+      "totalTimeBlocks": 4,
+      "sectionsWithFees": 4
     }
   }
 }
