@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-01-06T15:29:31.604Z",
+    "generatedAt": "2026-02-09T23:18:51.746Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "COMP9302",
@@ -11,6 +11,58 @@
     "sisID": "COMP9302",
     "name": "Microsoft Excel - Core",
     "children": [
+      {
+        "id": "93ED42984C374AA792733365D5F60A01",
+        "name": "26AUGMNOA92",
+        "sisID": "224603",
+        "courseName": "",
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "30",
+        "registrationStart": "20260105T000000",
+        "registrationEnd": "20260811T235959",
+        "startDate": "20260812T000000",
+        "endDate": "20261112T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "375.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
       {
         "id": "997B7F494A7843CFBF77D33A8B4F186E",
         "name": "26FEBMNOA92",
@@ -65,10 +117,10 @@
       }
     ],
     "summary": {
-      "totalSections": 1,
-      "totalFees": 1,
+      "totalSections": 2,
+      "totalFees": 2,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      "sectionsWithFees": 2
     }
   }
 }

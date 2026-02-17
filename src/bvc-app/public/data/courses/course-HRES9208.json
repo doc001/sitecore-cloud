@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-01-06T15:29:42.240Z",
+    "generatedAt": "2026-02-09T23:19:02.938Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "HRES9208",
@@ -12,9 +12,9 @@
     "name": "Payroll Fundamentals I",
     "children": [
       {
-        "id": "AC2EA85A027B4704968412909BD969C6",
-        "name": "26JANMNOS91",
-        "sisID": "223369",
+        "id": "5B4BD6C1D74E48E0AF5C3CCFB993D29D",
+        "name": "26MAYMNOS91",
+        "sisID": "224616",
         "courseName": "",
         "deliveryTypeId": "{38A52F87-E8A6-4739-8DD6-DC29A3FDA55F}",
         "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
@@ -29,79 +29,6 @@
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
-        },
-        "hours": "39",
-        "registrationStart": "20250919T000000",
-        "registrationEnd": "20260108T235959",
-        "startDate": "20260115T000000",
-        "endDate": "20260416T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "475.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170S1-12180622",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-              "name": "170S1",
-              "displayName": "170S1",
-              "endTime": "20260101T205000",
-              "startTime": "20260101T180000",
-              "sisId": "170S1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160305Z",
-              "Updated": "20260101T070126Z"
-            },
-            "day": "4"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 1
-        }
-      },
-      {
-        "id": "5B4BD6C1D74E48E0AF5C3CCFB993D29D",
-        "name": "26MAYMNOS91",
-        "sisID": "224616",
-        "courseName": "",
-        "deliveryTypeId": "{38A52F87-E8A6-4739-8DD6-DC29A3FDA55F}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "38A52F87E8A647398DD6DC29A3FDA55F",
-          "name": "Online - Synchronous",
-          "displayName": "Online - Synchronous",
-          "slug": "online-synchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
         },
         "hours": "39",
         "registrationStart": "20260105T000000",
@@ -126,7 +53,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170S1-12160708",
+            "feeItemName": "170S1-12292144",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -159,10 +86,10 @@
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 2
+      "totalSections": 1,
+      "totalFees": 2,
+      "totalTimeBlocks": 1,
+      "sectionsWithFees": 1
     }
   }
 }

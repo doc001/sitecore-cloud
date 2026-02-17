@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-01-06T15:29:23.165Z",
+    "generatedAt": "2026-02-09T23:18:42.179Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ACCT9101",
@@ -69,7 +69,7 @@
         "sisID": "224590",
         "courseName": "",
         "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
         "deliveryType": {
           "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
           "name": "Online - Asynchronous",
@@ -77,10 +77,10 @@
           "slug": "online-asynchronous"
         },
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
         },
         "hours": "40",
         "registrationStart": "20260105T000000",
@@ -168,82 +168,9 @@
         }
       },
       {
-        "id": "539E05B1710B466183106E607E2BB9A7",
-        "name": "26JANMNFS91",
-        "sisID": "223329",
-        "courseName": "",
-        "deliveryTypeId": "{AB98C091-3E88-437F-8E21-3869FAB80C8B}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "40",
-        "registrationStart": "20250919T000000",
-        "registrationEnd": "20260116T235959",
-        "startDate": "20260117T000000",
-        "endDate": "20260314T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "475.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "330A-12180610",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "8BE7F6C2DF444FED811277A465E9F9B5",
-              "name": "330A",
-              "displayName": "330A",
-              "endTime": "20260101T143000",
-              "startTime": "20260101T090000",
-              "sisId": "330A",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160031Z",
-              "Updated": "20260101T070014Z"
-            },
-            "day": "6"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 1
-        }
-      },
-      {
-        "id": "63847CEC23F9406F8E3E97EA109D50CB",
-        "name": "26JANMNOA92",
-        "sisID": "223330",
+        "id": "54570DE24A15447592E2F744CCCA3DFD",
+        "name": "26JULMNOA94",
+        "sisID": "224589",
         "courseName": "",
         "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
         "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
@@ -258,58 +185,6 @@
           "name": "Distance Learning",
           "displayName": "Distance Learning",
           "slug": "distance-learning"
-        },
-        "hours": "40",
-        "registrationStart": "20250919T000000",
-        "registrationEnd": "20260113T235959",
-        "startDate": "20260114T000000",
-        "endDate": "20260514T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "475.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "54570DE24A15447592E2F744CCCA3DFD",
-        "name": "26JULMNOA94",
-        "sisID": "224589",
-        "courseName": "",
-        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
         },
         "hours": "40",
         "registrationStart": "20260105T000000",
@@ -350,7 +225,7 @@
         "sisID": "224588",
         "courseName": "",
         "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
         "deliveryType": {
           "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
           "name": "Online - Asynchronous",
@@ -358,10 +233,10 @@
           "slug": "online-asynchronous"
         },
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
         },
         "hours": "40",
         "registrationStart": "20260105T000000",
@@ -490,7 +365,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "330A-12160699",
+            "feeItemName": "330A-12292135",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -527,7 +402,7 @@
         "sisID": "224587",
         "courseName": "",
         "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
         "deliveryType": {
           "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
           "name": "Online - Asynchronous",
@@ -535,10 +410,10 @@
           "slug": "online-asynchronous"
         },
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
         },
         "hours": "40",
         "registrationStart": "20260105T000000",
@@ -575,10 +450,10 @@
       }
     ],
     "summary": {
-      "totalSections": 10,
-      "totalFees": 12,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 10
+      "totalSections": 8,
+      "totalFees": 9,
+      "totalTimeBlocks": 1,
+      "sectionsWithFees": 8
     }
   }
 }
