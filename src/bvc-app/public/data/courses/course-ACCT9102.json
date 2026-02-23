@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-02-09T23:18:43.829Z",
+    "generatedAt": "2026-02-19T15:15:56.186Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ACCT9102",
@@ -100,58 +100,6 @@
               "slug": "tuition"
             },
             "amount": "500.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "E787ED60A3EE449BAEDBD882C7EA6A11",
-        "name": "26FEBMNOA94",
-        "sisID": "223336",
-        "courseName": "",
-        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
-        },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "40",
-        "registrationStart": "20250919T000000",
-        "registrationEnd": "20260210T235959",
-        "startDate": "20260211T000000",
-        "endDate": "20260611T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "475.000",
             "timeBlock": null,
             "day": ""
           }
@@ -273,10 +221,10 @@
       }
     ],
     "summary": {
-      "totalSections": 5,
-      "totalFees": 5,
+      "totalSections": 4,
+      "totalFees": 4,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 5
+      "sectionsWithFees": 4
     }
   }
 }
