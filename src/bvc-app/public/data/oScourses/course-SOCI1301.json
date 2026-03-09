@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-01-06T15:30:54.341Z",
+    "generatedAt": "2026-03-09T14:59:44.559Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "SOCI1301",
@@ -13,29 +13,29 @@
     "credits": "3",
     "children": [
       {
-        "id": "7455C7C23CBB44718910F4A587E44531",
-        "name": "26JANMNFS30",
-        "sisID": "222972",
+        "id": "FCC6545FD365475E90FCB3972BB42E02",
+        "name": "26MAYMNOA60",
+        "sisID": "224415",
         "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
+        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
         "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
         },
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
         },
         "hours": "45",
-        "registrationStart": "20251006T000000",
-        "registrationEnd": "20260116T235959",
-        "startDate": "20260107T000000",
-        "endDate": "20260421T000000",
+        "registrationStart": "20260202T000000",
+        "registrationEnd": "20260512T235959",
+        "startDate": "20260505T000000",
+        "endDate": "20260626T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -67,46 +67,24 @@
             "amount": "520.000",
             "timeBlock": null,
             "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170A1-12180167",
-            "feeItemNameSanitized": "170A1-12180167",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "F7A9D455F118456A895A91A34CB8D5D6",
-              "name": "170A1",
-              "displayName": "170A1",
-              "endTime": "20260101T105000",
-              "startTime": "20260101T080000",
-              "sisId": "170A1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20260101T070113Z"
-            },
-            "day": "5"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 2,
           "containers": [
-            "Fees",
-            "TimeBlock"
+            "Fees"
           ],
           "feeTypes": [
             "International Tuition",
             "Tuition"
           ],
-          "timeBlockCount": 1
+          "timeBlockCount": 0
         }
       },
       {
-        "id": "B081C61F33D64294803729ABB74931D4",
-        "name": "26JANMNOA60",
-        "sisID": "222973",
+        "id": "71DBFFEF3C1C4A58A24EAB80370E16C8",
+        "name": "26MAYMNOA61",
+        "sisID": "224416",
         "courseName": "",
         "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
         "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
@@ -123,10 +101,10 @@
           "slug": "distance-learning"
         },
         "hours": "45",
-        "registrationStart": "20251006T000000",
-        "registrationEnd": "20260116T235959",
-        "startDate": "20260107T000000",
-        "endDate": "20260421T000000",
+        "registrationStart": "20260202T000000",
+        "registrationEnd": "20260512T235959",
+        "startDate": "20260505T000000",
+        "endDate": "20260626T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -175,8 +153,8 @@
     ],
     "summary": {
       "totalSections": 2,
-      "totalFees": 5,
-      "totalTimeBlocks": 1,
+      "totalFees": 4,
+      "totalTimeBlocks": 0,
       "sectionsWithFees": 2
     }
   }
