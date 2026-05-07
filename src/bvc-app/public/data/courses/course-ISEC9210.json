@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "generatedAt": "2026-04-09T14:23:27.043Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "ISEC9210",
+    "courseName": "Building Cybersecurity Crisis Communication Strategies"
+  },
+  "course": {
+    "id": "96BF3C30EB5E4ECABAC350CC004B7C55",
+    "sisID": "ISEC9210",
+    "name": "Building Cybersecurity Crisis Communication Strategies",
+    "children": [
+      {
+        "id": "534F4F3E8B79454C89D9CD35280061AA",
+        "name": "26MAYMNOA90",
+        "sisID": "225529",
+        "courseName": "",
+        "deliveryTypeId": "{2307E4CB-966D-4945-9B56-5069D6A015A3}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "2307E4CB966D49459B565069D6A015A3",
+          "name": "Online - Synchronous - Asynchronous",
+          "displayName": "Online - Synchronous - Asynchronous",
+          "slug": "online-synchronous-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "25",
+        "registrationStart": "20260326T000000",
+        "registrationEnd": "20260512T235959",
+        "startDate": "20260513T000000",
+        "endDate": "20260713T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "350.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1-12450871",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20260101T205000",
+              "startTime": "20260101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20260101T070126Z"
+            },
+            "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1-12450872",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20260101T205000",
+              "startTime": "20260101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20260101T070126Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 2
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 3,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 1
+    }
+  }
+}

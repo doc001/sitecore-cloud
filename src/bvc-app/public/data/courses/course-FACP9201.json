@@ -1,0 +1,208 @@
+{
+  "metadata": {
+    "generatedAt": "2026-04-09T14:23:23.060Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "FACP9201",
+    "courseName": "Standard First Aid & CPR (Red Cross)"
+  },
+  "course": {
+    "id": "842F691DE5CC42ED884FC9F2A9F1BF50",
+    "sisID": "FACP9201",
+    "name": "Standard First Aid & CPR (Red Cross)",
+    "children": [
+      {
+        "id": "796B3ECE8F2E4B27B1C109E973C28F7B",
+        "name": "26APRMNFS90",
+        "sisID": "225513",
+        "courseName": "",
+        "deliveryTypeId": "{AB98C091-3E88-437F-8E21-3869FAB80C8B}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "16",
+        "registrationStart": "20260319T000000",
+        "registrationEnd": "20260417T235959",
+        "startDate": "20260418T000000",
+        "endDate": "20260419T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "155.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "480B-12442971",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D620F203919E404F85613E0819D13854",
+              "name": "480B",
+              "displayName": "480B",
+              "endTime": "20260101T170000",
+              "startTime": "20260101T090000",
+              "sisId": "480B",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160032Z",
+              "Updated": "20260101T070014Z"
+            },
+            "day": "7"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "480B-12442972",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D620F203919E404F85613E0819D13854",
+              "name": "480B",
+              "displayName": "480B",
+              "endTime": "20260101T170000",
+              "startTime": "20260101T090000",
+              "sisId": "480B",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160032Z",
+              "Updated": "20260101T070014Z"
+            },
+            "day": "6"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 2
+        }
+      },
+      {
+        "id": "7C270A645F4749509760A3783FEA1BD2",
+        "name": "26MAYMNFS90",
+        "sisID": "225514",
+        "courseName": "",
+        "deliveryTypeId": "{AB98C091-3E88-437F-8E21-3869FAB80C8B}",
+        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
+        "deliveryType": {
+          "id": "AB98C0913E88437F8E213869FAB80C8B",
+          "name": "Face to Face - Synchronous",
+          "displayName": "Face to Face - Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "16",
+        "registrationStart": "20260320T000000",
+        "registrationEnd": "20260501T235959",
+        "startDate": "20260502T000000",
+        "endDate": "20260503T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "155.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "480B-12450862",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D620F203919E404F85613E0819D13854",
+              "name": "480B",
+              "displayName": "480B",
+              "endTime": "20260101T170000",
+              "startTime": "20260101T090000",
+              "sisId": "480B",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160032Z",
+              "Updated": "20260101T070014Z"
+            },
+            "day": "7"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "480B-12450863",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "D620F203919E404F85613E0819D13854",
+              "name": "480B",
+              "displayName": "480B",
+              "endTime": "20260101T170000",
+              "startTime": "20260101T090000",
+              "sisId": "480B",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160032Z",
+              "Updated": "20260101T070014Z"
+            },
+            "day": "6"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 2
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 2,
+      "totalFees": 6,
+      "totalTimeBlocks": 4,
+      "sectionsWithFees": 2
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-03-09T14:59:10.653Z",
+    "generatedAt": "2026-04-09T14:23:29.731Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9213",
@@ -11,79 +11,6 @@
     "sisID": "NURS9213",
     "name": "Intravenous Initiation, Infusion and Medication Administration",
     "children": [
-      {
-        "id": "97F8B932E2DC499085BC1B24E8CF2215",
-        "name": "26APRMNBA92",
-        "sisID": "223375",
-        "courseName": "",
-        "deliveryTypeId": "{B15831A5-1AA3-4904-BA96-EAA5086F90B7}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "B15831A51AA34904BA96EAA5086F90B7",
-          "name": "Blended - Asynchronous",
-          "displayName": "Blended - Asynchronous",
-          "slug": "blended-asynchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "20250918T000000",
-        "registrationEnd": "20260407T235959",
-        "startDate": "20260408T000000",
-        "endDate": "20260502T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "449.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "390B-12364488",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "BA0C74B5A3EE4600993688A3537B3C2B",
-              "name": "390B",
-              "displayName": "390B",
-              "endTime": "20260101T153000",
-              "startTime": "20260101T090000",
-              "sisId": "390B",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160032Z",
-              "Updated": "20260101T070014Z"
-            },
-            "day": "6"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 1
-        }
-      },
       {
         "id": "0C48AAB909344D5AA8ADAC88F327B03E",
         "name": "26JULMNBA92",
@@ -126,7 +53,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "380A1-12366988",
+            "feeItemName": "380A1-12450882",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -199,7 +126,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "380A1-12366987",
+            "feeItemName": "380A1-12450881",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -232,10 +159,10 @@
       }
     ],
     "summary": {
-      "totalSections": 3,
-      "totalFees": 6,
-      "totalTimeBlocks": 3,
-      "sectionsWithFees": 3
+      "totalSections": 2,
+      "totalFees": 4,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 2
     }
   }
 }

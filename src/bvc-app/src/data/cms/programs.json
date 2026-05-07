@@ -3,8 +3,8 @@
     {
       "id": "6984dfbc2986acd09b8f375e",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-02T20:45:45.568Z",
-      "lastUpdated": "2026-03-02T20:45:45.568Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:49:45.442Z",
       "createdOn": "2026-02-05T18:21:48.083Z",
       "isArchived": false,
       "isDraft": false,
@@ -18,7 +18,7 @@
         "banner-image": {
           "fileId": "69951ab31725a5a00c626214",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951ab31725a5a00c626214_BVC_School%20of%20Health%20and%20Wellness_26.jpg",
-          "alt": null
+          "alt": "A smiling nurse stands in a bright hallway, ready to assist patients."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -50,14 +50,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Psychiatric Nurse",
-        "slug": "psychiatric-nurse"
+        "slug": "psychiatric-nurse",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "68f287f5e6357f02a727c60b",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-04T16:25:10.340Z",
-      "lastUpdated": "2026-03-04T16:25:10.340Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:51:01.199Z",
       "createdOn": "2025-10-17T18:16:21.108Z",
       "isArchived": false,
       "isDraft": false,
@@ -71,7 +73,7 @@
         "banner-image": {
           "fileId": "698f9f845c7676acd8655787",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9f845c7676acd8655787_GettyImages-1367515302.jpg",
-          "alt": null
+          "alt": "A dark background filled with a web of interconnected dots, resembling a starry night sky or digital network."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -100,20 +102,23 @@
         ],
         "has-zero-textbook-cost": false,
         "has-courses": false,
-        "courses-code": "<div data-rt-embed-type='true'><style>\n.accordion-item {\n  margin-bottom: 10px;\n}\n.accordion-button {\n  width: 100%;\n  height: 40px;\n  padding-left: 1em;\n  text-align: left;\n  font-size: 1em;\n  background-image: linear-gradient(101deg, rgba(3, 26, 98, 0.4), rgba(255, 255, 255, 0.2));\n  background-color: rgb(0,163,355);\n  color: white;\n  border: none;\n  cursor: pointer;\n  position: relative;\n}\n.accordion-button::after {\n  content: \">\";\n  position: absolute;\n  right: 1rem;\n  font-size: 1.4em;\n  transition: transform 0.3s ease;\n  transform: rotate(90deg);\n}\n.accordion-button.active::after {\n  transform: rotate(-90deg);\n}\n.accordion-content {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 0.4s ease;\n  background: #f1f1f1;\n  padding: 0 1em;\n}\n.accordion-content.open {\n  padding: 1em;\n  max-height: 2000px;\n}\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1rem auto;\n}\nth, td {\n  padding: 0.75rem;\n  text-align: left;\n  border: 1px solid #ccc;\n}\nth {\n  background-color: #0077cc;\n  color: white;\n}\n.table-center {\n  text-align: center;\n}\ntr:nth-child(even) {\n  background-color: #f9f9f9;\n}\n.accordion-section {\n  margin-bottom: 1rem;\n}\n.icon.tooltip {\n  height: 25px!important;\n  width: 25px!important;\n  cursor: pointer;\n}\n</style>\n<div class=\"bvc-accordion\">\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 1</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ISEC1200</td><td>Apply Cybersecurity Principles</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>SODV1400</td><td>Scripting  Fundamentals</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1200</td><td>Introduction to Networking</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1300</td><td>Deploy and Administer Enterprise Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1304</td><td>Introduction to Virtualization</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 2</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>CLCM1300</td><td>Introduction to Cloud Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT1108</td><td>Implement ITIL Service Management</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT1109</td><td>Manage Projects</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>SODV1401</td><td>Apply Scripting Techniques for Web Application</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1303</td><td>Configure and Administer Servers</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 3</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>TECH2100</td><td>Research Emerging Technology in IT</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2200</td><td>Automate IT Tasks and Processes</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2203</td><td>Develop Security Monitoring Techniques</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2204</td><td>Perform Advanced Network Administration</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2205</td><td>Advanced Switching and Routing</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 4</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>CLCM2400</td><td>Resolve Cloud Issues and Optimize Performance</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2206</td><td>Analyze and Visualize Networks</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2300</td><td>Diagnose and Resolve Complex IT Incidents</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2303</td><td>Perform Advanced Server Administration</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2998</td><td>Capstone Project for IT Solutions</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", function() {\n    const toggles = document.querySelectorAll(\".accordion-button\");\n    toggles.forEach(toggle => {\n        toggle.addEventListener(\"click\", () => {\n            const content = toggle.nextElementSibling;\n            const expanded = toggle.getAttribute(\"aria-expanded\") === \"true\";\n            toggle.setAttribute(\"aria-expanded\", !expanded);\n            toggle.classList.toggle(\"active\");\n            if (expanded) {\n                content.style.maxHeight = null;\n            } else {\n                content.style.maxHeight = content.scrollHeight + \"px\";\n            }\n        });\n    });\n});\n</script></div>",
+        "courses-code": "<div data-rt-embed-type='true'><style>\n.accordion-item {\n  margin-bottom: 10px;\n}\n.accordion-button {\n  width: 100%;\n  height: 40px;\n  padding-left: 1em;\n  text-align: left;\n  font-size: 1em;\n  background-image: linear-gradient(101deg, rgba(3, 26, 98, 0.4), rgba(255, 255, 255, 0.2));\n  background-color: rgb(0,163,355);\n  color: white;\n  border: none;\n  cursor: pointer;\n  position: relative;\n}\n.accordion-button::after {\n  content: \">\";\n  position: absolute;\n  right: 1rem;\n  font-size: 1.4em;\n  transition: transform 0.3s ease;\n  transform: rotate(90deg);\n}\n.accordion-button.active::after {\n  transform: rotate(-90deg);\n}\n.accordion-content {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 0.4s ease;\n  background: #f1f1f1;\n  padding: 0 1em;\n}\n.accordion-content.open {\n  padding: 1em;\n  max-height: 2000px;\n}\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1rem auto;\n}\nth, td {\n  padding: 0.75rem;\n  text-align: left;\n  border: 1px solid #ccc;\n}\nth {\n  background-color: #0077cc;\n  color: white;\n}\n.table-center {\n  text-align: center;\n}\ntr:nth-child(even) {\n  background-color: #f9f9f9;\n}\n.accordion-section {\n  margin-bottom: 1rem;\n}\n.icon.tooltip {\n  height: 25px!important;\n  width: 25px!important;\n  cursor: pointer;\n}\n</style>\n<div class=\"bvc-accordion\">\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 1</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>SODV1400</td><td>Scripting  Fundamentals</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1200</td><td>Introduction to Networking</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1300</td><td>Deploy and Administer Enterprise Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1304</td><td>Introduction to Virtualization</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>SODV1401</td><td>Apply Scripting Techniques for Web Application</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 2</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>CLCM1300</td><td>Introduction to Cloud Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC1201</td><td>Secure Complex Networks</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT1109</td><td>Manage Projects</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1303</td><td>Configure and Administer Servers</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC1200</td><td>Apply Cybersecurity Principles</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 3</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ISEC2100</td><td>Research Emerging Technology in Cybersecurity</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC2200</td><td>Manage Identity Access</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC2201</td><td>Conduct Penetration Testing</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC2202</td><td>Implement Advanced Network Security for Endpoint Devices</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT2100</td><td>Manage Enterprise Security</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 4</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ISEC2203</td><td>Operate Security Operations Centre Environments</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC2204</td><td>Respond to Incidents</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC2205</td><td>Investigate Digital Forensics</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC2300</td><td>Apply Cryptographic Techniques</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC2999</td><td>Capstone Project for Cybersecurity Solutions</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", function() {\n    const toggles = document.querySelectorAll(\".accordion-button\");\n    toggles.forEach(toggle => {\n        toggle.addEventListener(\"click\", () => {\n            const content = toggle.nextElementSibling;\n            const expanded = toggle.getAttribute(\"aria-expanded\") === \"true\";\n            toggle.setAttribute(\"aria-expanded\", !expanded);\n            toggle.classList.toggle(\"active\");\n            if (expanded) {\n                content.style.maxHeight = null;\n            } else {\n                content.style.maxHeight = content.scrollHeight + \"px\";\n            }\n        });\n    });\n});\n</script></div>",
         "apply-button-is-english-learing-skill": false,
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "connect-form": "<div data-rt-embed-type='true'><!-- Demo Page Content -->\n<div class=\"demo-container\">\n    <button class=\"connect-btn\" onclick=\"openPopup()\">I am interested</button>\n</div>\n<!-- Popup Overlay -->\n<div id=\"popupOverlay\" class=\"popup-overlay\" onclick=\"closePopupOnOverlay(event)\">\n    <div class=\"popup-container\">\n        <button class=\"close-btn\" onclick=\"closePopup()\">&times;</button>\n        <!-- Processing Overlay -->\n        <div id=\"processingOverlay\" class=\"processing-overlay\">\n            <div class=\"processing-content\">\n                <div class=\"spinner\"></div>\n                <h2>Processing your request...</h2>\n                <p>Please wait while we submit your application.</p>\n            </div>\n        </div>\n        <div class=\"form-container\">\n            <h2 class=\"form-title\">Register your interest</h2>\n            <form id=\"wf-form\" name=\"wf-form\" data-name=\"wf-form\" action=\"https://analytics-ca.clickdimensions.com/forms/h/aTJ0wC9tccU191hBgrimww\" method=\"post\">\n                <div class=\"form-step\">\n                    <div class=\"form-control\">\n                        <label for=\"first_name\" class=\"field-label\">First Name <span class=\"required\">*</span></label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"first_name\" placeholder=\"Enter your First Name\" type=\"text\" id=\"first_name\" required>\n                        <div class=\"error-message\" id=\"first_name_error\">Please enter your first name</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <label for=\"last_name\" class=\"field-label\">Last Name <span class=\"required\">*</span></label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"last_name\" placeholder=\"Enter your Last Name\" type=\"text\" id=\"last_name\" required>\n                        <div class=\"error-message\" id=\"last_name_error\">Please enter your last name</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <label for=\"email\" class=\"field-label\">Email Address <span class=\"required\">*</span></label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"email\" placeholder=\"Enter your Email Address\" type=\"email\" id=\"email\" required>\n                        <div class=\"error-message\" id=\"email_error\">Please enter a valid email address</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <label for=\"phone\" class=\"field-label\">Phone Number</label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"phone\" placeholder=\"Enter your Phone Number\" type=\"tel\" id=\"phone\">\n                        <div class=\"error-message\" id=\"phone_error\">Please enter a valid phone number</div>\n                    </div>\n                    <!-- <div class=\"form-control\">\n                        <label class=\"field-label\">What type of information are you looking for? <span\n                                class=\"required\">*</span></label>\n                        <div class=\"custom-multiselect\">\n                            <div class=\"selected-items\" id=\"selectedItems\">\n                                <span class=\"placeholder\">Click to select options...</span>\n                            </div>\n                            <div class=\"dropdown-arrow\">▼</div>\n                            <div class=\"dropdown-options\" id=\"dropdownOptions\">\n                                <div class=\"option-item\" data-value=\"Admissions & Requirements\">\n                                    <input type=\"checkbox\" id=\"opt_admissions\">\n                                    <label for=\"opt_admissions\">Admissions & Requirements</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Programs, Courses & Delivery\">\n                                    <input type=\"checkbox\" id=\"opt_programs\">\n                                    <label for=\"opt_programs\">Programs, Courses & Delivery</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Tuition & Fees\">\n                                    <input type=\"checkbox\" id=\"opt_tuition\">\n                                    <label for=\"opt_tuition\">Tuition & Fees</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Financial Aid & Scholarships\">\n                                    <input type=\"checkbox\" id=\"opt_financial\">\n                                    <label for=\"opt_financial\">Financial Aid & Scholarships</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Work, Co-op & Career Advise\">\n                                    <input type=\"checkbox\" id=\"opt_career\">\n                                    <label for=\"opt_career\">Work, Co-op & Career Advise</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Registration & Enrolment to Courses\">\n                                    <input type=\"checkbox\" id=\"opt_registration\">\n                                    <label for=\"opt_registration\">Registration & Enrolment to Courses</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Other\">\n                                    <input type=\"checkbox\" id=\"opt_other\">\n                                    <label for=\"opt_other\">Other...</label>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"error-message\" id=\"info_type_error\">Please select at least one type of information\n                        </div>\n                    </div>\n                    <div class=\"form-control\" id=\"other_details_container\" style=\"display: none;\">\n                        <label for=\"other_details\" class=\"field-label\">Please specify what other information you need\n                            <span class=\"required\">*</span></label>\n                        <textarea class=\"textarea-field\" name=\"other_details\"\n                            placeholder=\"Please describe the specific information you're looking for...\"\n                            id=\"other_details\"></textarea>\n                        <div class=\"error-message\" id=\"other_details_error\">Please provide details about the information\n                            you need</div>\n                    </div> -->\n                    <!-- Hidden field to store all selected values -->\n                    <input type=\"hidden\" name=\"s_faqs\" id=\"s_faqs\" value=\"I am interested. Contact me with more information.\">\n                    <div class=\"form-control\">\n                        <label for=\"bvc_receivefutureeventcommunications\" class=\"field-label\">Do you want to receive\n                            information about upcoming events? <span class=\"required\">*</span></label>\n                        <select id=\"bvc_receivefutureeventcommunications\" name=\"bvc_receivefutureeventcommunications\" required class=\"select-field\">\n                            <option value>Please select...</option>\n                            <option value=\"1\" selected>Yes</option>\n                            <option value=\"0\">No</option>\n                        </select>\n                        <div class=\"error-message\" id=\"events_error\">Please select an option</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <div class=\"g-recaptcha\" data-sitekey=\"6LdZA8grAAAAAJ4TqnEHpm6-HazESgQ1SdM1KrQC\"></div>\n                        <div class=\"error-message\" id=\"recaptcha_error\">Please complete the reCAPTCHA</div>\n                    </div>\n                    <div class=\"loading\" id=\"loading\">Submitting...</div>\n                    <input type=\"submit\" class=\"submit-btn\" value=\"Submit\" id=\"submitBtn\">\n                </div>\n                <input type=\"hidden\" name=\"s_type\" id=\"s_type\" value=\"916190001\">\n                <input type=\"hidden\" name=\"funnelStartingStage\" id=\"funnelStartingStage\" value=\"916190002\">\n                <input type=\"hidden\" name=\"initialTouchPoint\" id=\"initialTouchPoint\" value=\"916190004\">\n                <input type=\"hidden\" name=\"contact_type\" id=\"contact_type\" value=\"916190000\">\n                <input type=\"hidden\" name=\"campaignType\" id=\"campaignType\" value>\n            </form>\n        </div>\n    </div>\n</div>\n<!-- Success Message Overlay -->\n<div id=\"successOverlay\" class=\"success-overlay\">\n    <div class=\"success-content\">\n        <button class=\"success-close-btn\" onclick=\"closeSuccessMessage()\">&times;</button>\n        <h2>Thank you for your submission.</h2>\n        <p>Our team will get back to you with clear next steps.</p>\n        <!-- <h4>While you’re here</h4>\n        <p>Grab the Bow Valley College Viewbook. Your guide to programs, course delivery, admission requirements, and how to apply.</p>\n        <p>\n            <a href=\"#\" class=\"bvc-btn\" aria-describedby=\"bvc-viewbook-title\" download>\n            Download the Viewbook (PDF)\n            </a>\n        </p> -->\n        <p>\n            Need help now? Call <strong>403-410-1400</strong>.<br>\n            <strong>Hit the ground working.</strong>\n        </p>\n    </div>\n</div></div>",
         "name": "Cybersecurity Solutions",
-        "slug": "cybersecurity-solutions"
+        "slug": "cybersecurity-solutions",
+        "customizable-apply-button": false,
+        "cancelled-program": false,
+        "pre-practicum-requirement-laptop-requirements-additional-admin-info": "<h5>Minimum Technology Requirements</h5><ul><li>Windows Laptops (Brand‑Agnostic)</li><li>CPU: Current Intel Core Ultra / Core i9‑HX (24‑core class) or AMD Ryzen 9 HX (16‑core class) </li><li>Windows: Windows 11 Pro/Education </li><li>Memory: 32 GB </li><li>Graphics: Dedicated GPU (16 GB VRAM) </li><li>Storage: 2–4 TB SSD </li><li>Backup: External SSD/HDD (2 TB or larger)</li></ul>"
       }
     },
     {
       "id": "68f182fee4bd03c72d4aca37",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-25T04:20:20.870Z",
-      "lastUpdated": "2026-02-23T21:03:05.315Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:52:14.706Z",
       "createdOn": "2025-10-16T23:42:54.367Z",
       "isArchived": false,
       "isDraft": false,
@@ -126,7 +131,7 @@
         "banner-image": {
           "fileId": "699cc0597e45cf17d567decf",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/699cc0597e45cf17d567decf_leadership-case-management-1.jpg",
-          "alt": null
+          "alt": "A doctor and three nurses gathered around a laptop, engaged in a discussion about medical cases and treatment plans."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -149,14 +154,16 @@
         "connect-with-us": false,
         "frequently-asked-questions": "<p>‍</p><div data-rt-embed-type='true'><style>\n.accordion-item {\n  margin-bottom: 10px;\n}\n.accordion-button {\n  width: 100%;\n  height: 40px;\n  padding-left: 1em;\n  text-align: left;\n  font-size: 1em;\n  background-image: linear-gradient(101deg, rgba(3, 26, 98, 0.4), rgba(255, 255, 255, 0.2));\n  background-color: rgb(0,163,355);\n  color: white;\n  border: none;\n  cursor: pointer;\n  position: relative;\n}\n.accordion-button::after {\n  content: \">\";\n  position: absolute;\n  right: 1rem;\n  font-size: 1.4em;\n  transition: transform 0.3s ease;\n  transform: rotate(90deg);\n}\n.accordion-button.active::after {\n  transform: rotate(-90deg);\n}\n.accordion-content {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 0.4s ease;\n  background: #f2f3f7;\n  padding: 0 1em;\n}\n.accordion-content.open {\n  padding: 1em;\n  max-height: 2000px;\n}\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1rem auto;\n}\nth, td {\n  padding: 0.75rem;\n  text-align: left;\n  border: 1px solid #ccc;\n}\nth {\n  background-color: #0077cc;\n  color: white;\n}\n.table-center {\n  text-align: center;\n}\ntr:nth-child(even) {\n  background-color: #f9f9f9;\n}\n.accordion-section {\n  margin-bottom: 1rem;\n}\n.icon.tooltip {\n  height: 25px!important;\n  width: 25px!important;\n  cursor: pointer;\n}\n</style>\n\n<div class=\"bvc-accordion\">\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">How long will I have access to the course materials?</button>\n  <div class=\"accordion-content\">\n    <p>You will have access to their course materials for 4 weeks from the start date. (Note: Please check your course page for specifics.)</p>\n  </div>\n</div>\n\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">What happens if a course is cancelled or postponed?</button>\n  <div class=\"accordion-content\">\n    <p>If a course is cancelled, you will receive a full refund. If postponed, you’ll have the option to join the rescheduled session or request a refund. Please review our refund policy for eligibility and conditions-Student Financial Accounts Procedure 500-1-11(if required).</p>\n  </div>\n</div>\t\n\t\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">Can I download the course materials, or do I need internet access?</button>\n  <div class=\"accordion-content\">\n    <p>Most learning activities (such as quizzes, assessments, and discussions) are completed through D2L (Desire2Learn), which requires internet access. Some readings or resources may be available for download but active participation in the course requires being online.</p>\n  </div>\n</div>\t\n\t\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">What is expected of me during the course?</button>\n  <div class=\"accordion-content\">\n    <p>You will be expected to actively engage, complete assessments on time, and follow all course guidelines.</p>\n  </div>\n</div>\t\n\t\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">How long is my credential valid?</button>\n  <div class=\"accordion-content\">\n    <p>Your credential does not expire; however, please note that updates in the field may affect its relevance over time.</p>\n  </div>\n</div>\t\n\t\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">Who owns the course content?</button>\n  <div class=\"accordion-content\">\n    <p>Instructors are still central — their role has shifted:\n</p><ul>\n<li>Coach: Helping you set goals and build confidence.</li>\n<li>Guide: Explaining rubrics, assessments, and resources.</li>\n<li>Support: Giving feedback and direction when needed.</li>\n<li>Pop-Up Workshops: Instructors may create short lectures, presentations, or Q&amp;A sessions in response to common student struggles.</li>\n</ul>\nSpeak up! The more you share your needs, the more instructors can tailor support.<p></p>\n  </div>\n</div>\t\n\t\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">Do these courses count toward professional development (CEUs/CPD)</button>\n  <div class=\"accordion-content\">\n    <p>Recognition of these courses for CEUs/CPD varies by employer and professional association. Some companies may accept them, while others may not. We recommend confirming with your employer or professional body.</p>\n  </div>\n</div>\t\t\n\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">Isn't this just correspondence or self-study?</button>\n  <div class=\"accordion-content\">\n    <p>All course content remains the intellectual property of Bow Valley College. Students may use it for personal educational purposes only.</p>\n  </div>\n</div>\t\n\t\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">Can I get a refund if I change my mind?</button>\n  <div class=\"accordion-content\">\n    <p>Yes. Please review our refund policy for eligibility and conditions-Student Financial Accounts Procedure 500-1-11 (if required).</p>\n  </div>\n</div>\t\n\t\n<div class=\"accordion-item\">\n  <button class=\"accordion-button\" aria-expanded=\"false\">How will my personal data be used?</button>\n  <div class=\"accordion-content\">\n    <p>We may use enrollment data to improve courses, verify certification, and share updates. Marketing communications are optional, and you can opt out anytime.</p>\n  </div>\n</div>\t\n\n</div>\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", function() {\n    const toggles = document.querySelectorAll(\".accordion-button\");\n    toggles.forEach(toggle => {\n        toggle.addEventListener(\"click\", () => {\n            const content = toggle.nextElementSibling;\n            const expanded = toggle.getAttribute(\"aria-expanded\") === \"true\";\n            toggle.setAttribute(\"aria-expanded\", !expanded);\n            toggle.classList.toggle(\"active\");\n            if (expanded) {\n                content.style.maxHeight = null;\n            } else {\n                content.style.maxHeight = content.scrollHeight + \"px\";\n            }\n        });\n    });\n});\n</script></div>",
         "name": "Advancing Internationally Educated Nurses Care Pathways",
-        "slug": "advancing-internationally-educated-nurses-care-pathways"
+        "slug": "advancing-internationally-educated-nurses-care-pathways",
+        "customizable-apply-button": true,
+        "cancelled-program": false
       }
     },
     {
       "id": "68e94ed523b0fea2a6148385",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:24:01.597Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:52:55.273Z",
       "createdOn": "2025-10-10T18:22:13.982Z",
       "isArchived": false,
       "isDraft": false,
@@ -170,7 +177,7 @@
         "banner-image": {
           "fileId": "698f943fedb7c6cdaa179732",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f943fedb7c6cdaa179732_GettyImages-800305700.jpg",
-          "alt": null
+          "alt": "A man in a white shirt and tie holds a laptop while standing in a server room filled with equipment."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -199,20 +206,23 @@
         ],
         "has-zero-textbook-cost": false,
         "has-courses": false,
-        "courses-code": "<div data-rt-embed-type='true'><style>\n.accordion-item {\n  margin-bottom: 10px;\n}\n.accordion-button {\n  width: 100%;\n  height: 40px;\n  padding-left: 1em;\n  text-align: left;\n  font-size: 1em;\n  background-image: linear-gradient(101deg, rgba(3, 26, 98, 0.4), rgba(255, 255, 255, 0.2));\n  background-color: rgb(0,163,355);\n  color: white;\n  border: none;\n  cursor: pointer;\n  position: relative;\n}\n.accordion-button::after {\n  content: \">\";\n  position: absolute;\n  right: 1rem;\n  font-size: 1.4em;\n  transition: transform 0.3s ease;\n  transform: rotate(90deg);\n}\n.accordion-button.active::after {\n  transform: rotate(-90deg);\n}\n.accordion-content {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 0.4s ease;\n  background: #f1f1f1;\n  padding: 0 1em;\n}\n.accordion-content.open {\n  padding: 1em;\n  max-height: 2000px;\n}\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1rem auto;\n}\nth, td {\n  padding: 0.75rem;\n  text-align: left;\n  border: 1px solid #ccc;\n}\nth {\n  background-color: #0077cc;\n  color: white;\n}\n.table-center {\n  text-align: center;\n}\ntr:nth-child(even) {\n  background-color: #f9f9f9;\n}\n.accordion-section {\n  margin-bottom: 1rem;\n}\n.icon.tooltip {\n  height: 25px!important;\n  width: 25px!important;\n  cursor: pointer;\n}\n</style>\n<div class=\"bvc-accordion\">\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 1</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ISEC1200</td><td>Apply Cybersecurity Principles</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>SODV1400</td><td>Scripting  Fundamentals</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1200</td><td>Introduction to Networking</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1300</td><td>Deploy and Administer Enterprise Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1304</td><td>Introduction to Virtualization</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 2</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>CLCM1300</td><td>Introduction to Cloud Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT1108</td><td>Implement ITIL Service Management</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT1109</td><td>Manage Projects</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>SODV1401</td><td>Apply Scripting Techniques for Web Application</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1303</td><td>Configure and Administer Servers</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 3</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>TECH2100</td><td>Research Emerging Technology in IT</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2200</td><td>Automate IT Tasks and Processes</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2203</td><td>Develop Security Monitoring Techniques</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2204</td><td>Perform Advanced Network Administration</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2205</td><td>Advanced Switching and Routing</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 4</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>CLCM2400</td><td>Resolve Cloud Issues and Optimize Performance</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2206</td><td>Analyze and Visualize Networks</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2300</td><td>Diagnose and Resolve Complex IT Incidents</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2303</td><td>Perform Advanced Server Administration</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2998</td><td>Capstone Project for IT Solutions</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", function() {\n    const toggles = document.querySelectorAll(\".accordion-button\");\n    toggles.forEach(toggle => {\n        toggle.addEventListener(\"click\", () => {\n            const content = toggle.nextElementSibling;\n            const expanded = toggle.getAttribute(\"aria-expanded\") === \"true\";\n            toggle.setAttribute(\"aria-expanded\", !expanded);\n            toggle.classList.toggle(\"active\");\n            if (expanded) {\n                content.style.maxHeight = null;\n            } else {\n                content.style.maxHeight = content.scrollHeight + \"px\";\n            }\n        });\n    });\n});\n</script></div>",
+        "courses-code": "<div data-rt-embed-type='true'><style>\n.accordion-item {\n  margin-bottom: 10px;\n}\n.accordion-button {\n  width: 100%;\n  height: 40px;\n  padding-left: 1em;\n  text-align: left;\n  font-size: 1em;\n  background-image: linear-gradient(101deg, rgba(3, 26, 98, 0.4), rgba(255, 255, 255, 0.2));\n  background-color: rgb(0,163,355);\n  color: white;\n  border: none;\n  cursor: pointer;\n  position: relative;\n}\n.accordion-button::after {\n  content: \">\";\n  position: absolute;\n  right: 1rem;\n  font-size: 1.4em;\n  transition: transform 0.3s ease;\n  transform: rotate(90deg);\n}\n.accordion-button.active::after {\n  transform: rotate(-90deg);\n}\n.accordion-content {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 0.4s ease;\n  background: #f1f1f1;\n  padding: 0 1em;\n}\n.accordion-content.open {\n  padding: 1em;\n  max-height: 2000px;\n}\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1rem auto;\n}\nth, td {\n  padding: 0.75rem;\n  text-align: left;\n  border: 1px solid #ccc;\n}\nth {\n  background-color: #0077cc;\n  color: white;\n}\n.table-center {\n  text-align: center;\n}\ntr:nth-child(even) {\n  background-color: #f9f9f9;\n}\n.accordion-section {\n  margin-bottom: 1rem;\n}\n.icon.tooltip {\n  height: 25px!important;\n  width: 25px!important;\n  cursor: pointer;\n}\n</style>\n<div class=\"bvc-accordion\">\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 1</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>SODV1400</td><td>Scripting  Fundamentals</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1200</td><td>Introduction to Networking</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1300</td><td>Deploy and Administer Enterprise Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1304</td><td>Introduction to Virtualization</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>SODV1401</td><td>Apply Scripting Techniques for Web Application</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 2</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>CLCM1300</td><td>Introduction to Cloud Infrastructure</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT1108</td><td>Implement ITIL Service Management</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>MGMT1109</td><td>Manage Projects</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH1303</td><td>Configure and Administer Servers</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>ISEC1200</td><td>Apply Cybersecurity Principles</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 3</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>TECH2100</td><td>Research Emerging Technology in IT</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2200</td><td>Automate IT Tasks and Processes</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2203</td><td>Develop Security Monitoring Techniques</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2205</td><td>Advanced Switching and Routing</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2303</td><td>Perform Advanced Server Administration</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 4</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>CLCM2400</td><td>Resolve Cloud Issues and Optimize Performance</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2204</td><td>Perform Advanced Network Administration</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2206</td><td>Analyze and Visualize Networks</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2300</td><td>Diagnose and Resolve Complex IT Incidents</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n          <tr><td>TECH2998</td><td>Capstone Project for IT Solutions</td><td class=\"table-center\">3</td><td class=\"table-center\"></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", function() {\n    const toggles = document.querySelectorAll(\".accordion-button\");\n    toggles.forEach(toggle => {\n        toggle.addEventListener(\"click\", () => {\n            const content = toggle.nextElementSibling;\n            const expanded = toggle.getAttribute(\"aria-expanded\") === \"true\";\n            toggle.setAttribute(\"aria-expanded\", !expanded);\n            toggle.classList.toggle(\"active\");\n            if (expanded) {\n                content.style.maxHeight = null;\n            } else {\n                content.style.maxHeight = content.scrollHeight + \"px\";\n            }\n        });\n    });\n});\n</script></div>",
         "apply-button-is-english-learing-skill": false,
         "apply-button-is-first-year-student": true,
         "connect-with-us": false,
         "connect-form": "<div data-rt-embed-type='true'><!-- Demo Page Content -->\n<div class=\"demo-container\">\n    <button class=\"connect-btn\" onclick=\"openPopup()\">I am interested</button>\n</div>\n<!-- Popup Overlay -->\n<div id=\"popupOverlay\" class=\"popup-overlay\" onclick=\"closePopupOnOverlay(event)\">\n    <div class=\"popup-container\">\n        <button class=\"close-btn\" onclick=\"closePopup()\">&times;</button>\n        <!-- Processing Overlay -->\n        <div id=\"processingOverlay\" class=\"processing-overlay\">\n            <div class=\"processing-content\">\n                <div class=\"spinner\"></div>\n                <h2>Processing your request...</h2>\n                <p>Please wait while we submit your application.</p>\n            </div>\n        </div>\n        <div class=\"form-container\">\n            <h2 class=\"form-title\">Register your interest</h2>\n            <form id=\"wf-form\" name=\"wf-form\" data-name=\"wf-form\" action=\"https://analytics-ca.clickdimensions.com/forms/h/aTJ0wC9tccU191hBgrimww\" method=\"post\">\n                <div class=\"form-step\">\n                    <div class=\"form-control\">\n                        <label for=\"first_name\" class=\"field-label\">First Name <span class=\"required\">*</span></label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"first_name\" placeholder=\"Enter your First Name\" type=\"text\" id=\"first_name\" required>\n                        <div class=\"error-message\" id=\"first_name_error\">Please enter your first name</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <label for=\"last_name\" class=\"field-label\">Last Name <span class=\"required\">*</span></label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"last_name\" placeholder=\"Enter your Last Name\" type=\"text\" id=\"last_name\" required>\n                        <div class=\"error-message\" id=\"last_name_error\">Please enter your last name</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <label for=\"email\" class=\"field-label\">Email Address <span class=\"required\">*</span></label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"email\" placeholder=\"Enter your Email Address\" type=\"email\" id=\"email\" required>\n                        <div class=\"error-message\" id=\"email_error\">Please enter a valid email address</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <label for=\"phone\" class=\"field-label\">Phone Number</label>\n                        <input class=\"text-field\" maxlength=\"256\" name=\"phone\" placeholder=\"Enter your Phone Number\" type=\"tel\" id=\"phone\">\n                        <div class=\"error-message\" id=\"phone_error\">Please enter a valid phone number</div>\n                    </div>\n                    <!-- <div class=\"form-control\">\n                        <label class=\"field-label\">What type of information are you looking for? <span\n                                class=\"required\">*</span></label>\n                        <div class=\"custom-multiselect\">\n                            <div class=\"selected-items\" id=\"selectedItems\">\n                                <span class=\"placeholder\">Click to select options...</span>\n                            </div>\n                            <div class=\"dropdown-arrow\">▼</div>\n                            <div class=\"dropdown-options\" id=\"dropdownOptions\">\n                                <div class=\"option-item\" data-value=\"Admissions & Requirements\">\n                                    <input type=\"checkbox\" id=\"opt_admissions\">\n                                    <label for=\"opt_admissions\">Admissions & Requirements</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Programs, Courses & Delivery\">\n                                    <input type=\"checkbox\" id=\"opt_programs\">\n                                    <label for=\"opt_programs\">Programs, Courses & Delivery</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Tuition & Fees\">\n                                    <input type=\"checkbox\" id=\"opt_tuition\">\n                                    <label for=\"opt_tuition\">Tuition & Fees</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Financial Aid & Scholarships\">\n                                    <input type=\"checkbox\" id=\"opt_financial\">\n                                    <label for=\"opt_financial\">Financial Aid & Scholarships</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Work, Co-op & Career Advise\">\n                                    <input type=\"checkbox\" id=\"opt_career\">\n                                    <label for=\"opt_career\">Work, Co-op & Career Advise</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Registration & Enrolment to Courses\">\n                                    <input type=\"checkbox\" id=\"opt_registration\">\n                                    <label for=\"opt_registration\">Registration & Enrolment to Courses</label>\n                                </div>\n                                <div class=\"option-item\" data-value=\"Other\">\n                                    <input type=\"checkbox\" id=\"opt_other\">\n                                    <label for=\"opt_other\">Other...</label>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"error-message\" id=\"info_type_error\">Please select at least one type of information\n                        </div>\n                    </div>\n                    <div class=\"form-control\" id=\"other_details_container\" style=\"display: none;\">\n                        <label for=\"other_details\" class=\"field-label\">Please specify what other information you need\n                            <span class=\"required\">*</span></label>\n                        <textarea class=\"textarea-field\" name=\"other_details\"\n                            placeholder=\"Please describe the specific information you're looking for...\"\n                            id=\"other_details\"></textarea>\n                        <div class=\"error-message\" id=\"other_details_error\">Please provide details about the information\n                            you need</div>\n                    </div> -->\n                    <!-- Hidden field to store all selected values -->\n                    <input type=\"hidden\" name=\"s_faqs\" id=\"s_faqs\" value=\"I am interested. Contact me with more information.\">\n                    <div class=\"form-control\">\n                        <label for=\"bvc_receivefutureeventcommunications\" class=\"field-label\">Do you want to receive\n                            information about upcoming events? <span class=\"required\">*</span></label>\n                        <select id=\"bvc_receivefutureeventcommunications\" name=\"bvc_receivefutureeventcommunications\" required class=\"select-field\">\n                            <option value>Please select...</option>\n                            <option value=\"1\" selected>Yes</option>\n                            <option value=\"0\">No</option>\n                        </select>\n                        <div class=\"error-message\" id=\"events_error\">Please select an option</div>\n                    </div>\n                    <div class=\"form-control\">\n                        <div class=\"g-recaptcha\" data-sitekey=\"6LdZA8grAAAAAJ4TqnEHpm6-HazESgQ1SdM1KrQC\"></div>\n                        <div class=\"error-message\" id=\"recaptcha_error\">Please complete the reCAPTCHA</div>\n                    </div>\n                    <div class=\"loading\" id=\"loading\">Submitting...</div>\n                    <input type=\"submit\" class=\"submit-btn\" value=\"Submit\" id=\"submitBtn\">\n                </div>\n                <input type=\"hidden\" name=\"s_type\" id=\"s_type\" value=\"916190001\">\n                <input type=\"hidden\" name=\"funnelStartingStage\" id=\"funnelStartingStage\" value=\"916190002\">\n                <input type=\"hidden\" name=\"initialTouchPoint\" id=\"initialTouchPoint\" value=\"916190004\">\n                <input type=\"hidden\" name=\"contact_type\" id=\"contact_type\" value=\"916190000\">\n                <input type=\"hidden\" name=\"campaignType\" id=\"campaignType\" value>\n            </form>\n        </div>\n    </div>\n</div>\n<!-- Success Message Overlay -->\n<div id=\"successOverlay\" class=\"success-overlay\">\n    <div class=\"success-content\">\n        <button class=\"success-close-btn\" onclick=\"closeSuccessMessage()\">&times;</button>\n        <h2>Thank you for your submission.</h2>\n        <p>Our team will get back to you with clear next steps.</p>\n        <!-- <h4>While you’re here</h4>\n        <p>Grab the Bow Valley College Viewbook. Your guide to programs, course delivery, admission requirements, and how to apply.</p>\n        <p>\n            <a href=\"#\" class=\"bvc-btn\" aria-describedby=\"bvc-viewbook-title\" download>\n            Download the Viewbook (PDF)\n            </a>\n        </p> -->\n        <p>\n            Need help now? Call <strong>403-410-1400</strong>.<br>\n            <strong>Hit the ground working.</strong>\n        </p>\n    </div>\n</div></div>",
         "name": "Information Technology Solutions",
-        "slug": "information-technology-solutions"
+        "slug": "information-technology-solutions",
+        "customizable-apply-button": false,
+        "cancelled-program": false,
+        "pre-practicum-requirement-laptop-requirements-additional-admin-info": "<h5>Minimum Technology Requirements</h5><ul><li>Windows Laptops (Brand‑Agnostic)</li><li>CPU: Current Intel Core Ultra / Core i9‑HX (24‑core class) or AMD Ryzen 9 HX (16‑core class) </li><li>Windows: Windows 11 Pro/Education </li><li>Memory: 32 GB </li><li>Graphics: Dedicated GPU (16 GB VRAM) </li><li>Storage: 2–4 TB SSD </li><li>Backup: External SSD/HDD (2 TB or larger)</li></ul>"
       }
     },
     {
       "id": "68dd315f55d438435cc29a3f",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:24:24.307Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:53:33.653Z",
       "createdOn": "2025-10-01T13:49:19.974Z",
       "isArchived": false,
       "isDraft": false,
@@ -226,7 +236,7 @@
         "banner-image": {
           "fileId": "698f9f1cad1319a3e12c8677",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9f1cad1319a3e12c8677_iStock-487536795-disability-studies.jpg",
-          "alt": null
+          "alt": "A woman talks to a young boy in a wheelchair, creating a friendly and supportive atmosphere."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -256,14 +266,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Disability Studies",
-        "slug": "disability-studies-certificate"
+        "slug": "disability-studies-certificate",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "68b9efc9bbcc2b38191daabc",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-02T20:40:37.159Z",
-      "lastUpdated": "2026-03-02T20:40:37.159Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T21:03:29.963Z",
       "createdOn": "2025-09-04T20:00:09.700Z",
       "isArchived": false,
       "isDraft": false,
@@ -277,7 +289,7 @@
         "banner-image": {
           "fileId": "69951a21bcd8700b1be63e33",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951a21bcd8700b1be63e33_GettyImages-637181826.jpg",
-          "alt": null
+          "alt": "A group of nurses in a classroom setting, joyfully raising their hands in the air."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -307,14 +319,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Registered Nurse Pathway to Canadian Practice",
-        "slug": "registered-nurse-pathway-to-canada-practice"
+        "slug": "registered-nurse-pathway-to-canada-practice",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "68b75882612b532fc38203d6",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:25:19.045Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T21:04:37.580Z",
       "createdOn": "2025-09-02T20:50:10.209Z",
       "isArchived": false,
       "isDraft": false,
@@ -328,7 +342,7 @@
         "banner-image": {
           "fileId": "698f9d8117d999591df8aa34",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9d8117d999591df8aa34_GettyImages-1309274126.jpg",
-          "alt": null
+          "alt": "Two women sitting at a table in what appears to be a coffee shop, focused on a laptop, engaged in conversation."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -361,14 +375,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - Digital Marketing",
-        "slug": "business-administration---digital-marketing"
+        "slug": "business-administration---digital-marketing",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67ed94039a030e1a0f904206",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-09T04:29:44.863Z",
-      "lastUpdated": "2026-03-09T04:29:44.863Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T21:05:27.460Z",
       "createdOn": "2025-04-02T19:46:11.192Z",
       "isArchived": false,
       "isDraft": false,
@@ -381,7 +397,7 @@
         "banner-image": {
           "fileId": "698fa0273f4ae9f56c4b6b99",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698fa0273f4ae9f56c4b6b99_GettyImages-1349165877.jpg",
-          "alt": null
+          "alt": "A group of diverse students, ranging from the ages of young and old, in a well-lit classroom."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -407,7 +423,9 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Open Studies",
-        "slug": "open-studies"
+        "slug": "open-studies",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
@@ -445,14 +463,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Data Analytics",
-        "slug": "business-data-analytics"
+        "slug": "business-data-analytics",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67ec5df9d838d4e183344aae",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:25:49.262Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T21:06:08.522Z",
       "createdOn": "2025-04-01T21:43:21.909Z",
       "isArchived": false,
       "isDraft": false,
@@ -465,7 +485,7 @@
         "banner-image": {
           "fileId": "699519dd10f4d26e2fec2c4a",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/699519dd10f4d26e2fec2c4a_GettyImages-143071394.jpg",
-          "alt": null
+          "alt": "A group of for diverse students sitting outside on campus, smiling and talking."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -491,14 +511,16 @@
         "apply-button-is-first-year-student": true,
         "connect-with-us": false,
         "name": "University Transfer",
-        "slug": "university-transfer"
+        "slug": "university-transfer",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67eb196a96d1d03fe4b5adbe",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-07T15:37:35.115Z",
-      "lastUpdated": "2026-03-04T20:05:49.752Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T21:07:26.283Z",
       "createdOn": "2025-03-31T22:38:34.693Z",
       "isArchived": false,
       "isDraft": false,
@@ -511,14 +533,14 @@
         "banner-image": {
           "fileId": "699521b59e3611c40180c12e",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/699521b59e3611c40180c12e_BVC_School%20of%20Health%20and%20Wellness_08.jpg",
-          "alt": null
+          "alt": "A group of nurses with diverse background gathered around a table, engaged in conversation and sharing ideas."
         },
         "has-intl-offerings": false,
         "pgwp": false,
-        "program-description": "<h5 id=\"\">Breaking down barriers: Empowering internationally educated nurses</h5><p id=\"\">The Path2Practice for IENs (Internationally Educated Nurses) program is designed to help nurses who were educated outside of Canada start their nursing career in Alberta. </p><p id=\"\">This program helps bridge your nursing qualifications and experience with what is needed to meet the healthcare standards and work requirements in Alberta.</p><p id=\"\">‍</p><p id=\"\">‍</p><figure id=\"\" class=\"w-richtext-figure-type-image w-richtext-align-center\" style=\"max-width:90%\" data-rt-type=\"image\" data-rt-align=\"center\" data-rt-max-width=\"90%\"><div id=\"\"><img src=\"https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/6848be4d68e9d09881e04b7d_path2practice%20journey%20map.png\" loading=\"lazy\" alt=\"__wf_reserved_inherit\" width=\"auto\" height=\"auto\" id=\"\"></div></figure><div data-rt-embed-type='true'><a href=\"https://criec.ca/p2pforiens/\" target=\"_blank\"><h2 style=\"text-align: center;\">Begin here</h2></a></div><h4 id=\"\">Partner</h4><h5 id=\"\">About CRIEC</h5><p id=\"\">CRIEC is a robust not-for-profit organization that seeks to effectively and efficiently connect newcomer professionals with strategies designed to lead to successful employment outcomes. Our specially designed initiatives have resulted in 80% of our clients finding gainful employment in their chosen fields within 3-6 months of competing our programs.</p><h2 id=\"\">‍</h2><figure id=\"\" class=\"w-richtext-figure-type-image w-richtext-align-normal\" data-rt-type=\"image\" data-rt-align=\"normal\" data-rt-max-width=\"\"><div id=\"\"><img src=\"https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/67eb19b1f4b9087a431a4e42_Wordmark_Canada-EN%20-%20funded%20in%20part.png\" loading=\"lazy\" alt=\"__wf_reserved_inherit\" width=\"auto\" height=\"auto\" id=\"\"></div></figure>",
+        "program-description": "<h5>Breaking down barriers: Empowering internationally educated nurses</h5><p>The Path2Practice for IENs (Internationally Educated Nurses) program is designed to help nurses who were educated outside of Canada start their nursing career in Alberta. </p><p>This program helps bridge your nursing qualifications and experience with what is needed to meet the healthcare standards and work requirements in Alberta.</p><p>‍</p><p>‍</p><figure class=\"w-richtext-figure-type-image w-richtext-align-center\" style=\"max-width:90%\" data-rt-type=\"image\" data-rt-align=\"center\" data-rt-max-width=\"90%\"><div><img src=\"https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/6848be4d68e9d09881e04b7d_path2practice%20journey%20map.png\" loading=\"lazy\" alt=\"__wf_reserved_inherit\" width=\"auto\" height=\"auto\"></div></figure><div data-rt-embed-type='true'><style>\n.button-wrapper {\n  display: flex;\n  justify-content: center;\n}\n</style>\n\n<div class=\"button-wrapper\">\n<a href=\"https://criec.ca/p2pforiens/\" target=\"_blank\" class=\"c-button__grad-o-3 w-button\">Begin here</a>\n</div></div><h4>Partner</h4><h5>About CRIEC</h5><p>CRIEC is a robust not-for-profit organization that seeks to effectively and efficiently connect newcomer professionals with strategies designed to lead to successful employment outcomes. Our specially designed initiatives have resulted in 80% of our clients finding gainful employment in their chosen fields within 3-6 months of competing our programs.</p><h2>‍</h2><figure class=\"w-richtext-figure-type-image w-richtext-align-fullwidth\" style=\"max-width:550px\" data-rt-type=\"image\" data-rt-align=\"fullwidth\" data-rt-max-width=\"550px\"><div><img src=\"https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/67eb19b1f4b9087a431a4e42_Wordmark_Canada-EN%20-%20funded%20in%20part.png\" loading=\"lazy\" alt=\"__wf_reserved_inherit\" width=\"auto\" height=\"auto\"></div></figure>",
         "show-transcript-deadline-disclaimer": false,
         "doesnt-have-admin-requirements": false,
-        "admin-req": "<h4>Program Eligibility Criteria</h4><h6><strong>Residence Status<br></strong></h6><p>Canadian Citizens, Permanent Residents, Refugee/Protected Persons selected by IRCC, or work permit holders.</p><p><strong><em>*NOTE: </em></strong><em>Participants holding an open or closed work permit with the condition: “Unless authorized, prohibited from attending any education institution, or taking any academic, professional or vocational training course” are not eligible for this educational training program. For further guidance, please contact IRCC regarding options such as removal of conditions or other available pathways.</em></p><h6><strong>Educational Requirements</strong></h6><p>Must hold a degree equivalent to the Canadian standard.</p><h6><strong>Currency of Practice</strong></h6><p>Practiced nursing within the last 5-7 years</p><h6><strong>NCLEX Certification</strong></h6><p>Although not required, participants who already hold NCLEX certification, as recognized by CRNA.</p><h6><strong>CRNA Assessment</strong></h6><p>Participants who have been assessed by CRNA and have a letter with the results of their education assessment and additional education or language requirements.<br></p><h6><strong>English Language Proficiency</strong></h6><ul><li>IELTS Academic: Listening 7.0, Reading 6.5, Writing 6.5, Speaking 7.0 or</li><li>CELBAN: Listening 9, Reading 8, Writing 7, Speaking 8</li></ul><p><a href=\"https://criec.ca/path2practiceforiens/\" target=\"_blank\">Learn more about eligibility criteria from CRIEC</a></p><h4><br>Not Eligible? </h4><p>Check out the <a href=\"https://www.bowvalleycollege.ca/programs/registered-nurse-pathway-to-canada-practice\">Registered Nurse Pathway to Canada Practice program</a>.<br></p>",
+        "admin-req": "<h4>Program Eligibility Criteria</h4><h6><strong>Residence Status<br></strong></h6><p>Canadian Citizens, Permanent Residents, Refugee/Protected Persons selected by IRCC, or work permit holders.</p><p><strong><em>*NOTE: </em></strong><em>Participants holding an open or closed work permit with the condition: “Unless authorized, prohibited from attending any education institution, or taking any academic, professional or vocational training course” are not eligible for this educational training program. For further guidance, please contact IRCC regarding options such as removal of conditions or other available pathways.</em></p><h6><strong>Educational Requirements</strong></h6><p>Must hold a degree equivalent to the Canadian standard.</p><h6><strong>Currency of Practice</strong></h6><p>Practiced nursing within the last 5-7 years</p><h6><strong>NCLEX Certification</strong></h6><p>Although not required, participants who already hold NCLEX certification, as recognized by CRNA.</p><h6><strong>CRNA Assessment</strong></h6><p>Participants who have been assessed by CRNA and have a letter with the results of their education assessment and additional education or language requirements.<br></p><h6><strong>English Language Proficiency</strong></h6><ul><li>IELTS Academic: Listening 7.0, Reading 6.5, Writing 6.5, Speaking 7.0 or</li><li>CELBAN: Listening 9, Reading 8, Writing 7, Speaking 8</li></ul><h6>LPNs who are IENs with current clinical practice*</h6><p><em>Licensed Practical Nurse(LPN) in Canada are are eligible for this program if they have an active LPN license, meaning that they have clinical experience or currency of practice. LPNs who have only completed the LPN program without any practice will not be considered to have clinical experience or currency of practice. In addition, the LPN must have a Bachelor Nursing degree/Diploma (equivalent to BSc Nursing in Canada) from their home country as this program is exclusively for IENs.</em></p><p><a href=\"https://criec.ca/p2pforiens/\" target=\"_blank\">Learn more about what CRIEC offers through our P2P for IENs program</a></p><p>‍</p><p>Check out the <a href=\"https://www.bowvalleycollege.ca/programs/registered-nurse-pathway-to-canada-practice\">Registered Nurse Pathway to Canada Practice program</a>.<br></p>",
         "has-transfer-option": false,
         "upgrading-not-applicable": true,
         "provincial-equivalency-not-applicable": true,
@@ -532,14 +554,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Path2Practice for IENs",
-        "slug": "path2practiceforiens"
+        "slug": "path2practiceforiens",
+        "customizable-apply-button": true,
+        "cancelled-program": false
       }
     },
     {
       "id": "67e1ae082d5d1dc4460d7b8d",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-07T15:37:35.115Z",
-      "lastUpdated": "2026-03-06T17:45:54.300Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T21:08:10.811Z",
       "createdOn": "2025-03-24T19:10:00.865Z",
       "isArchived": false,
       "isDraft": false,
@@ -551,9 +575,9 @@
         "program-area": "66e89017bd573526b68b151e",
         "duration": "66e8516218e2b3afb6237f55",
         "banner-image": {
-          "fileId": "698f9fe4d83c7f0dce39f20c",
-          "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9fe4d83c7f0dce39f20c_GettyImages-2081435496.jpg",
-          "alt": null
+          "fileId": "69c164c107886c82eea66289",
+          "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69c164c107886c82eea66289_eced-hero-image-2.jpg",
+          "alt": "A group of young preschool children holding hands with a teacher in a big circle playing a game outside on the playground."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -588,14 +612,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Early Childhood Education and Development",
-        "slug": "early-childhood-education-and-development-diploma"
+        "slug": "early-childhood-education-and-development-diploma",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67e196e8a2e0d241ce9f4614",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:26:45.282Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T21:11:36.564Z",
       "createdOn": "2025-03-24T17:31:20.736Z",
       "isArchived": false,
       "isDraft": false,
@@ -609,7 +635,7 @@
         "banner-image": {
           "fileId": "699519aa79842bf9a33a34cb",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/699519aa79842bf9a33a34cb_MarqAssets_264_03838.jpg",
-          "alt": null
+          "alt": " A woman and man sit at a table, focused on a laptop in front of them."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -642,14 +668,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Health Data Analytics",
-        "slug": "health-data-analytics-diploma"
+        "slug": "health-data-analytics-diploma",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da45376051a4818b3e7707",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:27:02.946Z",
+      "lastPublished": "2026-03-25T17:37:09.149Z",
+      "lastUpdated": "2026-03-25T17:37:09.149Z",
       "createdOn": "2025-03-19T04:16:55.593Z",
       "isArchived": false,
       "isDraft": false,
@@ -663,7 +691,7 @@
         "banner-image": {
           "fileId": "69951b724a2f78b455890ab4",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951b724a2f78b455890ab4_GettyImages-1138528707.jpg",
-          "alt": null
+          "alt": "A young woman working on her laptop at her home."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -695,14 +723,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Software Development - Apprenticeship Style",
-        "slug": "software-development---apprenticeship-style"
+        "slug": "software-development---apprenticeship-style",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da44d04929a3dd38d36677",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:27:17.901Z",
+      "lastPublished": "2026-03-25T17:37:17.712Z",
+      "lastUpdated": "2026-03-25T17:37:17.712Z",
       "createdOn": "2025-03-19T04:15:12.163Z",
       "isArchived": false,
       "isDraft": false,
@@ -716,7 +746,7 @@
         "banner-image": {
           "fileId": "698f98a4a6849a5f6652d677",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f98a4a6849a5f6652d677_GettyImages-488768846.jpg",
-          "alt": null
+          "alt": "A young man at a computer in a computer lab looking focused on screen."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -750,14 +780,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Software Development",
-        "slug": "software-development"
+        "slug": "software-development",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3ded6debcecaddfe6094",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:28:42.525Z",
+      "lastPublished": "2026-03-25T17:37:22.035Z",
+      "lastUpdated": "2026-03-25T17:37:22.035Z",
       "createdOn": "2025-03-19T03:45:49.940Z",
       "isArchived": false,
       "isDraft": false,
@@ -771,7 +803,7 @@
         "banner-image": {
           "fileId": "696e8f619d4624142f9fd628",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/696e8f619d4624142f9fd628_20250711_IMAC_CampusAnthem_HKA9149.jpg",
-          "alt": null
+          "alt": "A Bow Valley College nursing student wearing scrubs attending to a patient with a doctor watching."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -808,14 +840,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Practical Nurse",
-        "slug": "practical-nurse"
+        "slug": "practical-nurse",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3ded66d12f666d9876f2",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-13T20:50:01.150Z",
-      "lastUpdated": "2026-02-13T17:46:48.213Z",
+      "lastPublished": "2026-03-25T17:37:25.674Z",
+      "lastUpdated": "2026-03-25T17:37:25.674Z",
       "createdOn": "2025-03-19T03:45:49.814Z",
       "isArchived": false,
       "isDraft": false,
@@ -829,7 +863,7 @@
         "banner-image": {
           "fileId": "698e03f5293942be393028df",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e03f5293942be393028df_GettyImages-849302322.jpg",
-          "alt": null
+          "alt": "A veterinary office assistant wearing scrubs, petting a dog."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -860,14 +894,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Veterinary Office Assistant",
-        "slug": "veterinary-office-assistant"
+        "slug": "veterinary-office-assistant",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dede62ce5418f1bb639",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:29:08.150Z",
+      "lastPublished": "2026-03-25T17:37:33.089Z",
+      "lastUpdated": "2026-03-25T17:37:33.089Z",
       "createdOn": "2025-03-19T03:45:49.451Z",
       "isArchived": false,
       "isDraft": false,
@@ -881,7 +917,7 @@
         "banner-image": {
           "fileId": "698e0349078eb2e54203bf2b",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e0349078eb2e54203bf2b_BVC_School%20of%20Health%20and%20Wellness_21.jpg",
-          "alt": null
+          "alt": "A woman in a wheelchair assists an older woman, showcasing kindness and support in their interaction."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -913,14 +949,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Recreation Therapy Aide",
-        "slug": "recreation-therapy-aide"
+        "slug": "recreation-therapy-aide",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dedf2925a9edff7f58f",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:29:34.735Z",
+      "lastPublished": "2026-04-02T15:52:25.770Z",
+      "lastUpdated": "2026-03-31T20:04:47.450Z",
       "createdOn": "2025-03-19T03:45:49.442Z",
       "isArchived": false,
       "isDraft": false,
@@ -934,14 +972,15 @@
         "banner-image": {
           "fileId": "698e0589f447a1264be8d013",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e0589f447a1264be8d013_BVC_School%20of%20Community%20Studies_23.jpg",
-          "alt": null
+          "alt": "A diverse group of people engaged in a meeting sitting in an open circle."
         },
         "has-intl-offerings": false,
         "pgwp": false,
         "cip-code": "44.0701",
         "program-description": "<p>The two-year Social Work Diploma program at Bow Valley College will provide students with comprehensive knowledge and preparation for a career in social work practice. This program equips students with the skills to support individuals, families, and communities while championing social justice and advocacy. In addition to learning the foundations of Social Work, students will develop critical thinking skills, empower change through advocacy, and learn self-reflection. Social Work Diploma graduates work in non-profit and private agencies including diverse community-based organizations, schools, addiction services, residential settings, senior care facilities, health care settings, and government organizations.</p><p>The Social Work Diploma program is accredited and approved by the Alberta College of Social Workers. Students who graduate from the program are eligible to apply to be a Registered Social Worker (RSW).</p><figure class=\"w-richtext-figure-type-image w-richtext-align-normal\" style=\"max-width:25%\" data-rt-type=\"image\" data-rt-align=\"normal\" data-rt-max-width=\"25%\"><div><img src=\"https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/68cb1b5c6e07dfaa653b3bf8_74de9e653b047e104a70ad8c24e45a33.png\" loading=\"lazy\" alt=\"__wf_reserved_inherit\" width=\"auto\" height=\"auto\"></div></figure>",
         "availabe-intakes-2": [
-          "68dd2b222cc5027fe3372830"
+          "68dd2b222cc5027fe3372830",
+          "69c1714ecf5ae857c6de2b79"
         ],
         "show-transcript-deadline-disclaimer": false,
         "doesnt-have-admin-requirements": false,
@@ -953,7 +992,7 @@
         "intl-students-do-not-need-to-show-country-specific-document": true,
         "pre-practicum-requirement-laptop-requirements-additional-admin-info": "<h5 id=\"\">Pre-practicum requirement</h5><p id=\"\">A current <a href=\"http://www.calgary.ca/cps/Pages/home.aspx\" target=\"_blank\" id=\"\"><strong id=\"\">Police Information Check (PIC)</strong></a> with a Vulnerable Sector Search (VSS) must be submitted prior to practicum placements. The existence of a criminal record may postpone or prevent clinical, practicum, or field work placements and, subsequently, successful completion of the program.</p>",
         "offered-at-regional-campuses": true,
-        "regional-description": "<p id=\"\">Students living in Okotoks and the surrounding area can take the program starting in Fall (September) at the Okotoks campus. Practicum courses include on-site activity at an agency in the region.</p><p id=\"\">If you are interested in applying for the program in Okotoks, please fill out our <a href=\"https://forms.office.com/r/kDfQ4APVqi\" target=\"_blank\" id=\"\">online form to register your interest</a>. You will receive a response in 2-3 business days.</p>",
+        "regional-description": "<p>Students living in Okotoks and the surrounding area can take the program at the Okotoks campus. Practicum courses include on-site activity at an agency in the region. If you are interested in applying for the program in Okotoks, please fill out our <a href=\"https://forms.office.com/pages/responsepage.aspx?id=9MYRj45kDEy7mZboQIqOKlSfH7tqOaZMrUqlvRFMhNRUMTdWUTNVSU5IOEcyN0IzM1hLVDc2VlJNTC4u&route=shorturl\" target=\"_blank\">online form to start your application. </a></p><p><em>Please note that this Okotoks offering does not accept Calgary residents.</em></p>",
         "has-tuition": false,
         "tuition-fees": [
           "67da0c587bc61380083d328c",
@@ -970,14 +1009,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Social Work",
-        "slug": "social-work"
+        "slug": "social-work",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3ded07b39ce6f15ca73f",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:29:47.662Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:59:31.164Z",
       "createdOn": "2025-03-19T03:45:49.337Z",
       "isArchived": false,
       "isDraft": false,
@@ -991,7 +1032,7 @@
         "banner-image": {
           "fileId": "69951bcb85a59098542a771a",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951bcb85a59098542a771a_GettyImages-1214593883.jpg",
-          "alt": null
+          "alt": " A man sits at a desk, focused on paperwork, surrounded by office supplies and a laptop."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -1020,7 +1061,9 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Risk Management",
-        "slug": "risk-management"
+        "slug": "risk-management",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
@@ -1059,14 +1102,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Practical Nurse Online Diploma program for Rural Alberta",
-        "slug": "practical-nurse-online-diploma-program-for-rural-alberta"
+        "slug": "practical-nurse-online-diploma-program-for-rural-alberta",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3ded089c1860cba3e531",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-20T17:29:43.869Z",
-      "lastUpdated": "2026-02-20T17:26:06.907Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:58:35.727Z",
       "createdOn": "2025-03-19T03:45:49.018Z",
       "isArchived": false,
       "isDraft": false,
@@ -1080,7 +1125,7 @@
         "banner-image": {
           "fileId": "698f929c094e67515dae3728",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f929c094e67515dae3728_MOA.jpg",
-          "alt": null
+          "alt": " A nurse sits at a desk with two other team members, engaged in discussion and paperwork."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -1113,14 +1158,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Medical Office Assistant and Unit Clerk",
-        "slug": "medical-office-assistant-and-unit-clerk"
+        "slug": "medical-office-assistant-and-unit-clerk",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dedf2925a9edff7f54e",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:30:41.188Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:57:33.986Z",
       "createdOn": "2025-03-19T03:45:49.015Z",
       "isArchived": false,
       "isDraft": false,
@@ -1134,7 +1181,7 @@
         "banner-image": {
           "fileId": "698e01f05852aff8c29a620a",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e01f05852aff8c29a620a_20250711_IMAC_CampusAnthem_HKA8978.jpg",
-          "alt": null
+          "alt": "A pharmacy student wear full protective gear sitting down handling specimen."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -1168,14 +1215,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Pharmacy Technician",
-        "slug": "pharmacy-technician"
+        "slug": "pharmacy-technician",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3decf0f0e246cf031001",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:31:00.125Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:56:05.739Z",
       "createdOn": "2025-03-19T03:45:48.904Z",
       "isArchived": false,
       "isDraft": false,
@@ -1189,7 +1238,7 @@
         "banner-image": {
           "fileId": "69952262382917db0e0ce840",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69952262382917db0e0ce840_GettyImages-506479358.jpg",
-          "alt": null
+          "alt": "A female nurse and two male nurses walks side by side in a hospital hallway."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -1218,14 +1267,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Perioperative Nursing for Registered Nurses and Licensed Practical Nurses",
-        "slug": "perioperative-nursing-for-registered-nurses-and-licensed-practical-nurses"
+        "slug": "perioperative-nursing-for-registered-nurses-and-licensed-practical-nurses",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dec089c1860cba3e4e9",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:31:15.346Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:54:39.136Z",
       "createdOn": "2025-03-19T03:45:48.812Z",
       "isArchived": false,
       "isDraft": false,
@@ -1239,7 +1290,7 @@
         "banner-image": {
           "fileId": "69951e5a3c6a4db7e5171c21",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951e5a3c6a4db7e5171c21_GettyImages-1402803562_resaved.jpg",
-          "alt": null
+          "alt": "A group of people wearing a VR headset and holding a game controller sitting together in a room illuminated by colorful neon lights."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -1271,14 +1322,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Machine Learning Analyst",
-        "slug": "machine-learning-analyst"
+        "slug": "machine-learning-analyst",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dec012f98916e1eace0",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-20T17:29:43.869Z",
-      "lastUpdated": "2026-02-18T17:30:41.028Z",
+      "lastPublished": "2026-03-25T18:22:48.941Z",
+      "lastUpdated": "2026-03-25T17:55:58.322Z",
       "createdOn": "2025-03-19T03:45:48.642Z",
       "isArchived": false,
       "isDraft": false,
@@ -1292,11 +1345,11 @@
         "banner-image": {
           "fileId": "6994f86fdc32072ae9ff55c5",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/6994f86fdc32072ae9ff55c5_GettyImages-1299800262.jpg",
-          "alt": null
+          "alt": "A woman in a business suit is holding a cell phone outside."
         },
         "has-intl-offerings": true,
         "pgwp": false,
-        "program-description": "<p id=\"\">Get ready to take on a key role in a law office, a corporate legal department, or the judicial system. Legal assistants have superior computer skills, excellent attention to detail and proofreading skills, effective time management, prioritization, and an understanding of confidentiality. Strong verbal and written communication skills are essential in this position. The Legal Assistant Capstone course brings theory and practice together in a law office simulation. Expected keyboarding speed at the end of this program is 60 words per minute.</p><h5 id=\"\">Time commitment</h5><p id=\"\">This diploma program can be completed as quickly as 18 months (including field placement)</p><h5 id=\"\">Field placement (mandatory)</h5><p id=\"\">A mandatory field placement is a requirement of the program. Mandatory field placement is a <strong id=\"\">3-credit, unpaid, 4-week work experience </strong>that occurs at the end of your program. To be eligible for mandatory field placement, you need to finish your coursework and complete all pre-placement requirements.</p><h5 id=\"\">Mentorship Opportunity</h5><figure id=\"\" class=\"w-richtext-figure-type-image w-richtext-align-floatleft\" style=\"max-width:250px\" data-rt-type=\"image\" data-rt-align=\"floatleft\" data-rt-max-width=\"250px\"><div id=\"\"><img src=\"https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/6995f690d8ed1c0b8a56591d_Dentons-Logo-RGB-Dentons-Purple-300.png\" loading=\"lazy\" alt=\"Dentons, Canada's Global LawFirm\" width=\"auto\" height=\"auto\" id=\"\"></div></figure><p id=\"\">The Legal Assistant Diploma program at Bow Valley College has partnered with the Calgary office of Dentons, Canada’s Global Law Firm, to offer a mentorship program for selected students, connecting them with experienced legal professionals through various activities, including speed mentoring, lunch and learns, and one-on-one guidance as they prepare for careers in the legal field. </p>",
+        "program-description": "<p>Get ready to take on a key role in a law office, a corporate legal department, or the judicial system. Legal assistants have superior computer skills, excellent attention to detail and proofreading skills, effective time management, prioritization, and an understanding of confidentiality. Strong verbal and written communication skills are essential in this position. The Legal Assistant Office Simulation course brings theory and practice together in a law office simulation. Expected keyboarding speed at the end of this program is 60 words per minute.</p><h5>Time commitment</h5><p>This diploma program can be completed as quickly as 18 months (including field placement)</p><h5>Field placement (mandatory)</h5><p>A mandatory field placement is a requirement of the program. Mandatory field placement is a <strong>3-credit, unpaid, 4-week work experience </strong>that occurs at the end of your program. To be eligible for mandatory field placement, you need to finish your coursework and complete all pre-placement requirements.</p><h5>Mentorship Opportunity</h5><figure class=\"w-richtext-figure-type-image w-richtext-align-floatleft\" style=\"max-width:250px\" data-rt-type=\"image\" data-rt-align=\"floatleft\" data-rt-max-width=\"250px\"><div><img src=\"https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/6995f690d8ed1c0b8a56591d_Dentons-Logo-RGB-Dentons-Purple-300.png\" loading=\"lazy\" alt=\"Dentons, Canada's Global LawFirm\" width=\"auto\" height=\"auto\"></div></figure><p>The Legal Assistant Diploma program at Bow Valley College has partnered with the Calgary office of Dentons, Canada’s Global Law Firm, to offer a mentorship program for selected students, connecting them with experienced legal professionals through various activities, including speed mentoring, lunch and learns, and one-on-one guidance as they prepare for careers in the legal field. </p>",
         "wil-cbe-program-delivery": "<p id=\"\">Courses are offered both in-person and online. Please note that not all courses may be available each semester. For assistance with program planning, consult with the Academic Advising Team.</p>",
         "availabe-intakes-2": [
           "68dd29ef7293b41496a41e6e",
@@ -1321,12 +1374,14 @@
         ],
         "has-zero-textbook-cost": true,
         "has-courses": false,
-        "courses-code": "<div data-rt-embed-type='true'><style>\n.accordion-item {\n  margin-bottom: 10px;\n}\n.accordion-button {\n  width: 100%;\n  height: 40px;\n  padding-left: 1em;\n  text-align: left;\n  font-size: 1em;\n  background-image: linear-gradient(101deg, rgba(3, 26, 98, 0.4), rgba(255, 255, 255, 0.2));\n  background-color: rgb(0,163,355);\n  color: white;\n  border: none;\n  cursor: pointer;\n  position: relative;\n}\n.accordion-button::after {\n  content: \">\";\n  position: absolute;\n  right: 1rem;\n  font-size: 1.4em;\n  transition: transform 0.3s ease;\n  transform: rotate(90deg);\n}\n.accordion-button.active::after {\n  transform: rotate(-90deg);\n}\n.accordion-content {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 0.4s ease;\n  background: #f1f1f1;\n  padding: 0 1em;\n}\n.accordion-content.open {\n  padding: 1em;\n  max-height: 2000px;\n}\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1rem auto;\n}\nth, td {\n  padding: 0.75rem;\n  text-align: left;\n  border: 1px solid #ccc;\n}\nth {\n  background-color: #0077cc;\n  color: white;\n}\n.table-center {\n  text-align: center;\n}\ntr:nth-child(even) {\n  background-color: #f9f9f9;\n}\n.accordion-section {\n  margin-bottom: 1rem;\n}\n.icon.tooltip {\n  height: 25px!important;\n  width: 25px!important;\n  cursor: pointer;\n}\n</style>\n<div class=\"bvc-accordion\">\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 1</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ADMN1101</td><td>Introduction to Professional Keyboarding</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1101_Introduction to Professional Keyboarding_(Winter 2025_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1201</td><td>Introduction to the Legal Profession</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1201_Introduction to the Legal Profession_(Fall 2024_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1401</td><td>Legal Document Processing I</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1401_Legal Document Processing I_(Fall 2023_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1501</td><td>Litigation I</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1501_Litigation I_(Fall 2022_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n      <p>Earn a minimum grade of B- in each of the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>MGMT1201</td><td>Business Communication</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1201_Business Communication_(Winter 2025_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 2</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL1502</td><td>Litigation II</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1502_Litigation II_(Fall 2023_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1602</td><td>Real Estate Law I</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1602_Real Estate Law I_(Fall 2020_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2105</td><td>Criminal Law for Legal Assistants</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2105_Criminal Law for Legal Assistants_(Fall 2025_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n      <p>Earn a minimum grade of B- in each of the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ADMN1102</td><td>Advanced Professional Keyboarding</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1102_Advanced Professional Keyboarding_(Winter 2021_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1402</td><td>Legal Document Processing II</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1402_Legal Document Processing II_(Spring 2024_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 3</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ADMN1203</td><td>Business Technology</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1203_Business Technology_(Spring 2022_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1603</td><td>Real Estate Law II</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1603_Real Estate Law II_(Spring 2023_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2101</td><td>Corporate Law</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2101_Corporate Law_(Fall 2024_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2103</td><td>Family Law</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2103_Family Law_(Fall 2025_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2104</td><td>Wills &amp; Estates</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2104_Wills &amp; Estates_(Winter 2023_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 4</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL2102</td><td>Commercial Law</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2102_Commercial Law_(Fall 2022_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2601</td><td>Credit &amp; Collections</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2601_Credit &amp; Collections_(Spring 2025_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2301</td><td>Communication Skills for the Legal Assistant</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2301_Communication Skills for the Legal Assistant_(Fall 2024_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2702</td><td>Legal Assistant Procedures</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2702_Legal Assistant Procedures _(Winter 2024_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n      <p>Earn a minimum grade of B- in each of the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL2703</td><td>Legal Assistant Office Simulation</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2703_Legal Assistant Office Simulation_(Winter 2025_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 5</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL2998</td><td>Field Placement for Legal Assistants</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2998_Field Placement for Legal Assistants_(Fall 2025_Current).pdf\" target=\"_blank\"><p class=\"material-icon-2 is_mediium\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", function() {\n    const toggles = document.querySelectorAll(\".accordion-button\");\n    toggles.forEach(toggle => {\n        toggle.addEventListener(\"click\", () => {\n            const content = toggle.nextElementSibling;\n            const expanded = toggle.getAttribute(\"aria-expanded\") === \"true\";\n            toggle.setAttribute(\"aria-expanded\", !expanded);\n            toggle.classList.toggle(\"active\");\n            if (expanded) {\n                content.style.maxHeight = null;\n            } else {\n                content.style.maxHeight = content.scrollHeight + \"px\";\n            }\n        });\n    });\n});\n</script></div>",
+        "courses-code": "<div data-rt-embed-type='true'><style>\n.accordion-item {\n  margin-bottom: 10px;\n}\n.accordion-button {\n  width: 100%;\n  height: 40px;\n  padding-left: 1em;\n  text-align: left;\n  font-size: 1em;\n  background-image: linear-gradient(101deg, rgba(3, 26, 98, 0.4), rgba(255, 255, 255, 0.2));\n  background-color: rgb(0,163,355);\n  color: white;\n  border: none;\n  cursor: pointer;\n  position: relative;\n}\n.accordion-button::after {\n  content: \">\";\n  position: absolute;\n  right: 1rem;\n  font-size: 1.4em;\n  transition: transform 0.3s ease;\n  transform: rotate(90deg);\n}\n.accordion-button.active::after {\n  transform: rotate(-90deg);\n}\n.accordion-content {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 0.4s ease;\n  background: #f1f1f1;\n  padding: 0 1em;\n}\n.accordion-content.open {\n  padding: 1em;\n  max-height: 2000px;\n}\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1rem auto;\n}\nth, td {\n  padding: 0.75rem;\n  text-align: left;\n  border: 1px solid #ccc;\n}\nth {\n  background-color: #0077cc;\n  color: white;\n}\n.table-center {\n  text-align: center;\n}\ntr:nth-child(even) {\n  background-color: #f9f9f9;\n}\n.accordion-section {\n  margin-bottom: 1rem;\n}\n.icon.tooltip {\n  height: 25px!important;\n  width: 25px!important;\n  cursor: pointer;\n}\n\n\n\n</style>\n<div class=\"bvc-accordion\">\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 1</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ADMN1101</td><td>Introduction to Professional Keyboarding<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1101_Introduction to Professional Keyboarding_(Winter 2025_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1201</td><td>Introduction to the Legal Profession<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1201_Introduction to the Legal Profession_(Fall 2024_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1401</td><td>Legal Document Processing I<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1401_Legal Document Processing I_(Fall 2023_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1501</td><td>Litigation I<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1501_Litigation I_(Fall 2022_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n      <p>Earn a minimum grade of B- in each of the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>MGMT1201</td><td>Business Communication<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1201_Business Communication_(Winter 2025_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 2</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL1502</td><td>Litigation II<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1502_Litigation II_(Fall 2023_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1602</td><td>Real Estate Law I<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1602_Real Estate Law I_(Fall 2020_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2105</td><td>Criminal Law for Legal Assistants<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2105_Criminal Law for Legal Assistants_(Fall 2025_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n      <p>Earn a minimum grade of B- in each of the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ADMN1102</td><td>Advanced Professional Keyboarding<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1102_Advanced Professional Keyboarding_(Winter 2021_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1402</td><td>Legal Document Processing II<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1402_Legal Document Processing II_(Spring 2024_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 3</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>ADMN1203</td><td>Business Technology<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1203_Business Technology_(Spring 2022_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL1603</td><td>Real Estate Law II<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1603_Real Estate Law II_(Spring 2023_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2101</td><td>Corporate Law<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2101_Corporate Law_(Fall 2024_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2103</td><td>Family Law<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2103_Family Law_(Fall 2025_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2104</td><td>Wills &amp; Estates<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2104_Wills &amp; Estates_(Winter 2023_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 4</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL2102</td><td>Commercial Law<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2102_Commercial Law_(Fall 2022_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2601</td><td>Credit &amp; Collections<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2601_Credit &amp; Collections_(Spring 2025_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2301</td><td>Communication Skills for the Legal Assistant<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2301_Communication Skills for the Legal Assistant_(Fall 2024_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n          <tr><td>LEGL2702</td><td>Legal Assistant Procedures<p class=\"pdf\">move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2702_Legal Assistant Procedures _(Winter 2024_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n      <p>Earn a minimum grade of B- in each of the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL2703</td><td>Legal Assistant Office Simulation</td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2703_Legal Assistant Office Simulation_(Winter 2025_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  <div class=\"accordion-item\">\n    <button class=\"accordion-button\" aria-expanded=\"false\">Term 5</button>\n    <div class=\"accordion-content\">\n      <p>Complete the following courses:</p>\n      <table>\n        <thead>\n          <tr>\n            <th>Code</th><th>Course</th><th class=\"table-center\">Credits</th><th class=\"table-center\">PDF</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr><td>LEGL2998</td><td>Field Placement for Legal Assistants<p class=\"pdf\">hide_source move_down</p></td><td class=\"table-center\">3</td><td class=\"table-center\"><a href=\"https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL2998_Field Placement for Legal Assistants_(Fall 2025_Current).pdf\" target=\"_blank\"><p class=\"pdf\">picture_as_pdf</p></a></td></tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", function() {\n    const toggles = document.querySelectorAll(\".accordion-button\");\n    toggles.forEach(toggle => {\n        toggle.addEventListener(\"click\", () => {\n            const content = toggle.nextElementSibling;\n            const expanded = toggle.getAttribute(\"aria-expanded\") === \"true\";\n            toggle.setAttribute(\"aria-expanded\", !expanded);\n            toggle.classList.toggle(\"active\");\n            if (expanded) {\n                content.style.maxHeight = null;\n            } else {\n                content.style.maxHeight = content.scrollHeight + \"px\";\n            }\n        });\n    });\n});\n</script></div>",
         "apply-button-is-english-learing-skill": false,
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Legal Assistant",
-        "slug": "legal-assistant"
+        "slug": "legal-assistant",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
@@ -1368,14 +1423,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Kitchen and Bath Design - Post-Diploma Certificate",
-        "slug": "kitchen-and-bath-design---post-diploma-certificate"
+        "slug": "kitchen-and-bath-design---post-diploma-certificate",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dec973554bfa969817a",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:31:46.028Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:47:42.353Z",
       "createdOn": "2025-03-19T03:45:48.527Z",
       "isArchived": false,
       "isDraft": false,
@@ -1389,7 +1446,7 @@
         "banner-image": {
           "fileId": "69951f27589feb63177be994",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951f27589feb63177be994_BVC_School%20of%20Community%20Studies_01.jpg",
-          "alt": null
+          "alt": "A police officer stands beside a police car, highlighting their role in community safety."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -1423,14 +1480,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Justice Studies",
-        "slug": "justice-studies---general"
+        "slug": "justice-studies---general",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dec6655dc248a830b66",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:32:21.467Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:46:58.577Z",
       "createdOn": "2025-03-19T03:45:48.501Z",
       "isArchived": false,
       "isDraft": false,
@@ -1444,7 +1503,7 @@
         "banner-image": {
           "fileId": "69951f8e87a2b22cf335e6b6",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951f8e87a2b22cf335e6b6_BVC_School%20of%20Health%20and%20Wellness_09.jpg",
-          "alt": null
+          "alt": "A nurse offers a pill to an elderly woman, showing care and support in a healthcare setting."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -1479,14 +1538,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Interdisciplinary Therapy Assistant",
-        "slug": "interdisciplinary-therapy-assistant"
+        "slug": "interdisciplinary-therapy-assistant",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dec11000731ae1158fa",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:32:46.132Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:46:02.626Z",
       "createdOn": "2025-03-19T03:45:48.495Z",
       "isArchived": false,
       "isDraft": false,
@@ -1500,7 +1561,7 @@
         "banner-image": {
           "fileId": "698f93f31e13c3b14fb5efe6",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f93f31e13c3b14fb5efe6_GettyImages-1037707522.jpg",
-          "alt": null
+          "alt": "A woman is seated at a desk, using a computer and looking at color swatches."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -1534,7 +1595,9 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Interior Decorating",
-        "slug": "interior-decorating"
+        "slug": "interior-decorating",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
@@ -1571,14 +1634,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Indigenous Pathways to Employment",
-        "slug": "indigenous-pathways-to-employment"
+        "slug": "indigenous-pathways-to-employment",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dec23ea7b52053a1130",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:33:01.384Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:43:21.262Z",
       "createdOn": "2025-03-19T03:45:48.173Z",
       "isArchived": false,
       "isDraft": false,
@@ -1592,7 +1657,7 @@
         "banner-image": {
           "fileId": "69951c723f374d78f309a274",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951c723f374d78f309a274_GettyImages-1081071702.jpg",
-          "alt": null
+          "alt": "Two young people working together at computers in a bright, modern computer lab."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -1623,14 +1688,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Information Technology Systems",
-        "slug": "information-technology-systems"
+        "slug": "information-technology-systems",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
       "id": "67da3dec7bc61380086992b3",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:33:46.872Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:42:34.979Z",
       "createdOn": "2025-03-19T03:45:48.147Z",
       "isArchived": false,
       "isDraft": false,
@@ -1644,7 +1711,7 @@
         "banner-image": {
           "fileId": "698e060cc659a4292f19b00e",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e060cc659a4292f19b00e_GettyImages-677809798.jpg",
-          "alt": null
+          "alt": "A woman is actively presenting to a captivated audience, sharing her ideas and insights."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -1675,14 +1742,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Human Resources",
-        "slug": "human-resources"
+        "slug": "human-resources",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dec19b4e944a9792ec5",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:33:58.383Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:38:41.683Z",
       "createdOn": "2025-03-19T03:45:48.141Z",
       "isArchived": false,
       "isDraft": false,
@@ -1695,7 +1764,7 @@
         "banner-image": {
           "fileId": "6995206d7bb14e85be3741c1",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/6995206d7bb14e85be3741c1_MarqAssets_BVC_Campus_1928_Social%20(2).jpg",
-          "alt": null
+          "alt": "A classroom at Bow Valley College South Campus. An instructor stands in front as she lectures to a small group of students sitting at their desk"
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -1718,14 +1787,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Indigenous Foundational Learning",
-        "slug": "indigenous-foundational-learning"
+        "slug": "indigenous-foundational-learning",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3decd8ed9414e268af33",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:34:16.247Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:37:18.203Z",
       "createdOn": "2025-03-19T03:45:48.002Z",
       "isArchived": false,
       "isDraft": false,
@@ -1738,7 +1809,7 @@
         "banner-image": {
           "fileId": "6995214d886c88f6a429774b",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/6995214d886c88f6a429774b_BVC_School%20of%20Community%20Studies_14.jpg",
-          "alt": null
+          "alt": "Three colleagues engaged in a meeting, with one woman smiling and raising her hand to speak. The setting is a modern workspace with warm lighting and wooden accents."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -1767,14 +1838,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Upgrading",
-        "slug": "upgrading"
+        "slug": "upgrading",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3deb1314bd17b3324f90",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-20T17:29:43.869Z",
-      "lastUpdated": "2026-02-20T17:21:47.323Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:36:56.825Z",
       "createdOn": "2025-03-19T03:45:47.894Z",
       "isArchived": false,
       "isDraft": false,
@@ -1788,7 +1861,7 @@
         "banner-image": {
           "fileId": "699521e2378b9966be5bf7d6",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/699521e2378b9966be5bf7d6_heca.jpg",
-          "alt": null
+          "alt": "A healthcare professional in blue scrubs sits next to an elderly woman on a couch, reviewing information on a clipboard together. The setting is bright and comfortable, with a modern decor."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -1822,14 +1895,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Health Care Aide",
-        "slug": "health-care-aide"
+        "slug": "health-care-aide",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3deb99194f07c0efe43a",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-20T17:29:43.869Z",
-      "lastUpdated": "2026-02-18T17:01:14.944Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:36:29.706Z",
       "createdOn": "2025-03-19T03:45:47.718Z",
       "isArchived": false,
       "isDraft": false,
@@ -1843,7 +1918,7 @@
         "banner-image": {
           "fileId": "698e054291fcd3d8eb6e2ee8",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e054291fcd3d8eb6e2ee8_BVC_School%20of%20Community%20Studies_12.jpg",
-          "alt": null
+          "alt": "A diverse group of six professionals collaborating around a laptop at a conference table, focusing on a presentation. They are engaged in discussion, with expressions of concentration and interest."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -1871,14 +1946,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Health and Human Services Management",
-        "slug": "health-and-human-services-management"
+        "slug": "health-and-human-services-management",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
       "id": "67da3deb1d8dc8e2ba775a65",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-13T20:50:01.150Z",
-      "lastUpdated": "2026-02-13T17:47:08.582Z",
+      "lastPublished": "2026-03-11T22:02:23.714Z",
+      "lastUpdated": "2026-03-11T16:17:15.296Z",
       "createdOn": "2025-03-19T03:45:47.639Z",
       "isArchived": false,
       "isDraft": false,
@@ -1922,14 +1999,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Foundation in Entertainment Arts",
-        "slug": "foundation-in-entertainment-arts"
+        "slug": "foundation-in-entertainment-arts",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
       "id": "67da3deb546eab36bdea83e9",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-07T15:37:35.115Z",
-      "lastUpdated": "2026-03-04T17:48:30.515Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:35:43.812Z",
       "createdOn": "2025-03-19T03:45:47.554Z",
       "isArchived": false,
       "isDraft": false,
@@ -1943,7 +2022,7 @@
         "banner-image": {
           "fileId": "698f96a6b9d00bf86bf13d03",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f96a6b9d00bf86bf13d03_BVC_School%20of%20Global%20Access_04.jpg",
-          "alt": null
+          "alt": "A diverse group of four people in a modern meeting room, engaged in discussion. One woman, wearing a blue dress and earrings, is holding a tablet while others look on attentively. Natural light filters through large windows."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -1974,14 +2053,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "English for Academic Purposes",
-        "slug": "english-for-academic-purposes"
+        "slug": "english-for-academic-purposes",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3deb017310b7c5357db5",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:36:34.572Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:35:18.408Z",
       "createdOn": "2025-03-19T03:45:47.469Z",
       "isArchived": false,
       "isDraft": false,
@@ -1995,7 +2076,7 @@
         "banner-image": {
           "fileId": "698dfeecba121188bdfd48da",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698dfeecba121188bdfd48da_20250205_BVC_Esports_Valorant_Match_HKB2580.jpg",
-          "alt": null
+          "alt": "The Bow Valley College Esports team, The Bears playing in the Esports Arena."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -2027,14 +2108,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Esports Business Management",
-        "slug": "esports-business-management"
+        "slug": "esports-business-management",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3debfaf4e704b6de0284",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:36:46.121Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:34:49.093Z",
       "createdOn": "2025-03-19T03:45:47.467Z",
       "isArchived": false,
       "isDraft": false,
@@ -2048,7 +2131,7 @@
         "banner-image": {
           "fileId": "699897245afe14e76aef515b",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/699897245afe14e76aef515b_GettyImages-886908460.jpg",
-          "alt": null
+          "alt": "Two men in an informal office setting, one standing and speaking while the other listens attentively. A chart is displayed on the wall behind them, showing various data visualizations. The room features large windows and modern furniture."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -2077,14 +2160,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Financial Planning Certificate of Achievement",
-        "slug": "financial-planning"
+        "slug": "financial-planning",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3deb5d55e64fad42b48d",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:37:21.097Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:34:25.851Z",
       "createdOn": "2025-03-19T03:45:47.307Z",
       "isArchived": false,
       "isDraft": false,
@@ -2098,7 +2183,7 @@
         "banner-image": {
           "fileId": "698f9955e2c9ff0515606461",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9955e2c9ff0515606461_GettyImages-1346506872.jpg",
-          "alt": null
+          "alt": "A classroom scene with young children engaged in art activities at small tables. A teacher is sitting with a group of kids, assisting them while colorful drawings are displayed on the walls."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2131,17 +2216,19 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Education Assistant",
-        "slug": "education-assistant"
+        "slug": "education-assistant",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3deb02cbe3b2ba2901c6",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-18T00:13:04.488Z",
-      "lastUpdated": "2026-02-27T21:37:43.644Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:33:58.316Z",
       "createdOn": "2025-03-19T03:45:47.180Z",
       "isArchived": false,
-      "isDraft": true,
+      "isDraft": false,
       "fieldData": {
         "code": "DCSD",
         "short-description": "Turn your passion for helping others into a meaningful career.",
@@ -2152,7 +2239,7 @@
         "banner-image": {
           "fileId": "698f9e930dfe243dfde553c2",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9e930dfe243dfde553c2_GettyImages-514734772.jpg",
-          "alt": null
+          "alt": "A woman and a young girl engaged in a creative activity at a table. The woman, dressed in a pink shirt, is watching the girl as she draws with a marker. A wheelchair is visible in the background."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2187,14 +2274,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Disability Studies",
-        "slug": "disability-studies"
+        "slug": "disability-studies",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3debbfd3ef5f0ffc784d",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-03-07T15:37:35.115Z",
-      "lastUpdated": "2026-03-06T17:47:49.266Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:19:36.439Z",
       "createdOn": "2025-03-19T03:45:47.065Z",
       "isArchived": false,
       "isDraft": false,
@@ -2208,7 +2297,7 @@
         "banner-image": {
           "fileId": "69951d7df488bdf508d476bf",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951d7df488bdf508d476bf_BVC_School%20of%20Community%20Studies_08.jpg",
-          "alt": null
+          "alt": "A teacher sharing a story with a group of young children, who are focused on the book. The setting appears to be a bright classroom with educational materials in the background."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -2242,14 +2331,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Early Childhood Education and Development",
-        "slug": "early-childhood-education-and-development"
+        "slug": "early-childhood-education-and-development",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dea0f1942d083b0c50a",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:38:09.665Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:18:57.236Z",
       "createdOn": "2025-03-19T03:45:46.985Z",
       "isArchived": false,
       "isDraft": false,
@@ -2263,7 +2354,7 @@
         "banner-image": {
           "fileId": "698f9df85636c43018279201",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9df85636c43018279201_GettyImages-1383890727.jpg",
-          "alt": null
+          "alt": "A diverse group of seven young people sitting in a circle in a well-lit room, engaging in conversation. They appear to be sharing thoughts, with some smiling and others looking attentive."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2296,14 +2387,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Child and Youth Care",
-        "slug": "child-and-youth-care"
+        "slug": "child-and-youth-care",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dead8ed9414e268aec0",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:40:26.639Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:18:29.044Z",
       "createdOn": "2025-03-19T03:45:46.958Z",
       "isArchived": false,
       "isDraft": false,
@@ -2317,7 +2410,7 @@
         "banner-image": {
           "fileId": "698f96039c9b715f079ed468",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f96039c9b715f079ed468_BVC_School%20of%20Technologies_11.jpg",
-          "alt": null
+          "alt": "A group of diverse individuals engaged in a collaborative discussion at a table in a modern classroom. A woman stands by the table, while others share ideas, displaying interest and participation in the meeting."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2349,14 +2442,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Digital Marketing",
-        "slug": "digital-marketing"
+        "slug": "digital-marketing",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dea7bc6138008699239",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:40:44.721Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:17:45.109Z",
       "createdOn": "2025-03-19T03:45:46.760Z",
       "isArchived": false,
       "isDraft": false,
@@ -2370,7 +2465,7 @@
         "banner-image": {
           "fileId": "698f94a977c69ef07bde4728",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f94a977c69ef07bde4728_shutterstock_1966256701.jpg",
-          "alt": null
+          "alt": "Two women collaborating at a desk with dual monitors. One woman is pointing at a 3D design on the screen while the other is taking notes. The workspace includes plants and stationery, creating a productive environment."
         },
         "has-intl-offerings": false,
         "pgwp": false,
@@ -2402,14 +2497,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Digital Design - Apprenticeship Style",
-        "slug": "digital-design---apprenticeship-style"
+        "slug": "digital-design---apprenticeship-style",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dea68660bfefa9699f0",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:40:58.729Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:17:20.372Z",
       "createdOn": "2025-03-19T03:45:46.646Z",
       "isArchived": false,
       "isDraft": false,
@@ -2423,7 +2520,7 @@
         "banner-image": {
           "fileId": "698e06d91649a8f8655d97f5",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e06d91649a8f8655d97f5_GettyImages-740521233.jpg",
-          "alt": null
+          "alt": "A woman and a man interacting while reviewing colorful sticky notes on a board in a classroom. Another person is seated in the background, engaged in their work."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2456,14 +2553,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Digital Design",
-        "slug": "digital-design"
+        "slug": "digital-design",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3deacf0c01df5c2f7638",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:41:19.632Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:16:53.030Z",
       "createdOn": "2025-03-19T03:45:46.510Z",
       "isArchived": false,
       "isDraft": false,
@@ -2477,7 +2576,7 @@
         "banner-image": {
           "fileId": "698e06842e34f44b40795af3",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e06842e34f44b40795af3_GettyImages-1130889251.jpg",
-          "alt": null
+          "alt": "A presenter stands in front of an audience in a modern meeting space, pointing at a graph displayed on a screen. The graph shows a rising trend. The audience consists of several people seated, mostly from behind, with visible long hair and a few different "
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2508,14 +2607,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Data Management and Analytics",
-        "slug": "data-management-and-analytics"
+        "slug": "data-management-and-analytics",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dea9b55c3446f82131c",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:41:41.540Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:16:15.465Z",
       "createdOn": "2025-03-19T03:45:46.510Z",
       "isArchived": false,
       "isDraft": false,
@@ -2529,7 +2630,7 @@
         "banner-image": {
           "fileId": "698f97d4094e67515daf0dd8",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f97d4094e67515daf0dd8_GettyImages-1205976537.jpg",
-          "alt": null
+          "alt": "A young man wearing headphones, focused on working on a laptop at a study table. Two female students are seated nearby, one using a smartphone and the other engaging with her computer. The setting is a modern workspace."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2560,14 +2661,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Cybersecurity",
-        "slug": "cybersecurity"
+        "slug": "cybersecurity",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
       "id": "67da3dea07b39ce6f15ca509",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:41:56.151Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:15:38.927Z",
       "createdOn": "2025-03-19T03:45:46.483Z",
       "isArchived": false,
       "isDraft": false,
@@ -2581,7 +2684,7 @@
         "banner-image": {
           "fileId": "698f96f22e495ea3ca41752e",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f96f22e495ea3ca41752e_BVC_School%20of%20Technologies_25.jpg",
-          "alt": null
+          "alt": "A woman with a shaved head and glasses typing on a laptop at a study table. Another person sits in the background using a laptop. The setting appears to be a modern learning environment with natural light."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2610,14 +2713,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Cloud Computing",
-        "slug": "cloud-computing"
+        "slug": "cloud-computing",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3deaf0f0e246cf030dea",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:42:25.834Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:15:07.054Z",
       "createdOn": "2025-03-19T03:45:46.268Z",
       "isArchived": false,
       "isDraft": false,
@@ -2631,7 +2736,7 @@
         "banner-image": {
           "fileId": "698e08fd96d7ea70f7f1e2ae",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e08fd96d7ea70f7f1e2ae_MarqAssets_20130509_Supply%20Chain%20Management_001.jpg",
-          "alt": null
+          "alt": "A man and a woman discussing information while looking at a laptop in a warehouse. In the background, a person in a safety vest is operating a pallet jack near stacked boxes."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2667,14 +2772,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - Supply Chain Management  Major",
-        "slug": "business-administration---supply-chain-management-major"
+        "slug": "business-administration---supply-chain-management-major",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3dea4929a3dd38ccf297",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:42:43.414Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:14:36.731Z",
       "createdOn": "2025-03-19T03:45:46.102Z",
       "isArchived": false,
       "isDraft": false,
@@ -2688,7 +2795,7 @@
         "banner-image": {
           "fileId": "698f9d35d6b80cdcdfbc00ce",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9d35d6b80cdcdfbc00ce_GettyImages-1323851976.jpg",
-          "alt": null
+          "alt": "A woman and a man collaborating on a laptop at a study table, with students working in the background. The woman, with curly hair, points to the screen, while the man, wearing glasses, listens attentively. Several devices are visible on the table."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -2722,14 +2829,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - Integrated Marketing Communications Major",
-        "slug": "business-administration---integrated-marketing-communications-major"
+        "slug": "business-administration---integrated-marketing-communications-major",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de9089c1860cba3e11e",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:43:04.614Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:13:58.167Z",
       "createdOn": "2025-03-19T03:45:45.979Z",
       "isArchived": false,
       "isDraft": false,
@@ -2743,7 +2852,7 @@
         "banner-image": {
           "fileId": "698f9aefbae03ed3b1bb225c",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9aefbae03ed3b1bb225c_GettyImages-525043149%20(1).jpg",
-          "alt": null
+          "alt": "Three colleagues collaborating at a table with a laptop and documents. One person is reviewing papers while the others observe and discuss, in a well-lit office with large windows."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -2779,14 +2888,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - Insurance and Risk Management Major",
-        "slug": "business-administration---insurance-and-risk-management-major"
+        "slug": "business-administration---insurance-and-risk-management-major",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de9d242c08e1201b8fb",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:43:24.811Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:13:31.845Z",
       "createdOn": "2025-03-19T03:45:45.964Z",
       "isArchived": false,
       "isDraft": false,
@@ -2800,7 +2911,7 @@
         "banner-image": {
           "fileId": "698f9a7b4e0a972477be03f5",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9a7b4e0a972477be03f5_GettyImages-664585492.jpg",
-          "alt": null
+          "alt": "Three professionals collaborating at a conference table. A woman with curly hair points to documents while a man in a suit takes notes. A woman with short hair observes, and a laptop and cups are visible on the table."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -2835,14 +2946,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - Human Resources Major",
-        "slug": "business-administration---human-resources-major"
+        "slug": "business-administration---human-resources-major",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de902cbe3b2ba290029",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:43:47.852Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:13:02.303Z",
       "createdOn": "2025-03-19T03:45:45.623Z",
       "isArchived": false,
       "isDraft": false,
@@ -2856,7 +2969,7 @@
         "banner-image": {
           "fileId": "698f9a3de51cc65576301ee9",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9a3de51cc65576301ee9_GettyImages-1215116789.jpg",
-          "alt": null
+          "alt": "A business meeting is taking place at a table in a modern office. Two professionals, a man and a woman, are looking at documents, while a third man in a suit is speaking to them. Soft lighting and a contemporary design are visible."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -2890,14 +3003,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - General Business Major",
-        "slug": "business-administration---general-business-major"
+        "slug": "business-administration---general-business-major",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de9089c1860cba3e0d8",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-13T20:50:01.150Z",
-      "lastUpdated": "2026-02-13T17:47:08.590Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:12:29.449Z",
       "createdOn": "2025-03-19T03:45:45.545Z",
       "isArchived": false,
       "isDraft": false,
@@ -2911,7 +3026,7 @@
         "banner-image": {
           "fileId": "698e072bd867218a1a6ec29e",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e072bd867218a1a6ec29e_AdobeStock_562156062_144ppi.jpg",
-          "alt": null
+          "alt": "Two women sitting at a table in an office environment, one holding papers and discussing with the other. The office has a modern design with blurred workspaces in the background."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -2943,14 +3058,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration",
-        "slug": "business-administration---certificate"
+        "slug": "business-administration---certificate",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de9c2b5bf6c0d1e3b71",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:44:08.040Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:11:50.950Z",
       "createdOn": "2025-03-19T03:45:45.502Z",
       "isArchived": false,
       "isDraft": false,
@@ -2964,7 +3081,7 @@
         "banner-image": {
           "fileId": "698f9b8a16369c930953846e",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9b8a16369c930953846e_MarqAssets_299_02559.jpg",
-          "alt": null
+          "alt": "\t A woman in a white top points to a screen while presenting in a meeting room. A man in a suit sits at a table using a laptop, facing her. Large windows provide natural light in the modern office space."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -2999,14 +3116,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - Financial Services Major",
-        "slug": "business-administration---financial-services-major"
+        "slug": "business-administration---financial-services-major",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de9017310b7c5357bce",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:44:51.639Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:11:05.985Z",
       "createdOn": "2025-03-19T03:45:45.481Z",
       "isArchived": false,
       "isDraft": false,
@@ -3020,7 +3139,7 @@
         "banner-image": {
           "fileId": "698f9c459a0b40913f915fa4",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f9c459a0b40913f915fa4_GettyImages-1536191188_smaller.jpg",
-          "alt": null
+          "alt": "A man and a woman collaborate at a desk, with the man smiling while working on a computer. The woman stands beside him, pointing at the screen. Charts and graphs are visible on the wall behind them."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -3054,14 +3173,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Business Administration - Accounting Major",
-        "slug": "business-administration---accounting-major"
+        "slug": "business-administration---accounting-major",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de90f1942d083b0c0ad",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:44:26.050Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:10:39.490Z",
       "createdOn": "2025-03-19T03:45:45.311Z",
       "isArchived": false,
       "isDraft": false,
@@ -3075,7 +3196,7 @@
         "banner-image": {
           "fileId": "698e00676f6bc7d549ed1804",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e00676f6bc7d549ed1804_20260210_CEA_EsportsAbstracts_HKB8017.jpg",
-          "alt": null
+          "alt": "Two soft-lit light-source from a computer with swirling colors of pink, purple, and blue, set against a dark background."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -3108,7 +3229,9 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Advanced Visual Effects (VFX) and Virtual Production",
-        "slug": "advanced-visual-effects"
+        "slug": "advanced-visual-effects",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
@@ -3149,14 +3272,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Adult Basic Education",
-        "slug": "adult-basic-education"
+        "slug": "adult-basic-education",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de95c0c2e4815477865",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:45:15.291Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:09:51.697Z",
       "createdOn": "2025-03-19T03:45:45.079Z",
       "isArchived": false,
       "isDraft": false,
@@ -3170,7 +3295,7 @@
         "banner-image": {
           "fileId": "698dffd6c01d6657be65440f",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698dffd6c01d6657be65440f_20260204_CEA_ProHubAbstracts_HKB7864.jpg",
-          "alt": null
+          "alt": "A close-up of an ARRI camera lens with a purple background, displaying markings for focal length and aperture settings."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -3204,14 +3329,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Advanced Film Production",
-        "slug": "advanced-film-production"
+        "slug": "advanced-film-production",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
       "id": "67da3de86debcecaddfe58ac",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:45:35.547Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:08:26.124Z",
       "createdOn": "2025-03-19T03:45:44.971Z",
       "isArchived": false,
       "isDraft": false,
@@ -3225,7 +3352,7 @@
         "banner-image": {
           "fileId": "698e01a264ddeb44acd4def9",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e01a264ddeb44acd4def9_20260210_CEA_EsportsAbstracts_HKB8033.jpg",
-          "alt": null
+          "alt": "A close-up view of a racing steering wheel with a dark background, featuring buttons and a logo that reads 'MOZA'. The wheel is illuminated with a purple hue, highlighting its design and features."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -3259,14 +3386,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Advanced 3D Animation & 3D Modelling",
-        "slug": "advanced-3d-animation-3d-modelling"
+        "slug": "advanced-3d-animation-3d-modelling",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
       "id": "67da3de8bfd3ef5f0ffc7652",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:23:16.191Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:07:58.028Z",
       "createdOn": "2025-03-19T03:45:44.932Z",
       "isArchived": false,
       "isDraft": false,
@@ -3280,7 +3409,7 @@
         "banner-image": {
           "fileId": "698e013c89e128105eca6c44",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e013c89e128105eca6c44_20260210_CEA_EsportsAbstracts_HKB8018.jpg",
-          "alt": null
+          "alt": "Close-up of a computer's internal components with MSI graphics card and RAM. The components are illuminated with purple and blue lighting, showcasing the technology within a modern PC setup."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -3315,14 +3444,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Advanced Game Development",
-        "slug": "advanced-game-development"
+        "slug": "advanced-game-development",
+        "customizable-apply-button": false,
+        "cancelled-program": true
       }
     },
     {
       "id": "67da3de8ee7c45c9b5a3556c",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:19:08.928Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:04:36.624Z",
       "createdOn": "2025-03-19T03:45:44.914Z",
       "isArchived": false,
       "isDraft": false,
@@ -3334,9 +3465,9 @@
         "program-area": "66e88fd785912baaa400769f",
         "duration": "66ed9c0ef7b9be43bc992d2a",
         "banner-image": {
-          "fileId": "698e0820bee04e651a05735f",
-          "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698e0820bee04e651a05735f_iStock-901863898.jpg",
-          "alt": null
+          "fileId": "69c2ed956638a043f532d82f",
+          "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69c2ed956638a043f532d82f_GettyImages-1214304545.jpg",
+          "alt": "A woman with long dark hair working on a laptop in a bright and organized home office. She is wearing a light blue striped shirt. Bookshelves and paperwork are visible in the background."
         },
         "has-intl-offerings": true,
         "pgwp": false,
@@ -3369,14 +3500,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Administrative Professional",
-        "slug": "administrative-professional"
+        "slug": "administrative-professional",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "67da3de866d12f666d98744a",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:22:04.469Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:07:16.712Z",
       "createdOn": "2025-03-19T03:45:44.913Z",
       "isArchived": false,
       "isDraft": false,
@@ -3390,7 +3523,7 @@
         "banner-image": {
           "fileId": "69951d1df47b7be61dd45f3b",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/69951d1df47b7be61dd45f3b_BVC_School%20of%20Community%20Studies_22.jpg",
-          "alt": null
+          "alt": "A young man with dark hair in a gray shirt is speaking to an older man with glasses and gray hair, who is wearing a blue sweater. "
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -3424,14 +3557,16 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Addiction Studies",
-        "slug": "addiction-studies-diploma"
+        "slug": "addiction-studies-diploma",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     },
     {
       "id": "677b6fe3a40b89e587d0c0a7",
       "cmsLocaleId": "66e8483e020e35058a5a411d",
-      "lastPublished": "2026-02-27T22:37:04.613Z",
-      "lastUpdated": "2026-02-27T21:21:41.309Z",
+      "lastPublished": "2026-03-24T21:38:12.651Z",
+      "lastUpdated": "2026-03-24T20:05:26.056Z",
       "createdOn": "2025-01-06T05:53:39.079Z",
       "isArchived": false,
       "isDraft": false,
@@ -3445,7 +3580,7 @@
         "banner-image": {
           "fileId": "698f98530abd1d9eeab0667b",
           "url": "https://cdn.prod.website-files.com/66e8483e020e35058a5a4120/698f98530abd1d9eeab0667b_software%20dev.jpg",
-          "alt": null
+          "alt": "A group of four students working on computers in a classroom setting. One student leans over to assist another, while two others focus on their screens. The environment appears collaborative and educational."
         },
         "has-intl-offerings": true,
         "pgwp": true,
@@ -3477,7 +3612,9 @@
         "apply-button-is-first-year-student": false,
         "connect-with-us": false,
         "name": "Software Development",
-        "slug": "software-development-post-diploma"
+        "slug": "software-development-post-diploma",
+        "customizable-apply-button": false,
+        "cancelled-program": false
       }
     }
   ]

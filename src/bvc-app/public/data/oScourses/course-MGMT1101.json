@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-03-09T14:59:34.584Z",
+    "generatedAt": "2026-04-09T14:23:49.371Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "MGMT1101",
@@ -12,118 +12,6 @@
     "name": "Introduction to Management",
     "credits": "3",
     "children": [
-      {
-        "id": "AF1D1D20D8DB4D9AA8EB796BF7CC71ED",
-        "name": "26MAYMNFS1",
-        "sisID": "224483",
-        "courseName": "",
-        "deliveryTypeId": "8980B6F5-107D-497F-8FC4-27F7C467F55D",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "8980B6F5107D497F8FC427F7C467F55D",
-          "name": "Blended - Synchronous",
-          "displayName": "Blended - Synchronous",
-          "slug": "blended-synchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "20260204T000000",
-        "registrationEnd": "20260512T235959",
-        "startDate": "20260505T000000",
-        "endDate": "20260626T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1613.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170E1-12366773",
-            "feeItemNameSanitized": "170E1-12366773",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "541C7E0ED4EA4E5E82A535FD54FFD9CD",
-              "name": "170E1",
-              "displayName": "170E1",
-              "endTime": "20260101T165000",
-              "startTime": "20260101T140000",
-              "sisId": "170E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160240Z",
-              "Updated": "20260101T070114Z"
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170E1-12366774",
-            "feeItemNameSanitized": "170E1-12366774",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "541C7E0ED4EA4E5E82A535FD54FFD9CD",
-              "name": "170E1",
-              "displayName": "170E1",
-              "endTime": "20260101T165000",
-              "startTime": "20260101T140000",
-              "sisId": "170E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160240Z",
-              "Updated": "20260101T070114Z"
-            },
-            "day": "2"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 2
-        }
-      },
       {
         "id": "7BA298210F39423FB4A012280574CCBB",
         "name": "26MAYMNFS2",
@@ -182,8 +70,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170B1-12366775",
-            "feeItemNameSanitized": "170B1-12366775",
+            "feeItemName": "170B1-12450673",
+            "feeItemNameSanitized": "170B1-12450673",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -203,8 +91,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170B1-12366776",
-            "feeItemNameSanitized": "170B1-12366776",
+            "feeItemName": "170B1-12450674",
+            "feeItemNameSanitized": "170B1-12450674",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -307,10 +195,10 @@
       }
     ],
     "summary": {
-      "totalSections": 3,
-      "totalFees": 10,
-      "totalTimeBlocks": 4,
-      "sectionsWithFees": 3
+      "totalSections": 2,
+      "totalFees": 6,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 2
     }
   }
 }

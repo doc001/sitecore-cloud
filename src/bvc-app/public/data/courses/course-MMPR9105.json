@@ -1,20 +1,20 @@
 {
   "metadata": {
-    "generatedAt": "2026-01-06T15:29:46.667Z",
+    "generatedAt": "2026-04-09T14:23:28.123Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MMPR9108",
-    "courseName": "Capstone Project"
+    "sisID": "MMPR9105",
+    "courseName": "Maintenance Strategy Development"
   },
   "course": {
-    "id": "69B03D691D3C45EB998DF9BBE89B0558",
-    "sisID": "MMPR9108",
-    "name": "Capstone Project",
+    "id": "F56E8AD1D2054C9898E411A3A26DCED8",
+    "sisID": "MMPR9105",
+    "name": "Maintenance Strategy Development",
     "children": [
       {
-        "id": "CE4AB8B7911D4577B08DECE3AF4C6378",
-        "name": "26JANMNOA91",
-        "sisID": "224307",
+        "id": "65CBEF5625E649399147F87E4D879904",
+        "name": "26MAYMNOA91",
+        "sisID": "225499",
         "courseName": "",
         "deliveryTypeId": "{2307E4CB-966D-4945-9B56-5069D6A015A3}",
         "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
@@ -31,10 +31,10 @@
           "slug": "distance-learning"
         },
         "hours": "30",
-        "registrationStart": "20251020T000000",
-        "registrationEnd": "20260114T235959",
-        "startDate": "20260116T000000",
-        "endDate": "20260320T000000",
+        "registrationStart": "20260310T000000",
+        "registrationEnd": "20260520T235959",
+        "startDate": "20260522T000000",
+        "endDate": "20260620T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -53,67 +53,87 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "240E-12180649",
+            "feeItemName": "530A1-12450875",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "B3F4DAD5142F49CCBD6DFCE191862E47",
-              "name": "240E",
-              "displayName": "240E",
-              "endTime": "20260101T120000",
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
               "startTime": "20260101T080000",
-              "sisId": "240E",
+              "sisId": "530A1",
               "created": "",
               "updated": "",
-              "Created": "20250520T160040Z",
-              "Updated": "20260101T070018Z"
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
+            },
+            "day": "6"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "530A1-12450876",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
+              "startTime": "20260101T080000",
+              "sisId": "530A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
             },
             "day": "5"
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "240E-12180650",
+            "feeItemName": "530A1-12450877",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "B3F4DAD5142F49CCBD6DFCE191862E47",
-              "name": "240E",
-              "displayName": "240E",
-              "endTime": "20260101T120000",
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
               "startTime": "20260101T080000",
-              "sisId": "240E",
+              "sisId": "530A1",
               "created": "",
               "updated": "",
-              "Created": "20250520T160040Z",
-              "Updated": "20260101T070018Z"
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
             },
             "day": "5"
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "240E-12180651",
+            "feeItemName": "530A1-12450878",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "B3F4DAD5142F49CCBD6DFCE191862E47",
-              "name": "240E",
-              "displayName": "240E",
-              "endTime": "20260101T120000",
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
               "startTime": "20260101T080000",
-              "sisId": "240E",
+              "sisId": "530A1",
               "created": "",
               "updated": "",
-              "Created": "20250520T160040Z",
-              "Updated": "20260101T070018Z"
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
             },
-            "day": "5"
+            "day": "6"
           }
         ],
         "feesSummary": {
-          "totalFees": 4,
+          "totalFees": 5,
           "containers": [
             "Fees",
             "TimeBlock"
@@ -121,14 +141,14 @@
           "feeTypes": [
             "Tuition"
           ],
-          "timeBlockCount": 3
+          "timeBlockCount": 4
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 4,
-      "totalTimeBlocks": 3,
+      "totalFees": 5,
+      "totalTimeBlocks": 4,
       "sectionsWithFees": 1
     }
   }

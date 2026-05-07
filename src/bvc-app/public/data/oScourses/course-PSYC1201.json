@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-03-09T14:59:41.465Z",
+    "generatedAt": "2026-04-09T14:23:54.725Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "PSYC1201",
@@ -82,6 +82,97 @@
         }
       },
       {
+        "id": "B7AEF78C5CC5458D89947496436BE560",
+        "name": "26MAYMNOA60",
+        "sisID": "224398",
+        "courseName": "",
+        "deliveryTypeId": "2307E4CB-966D-4945-9B56-5069D6A015A3",
+        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
+        "deliveryType": {
+          "id": "2307E4CB966D49459B565069D6A015A3",
+          "name": "Online - Synchronous - Asynchronous",
+          "displayName": "Online - Synchronous - Asynchronous",
+          "slug": "online-synchronous-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20260202T000000",
+        "registrationEnd": "20260512T235959",
+        "startDate": "20260505T000000",
+        "endDate": "20260626T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "International Tuition",
+            "feeItemNameSanitized": "International Tuition",
+            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeType": {
+              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
+              "name": "International Tuition",
+              "displayName": "International Tuition",
+              "slug": "international-tuition"
+            },
+            "amount": "1374.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeItemNameSanitized": "Tuition",
+            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "430.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "170S1-12450583",
+            "feeItemNameSanitized": "170S1-12450583",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
+              "name": "170S1",
+              "displayName": "170S1",
+              "endTime": "20260101T205000",
+              "startTime": "20260101T180000",
+              "sisId": "170S1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160305Z",
+              "Updated": "20260101T070126Z"
+            },
+            "day": "2"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 3,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "International Tuition",
+            "Tuition"
+          ],
+          "timeBlockCount": 1
+        }
+      },
+      {
         "id": "DB694EEB4C5C4EA4A32EEAC95EDD9584",
         "name": "26MAYMNOA88",
         "sisID": "224400",
@@ -139,8 +230,8 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "80B1-12366663",
-            "feeItemNameSanitized": "80B1-12366663",
+            "feeItemName": "80B1-12450584",
+            "feeItemNameSanitized": "80B1-12450584",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
@@ -174,10 +265,10 @@
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 5,
-      "totalTimeBlocks": 1,
-      "sectionsWithFees": 2
+      "totalSections": 3,
+      "totalFees": 8,
+      "totalTimeBlocks": 2,
+      "sectionsWithFees": 3
     }
   }
 }

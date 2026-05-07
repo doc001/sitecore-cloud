@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generatedAt": "2026-03-09T14:59:44.562Z",
+    "generatedAt": "2026-04-09T14:23:58.160Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Course Index",
-    "totalCourses": 39
+    "totalCourses": 33
   },
   "courses": [
     {
@@ -73,35 +73,14 @@
       }
     },
     {
-      "sisID": "ADMN1101",
-      "name": "Introduction to Professional Keyboarding",
-      "fileName": "course-ADMN1101.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "International Tuition",
-          "Tuition"
-        ]
-      }
-    },
-    {
       "sisID": "ANAT1101",
       "name": "Anatomy And Physiology",
       "fileName": "course-ANAT1101.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 8,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 2,
+        "totalSections": 3,
+        "totalFees": 16,
+        "totalTimeBlocks": 10,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -120,37 +99,16 @@
       "name": "Interpersonal Relationships And Communication Skills",
       "fileName": "course-COMM1101.json",
       "summary": {
-        "totalSections": 6,
-        "totalFees": 18,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 6,
+        "totalSections": 9,
+        "totalFees": 25,
+        "totalTimeBlocks": 7,
+        "sectionsWithFees": 9,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
         "containers": [
           "Fees",
           "TimeBlock"
-        ],
-        "feeTypes": [
-          "International Tuition",
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "DAST1401",
-      "name": "Positive Behaviour Support",
-      "fileName": "course-DAST1401.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
         ],
         "feeTypes": [
           "International Tuition",
@@ -207,10 +165,10 @@
       "name": "English Composition",
       "fileName": "course-ENGL1201.json",
       "summary": {
-        "totalSections": 10,
-        "totalFees": 26,
+        "totalSections": 12,
+        "totalFees": 30,
         "totalTimeBlocks": 6,
-        "sectionsWithFees": 10,
+        "sectionsWithFees": 12,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -229,52 +187,10 @@
       "name": "Fetal Alcohol Spectrum Awareness for Human Service Professionals",
       "fileName": "course-FASD1101.json",
       "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
+        "totalSections": 2,
+        "totalFees": 4,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "International Tuition",
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "FNSR2402",
-      "name": "Risk Assessment and Treatment",
-      "fileName": "course-FNSR2402.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "International Tuition",
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "FNSR2403",
-      "name": "Risk Financing",
-      "fileName": "course-FNSR2403.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -291,28 +207,6 @@
       "sisID": "HRES1101",
       "name": "Organizational Behaviour",
       "fileName": "course-HRES1101.json",
-      "summary": {
-        "totalSections": 4,
-        "totalFees": 14,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 4,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "International Tuition",
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "HRES2201",
-      "name": "Introduction to Human Resources",
-      "fileName": "course-HRES2201.json",
       "summary": {
         "totalSections": 3,
         "totalFees": 10,
@@ -332,14 +226,36 @@
       }
     },
     {
-      "sisID": "HRES2204",
-      "name": "Talent Acquisition and Retention",
-      "fileName": "course-HRES2204.json",
+      "sisID": "HRES2201",
+      "name": "Introduction to Human Resources",
+      "fileName": "course-HRES2201.json",
       "summary": {
         "totalSections": 2,
         "totalFees": 6,
         "totalTimeBlocks": 2,
         "sectionsWithFees": 2,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": true,
+        "containers": [
+          "Fees",
+          "TimeBlock"
+        ],
+        "feeTypes": [
+          "International Tuition",
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "HRES2204",
+      "name": "Talent Acquisition and Retention",
+      "fileName": "course-HRES2204.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 4,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -380,10 +296,10 @@
       "name": "Introduction to Health Care Fundamentals",
       "fileName": "course-HUCL1201.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 10,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 3,
+        "totalSections": 2,
+        "totalFees": 6,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -424,10 +340,10 @@
       "name": "Introduction to Indigenous Studies",
       "fileName": "course-INDG1101.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 5,
+        "totalSections": 4,
+        "totalFees": 9,
         "totalTimeBlocks": 1,
-        "sectionsWithFees": 2,
+        "sectionsWithFees": 4,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -446,10 +362,10 @@
       "name": "Introduction to Management",
       "fileName": "course-MGMT1101.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 10,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 3,
+        "totalSections": 2,
+        "totalFees": 6,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -468,10 +384,10 @@
       "name": "Introduction to Organizations and Sustainability",
       "fileName": "course-MGMT1102.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 10,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 3,
+        "totalSections": 2,
+        "totalFees": 6,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -490,10 +406,10 @@
       "name": "Business Communication",
       "fileName": "course-MGMT1201.json",
       "summary": {
-        "totalSections": 9,
-        "totalFees": 31,
-        "totalTimeBlocks": 13,
-        "sectionsWithFees": 9,
+        "totalSections": 3,
+        "totalFees": 8,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -534,10 +450,10 @@
       "name": "Microeconomics",
       "fileName": "course-MGMT1401.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 8,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 2,
+        "totalSections": 1,
+        "totalFees": 4,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -574,57 +490,14 @@
       }
     },
     {
-      "sisID": "MGMT1501",
-      "name": "Business Mathematics",
-      "fileName": "course-MGMT1501.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "International Tuition",
-          "Tuition"
-        ]
-      }
-    },
-    {
       "sisID": "MGMT1601",
       "name": "Business Law",
       "fileName": "course-MGMT1601.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 10,
+        "totalSections": 4,
+        "totalFees": 12,
         "totalTimeBlocks": 4,
-        "sectionsWithFees": 3,
-        "hasDeliveryTypes": true,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "International Tuition",
-          "Tuition"
-        ]
-      }
-    },
-    {
-      "sisID": "MGMT2301",
-      "name": "Microsoft Excel",
-      "fileName": "course-MGMT2301.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 4,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 1,
+        "sectionsWithFees": 4,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -665,10 +538,10 @@
       "name": "Introduction to Marketing",
       "fileName": "course-MKTG1101.json",
       "summary": {
-        "totalSections": 3,
-        "totalFees": 10,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 3,
+        "totalSections": 2,
+        "totalFees": 6,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 2,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -709,10 +582,10 @@
       "name": "Human Growth and Development Across The Life Span",
       "fileName": "course-PSYC1201.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 5,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 2,
+        "totalSections": 3,
+        "totalFees": 8,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -818,10 +691,10 @@
       "name": "Sociology of the Family",
       "fileName": "course-SOCI1201.json",
       "summary": {
-        "totalSections": 5,
-        "totalFees": 12,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 5,
+        "totalSections": 7,
+        "totalFees": 18,
+        "totalTimeBlocks": 4,
+        "sectionsWithFees": 7,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -840,10 +713,10 @@
       "name": "Sociology of Aging",
       "fileName": "course-SOCI1301.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 4,
+        "totalSections": 6,
+        "totalFees": 12,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 2,
+        "sectionsWithFees": 6,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,

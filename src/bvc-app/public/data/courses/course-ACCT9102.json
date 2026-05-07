@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-03-09T14:58:51.935Z",
+    "generatedAt": "2026-04-09T14:23:12.809Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ACCT9102",
@@ -11,58 +11,6 @@
     "sisID": "ACCT9102",
     "name": "Financial Accounting - Intermediate",
     "children": [
-      {
-        "id": "340AD32E4F7D43BF812B571347D63065",
-        "name": "26APRMNOA93",
-        "sisID": "223335",
-        "courseName": "",
-        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
-        },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "40",
-        "registrationStart": "20250919T000000",
-        "registrationEnd": "20260407T235959",
-        "startDate": "20260408T000000",
-        "endDate": "20260808T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "475.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 0
-        }
-      },
       {
         "id": "7491867F1AA3447EA0221336B45D2062",
         "name": "26AUGMNOA93",
@@ -166,65 +114,13 @@
           ],
           "timeBlockCount": 0
         }
-      },
-      {
-        "id": "85D8DECBBB424AE1966FB5A2228FF6F5",
-        "name": "26MARMNOA95",
-        "sisID": "223337",
-        "courseName": "",
-        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
-        },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "40",
-        "registrationStart": "20250919T000000",
-        "registrationEnd": "20260310T235959",
-        "startDate": "20260311T000000",
-        "endDate": "20260711T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "475.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 0
-        }
       }
     ],
     "summary": {
-      "totalSections": 4,
-      "totalFees": 4,
+      "totalSections": 2,
+      "totalFees": 2,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 4
+      "sectionsWithFees": 2
     }
   }
 }
