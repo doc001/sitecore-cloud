@@ -1,0 +1,146 @@
+<div class="box-width-1280"><div class="c-1vh-bottom-padding"><div class="os-content__box"><div id="courseComponent" class="course-component"></div></div><div class="w-embed"><style>
+.sliding-cart {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    transition: right 0.3s ease;
+    z-index: 1000000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sliding-cart.open {
+    right: 0;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000000;
+}
+
+.cart-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+button.remove-item {
+    position: absolute;
+    right: 15px;
+    border-left: 4px solid #f44336;
+}
+
+button.checkout-button {
+    display: block;
+    position: relative;
+    top: 30px;
+    width: 100%;
+    height: 50px;
+    background-color: #6a4cd7;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.cart-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cart-item-details {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.cart-item-info {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #555;
+}
+
+.cart-item-fees {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #eee;
+}
+
+.fee-item {
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.fee-summary {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.cart-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.cart-message {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-left: 4px solid #f44336;
+    display: none;
+}
+
+.cart-message.visible {
+    display: block;
+}
+
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    border-radius: 4px;
+    color: white;
+    z-index: 1001;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.notification-success { background-color: #4CAF50; }
+.notification-error   { background-color: #f44336; }
+
+.addtocartbutton.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.addtocartbutton.unavailable, .addtocartbutton.in-cart {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #cccccc;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+}
+</style></div></div></div>

@@ -1,0 +1,108 @@
+{
+  "metadata": {
+    "generatedAt": "2026-05-08T19:53:27.869Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "FACP9201",
+    "courseName": "Standard First Aid & CPR (Red Cross)"
+  },
+  "course": {
+    "id": "398327622E3D400280D148C8BEFA9299",
+    "sisID": "FACP9201",
+    "name": "Standard First Aid & CPR (Red Cross)",
+    "children": [
+      {
+        "id": "E4EA9AAAC77B49FEB2093B92250EB9C8",
+        "name": "FACP9201-90",
+        "sisID": "10365",
+        "courseName": "",
+        "deliveryTypeId": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+        "deliveryType": {
+          "id": "939C8DACA6C1415EBC831B3F062D4250",
+          "name": "Face to Face Synchronous",
+          "displayName": "Face to Face Synchronous",
+          "slug": "face-to-face-synchronous"
+        },
+        "campus": {
+          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "16",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20260418T000000",
+        "endDate": "20260419T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
+            "feeType": {
+              "id": "56C8D85F506A4CD2B88A30462453C204",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "155.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
+            "feeType": {
+              "id": "38A0B2C346264FBF8F95956E78B80C65",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "155.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "4939",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "5204",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 4,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Domestic",
+            "International"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 4,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}

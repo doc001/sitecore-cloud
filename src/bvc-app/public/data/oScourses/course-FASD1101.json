@@ -1,161 +1,63 @@
 {
-  "metadata": {
-    "generatedAt": "2025-08-13T17:57:54.037Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "FASD1101",
-    "courseName": "Fetal Alcohol Spectrum Awareness for Human Service Professionals"
-  },
-  "course": {
-    "id": "3A1FBEB55ECB42C58ECDA4A00552852A",
-    "sisID": "FASD1101",
-    "name": "Fetal Alcohol Spectrum Awareness for Human Service Professionals",
-    "credits": "3",
-    "children": [
-      {
-        "id": "05A74DD164144FF6976BC494B68AD869",
-        "name": "25SEPMNOA11",
-        "sisID": "222137",
-        "courseName": "",
-        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
-        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
+  "id": "069BE79E96B24817AF97EB04F347CCB3",
+  "sisId": "FASD1101",
+  "name": "Fetal Alcohol Spectrum Awareness for Human Service Professionals",
+  "description": "Students examine the effects of prenatal alcohol exposure on individuals, their families, communities, and societal systems. As part of this examination, students discuss the ethical issues surrounding prenatal alcohol exposure. They examine the pathways and process of a diagnosis of Fetal Alcohol Spectrum Disorder FASD. Students analyze the complex behaviours exhibited by individuals with FASD to assess their needs and to determine priorities to support those individuals and their families. They explore supports and services available to individuals who are living with FASD.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "B67F71F53E8542FEA870A3ADE4B60036",
+      "name": "FASD1101-11",
+      "sisId": "25709",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "startDate": "20260107T000000",
+      "endDate": "20260421T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 520,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "45",
-        "registrationStart": "20250605T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1572.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "520.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 1572,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "54B30052AEE14698A5771A60D51D5CF4",
-        "name": "25SEPMNOA12",
-        "sisID": "222138",
-        "courseName": "",
-        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
-        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
+      "timeBlocks": []
+    },
+    {
+      "id": "54485DB4A4634062A0289598EF9EDD0A",
+      "name": "FASD1101-12",
+      "sisId": "25717",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "startDate": "20260107T000000",
+      "endDate": "20260421T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 520,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "45",
-        "registrationStart": "20250605T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1572.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "520.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 1572,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 2,
-      "totalFees": 4,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

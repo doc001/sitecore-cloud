@@ -1,31 +1,31 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:38:07.334Z",
+    "generatedAt": "2026-05-08T19:53:33.207Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "MMPR9105",
     "courseName": "Maintenance Strategy Development"
   },
   "course": {
-    "id": "417DA6D3CF8A4B64B1CD6B9EEEA58D89",
+    "id": "B3C0ECDEC03A4FDAA22911EABE0CFCF2",
     "sisID": "MMPR9105",
     "name": "Maintenance Strategy Development",
     "children": [
       {
-        "id": "8AF9329F7CA444ECA51986E57AA7BDF3",
-        "name": "MMPR9105-206301",
-        "sisID": "MMPR9105-206301",
+        "id": "97119B0C2731422C88CA98A5D903E7D1",
+        "name": "MMPR9105-91",
+        "sisID": "25909",
         "courseName": "",
-        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryTypeId": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
+        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
         "deliveryType": {
-          "id": "4773C629459B46F9A70478BEC70CF10B",
-          "name": "Combined Online",
-          "displayName": "Combined Online",
-          "slug": "combined-online"
+          "id": "F6250694BAD64615BCB91693A45D76C5",
+          "name": "Online Synchronous Asynchronous",
+          "displayName": "Online Synchronous Asynchronous",
+          "slug": "online-synchronous-asynchronous"
         },
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -33,146 +33,57 @@
         "hours": "30",
         "registrationStart": "",
         "registrationEnd": "",
-        "startDate": "20221125T070000",
-        "endDate": "20221217T070000",
+        "startDate": "20260522T000000",
+        "endDate": "20260620T000000",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
             "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
             "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "id": "56C8D85F506A4CD2B88A30462453C204",
               "name": "Domestic",
               "displayName": "Domestic",
               "slug": "domestic"
             },
-            "amount": "658.00000000",
+            "amount": "925.00000000",
             "timeBlock": null,
             "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "9F169D8E7D6648828891B276E2A5A3ED",
-        "name": "MMPR9105-210860",
-        "sisID": "MMPR9105-210860",
-        "courseName": "",
-        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "4773C629459B46F9A70478BEC70CF10B",
-          "name": "Combined Online",
-          "displayName": "Combined Online",
-          "slug": "combined-online"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230512T060000",
-        "endDate": "20230610T060000",
-        "seatsAvailable": "1",
-        "fees": [
+          },
           {
             "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeItemName": "International",
+            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
             "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
+              "id": "38A0B2C346264FBF8F95956E78B80C65",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
             },
-            "amount": "658.00000000",
+            "amount": "925.00000000",
             "timeBlock": null,
             "day": ""
           }
         ],
         "feesSummary": {
-          "totalFees": 1,
+          "totalFees": 2,
           "containers": [
             "Fees"
           ],
           "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "8685CD8EF3594A48AF7393A556357ED1",
-        "name": "MMPR9105-214230",
-        "sisID": "MMPR9105-214230",
-        "courseName": "",
-        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "4773C629459B46F9A70478BEC70CF10B",
-          "name": "Combined Online",
-          "displayName": "Combined Online",
-          "slug": "combined-online"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240223T070000",
-        "endDate": "20240316T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
+            "Domestic",
+            "International"
           ],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
-      "totalSections": 3,
-      "totalFees": 3,
+      "totalSections": 1,
+      "totalFees": 2,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 3
+      "sectionsWithFees": 1
     }
   }
 }

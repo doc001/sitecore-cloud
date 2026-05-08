@@ -21,11 +21,12 @@
     "generateOpenStudies": "node scripts/export-os-valid-courses.mjs",
     "generateMap": "node scripts/generateSiSData.mjs",
     "generateCourseData": "node scripts/buildCoursesComplete.mjs",
-    "generateOpenStudiesData": "node scripts/buildCoursesOpenStudiesComplete.mjs",
+    "generateOpenStudiesData": "node scripts/generateOSCourses.mjs",
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
     "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run prelaunch:build",
-    "build": "npm run bvcapp-scripts && next build"
+    "build": "npm run bvcapp-scripts && next build",
+    "cleanup": "node scripts/cleanup-data.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",

@@ -1,156 +1,58 @@
 {
-  "metadata": {
-    "generatedAt": "2025-08-13T17:58:03.949Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MATH1600",
-    "courseName": "Introduction to Statistics I"
-  },
-  "course": {
-    "id": "94746808FFDD4D9CA5A426FC65D61266",
-    "sisID": "MATH1600",
-    "name": "Introduction to Statistics I",
-    "credits": "4",
-    "children": [
-      {
-        "id": "A8EFCCCBF6D44A80BD5B4FFF012818CD",
-        "name": "25SEPMNFS1",
-        "sisID": "221520",
-        "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
+  "id": "329F36106F494D1DBAB27E77146EC549",
+  "sisId": "MATH1600",
+  "name": "Introduction to Statistics I",
+  "description": "Students learn the basic principles of statistics, acquire the skills to solve elementary statistical and probability problems, and gain hands-on experience with well-known statistical software and basic methods for collecting data. Students also learn the main tools of descriptive statistics to visualize collected data, analyze data distributions, and establish correlations and regressions between random variables. The course covers the main tools of inferential statistics for estimating mean values and proportions by confidence intervals, hypotheses testing, and one-way ANOVA. Applications are taken from a wide range of subject areas such as biology and environmental science, business and economics, health sciences, education, crime and law, politics, social studies, and sports and entertainment.",
+  "credits": 4,
+  "sections": [
+    {
+      "id": "2559884E875B457A952DB2BFF809D4FF",
+      "name": "MATH1600-01",
+      "sisId": "8329",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "startDate": "20260107T000000",
+      "endDate": "20260421T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 4,
+      "hours": 60,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 917,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "60",
-        "registrationStart": "20250603T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "2617.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "917.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11546701",
-            "feeItemNameSanitized": "11546701",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "1E0B47F057784526A3B105445EBC32CF",
-              "name": "80E1",
-              "displayName": "80E1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T140000",
-              "sisId": "80E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
-            },
-            "day": "2"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11546702",
-            "feeItemNameSanitized": "11546702",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "1E0B47F057784526A3B105445EBC32CF",
-              "name": "80E1",
-              "displayName": "80E1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T140000",
-              "sisId": "80E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "80E1",
-            "feeItemNameSanitized": "80E1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "1E0B47F057784526A3B105445EBC32CF",
-              "name": "80E1",
-              "displayName": "80E1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T140000",
-              "sisId": "80E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
-            },
-            "day": "3"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 5,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 3
+        "international": {
+          "amount": 2617,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 5,
-      "totalTimeBlocks": 3,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "3878",
+          "frequency": "Weekly",
+          "startTime": "20260113T000000",
+          "endTime": "20260421T000000",
+          "schedule": "T 12:30 PM - 1:50 PM"
+        },
+        {
+          "sisId": "3879",
+          "frequency": "Weekly",
+          "startTime": "20260108T000000",
+          "endTime": "20260416T000000",
+          "schedule": "Th 12:30 PM - 1:50 PM"
+        },
+        {
+          "sisId": "4582",
+          "frequency": "Weekly",
+          "startTime": "20260112T000000",
+          "endTime": "20260420T000000",
+          "schedule": "M 11:00 AM - 12:20 PM"
+        }
+      ]
     }
-  }
+  ]
 }

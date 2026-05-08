@@ -1,126 +1,135 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:38:09.803Z",
+    "generatedAt": "2025-12-06T19:25:52.924Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "MMPR9108",
     "courseName": "Capstone Project"
   },
   "course": {
-    "id": "8223BE2D4A124672ABDEE7C699BFC1E1",
+    "id": "288736C9218E4B6DB1A63F7857267923",
     "sisID": "MMPR9108",
     "name": "Capstone Project",
     "children": [
       {
-        "id": "6460A6B79A0D4C0493E7F468B4029A69",
-        "name": "MMPR9108-207913",
-        "sisID": "MMPR9108-207913",
+        "id": "C51645512EEA4B52B13C588D217786AF",
+        "name": "26JANMNOA91",
+        "sisID": "224307",
         "courseName": "",
-        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryTypeId": "{938C6A57-BC53-463C-823F-21D4874C202F}",
+        "campusId": "{77C07EAB-B256-4B28-B911-85A18EBB1A5D}",
         "deliveryType": {
-          "id": "4773C629459B46F9A70478BEC70CF10B",
-          "name": "Combined Online",
-          "displayName": "Combined Online",
-          "slug": "combined-online"
+          "id": "938C6A57BC53463C823F21D4874C202F",
+          "name": "Online - Synchronous - Asynchronous",
+          "displayName": "Online - Synchronous - Asynchronous",
+          "slug": "online-synchronous-asynchronous"
         },
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+          "id": "77C07EABB2564B28B91185A18EBB1A5D",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
         },
         "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230113T070000",
-        "endDate": "20230324T060000",
+        "registrationStart": "20251020T000000",
+        "registrationEnd": "20260114T235959",
+        "startDate": "20260116T000000",
+        "endDate": "20260327T000000",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{375E208E-FA95-4AE8-A022-FCE0FECA26FA}",
             "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
+              "id": "375E208EFA954AE8A022FCE0FECA26FA",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
             },
-            "amount": "658.00000000",
+            "amount": "925.000",
             "timeBlock": null,
             "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "C4A1387067B44C45AECC59789A8A2DF2",
-        "name": "MMPR9108-214159",
-        "sisID": "MMPR9108-214159",
-        "courseName": "",
-        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "4773C629459B46F9A70478BEC70CF10B",
-          "name": "Combined Online",
-          "displayName": "Combined Online",
-          "slug": "combined-online"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240112T070000",
-        "endDate": "20240322T060000",
-        "seatsAvailable": "1",
-        "fees": [
+          },
           {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
+            "containerName": "TimeBlock",
+            "feeItemName": "240E-11975855",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "61E4B469034D4F85A69B1658D0DBCE1A",
+              "name": "240E",
+              "displayName": "240E",
+              "endTime": "20250101T120000",
+              "startTime": "20250101T080000",
+              "sisId": "240E",
+              "created": "",
+              "updated": "",
+              "Created": "20250919T140823Z",
+              "Updated": "20250919T140823Z"
             },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
+            "day": "5"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "240E-11975856",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "61E4B469034D4F85A69B1658D0DBCE1A",
+              "name": "240E",
+              "displayName": "240E",
+              "endTime": "20250101T120000",
+              "startTime": "20250101T080000",
+              "sisId": "240E",
+              "created": "",
+              "updated": "",
+              "Created": "20250919T140823Z",
+              "Updated": "20250919T140823Z"
+            },
+            "day": "5"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "240E-11975857",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "61E4B469034D4F85A69B1658D0DBCE1A",
+              "name": "240E",
+              "displayName": "240E",
+              "endTime": "20250101T120000",
+              "startTime": "20250101T080000",
+              "sisId": "240E",
+              "created": "",
+              "updated": "",
+              "Created": "20250919T140823Z",
+              "Updated": "20250919T140823Z"
+            },
+            "day": "5"
           }
         ],
         "feesSummary": {
-          "totalFees": 1,
+          "totalFees": 4,
           "containers": [
-            "Fees"
+            "Fees",
+            "TimeBlock"
           ],
           "feeTypes": [
-            "Domestic"
+            "Tuition"
           ],
-          "timeBlockCount": 0
+          "timeBlockCount": 3
         }
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 2,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      "totalSections": 1,
+      "totalFees": 4,
+      "totalTimeBlocks": 3,
+      "sectionsWithFees": 1
     }
   }
 }

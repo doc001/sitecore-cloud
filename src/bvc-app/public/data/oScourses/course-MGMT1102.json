@@ -1,428 +1,189 @@
 {
-  "metadata": {
-    "generatedAt": "2025-08-13T17:58:06.100Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MGMT1102",
-    "courseName": "Introduction to Organizations and Sustainability"
-  },
-  "course": {
-    "id": "2F697EEA41D24915AF0D1DAEA94F8001",
-    "sisID": "MGMT1102",
-    "name": "Introduction to Organizations and Sustainability",
-    "credits": "3",
-    "children": [
-      {
-        "id": "4590FACE7F6D423691BA44645D742397",
-        "name": "25SEPMNBS4",
-        "sisID": "221725",
-        "courseName": "",
-        "deliveryTypeId": "8980B6F5-107D-497F-8FC4-27F7C467F55D",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "8980B6F5107D497F8FC427F7C467F55D",
-          "name": "Blended - Synchronous",
-          "displayName": "Blended - Synchronous",
-          "slug": "blended-synchronous"
+  "id": "5AEDDD35EEA349228D102F26419BBB7D",
+  "sisId": "MGMT1102",
+  "name": "Introduction to Organizations and Sustainability",
+  "description": "Introduction to organizations and sustainability articulates a management approach to integrating economic, ethical, and environmental responsibilities into all aspects of organizations working to benefit society. Learners examine ethics of business and constructs of morally appropriate behavior concerning decision-making and businesses relationship with the community. Concepts and practical approaches are used to discuss and integrate sustainability criteria with business requirements, including performance management and evolving strategies as business needs change.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "7FE22DE4E29742B5B93DB84489064D66",
+      "name": "MGMT1102-01",
+      "sisId": "19059",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "startDate": "20250902T000000",
+      "endDate": "20251218T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1613.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11546955",
-            "feeItemNameSanitized": "11546955",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "2AFC22538C7348CE876F19995518992F",
-              "name": "80F1",
-              "displayName": "80F1",
-              "endTime": "20250101T165000",
-              "startTime": "20250101T153000",
-              "sisId": "80F1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
-            },
-            "day": "3"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "80F1",
-            "feeItemNameSanitized": "80F1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "2AFC22538C7348CE876F19995518992F",
-              "name": "80F1",
-              "displayName": "80F1",
-              "endTime": "20250101T165000",
-              "startTime": "20250101T153000",
-              "sisId": "80F1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
-            },
-            "day": "1"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 2
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "E6289904621344B689F2880BF7E31434",
-        "name": "25SEPMNFS1",
-        "sisID": "221722",
-        "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
+      "timeBlocks": [
+        {
+          "sisId": "8154",
+          "frequency": "Weekly",
+          "startTime": "20250902T000000",
+          "endTime": "20251216T000000",
+          "schedule": "T 12:30 PM - 1:50 PM"
         },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+        {
+          "sisId": "8290",
+          "frequency": "Weekly",
+          "startTime": "20250904T000000",
+          "endTime": "20251218T000000",
+          "schedule": "Th 12:30 PM - 1:50 PM"
+        }
+      ]
+    },
+    {
+      "id": "B3917BF8F26E40A6ACEFE39CB4DA8087",
+      "name": "MGMT1102-02",
+      "sisId": "19123",
+      "deliveryType": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+      "startDate": "20260505T000000",
+      "endDate": "20260626T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1613.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11546951",
-            "feeItemNameSanitized": "11546951",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "D9943AD95CCD4AFD8C5ED725F9BA9EC7",
-              "name": "80D1",
-              "displayName": "80D1",
-              "endTime": "20250101T135000",
-              "startTime": "20250101T123000",
-              "sisId": "80D1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160249Z",
-              "Updated": "20250520T160249Z"
-            },
-            "day": "2"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "80D1",
-            "feeItemNameSanitized": "80D1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "D9943AD95CCD4AFD8C5ED725F9BA9EC7",
-              "name": "80D1",
-              "displayName": "80D1",
-              "endTime": "20250101T135000",
-              "startTime": "20250101T123000",
-              "sisId": "80D1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160249Z",
-              "Updated": "20250520T160249Z"
-            },
-            "day": "4"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 2
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "AF25D424A03446F68CD5BB180A1AC53D",
-        "name": "25SEPMNFS2",
-        "sisID": "221723",
-        "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
+      "timeBlocks": [
+        {
+          "sisId": "8155",
+          "frequency": "Weekly",
+          "startTime": "20250904T000000",
+          "endTime": "20251218T000000",
+          "schedule": "Th 9:30 AM - 10:50 AM"
         },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+        {
+          "sisId": "8291",
+          "frequency": "Weekly",
+          "startTime": "20250902T000000",
+          "endTime": "20251216T000000",
+          "schedule": "T 9:30 AM - 10:50 AM"
+        }
+      ]
+    },
+    {
+      "id": "50640F3765524066A37C20D57635564A",
+      "name": "MGMT1102-04",
+      "sisId": "19054",
+      "deliveryType": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+      "startDate": "20250902T000000",
+      "endDate": "20251218T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1613.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11546952",
-            "feeItemNameSanitized": "11546952",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "D192DBCD36C549CD83B4EE04A97458E5",
-              "name": "80B1",
-              "displayName": "80B1",
-              "endTime": "20250101T105000",
-              "startTime": "20250101T093000",
-              "sisId": "80B1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160249Z",
-              "Updated": "20250520T160249Z"
-            },
-            "day": "2"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "80B1",
-            "feeItemNameSanitized": "80B1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "D192DBCD36C549CD83B4EE04A97458E5",
-              "name": "80B1",
-              "displayName": "80B1",
-              "endTime": "20250101T105000",
-              "startTime": "20250101T093000",
-              "sisId": "80B1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160249Z",
-              "Updated": "20250520T160249Z"
-            },
-            "day": "4"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 2
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "81710BF01DF948D5A03BAC7DF08EB688",
-        "name": "25SEPMNOA42",
-        "sisID": "221727",
-        "courseName": "",
-        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
-        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
+      "timeBlocks": [
+        {
+          "sisId": "8153",
+          "frequency": "Weekly",
+          "startTime": "20250908T000000",
+          "endTime": "20251215T000000",
+          "schedule": "M 3:30 PM - 4:50 PM"
         },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1613.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 0
+        {
+          "sisId": "8289",
+          "frequency": "Weekly",
+          "startTime": "20250903T000000",
+          "endTime": "20251217T000000",
+          "schedule": "W 3:30 PM - 4:50 PM"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 4,
-      "totalFees": 14,
-      "totalTimeBlocks": 6,
-      "sectionsWithFees": 4
+      ]
+    },
+    {
+      "id": "0566AF37194D4AFB85CF0D0C29EA51F2",
+      "name": "MGMT1102-41",
+      "sisId": "19126",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "startDate": "20260505T000000",
+      "endDate": "20260821T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": []
+    },
+    {
+      "id": "203A8E2C23FF471096AD12255589C77B",
+      "name": "MGMT1102-42",
+      "sisId": "19118",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

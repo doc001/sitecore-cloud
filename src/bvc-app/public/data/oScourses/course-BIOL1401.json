@@ -1,135 +1,51 @@
 {
-  "metadata": {
-    "generatedAt": "2025-08-13T17:57:39.956Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "BIOL1401",
-    "courseName": "The Organization and Diversity of Life"
-  },
-  "course": {
-    "id": "5321C11FBEBC4228869ABA59CC1D97EC",
-    "sisID": "BIOL1401",
-    "name": "The Organization and Diversity of Life",
-    "credits": "3",
-    "children": [
-      {
-        "id": "49D9AD96FE3B4CEFBADA7053C4CBC357",
-        "name": "25SEPMNFS1",
-        "sisID": "221429",
-        "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
+  "id": "5CD7E86A03C14EA4BF6C485D4F530A0B",
+  "sisId": "BIOL1401",
+  "name": "The Organization and Diversity of Life",
+  "description": "This course introduces learners to foundational biological concepts and mechanisms. Learners explore the organization and processes of life at the cellular, organismal, species, and ecosystem levels. These concepts are illustrated through current examples of medical and environmental issues and discoveries.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "90849569204A4E9E92A91B2BE581B890",
+      "name": "BIOL1401-01",
+      "sisId": "4033",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "20250603T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1894.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11546611",
-            "feeItemNameSanitized": "11546611",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "1E0B47F057784526A3B105445EBC32CF",
-              "name": "80E1",
-              "displayName": "80E1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T140000",
-              "sisId": "80E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
-            },
-            "day": "3"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "80E1",
-            "feeItemNameSanitized": "80E1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "1E0B47F057784526A3B105445EBC32CF",
-              "name": "80E1",
-              "displayName": "80E1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T140000",
-              "sisId": "80E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
-            },
-            "day": "4"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 2
+        "international": {
+          "amount": 1894,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "1155",
+          "frequency": "Weekly",
+          "startTime": "20250903T000000",
+          "endTime": "20251210T000000",
+          "schedule": "W 2:00 PM - 3:20 PM"
+        },
+        {
+          "sisId": "631",
+          "frequency": "Weekly",
+          "startTime": "20250904T000000",
+          "endTime": "20251211T000000",
+          "schedule": "Th 2:00 PM - 3:20 PM"
+        }
+      ]
     }
-  }
+  ]
 }

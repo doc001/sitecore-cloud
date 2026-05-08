@@ -1,187 +1,31 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:37:41.447Z",
+    "generatedAt": "2026-05-08T19:53:30.921Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "HRES9306",
     "courseName": "Payroll Compliance Legislation"
   },
   "course": {
-    "id": "6F7574DD45B84C9690BB5A5D17E88A59",
+    "id": "B4B309B248B64EF48F286540A4FA6F08",
     "sisID": "HRES9306",
     "name": "Payroll Compliance Legislation",
     "children": [
       {
-        "id": "036431124C834AD4838F9FBB76015E90",
-        "name": "HRES9306-212588",
-        "sisID": "HRES9306-212588",
+        "id": "8EA9840FAF364D9F8B495DCF0CD72A74",
+        "name": "HRES9306-91",
+        "sisID": "14625",
         "courseName": "",
-        "deliveryTypeId": "{A1CE4E07-D8D1-4039-9EDC-C198031652A1}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
+        "deliveryTypeId": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
         "deliveryType": {
-          "id": "A1CE4E07D8D140399EDCC198031652A1",
-          "name": "Real-time Online",
-          "displayName": "Real-time Online",
-          "slug": "real-time-online"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "39",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230906T060000",
-        "endDate": "20231129T070000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "62C5C0445EF24E65AA541D7A1EA25EB2",
-        "name": "HRES9306-214170",
-        "sisID": "HRES9306-214170",
-        "courseName": "",
-        "deliveryTypeId": "{A1CE4E07-D8D1-4039-9EDC-C198031652A1}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "A1CE4E07D8D140399EDCC198031652A1",
-          "name": "Real-time Online",
-          "displayName": "Real-time Online",
-          "slug": "real-time-online"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "39",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240110T070000",
-        "endDate": "20240403T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "657AB5E03F604036B9EB125CCB0D6E51",
-        "name": "HRES9306-216001",
-        "sisID": "HRES9306-216001",
-        "courseName": "",
-        "deliveryTypeId": "{A1CE4E07-D8D1-4039-9EDC-C198031652A1}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "A1CE4E07D8D140399EDCC198031652A1",
-          "name": "Real-time Online",
-          "displayName": "Real-time Online",
-          "slug": "real-time-online"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "39",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240508T060000",
-        "endDate": "20240731T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "8B0D2C5073BD4D328101E8161558F718",
-        "name": "HRES9306-216539",
-        "sisID": "HRES9306-216539",
-        "courseName": "",
-        "deliveryTypeId": "{2201F586-5224-4378-BE22-F6449AE7B7C8}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "2201F58652244378BE22F6449AE7B7C8",
+          "id": "71159BEB070D42C981D9758B3108A0CD",
           "name": "Online Synchronous",
           "displayName": "Online Synchronous",
           "slug": "online-synchronous"
         },
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -189,42 +33,67 @@
         "hours": "39",
         "registrationStart": "",
         "registrationEnd": "",
-        "startDate": "20240904T060000",
-        "endDate": "20241127T070000",
+        "startDate": "20260513T000000",
+        "endDate": "20260812T000000",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
             "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
             "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "id": "56C8D85F506A4CD2B88A30462453C204",
               "name": "Domestic",
               "displayName": "Domestic",
               "slug": "domestic"
             },
-            "amount": "658.00000000",
+            "amount": "475.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
+            "feeType": {
+              "id": "38A0B2C346264FBF8F95956E78B80C65",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "475.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "6410",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
             "timeBlock": null,
             "day": ""
           }
         ],
         "feesSummary": {
-          "totalFees": 1,
+          "totalFees": 3,
           "containers": [
-            "Fees"
+            "Fees",
+            "TimeBlock"
           ],
           "feeTypes": [
-            "Domestic"
+            "Domestic",
+            "International"
           ],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
-      "totalSections": 4,
-      "totalFees": 4,
+      "totalSections": 1,
+      "totalFees": 3,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 4
+      "sectionsWithFees": 1
     }
   }
 }

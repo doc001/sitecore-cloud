@@ -1,92 +1,36 @@
 {
-  "metadata": {
-    "generatedAt": "2025-08-13T17:58:10.866Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MGMT2301",
-    "courseName": "Microsoft Excel"
-  },
-  "course": {
-    "id": "2348EACC0FE6497E8B808C1149E1330F",
-    "sisID": "MGMT2301",
-    "name": "Microsoft Excel",
-    "credits": "3",
-    "children": [
-      {
-        "id": "772A4D0853B2402BA7DA55D0093F6B45",
-        "name": "25SEPMNOA41",
-        "sisID": "221767",
-        "courseName": "",
-        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
-        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
+  "id": "B94DA22B05B041639E2E95393C0704BF",
+  "sisId": "MGMT2301",
+  "name": "Microsoft Excel",
+  "description": "This course provides hands-on learning with Microsoft Excel and its applications in today’s business environment. Learners develop skills to navigate, consolidate, and analyze data across multiple worksheets. Learners also create macros for efficient analysis, manage complex nested formulas for scenario planning, and design effective corporate dashboards.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "9473336D510B4B23BC3B6284CD5E6986",
+      "name": "MGMT2301-41",
+      "sisId": "21239",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1676.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "612.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 1676,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 2,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

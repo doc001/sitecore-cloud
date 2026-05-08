@@ -1,205 +1,114 @@
 {
-  "metadata": {
-    "generatedAt": "2025-08-13T17:58:13.334Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "POSC1201",
-    "courseName": "Canadian Politics: Institutions and Issues"
-  },
-  "course": {
-    "id": "7546FFAC22FD42328AC2C10E2B3438C7",
-    "sisID": "POSC1201",
-    "name": "Canadian Politics: Institutions and Issues",
-    "credits": "3",
-    "children": [
-      {
-        "id": "5460768DF10C40639DFDA7604D8CAF8B",
-        "name": "25SEPMNFS30",
-        "sisID": "221524",
-        "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
+  "id": "B4869FB157644EDB90FE8876EF08CA4E",
+  "sisId": "POSC1201",
+  "name": "Canadian Politics: Institutions and Issues",
+  "description": "This course explores the development of Canadian political institutions and political issues in Canada. Learners explore contemporary Canadian politics by examining concepts such as the evolution of federalism, the Constitution, parliament, elections, Indigenous and minority rights, and multiculturalism. Learners will apply political science terms and concepts to the analysis of contemporary Canadian political issues.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "166C61F738D14A68B9C37DC297B0998C",
+      "name": "POSC1201-19",
+      "sisId": "27088",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "campus": "{D532C4A0-3C6C-42E9-9C3C-5569D3B7F59F}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "20250602T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1613.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "612.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170B1",
-            "feeItemNameSanitized": "170B1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "2ABB683D20BE4DDF8D96B37EF9DD8370",
-              "name": "170B1",
-              "displayName": "170B1",
-              "endTime": "20250101T122000",
-              "startTime": "20250101T093000",
-              "sisId": "170B1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20250520T160238Z"
-            },
-            "day": "5"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 1
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "BD6AB68F2D554AF3BA499B42F38612CC",
-        "name": "25SEPMNFS31",
-        "sisID": "221525",
-        "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "20250602T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1613.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "612.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170A1",
-            "feeItemNameSanitized": "170A1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "F7A9D455F118456A895A91A34CB8D5D6",
-              "name": "170A1",
-              "displayName": "170A1",
-              "endTime": "20250101T105000",
-              "startTime": "20250101T080000",
-              "sisId": "170A1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20250520T160238Z"
-            },
-            "day": "2"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 1
+      "timeBlocks": [
+        {
+          "sisId": "11746",
+          "frequency": "Weekly",
+          "startTime": "20250902T000000",
+          "endTime": "20251209T000000",
+          "schedule": "T 1:00 PM - 3:50 PM"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 2,
-      "totalFees": 6,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 2
+      ]
+    },
+    {
+      "id": "7A439472AB5B4EB993E1A05309B219D5",
+      "name": "POSC1201-30",
+      "sisId": "27071",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "11740",
+          "frequency": "Weekly",
+          "startTime": "20250905T000000",
+          "endTime": "20251212T000000",
+          "schedule": "F 9:30 AM - 12:20 PM"
+        }
+      ]
+    },
+    {
+      "id": "DEBA9DF62A6C494BA6F9EEA77C767BDE",
+      "name": "POSC1201-31",
+      "sisId": "27072",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "credits": 3,
+      "hours": 45,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "11741",
+          "frequency": "Weekly",
+          "startTime": "20250902T000000",
+          "endTime": "20251209T000000",
+          "schedule": "T 8:00 AM - 10:50 AM"
+        }
+      ]
     }
-  }
+  ]
 }

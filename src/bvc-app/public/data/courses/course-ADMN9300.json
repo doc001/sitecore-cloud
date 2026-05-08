@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "generatedAt": "2026-05-08T19:53:21.873Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "ADMN9300",
+    "courseName": "AI Enhanced Business Communications"
+  },
+  "course": {
+    "id": "A4FC478BB63C4FE284AC2C69205340F4",
+    "sisID": "ADMN9300",
+    "name": "AI Enhanced Business Communications",
+    "children": [
+      {
+        "id": "2043B11F680A4D7C851195D5655E42CF",
+        "name": "ADMN9300-90",
+        "sisID": "22322",
+        "courseName": "",
+        "deliveryTypeId": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
+        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+        "deliveryType": {
+          "id": "F6250694BAD64615BCB91693A45D76C5",
+          "name": "Online Synchronous Asynchronous",
+          "displayName": "Online Synchronous Asynchronous",
+          "slug": "online-synchronous-asynchronous"
+        },
+        "campus": {
+          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "40",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20260513T000000",
+        "endDate": "20260713T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
+            "feeType": {
+              "id": "56C8D85F506A4CD2B88A30462453C204",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "600.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
+            "feeType": {
+              "id": "38A0B2C346264FBF8F95956E78B80C65",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "600.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic",
+            "International"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 2,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}
