@@ -1,183 +1,282 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-13T17:57:58.396Z",
+    "generatedAt": "2026-03-10T22:09:48.364Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "HRES2204",
     "courseName": "Talent Acquisition and Retention"
   },
   "course": {
-    "id": "501C2E7AAA17427787F2657741C6F2F4",
+    "id": "48E5E218A4C24F7AB21D90AEE797364D",
     "sisID": "HRES2204",
     "name": "Talent Acquisition and Retention",
     "credits": "3",
     "children": [
       {
-        "id": "1A680A0DC4B64A308C55AF600907F1E8",
-        "name": "25SEPMNFS1",
-        "sisID": "221648",
+        "id": "48B30B0A62764EA1B615ED28602D80D0",
+        "name": "HRES2204-01",
+        "sisID": "11461",
         "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
-        },
+        "deliveryTypeId": "1DDD3461-AF47-4EB7-BB87-1F8AD754052F",
+        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
+        "deliveryType": null,
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
         },
         "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20260505T000000",
+        "endDate": "20260626T000000",
+        "seatsAvailable": "0",
         "fees": [
           {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1676.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
             "containerName": "TimeBlock",
-            "feeItemName": "170B1",
-            "feeItemNameSanitized": "170B1",
+            "feeItemName": "272236",
+            "feeItemNameSanitized": "272236",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "2ABB683D20BE4DDF8D96B37EF9DD8370",
-              "name": "170B1",
-              "displayName": "170B1",
-              "endTime": "20250101T122000",
-              "startTime": "20250101T093000",
-              "sisId": "170B1",
+              "id": null,
+              "name": "272236",
+              "displayName": "272236",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272236",
               "created": "",
               "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20250520T160238Z"
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "272239",
+            "feeItemNameSanitized": "272239",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "272239",
+              "displayName": "272239",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272239",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "272242",
+            "feeItemNameSanitized": "272242",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "272242",
+              "displayName": "272242",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272242",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "272243",
+            "feeItemNameSanitized": "272243",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "272243",
+              "displayName": "272243",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272243",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "272244",
+            "feeItemNameSanitized": "272244",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "272244",
+              "displayName": "272244",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272244",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "272245",
+            "feeItemNameSanitized": "272245",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "272245",
+              "displayName": "272245",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272245",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "272246",
+            "feeItemNameSanitized": "272246",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "272246",
+              "displayName": "272246",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272246",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "272247",
+            "feeItemNameSanitized": "272247",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "272247",
+              "displayName": "272247",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "272247",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "310980",
+            "feeItemNameSanitized": "310980",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "310980",
+              "displayName": "310980",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "310980",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "310981",
+            "feeItemNameSanitized": "310981",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "310981",
+              "displayName": "310981",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "310981",
+              "created": "",
+              "updated": "",
+              "isFallback": true
             },
             "day": "2"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 10,
           "containers": [
-            "Fees",
             "TimeBlock"
           ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 1
+          "feeTypes": [],
+          "timeBlockCount": 10
         }
       },
       {
-        "id": "A86711A6C5DF40BDA029FCC77209EA97",
-        "name": "25SEPMNOA41",
-        "sisID": "221649",
+        "id": "E124ED6A0D594EE0A2088D8E5AE2BBB4",
+        "name": "HRES2204-41",
+        "sisID": "11464",
         "courseName": "",
-        "deliveryTypeId": "E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F",
-        "campusId": "0D86BB64-AC21-416E-971F-3FD01D8C472B",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
-        },
+        "deliveryTypeId": "DD3C86D0-2E98-41AE-8C03-B3CD16D56584",
+        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
+        "deliveryType": null,
         "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
         },
         "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1676.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "633.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20260505T000000",
+        "endDate": "20260821T000000",
+        "seatsAvailable": "0",
+        "fees": [],
         "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
+          "totalFees": 0,
+          "containers": [],
+          "feeTypes": [],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
       "totalSections": 2,
-      "totalFees": 5,
-      "totalTimeBlocks": 1,
-      "sectionsWithFees": 2
+      "totalFees": 10,
+      "totalTimeBlocks": 10,
+      "sectionsWithFees": 1
     }
   }
 }

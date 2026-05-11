@@ -1,35 +1,41 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:39:55.154Z",
+    "generatedAt": "2026-03-17T14:21:33.488Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Summary Statistics"
   },
   "overview": {
-    "totalCourses": 0,
-    "totalSections": 0,
-    "totalFees": 0,
-    "totalTimeBlocks": 0,
-    "successRate": "NaN%"
+    "totalCourses": 53,
+    "totalSections": 170,
+    "totalFees": 536,
+    "totalTimeBlocks": 196,
+    "successRate": "100.0%"
   },
   "courseDistribution": {
-    "coursesWithManySection": 0,
-    "coursesWithManyFees": 0,
-    "coursesWithTimeBlocks": 0,
-    "maxSectionsInCourse": 0,
-    "maxFeesInCourse": 0,
-    "maxTimeBlocksInCourse": 0
+    "coursesWithManySection": 3,
+    "coursesWithManyFees": 1,
+    "coursesWithTimeBlocks": 46,
+    "maxSectionsInCourse": 34,
+    "maxFeesInCourse": 95,
+    "maxTimeBlocksInCourse": 27
   },
   "lookupResolution": {
     "resolvedDeliveryTypes": 0,
-    "resolvedCampuses": 0,
-    "resolvedFeeTypes": 0,
-    "resolvedTimeBlocks": 0
+    "resolvedCampuses": 170,
+    "resolvedFeeTypes": 340,
+    "resolvedTimeBlocks": 196
   },
   "paginationUsage": {
-    "coursesRequiringPagination": 0,
+    "coursesRequiringPagination": 3,
     "sectionsRequiringPagination": 0,
     "feesRequiringPagination": 0
   },
-  "containerTypes": [],
-  "feeTypes": []
+  "containerTypes": [
+    "Fees",
+    "TimeBlock"
+  ],
+  "feeTypes": [
+    "Domestic",
+    "International"
+  ]
 }

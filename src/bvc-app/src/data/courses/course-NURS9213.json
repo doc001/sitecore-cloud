@@ -1,31 +1,26 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:38:19.164Z",
+    "generatedAt": "2026-03-17T14:20:12.930Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9213",
     "courseName": "Intravenous Initiation, Infusion and Medication Administration"
   },
   "course": {
-    "id": "1DBE6CEB75464900A00936A3CFBA1255",
+    "id": "B6394961487D44B78C99FC3FFD93D4CA",
     "sisID": "NURS9213",
     "name": "Intravenous Initiation, Infusion and Medication Administration",
     "children": [
       {
-        "id": "6EA11FAE620C485FAA07CDCFF01943C5",
-        "name": "NURS9213-206308",
-        "sisID": "NURS9213-206308",
+        "id": "9AB7171CDE9F48E5A785D9A14C9C4578",
+        "name": "NURS9213-91",
+        "sisID": "6864",
         "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
+        "deliveryTypeId": "{B25EF090-C76B-45BC-A851-D656FFECC7C6}",
+        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
+        "deliveryType": null,
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -33,51 +28,71 @@
         "hours": "15",
         "registrationStart": "",
         "registrationEnd": "",
-        "startDate": "20221012T060000",
-        "endDate": "20221106T060000",
+        "startDate": "20260204T000000",
+        "endDate": "20260228T000000",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
             "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
             "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "id": "516310D879C24F0EAEF798F911689E41",
               "name": "Domestic",
               "displayName": "Domestic",
               "slug": "domestic"
             },
-            "amount": "658.00000000",
+            "amount": "439.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
+            "feeType": {
+              "id": "81F1879F87F4457C98D51F933D6BFE51",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "439.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "19592",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
             "timeBlock": null,
             "day": ""
           }
         ],
         "feesSummary": {
-          "totalFees": 1,
+          "totalFees": 3,
           "containers": [
-            "Fees"
+            "Fees",
+            "TimeBlock"
           ],
           "feeTypes": [
-            "Domestic"
+            "Domestic",
+            "International"
           ],
           "timeBlockCount": 0
         }
       },
       {
-        "id": "20D8F744D9754331805DE659C79A3DFB",
-        "name": "NURS9213-206309",
-        "sisID": "NURS9213-206309",
+        "id": "19D4CF38AD4B4116A38D0289C1ADCC38",
+        "name": "NURS9213-92",
+        "sisID": "6277",
         "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
+        "deliveryTypeId": "{B25EF090-C76B-45BC-A851-D656FFECC7C6}",
+        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
+        "deliveryType": null,
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -85,614 +100,67 @@
         "hours": "15",
         "registrationStart": "",
         "registrationEnd": "",
-        "startDate": "20221109T070000",
-        "endDate": "20221204T070000",
+        "startDate": "20251112T000000",
+        "endDate": "20251206T000000",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
             "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
             "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
+              "id": "516310D879C24F0EAEF798F911689E41",
               "name": "Domestic",
               "displayName": "Domestic",
               "slug": "domestic"
             },
-            "amount": "658.00000000",
+            "amount": "439.00000000",
             "timeBlock": null,
             "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "71DD73BBCEB44F00B83776EE85B1C230",
-        "name": "NURS9213-207919",
-        "sisID": "NURS9213-207919",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230208T070000",
-        "endDate": "20230304T070000",
-        "seatsAvailable": "1",
-        "fees": [
+          },
           {
             "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
+            "feeItemName": "International",
+            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
             "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
+              "id": "81F1879F87F4457C98D51F933D6BFE51",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
             },
-            "amount": "658.00000000",
+            "amount": "439.00000000",
             "timeBlock": null,
             "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "0FB2757D457D4569A245D42860B2ECE6",
-        "name": "NURS9213-210063",
-        "sisID": "NURS9213-210063",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230510T060000",
-        "endDate": "20230604T060000",
-        "seatsAvailable": "1",
-        "fees": [
+          },
           {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
+            "containerName": "TimeBlock",
+            "feeItemName": "19589",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
             "timeBlock": null,
             "day": ""
           }
         ],
         "feesSummary": {
-          "totalFees": 1,
+          "totalFees": 3,
           "containers": [
-            "Fees"
+            "Fees",
+            "TimeBlock"
           ],
           "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "08D5C14B40DD4970AB61A5FE8E9ED9E4",
-        "name": "NURS9213-210065",
-        "sisID": "NURS9213-210065",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230719T060000",
-        "endDate": "20230813T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "DDBAA44DA4B342058B33F5C0DF009761",
-        "name": "NURS9213-211435",
-        "sisID": "NURS9213-211435",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20231011T060000",
-        "endDate": "20231105T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "947EC5A6DAA34B37B435BA36E281C1EC",
-        "name": "NURS9213-211436",
-        "sisID": "NURS9213-211436",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20231108T070000",
-        "endDate": "20231203T070000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "E1869876841A4D63AFD19DD1824EA5C2",
-        "name": "NURS9213-213119",
-        "sisID": "NURS9213-213119",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240214T070000",
-        "endDate": "20240309T070000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "99D521BD6DB84F64B67F07653C012586",
-        "name": "NURS9213-213120",
-        "sisID": "NURS9213-213120",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240410T060000",
-        "endDate": "20240504T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "3C6DBC1FF65642A09A4231A3EA04F81D",
-        "name": "NURS9213-214628",
-        "sisID": "NURS9213-214628",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240529T060000",
-        "endDate": "20240622T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "4E161373FF3B4666A5B1C80DF6385756",
-        "name": "NURS9213-214629",
-        "sisID": "NURS9213-214629",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240724T060000",
-        "endDate": "20240818T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "9B47E51124C14D03BC28A99C43FC9425",
-        "name": "NURS9213-216549",
-        "sisID": "NURS9213-216549",
-        "courseName": "",
-        "deliveryTypeId": "{9469E42F-E6CC-4F3A-A2DE-5BC582A34999}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "9469E42FE6CC4F3AA2DE5BC582A34999",
-          "name": "Blended Asynchronous",
-          "displayName": "Blended Asynchronous",
-          "slug": "blended-asynchronous"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240911T060000",
-        "endDate": "20241005T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "88C2C7558A9F4CD1A82D38BE3C4BC67A",
-        "name": "NURS9213-216550",
-        "sisID": "NURS9213-216550",
-        "courseName": "",
-        "deliveryTypeId": "{9469E42F-E6CC-4F3A-A2DE-5BC582A34999}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "9469E42FE6CC4F3AA2DE5BC582A34999",
-          "name": "Blended Asynchronous",
-          "displayName": "Blended Asynchronous",
-          "slug": "blended-asynchronous"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20241113T070000",
-        "endDate": "20241207T070000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
+            "Domestic",
+            "International"
           ],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
-      "totalSections": 13,
-      "totalFees": 13,
+      "totalSections": 2,
+      "totalFees": 6,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 13
+      "sectionsWithFees": 2
     }
   }
 }

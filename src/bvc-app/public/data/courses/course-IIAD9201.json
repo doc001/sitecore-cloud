@@ -1,31 +1,26 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:37:47.504Z",
+    "generatedAt": "2026-03-10T22:07:51.252Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "IIAD9201",
     "courseName": "Supervisory Skills in Intercultural Teams"
   },
   "course": {
-    "id": "D1F8BA3623FD438BB7B4D30B9035DD0E",
+    "id": "EFB2897EA8A5438C84E25452928EEEEC",
     "sisID": "IIAD9201",
     "name": "Supervisory Skills in Intercultural Teams",
     "children": [
       {
-        "id": "ADFDB14710114C368A0AA5C479BAB843",
-        "name": "IIAD9201-208447",
-        "sisID": "IIAD9201-208447",
+        "id": "7BCC0CE7A5644ED7A9DAE52A3DCF2C37",
+        "name": "IIAD9201-01",
+        "sisID": "14144",
         "courseName": "",
-        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "4773C629459B46F9A70478BEC70CF10B",
-          "name": "Combined Online",
-          "displayName": "Combined Online",
-          "slug": "combined-online"
-        },
+        "deliveryTypeId": "{DD3C86D0-2E98-41AE-8C03-B3CD16D56584}",
+        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
+        "deliveryType": null,
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -33,42 +28,23 @@
         "hours": "12",
         "registrationStart": "",
         "registrationEnd": "",
-        "startDate": "20230327T060000",
-        "endDate": "20230423T060000",
+        "startDate": "20250324T000000",
+        "endDate": "20250420T000000",
         "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
+        "fees": [],
         "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
+          "totalFees": 0,
+          "containers": [],
+          "feeTypes": [],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 1,
+      "totalFees": 0,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      "sectionsWithFees": 0
     }
   }
 }

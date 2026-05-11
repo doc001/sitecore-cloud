@@ -1,114 +1,107 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-13T17:57:39.956Z",
+    "generatedAt": "2026-03-17T14:20:29.202Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "BIOL1401",
     "courseName": "The Organization and Diversity of Life"
   },
   "course": {
-    "id": "5321C11FBEBC4228869ABA59CC1D97EC",
+    "id": "149D8FB63F094F528DE12C7BF03054FA",
     "sisID": "BIOL1401",
     "name": "The Organization and Diversity of Life",
     "credits": "3",
     "children": [
       {
-        "id": "49D9AD96FE3B4CEFBADA7053C4CBC357",
-        "name": "25SEPMNFS1",
-        "sisID": "221429",
+        "id": "0561F574912F4CEA8836C8CF99FD9C9A",
+        "name": "BIOL1401-01",
+        "sisID": "22465",
         "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
-        },
+        "deliveryTypeId": "1238B4B4-026E-47C2-B4E8-7A25120355EF",
+        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
+        "deliveryType": null,
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
         },
         "hours": "45",
-        "registrationStart": "20250603T000000",
-        "registrationEnd": "20250911T235959",
+        "registrationStart": "",
+        "registrationEnd": "",
         "startDate": "20250902T000000",
         "endDate": "20251215T000000",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeItemName": "Domestic",
+            "feeItemNameSanitized": "Domestic",
+            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
             "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
+              "id": "516310D879C24F0EAEF798F911689E41",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
             },
-            "amount": "1894.000",
+            "amount": "633.00000000",
             "timeBlock": null,
             "day": ""
           },
           {
             "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeItemName": "International",
+            "feeItemNameSanitized": "International",
+            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
             "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
+              "id": "81F1879F87F4457C98D51F933D6BFE51",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
             },
-            "amount": "633.000",
+            "amount": "1894.00000000",
             "timeBlock": null,
             "day": ""
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "11546611",
-            "feeItemNameSanitized": "11546611",
+            "feeItemName": "1209",
+            "feeItemNameSanitized": "1209",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "1E0B47F057784526A3B105445EBC32CF",
-              "name": "80E1",
-              "displayName": "80E1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T140000",
-              "sisId": "80E1",
+              "id": null,
+              "name": "1209",
+              "displayName": "1209",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "1209",
               "created": "",
               "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
+              "isFallback": true
             },
-            "day": "3"
+            "day": ""
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "80E1",
-            "feeItemNameSanitized": "80E1",
+            "feeItemName": "1210",
+            "feeItemNameSanitized": "1210",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "1E0B47F057784526A3B105445EBC32CF",
-              "name": "80E1",
-              "displayName": "80E1",
-              "endTime": "20250101T152000",
-              "startTime": "20250101T140000",
-              "sisId": "80E1",
+              "id": null,
+              "name": "1210",
+              "displayName": "1210",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "1210",
               "created": "",
               "updated": "",
-              "Created": "20250520T160257Z",
-              "Updated": "20250520T160257Z"
+              "isFallback": true
             },
-            "day": "4"
+            "day": ""
           }
         ],
         "feesSummary": {
@@ -118,8 +111,8 @@
             "TimeBlock"
           ],
           "feeTypes": [
-            "International Tuition",
-            "Tuition"
+            "Domestic",
+            "International"
           ],
           "timeBlockCount": 2
         }

@@ -1,31 +1,26 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:37:42.875Z",
+    "generatedAt": "2026-03-10T22:07:50.199Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "IIAD9102",
     "courseName": "Intercultural Competence 2"
   },
   "course": {
-    "id": "CE585215157F4C03936D23575CDD5763",
+    "id": "F206C5D75D4B4A14B33078B578CE032F",
     "sisID": "IIAD9102",
     "name": "Intercultural Competence 2",
     "children": [
       {
-        "id": "0ED2974CCC294102AF618B5009C6BA26",
-        "name": "IIAD9102-208445",
-        "sisID": "IIAD9102-208445",
+        "id": "CC5058237E9E46DA95EC1484090A1C12",
+        "name": "IIAD9102-01",
+        "sisID": "13036",
         "courseName": "",
-        "deliveryTypeId": "{4773C629-459B-46F9-A704-78BEC70CF10B}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "4773C629459B46F9A70478BEC70CF10B",
-          "name": "Combined Online",
-          "displayName": "Combined Online",
-          "slug": "combined-online"
-        },
+        "deliveryTypeId": "{DD3C86D0-2E98-41AE-8C03-B3CD16D56584}",
+        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
+        "deliveryType": null,
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -33,94 +28,23 @@
         "hours": "12",
         "registrationStart": "",
         "registrationEnd": "",
-        "startDate": "20230227T070000",
-        "endDate": "20230319T060000",
+        "startDate": "20250224T000000",
+        "endDate": "20250316T000000",
         "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
+        "fees": [],
         "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "0BA99A5E05A34C1BBF486D0FF65C4F43",
-        "name": "IIAD9102-217118",
-        "sisID": "IIAD9102-217118",
-        "courseName": "",
-        "deliveryTypeId": "{A3E8C32F-B6BF-4641-A3C1-4590D90EE7EB}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "A3E8C32FB6BF4641A3C14590D90EE7EB",
-          "name": "Online Asynchronous",
-          "displayName": "Online Asynchronous",
-          "slug": "online-asynchronous"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "12",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240916T060000",
-        "endDate": "20241015T060000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{322363D7-88AD-48BF-BCEA-0AE4C2968482}",
-            "feeType": {
-              "id": "322363D788AD48BFBCEA0AE4C2968482",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "658.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic"
-          ],
+          "totalFees": 0,
+          "containers": [],
+          "feeTypes": [],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 2,
+      "totalSections": 1,
+      "totalFees": 0,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      "sectionsWithFees": 0
     }
   }
 }

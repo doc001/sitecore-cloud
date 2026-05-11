@@ -1,163 +1,26 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-15T19:38:51.143Z",
+    "generatedAt": "2026-03-17T14:20:14.785Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "PHRM9504",
     "courseName": "Sterile Compounding Recertification - Non-hazardous"
   },
   "course": {
-    "id": "45BB0AB17CB84A0CAEC4429BE8B04CF1",
+    "id": "1AF2DB15B4514DA5986CC69B7CA3501F",
     "sisID": "PHRM9504",
     "name": "Sterile Compounding Recertification - Non-hazardous",
     "children": [
       {
-        "id": "65C6F29F5E104C92B174B79A864BE89A",
-        "name": "PHRM9504-209021",
-        "sisID": "PHRM9504-209021",
+        "id": "85B735BD7B734A3283351B76DD455F47",
+        "name": "PHRM9504-92",
+        "sisID": "14890",
         "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
+        "deliveryTypeId": "{B25EF090-C76B-45BC-A851-D656FFECC7C6}",
+        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
+        "deliveryType": null,
         "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "10",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20220922T060000",
-        "endDate": "20221010T060000",
-        "seatsAvailable": "1",
-        "fees": [],
-        "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "BA525154C3A145CEA4924C1A9AD6E1F8",
-        "name": "PHRM9504-209765",
-        "sisID": "PHRM9504-209765",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "10",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20221205T070000",
-        "endDate": "20230115T070000",
-        "seatsAvailable": "1",
-        "fees": [],
-        "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "B1A56CAA17724A02A0AD3564BC6BB71E",
-        "name": "PHRM9504-211004",
-        "sisID": "PHRM9504-211004",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "10",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230310T070000",
-        "endDate": "20230407T060000",
-        "seatsAvailable": "1",
-        "fees": [],
-        "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "EEC32E9F82EB4BB7ACCA2FC90B14291B",
-        "name": "PHRM9504-212361",
-        "sisID": "PHRM9504-212361",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "10",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20230420T060000",
-        "endDate": "20230705T060000",
-        "seatsAvailable": "1",
-        "fees": [],
-        "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "4BF82D05240D4A02BFB5C1E2D248BBD9",
-        "name": "PHRM9504-214148",
-        "sisID": "PHRM9504-214148",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
@@ -165,89 +28,57 @@
         "hours": "15",
         "registrationStart": "",
         "registrationEnd": "",
-        "startDate": "20230922T060000",
-        "endDate": "20231110T070000",
+        "startDate": "20250917T000000",
+        "endDate": "20251130T000000",
         "seatsAvailable": "1",
-        "fees": [],
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
+            "feeType": {
+              "id": "516310D879C24F0EAEF798F911689E41",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "299.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
+            "feeType": {
+              "id": "81F1879F87F4457C98D51F933D6BFE51",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "299.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
         "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "75886C7B60F14E3BB2C3D066D10B8290",
-        "name": "PHRM9504-216029",
-        "sisID": "PHRM9504-216029",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240223T070000",
-        "endDate": "20240430T060000",
-        "seatsAvailable": "1",
-        "fees": [],
-        "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "0EEE8F95D25441C0A2330726E76B0EA4",
-        "name": "PHRM9504-217617",
-        "sisID": "PHRM9504-217617",
-        "courseName": "",
-        "deliveryTypeId": "{C239AE8F-0C83-4B0C-A44B-3A06961EEBE3}",
-        "campusId": "{7245E3E2-E633-4A77-87A6-15D908F774B8}",
-        "deliveryType": {
-          "id": "C239AE8F0C834B0CA44B3A06961EEBE3",
-          "name": "Blended",
-          "displayName": "Blended",
-          "slug": "blended"
-        },
-        "campus": {
-          "id": "7245E3E2E6334A7787A615D908F774B8",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20240506T060000",
-        "endDate": "20240715T060000",
-        "seatsAvailable": "1",
-        "fees": [],
-        "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic",
+            "International"
+          ],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
-      "totalSections": 7,
-      "totalFees": 0,
+      "totalSections": 1,
+      "totalFees": 2,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 0
+      "sectionsWithFees": 1
     }
   }
 }

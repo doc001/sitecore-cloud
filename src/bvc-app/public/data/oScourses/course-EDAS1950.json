@@ -1,0 +1,553 @@
+{
+  "metadata": {
+    "generatedAt": "2026-03-10T22:08:59.046Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "EDAS1950",
+    "courseName": "Education Assistant Practicum"
+  },
+  "course": {
+    "id": "0D4370280663440293B1712B3D022D66",
+    "sisID": "EDAS1950",
+    "name": "Education Assistant Practicum",
+    "credits": "6",
+    "children": [
+      {
+        "id": "EA7137D37B7F4A638C22C7E0F8CA47F3",
+        "name": "EDAS1950-51",
+        "sisID": "26943",
+        "courseName": "",
+        "deliveryTypeId": "FB15711D-B8F5-4A0B-BFCE-6DE132C68670",
+        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
+        "deliveryType": null,
+        "campus": {
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "210",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20260302T000000",
+        "endDate": "20260421T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeItemNameSanitized": "Domestic",
+            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
+            "feeType": {
+              "id": "516310D879C24F0EAEF798F911689E41",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "822.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeItemNameSanitized": "International",
+            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
+            "feeType": {
+              "id": "81F1879F87F4457C98D51F933D6BFE51",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "2100.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "200350",
+            "feeItemNameSanitized": "200350",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "200350",
+              "displayName": "200350",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "200350",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "200353",
+            "feeItemNameSanitized": "200353",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "200353",
+              "displayName": "200353",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "200353",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "200356",
+            "feeItemNameSanitized": "200356",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "200356",
+              "displayName": "200356",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "200356",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "200358",
+            "feeItemNameSanitized": "200358",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "200358",
+              "displayName": "200358",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "200358",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "200360",
+            "feeItemNameSanitized": "200360",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "200360",
+              "displayName": "200360",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "200360",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "200362",
+            "feeItemNameSanitized": "200362",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "200362",
+              "displayName": "200362",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "200362",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "200364",
+            "feeItemNameSanitized": "200364",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "200364",
+              "displayName": "200364",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "200364",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "203191",
+            "feeItemNameSanitized": "203191",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "203191",
+              "displayName": "203191",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "203191",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "203192",
+            "feeItemNameSanitized": "203192",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "203192",
+              "displayName": "203192",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "203192",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "203193",
+            "feeItemNameSanitized": "203193",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "203193",
+              "displayName": "203193",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "203193",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 12,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Domestic",
+            "International"
+          ],
+          "timeBlockCount": 10
+        }
+      },
+      {
+        "id": "1740B8A6800A4D5B830817F53D8DE745",
+        "name": "EDAS1950-52",
+        "sisID": "26944",
+        "courseName": "",
+        "deliveryTypeId": "FB15711D-B8F5-4A0B-BFCE-6DE132C68670",
+        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
+        "deliveryType": null,
+        "campus": {
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "210",
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20260302T000000",
+        "endDate": "20260421T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeItemNameSanitized": "Domestic",
+            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
+            "feeType": {
+              "id": "516310D879C24F0EAEF798F911689E41",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "822.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeItemNameSanitized": "International",
+            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
+            "feeType": {
+              "id": "81F1879F87F4457C98D51F933D6BFE51",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "2100.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332431",
+            "feeItemNameSanitized": "332431",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332431",
+              "displayName": "332431",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332431",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332434",
+            "feeItemNameSanitized": "332434",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332434",
+              "displayName": "332434",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332434",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332437",
+            "feeItemNameSanitized": "332437",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332437",
+              "displayName": "332437",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332437",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332440",
+            "feeItemNameSanitized": "332440",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332440",
+              "displayName": "332440",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332440",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332442",
+            "feeItemNameSanitized": "332442",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332442",
+              "displayName": "332442",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332442",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332445",
+            "feeItemNameSanitized": "332445",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332445",
+              "displayName": "332445",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332445",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332447",
+            "feeItemNameSanitized": "332447",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332447",
+              "displayName": "332447",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332447",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "4"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332449",
+            "feeItemNameSanitized": "332449",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332449",
+              "displayName": "332449",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332449",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "1"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332451",
+            "feeItemNameSanitized": "332451",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332451",
+              "displayName": "332451",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332451",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "2"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "332453",
+            "feeItemNameSanitized": "332453",
+            "feeTypeId": null,
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": null,
+              "name": "332453",
+              "displayName": "332453",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "332453",
+              "created": "",
+              "updated": "",
+              "isFallback": true
+            },
+            "day": "3"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 12,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Domestic",
+            "International"
+          ],
+          "timeBlockCount": 10
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 2,
+      "totalFees": 24,
+      "totalTimeBlocks": 20,
+      "sectionsWithFees": 2
+    }
+  }
+}

@@ -1,87 +1,51 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-03T07:07:02.055Z",
+    "generatedAt": "2026-03-10T22:09:32.002Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "FNSR2403",
     "courseName": "Risk Financing"
   },
   "course": {
-    "id": "65C40BACC68A47E6A56C7851583D72E1",
+    "id": "BFBB768C1F20492981D6FEE279CFF4C7",
     "sisID": "FNSR2403",
     "name": "Risk Financing",
     "credits": "3",
     "children": [
       {
-        "id": "41D834A21B6B4CAA9A12FC8FF3091FAE",
-        "name": "25SEPMNOA41",
-        "sisID": "221624",
+        "id": "612AD3F11CF44E1C9791A1626F9280EB",
+        "name": "FNSR2403-41",
+        "sisID": "14411",
         "courseName": "",
-        "deliveryTypeId": "73DB4BB3-7C19-4BAD-BB66-CE697687EADE",
-        "campusId": "0C49C6D7-F256-4684-91C3-27526460556B",
+        "deliveryTypeId": "DD3C86D0-2E98-41AE-8C03-B3CD16D56584",
+        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
         "deliveryType": null,
         "campus": {
-          "id": "0C49C6D7F256468491C327526460556B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
         },
         "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "E0BE9D7C-5E42-4089-91EF-13819B30B907",
-            "feeType": {
-              "id": "E0BE9D7C5E42408991EF13819B30B907",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "1676.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "3782604D-B5FA-4864-8E5B-C2AE0333753F",
-            "feeType": {
-              "id": "3782604DB5FA48648E5BC2AE0333753F",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "612.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
+        "registrationStart": "",
+        "registrationEnd": "",
+        "startDate": "20260505T000000",
+        "endDate": "20260821T000000",
+        "seatsAvailable": "0",
+        "fees": [],
         "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
+          "totalFees": 0,
+          "containers": [],
+          "feeTypes": [],
           "timeBlockCount": 0
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 2,
+      "totalFees": 0,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      "sectionsWithFees": 0
     }
   }
 }

@@ -1,93 +1,87 @@
 {
   "metadata": {
-    "generatedAt": "2025-08-13T17:57:55.259Z",
+    "generatedAt": "2026-03-17T14:20:43.576Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "HMSV3405",
     "courseName": "Implementing TRC (2015) Calls to Action in Health and Human Services"
   },
   "course": {
-    "id": "3254309CCDA54A59ABD426FF23C05E98",
+    "id": "4DF6F31D855A4D7BA80CE659311FEFA1",
     "sisID": "HMSV3405",
     "name": "Implementing TRC (2015) Calls to Action in Health and Human Services",
     "credits": "3",
     "children": [
       {
-        "id": "4770777B964740A9822B8D2657438BB4",
-        "name": "25SEPMNBS21",
-        "sisID": "222159",
+        "id": "37970743637340F58448FE576858E3B5",
+        "name": "HMSV3405-21",
+        "sisID": "10213",
         "courseName": "",
-        "deliveryTypeId": "8980B6F5-107D-497F-8FC4-27F7C467F55D",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "8980B6F5107D497F8FC427F7C467F55D",
-          "name": "Blended - Synchronous",
-          "displayName": "Blended - Synchronous",
-          "slug": "blended-synchronous"
-        },
+        "deliveryTypeId": "D10A7167-7807-4332-AF49-B0C43B88FDDB",
+        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
+        "deliveryType": null,
         "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
+          "id": "D0574CAFDF044732B1B3CC3539797F1F",
           "name": "Calgary Downtown Campus",
           "displayName": "Calgary Downtown Campus",
           "slug": "calgary-downtown-campus"
         },
         "hours": "45",
-        "registrationStart": "20250605T000000",
-        "registrationEnd": "20250911T235959",
+        "registrationStart": "",
+        "registrationEnd": "",
         "startDate": "20250902T000000",
         "endDate": "20251215T000000",
         "seatsAvailable": "1",
         "fees": [
           {
             "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
+            "feeItemName": "Domestic",
+            "feeItemNameSanitized": "Domestic",
+            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
             "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
+              "id": "516310D879C24F0EAEF798F911689E41",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
             },
-            "amount": "1572.000",
+            "amount": "612.00000000",
             "timeBlock": null,
             "day": ""
           },
           {
             "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
+            "feeItemName": "International",
+            "feeItemNameSanitized": "International",
+            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
             "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
+              "id": "81F1879F87F4457C98D51F933D6BFE51",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
             },
-            "amount": "612.000",
+            "amount": "1572.00000000",
             "timeBlock": null,
             "day": ""
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170E1",
-            "feeItemNameSanitized": "170E1",
+            "feeItemName": "10769",
+            "feeItemNameSanitized": "10769",
             "feeTypeId": null,
             "feeType": null,
             "amount": "",
             "timeBlock": {
-              "id": "541C7E0ED4EA4E5E82A535FD54FFD9CD",
-              "name": "170E1",
-              "displayName": "170E1",
-              "endTime": "20250101T165000",
-              "startTime": "20250101T140000",
-              "sisId": "170E1",
+              "id": null,
+              "name": "10769",
+              "displayName": "10769",
+              "endTime": "",
+              "startTime": "",
+              "sisId": "10769",
               "created": "",
               "updated": "",
-              "Created": "20250520T160240Z",
-              "Updated": "20250520T160240Z"
+              "isFallback": true
             },
-            "day": "3"
+            "day": ""
           }
         ],
         "feesSummary": {
@@ -97,8 +91,8 @@
             "TimeBlock"
           ],
           "feeTypes": [
-            "International Tuition",
-            "Tuition"
+            "Domestic",
+            "International"
           ],
           "timeBlockCount": 1
         }
