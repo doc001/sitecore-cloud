@@ -12,7 +12,7 @@
     "breadcrumbs:types": "node scripts/generateNavigationBreadcrumbs.mjs types",
     "breadcrumbs:manifest": "node scripts/generateNavigationBreadcrumbs.mjs manifest",
     "breadcrumbs:all": "node scripts/generateNavigationBreadcrumbs.mjs all",
-    "prebuild": "npm run breadcrumbs:all",
+    "prebuild": "npm run breadcrumbs:all && node scripts/copy-folders.mjs",
     "predev": "npm run breadcrumbs:build",
     "prelaunch:build": "npm run createCourses && node scripts/copy-folders.mjs",
     "postinstall": "flowbite-react patch",
