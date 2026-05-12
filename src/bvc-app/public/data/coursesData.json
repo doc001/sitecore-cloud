@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-05-11T18:33:48.647Z",
+    "generatedAt": "2026-05-12T20:58:07.655Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Complete Solution with Individual Files",
     "note": "Individual course files are available in /courses/ directory",
@@ -21,15 +21,15 @@
       ]
     },
     "stats": {
-      "totalCourses": 39,
-      "totalSections": 99,
-      "totalFees": 220,
+      "totalCourses": 41,
+      "totalSections": 101,
+      "totalFees": 224,
       "totalTimeBlocks": 0,
-      "successes": 39,
+      "successes": 41,
       "failures": 0,
-      "resolvedDeliveryTypes": 99,
-      "resolvedCampuses": 99,
-      "resolvedFeeTypes": 196,
+      "resolvedDeliveryTypes": 101,
+      "resolvedCampuses": 101,
+      "resolvedFeeTypes": 200,
       "resolvedTimeBlocks": 0,
       "coursesWithManySection": 1,
       "coursesWithManyFees": 0,
@@ -52,6 +52,7 @@
           "course-ACCT9402.json",
           "course-ADMN9300.json",
           "course-ADMN9302.json",
+          "course-ANTH001.json",
           "course-COMP9301.json",
           "course-COMP9302.json",
           "course-DESN9312.json",
@@ -82,6 +83,7 @@
           "course-RELE9202.json",
           "course-RELE9204.json",
           "course-SAFT9406.json",
+          "course-SDSTEST001.json",
           "course-TECH9400.json"
         ],
         "failed": []
@@ -130,7 +132,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -144,7 +146,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -197,7 +199,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -211,7 +213,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -331,7 +333,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -345,7 +347,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -411,7 +413,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -425,7 +427,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -826,7 +828,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -840,7 +842,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -906,7 +908,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -920,7 +922,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "475.00000000",
+              "amount": "500.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -1053,7 +1055,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "410.00000000",
+              "amount": "430.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -1067,7 +1069,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "410.00000000",
+              "amount": "430.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -1601,6 +1603,86 @@
       }
     },
     {
+      "id": "A39632872300490482B629AB0AC91D78",
+      "sisID": "ANTH001",
+      "name": "Artificial Intelligence",
+      "children": [
+        {
+          "id": "52A65351A3504DBA843178105A842121",
+          "name": "ANTH001",
+          "sisID": "30656",
+          "courseName": "",
+          "deliveryTypeId": "{E9F80427-5D3C-4B61-A685-F63DF5134F14}",
+          "campusId": "{0B44F9AE-85B9-426F-9A38-76762BBA5B5A}",
+          "deliveryType": {
+            "id": "E9F804275D3C4B61A685F63DF5134F14",
+            "name": "In Class",
+            "displayName": "In Class",
+            "slug": "in-class"
+          },
+          "campus": {
+            "id": "0B44F9AE85B9426F9A3876762BBA5B5A",
+            "name": "Calgary",
+            "displayName": "Calgary",
+            "slug": "calgary"
+          },
+          "hours": "40",
+          "registrationStart": "20260504T000000",
+          "registrationEnd": "20260522T000000",
+          "startDate": "20260622T000000",
+          "endDate": "20270212T000000",
+          "seatsAvailable": "1",
+          "fees": [
+            {
+              "containerName": "Fees",
+              "feeItemName": "Domestic",
+              "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
+              "feeType": {
+                "id": "56C8D85F506A4CD2B88A30462453C204",
+                "name": "Domestic",
+                "displayName": "Domestic",
+                "slug": "domestic"
+              },
+              "amount": "1130.00000000",
+              "timeBlock": null,
+              "day": ""
+            },
+            {
+              "containerName": "Fees",
+              "feeItemName": "International",
+              "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
+              "feeType": {
+                "id": "38A0B2C346264FBF8F95956E78B80C65",
+                "name": "International",
+                "displayName": "International",
+                "slug": "international"
+              },
+              "amount": "1374.00000000",
+              "timeBlock": null,
+              "day": ""
+            }
+          ],
+          "feesSummary": {
+            "totalFees": 2,
+            "containers": [
+              "Fees"
+            ],
+            "feeTypes": [
+              "Domestic",
+              "International"
+            ],
+            "timeBlockCount": 0
+          }
+        }
+      ],
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 2,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1
+      }
+    },
+    {
       "id": "E97578FD5C0E4B599F65D3D87CD85210",
       "sisID": "COMP9301",
       "name": "Microsoft Excel - Introduction",
@@ -1788,7 +1870,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "337.00000000",
+              "amount": "375.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -1802,7 +1884,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "337.00000000",
+              "amount": "375.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -1855,7 +1937,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "337.00000000",
+              "amount": "375.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -1869,7 +1951,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "337.00000000",
+              "amount": "375.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -3144,7 +3226,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "409.00000000",
+              "amount": "419.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -3158,7 +3240,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "409.00000000",
+              "amount": "419.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -3211,7 +3293,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "409.00000000",
+              "amount": "419.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -3225,7 +3307,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "409.00000000",
+              "amount": "419.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -3358,7 +3440,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "429.00000000",
+              "amount": "439.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -3372,7 +3454,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "429.00000000",
+              "amount": "439.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -3425,7 +3507,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "429.00000000",
+              "amount": "439.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -3439,7 +3521,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "429.00000000",
+              "amount": "439.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -4543,7 +4625,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "239.00000000",
+              "amount": "249.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -4557,7 +4639,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "239.00000000",
+              "amount": "249.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -4700,7 +4782,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "439.00000000",
+              "amount": "449.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -4714,7 +4796,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "439.00000000",
+              "amount": "449.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -4994,7 +5076,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "389.00000000",
+              "amount": "399.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -5008,7 +5090,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "389.00000000",
+              "amount": "399.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -5061,7 +5143,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "389.00000000",
+              "amount": "399.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -5075,7 +5157,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "389.00000000",
+              "amount": "399.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6288,7 +6370,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6302,7 +6384,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6355,7 +6437,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6369,7 +6451,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6422,7 +6504,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6436,7 +6518,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6489,7 +6571,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6503,7 +6585,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6556,7 +6638,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6570,7 +6652,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6623,7 +6705,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6637,7 +6719,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6690,7 +6772,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6704,7 +6786,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6757,7 +6839,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6771,7 +6853,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6824,7 +6906,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6838,7 +6920,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6891,7 +6973,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6905,7 +6987,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -6958,7 +7040,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -6972,7 +7054,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -7025,7 +7107,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -7039,7 +7121,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -7092,7 +7174,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -7106,7 +7188,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -7159,7 +7241,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -7173,7 +7255,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -7226,7 +7308,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -7240,7 +7322,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -7293,7 +7375,7 @@
                 "displayName": "Domestic",
                 "slug": "domestic"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             },
@@ -7307,7 +7389,7 @@
                 "displayName": "International",
                 "slug": "international"
               },
-              "amount": "47.00000000",
+              "amount": "49.00000000",
               "timeBlock": null,
               "day": ""
             }
@@ -7330,6 +7412,86 @@
         "totalFees": 32,
         "totalTimeBlocks": 0,
         "sectionsWithFees": 16
+      }
+    },
+    {
+      "id": "D17A486C9A954DF2BD4D234FAE9A1665",
+      "sisID": "SDSTEST001",
+      "name": "SDS TESTING",
+      "children": [
+        {
+          "id": "24469BB2794348D39A3F82AC1EED262E",
+          "name": "SDSTEST001",
+          "sisID": "30658",
+          "courseName": "",
+          "deliveryTypeId": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+          "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+          "deliveryType": {
+            "id": "C45FFE750A404E30A906FC3C6FDD99FC",
+            "name": "Blended Synchronous",
+            "displayName": "Blended Synchronous",
+            "slug": "blended-synchronous"
+          },
+          "campus": {
+            "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
+            "name": "Calgary Downtown Campus",
+            "displayName": "Calgary Downtown Campus",
+            "slug": "calgary-downtown-campus"
+          },
+          "hours": "40",
+          "registrationStart": "20260512T000000",
+          "registrationEnd": "20260620T000000",
+          "startDate": "20260628T000000",
+          "endDate": "20261230T000000",
+          "seatsAvailable": "1",
+          "fees": [
+            {
+              "containerName": "Fees",
+              "feeItemName": "Domestic",
+              "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
+              "feeType": {
+                "id": "56C8D85F506A4CD2B88A30462453C204",
+                "name": "Domestic",
+                "displayName": "Domestic",
+                "slug": "domestic"
+              },
+              "amount": "155.00000000",
+              "timeBlock": null,
+              "day": ""
+            },
+            {
+              "containerName": "Fees",
+              "feeItemName": "International",
+              "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
+              "feeType": {
+                "id": "38A0B2C346264FBF8F95956E78B80C65",
+                "name": "International",
+                "displayName": "International",
+                "slug": "international"
+              },
+              "amount": "0.00000000",
+              "timeBlock": null,
+              "day": ""
+            }
+          ],
+          "feesSummary": {
+            "totalFees": 2,
+            "containers": [
+              "Fees"
+            ],
+            "feeTypes": [
+              "Domestic",
+              "International"
+            ],
+            "timeBlockCount": 0
+          }
+        }
+      ],
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 2,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1
       }
     },
     {

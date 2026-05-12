@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generatedAt": "2026-05-11T18:33:48.651Z",
+    "generatedAt": "2026-05-12T20:58:07.658Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Course Index",
-    "totalCourses": 39
+    "totalCourses": 41
   },
   "courses": [
     {
@@ -157,6 +157,27 @@
       "sisID": "ADMN9302",
       "name": "Marketing Support with AI",
       "fileName": "course-ADMN9302.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 2,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Domestic",
+          "International"
+        ]
+      }
+    },
+    {
+      "sisID": "ANTH001",
+      "name": "Artificial Intelligence",
+      "fileName": "course-ANTH001.json",
       "summary": {
         "totalSections": 1,
         "totalFees": 2,
@@ -802,6 +823,27 @@
         "totalFees": 32,
         "totalTimeBlocks": 0,
         "sectionsWithFees": 16,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Domestic",
+          "International"
+        ]
+      }
+    },
+    {
+      "sisID": "SDSTEST001",
+      "name": "SDS TESTING",
+      "fileName": "course-SDSTEST001.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 2,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,

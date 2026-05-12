@@ -10,14 +10,14 @@
       "name": "DATA2301-01",
       "sisId": "17826",
       "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
       "startDate": "20250902T000000",
       "endDate": "20251218T000000",
       "seatsAvailable": true,
-      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-      "credits": 3,
-      "hours": 45,
-      "registrationStart": "",
-      "registrationEnd": "",
       "fees": {
         "domestic": {
           "amount": 1000,
@@ -33,16 +33,18 @@
       "timeBlocks": [
         {
           "sisId": "7790",
-          "frequency": "Weekly",
+          "name": "7790",
           "startTime": "20250902T000000",
           "endTime": "20251216T000000",
+          "frequency": "Weekly",
           "schedule": "T 12:30 PM - 1:50 PM"
         },
         {
           "sisId": "7908",
-          "frequency": "Weekly",
+          "name": "7908",
           "startTime": "20250904T000000",
           "endTime": "20251218T000000",
+          "frequency": "Weekly",
           "schedule": "Th 12:30 PM - 1:50 PM"
         }
       ]

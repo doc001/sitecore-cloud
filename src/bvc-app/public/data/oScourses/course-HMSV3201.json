@@ -10,14 +10,14 @@
       "name": "HMSV3201-21",
       "sisId": "30608",
       "deliveryType": "{9754E29D-F075-4139-B125-292A81550174}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
       "startDate": "20260107T000000",
       "endDate": "20260421T000000",
       "seatsAvailable": true,
-      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-      "credits": 3,
-      "hours": 45,
-      "registrationStart": "",
-      "registrationEnd": "",
       "fees": {
         "domestic": {
           "amount": 633,
@@ -33,9 +33,10 @@
       "timeBlocks": [
         {
           "sisId": "13877",
-          "frequency": "Weekly",
+          "name": "13877",
           "startTime": "20260108T000000",
           "endTime": "20260416T000000",
+          "frequency": "Weekly",
           "schedule": "Th 8:00 AM - 10:50 AM"
         }
       ]

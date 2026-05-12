@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "generatedAt": "2026-05-12T20:58:07.216Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "SDSTEST001",
+    "courseName": "SDS TESTING"
+  },
+  "course": {
+    "id": "D17A486C9A954DF2BD4D234FAE9A1665",
+    "sisID": "SDSTEST001",
+    "name": "SDS TESTING",
+    "children": [
+      {
+        "id": "24469BB2794348D39A3F82AC1EED262E",
+        "name": "SDSTEST001",
+        "sisID": "30658",
+        "courseName": "",
+        "deliveryTypeId": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+        "deliveryType": {
+          "id": "C45FFE750A404E30A906FC3C6FDD99FC",
+          "name": "Blended Synchronous",
+          "displayName": "Blended Synchronous",
+          "slug": "blended-synchronous"
+        },
+        "campus": {
+          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
+          "name": "Calgary Downtown Campus",
+          "displayName": "Calgary Downtown Campus",
+          "slug": "calgary-downtown-campus"
+        },
+        "hours": "40",
+        "registrationStart": "20260512T000000",
+        "registrationEnd": "20260620T000000",
+        "startDate": "20260628T000000",
+        "endDate": "20261230T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Domestic",
+            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
+            "feeType": {
+              "id": "56C8D85F506A4CD2B88A30462453C204",
+              "name": "Domestic",
+              "displayName": "Domestic",
+              "slug": "domestic"
+            },
+            "amount": "155.00000000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "Fees",
+            "feeItemName": "International",
+            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
+            "feeType": {
+              "id": "38A0B2C346264FBF8F95956E78B80C65",
+              "name": "International",
+              "displayName": "International",
+              "slug": "international"
+            },
+            "amount": "0.00000000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 2,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Domestic",
+            "International"
+          ],
+          "timeBlockCount": 0
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 2,
+      "totalTimeBlocks": 0,
+      "sectionsWithFees": 1
+    }
+  }
+}
