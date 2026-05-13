@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-09T14:23:30.420Z",
+    "generatedAt": "2026-05-13T21:27:34.541Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "NURS9502",
@@ -64,9 +64,9 @@
         }
       },
       {
-        "id": "0887C2B9AAB64A559E625F7528E2B623",
-        "name": "26MAYMNOA91",
-        "sisID": "224623",
+        "id": "D2F7764BAE1A450DA40AFD6F8816A6EA",
+        "name": "26NOVONOA92",
+        "sisID": "226806",
         "courseName": "",
         "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
         "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
@@ -83,10 +83,62 @@
           "slug": "distance-learning"
         },
         "hours": "45",
-        "registrationStart": "20251211T000000",
-        "registrationEnd": "20260512T235959",
-        "startDate": "20260513T000000",
-        "endDate": "20260913T000000",
+        "registrationStart": "20260420T000000",
+        "registrationEnd": "20261109T235959",
+        "startDate": "20261110T000000",
+        "endDate": "20270310T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "429.000",
+            "timeBlock": null,
+            "day": ""
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 1,
+          "containers": [
+            "Fees"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 0
+        }
+      },
+      {
+        "id": "6FB53661DA0B4095831A59821AA7AA5E",
+        "name": "26SEPONOA91",
+        "sisID": "226805",
+        "courseName": "",
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "45",
+        "registrationStart": "20260420T000000",
+        "registrationEnd": "20260908T235959",
+        "startDate": "20260909T000000",
+        "endDate": "20270109T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -117,10 +169,10 @@
       }
     ],
     "summary": {
-      "totalSections": 2,
-      "totalFees": 2,
+      "totalSections": 3,
+      "totalFees": 3,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      "sectionsWithFees": 3
     }
   }
 }

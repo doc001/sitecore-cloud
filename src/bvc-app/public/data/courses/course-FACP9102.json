@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-09T14:23:22.260Z",
+    "generatedAt": "2026-05-13T21:27:25.850Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "FACP9102",
@@ -11,79 +11,6 @@
     "sisID": "FACP9102",
     "name": "Basic Life Support CPR Renewal",
     "children": [
-      {
-        "id": "2F90558D01C34D6AA302A70FB25D93E9",
-        "name": "26APRMNFS93",
-        "sisID": "225253",
-        "courseName": "",
-        "deliveryTypeId": "{AB98C091-3E88-437F-8E21-3869FAB80C8B}",
-        "campusId": "{6329B28E-8957-41AA-A5A7-09A4EB50C9AE}",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
-        },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "2.50000000",
-        "registrationStart": "20260217T000000",
-        "registrationEnd": "20260424T235959",
-        "startDate": "20260425T000000",
-        "endDate": "20260425T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "70.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170E1-12442970",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "541C7E0ED4EA4E5E82A535FD54FFD9CD",
-              "name": "170E1",
-              "displayName": "170E1",
-              "endTime": "20260101T165000",
-              "startTime": "20260101T140000",
-              "sisId": "170E1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160240Z",
-              "Updated": "20260101T070114Z"
-            },
-            "day": "6"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 1
-        }
-      },
       {
         "id": "69EC0C2B1E5E45738B44383E63116CEB",
         "name": "26AUGMNFS93",
@@ -126,7 +53,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170E1-12450861",
+            "feeItemName": "170E1-12586696",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -199,7 +126,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170E1-12450860",
+            "feeItemName": "170E1-12586695",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -272,7 +199,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170E1-12450859",
+            "feeItemName": "170E1-12586694",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -345,7 +272,7 @@
           },
           {
             "containerName": "TimeBlock",
-            "feeItemName": "170E1-12450858",
+            "feeItemName": "170E1-12586693",
             "feeTypeId": "",
             "feeType": null,
             "amount": "",
@@ -378,10 +305,10 @@
       }
     ],
     "summary": {
-      "totalSections": 5,
-      "totalFees": 10,
-      "totalTimeBlocks": 5,
-      "sectionsWithFees": 5
+      "totalSections": 4,
+      "totalFees": 8,
+      "totalTimeBlocks": 4,
+      "sectionsWithFees": 4
     }
   }
 }

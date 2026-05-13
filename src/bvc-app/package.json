@@ -26,7 +26,8 @@
     "generateOpenStudiesData": "node scripts/buildCoursesOpenStudiesComplete.mjs",
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
-    "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run prelaunch:build",
+    "generateProgramRequirementsManifest": "node scripts/generateProgramRequirementsManifest.mjs",
+    "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirementsManifest && npm run prelaunch:build",
     "build": "npm run bvcapp-scripts && next build"
   },
   "dependencies": {

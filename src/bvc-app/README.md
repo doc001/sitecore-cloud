@@ -39,15 +39,39 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 This is a **static export** site (`output: "export"`, `distDir: "out"` in `next.config.ts`). Next.js only copies the `public/` folder into `out/` — anything under `src/` is bundled into JS modules and is *never* emitted as a static asset.
 
-JSON data that must be fetched at runtime (e.g. `src/data/static/program-requirements/*.json`, `src/data/banners/`, `src/data/cms/`, `src/data/courses/`, `src/data/oScourses/`) is therefore mirrored from `src/data` into `public/data` by `scripts/copy-folders.mjs` before `next build` runs.
+JSON data that must be fetched at runtime (e.g. `src/data/static/program-requirements/*.json`, `src/data/banners/`, `src/data/cms/`, `src/data/courses/`, `src/data/oScourses/`) is mirrored from `src/data` → `public/data` by `scripts/copy-folders.mjs`.
 
-### How it's wired
+### Split build: local vs Vercel
 
-- `prebuild` (`package.json`) runs `breadcrumbs:all && node scripts/copy-folders.mjs`. Because this is an npm lifecycle hook, it fires automatically before every `next build`, independent of the longer `bvcapp-scripts` chain — so the copy still happens even if a Webflow / SiS data-generation step fails downstream.
-- `bvcapp-scripts` (the data-refresh chain that hits Webflow, parses programs, builds course data, etc.) also ends with `prelaunch:build` which re-runs `copy-folders.mjs`. This is intentional: the chain regenerates files under `src/data/`, then re-copies them.
+The build runs in two different places. Each does part of the job:
+
+| Step | Local (`npm run build:bvcapp`) | Vercel (`npx next build`) |
+|------|-------------------------------|---------------------------|
+| Webflow / SiS data fetch + regenerate `src/data/` | ✅ runs | ❌ skipped |
+| Copy `src/data` → `public/data` (`copy-folders.mjs`) | ✅ runs (prebuild + prelaunch:build) | ❌ skipped |
+| `next build` → emit `out/` from `public/` | ✅ (for local verification) | ✅ (this is what's actually served) |
+
+This is **by design**:
+
+- `src/bvc-app/src/data/` is gitignored. The Webflow generators write there locally, but those files are never uploaded to Vercel.
+- `src/bvc-app/public/` is *not* gitignored — it's the contract between local builds and the Vercel deploy. Whatever is in `public/` on your disk at deploy time is what gets uploaded.
+- `vercel.json` sets `"buildCommand": "npx next build"` — *not* `npm run build`. Using `npx` deliberately bypasses npm lifecycle hooks (including `prebuild`), so Vercel never tries to re-run the data pipeline against an empty `src/data/`.
+
+### Deploy flow (no git involved)
+
+Deployment is **not** git-triggered. From the monorepo root:
+
+1. `npm run build:bvcapp` — turbo runs the full local build: prebuild → bvcapp-scripts → next build. This regenerates `src/data/` from Webflow and copies into `public/data/`.
+2. `npm run deploy:bvcapp` — runs `node deploy.mjs bvcapp`, which `cd`s into `src/bvc-app/` and runs `vercel --scope=bvc-marketing-its --prod --token=$VERCEL_TOKEN`.
+3. The Vercel CLI uploads the local filesystem of `src/bvc-app/`, **filtered by `.gitignore`** (so `src/`, `out/`, `node_modules/`, etc. are excluded). `public/` is included.
+4. Vercel runs `vercel.json` buildCommand (`npx next build`), which reads the uploaded `public/` and emits `out/` — the deployed output.
+
+Production state = whatever was in your local `public/` at the moment you ran `deploy:bvcapp`. There is no remote git checkout involved.
 
 ### Gotchas
 
-- **`npm run dev` does NOT run `copy-folders.mjs`**, only `predev` (which is `breadcrumbs:build`). If you add new files under `src/data/` and need them served from `/data/...` during dev, run `node scripts/copy-folders.mjs` manually, or restart with a full build.
-- If the `bvcapp-scripts` chain dies (e.g. missing Webflow env vars on Vercel), the `prebuild`-level copy still runs — so the export will at least contain whatever was last committed under `src/data/`.
-- `public/data/static/navigation-breadcrumbs.json` is written directly by `generateNavigationBreadcrumbs.mjs`; the rest of `public/data/` is produced exclusively by the copy script. Don't hand-edit files under `public/data/` — they will be overwritten on the next build.
+- **Forgetting to rebuild locally before deploying → stale data in production.** Always run `build:bvcapp` before `deploy:bvcapp`. The deploy script does not chain a build.
+- **`npm run dev` does NOT run `copy-folders.mjs`** (only `predev` → `breadcrumbs:build` runs). If a dev session needs new files under `src/data/` served from `/data/...`, run `node scripts/copy-folders.mjs` manually.
+- **Never hand-edit files under `public/data/`** — the next local build overwrites them. Edit the source under `src/data/` instead.
+- `public/data/static/navigation-breadcrumbs.json` is also written directly by `scripts/generateNavigationBreadcrumbs.mjs`; the rest of `public/data/` comes exclusively from the copy script.
+- `.gitignore` ignores `/src/data` only (the generated-data folder). The Vercel CLI also uses `.gitignore` to filter uploads (no `.vercelignore` exists), so `src/data/`, `out/`, `node_modules/`, `.next/`, and `.env*` are excluded from the upload — Vercel reproduces `out/` from `public/` during its own `next build`.

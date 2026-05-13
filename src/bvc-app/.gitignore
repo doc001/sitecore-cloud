@@ -20,8 +20,10 @@
 # production
 /build
 
-#data
-/src
+# generated data — Webflow / SiS / breadcrumbs scripts write here locally;
+# the contents are propagated to public/data/ by scripts/copy-folders.mjs
+# and public/ is what actually ships to Vercel.
+/src/data
 
 
 

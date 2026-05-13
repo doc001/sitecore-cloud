@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(dir C:wamp64wwwsitecore-cloud *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(node scripts/copy-folders.mjs)",
+      "Bash(echo \"\\(exit $?: 1 = not ignored ✓, 0 = ignored ✗\\)\")",
+      "Bash(echo \"\\(exit $?: 1 = not ignored ✓\\)\")",
+      "WebFetch(domain:www.bowvalleycollege.ca)",
+      "Bash(node scripts/generateProgramRequirementsManifest.mjs)",
+      "Bash(node -e \"const m = require\\('./src/data/static/program-requirements-manifest.json'\\); ['addiction-studies-diploma','esports-business-management-diploma','justice-studies-law-enforcement','social-work-diploma'].forEach\\(s => console.log\\(s.padEnd\\(45\\), '→', m[s] || '\\(not found\\)'\\)\\);\")",
+      "Bash(curl -sI \"https://bvc-app.vercel.app/data/static/program-requirements-manifest.json\")",
+      "Bash(curl -sI \"https://bvc-app.vercel.app/data/static/program-requirements/AASD_-_Addiction_Studies_Diploma.json\")",
+      "Bash(curl -s \"https://bvc-app.vercel.app/data/static/program-requirements-manifest.json\")",
+      "Bash(curl -sI \"https://bvc-app.vercel.app/data/static/program-requirements-manifest.json/\")"
     ]
   }
 }
