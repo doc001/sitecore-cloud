@@ -1,156 +1,63 @@
 {
-  "metadata": {
-    "generatedAt": "2026-05-12T20:57:38.504Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "ACCT9201",
-    "courseName": "Budget and Financial Reports"
-  },
-  "course": {
-    "id": "57A5CBF7177F4F94A4A5C658E733B1DA",
-    "sisID": "ACCT9201",
-    "name": "Budget and Financial Reports",
-    "children": [
-      {
-        "id": "A2103C524125494E856DCA4A410133B4",
-        "name": "ACCT9201-92",
-        "sisID": "18851",
-        "courseName": "",
-        "deliveryTypeId": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
-        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-        "deliveryType": {
-          "id": "EC1C42ED10C54C1995A9F2CFEAC79CD9",
-          "name": "Online Asynchronous",
-          "displayName": "Online Asynchronous",
-          "slug": "online-asynchronous"
+  "id": "57A5CBF7177F4F94A4A5C658E733B1DA",
+  "sisId": "ACCT9201",
+  "name": "Budget and Financial Reports",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "A2103C524125494E856DCA4A410133B4",
+      "name": "ACCT9201-92",
+      "sisId": "18851",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 40,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260114T000000",
+      "endDate": "20260514T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 500,
+          "tax": 25,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "40",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260114T000000",
-        "endDate": "20260514T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
-            "feeType": {
-              "id": "56C8D85F506A4CD2B88A30462453C204",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "500.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
-            "feeType": {
-              "id": "38A0B2C346264FBF8F95956E78B80C65",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "500.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 500,
+          "tax": 25,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "7BC00156362B4B8C9379E44E7A4F147A",
-        "name": "ACCT9201-93",
-        "sisID": "18764",
-        "courseName": "",
-        "deliveryTypeId": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
-        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-        "deliveryType": {
-          "id": "EC1C42ED10C54C1995A9F2CFEAC79CD9",
-          "name": "Online Asynchronous",
-          "displayName": "Online Asynchronous",
-          "slug": "online-asynchronous"
+      "timeBlocks": []
+    },
+    {
+      "id": "7BC00156362B4B8C9379E44E7A4F147A",
+      "name": "ACCT9201-93",
+      "sisId": "18764",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 40,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260708T000000",
+      "endDate": "20261108T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 500,
+          "tax": 25,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "40",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260708T000000",
-        "endDate": "20261108T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
-            "feeType": {
-              "id": "56C8D85F506A4CD2B88A30462453C204",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "500.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
-            "feeType": {
-              "id": "38A0B2C346264FBF8F95956E78B80C65",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "500.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 500,
+          "tax": 25,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 2,
-      "totalFees": 4,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

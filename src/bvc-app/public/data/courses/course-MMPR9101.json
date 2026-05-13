@@ -1,89 +1,36 @@
 {
-  "metadata": {
-    "generatedAt": "2026-05-12T20:57:53.709Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MMPR9101",
-    "courseName": "An Integrated Strategy for Maintenance Management"
-  },
-  "course": {
-    "id": "ECE5C5452EC34DF2A7E5F59E71C28B33",
-    "sisID": "MMPR9101",
-    "name": "An Integrated Strategy for Maintenance Management",
-    "children": [
-      {
-        "id": "51BE4085278941F483B34A82FA4C784B",
-        "name": "MMPR9101-91",
-        "sisID": "5731",
-        "courseName": "",
-        "deliveryTypeId": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
-        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-        "deliveryType": {
-          "id": "71159BEB070D42C981D9758B3108A0CD",
-          "name": "Online Synchronous",
-          "displayName": "Online Synchronous",
-          "slug": "online-synchronous"
+  "id": "ECE5C5452EC34DF2A7E5F59E71C28B33",
+  "sisId": "MMPR9101",
+  "name": "An Integrated Strategy for Maintenance Management",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "51BE4085278941F483B34A82FA4C784B",
+      "name": "MMPR9101-91",
+      "sisId": "5731",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 15,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260508T000000",
+      "endDate": "20260509T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 550,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260508T000000",
-        "endDate": "20260509T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
-            "feeType": {
-              "id": "56C8D85F506A4CD2B88A30462453C204",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "550.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
-            "feeType": {
-              "id": "38A0B2C346264FBF8F95956E78B80C65",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "550.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 550,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 2,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

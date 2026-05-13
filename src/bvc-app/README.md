@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# bvc-app
+
+Next.js 15 / React 19 application for Bow Valley College. Statically generated at build time (`output: "export"`), deployed to Vercel.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build Pipeline
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The build fetches data from external sources, generates static JSON, then runs `next build`:
 
-## Learn More
+```bash
+npm run build    # Full pipeline: data scripts → breadcrumbs → next build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Individual data scripts:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Script | Purpose | Output |
+|---|---|---|
+| `getWebflowData` | Fetch Webflow CMS collections | `src/data/cms/*.json` |
+| `generateCourses` | Export valid Extended Ed course list | `src/data/validCourses.json` |
+| `generateOpenStudies` | Export valid Open Studies course list | `src/data/osValidCourses.json` |
+| `generateMap` | Generate SIS data mapping | `src/data/sis-data*.json` |
+| `generateCourseData` | Fetch Extended Ed courses from Sitecore XMC | `src/data/courses/*.json` |
+| `generateOpenStudiesData` | Fetch Open Studies courses from Sitecore XMC | `src/data/oScourses/*.json` |
+| `generateOpenStudiesJson` | Generate OS public index + per-course files | `public/data/open-studies/` |
+| `breadcrumbs:all` | Regenerate navigation breadcrumbs | `src/data/static/` |
+| `bvcapp-scripts` | Run full pipeline (all above + copy) | — |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Data Sources
 
-## Deploy on Vercel
+- **Webflow API** (`WEBFLOW_API_KEY`) — CMS content (programs, events, news)
+- **Sitecore XM Cloud GraphQL** (`SITECORE_GRAPHQL_ENDPOINT` + `SITECORE_GRAPHQL_API_KEY`) — SIS course data (sections, fees, schedules)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Key Routes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Route | Data source |
+|---|---|
+| `/` | Static |
+| `/programs/[slug]` | `cms/programs.parsed.json` |
+| `/program-list` | CMS JSON |
+| `/study/extended-education/courses/[sisID]` | `courses/course-{sisID}.json` |
+| `/study/open-studies/courses/[sisID]` | `oScourses/course-{sisID}.json` |
+| `/apply/i-am-ready/[slug]` | CMS JSON |
+
+## Webflow Embeds
+
+Standalone HTML snippets in `src/webflow/` are pasted into Webflow "Embed" blocks. They fetch JSON from the Vercel deployment at runtime.
+
+| File | Purpose |
+|---|---|
+| `open-studies-listing.html` | OS program page — accordion table by category |
+| `open-studies-course.html` | OS course detail — description, offerings, add-to-cart |
+| `extended-education-listing.html` | EE program page — searchable flat table |
+| `extended-education-course.html` | EE course detail — same layout as OS |
+
+Course detail embeds render into the existing `#courseComponent` div and output `.addtocartbutton` elements compatible with the separate CartManager ecommerce script.
+
+## Environment Variables
+
+Create `.env.local`:
+
+```
+WEBFLOW_API_KEY=...
+SITECORE_GRAPHQL_ENDPOINT=...
+SITECORE_GRAPHQL_API_KEY=...
+```
+
+## Notes
+
+- TypeScript errors are suppressed at build (`ignoreBuildErrors: true`)
+- Static export — no SSR, no middleware, no API routes
+- Images are unoptimized (`next/image` disabled)
+- Console logs stripped in production builds

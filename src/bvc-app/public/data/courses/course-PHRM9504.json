@@ -1,89 +1,36 @@
 {
-  "metadata": {
-    "generatedAt": "2026-05-12T20:57:58.943Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "PHRM9504",
-    "courseName": "Sterile Compounding Recertification - Non-hazardous"
-  },
-  "course": {
-    "id": "EE6C028C719748998EB4245AD8DD6D76",
-    "sisID": "PHRM9504",
-    "name": "Sterile Compounding Recertification - Non-hazardous",
-    "children": [
-      {
-        "id": "7DC92CBE1F94467FAA6D1CB5B72A9296",
-        "name": "PHRM9504-90",
-        "sisID": "10476",
-        "courseName": "",
-        "deliveryTypeId": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
-        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-        "deliveryType": {
-          "id": "0102087B8DAB4E96B64F49185C0B1FF8",
-          "name": "Blended Asynchronous",
-          "displayName": "Blended Asynchronous",
-          "slug": "blended-asynchronous"
+  "id": "EE6C028C719748998EB4245AD8DD6D76",
+  "sisId": "PHRM9504",
+  "name": "Sterile Compounding Recertification - Non-hazardous",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "7DC92CBE1F94467FAA6D1CB5B72A9296",
+      "name": "PHRM9504-90",
+      "sisId": "10476",
+      "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 15,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260416T000000",
+      "endDate": "20260531T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 299,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260416T000000",
-        "endDate": "20260531T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
-            "feeType": {
-              "id": "56C8D85F506A4CD2B88A30462453C204",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "299.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
-            "feeType": {
-              "id": "38A0B2C346264FBF8F95956E78B80C65",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "299.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 299,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 2,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

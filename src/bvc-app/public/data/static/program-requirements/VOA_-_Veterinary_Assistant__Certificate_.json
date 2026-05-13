@@ -1,0 +1,109 @@
+{
+    "sectionLabel": "Program Completion Requirements",
+    "groupings": [
+        {
+            "termLabel": "Term 1",
+            "totalCredits": 15,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "HUCL1101",
+                            "title": "Professional Practice and Communication in Health Care",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HUCL1101_Professional Practice and Communication in Health Care_(Fall 2025_Current).pdf"
+                        },
+                        {
+                            "code": "HUCL1401",
+                            "title": "Medical Terminology",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HUCL1401_Medical Terminology_(Fall 2025_Current).pdf"
+                        },
+                        {
+                            "code": "VOAS1202",
+                            "title": "Small Animal Health Management",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1202_Small Animal Health Management_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "VOAS1301",
+                            "title": "Financial Management for the Veterinary Office",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1301_Financial Management for the Veterinary Office_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "VOAS1100",
+                            "title": "Introduction to the Veterinary Profession",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1100_Introduction to the Veterinary Profession_(Fall 2025_Current).pdf"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "termLabel": "Term 2",
+            "totalCredits": 18,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "MGMT1201",
+                            "title": "Business Communication",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1201_Business Communication_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MGMT1302",
+                            "title": "Computer Applications",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1302_Computer Applications_(Fall 2024_Current).pdf"
+                        }
+                    ]
+                },
+                {
+                    "ruleType": "minimumGrade",
+                    "description": "Earn a minimum grade of C+ in each of the following courses:",
+                    "courses": [
+                        {
+                            "code": "VOAS1401",
+                            "title": "Clinical Skills for the Veterinary Assistant",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1401_Clinical Skills for the Veterinary Office_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "VOAS1402",
+                            "title": "Small Animal Behaviour and Handling",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1402_Small Animal Behaviour and Handling _(Winter 2024_Current).pdf"
+                        },
+                        {
+                            "code": "VOAS1601",
+                            "title": "Administrative Skills for the Veterinary Office",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1601_Administrative Skills for the Veterinary Office_(Winter 2025_Current).pdf"
+                        }
+                    ],
+                    "minimumGrade": "C+"
+                },
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "VOAS1999",
+                            "title": "Field Placement for Veterinary Assistants",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1999_Field Placement for Veterinary Office Assistants _(Fall 2025_Current).pdf"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "grandTotalCredits": 33
+}

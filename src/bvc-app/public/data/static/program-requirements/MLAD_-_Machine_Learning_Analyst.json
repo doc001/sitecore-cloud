@@ -1,0 +1,200 @@
+{
+    "sectionLabel": "Program Completion Requirements",
+    "groupings": [
+        {
+            "termLabel": "Term 1",
+            "totalCredits": 16,
+            "rules": [
+                {
+                    "ruleType": "minimumGrade",
+                    "description": "Earn a minimum grade of C in each of the following courses:",
+                    "courses": [
+                        {
+                            "code": "CMPT1011",
+                            "title": "Introduction to Computing",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT1500",
+                            "title": "Introduction to Machine Learning and Data Science",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "ENGL2510",
+                            "title": "Scientific and Technical Writing",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "MATH1902",
+                            "title": "Introductory Calculus",
+                            "credits": 4,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1902_Introductory Calculus_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "STAT1151",
+                            "title": "Statistics I",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ],
+                    "minimumGrade": "C"
+                }
+            ]
+        },
+        {
+            "termLabel": "Term 2",
+            "totalCredits": 16,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "CMPT2091",
+                            "title": "Database Management Systems",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ]
+                },
+                {
+                    "ruleType": "minimumGrade",
+                    "description": "Earn a minimum grade of C in each of the following courses:",
+                    "courses": [
+                        {
+                            "code": "BUSD1201",
+                            "title": "Canadian Business Fundamentals",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT1510",
+                            "title": "Introduction to Artificial Intelligence",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "MATH1904",
+                            "title": "Linear Methods I",
+                            "credits": 4,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1904_Linear Methods I_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "CMPT2021",
+                            "title": "Algorithms",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ],
+                    "minimumGrade": "C"
+                }
+            ]
+        },
+        {
+            "termLabel": "Term 3",
+            "totalCredits": 15,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "BUSD2360",
+                            "title": "Public Speaking for Business",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT2150",
+                            "title": "Technology Business Strategy and Execution",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT2400",
+                            "title": "Data Preparation Analytics",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT3510",
+                            "title": "Machine Learning I",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT3830",
+                            "title": "Machine Learning Work Integrated Project I",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "termLabel": "Term 4",
+            "totalCredits": 15,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "CMPT2110",
+                            "title": "Technology Ethics and Society",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT2500",
+                            "title": "Machine Learning Deployment and Software Development",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT3520",
+                            "title": "Machine Learning II",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "CMPT3835",
+                            "title": "Machine Learning Work Integrated Project II",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ]
+                },
+                {
+                    "ruleType": "",
+                    "description": "Complete at least 1 of the following courses:",
+                    "courses": [
+                        {
+                            "code": "BUSD2018",
+                            "title": "Business Values and Ethics",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "BUSD2022",
+                            "title": "Venture Development",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "BUSD2032",
+                            "title": "Financial Markets and FinTech",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "grandTotalCredits": 62
+}

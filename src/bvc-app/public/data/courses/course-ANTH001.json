@@ -1,89 +1,36 @@
 {
-  "metadata": {
-    "generatedAt": "2026-05-12T20:57:41.604Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "ANTH001",
-    "courseName": "Artificial Intelligence"
-  },
-  "course": {
-    "id": "A39632872300490482B629AB0AC91D78",
-    "sisID": "ANTH001",
-    "name": "Artificial Intelligence",
-    "children": [
-      {
-        "id": "52A65351A3504DBA843178105A842121",
-        "name": "ANTH001",
-        "sisID": "30656",
-        "courseName": "",
-        "deliveryTypeId": "{E9F80427-5D3C-4B61-A685-F63DF5134F14}",
-        "campusId": "{0B44F9AE-85B9-426F-9A38-76762BBA5B5A}",
-        "deliveryType": {
-          "id": "E9F804275D3C4B61A685F63DF5134F14",
-          "name": "In Class",
-          "displayName": "In Class",
-          "slug": "in-class"
+  "id": "A39632872300490482B629AB0AC91D78",
+  "sisId": "ANTH001",
+  "name": "Artificial Intelligence",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "52A65351A3504DBA843178105A842121",
+      "name": "ANTH001",
+      "sisId": "30656",
+      "deliveryType": "{E9F80427-5D3C-4B61-A685-F63DF5134F14}",
+      "campus": "{0B44F9AE-85B9-426F-9A38-76762BBA5B5A}",
+      "hours": 40,
+      "credits": 0,
+      "registrationStart": "20260504T000000",
+      "registrationEnd": "20260522T000000",
+      "startDate": "20260622T000000",
+      "endDate": "20270212T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 1130,
+          "tax": 56.5,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "0B44F9AE85B9426F9A3876762BBA5B5A",
-          "name": "Calgary",
-          "displayName": "Calgary",
-          "slug": "calgary"
-        },
-        "hours": "40",
-        "registrationStart": "20260504T000000",
-        "registrationEnd": "20260522T000000",
-        "startDate": "20260622T000000",
-        "endDate": "20270212T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
-            "feeType": {
-              "id": "56C8D85F506A4CD2B88A30462453C204",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "1130.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
-            "feeType": {
-              "id": "38A0B2C346264FBF8F95956E78B80C65",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "1374.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 1374,
+          "tax": 68.7,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 2,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

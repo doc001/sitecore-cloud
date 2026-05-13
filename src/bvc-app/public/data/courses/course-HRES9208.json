@@ -1,99 +1,45 @@
 {
-  "metadata": {
-    "generatedAt": "2026-05-12T20:57:50.970Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "HRES9208",
-    "courseName": "Payroll Fundamentals I"
-  },
-  "course": {
-    "id": "7465F7AFD14345DA8B2959A955AE7ED0",
-    "sisID": "HRES9208",
-    "name": "Payroll Fundamentals I",
-    "children": [
-      {
-        "id": "7EC56CAA76B64F6DB9F951446532FE58",
-        "name": "HRES9208-91",
-        "sisID": "3439",
-        "courseName": "",
-        "deliveryTypeId": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
-        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-        "deliveryType": {
-          "id": "71159BEB070D42C981D9758B3108A0CD",
-          "name": "Online Synchronous",
-          "displayName": "Online Synchronous",
-          "slug": "online-synchronous"
+  "id": "7465F7AFD14345DA8B2959A955AE7ED0",
+  "sisId": "HRES9208",
+  "name": "Payroll Fundamentals I",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "7EC56CAA76B64F6DB9F951446532FE58",
+      "name": "HRES9208-91",
+      "sisId": "3439",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 39,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260514T000000",
+      "endDate": "20260806T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 475,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "39",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260514T000000",
-        "endDate": "20260806T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
-            "feeType": {
-              "id": "56C8D85F506A4CD2B88A30462453C204",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "475.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
-            "feeType": {
-              "id": "38A0B2C346264FBF8F95956E78B80C65",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "475.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "2020",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 475,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 3,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "2020",
+          "name": "2020",
+          "startTime": "20260115T000000",
+          "endTime": "20260416T000000",
+          "frequency": "Weekly",
+          "schedule": "Th 6:00 PM - 8:50 PM"
+        }
+      ]
     }
-  }
+  ]
 }

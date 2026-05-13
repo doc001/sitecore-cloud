@@ -1,126 +1,69 @@
 {
-  "metadata": {
-    "generatedAt": "2026-05-12T20:57:54.238Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MMPR9104",
-    "courseName": "Financial Management for the Maintenance Manager"
-  },
-  "course": {
-    "id": "0606A311AE60449387A79689C3D1BFB5",
-    "sisID": "MMPR9104",
-    "name": "Financial Management for the Maintenance Manager",
-    "children": [
-      {
-        "id": "92DB3B6F025443ED8CA2C540D0D1D04D",
-        "name": "MMPR9104-91",
-        "sisID": "25852",
-        "courseName": "",
-        "deliveryTypeId": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
-        "campusId": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
-        "deliveryType": {
-          "id": "F6250694BAD64615BCB91693A45D76C5",
-          "name": "Online Synchronous Asynchronous",
-          "displayName": "Online Synchronous Asynchronous",
-          "slug": "online-synchronous-asynchronous"
+  "id": "0606A311AE60449387A79689C3D1BFB5",
+  "sisId": "MMPR9104",
+  "name": "Financial Management for the Maintenance Manager",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "92DB3B6F025443ED8CA2C540D0D1D04D",
+      "name": "MMPR9104-91",
+      "sisId": "25852",
+      "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 30,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260313T000000",
+      "endDate": "20260411T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 925,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "8005CA67F70B43C2BBB5004FF89FA4E1",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260313T000000",
-        "endDate": "20260411T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{56C8D85F-506A-4CD2-B88A-30462453C204}",
-            "feeType": {
-              "id": "56C8D85F506A4CD2B88A30462453C204",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "925.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}",
-            "feeType": {
-              "id": "38A0B2C346264FBF8F95956E78B80C65",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "925.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11112",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11113",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11114",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11628",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 6,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 925,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 6,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "11112",
+          "name": "11112",
+          "startTime": "20260314T000000",
+          "endTime": "20260314T000000",
+          "frequency": "Weekly",
+          "schedule": "Sa 8:00 AM - 4:50 PM"
+        },
+        {
+          "sisId": "11113",
+          "name": "11113",
+          "startTime": "20260410T000000",
+          "endTime": "20260410T000000",
+          "frequency": "Weekly",
+          "schedule": "F 8:00 AM - 4:50 PM"
+        },
+        {
+          "sisId": "11114",
+          "name": "11114",
+          "startTime": "20260411T000000",
+          "endTime": "20260411T000000",
+          "frequency": "Weekly",
+          "schedule": "Sa 8:00 AM - 4:50 PM"
+        },
+        {
+          "sisId": "11628",
+          "name": "11628",
+          "startTime": "20260313T000000",
+          "endTime": "20260313T000000",
+          "frequency": "Weekly",
+          "schedule": "F 8:00 AM - 4:50 PM"
+        }
+      ]
     }
-  }
+  ]
 }

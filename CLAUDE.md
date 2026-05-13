@@ -77,6 +77,9 @@ Key data files:
 - `src/data/oScourses/course-{SISID}.json` — per-course Open Studies data
 - `src/data/static/navigation-breadcrumbs.json` — pre-generated breadcrumbs
 - `src/data/navigation-data.json` — navigation structure
+- `public/data/coursesIndex.json` — Extended Ed course index (generated at build)
+- `public/data/open-studies/index.json` — Open Studies course index by category (generated at build)
+- `public/data/sis-data-lookup.json` — GUID-to-name lookup for delivery types and campuses
 
 ### bvc-app — Component Structure
 
@@ -99,6 +102,27 @@ src/lib/
   SiteConfig.ts                 # Navigation menu config (placeholder data, not production-ready)
   queries/                      # Sitecore XMC GraphQL query strings
 ```
+
+### bvc-app — Webflow Embeds
+
+Standalone HTML/CSS/JS snippets pasted into Webflow "Embed" blocks. They fetch JSON from the Vercel deployment at runtime and render course data client-side.
+
+```
+src/webflow/
+  open-studies-listing.html          # OS program page — accordion table grouped by category
+  open-studies-course.html           # OS course detail — description, credits, accordion offerings, add-to-cart
+  extended-education-listing.html    # EE program page — searchable flat table
+  extended-education-course.html     # EE course detail — same layout as OS, reads from /data/courses/
+```
+
+Key conventions:
+- **Course detail embeds target `#courseComponent`** — the existing Webflow div on course pages.
+- **Listing embeds create their own container** (`#bvc-os-listing` / `#bvc-ee-listing`).
+- **Cart integration**: course detail embeds output `.addtocartbutton` elements with `data-product-*` attributes. A separate CartManager/ecommerce script (also a Webflow embed) attaches to these buttons. The display embed must load **before** the cart script.
+- **GUID resolution**: delivery types and campuses come from Sitecore as GUIDs. Embeds use a hardcoded lookup table plus a runtime fetch of `/data/sis-data-lookup.json` for augmentation.
+- **Date display**: accordion items show dates derived from `timeBlock.startTime/endTime` (actual class dates), falling back to `section.startDate/endDate` when no timeBlocks exist.
+- **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
+- **`data-base-url`** on the container div points to the Vercel deployment (UAT: `https://bvc-uat.vercel.app`). Must be updated for production.
 
 ### bvc-app — Route Map
 

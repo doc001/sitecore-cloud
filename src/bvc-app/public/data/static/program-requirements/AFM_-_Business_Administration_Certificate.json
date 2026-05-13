@@ -1,0 +1,109 @@
+{
+    "sectionLabel": "Program Completion Requirements",
+    "groupings": [
+        {
+            "termLabel": "Term 1",
+            "totalCredits": 15,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "MGMT1101",
+                            "title": "Introduction to Management",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1101_Introduction to Management_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MGMT1401",
+                            "title": "Microeconomics",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1401_Microeconomics_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MKTG1101",
+                            "title": "Introduction to Marketing",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MKTG1101_Introduction to Marketing_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "ACCT1103",
+                            "title": "Introduction to Financial Accounting",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ACCT1103_Introduction to Financial Accounting_(Fall 2023_Current).pdf"
+                        }
+                    ]
+                },
+                {
+                    "ruleType": "minimumGrade",
+                    "description": "Earn a minimum grade of C+ in each of the following courses:",
+                    "courses": [
+                        {
+                            "code": "MGMT1201",
+                            "title": "Business Communication",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1201_Business Communication_(Winter 2025_Current).pdf"
+                        }
+                    ],
+                    "minimumGrade": "C+"
+                }
+            ]
+        },
+        {
+            "termLabel": "Term 2",
+            "totalCredits": 15,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "HRES1101",
+                            "title": "Organizational Behaviour",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES1101_Organizational Behaviour_(Winter 2026_Current).pdf"
+                        },
+                        {
+                            "code": "HRES2201",
+                            "title": "Introduction to Human Resources",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2201_Introduction to Human Resources_(Fall 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MGMT1102",
+                            "title": "Introduction to Organizations and Sustainability",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1102_Introduction to Organizations and Sustainability _(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "MGMT1601",
+                            "title": "Business Law",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1601_Business Law_(Fall 2024_Current).pdf"
+                        }
+                    ]
+                },
+                {
+                    "ruleType": "",
+                    "description": "Complete at least 1 of the following courses:",
+                    "courses": [
+                        {
+                            "code": "MGMT1998",
+                            "title": "Business Capstone",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1998_Business Capstone_(Spring 2026_Current).pdf"
+                        },
+                        {
+                            "code": "MGMT1999",
+                            "title": "Business Field Placement",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1999_Business Field Placement_(Fall 2024_Current).pdf"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "grandTotalCredits": 30
+}

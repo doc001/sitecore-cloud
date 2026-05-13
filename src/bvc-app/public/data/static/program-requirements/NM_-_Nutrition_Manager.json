@@ -1,0 +1,92 @@
+{
+    "sectionLabel": "Program Completion Requirements",
+    "groupings": [
+        {
+            "termLabel": "Term 1",
+            "totalCredits": 15,
+            "rules": [
+                {
+                    "ruleType": "minimumGrade",
+                    "description": "Earn a minimum grade of C in each of the following courses:",
+                    "courses": [
+                        {
+                            "code": "MGMT1201",
+                            "title": "Business Communication",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1201_Business Communication_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "NUTR1101",
+                            "title": "Introduction to Nutrition Management",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1101_Introduction to Nutrition Management_(Fall 2020_Current).pdf"
+                        },
+                        {
+                            "code": "NUTR1102",
+                            "title": "Foundations of Nutrition",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1102_Foundations of Nutrition_(Fall 2020_Current).pdf"
+                        },
+                        {
+                            "code": "NUTR1201",
+                            "title": "Clinical Nutrition",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1201_Clinical Nutrition_(Fall 2020_Current).pdf"
+                        },
+                        {
+                            "code": "NUTR1301",
+                            "title": "Food Service Safety",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1301_Food Service Safety_(Fall 2020_Current).pdf"
+                        }
+                    ],
+                    "minimumGrade": "C"
+                }
+            ]
+        },
+        {
+            "termLabel": "Term 2",
+            "totalCredits": 15,
+            "rules": [
+                {
+                    "ruleType": "minimumGrade",
+                    "description": "Earn a minimum grade of C in each of the following courses:",
+                    "courses": [
+                        {
+                            "code": "NUTR1302",
+                            "title": "Food Production Management",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1302_Food Production Management_(Fall 2020_Current).pdf"
+                        },
+                        {
+                            "code": "NUTR1401",
+                            "title": "Human Resources for Nutrition Managers",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1401_Human Resources for Nutrition Managers_(Fall 2020_Current).pdf"
+                        },
+                        {
+                            "code": "NUTR1402",
+                            "title": "Business Management",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1402_Business Management_(Fall 2020_Current).pdf"
+                        }
+                    ],
+                    "minimumGrade": "C"
+                },
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "NUTR1999",
+                            "title": "Nutrition Manager Work Experience",
+                            "credits": 6,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NUTR1999_Nutrition Manager Work Experience_(Fall 2020_Current).pdf"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "grandTotalCredits": 30
+}

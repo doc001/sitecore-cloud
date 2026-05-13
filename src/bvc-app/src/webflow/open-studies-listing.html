@@ -124,8 +124,9 @@
   .bvc-os-pdf-link svg { width: 18px; height: 18px; }
   .bvc-os-pdf-none { color: #cbd5e1; font-size: 13px; display: flex; justify-content: center; }
 
-  /* ── Mobile label (hidden on desktop) ──────────────────────────── */
-  .bvc-os-mobile-label { display: none; }
+  /* ── Desktop: hide mobile-only elements ──────────────────────────── */
+  .bvc-os-row-top { display: none; }
+  .bvc-os-code-desktop { display: block; }
 
   /* ── Tablet portrait + mobile (≤ 640px) ────────────────────────── */
   @media (max-width: 640px) {
@@ -138,7 +139,7 @@
       padding: 12px 16px;
     }
 
-    /* Top bar: code + credits + pdf on one line */
+    /* Show mobile top bar, hide desktop-only cells */
     .bvc-os-row-top {
       display: flex;
       align-items: center;
@@ -146,6 +147,9 @@
       gap: 8px;
     }
     .bvc-os-row-top-left { display: flex; align-items: center; gap: 10px; }
+    .bvc-os-code-desktop { display: none; }
+    .bvc-os-row > .bvc-os-credits[aria-hidden],
+    .bvc-os-row > .bvc-os-pdf-wrap[aria-hidden] { display: none; }
 
     .bvc-os-credits {
       text-align: left;
@@ -215,8 +219,10 @@
             ? baseUrl + '/data/course-outlines-pdf/' + encodeURIComponent(course.pdfFilename)
             : null;
 
-          // On mobile: top bar wraps code + credits + pdf together
           html += '<div class="bvc-os-row">';
+
+          // Desktop-only code cell (grid column 1)
+          html += '<a class="bvc-os-code bvc-os-code-desktop" href="' + courseUrl + '">' + esc(course.sisId) + '</a>';
 
           // Mobile-only top bar (flex row: code | credits | pdf)
           html += '<div class="bvc-os-row-top">'

@@ -15,7 +15,12 @@
       "Bash(curl -s \"https://bvc-uat.vercel.app/data/open-studies/index.json\" -o tmp_check.json)",
       "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('tmp_check.json','utf8'\\)\\); d.categories.forEach\\(c=>console.log\\(c.name+':',c.courses.length,'courses'\\)\\); require\\('fs'\\).unlinkSync\\('tmp_check.json'\\)\")",
       "Bash(curl *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(wc -l *.mjs)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "WebFetch(domain:bvc-uat.vercel.app)",
+      "WebFetch(domain:www.bowvalleycollege.ca)"
     ]
   }
 }

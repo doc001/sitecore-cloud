@@ -1,263 +1,420 @@
 <!--
-  WEBFLOW EMBED — Open Studies Course Detail
-  ==========================================
-  Paste this into a Webflow "Embed" block on the individual course detail page.
+  WEBFLOW EMBED — Open Studies Course Detail (Display + Cart-ready)
+  =================================================================
+  Renders into the existing #courseComponent div on the Webflow page.
+  Reads raw course JSON from /data/oScourses/course-{sisId}.json.
 
-  The script resolves the course SIS ID from (in priority order):
-    1. data-sisid attribute on the container div
-    2. The last path segment of window.location.pathname
-       e.g. /open-studies/ANAT1101  →  ANAT1101
+  Resolves course key from:
+    1. data-sisid attribute on #courseComponent
+    2. Webflow CMS courseid field
+    3. Last URL path segment (slug — resolved via index.json)
 
-  Configuration:
-    data-base-url  — base URL of the bvc-app Vercel deployment (no trailing slash)
-    data-sisid     — (optional) override SIS ID; useful in Webflow CMS via {{slug}}
+  The add-to-cart buttons use data attributes compatible with the
+  existing CartManager / add-to-cart script (separate embed).
 
-  Example Webflow usage on a CMS collection page where slug = course SIS ID:
-    <div
-      id="bvc-os-course"
-      data-base-url="https://bvc-uat.vercel.app"
-      data-sisid="{{slug}}"
-    ></div>
+  Place BEFORE the cart/ecommerce script in the page.
 -->
 
-<style>
-  .bvc-oc-wrap * { box-sizing: border-box; }
-  .bvc-oc-wrap { font-family: inherit; }
-
-  /* Header */
-  .bvc-oc-header { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
-  .bvc-oc-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-  .bvc-oc-badge {
-    display: inline-block;
-    border-radius: 99px;
-    padding: 3px 12px;
-    font-size: 12px;
-    font-weight: 500;
-  }
-  .bvc-oc-badge-blue { background: #e0edfb; color: #005596; }
-  .bvc-oc-badge-gray { background: #f1f5f9; color: #475569; }
-  .bvc-oc-title { font-size: 28px; font-weight: 700; color: #0f172a; margin: 0 0 12px; }
-  .bvc-oc-desc { font-size: 15px; line-height: 1.65; color: #475569; max-width: 720px; margin: 0; }
-  .bvc-oc-pdf-row { margin-top: 12px; }
-  .bvc-oc-pdf-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 13px; font-weight: 500; color: #dc2626; text-decoration: none;
-  }
-  .bvc-oc-pdf-link:hover { text-decoration: underline; color: #991b1b; }
-  .bvc-oc-pdf-link svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-  /* Section heading */
-  .bvc-oc-section-heading {
-    font-size: 18px; font-weight: 600; color: #0f172a;
-    margin: 0 0 16px;
-    display: flex; align-items: baseline; gap: 8px;
-  }
-  .bvc-oc-section-count { font-size: 14px; font-weight: 400; color: #64748b; }
-
-  /* Section card */
-  .bvc-oc-card {
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 14px;
-    background: #fff;
-  }
-  .bvc-oc-card-header {
-    display: flex; flex-wrap: wrap; justify-content: space-between;
-    align-items: flex-start; gap: 10px; margin-bottom: 16px;
-  }
-  .bvc-oc-card-name { font-size: 16px; font-weight: 600; color: #0f172a; margin: 0; }
-  .bvc-oc-card-sisid { font-size: 12px; color: #94a3b8; margin-top: 2px; }
-  .bvc-oc-avail-yes { background: #dcfce7; color: #166534; border-radius: 99px; padding: 3px 12px; font-size: 12px; font-weight: 500; }
-  .bvc-oc-avail-no  { background: #fee2e2; color: #991b1b; border-radius: 99px; padding: 3px 12px; font-size: 12px; font-weight: 500; }
-
-  .bvc-oc-dl {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px 24px;
-    margin-bottom: 16px;
-    font-size: 13.5px;
-  }
-  .bvc-oc-dl dt { font-weight: 500; color: #64748b; margin-bottom: 2px; }
-  .bvc-oc-dl dd { color: #1e293b; margin: 0; }
-
-  .bvc-oc-schedule { margin-bottom: 16px; }
-  .bvc-oc-schedule-label { font-size: 13px; font-weight: 500; color: #64748b; margin-bottom: 4px; }
-  .bvc-oc-schedule-item { font-size: 13.5px; color: #1e293b; line-height: 1.8; }
-
-  .bvc-oc-fees {
-    display: flex; flex-wrap: wrap; gap: 10px;
-    border-top: 1px solid #f1f5f9; padding-top: 14px;
-  }
-  .bvc-oc-fee-box { border-radius: 8px; padding: 8px 18px; text-align: center; }
-  .bvc-oc-fee-box-dom { background: #eff6ff; }
-  .bvc-oc-fee-box-intl { background: #f5f3ff; }
-  .bvc-oc-fee-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-  .bvc-oc-fee-box-dom .bvc-oc-fee-label { color: #2563eb; }
-  .bvc-oc-fee-box-intl .bvc-oc-fee-label { color: #7c3aed; }
-  .bvc-oc-fee-amount { font-size: 20px; font-weight: 700; }
-  .bvc-oc-fee-box-dom .bvc-oc-fee-amount { color: #1d4ed8; }
-  .bvc-oc-fee-box-intl .bvc-oc-fee-amount { color: #6d28d9; }
-
-  .bvc-oc-no-sections {
-    padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0;
-    border-radius: 8px; text-align: center; color: #64748b; font-size: 14px;
-  }
-  .bvc-oc-loading, .bvc-oc-error {
-    padding: 32px; text-align: center; color: #64748b; font-size: 14px;
-  }
-  .bvc-oc-error { color: #dc2626; }
-</style>
-
-<div id="bvc-os-course" data-base-url="https://bvc-uat.vercel.app"></div>
-
 <script>
-(function () {
-  var container = document.getElementById('bvc-os-course');
-  if (!container) return;
+  // GUID → display name lookup (delivery types and campuses from sis-data-lookup.json)
+  const GUID_LOOKUP = {
+    // Delivery Types
+    '1AE082FF1070438CBAA776B245B6F75D': 'Any-time Online',
+    C38BDD5C70E34955AD170B6C6A1EC5E8: 'AudioVideo Based Instruction',
+    '481341DF9A144AC8A315112B97377EC9': 'Blended',
+    '0102087B8DAB4E96B64F49185C0B1FF8': 'Blended Asynchronous',
+    '914480483DE14389ABD9EE4F1D28589E': 'Blended Self-Paced',
+    C45FFE750A404E30A906FC3C6FDD99FC: 'Blended Synchronous',
+    '6BF78E16E03F462FAEE8F223086CFB35': 'Blended Synchronous Asynchronous',
+    '5969AC19010546B5B9834F6F8D2F3B29': 'BVC Online',
+    '2E7F9F03DDB84D6BB91FDC2D4464372A': 'Challenge',
+    '6F3515869E4C4C5599F470A7A58B13F0': 'Combined Online',
+    C5BAA31D7BC0449890F790E897A92261: 'Computer Assisted Instruction',
+    '2B0F27FC3A764DBB941F2644DB71B7D6': 'Correspondence Based Instruction',
+    E27E365D5A3341629CFDB4DB6DE64FCA: 'Distributed Learning ecampus 2',
+    '467A978F3823421BBDF788D21BC7B09C': 'ECampus Alberta - online learning',
+    B146327974D348BD8306F957AE47CECD: 'eCampusAlberta Online',
+    EE331EC390BC4D329910C5911DF970A7: 'Face to Face Self-Paced',
+    '939C8DACA6C1415EBC831B3F062D4250': 'Face to Face Synchronous',
+    '8317C7933CC449C2984E7F1CCD6FF5B8': 'Flexclass',
+    F8EBCF8BF2D147AA9F76522DCBEDFA75: 'Home Study',
+    '9754E29DF0754139B125292A81550174': 'Hyflex',
+    E9F804275D3C4B61A685F63DF5134F14: 'In Class',
+    '8AFAF1DADDEF4B71AC14DA272E952D0A': 'Micro-Credential Assessment',
+    '5D448378DA984E9986E737C02BEA8F46': 'Mixed',
+    C570FE50B9824FD6906B571CDE435CF3: 'Off-Site',
+    EC1C42ED10C54C1995A9F2CFEAC79CD9: 'Online Asynchronous',
+    '9FA504584ED84FABB0748D043A306BC3': 'Online Self-Paced',
+    '71159BEB070D42C981D9758B3108A0CD': 'Online Synchronous',
+    F6250694BAD64615BCB91693A45D76C5: 'Online Synchronous Asynchronous',
+    '40817BFE87E1432EB3E68929DF8C9965': 'Real-time Online',
+    '60C2E33F37514B7E884D1BEFB7155785': 'Teleconferencing / Videoconferencing',
+    '63ADFB9EB3484A00BD66C043F43DEBE4': 'Traditional and Self Paced',
+    '05A8F1DF96624B67A7F9DC22C32B4A5F': 'Work Experience',
+    // Campuses
+    '00D83EDBF5B642ADA6493FBFE3EC116A': 'Airdrie',
+    '481D28AD75CA4F12B5B10C078AA05F35': 'Banff',
+    '0B44F9AE85B9426F9A3876762BBA5B5A': 'Calgary',
+    '8005CA67F70B43C2BBB5004FF89FA4E1': 'Calgary Downtown Campus',
+    A9B98CE5F1D5460F8812E36A93FDF320: 'Cochrane',
+    '82E8438804E84947BAAF251119943A6A': 'Distance Learning',
+    '5AA49765063A4B0BB623C0404A92406A': 'High River',
+    '2B4E485287444409AA1E828DA53BFC0C': 'Okotoks',
+    D8ECBBFE90E944FA8526B7A90ED56FC5: 'Online',
+    D532C4A03C6C42E99C3C5569D3B7F59F: 'Regional',
+    '05A9B93BC41A4F5CBE72FC9B97548AFF': 'Rural',
+    A7B3BDCF1E404C32890EF853D2DCFDF2: 'Strathmore',
+    FBE851B811DA49F0A8795BD188113BDB: 'Three Gorges Medical College',
+    AF5967FBE4D446E3BA1212EFEE54B86C: 'Three Hills',
+    '1B561481FF05406A897B1FEB28F98004': 'Yukon',
+  };
 
-  var baseUrl = (container.getAttribute('data-base-url') || 'https://bvc-uat.vercel.app').replace(/\/$/, '');
-
-  // Resolve course key: data-sisid attribute (Webflow CMS slug) → last URL path segment
-  // The JSON is indexed by both sisId (ANAT1101) and slug (anatomy-and-physiology)
-  var courseKey = container.getAttribute('data-sisid');
-  if (!courseKey) {
-    var parts = window.location.pathname.replace(/\/$/, '').split('/');
-    courseKey = parts[parts.length - 1] || '';
+  // Resolve a Sitecore GUID string like "{939C8DAC-A6C1-...}" to a display name
+  function resolveGuid(rawGuid) {
+    if (!rawGuid) return 'N/A';
+    const key = rawGuid.replace(/[{}\-]/g, '').toUpperCase();
+    return GUID_LOOKUP[key] || rawGuid;
   }
-  courseKey = courseKey.trim();
 
-  if (!courseKey) {
-    container.innerHTML = '<div class="bvc-oc-error">Course ID not found in URL.</div>';
-    return;
+  // Minimal fetch call using mode: 'cors'
+  async function fetchCourseData(url) {
+    try {
+      const res = await fetch(url, { mode: 'cors' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.error('Fetch error:', err);
+      throw err;
+    }
   }
 
-  var jsonUrl = baseUrl + '/data/open-studies/' + encodeURIComponent(courseKey) + '.json';
-  container.innerHTML = '<div class="bvc-oc-loading">Loading course…</div>';
+  function formatDate(dateString) {
+    if (!dateString) return '';
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    const date = new Date(year, month - 1, day);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
 
-  fetch(jsonUrl)
-    .then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(function (course) {
-      var pdfHtml = '';
-      if (course.pdfFilename) {
-        var pdfUrl = baseUrl + '/data/course-outlines-pdf/' + encodeURIComponent(course.pdfFilename);
-        pdfHtml = '<div class="bvc-oc-pdf-row">'
-          + '<a class="bvc-oc-pdf-link" href="' + pdfUrl + '" target="_blank" rel="noopener">'
-          + '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">'
-          + '<path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z"/>'
-          + '<path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z"/>'
-          + '</svg>'
-          + 'Course Outline PDF</a></div>';
-      }
+  function generateId() {
+    return Math.random().toString(36).substr(2, 9);
+  }
 
-      var html = '<div class="bvc-oc-wrap">';
+  // Component Generators
 
-      // Header
-      html += '<div class="bvc-oc-header">';
-      html += '<div class="bvc-oc-badges">'
-        + '<span class="bvc-oc-badge bvc-oc-badge-blue">' + esc(course.sisId) + '</span>'
-        + (course.credits > 0
-          ? '<span class="bvc-oc-badge bvc-oc-badge-gray">' + course.credits + ' ' + (course.credits === 1 ? 'credit' : 'credits') + '</span>'
-          : '')
-        + '</div>';
-      html += '<h1 class="bvc-oc-title">' + esc(course.name) + '</h1>';
-      if (course.description) {
-        html += '<p class="bvc-oc-desc">' + esc(course.description) + '</p>';
-      }
-      html += pdfHtml;
-      html += '</div>';
+  // Renders the time block schedule lines from section.timeBlocks[]
+  function generateTimeBlockInfo(section) {
+    if (!Array.isArray(section.timeBlocks) || !section.timeBlocks.length) return '';
 
-      // Sections
-      html += '<h2 class="bvc-oc-section-heading">Available Sections '
-        + '<span class="bvc-oc-section-count">(' + course.sections.length + ')</span></h2>';
+    const blocksHtml = section.timeBlocks
+      .map(
+        (tb) => `
+        <div>
+            <span class="producthours">${tb.schedule || ''}</span>
+            ${tb.frequency ? `<span class="productdays"> &mdash; ${tb.frequency}</span>` : ''}
+        </div>`,
+      )
+      .join('');
 
-      if (course.sections.length === 0) {
-        html += '<div class="bvc-oc-no-sections">No sections are currently scheduled for this course.</div>';
-      } else {
-        course.sections.forEach(function (sec) {
-          html += '<div class="bvc-oc-card">';
+    return `<div class="timeblock-info">
+        <div class="detail-label">Schedule</div>
+        <div class="timeblock-details">${blocksHtml}</div>
+    </div>`;
+  }
 
-          // Card header
-          html += '<div class="bvc-oc-card-header">';
-          html += '<div><p class="bvc-oc-card-name">' + esc(sec.name) + '</p>'
-            + '<p class="bvc-oc-card-sisid">SIS ID: ' + esc(sec.sisId) + '</p></div>';
-          html += '<span class="' + (sec.seatsAvailable ? 'bvc-oc-avail-yes' : 'bvc-oc-avail-no') + '">'
-            + (sec.seatsAvailable ? 'Seats Available' : 'Full') + '</span>';
-          html += '</div>';
+  // Derive actual class dates from timeBlocks; fall back to section dates
+  function resolveDates(section) {
+    const tbs = Array.isArray(section.timeBlocks) ? section.timeBlocks.filter(tb => tb.startTime) : [];
+    if (tbs.length === 0) return { start: section.startDate, end: section.endDate };
+    const starts = tbs.map(tb => tb.startTime).sort();
+    const ends   = tbs.map(tb => tb.endTime).filter(Boolean).sort();
+    return {
+      start: starts[0],
+      end:   ends.length ? ends[ends.length - 1] : section.endDate
+    };
+  }
 
-          // Details grid
-          html += '<dl class="bvc-oc-dl">';
-          html += dl('Delivery', sec.deliveryType);
-          html += dl('Campus', sec.campus);
-          html += dl('Hours', sec.hours > 0 ? sec.hours + ' hrs' : '—');
-          html += dl('Start Date', sec.startDate || '—');
-          html += dl('End Date', sec.endDate || '—');
-          if (sec.registrationStart) {
-            html += dl('Registration Opens', sec.registrationStart);
-          }
-          html += '</dl>';
+  function generateAccordionItem(section, courseName, credits) {
+    const id = generateId();
+    const dates = resolveDates(section);
+    const startDate = formatDate(dates.start);
+    const endDate = formatDate(dates.end);
 
-          // Schedule
-          if (sec.schedule && sec.schedule.length > 0) {
-            html += '<div class="bvc-oc-schedule">';
-            html += '<p class="bvc-oc-schedule-label">Schedule</p>';
-            sec.schedule.forEach(function (s) {
-              html += '<div class="bvc-oc-schedule-item">' + esc(s) + '</div>';
-            });
-            html += '</div>';
-          }
+    // Domestic fee (used for cart price)
+    const domesticAmount = section.fees?.domestic?.amount ?? 0;
+    const domesticTax = section.fees?.domestic?.tax ?? 0;
+    const price = parseFloat(domesticAmount).toFixed(0);
 
-          // Fees
-          var domFee = sec.fees && sec.fees.domestic;
-          var intlFee = sec.fees && sec.fees.international;
-          if (domFee > 0 || intlFee > 0) {
-            html += '<div class="bvc-oc-fees">';
-            if (domFee > 0) {
-              html += '<div class="bvc-oc-fee-box bvc-oc-fee-box-dom">'
-                + '<div class="bvc-oc-fee-label">Domestic</div>'
-                + '<div class="bvc-oc-fee-amount">' + fmtCad(domFee) + '</div>'
-                + '</div>';
-            }
-            if (intlFee > 0) {
-              html += '<div class="bvc-oc-fee-box bvc-oc-fee-box-intl">'
-                + '<div class="bvc-oc-fee-label">International</div>'
-                + '<div class="bvc-oc-fee-amount">' + fmtCad(intlFee) + '</div>'
-                + '</div>';
-            }
-            html += '</div>';
-          }
+    // International fee (display only)
+    const intlAmount = section.fees?.international?.amount ?? null;
+    const intlPrice = intlAmount !== null ? parseFloat(intlAmount).toFixed(0) : null;
 
-          html += '</div>'; // .bvc-oc-card
-        });
-      }
+    const campusName = resolveGuid(section.campus);
+    const deliveryName = resolveGuid(section.deliveryType);
+    const timeBlockInfo = generateTimeBlockInfo(section);
+    const seatsLabel = section.seatsAvailable ? 'Available' : 'Full';
+    const sectionCredits = section.credits || credits;
 
-      html += '</div>'; // .bvc-oc-wrap
-      container.innerHTML = html;
-    })
-    .catch(function (err) {
-      container.innerHTML = '<div class="bvc-oc-error">Could not load course data. Please try again later.</div>';
-      console.error('[bvc-os-course]', err);
+    const regInfo = section.registrationStart
+      ? `<div class="detail-item">
+               <div class="detail-label">Registration</div>
+               <div class="detail-value">${formatDate(section.registrationStart)}${section.registrationEnd ? ' &ndash; ' + formatDate(section.registrationEnd) : ''}</div>
+           </div>`
+      : '';
+
+    return `
+        <div class="accordion-item-${id}">
+            <button class="accordion-toggle" onclick="toggleAccordion('${id}')">
+                <div class="date-range">
+                    <span class="productdates">${startDate} &ndash; ${endDate}</span>
+                    <span class="dropdown-icon">&#9660;</span>
+                </div>
+            </button>
+            <div class="accordion-content" id="accordion-${id}">
+                <div class="course-details">
+                    <div class="detail-group">
+                        <div class="detail-item">
+                            <div class="detail-label">Location</div>
+                            <div class="detail-value productlocation">${campusName}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Hours</div>
+                            <div class="detail-value">${section.hours}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Credits</div>
+                            <div class="detail-value">${sectionCredits}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Seats</div>
+                            <div class="detail-value seats-${section.seatsAvailable ? 'open' : 'full'}">${seatsLabel}</div>
+                        </div>
+                        ${regInfo}
+                        ${timeBlockInfo}
+                    </div>
+
+                    <div class="price-section">
+                        <div class="price-info">
+                            <div class="price-display">
+                                <span class="currency">$</span>
+                                <span class="price">${price}</span>
+                                <span class="currency-code">CAD</span>
+                            </div>
+                            <div class="student-type">Domestic Student</div>
+                            ${domesticTax > 0 ? `<div class="tax-note">+ $${parseFloat(domesticTax).toFixed(2)} tax</div>` : ''}
+                            ${
+                              intlPrice !== null
+                                ? `
+                            <div class="price-display intl" style="margin-top:8px;">
+                                <span class="currency">$</span>
+                                <span class="price">${intlPrice}</span>
+                                <span class="currency-code">CAD</span>
+                            </div>
+                            <div class="student-type">International Student</div>`
+                                : ''
+                            }
+                        </div>
+                        <div class="action-section">
+                            <a href="#"
+                                data-accordion-id="${id}"
+                                data-product-name="${courseName}"
+                                data-product-id="${section.sisId}"
+                                data-product-credits="${sectionCredits}"
+                                data-quantity="1"
+                                data-product-price="${price}"
+                                data-product-delivery="${deliveryName}"
+                                class="c-button_cart addtocartbutton w-button"
+                                tabindex="0">Add</a>
+                            <p class="additional-fees">Additional fees apply</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+  }
+
+  function generateCourseOfferings(sections, courseName, courseCredits) {
+    // Sort by startDate ascending
+    const sorted = sections.slice().sort((a, b) => {
+      const toDate = (s) => new Date(s.startDate.substring(0, 4), s.startDate.substring(4, 6) - 1, s.startDate.substring(6, 8));
+      return toDate(a) - toDate(b);
     });
 
-  function dl(label, value) {
-    return '<div><dt>' + esc(label) + '</dt><dd>' + esc(String(value)) + '</dd></div>';
+    const grouped = groupSectionsByDeliveryType(sorted);
+    return Object.entries(grouped)
+      .map(
+        ([deliveryType, secs]) => `
+        <div class="course-offering">
+            <h3 class="offering-title">${deliveryType}</h3>
+            <div class="date-label">START / END DATE</div>
+            ${secs.map((s) => generateAccordionItem(s, courseName, s.credits || courseCredits)).join('')}
+        </div>`,
+      )
+      .join('');
   }
 
-  function fmtCad(n) {
-    return new Intl.NumberFormat('en-CA', {
-      style: 'currency', currency: 'CAD', minimumFractionDigits: 0
-    }).format(n);
+  function groupSectionsByDeliveryType(sections) {
+    return sections.reduce((grouped, section) => {
+      const key = resolveGuid(section.deliveryType);
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(section);
+      return grouped;
+    }, {});
   }
 
-  function esc(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+  function generateCourseComponent(data) {
+    const name = data.name || '';
+    const description = data.description || '';
+    const credits = Number(data.credits || 0);
+    const sisId = data.sisId || '';
+    const sections = Array.isArray(data.sections) ? data.sections : [];
+
+    const creditsHtml =
+      credits > 0
+        ? `<div class="c-course_credits">
+               <div class="c-course_credits-box">
+                   <div class="c-course_credits-txt">${credits}</div>
+                   <div>Credits</div>
+               </div>
+           </div>`
+        : '';
+
+    const descHtml = description
+      ? `<h2 class="c-course__col1">Course Description</h2>
+           <div class="w-richtext"><p>${description}</p></div>`
+      : '';
+
+    const pdfHtml = sisId
+      ? `<div class="course-pdf-section">
+               <a class="course-pdf-link"
+                  href="https://bvc-uat.vercel.app/pdf/course-${sisId}.pdf"
+                  target="_blank" rel="noopener">
+                   Download Course Outline (PDF)
+               </a>
+           </div>`
+      : '';
+
+    const enrollHtml =
+      sections.length > 0
+        ? `<div class="enrollment-section">
+               <div class="enrollment-header">Enroll now</div>
+               ${generateCourseOfferings(sections, name, credits)}
+           </div>`
+        : `<p class="no-sections">No sections currently available.</p>`;
+
+    return `
+        <div class="course-page-grid">
+            <div class="course-info-col">
+                ${descHtml}
+                ${creditsHtml}
+                ${pdfHtml}
+            </div>
+            <div class="course-offers-col">
+                ${enrollHtml}
+            </div>
+        </div>`;
   }
-})();
+
+  // Accordion toggle function
+  function toggleAccordion(id) {
+    const content = document.getElementById(`accordion-${id}`);
+    const btn = content.previousElementSibling;
+    if (content.classList.contains('open')) {
+      content.classList.remove('open');
+      btn.classList.remove('active');
+    } else {
+      document.querySelectorAll('.accordion-content.open').forEach((c) => {
+        c.classList.remove('open');
+        c.previousElementSibling.classList.remove('active');
+      });
+      content.classList.add('open');
+      btn.classList.add('active');
+    }
+  }
+  window.toggleAccordion = toggleAccordion; // expose globally for inline onclick
+
+  // ─── Course key resolution ─────────────────────────────────────────────────
+
+  function resolveCourseKey() {
+    var container = document.getElementById('courseComponent');
+    // 1. data-sisid attribute
+    var key = container && container.getAttribute('data-sisid');
+    if (key && key.trim()) return key.trim();
+    // 2. Last URL path segment
+    var parts = window.location.pathname.replace(/\/$/, '').split('/');
+    return parts[parts.length - 1] || '';
+  }
+
+  // Fetch by SIS ID first, fall back to slug lookup via index
+  async function fetchCourseByKey(baseUrl, key) {
+    // Try direct SIS ID fetch
+    var directUrl = baseUrl + '/data/oScourses/course-' + encodeURIComponent(key) + '.json';
+    var res = await fetch(directUrl, { mode: 'cors' });
+    if (res.ok) return res.json();
+
+    // Slug fallback: resolve via the index
+    var indexRes = await fetch(baseUrl + '/data/open-studies/index.json', { mode: 'cors' });
+    if (!indexRes.ok) throw new Error('Could not load course index');
+    var index = await indexRes.json();
+    var sisId = null;
+    (index.categories || []).forEach(function (cat) {
+      (cat.courses || []).forEach(function (c) {
+        if (c.slug === key || c.sisId === key) sisId = c.sisId;
+      });
+    });
+    if (!sisId) throw new Error('Course not found: ' + key);
+    return fetchCourseData(baseUrl + '/data/oScourses/course-' + encodeURIComponent(sisId) + '.json');
+  }
+
+  // ─── Initialize on DOMContentLoaded ────────────────────────────────────────
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const container = document.getElementById('courseComponent');
+    if (!container) return;
+
+    const baseUrl = 'https://bvc-uat.vercel.app';
+    const courseKey = resolveCourseKey();
+
+    if (!courseKey) {
+      container.innerHTML = '<p style="color:red;">Course ID not found in URL.</p>';
+      return;
+    }
+
+    try {
+      // Fetch course data and lookup table in parallel
+      const [data] = await Promise.all([
+        fetchCourseByKey(baseUrl, courseKey),
+        fetch(baseUrl + '/data/sis-data-lookup.json', { mode: 'cors' })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((lookup) => {
+            if (!lookup) return;
+            // Merge delivery types and campuses into GUID_LOOKUP
+            const dt = lookup?.lookups?.deliveryTypes?.byId || {};
+            const cam = lookup?.lookups?.campuses?.byId || {};
+            [...Object.entries(dt), ...Object.entries(cam)].forEach(([id, entry]) => {
+              GUID_LOOKUP[id.toUpperCase()] = entry.displayName || entry.name;
+            });
+          })
+          .catch(() => {}), // non-fatal — fall back to hardcoded table
+      ]);
+
+      container.innerHTML = generateCourseComponent(data);
+
+      // Wire up add-to-cart buttons for the cart script (if loaded after this)
+      container.querySelectorAll('.addtocartbutton').forEach((button) => {
+        if (typeof handleAddToCart === 'function') {
+          button.addEventListener('click', handleAddToCart);
+        }
+      });
+    } catch (err) {
+      container.innerHTML = `<p style="color:red;">Failed to load course data: ${err.message}</p>`;
+      console.error('[bvc-os-course]', err);
+    }
+  });
 </script>
