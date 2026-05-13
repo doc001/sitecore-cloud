@@ -118,9 +118,12 @@ src/webflow/
 Key conventions:
 - **Course detail embeds target `#courseComponent`** — the existing Webflow div on course pages.
 - **Listing embeds create their own container** (`#bvc-os-listing` / `#bvc-ee-listing`).
+- **Two-level section grouping**: course detail embeds group sections by Delivery Type, then by Campus (location). Each delivery type gets an `<h3>` heading, each campus gets an `<h4>` subheading, with accordion items underneath.
 - **Cart integration**: course detail embeds output `.addtocartbutton` elements with `data-product-*` attributes. A separate CartManager/ecommerce script (also a Webflow embed) attaches to these buttons. The display embed must load **before** the cart script.
 - **GUID resolution**: delivery types and campuses come from Sitecore as GUIDs. Embeds use a hardcoded lookup table plus a runtime fetch of `/data/sis-data-lookup.json` for augmentation.
 - **Date display**: accordion items show dates derived from `timeBlock.startTime/endTime` (actual class dates), falling back to `section.startDate/endDate` when no timeBlocks exist.
+- **Accordion detail fields**: Credits (first), Fee, Dates, Days, Time. Seats are intentionally hidden (always show as available). Location is shown in the campus subheading rather than per-item.
+- **PDF course outlines** (OS only): fetched via `pdfFilename` from the course index JSON. Correct path is `/data/course-outlines-pdf/{pdfFilename}`. EE courses do not have PDF outlines.
 - **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
 - **`data-base-url`** on the container div points to the Vercel deployment (UAT: `https://bvc-uat.vercel.app`). Must be updated for production.
 

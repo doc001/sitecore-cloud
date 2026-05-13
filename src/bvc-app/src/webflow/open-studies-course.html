@@ -6,8 +6,7 @@
 
   Resolves course key from:
     1. data-sisid attribute on #courseComponent
-    2. Webflow CMS courseid field
-    3. Last URL path segment (slug — resolved via index.json)
+    2. Last URL path segment (slug — resolved via index.json)
 
   The add-to-cart buttons use data attributes compatible with the
   existing CartManager / add-to-cart script (separate embed).
@@ -69,24 +68,16 @@
     '1B561481FF05406A897B1FEB28F98004': 'Yukon',
   };
 
-  // Resolve a Sitecore GUID string like "{939C8DAC-A6C1-...}" to a display name
   function resolveGuid(rawGuid) {
     if (!rawGuid) return 'N/A';
     const key = rawGuid.replace(/[{}\-]/g, '').toUpperCase();
     return GUID_LOOKUP[key] || rawGuid;
   }
 
-  // Minimal fetch call using mode: 'cors'
   async function fetchCourseData(url) {
-    try {
-      const res = await fetch(url, { mode: 'cors' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      console.error('Fetch error:', err);
-      throw err;
-    }
+    const res = await fetch(url, { mode: 'cors' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    return res.json();
   }
 
   function formatDate(dateString) {
@@ -95,40 +86,32 @@
     const month = dateString.substring(4, 6);
     const day = dateString.substring(6, 8);
     const date = new Date(year, month - 1, day);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
 
   function generateId() {
     return Math.random().toString(36).substr(2, 9);
   }
 
-  // Component Generators
+  // ── TimeBlock schedule lines ──────────────────────────────────────────────
 
-  // Renders the time block schedule lines from section.timeBlocks[]
   function generateTimeBlockInfo(section) {
     if (!Array.isArray(section.timeBlocks) || !section.timeBlocks.length) return '';
-
     const blocksHtml = section.timeBlocks
-      .map(
-        (tb) => `
+      .map((tb) => `
         <div>
             <span class="producthours">${tb.schedule || ''}</span>
             ${tb.frequency ? `<span class="productdays"> &mdash; ${tb.frequency}</span>` : ''}
-        </div>`,
-      )
+        </div>`)
       .join('');
-
     return `<div class="timeblock-info">
         <div class="detail-label">Schedule</div>
         <div class="timeblock-details">${blocksHtml}</div>
     </div>`;
   }
 
-  // Derive actual class dates from timeBlocks; fall back to section dates
+  // ── Derive actual class dates from timeBlocks; fall back to section dates ──
+
   function resolveDates(section) {
     const tbs = Array.isArray(section.timeBlocks) ? section.timeBlocks.filter(tb => tb.startTime) : [];
     if (tbs.length === 0) return { start: section.startDate, end: section.endDate };
@@ -140,25 +123,23 @@
     };
   }
 
+  // ── Accordion item (one per section) ──────────────────────────────────────
+
   function generateAccordionItem(section, courseName, credits) {
     const id = generateId();
     const dates = resolveDates(section);
     const startDate = formatDate(dates.start);
     const endDate = formatDate(dates.end);
 
-    // Domestic fee (used for cart price)
     const domesticAmount = section.fees?.domestic?.amount ?? 0;
     const domesticTax = section.fees?.domestic?.tax ?? 0;
     const price = parseFloat(domesticAmount).toFixed(0);
 
-    // International fee (display only)
     const intlAmount = section.fees?.international?.amount ?? null;
     const intlPrice = intlAmount !== null ? parseFloat(intlAmount).toFixed(0) : null;
 
-    const campusName = resolveGuid(section.campus);
     const deliveryName = resolveGuid(section.deliveryType);
     const timeBlockInfo = generateTimeBlockInfo(section);
-    const seatsLabel = section.seatsAvailable ? 'Available' : 'Full';
     const sectionCredits = section.credits || credits;
 
     const regInfo = section.registrationStart
@@ -180,20 +161,12 @@
                 <div class="course-details">
                     <div class="detail-group">
                         <div class="detail-item">
-                            <div class="detail-label">Location</div>
-                            <div class="detail-value productlocation">${campusName}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Hours</div>
-                            <div class="detail-value">${section.hours}</div>
-                        </div>
-                        <div class="detail-item">
                             <div class="detail-label">Credits</div>
                             <div class="detail-value">${sectionCredits}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Seats</div>
-                            <div class="detail-value seats-${section.seatsAvailable ? 'open' : 'full'}">${seatsLabel}</div>
+                            <div class="detail-label">Hours</div>
+                            <div class="detail-value">${section.hours}</div>
                         </div>
                         ${regInfo}
                         ${timeBlockInfo}
@@ -208,17 +181,13 @@
                             </div>
                             <div class="student-type">Domestic Student</div>
                             ${domesticTax > 0 ? `<div class="tax-note">+ $${parseFloat(domesticTax).toFixed(2)} tax</div>` : ''}
-                            ${
-                              intlPrice !== null
-                                ? `
+                            ${intlPrice !== null ? `
                             <div class="price-display intl" style="margin-top:8px;">
                                 <span class="currency">$</span>
                                 <span class="price">${intlPrice}</span>
                                 <span class="currency-code">CAD</span>
                             </div>
-                            <div class="student-type">International Student</div>`
-                                : ''
-                            }
+                            <div class="student-type">International Student</div>` : ''}
                         </div>
                         <div class="action-section">
                             <a href="#"
@@ -239,41 +208,52 @@
         </div>`;
   }
 
+  // ── Two-level grouping: Delivery Type > Campus ────────────────────────────
+
+  function groupSections(sections) {
+    const grouped = {};
+    sections.forEach((section) => {
+      const delivery = resolveGuid(section.deliveryType);
+      const campus = resolveGuid(section.campus);
+      if (!grouped[delivery]) grouped[delivery] = {};
+      if (!grouped[delivery][campus]) grouped[delivery][campus] = [];
+      grouped[delivery][campus].push(section);
+    });
+    return grouped;
+  }
+
   function generateCourseOfferings(sections, courseName, courseCredits) {
-    // Sort by startDate ascending
     const sorted = sections.slice().sort((a, b) => {
       const toDate = (s) => new Date(s.startDate.substring(0, 4), s.startDate.substring(4, 6) - 1, s.startDate.substring(6, 8));
       return toDate(a) - toDate(b);
     });
 
-    const grouped = groupSectionsByDeliveryType(sorted);
-    return Object.entries(grouped)
-      .map(
-        ([deliveryType, secs]) => `
-        <div class="course-offering">
-            <h3 class="offering-title">${deliveryType}</h3>
-            <div class="date-label">START / END DATE</div>
-            ${secs.map((s) => generateAccordionItem(s, courseName, s.credits || courseCredits)).join('')}
-        </div>`,
-      )
-      .join('');
+    const grouped = groupSections(sorted);
+    let html = '';
+    Object.entries(grouped).forEach(([deliveryType, campuses]) => {
+      html += `<div class="course-offering">
+            <h3 class="offering-title">${deliveryType}</h3>`;
+      Object.entries(campuses).forEach(([campus, secs]) => {
+        html += `<div class="offering-location">
+                <h4 class="location-title">${campus}</h4>
+                <div class="date-label">START / END DATE</div>
+                ${secs.map((s) => generateAccordionItem(s, courseName, s.credits || courseCredits)).join('')}
+            </div>`;
+      });
+      html += `</div>`;
+    });
+    return html;
   }
 
-  function groupSectionsByDeliveryType(sections) {
-    return sections.reduce((grouped, section) => {
-      const key = resolveGuid(section.deliveryType);
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(section);
-      return grouped;
-    }, {});
-  }
+  // ── Main component ────────────────────────────────────────────────────────
 
-  function generateCourseComponent(data) {
+  function generateCourseComponent(data, pdfFilename) {
     const name = data.name || '';
     const description = data.description || '';
     const credits = Number(data.credits || 0);
     const sisId = data.sisId || '';
     const sections = Array.isArray(data.sections) ? data.sections : [];
+    const baseUrl = 'https://bvc-uat.vercel.app';
 
     const creditsHtml =
       credits > 0
@@ -290,10 +270,10 @@
            <div class="w-richtext"><p>${description}</p></div>`
       : '';
 
-    const pdfHtml = sisId
+    const pdfHtml = pdfFilename
       ? `<div class="course-pdf-section">
                <a class="course-pdf-link"
-                  href="https://bvc-uat.vercel.app/pdf/course-${sisId}.pdf"
+                  href="${baseUrl}/data/course-outlines-pdf/${encodeURIComponent(pdfFilename)}"
                   target="_blank" rel="noopener">
                    Download Course Outline (PDF)
                </a>
@@ -311,8 +291,8 @@
     return `
         <div class="course-page-grid">
             <div class="course-info-col">
-                ${descHtml}
                 ${creditsHtml}
+                ${descHtml}
                 ${pdfHtml}
             </div>
             <div class="course-offers-col">
@@ -321,7 +301,8 @@
         </div>`;
   }
 
-  // Accordion toggle function
+  // ── Accordion toggle ──────────────────────────────────────────────────────
+
   function toggleAccordion(id) {
     const content = document.getElementById(`accordion-${id}`);
     const btn = content.previousElementSibling;
@@ -337,44 +318,47 @@
       btn.classList.add('active');
     }
   }
-  window.toggleAccordion = toggleAccordion; // expose globally for inline onclick
+  window.toggleAccordion = toggleAccordion;
 
   // ─── Course key resolution ─────────────────────────────────────────────────
 
   function resolveCourseKey() {
     var container = document.getElementById('courseComponent');
-    // 1. data-sisid attribute
     var key = container && container.getAttribute('data-sisid');
     if (key && key.trim()) return key.trim();
-    // 2. Last URL path segment
     var parts = window.location.pathname.replace(/\/$/, '').split('/');
     return parts[parts.length - 1] || '';
   }
 
-  // Fetch by SIS ID first, fall back to slug lookup via index
+  // Fetch course data + resolve pdfFilename from index
   async function fetchCourseByKey(baseUrl, key) {
-    // Try direct SIS ID fetch
-    var directUrl = baseUrl + '/data/oScourses/course-' + encodeURIComponent(key) + '.json';
-    var res = await fetch(directUrl, { mode: 'cors' });
-    if (res.ok) return res.json();
-
-    // Slug fallback: resolve via the index
+    // Always fetch the index to get pdfFilename
     var indexRes = await fetch(baseUrl + '/data/open-studies/index.json', { mode: 'cors' });
-    if (!indexRes.ok) throw new Error('Could not load course index');
-    var index = await indexRes.json();
-    var sisId = null;
-    (index.categories || []).forEach(function (cat) {
-      (cat.courses || []).forEach(function (c) {
-        if (c.slug === key || c.sisId === key) sisId = c.sisId;
+    var index = indexRes.ok ? await indexRes.json() : null;
+    var indexEntry = null;
+
+    if (index) {
+      (index.categories || []).forEach(function (cat) {
+        (cat.courses || []).forEach(function (c) {
+          if (c.slug === key || c.sisId === key) indexEntry = c;
+        });
       });
-    });
-    if (!sisId) throw new Error('Course not found: ' + key);
-    return fetchCourseData(baseUrl + '/data/oScourses/course-' + encodeURIComponent(sisId) + '.json');
+    }
+
+    // Resolve SIS ID (key might be a slug)
+    var sisId = (indexEntry && indexEntry.sisId) || key;
+    var courseUrl = baseUrl + '/data/oScourses/course-' + encodeURIComponent(sisId) + '.json';
+    var data = await fetchCourseData(courseUrl);
+
+    return {
+      data: data,
+      pdfFilename: indexEntry ? indexEntry.pdfFilename : null
+    };
   }
 
-  // ─── Initialize on DOMContentLoaded ────────────────────────────────────────
+  // ─── Initialize ─────────────────────────────────────────────────────────────
 
-  document.addEventListener('DOMContentLoaded', async () => {
+  async function initOsCourse() {
     const container = document.getElementById('courseComponent');
     if (!container) return;
 
@@ -387,26 +371,23 @@
     }
 
     try {
-      // Fetch course data and lookup table in parallel
-      const [data] = await Promise.all([
+      const [result] = await Promise.all([
         fetchCourseByKey(baseUrl, courseKey),
         fetch(baseUrl + '/data/sis-data-lookup.json', { mode: 'cors' })
           .then((r) => (r.ok ? r.json() : null))
           .then((lookup) => {
             if (!lookup) return;
-            // Merge delivery types and campuses into GUID_LOOKUP
             const dt = lookup?.lookups?.deliveryTypes?.byId || {};
             const cam = lookup?.lookups?.campuses?.byId || {};
             [...Object.entries(dt), ...Object.entries(cam)].forEach(([id, entry]) => {
               GUID_LOOKUP[id.toUpperCase()] = entry.displayName || entry.name;
             });
           })
-          .catch(() => {}), // non-fatal — fall back to hardcoded table
+          .catch(() => {}),
       ]);
 
-      container.innerHTML = generateCourseComponent(data);
+      container.innerHTML = generateCourseComponent(result.data, result.pdfFilename);
 
-      // Wire up add-to-cart buttons for the cart script (if loaded after this)
       container.querySelectorAll('.addtocartbutton').forEach((button) => {
         if (typeof handleAddToCart === 'function') {
           button.addEventListener('click', handleAddToCart);
@@ -416,5 +397,11 @@
       container.innerHTML = `<p style="color:red;">Failed to load course data: ${err.message}</p>`;
       console.error('[bvc-os-course]', err);
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initOsCourse);
+  } else {
+    initOsCourse();
+  }
 </script>

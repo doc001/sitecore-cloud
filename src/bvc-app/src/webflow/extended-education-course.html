@@ -6,8 +6,7 @@
 
   Resolves course key from:
     1. data-sisid attribute on #courseComponent
-    2. Webflow CMS courseid field
-    3. Last URL path segment (SIS ID from URL)
+    2. Last URL path segment (SIS ID from URL)
 
   The add-to-cart buttons use data attributes compatible with the
   existing CartManager / add-to-cart script (separate embed).
@@ -16,7 +15,6 @@
 -->
 
 <script>
-  // GUID → display name lookup (delivery types and campuses from sis-data-lookup.json)
   const EE_GUID_LOOKUP = {
     // Delivery Types
     '1AE082FF1070438CBAA776B245B6F75D': 'Any-time Online',
@@ -81,11 +79,7 @@
     const month = dateString.substring(4, 6);
     const day = dateString.substring(6, 8);
     const date = new Date(year, month - 1, day);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
 
   function eeGenerateId() {
@@ -94,24 +88,19 @@
 
   function eeGenerateTimeBlockInfo(section) {
     if (!Array.isArray(section.timeBlocks) || !section.timeBlocks.length) return '';
-
     const blocksHtml = section.timeBlocks
-      .map(
-        (tb) => `
+      .map((tb) => `
         <div>
             <span class="producthours">${tb.schedule || ''}</span>
             ${tb.frequency ? `<span class="productdays"> &mdash; ${tb.frequency}</span>` : ''}
-        </div>`,
-      )
+        </div>`)
       .join('');
-
     return `<div class="timeblock-info">
         <div class="detail-label">Schedule</div>
         <div class="timeblock-details">${blocksHtml}</div>
     </div>`;
   }
 
-  // Derive actual class dates from timeBlocks; fall back to section dates
   function eeResolveDates(section) {
     const tbs = Array.isArray(section.timeBlocks) ? section.timeBlocks.filter(tb => tb.startTime) : [];
     if (tbs.length === 0) return { start: section.startDate, end: section.endDate };
@@ -136,10 +125,8 @@
     const intlAmount = section.fees?.international?.amount ?? null;
     const intlPrice = intlAmount !== null ? parseFloat(intlAmount).toFixed(0) : null;
 
-    const campusName = eeResolveGuid(section.campus);
     const deliveryName = eeResolveGuid(section.deliveryType);
     const timeBlockInfo = eeGenerateTimeBlockInfo(section);
-    const seatsLabel = section.seatsAvailable ? 'Available' : 'Full';
     const sectionCredits = section.credits || credits;
 
     const regInfo = section.registrationStart
@@ -161,20 +148,12 @@
                 <div class="course-details">
                     <div class="detail-group">
                         <div class="detail-item">
-                            <div class="detail-label">Location</div>
-                            <div class="detail-value productlocation">${campusName}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Hours</div>
-                            <div class="detail-value">${section.hours}</div>
-                        </div>
-                        <div class="detail-item">
                             <div class="detail-label">Credits</div>
                             <div class="detail-value">${sectionCredits}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Seats</div>
-                            <div class="detail-value seats-${section.seatsAvailable ? 'open' : 'full'}">${seatsLabel}</div>
+                            <div class="detail-label">Hours</div>
+                            <div class="detail-value">${section.hours}</div>
                         </div>
                         ${regInfo}
                         ${timeBlockInfo}
@@ -189,17 +168,13 @@
                             </div>
                             <div class="student-type">Domestic Student</div>
                             ${domesticTax > 0 ? `<div class="tax-note">+ $${parseFloat(domesticTax).toFixed(2)} tax</div>` : ''}
-                            ${
-                              intlPrice !== null
-                                ? `
+                            ${intlPrice !== null ? `
                             <div class="price-display intl" style="margin-top:8px;">
                                 <span class="currency">$</span>
                                 <span class="price">${intlPrice}</span>
                                 <span class="currency-code">CAD</span>
                             </div>
-                            <div class="student-type">International Student</div>`
-                                : ''
-                            }
+                            <div class="student-type">International Student</div>` : ''}
                         </div>
                         <div class="action-section">
                             <a href="#"
@@ -220,39 +195,49 @@
         </div>`;
   }
 
+  // ── Two-level grouping: Delivery Type > Campus ────────────────────────────
+
+  function eeGroupSections(sections) {
+    const grouped = {};
+    sections.forEach((section) => {
+      const delivery = eeResolveGuid(section.deliveryType);
+      const campus = eeResolveGuid(section.campus);
+      if (!grouped[delivery]) grouped[delivery] = {};
+      if (!grouped[delivery][campus]) grouped[delivery][campus] = [];
+      grouped[delivery][campus].push(section);
+    });
+    return grouped;
+  }
+
   function eeGenerateCourseOfferings(sections, courseName, courseCredits) {
     const sorted = sections.slice().sort((a, b) => {
       const toDate = (s) => new Date(s.startDate.substring(0, 4), s.startDate.substring(4, 6) - 1, s.startDate.substring(6, 8));
       return toDate(a) - toDate(b);
     });
 
-    const grouped = eeGroupSectionsByDeliveryType(sorted);
-    return Object.entries(grouped)
-      .map(
-        ([deliveryType, secs]) => `
-        <div class="course-offering">
-            <h3 class="offering-title">${deliveryType}</h3>
-            <div class="date-label">START / END DATE</div>
-            ${secs.map((s) => eeGenerateAccordionItem(s, courseName, s.credits || courseCredits)).join('')}
-        </div>`,
-      )
-      .join('');
+    const grouped = eeGroupSections(sorted);
+    let html = '';
+    Object.entries(grouped).forEach(([deliveryType, campuses]) => {
+      html += `<div class="course-offering">
+            <h3 class="offering-title">${deliveryType}</h3>`;
+      Object.entries(campuses).forEach(([campus, secs]) => {
+        html += `<div class="offering-location">
+                <h4 class="location-title">${campus}</h4>
+                <div class="date-label">START / END DATE</div>
+                ${secs.map((s) => eeGenerateAccordionItem(s, courseName, s.credits || courseCredits)).join('')}
+            </div>`;
+      });
+      html += `</div>`;
+    });
+    return html;
   }
 
-  function eeGroupSectionsByDeliveryType(sections) {
-    return sections.reduce((grouped, section) => {
-      const key = eeResolveGuid(section.deliveryType);
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(section);
-      return grouped;
-    }, {});
-  }
+  // ── Main component ────────────────────────────────────────────────────────
 
   function eeGenerateCourseComponent(data) {
     const name = data.name || '';
     const description = data.description || '';
     const credits = Number(data.credits || 0);
-    const sisId = data.sisId || '';
     const sections = Array.isArray(data.sections) ? data.sections : [];
 
     const creditsHtml =
@@ -270,16 +255,6 @@
            <div class="w-richtext"><p>${description}</p></div>`
       : '';
 
-    const pdfHtml = sisId
-      ? `<div class="course-pdf-section">
-               <a class="course-pdf-link"
-                  href="https://bvc-uat.vercel.app/pdf/course-${sisId}.pdf"
-                  target="_blank" rel="noopener">
-                   Download Course Outline (PDF)
-               </a>
-           </div>`
-      : '';
-
     const enrollHtml =
       sections.length > 0
         ? `<div class="enrollment-section">
@@ -291,9 +266,8 @@
     return `
         <div class="course-page-grid">
             <div class="course-info-col">
-                ${descHtml}
                 ${creditsHtml}
-                ${pdfHtml}
+                ${descHtml}
             </div>
             <div class="course-offers-col">
                 ${enrollHtml}
@@ -301,7 +275,8 @@
         </div>`;
   }
 
-  // Accordion toggle function
+  // ── Accordion toggle ──────────────────────────────────────────────────────
+
   function eeToggleAccordion(id) {
     const content = document.getElementById(`ee-accordion-${id}`);
     const btn = content.previousElementSibling;
@@ -323,17 +298,15 @@
 
   function eeResolveCourseKey() {
     var container = document.getElementById('courseComponent');
-    // 1. data-sisid attribute
     var key = container && container.getAttribute('data-sisid');
     if (key && key.trim()) return key.trim();
-    // 2. Last URL path segment (SIS ID)
     var parts = window.location.pathname.replace(/\/$/, '').split('/');
     return parts[parts.length - 1] || '';
   }
 
-  // ─── Initialize on DOMContentLoaded ────────────────────────────────────────
+  // ─── Initialize ─────────────────────────────────────────────────────────────
 
-  document.addEventListener('DOMContentLoaded', async () => {
+  async function initEeCourse() {
     const container = document.getElementById('courseComponent');
     if (!container) return;
 
@@ -368,7 +341,6 @@
 
       container.innerHTML = eeGenerateCourseComponent(data);
 
-      // Wire up add-to-cart buttons for the cart script (if loaded after this)
       container.querySelectorAll('.addtocartbutton').forEach((button) => {
         if (typeof handleAddToCart === 'function') {
           button.addEventListener('click', handleAddToCart);
@@ -378,5 +350,11 @@
       container.innerHTML = `<p style="color:red;">Failed to load course data: ${err.message}</p>`;
       console.error('[bvc-ee-course]', err);
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEeCourse);
+  } else {
+    initEeCourse();
+  }
 </script>

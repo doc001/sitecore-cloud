@@ -62,6 +62,13 @@ Standalone HTML snippets in `src/webflow/` are pasted into Webflow "Embed" block
 
 Course detail embeds render into the existing `#courseComponent` div and output `.addtocartbutton` elements compatible with the separate CartManager ecommerce script.
 
+Key behaviours:
+- **Two-level grouping**: sections are grouped by Delivery Type → Campus, each with its own heading
+- **Accordion fields**: Credits, Fee, Dates, Days, Time (seats hidden; location in campus heading)
+- **Dates**: derived from `timeBlock.startTime/endTime` (actual class dates), falling back to `section.startDate/endDate`
+- **PDF outlines** (OS only): path is `/data/course-outlines-pdf/{pdfFilename}` from the course index
+- **GUID resolution**: delivery types and campuses resolved via hardcoded lookup + `/data/sis-data-lookup.json`
+
 ## Environment Variables
 
 Create `.env.local`:
