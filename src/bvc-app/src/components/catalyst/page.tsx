@@ -282,7 +282,7 @@ export default class page extends Component {
                           <div className="items-start flex-col justify-start flex text-sky-500">
                             <a
                               className="underline"
-                              href="https://www.bowvalleycollege.ca/mailto:info@bowvalleycollege.ca"
+                              href="mailto:info@bowvalleycollege.ca"
                             >
                               info@bowvalleycollege.ca
                             </a>
@@ -2444,7 +2444,7 @@ export default class page extends Component {
                     <div className="items-start flex-col justify-start flex text-sky-500">
                       <a
                         className="underline"
-                        href="https://www.bowvalleycollege.ca/mailto:info@bowvalleycollege.ca?subject=Information%20request"
+                        href="mailto:info@bowvalleycollege.ca?subject=Information%20request"
                       >
                         info@bowvalleycollege.ca
                       </a>

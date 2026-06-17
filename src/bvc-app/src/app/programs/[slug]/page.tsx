@@ -1,5 +1,6 @@
 // /app/programs/[slug]/page.tsx
 
+import { notFound } from 'next/navigation';
 import programs from '@/data/cms/programs.parsed.json'; // Output from parsePrograms.mjs
 import Breadcrumb from '@/components/common/Breadcrumb';
 import { getBreadcrumbData } from '@/lib/navigationBreadcrumbUtils';
@@ -12,13 +13,13 @@ function getProgramBySlug(slug: string) {
 // (Reuse your stripHtml, or import if you have one globally)
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '').trim();
 
-export default async function ProgramPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const programData = getProgramBySlug(slug);
 
   if (!programData) {
     // Not Found - Next.js App Router
-    return <div className="p-10 text-center text-red-500 text-xl">Program not found</div>;
+    notFound();
   }
 
   // (Breadcrumb logic remains)
@@ -53,8 +54,9 @@ export async function generateStaticParams() {
 }
 
 // SEO Metadata
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const program = getProgramBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const program = getProgramBySlug(slug);
   if (!program) {
     return { title: 'Program Not Found' };
   }

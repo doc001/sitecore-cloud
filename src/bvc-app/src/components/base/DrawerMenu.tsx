@@ -5,7 +5,6 @@ import Image from 'next/image'
 import HeaderLogo from '@/components/base/HeaderLogo'
 import MainMenu from '@/components/base/MainMenu'
 import Link from 'next/link'
-import { Main } from 'next/document'
 
 
 function HeaderTop() {

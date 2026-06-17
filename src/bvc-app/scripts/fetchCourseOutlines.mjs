@@ -10,7 +10,7 @@
 //        npm install dotenv
 //   3. Create a `local.env` (or `.env.local`) at project root containing:
 //        SITECORE_GRAPHQL_ENDPOINT=https://xmc-bowvalleyco2df9-bowvalleyco2779-development2348.sitecorecloud.io/sitecore/api/graph/edge/
-//        SC_APIKEY=7A236BA0-B9F9-4DC8-8731-5D9F2F2A58D2
+//        SC_APIKEY=<your-sitecore-api-key>
 //   4. From project root, run:
 //        node ./scripts/fetchCourseOutlines.mjs
 //        node ./scripts/fetchCourseOutlines.mjs --resume    (to resume from cursor)

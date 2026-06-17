@@ -259,7 +259,7 @@ const MainMenu: React.FC = () => {
               </div>
               <div className="items-start flex-col justify-start flex text-(--color-blue-100)">
                 <a
-                  href="http://localhost:8000/mailto:info@bowvalleycollege.ca"
+                  href="mailto:info@bowvalleycollege.ca"
                   className="underline"
                 >
                   info@bowvalleycollege.ca

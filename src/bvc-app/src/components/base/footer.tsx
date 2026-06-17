@@ -51,7 +51,7 @@ function footer() {
                   <p className="h-7 leading-7 mb-4 w-52">
                     <a
                       className="text-sky-500 cursor-pointer underline"
-                      href="https://www.bowvalleycollege.ca/mailto:info@bowvalleycollege.ca?subject=Information%20request"
+                      href="mailto:info@bowvalleycollege.ca?subject=Information%20request"
                     >
                       info@bowvalleycollege.ca
                     </a>
