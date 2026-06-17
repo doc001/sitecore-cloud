@@ -1,146 +1,90 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:05.071Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "HMSV9102",
-    "courseName": "Personal Support Skills for Caregivers"
-  },
-  "course": {
-    "id": "176BF6B3B74B44EDA059CF9DDC68A370",
-    "sisID": "HMSV9102",
-    "name": "Personal Support Skills for Caregivers",
-    "children": [
-      {
-        "id": "11C47F0AD2874DAD95CB2BE349AAAF91",
-        "name": "HMSV9102-91",
-        "sisID": "9385",
-        "courseName": "",
-        "deliveryTypeId": "{54A63C88-32BE-4D1F-8690-FD102D4A660A}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "BCEA91A117EF431EA727EA26D7ACFF03",
+  "sisId": "HMSV9102",
+  "name": "Personal Support Skills for Caregivers",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "DF2F802070594F8E82F8BC21C4459F4B",
+      "name": "HMSV9102-91",
+      "sisId": "30601",
+      "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 30,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260513T000000",
+      "endDate": "20260815T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 419,
+          "tax": 20.95,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260107T000000",
-        "endDate": "20260411T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "409.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "409.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 419,
+          "tax": 20.95,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "7DE7EFAA05E54452A553D341C20F1376",
-        "name": "HMSV9102-92",
-        "sisID": "8544",
-        "courseName": "",
-        "deliveryTypeId": "{54A63C88-32BE-4D1F-8690-FD102D4A660A}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+      "timeBlocks": []
+    },
+    {
+      "id": "B59026A5B5C64C70AD00B7E371EFC23D",
+      "name": "HMSV9102-92",
+      "sisId": "30600",
+      "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 30,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260708T000000",
+      "endDate": "20261003T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 419,
+          "tax": 20.95,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20251112T000000",
-        "endDate": "20260221T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "409.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "409.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 419,
+          "tax": 20.95,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 2,
-      "totalFees": 4,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      },
+      "timeBlocks": []
+    },
+    {
+      "id": "A1241E934E5546D080F2F1C86BE0F447",
+      "name": "HMSV9102-93",
+      "sisId": "24012",
+      "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 30,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260408T000000",
+      "endDate": "20260711T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 419,
+          "tax": 20.95,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 419,
+          "tax": 20.95,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

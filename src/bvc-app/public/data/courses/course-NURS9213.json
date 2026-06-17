@@ -1,166 +1,63 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:12.930Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "NURS9213",
-    "courseName": "Intravenous Initiation, Infusion and Medication Administration"
-  },
-  "course": {
-    "id": "B6394961487D44B78C99FC3FFD93D4CA",
-    "sisID": "NURS9213",
-    "name": "Intravenous Initiation, Infusion and Medication Administration",
-    "children": [
-      {
-        "id": "9AB7171CDE9F48E5A785D9A14C9C4578",
-        "name": "NURS9213-91",
-        "sisID": "6864",
-        "courseName": "",
-        "deliveryTypeId": "{B25EF090-C76B-45BC-A851-D656FFECC7C6}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "F4011893792F49909A34D54FB435904A",
+  "sisId": "NURS9213",
+  "name": "Intravenous Initiation, Infusion and Medication Administration",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "DA9A1DC4F5774084834BF6CBD2E67943",
+      "name": "NURS9213-91",
+      "sisId": "17219",
+      "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 15,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260513T000000",
+      "endDate": "20260606T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 449,
+          "tax": 22.45,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260204T000000",
-        "endDate": "20260228T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "439.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "439.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "19592",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 449,
+          "tax": 22.45,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "19D4CF38AD4B4116A38D0289C1ADCC38",
-        "name": "NURS9213-92",
-        "sisID": "6277",
-        "courseName": "",
-        "deliveryTypeId": "{B25EF090-C76B-45BC-A851-D656FFECC7C6}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+      "timeBlocks": []
+    },
+    {
+      "id": "D8AD0DDD82854F1F9EABC076E7DF4384",
+      "name": "NURS9213-92",
+      "sisId": "17254",
+      "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 15,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260408T000000",
+      "endDate": "20260502T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 449,
+          "tax": 22.45,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20251112T000000",
-        "endDate": "20251206T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "439.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "439.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "19589",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 449,
+          "tax": 22.45,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 2,
-      "totalFees": 6,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 2
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

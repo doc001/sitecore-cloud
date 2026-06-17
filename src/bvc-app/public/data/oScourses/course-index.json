@@ -1,1169 +1,512 @@
-{
-  "metadata": {
-    "generatedAt": "2026-03-17T14:21:33.485Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Course Index",
-    "totalCourses": 53
+[
+  {
+    "sisId": "ACCT1103",
+    "name": "Introduction to Financial Accounting",
+    "fileName": "course-ACCT1103.json",
+    "sectionCount": 8
   },
-  "courses": [
-    {
-      "sisID": "ACCT1103",
-      "name": "Introduction to Financial Accounting",
-      "fileName": "course-ACCT1103.json",
-      "summary": {
-        "totalSections": 4,
-        "totalFees": 14,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 4,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ACCT2303",
-      "name": "Personal and Corporate Taxation",
-      "fileName": "course-ACCT2303.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 8,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ADDC1101",
-      "name": "Introduction to Addiction Studies",
-      "fileName": "course-ADDC1101.json",
-      "summary": {
-        "totalSections": 3,
-        "totalFees": 9,
-        "totalTimeBlocks": 3,
-        "sectionsWithFees": 3,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ADMN1101",
-      "name": "Introduction to Professional Keyboarding",
-      "fileName": "course-ADMN1101.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 6,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ANAT1101",
-      "name": "Anatomy and Physiology",
-      "fileName": "course-ANAT1101.json",
-      "summary": {
-        "totalSections": 9,
-        "totalFees": 32,
-        "totalTimeBlocks": 14,
-        "sectionsWithFees": 9,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "BIOL1401",
-      "name": "The Organization and Diversity of Life",
-      "fileName": "course-BIOL1401.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 4,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "CHEM1901",
-      "name": "General Chemistry: Structure and Bonding",
-      "fileName": "course-CHEM1901.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 9,
-        "totalTimeBlocks": 7,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "COMM3201",
-      "name": "Intercultural Communication",
-      "fileName": "course-COMM3201.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "DAST1102",
-      "name": "Introduction to Autism Spectrum Disorder",
-      "fileName": "course-DAST1102.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 5,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "DAST1201",
-      "name": "Person Centered Planning",
-      "fileName": "course-DAST1201.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "DAST1202",
-      "name": "Disability Work Management and Supported Employment",
-      "fileName": "course-DAST1202.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "DAST1401",
-      "name": "Positive Behaviour Support",
-      "fileName": "course-DAST1401.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "DESN1101",
-      "name": "Fundamental Principles of Digital Design",
-      "fileName": "course-DESN1101.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ELA1104",
-      "name": "English Language Arts 10-2",
-      "fileName": "course-ELA1104.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 7,
-        "totalTimeBlocks": 5,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ELCC1101",
-      "name": "Introduction to Early Childhood Education and Development",
-      "fileName": "course-ELCC1101.json",
-      "summary": {
-        "totalSections": 3,
-        "totalFees": 12,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 3,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ELCC1305",
-      "name": "Developing Through Play",
-      "fileName": "course-ELCC1305.json",
-      "summary": {
-        "totalSections": 7,
-        "totalFees": 18,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 7,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ENGL1201",
-      "name": "English Composition",
-      "fileName": "course-ENGL1201.json",
-      "summary": {
-        "totalSections": 34,
-        "totalFees": 95,
-        "totalTimeBlocks": 27,
-        "sectionsWithFees": 34,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "ENGL1302",
-      "name": "Literature and Society",
-      "fileName": "course-ENGL1302.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "FASD1101",
-      "name": "Fetal Alcohol Spectrum Awareness for Human Service Professionals",
-      "fileName": "course-FASD1101.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "FIPR2102",
-      "name": "Topics in Film Genre",
-      "fileName": "course-FIPR2102.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HMSV3201",
-      "name": "Program Design and Evaluation",
-      "fileName": "course-HMSV3201.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HMSV3405",
-      "name": "Implementing TRC (2015) Calls to Action in Health and Human Services",
-      "fileName": "course-HMSV3405.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HMSV3506",
-      "name": "Managing and the Canadian Health System",
-      "fileName": "course-HMSV3506.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HRES1101",
-      "name": "Organizational Behaviour",
-      "fileName": "course-HRES1101.json",
-      "summary": {
-        "totalSections": 5,
-        "totalFees": 15,
-        "totalTimeBlocks": 5,
-        "sectionsWithFees": 5,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HRES2201",
-      "name": "Introduction to Human Resources",
-      "fileName": "course-HRES2201.json",
-      "summary": {
-        "totalSections": 5,
-        "totalFees": 16,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 5,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HUCL1101",
-      "name": "Professional Practice and Communication in Health Care",
-      "fileName": "course-HUCL1101.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 7,
-        "totalTimeBlocks": 3,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HUCL1201",
-      "name": "Introduction to Health Care Fundamentals",
-      "fileName": "course-HUCL1201.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 7,
-        "totalTimeBlocks": 3,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "HUCL1401",
-      "name": "Medical Terminology",
-      "fileName": "course-HUCL1401.json",
-      "summary": {
-        "totalSections": 5,
-        "totalFees": 17,
-        "totalTimeBlocks": 7,
-        "sectionsWithFees": 5,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "INDG1101",
-      "name": "Introduction to Indigenous Studies",
-      "fileName": "course-INDG1101.json",
-      "summary": {
-        "totalSections": 11,
-        "totalFees": 29,
-        "totalTimeBlocks": 7,
-        "sectionsWithFees": 11,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "JUST1101",
-      "name": "Introduction to the Criminal Justice System",
-      "fileName": "course-JUST1101.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "JUST2103",
-      "name": "Introduction to Law Enforcement",
-      "fileName": "course-JUST2103.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "LEGL2104",
-      "name": "Wills & Estates",
-      "fileName": "course-LEGL2104.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 4,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MAT2791",
-      "name": "Mathematics 20-1",
-      "fileName": "course-MAT2791.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MAT2792",
-      "name": "Mathematics 20-2",
-      "fileName": "course-MAT2792.json",
-      "summary": {
-        "totalSections": 3,
-        "totalFees": 25,
-        "totalTimeBlocks": 19,
-        "sectionsWithFees": 3,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MATH0704",
-      "name": "Math Foundations I",
-      "fileName": "course-MATH0704.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 7,
-        "totalTimeBlocks": 5,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MGMT1201",
-      "name": "Business Communication",
-      "fileName": "course-MGMT1201.json",
-      "summary": {
-        "totalSections": 7,
-        "totalFees": 24,
-        "totalTimeBlocks": 10,
-        "sectionsWithFees": 7,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MGMT1302",
-      "name": "Computer Applications",
-      "fileName": "course-MGMT1302.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 6,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MGMT1401",
-      "name": "Microeconomics",
-      "fileName": "course-MGMT1401.json",
-      "summary": {
-        "totalSections": 3,
-        "totalFees": 8,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 3,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MGMT1501",
-      "name": "Business Mathematics",
-      "fileName": "course-MGMT1501.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MGMT2301",
-      "name": "Microsoft Excel",
-      "fileName": "course-MGMT2301.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 2,
-        "totalTimeBlocks": 0,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": false,
-        "containers": [
-          "Fees"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MGMT2503",
-      "name": "Introductory Statistics for Business Disciplines",
-      "fileName": "course-MGMT2503.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "MKTG1101",
-      "name": "Introduction to Marketing",
-      "fileName": "course-MKTG1101.json",
-      "summary": {
-        "totalSections": 4,
-        "totalFees": 11,
-        "totalTimeBlocks": 3,
-        "sectionsWithFees": 4,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "PHRM1102",
-      "name": "Pharmacy Jurisprudence and Ethics",
-      "fileName": "course-PHRM1102.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "POSC1201",
-      "name": "Canadian Politics: Institutions and Issues",
-      "fileName": "course-POSC1201.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "PSYC1101",
-      "name": "Introduction to Psychology",
-      "fileName": "course-PSYC1101.json",
-      "summary": {
-        "totalSections": 5,
-        "totalFees": 16,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 5,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "PSYC1201",
-      "name": "Human Growth and Development Across The Life Span",
-      "fileName": "course-PSYC1201.json",
-      "summary": {
-        "totalSections": 11,
-        "totalFees": 28,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 11,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "PSYC1202",
-      "name": "Child and Adolescent Development",
-      "fileName": "course-PSYC1202.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 6,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "SOCI1101",
-      "name": "Introduction to Sociology",
-      "fileName": "course-SOCI1101.json",
-      "summary": {
-        "totalSections": 4,
-        "totalFees": 11,
-        "totalTimeBlocks": 3,
-        "sectionsWithFees": 4,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "SOCI1201",
-      "name": "Sociology of the Family",
-      "fileName": "course-SOCI1201.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 3,
-        "totalTimeBlocks": 1,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "SOCI1301",
-      "name": "Sociology of Aging",
-      "fileName": "course-SOCI1301.json",
-      "summary": {
-        "totalSections": 4,
-        "totalFees": 10,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 4,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "SST2771",
-      "name": "Social Studies 20-1",
-      "fileName": "course-SST2771.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 7,
-        "totalTimeBlocks": 5,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "TECH1101",
-      "name": "Web and Internet Fundamentals",
-      "fileName": "course-TECH1101.json",
-      "summary": {
-        "totalSections": 1,
-        "totalFees": 4,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 1,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    },
-    {
-      "sisID": "WGST2101",
-      "name": "Introduction to Women and Gender Studies",
-      "fileName": "course-WGST2101.json",
-      "summary": {
-        "totalSections": 2,
-        "totalFees": 6,
-        "totalTimeBlocks": 2,
-        "sectionsWithFees": 2,
-        "hasDeliveryTypes": false,
-        "hasCampuses": true,
-        "hasTimeBlocks": true,
-        "containers": [
-          "Fees",
-          "TimeBlock"
-        ],
-        "feeTypes": [
-          "Domestic",
-          "International"
-        ]
-      }
-    }
-  ]
-}
+  {
+    "sisId": "ACCT2201",
+    "name": "Management Accounting I",
+    "fileName": "course-ACCT2201.json",
+    "sectionCount": 5
+  },
+  {
+    "sisId": "ADDC1101",
+    "name": "Introduction to Addiction Studies",
+    "fileName": "course-ADDC1101.json",
+    "sectionCount": 6
+  },
+  {
+    "sisId": "ADMN1101",
+    "name": "Introduction to Professional Keyboarding",
+    "fileName": "course-ADMN1101.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "ANAT1101",
+    "name": "Anatomy and Physiology",
+    "fileName": "course-ANAT1101.json",
+    "sectionCount": 6
+  },
+  {
+    "sisId": "BIOL1401",
+    "name": "The Organization and Diversity of Life",
+    "fileName": "course-BIOL1401.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "BIOL1402",
+    "name": "Fundamentals of Bioenergetics",
+    "fileName": "course-BIOL1402.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "BIOL1403",
+    "name": "DNA, Inheritance, and Evolution",
+    "fileName": "course-BIOL1403.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "CHEM1901",
+    "name": "General Chemistry: Structure and Bonding",
+    "fileName": "course-CHEM1901.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "CHEM1902",
+    "name": "General Chemistry: Change and Equilibrium",
+    "fileName": "course-CHEM1902.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "CNST1100",
+    "name": "Introduction to Canadian Studies",
+    "fileName": "course-CNST1100.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "COMM1101",
+    "name": "Interpersonal Relationships And Communication Skills",
+    "fileName": "course-COMM1101.json",
+    "sectionCount": 20
+  },
+  {
+    "sisId": "COMM3201",
+    "name": "Intercultural Communication",
+    "fileName": "course-COMM3201.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "DAST1101",
+    "name": "Introduction to Disability Studies",
+    "fileName": "course-DAST1101.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "DAST1102",
+    "name": "Introduction to Autism Spectrum Disorder",
+    "fileName": "course-DAST1102.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "DAST1201",
+    "name": "Person Centered Planning",
+    "fileName": "course-DAST1201.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "DAST1202",
+    "name": "Disability Work Management and Supported Employment",
+    "fileName": "course-DAST1202.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "DAST1401",
+    "name": "Positive Behaviour Support",
+    "fileName": "course-DAST1401.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "DATA2301",
+    "name": "Fundamentals of Digital Marketing Analytics",
+    "fileName": "course-DATA2301.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "DESN1201",
+    "name": "Introduction to Digital Media Production",
+    "fileName": "course-DESN1201.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "DESN2201",
+    "name": "Introduction to Web Design for Digital Marketing",
+    "fileName": "course-DESN2201.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "EDAS1302",
+    "name": "Introduction to Exceptionalities",
+    "fileName": "course-EDAS1302.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "ELCC1101",
+    "name": "Introduction to Early Childhood Education and Development",
+    "fileName": "course-ELCC1101.json",
+    "sectionCount": 9
+  },
+  {
+    "sisId": "ELCC1305",
+    "name": "Developing Through Play",
+    "fileName": "course-ELCC1305.json",
+    "sectionCount": 10
+  },
+  {
+    "sisId": "ENGL1201",
+    "name": "English Composition",
+    "fileName": "course-ENGL1201.json",
+    "sectionCount": 33
+  },
+  {
+    "sisId": "ENGL1302",
+    "name": "Literature and Society",
+    "fileName": "course-ENGL1302.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "ENGL2301",
+    "name": "Children's Literature",
+    "fileName": "course-ENGL2301.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "ESPR1101",
+    "name": "Introduction to Esports",
+    "fileName": "course-ESPR1101.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "FASD1101",
+    "name": "Fetal Alcohol Spectrum Awareness for Human Service Professionals",
+    "fileName": "course-FASD1101.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "FIPR2102",
+    "name": "Topics in Film Genre",
+    "fileName": "course-FIPR2102.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "FNSR2401",
+    "name": "Risk Management Principles & Practice",
+    "fileName": "course-FNSR2401.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "FNSR2403",
+    "name": "Risk Financing",
+    "fileName": "course-FNSR2403.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HMSV3201",
+    "name": "Program Design and Evaluation",
+    "fileName": "course-HMSV3201.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HMSV3204",
+    "name": "Digital Transformations in Health and Human Services",
+    "fileName": "course-HMSV3204.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HMSV3302",
+    "name": "Chronic Illness Management",
+    "fileName": "course-HMSV3302.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HMSV3401",
+    "name": "Social Determinants of Health",
+    "fileName": "course-HMSV3401.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HMSV3405",
+    "name": "Implementing TRC (2015) Calls to Action in Health and Human Services",
+    "fileName": "course-HMSV3405.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HMSV3501",
+    "name": "Case Management",
+    "fileName": "course-HMSV3501.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HMSV3506",
+    "name": "Managing and the Canadian Health System",
+    "fileName": "course-HMSV3506.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "HRES1101",
+    "name": "Organizational Behaviour",
+    "fileName": "course-HRES1101.json",
+    "sectionCount": 8
+  },
+  {
+    "sisId": "HRES2201",
+    "name": "Introduction to Human Resources",
+    "fileName": "course-HRES2201.json",
+    "sectionCount": 8
+  },
+  {
+    "sisId": "HRES2204",
+    "name": "Talent Acquisition and Retention",
+    "fileName": "course-HRES2204.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "HRES2301",
+    "name": "Employment Law",
+    "fileName": "course-HRES2301.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "HUCL1101",
+    "name": "Professional Practice and Communication in Health Care",
+    "fileName": "course-HUCL1101.json",
+    "sectionCount": 4
+  },
+  {
+    "sisId": "HUCL1201",
+    "name": "Introduction to Health Care Fundamentals",
+    "fileName": "course-HUCL1201.json",
+    "sectionCount": 4
+  },
+  {
+    "sisId": "HUCL1401",
+    "name": "Medical Terminology",
+    "fileName": "course-HUCL1401.json",
+    "sectionCount": 5
+  },
+  {
+    "sisId": "INDG1101",
+    "name": "Introduction to Indigenous Studies",
+    "fileName": "course-INDG1101.json",
+    "sectionCount": 17
+  },
+  {
+    "sisId": "JUST1101",
+    "name": "Introduction to the Criminal Justice System",
+    "fileName": "course-JUST1101.json",
+    "sectionCount": 4
+  },
+  {
+    "sisId": "JUST1102",
+    "name": "Diversity and Criminal Justice in Canada",
+    "fileName": "course-JUST1102.json",
+    "sectionCount": 4
+  },
+  {
+    "sisId": "LEGL1201",
+    "name": "Introduction to the Legal Profession",
+    "fileName": "course-LEGL1201.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "LEGL1501",
+    "name": "Litigation I",
+    "fileName": "course-LEGL1501.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "MATH1600",
+    "name": "Introduction to Statistics I",
+    "fileName": "course-MATH1600.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "MATH1601",
+    "name": "Introduction to Statistics II",
+    "fileName": "course-MATH1601.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "MATH1902",
+    "name": "Introductory Calculus",
+    "fileName": "course-MATH1902.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "MATH1903",
+    "name": "Introductory Calculus II",
+    "fileName": "course-MATH1903.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "MATH1904",
+    "name": "Linear Methods I",
+    "fileName": "course-MATH1904.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "MGMT1101",
+    "name": "Introduction to Management",
+    "fileName": "course-MGMT1101.json",
+    "sectionCount": 7
+  },
+  {
+    "sisId": "MGMT1102",
+    "name": "Introduction to Organizations and Sustainability",
+    "fileName": "course-MGMT1102.json",
+    "sectionCount": 5
+  },
+  {
+    "sisId": "MGMT1201",
+    "name": "Business Communication",
+    "fileName": "course-MGMT1201.json",
+    "sectionCount": 11
+  },
+  {
+    "sisId": "MGMT1302",
+    "name": "Computer Applications",
+    "fileName": "course-MGMT1302.json",
+    "sectionCount": 5
+  },
+  {
+    "sisId": "MGMT1401",
+    "name": "Microeconomics",
+    "fileName": "course-MGMT1401.json",
+    "sectionCount": 5
+  },
+  {
+    "sisId": "MGMT1402",
+    "name": "Principles of Economics",
+    "fileName": "course-MGMT1402.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "MGMT1501",
+    "name": "Business Mathematics",
+    "fileName": "course-MGMT1501.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "MGMT1601",
+    "name": "Business Law",
+    "fileName": "course-MGMT1601.json",
+    "sectionCount": 5
+  },
+  {
+    "sisId": "MGMT2301",
+    "name": "Microsoft Excel",
+    "fileName": "course-MGMT2301.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "MGMT2503",
+    "name": "Introductory Statistics for Business Disciplines",
+    "fileName": "course-MGMT2503.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "MKTG1101",
+    "name": "Introduction to Marketing",
+    "fileName": "course-MKTG1101.json",
+    "sectionCount": 7
+  },
+  {
+    "sisId": "PHIL1201",
+    "name": "Ethics",
+    "fileName": "course-PHIL1201.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "PHYS1900",
+    "name": "Mechanics",
+    "fileName": "course-PHYS1900.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "POSC1201",
+    "name": "Canadian Politics: Institutions and Issues",
+    "fileName": "course-POSC1201.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "PSYC1101",
+    "name": "Introduction to Psychology",
+    "fileName": "course-PSYC1101.json",
+    "sectionCount": 8
+  },
+  {
+    "sisId": "PSYC1201",
+    "name": "Human Growth and Development Across The Life Span",
+    "fileName": "course-PSYC1201.json",
+    "sectionCount": 13
+  },
+  {
+    "sisId": "PSYC1202",
+    "name": "Child and Adolescent Development",
+    "fileName": "course-PSYC1202.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "PSYC2102",
+    "name": "Social Psychology",
+    "fileName": "course-PSYC2102.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "SCMT2101",
+    "name": "Introduction to Supply Chain Management",
+    "fileName": "course-SCMT2101.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "SCMT2201",
+    "name": "Operations Management I",
+    "fileName": "course-SCMT2201.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "SCMT2302",
+    "name": "Negotiation Skills",
+    "fileName": "course-SCMT2302.json",
+    "sectionCount": 3
+  },
+  {
+    "sisId": "SCMT2401",
+    "name": "Logistics & Transportation",
+    "fileName": "course-SCMT2401.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "SOCI1101",
+    "name": "Introduction to Sociology",
+    "fileName": "course-SOCI1101.json",
+    "sectionCount": 5
+  },
+  {
+    "sisId": "SOCI1201",
+    "name": "Sociology of the Family",
+    "fileName": "course-SOCI1201.json",
+    "sectionCount": 10
+  },
+  {
+    "sisId": "SOCI1301",
+    "name": "Sociology of Aging",
+    "fileName": "course-SOCI1301.json",
+    "sectionCount": 8
+  },
+  {
+    "sisId": "SODV1101",
+    "name": "Programming Fundamentals",
+    "fileName": "course-SODV1101.json",
+    "sectionCount": 2
+  },
+  {
+    "sisId": "TECH1101",
+    "name": "Web and Internet Fundamentals",
+    "fileName": "course-TECH1101.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "VOAS1100",
+    "name": "Introduction to the Veterinary Profession",
+    "fileName": "course-VOAS1100.json",
+    "sectionCount": 1
+  },
+  {
+    "sisId": "WGST2101",
+    "name": "Introduction to Women and Gender Studies",
+    "fileName": "course-WGST2101.json",
+    "sectionCount": 4
+  }
+]

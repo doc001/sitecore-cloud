@@ -1,270 +1,117 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-10T22:08:18.046Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "RELE9202",
-    "courseName": "Practice of Commercial Real Estate"
-  },
-  "course": {
-    "id": "292F3A9E0BD9429C8C6A43163045FDDB",
-    "sisID": "RELE9202",
-    "name": "Practice of Commercial Real Estate",
-    "children": [
-      {
-        "id": "CF98B4C4BA234BC38943F43A13DBB9ED",
-        "name": "RELE9202-91",
-        "sisID": "16808",
-        "courseName": "",
-        "deliveryTypeId": "{DD3C86D0-2E98-41AE-8C03-B3CD16D56584}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "418988B3B5764CC782DB89592FA01F45",
+  "sisId": "RELE9202",
+  "name": "Practice of Commercial Real Estate",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "ECF75F7A9F51465BB8EB11C432A7B927",
+      "name": "RELE9202-91",
+      "sisId": "13387",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 80,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250910T000000",
+      "endDate": "20260310T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "80",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250115T000000",
-        "endDate": "20250715T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "FBA16B3ADFEE463698E28785A787F873",
-        "name": "RELE9202-92",
-        "sisID": "16807",
-        "courseName": "",
-        "deliveryTypeId": "{DD3C86D0-2E98-41AE-8C03-B3CD16D56584}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+      "timeBlocks": []
+    },
+    {
+      "id": "8AB194DF26A44A438FEDA324341E2F0D",
+      "name": "RELE9202-92",
+      "sisId": "12989",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 80,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20251008T000000",
+      "endDate": "20260408T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "80",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250212T000000",
-        "endDate": "20250812T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "8149FB84594945BCB2ADAC3A904ECCB7",
-        "name": "RELE9202-93",
-        "sisID": "16809",
-        "courseName": "",
-        "deliveryTypeId": "{DD3C86D0-2E98-41AE-8C03-B3CD16D56584}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+      "timeBlocks": []
+    },
+    {
+      "id": "12AFF5FF69264C6ABA4812C29C7C7A6A",
+      "name": "RELE9202-93",
+      "sisId": "13383",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 80,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20251112T000000",
+      "endDate": "20260512T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "80",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250709T000000",
-        "endDate": "20260109T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "596A2DE0D0A743549A4031F2542A7C81",
-        "name": "RELE9202-94",
-        "sisID": "16803",
-        "courseName": "",
-        "deliveryTypeId": "{DD3C86D0-2E98-41AE-8C03-B3CD16D56584}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+      "timeBlocks": []
+    },
+    {
+      "id": "92C0D0E71BF141F8B90FCD4AB84FE3F2",
+      "name": "RELE9202-94",
+      "sisId": "13379",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 80,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20251210T000000",
+      "endDate": "20260610T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "80",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250409T000000",
-        "endDate": "20251009T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "525.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 525,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 4,
-      "totalFees": 8,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 4
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

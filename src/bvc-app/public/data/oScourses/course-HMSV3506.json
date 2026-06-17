@@ -1,108 +1,45 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:44.126Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "HMSV3506",
-    "courseName": "Managing and the Canadian Health System"
-  },
-  "course": {
-    "id": "A5CFC5D8FEEE411E9007DF6E8DF0B87F",
-    "sisID": "HMSV3506",
-    "name": "Managing and the Canadian Health System",
-    "credits": "3",
-    "children": [
-      {
-        "id": "2B7FA751928B4E76B016A9D814B6F15E",
-        "name": "HMSV3506-21",
-        "sisID": "17613",
-        "courseName": "",
-        "deliveryTypeId": "D10A7167-7807-4332-AF49-B0C43B88FDDB",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "BCBC7FD098F64909ADA39D63BDF53F5B",
+  "sisId": "HMSV3506",
+  "name": "Managing and the Canadian Health System",
+  "description": "This course explores the role of a health and human services manager when working alongside or within the structure of the Canadian health system. The roles and responsibilities of the different levels of government, including the importance of legislation such as the Canada Health Act, regulations, and guidelines are discussed. Through an analysis of contemporary issues the strengths, limitations, and potential gaps in services in the Canadian universal health system are explored.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "B5ADF38C84904A77A5791492BF431A77",
+      "name": "HMSV3506-21",
+      "sisId": "13172",
+      "deliveryType": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "612.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "1572.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "10792",
-            "feeItemNameSanitized": "10792",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "10792",
-              "displayName": "10792",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "10792",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 1
+        "international": {
+          "amount": 1572,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 3,
-      "totalTimeBlocks": 1,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "5597",
+          "name": "5597",
+          "startTime": "20250904T000000",
+          "endTime": "20251211T000000",
+          "frequency": "Weekly",
+          "schedule": "Th 11:00 AM - 1:50 PM"
+        }
+      ]
     }
-  }
+  ]
 }

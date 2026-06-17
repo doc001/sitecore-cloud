@@ -1,121 +1,36 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-10T22:07:55.167Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MMPR9105",
-    "courseName": "Maintenance Strategy Development"
-  },
-  "course": {
-    "id": "F535B6F191624BCEA42F4BE11F6698CF",
-    "sisID": "MMPR9105",
-    "name": "Maintenance Strategy Development",
-    "children": [
-      {
-        "id": "0D4CC006C03949AABD09F8824C1655DD",
-        "name": "MMPR9105-91",
-        "sisID": "13769",
-        "courseName": "",
-        "deliveryTypeId": "{0159F123-8070-4142-A661-16841FC5117E}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "B3C0ECDEC03A4FDAA22911EABE0CFCF2",
+  "sisId": "MMPR9105",
+  "name": "Maintenance Strategy Development",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "97119B0C2731422C88CA98A5D903E7D1",
+      "name": "MMPR9105-91",
+      "sisId": "25909",
+      "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 30,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260522T000000",
+      "endDate": "20260620T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 925,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "30",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250926T000000",
-        "endDate": "20251018T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "925.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "925.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "269943",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": "5"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "269985",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": "5"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "275073",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": "6"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "275074",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": null,
-            "day": "6"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 6,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 925,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 6,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

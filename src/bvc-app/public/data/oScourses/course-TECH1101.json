@@ -1,128 +1,53 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:21:32.873Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "TECH1101",
-    "courseName": "Web and Internet Fundamentals"
-  },
-  "course": {
-    "id": "2C3F81291F074ADAA4CEE234A8346713",
-    "sisID": "TECH1101",
-    "name": "Web and Internet Fundamentals",
-    "credits": "3",
-    "children": [
-      {
-        "id": "EBE9A0673F824D81B1898090EC0BF173",
-        "name": "TECH1101-02",
-        "sisID": "19409",
-        "courseName": "",
-        "deliveryTypeId": "1238B4B4-026E-47C2-B4E8-7A25120355EF",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "035FCF0E901643C695109CF9B173F3E4",
+  "sisId": "TECH1101",
+  "name": "Web and Internet Fundamentals",
+  "description": "Learners use HyperText Markup Language HTML, Cascading Style Sheets CSS, and JavaScript  a mix of programming and layout that powers the visuals and interactions on the web in this course. They also use the elements of a web page and describe how the HTML code is interpreted by a web browser to display the pages visual components. They are able to style a wide range of design elements and enhance the visual components. Further, they apply CSS properties to create completely responsive and aesthetically pleasing web pages. Learners explore the dynamics of JavaScript, the webs most popular, extensively used, and incredibly powerful language as well to develop interactive client-side functionality.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "B6C9E730E184488B9DDC2EBE7300E55C",
+      "name": "TECH1101-01",
+      "sisId": "21205",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 780,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "780.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "1894.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "23614",
-            "feeItemNameSanitized": "23614",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "23614",
-              "displayName": "23614",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "23614",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "23615",
-            "feeItemNameSanitized": "23615",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "23615",
-              "displayName": "23615",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "23615",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 2
+        "international": {
+          "amount": 1894,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "8826",
+          "name": "8826",
+          "startTime": "20260107T000000",
+          "endTime": "20260422T000000",
+          "frequency": "Weekly",
+          "schedule": "W 12:30 PM - 1:50 PM"
+        },
+        {
+          "sisId": "8898",
+          "name": "8898",
+          "startTime": "20260112T000000",
+          "endTime": "20260427T000000",
+          "frequency": "Weekly",
+          "schedule": "M 12:30 PM - 1:50 PM"
+        }
+      ]
     }
-  }
+  ]
 }

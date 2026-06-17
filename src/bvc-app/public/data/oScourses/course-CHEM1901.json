@@ -1,228 +1,93 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:29.648Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "CHEM1901",
-    "courseName": "General Chemistry: Structure and Bonding"
-  },
-  "course": {
-    "id": "8C7EFC50D62D4F6AA1918F46C438067E",
-    "sisID": "CHEM1901",
-    "name": "General Chemistry: Structure and Bonding",
-    "credits": "4",
-    "children": [
-      {
-        "id": "CBA9E32F0566485795D4A806176A3B36",
-        "name": "CHEM1901-01",
-        "sisID": "7462",
-        "courseName": "",
-        "deliveryTypeId": "1238B4B4-026E-47C2-B4E8-7A25120355EF",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "7BBB6AAAC1CF4FEAAB379D4741D274EC",
+  "sisId": "CHEM1901",
+  "name": "General Chemistry: Structure and Bonding",
+  "description": "An introduction to university chemistry from theoretical and practical perspectives, that focuses on an exploration of the fundamental links between electronic structure, chemical bonding, molecular structure and the interactions of molecules using inorganic and organic examples.",
+  "credits": 4,
+  "sections": [
+    {
+      "id": "C54D993DE0BC46CDAC4A8AA624D08CC3",
+      "name": "CHEM1901-01",
+      "sisId": "3394",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 60,
+      "credits": 4,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260421T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 708,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "60",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "708.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "2112.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1432",
-            "feeItemNameSanitized": "1432",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1432",
-              "displayName": "1432",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1432",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1433",
-            "feeItemNameSanitized": "1433",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1433",
-              "displayName": "1433",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1433",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1434",
-            "feeItemNameSanitized": "1434",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1434",
-              "displayName": "1434",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1434",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1435",
-            "feeItemNameSanitized": "1435",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1435",
-              "displayName": "1435",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1435",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1436",
-            "feeItemNameSanitized": "1436",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1436",
-              "displayName": "1436",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1436",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1437",
-            "feeItemNameSanitized": "1437",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1437",
-              "displayName": "1437",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1437",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1438",
-            "feeItemNameSanitized": "1438",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1438",
-              "displayName": "1438",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1438",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 9,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 7
+        "international": {
+          "amount": 2112,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 9,
-      "totalTimeBlocks": 7,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "1745",
+          "name": "1745",
+          "startTime": "20260327T000000",
+          "endTime": "20260327T000000",
+          "frequency": "Weekly",
+          "schedule": "F 11:00 AM - 1:50 PM"
+        },
+        {
+          "sisId": "1746",
+          "name": "1746",
+          "startTime": "20260313T000000",
+          "endTime": "20260313T000000",
+          "frequency": "Weekly",
+          "schedule": "F 11:00 AM - 1:50 PM"
+        },
+        {
+          "sisId": "1747",
+          "name": "1747",
+          "startTime": "20260213T000000",
+          "endTime": "20260213T000000",
+          "frequency": "Weekly",
+          "schedule": "F 11:00 AM - 1:50 PM"
+        },
+        {
+          "sisId": "1748",
+          "name": "1748",
+          "startTime": "20260130T000000",
+          "endTime": "20260130T000000",
+          "frequency": "Weekly",
+          "schedule": "F 11:00 AM - 1:50 PM"
+        },
+        {
+          "sisId": "1749",
+          "name": "1749",
+          "startTime": "20260116T000000",
+          "endTime": "20260116T000000",
+          "frequency": "Weekly",
+          "schedule": "F 11:00 AM - 1:50 PM"
+        },
+        {
+          "sisId": "1750",
+          "name": "1750",
+          "startTime": "20260108T000000",
+          "endTime": "20260416T000000",
+          "frequency": "Weekly",
+          "schedule": "Th 2:00 PM - 3:20 PM"
+        },
+        {
+          "sisId": "2502",
+          "name": "2502",
+          "startTime": "20260113T000000",
+          "endTime": "20260421T000000",
+          "frequency": "Weekly",
+          "schedule": "T 2:00 PM - 3:20 PM"
+        }
+      ]
     }
-  }
+  ]
 }

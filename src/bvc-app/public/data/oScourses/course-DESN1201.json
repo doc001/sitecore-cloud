@@ -1,114 +1,45 @@
 {
-  "metadata": {
-    "generatedAt": "2025-08-13T17:57:45.900Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "DESN1201",
-    "courseName": "Introduction to Digital Media Production"
-  },
-  "course": {
-    "id": "E324739977984726887F43B52608A6AF",
-    "sisID": "DESN1201",
-    "name": "Introduction to Digital Media Production",
-    "credits": "3",
-    "children": [
-      {
-        "id": "35E32151473444AE9B480DFE3E89CC99",
-        "name": "25SEPMNFS1",
-        "sisID": "221601",
-        "courseName": "",
-        "deliveryTypeId": "AB98C091-3E88-437F-8E21-3869FAB80C8B",
-        "campusId": "6329B28E-8957-41AA-A5A7-09A4EB50C9AE",
-        "deliveryType": {
-          "id": "AB98C0913E88437F8E213869FAB80C8B",
-          "name": "Face to Face - Synchronous",
-          "displayName": "Face to Face - Synchronous",
-          "slug": "face-to-face-synchronous"
+  "id": "312E1AE2444945FABAB97602CB5C8E6E",
+  "sisId": "DESN1201",
+  "name": "Introduction to Digital Media Production",
+  "description": "The image in interactive design, interface building, and web publishing is central to digital production. This course covers key tools, filters, and layers in the creation and manipulation of images, building foundational skills in the use of creative production software. A combination of photography, typography, drawing, computer graphics, brainstorming techniques, and production methods are addressed, as well as interactive design. Learners explore techniques combining photographic and illustrative material using imaging software to produce digital based visuals, collages, and conceptual mock-ups with both bitmap and vector elements.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "5A0BA0ABA84743119E1F6B145AFA2A6C",
+      "name": "DESN1201-01",
+      "sisId": "19367",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 780,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "campus": {
-          "id": "6329B28E895741AAA5A709A4EB50C9AE",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "20250604T000000",
-        "registrationEnd": "20250911T235959",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "International Tuition",
-            "feeItemNameSanitized": "International Tuition",
-            "feeTypeId": "DDA077EB-99A5-45BB-B655-1D31EBCE63FB",
-            "feeType": {
-              "id": "DDA077EB99A545BBB6551D31EBCE63FB",
-              "name": "International Tuition",
-              "displayName": "International Tuition",
-              "slug": "international-tuition"
-            },
-            "amount": "2112.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeItemNameSanitized": "Tuition",
-            "feeTypeId": "1351EB1B-28D6-45AE-A28E-A8442152E100",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "780.000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170B1",
-            "feeItemNameSanitized": "170B1",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "2ABB683D20BE4DDF8D96B37EF9DD8370",
-              "name": "170B1",
-              "displayName": "170B1",
-              "endTime": "20250101T122000",
-              "startTime": "20250101T093000",
-              "sisId": "170B1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160238Z",
-              "Updated": "20250520T160238Z"
-            },
-            "day": "1"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "International Tuition",
-            "Tuition"
-          ],
-          "timeBlockCount": 1
+        "international": {
+          "amount": 2112,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 3,
-      "totalTimeBlocks": 1,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "8321",
+          "name": "8321",
+          "startTime": "20260107T000000",
+          "endTime": "20260422T000000",
+          "frequency": "Weekly",
+          "schedule": "W 9:30 AM - 12:20 PM"
+        }
+      ]
     }
-  }
+  ]
 }

@@ -1,278 +1,225 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:26.569Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "ADDC1101",
-    "courseName": "Introduction to Addiction Studies"
-  },
-  "course": {
-    "id": "E054FD2B9A1347BEA2E6A52C469DBE81",
-    "sisID": "ADDC1101",
-    "name": "Introduction to Addiction Studies",
-    "credits": "3",
-    "children": [
-      {
-        "id": "9614EF810FA8432BB4563BB21D8CAA3A",
-        "name": "ADDC1101-1013",
-        "sisID": "29723",
-        "courseName": "",
-        "deliveryTypeId": "9E3AEFDA-4EA0-469D-9D15-3AFDBA49B216",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "38B4274781EB4FED8497C6614E00C68B",
+  "sisId": "ADDC1101",
+  "name": "Introduction to Addiction Studies",
+  "description": "This course focuses on the theories, practical skills, and broader issues to guide work in the field of addiction. Learners reflect on their beliefs and values to develop a professional practice drawing upon and respecting the richness and depth of Canadas multicultural society and special populations. Learners explore the types of addiction, the breadth of addiction treatment theory, and how theory informs addiction treatment practice. ",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "FC766C6A27A54DB49076489E5195AABE",
+      "name": "ADDC1101-11",
+      "sisId": "21699",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260505T000000",
+      "endDate": "20260817T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 474,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260107T000000",
-        "endDate": "20260421T000000",
-        "seatsAvailable": "0",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "474.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "975.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "25166",
-            "feeItemNameSanitized": "25166",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "25166",
-              "displayName": "25166",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "25166",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 1
+        "international": {
+          "amount": 975,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "D6350663FA7949A0B411884B00548355",
-        "name": "ADDC1101-14",
-        "sisID": "22173",
-        "courseName": "",
-        "deliveryTypeId": "9E3AEFDA-4EA0-469D-9D15-3AFDBA49B216",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+      "timeBlocks": [
+        {
+          "sisId": "786",
+          "name": "786",
+          "startTime": "20260109T000000",
+          "endTime": "20260417T000000",
+          "frequency": "Weekly",
+          "schedule": "F 8:00 AM - 10:50 AM"
+        }
+      ]
+    },
+    {
+      "id": "EF8FA1946A364A1AA3510C45904D4D7B",
+      "name": "ADDC1101-12",
+      "sisId": "21703",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260505T000000",
+      "endDate": "20260817T000000",
+      "seatsAvailable": false,
+      "fees": {
+        "domestic": {
+          "amount": 474,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "474.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "975.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "369",
-            "feeItemNameSanitized": "369",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "369",
-              "displayName": "369",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "369",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 1
+        "international": {
+          "amount": 975,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "78719CB8D40E4496A037E75695B7E1E9",
-        "name": "ADDC1101-16",
-        "sisID": "22179",
-        "courseName": "",
-        "deliveryTypeId": "9E3AEFDA-4EA0-469D-9D15-3AFDBA49B216",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "474.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "975.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "370",
-            "feeItemNameSanitized": "370",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "370",
-              "displayName": "370",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "370",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 1
+      "timeBlocks": [
+        {
+          "sisId": "782",
+          "name": "782",
+          "startTime": "20260109T000000",
+          "endTime": "20260417T000000",
+          "frequency": "Weekly",
+          "schedule": "F 2:00 PM - 4:50 PM"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 3,
-      "totalFees": 9,
-      "totalTimeBlocks": 3,
-      "sectionsWithFees": 3
+      ]
+    },
+    {
+      "id": "973843F860834ECC98A0B690AC091E6A",
+      "name": "ADDC1101-13",
+      "sisId": "2595",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 474,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 975,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "1685",
+          "name": "1685",
+          "startTime": "20250902T000000",
+          "endTime": "20251209T000000",
+          "frequency": "Weekly",
+          "schedule": "T 8:00 AM - 10:50 AM"
+        }
+      ]
+    },
+    {
+      "id": "4F2650328DB44725A7448E69ADB2E025",
+      "name": "ADDC1101-14",
+      "sisId": "202",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 474,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 975,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "658",
+          "name": "658",
+          "startTime": "20250905T000000",
+          "endTime": "20251212T000000",
+          "frequency": "Weekly",
+          "schedule": "F 8:00 AM - 10:50 AM"
+        }
+      ]
+    },
+    {
+      "id": "E2F8BDEF9DAC4D91865470DCE295A52C",
+      "name": "ADDC1101-16",
+      "sisId": "2640",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 474,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 975,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "784",
+          "name": "784",
+          "startTime": "20250904T000000",
+          "endTime": "20251211T000000",
+          "frequency": "Weekly",
+          "schedule": "Th 9:30 AM - 12:20 PM"
+        }
+      ]
+    },
+    {
+      "id": "0801E73BC93F4336B93E43CB3E133A79",
+      "name": "ADDC1101-17",
+      "sisId": "2641",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 474,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 975,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "785",
+          "name": "785",
+          "startTime": "20250903T000000",
+          "endTime": "20251210T000000",
+          "frequency": "Weekly",
+          "schedule": "W 11:00 AM - 1:50 PM"
+        }
+      ]
     }
-  }
+  ]
 }

@@ -1,0 +1,122 @@
+{
+    "sectionLabel": "Program Completion Requirements",
+    "groupings": [
+        {
+            "termLabel": "Term 1",
+            "totalCredits": 18,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "EDAS1202",
+                            "title": "Language And Literacy",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "EDAS1302",
+                            "title": "Introduction To Exceptionalities",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/EDAS1302_Introduction To Exceptionalities_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "EDAS1998",
+                            "title": "Introduction to the Inclusive Classroom",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "ENGL1201",
+                            "title": "English Composition",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1201_English Composition_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "HMSV1302",
+                            "title": "Assistive Technology and Principles of Universal Design",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV1302_Assistive Technology and Principles of Universal Design_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "PSYC1202",
+                            "title": "Child and Adolescent Development",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1202_Child and Adolescent Development_(Winter 2023_Current).pdf"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "termLabel": "Term 2",
+            "totalCredits": 18,
+            "rules": [
+                {
+                    "ruleType": "completeAllCourses",
+                    "description": "Complete the following courses:",
+                    "courses": [
+                        {
+                            "code": "EDAS1201",
+                            "title": "Instructional Strategies Across The Curriculum",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "EDAS1301",
+                            "title": "Observation And Behaviour",
+                            "credits": 3,
+                            "url": ""
+                        },
+                        {
+                            "code": "EDAS1303",
+                            "title": "Working With Exceptionalities",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ]
+                },
+                {
+                    "ruleType": "minimumCreditsFromList",
+                    "description": "Earn at least 3 credits from the following courses:",
+                    "courses": [
+                        {
+                            "code": "COMM1101",
+                            "title": "Interpersonal Relationships And Communication Skills",
+                            "credits": 3,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMM1101_Interpersonal Relationships And Communication Skills_(Spring 2026_Current).pdf"
+                        },
+                        {
+                            "code": "HMSV1102",
+                            "title": "Indigenous History, Identity And Culture",
+                            "credits": 3,
+                            "url": ""
+                        }
+                    ],
+                    "minimumCredits": 3
+                },
+                {
+                    "ruleType": "minimumCreditsFromList",
+                    "description": "Earn at least 6 credits from the following courses:",
+                    "courses": [
+                        {
+                            "code": "EDAS1999",
+                            "title": "Practice of the Education Assistant Profession",
+                            "credits": 6,
+                            "url": ""
+                        },
+                        {
+                            "code": "HMSV2999",
+                            "title": "International Human Services Practicum",
+                            "credits": 7,
+                            "url": ""
+                        }
+                    ],
+                    "minimumCredits": 6
+                }
+            ]
+        }
+    ],
+    "grandTotalCredits": 36
+}

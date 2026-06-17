@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(git -C \"C:/www/sitecore-cloud\" status)",
+      "Bash(git -C \"C:/www/sitecore-cloud\" log --oneline -3)",
+      "Bash(git -C \"C:/www/sitecore-cloud\" add src/sxastarter/package.json src/sxastarter/package-lock.json)",
+      "Bash(git -C C:/www/sitecore-cloud commit -m ' *)",
+      "WebSearch",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm view *)",
+      "Bash(node *)"
+    ]
+  }
+}

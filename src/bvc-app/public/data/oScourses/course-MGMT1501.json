@@ -1,87 +1,36 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:21:08.402Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "MGMT1501",
-    "courseName": "Business Mathematics"
-  },
-  "course": {
-    "id": "5473ADA594484EA8826F89DD5DC56874",
-    "sisID": "MGMT1501",
-    "name": "Business Mathematics",
-    "credits": "3",
-    "children": [
-      {
-        "id": "81DF4CC857E64E49A8DBA3ACE63C9648",
-        "name": "MGMT1501-41",
-        "sisID": "27925",
-        "courseName": "",
-        "deliveryTypeId": "31D1AAFA-7E63-4681-915C-6C0B85E440D3",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "A2B6481C58C347F9868AAEA46B2F42B2",
+  "sisId": "MGMT1501",
+  "name": "Business Mathematics",
+  "description": "This course will cover business uses of math and algebra with specific topics including: percentages ratios, proportions and currency exchange merchandise mathematics break-even and cost-volume-profit analysis simple interest compound interest including present and future value, annuities, loans and mortgages. ",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "1B0CFB8E2B9E4B53BF88CACA5BFFB940",
+      "name": "MGMT1501-41",
+      "sisId": "10448",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260107T000000",
-        "endDate": "20260428T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "612.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "1613.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 2,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

@@ -1,128 +1,53 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:29.202Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "BIOL1401",
-    "courseName": "The Organization and Diversity of Life"
-  },
-  "course": {
-    "id": "149D8FB63F094F528DE12C7BF03054FA",
-    "sisID": "BIOL1401",
-    "name": "The Organization and Diversity of Life",
-    "credits": "3",
-    "children": [
-      {
-        "id": "0561F574912F4CEA8836C8CF99FD9C9A",
-        "name": "BIOL1401-01",
-        "sisID": "22465",
-        "courseName": "",
-        "deliveryTypeId": "1238B4B4-026E-47C2-B4E8-7A25120355EF",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "5CD7E86A03C14EA4BF6C485D4F530A0B",
+  "sisId": "BIOL1401",
+  "name": "The Organization and Diversity of Life",
+  "description": "This course introduces learners to foundational biological concepts and mechanisms. Learners explore the organization and processes of life at the cellular, organismal, species, and ecosystem levels. These concepts are illustrated through current examples of medical and environmental issues and discoveries.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "90849569204A4E9E92A91B2BE581B890",
+      "name": "BIOL1401-01",
+      "sisId": "4033",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251215T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250902T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "633.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "1894.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1209",
-            "feeItemNameSanitized": "1209",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1209",
-              "displayName": "1209",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1209",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "1210",
-            "feeItemNameSanitized": "1210",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "1210",
-              "displayName": "1210",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "1210",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 2
+        "international": {
+          "amount": 1894,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 4,
-      "totalTimeBlocks": 2,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "1155",
+          "name": "1155",
+          "startTime": "20250903T000000",
+          "endTime": "20251210T000000",
+          "frequency": "Weekly",
+          "schedule": "W 2:00 PM - 3:20 PM"
+        },
+        {
+          "sisId": "631",
+          "name": "631",
+          "startTime": "20250904T000000",
+          "endTime": "20251211T000000",
+          "frequency": "Weekly",
+          "schedule": "Th 2:00 PM - 3:20 PM"
+        }
+      ]
     }
-  }
+  ]
 }

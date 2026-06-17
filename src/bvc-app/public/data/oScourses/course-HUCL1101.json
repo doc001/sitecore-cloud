@@ -1,213 +1,168 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:53.392Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "HUCL1101",
-    "courseName": "Professional Practice and Communication in Health Care"
-  },
-  "course": {
-    "id": "7CC8544274C74E5B99D3CD84B07D0F8E",
-    "sisID": "HUCL1101",
-    "name": "Professional Practice and Communication in Health Care",
-    "credits": "3",
-    "children": [
-      {
-        "id": "682DB46BF9CD45668B977242FD156609",
-        "name": "HUCL1101-01",
-        "sisID": "21410",
-        "courseName": "",
-        "deliveryTypeId": "1238B4B4-026E-47C2-B4E8-7A25120355EF",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "A1F9CCE805B347ED83AD9B7EFE732445",
+  "sisId": "HUCL1101",
+  "name": "Professional Practice and Communication in Health Care",
+  "description": "Learners examine interdisciplinary roles and responsibilities needed to be successful in an administrative support role within healthcare. Through an exploration of wellness, resilience, communication, teamwork, diversity, and reconciliation, learners apply strategies to enhance self-awareness and workplace relationships.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "56B7D76C28924063A916918569667EAB",
+      "name": "HUCL1101-01",
+      "sisId": "14716",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260505T000000",
+      "endDate": "20260626T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 520,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20250902T000000",
-        "endDate": "20251218T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "520.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "1130.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11207",
-            "feeItemNameSanitized": "11207",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "11207",
-              "displayName": "11207",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "11207",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "11208",
-            "feeItemNameSanitized": "11208",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "11208",
-              "displayName": "11208",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "11208",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 4,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 2
+        "international": {
+          "amount": 1130,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "CCAAA275D5D84D5792D13F4A320B2E1F",
-        "name": "HUCL1101-1002",
-        "sisID": "29824",
-        "courseName": "",
-        "deliveryTypeId": "1238B4B4-026E-47C2-B4E8-7A25120355EF",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+      "timeBlocks": [
+        {
+          "sisId": "6045",
+          "name": "6045",
+          "startTime": "20250903T000000",
+          "endTime": "20251217T000000",
+          "frequency": "Weekly",
+          "schedule": "W 11:00 AM - 12:20 PM"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260107T000000",
-        "endDate": "20260428T000000",
-        "seatsAvailable": "0",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeItemNameSanitized": "Domestic",
-            "feeTypeId": "516310D8-79C2-4F0E-AEF7-98F911689E41",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "520.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeItemNameSanitized": "International",
-            "feeTypeId": "81F1879F-87F4-457C-98D5-1F933D6BFE51",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "1130.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "25290",
-            "feeItemNameSanitized": "25290",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "25290",
-              "displayName": "25290",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "25290",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 3,
-          "containers": [
-            "Fees",
-            "TimeBlock"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 1
+        {
+          "sisId": "6420",
+          "name": "6420",
+          "startTime": "20250908T000000",
+          "endTime": "20251215T000000",
+          "frequency": "Weekly",
+          "schedule": "M 11:00 AM - 12:20 PM"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 2,
-      "totalFees": 7,
-      "totalTimeBlocks": 3,
-      "sectionsWithFees": 2
+      ]
+    },
+    {
+      "id": "1F667E9DA0D74EBBBD3D1A99FD5EE38B",
+      "name": "HUCL1101-03",
+      "sisId": "14734",
+      "deliveryType": "{9754E29D-F075-4139-B125-292A81550174}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251218T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 520,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1130,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "6566",
+          "name": "6566",
+          "startTime": "20250903T000000",
+          "endTime": "20251217T000000",
+          "frequency": "Weekly",
+          "schedule": "W 3:30 PM - 4:50 PM"
+        },
+        {
+          "sisId": "7707",
+          "name": "7707",
+          "startTime": "20250908T000000",
+          "endTime": "20251215T000000",
+          "frequency": "Weekly",
+          "schedule": "M 3:30 PM - 4:50 PM"
+        }
+      ]
+    },
+    {
+      "id": "7391D99A61B7407990F56FCE7C4AD527",
+      "name": "HUCL1101-04",
+      "sisId": "14705",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251218T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 520,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1130,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "6047",
+          "name": "6047",
+          "startTime": "20250908T000000",
+          "endTime": "20251215T000000",
+          "frequency": "Weekly",
+          "schedule": "M 12:30 PM - 1:50 PM"
+        },
+        {
+          "sisId": "6422",
+          "name": "6422",
+          "startTime": "20250903T000000",
+          "endTime": "20251217T000000",
+          "frequency": "Weekly",
+          "schedule": "W 12:30 PM - 1:50 PM"
+        }
+      ]
+    },
+    {
+      "id": "B7BEC493EE174CD7B787FCA5AE7B821A",
+      "name": "HUCL1101-41",
+      "sisId": "14735",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251218T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 520,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1130,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

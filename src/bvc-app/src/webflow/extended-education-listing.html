@@ -1,0 +1,250 @@
+<!--
+  WEBFLOW EMBED — Extended Education Course Listing
+  ==================================================
+  Paste this into a Webflow "Embed" block on the Extended Education program page.
+
+  data-base-url        — base URL of the bvc-app Vercel deployment (JSON source)
+  data-course-base-url — (optional) base path for Webflow course detail pages.
+                         Defaults to window.location.origin + /extended-education
+                         e.g. https://uat.bowvalleycollege.ca/extended-education/ACCT9101
+-->
+
+<style>
+  .bvc-ee * { box-sizing: border-box; }
+  .bvc-ee { font-family: inherit; }
+
+  /* ── Search ─────────────────────────────────────────────────────── */
+  .bvc-ee-search {
+    margin-bottom: 16px;
+  }
+  .bvc-ee-search-input {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    outline: none;
+  }
+  .bvc-ee-search-input:focus { border-color: #005596; box-shadow: 0 0 0 2px rgba(0,85,150,0.15); }
+  .bvc-ee-search-input::placeholder { color: #94a3b8; }
+  .bvc-ee-count {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 12px;
+  }
+
+  /* ── Desktop header row ─────────────────────────────────────────── */
+  .bvc-ee-header-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 80px 80px;
+    padding: 6px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    gap: 12px;
+  }
+  .bvc-ee-header-row .col-r { text-align: center; }
+
+  /* ── Course row — desktop grid ──────────────────────────────────── */
+  .bvc-ee-table {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .bvc-ee-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 80px 80px;
+    padding: 10px 16px;
+    gap: 12px;
+    align-items: start;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .bvc-ee-row:last-child { border-bottom: none; }
+  .bvc-ee-row:nth-child(even) { background: #fafafa; }
+
+  /* ── Code cell ──────────────────────────────────────────────────── */
+  .bvc-ee-code {
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #005596;
+    text-decoration: none;
+    line-height: 1.4;
+  }
+  .bvc-ee-code:hover { text-decoration: underline; }
+
+  /* ── Name cell ──────────────────────────────────────────────────── */
+  .bvc-ee-name-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e293b;
+    text-decoration: none;
+    display: block;
+    line-height: 1.4;
+  }
+  .bvc-ee-name-link:hover { color: #005596; text-decoration: underline; }
+
+  /* ── Sections / Credits cells ───────────────────────────────────── */
+  .bvc-ee-sections,
+  .bvc-ee-credits {
+    text-align: center;
+    font-size: 13.5px;
+    color: #475569;
+    padding-top: 1px;
+  }
+
+  /* ── Desktop: hide mobile-only elements ─────────────────────────── */
+  .bvc-ee-row-top { display: none; }
+  .bvc-ee-code-desktop { display: block; }
+
+  /* ── Mobile (≤ 640px) ───────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .bvc-ee-header-row { display: none; }
+
+    .bvc-ee-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 16px;
+    }
+
+    /* Show mobile top bar, hide desktop-only cells */
+    .bvc-ee-row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .bvc-ee-code-desktop { display: none; }
+    .bvc-ee-row > .bvc-ee-sections[aria-hidden],
+    .bvc-ee-row > .bvc-ee-credits[aria-hidden] { display: none; }
+
+    .bvc-ee-sections,
+    .bvc-ee-credits {
+      text-align: left;
+      font-size: 12px;
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 99px;
+      padding: 2px 8px;
+      display: inline-block;
+    }
+
+    .bvc-ee-meta { display: flex; gap: 6px; }
+  }
+
+  /* ── No results ─────────────────────────────────────────────────── */
+  .bvc-ee-no-results {
+    padding: 24px;
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+  }
+
+  /* ── Loading / error ────────────────────────────────────────────── */
+  .bvc-ee-loading, .bvc-ee-error {
+    padding: 32px; text-align: center; color: #64748b; font-size: 14px;
+  }
+  .bvc-ee-error { color: #dc2626; }
+</style>
+
+<div id="bvc-ee-listing" data-base-url="https://bvc-uat.vercel.app"></div>
+
+<script>
+(function () {
+  var container = document.getElementById('bvc-ee-listing');
+  if (!container) return;
+
+  var baseUrl    = (container.getAttribute('data-base-url') || 'https://bvc-uat.vercel.app').replace(/\/$/, '');
+  var courseBase = (container.getAttribute('data-course-base-url') || '').replace(/\/$/, '')
+                   || (window.location.origin + '/extended-education');
+  var jsonUrl    = baseUrl + '/data/coursesIndex.json';
+
+  container.innerHTML = '<div class="bvc-ee-loading">Loading courses…</div>';
+
+  fetch(jsonUrl)
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      var courses = data.courses || [];
+
+      var html = '<div class="bvc-ee">';
+
+      // Search
+      html += '<div class="bvc-ee-search">'
+        + '<input type="text" class="bvc-ee-search-input" placeholder="Search courses by name or code…" />'
+        + '</div>';
+      html += '<div class="bvc-ee-count"><span class="bvc-ee-count-num">' + courses.length + '</span> courses available</div>';
+
+      // Table
+      html += '<div class="bvc-ee-table">';
+
+      // Desktop header
+      html += '<div class="bvc-ee-header-row">'
+        + '<div>Code</div><div>Course</div>'
+        + '<div class="col-r">Sections</div><div class="col-r">Credits</div>'
+        + '</div>';
+
+      courses.forEach(function (course) {
+        var courseUrl = courseBase + '/' + course.sisId;
+
+        html += '<div class="bvc-ee-row" data-search="' + esc((course.sisId + ' ' + course.name).toLowerCase()) + '">';
+
+        // Desktop-only code cell (grid column 1)
+        html += '<a class="bvc-ee-code bvc-ee-code-desktop" href="' + courseUrl + '">' + esc(course.sisId) + '</a>';
+
+        // Mobile top bar
+        html += '<div class="bvc-ee-row-top">'
+          + '<a class="bvc-ee-code" href="' + courseUrl + '">' + esc(course.sisId) + '</a>'
+          + '<div class="bvc-ee-meta">'
+          + '<span class="bvc-ee-sections">' + course.sectionCount + ' sec</span>'
+          + '<span class="bvc-ee-credits">' + (course.credits > 0 ? course.credits + ' cr' : '—') + '</span>'
+          + '</div>'
+          + '</div>';
+
+        // Name
+        html += '<a class="bvc-ee-name-link" href="' + courseUrl + '">' + esc(course.name) + '</a>';
+
+        // Desktop-only cells
+        html += '<div class="bvc-ee-sections" aria-hidden="true">' + course.sectionCount + '</div>';
+        html += '<div class="bvc-ee-credits" aria-hidden="true">' + (course.credits > 0 ? course.credits : '—') + '</div>';
+
+        html += '</div>'; // .bvc-ee-row
+      });
+
+      html += '</div>'; // .bvc-ee-table
+      html += '</div>'; // .bvc-ee
+
+      container.innerHTML = html;
+
+      // Wire up search
+      var input = container.querySelector('.bvc-ee-search-input');
+      var countEl = container.querySelector('.bvc-ee-count-num');
+      var rows = container.querySelectorAll('.bvc-ee-row');
+
+      input.addEventListener('input', function () {
+        var query = input.value.toLowerCase().trim();
+        var visible = 0;
+        rows.forEach(function (row) {
+          var match = !query || row.getAttribute('data-search').indexOf(query) !== -1;
+          row.style.display = match ? '' : 'none';
+          if (match) visible++;
+        });
+        countEl.textContent = visible;
+      });
+    })
+    .catch(function (err) {
+      container.innerHTML = '<div class="bvc-ee-error">Could not load course data. Please try again later.</div>';
+      console.error('[bvc-ee-listing]', err);
+    });
+
+  function esc(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+})();
+</script>

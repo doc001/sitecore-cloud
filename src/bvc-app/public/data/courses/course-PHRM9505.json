@@ -1,84 +1,36 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-17T14:20:15.290Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "PHRM9505",
-    "courseName": "Sterile Compounding Recertification - Hazardous"
-  },
-  "course": {
-    "id": "3A79BF9DFA864D4F9B0BA031CAACA9B0",
-    "sisID": "PHRM9505",
-    "name": "Sterile Compounding Recertification - Hazardous",
-    "children": [
-      {
-        "id": "1FA0920DF6964E7185DB6EBCCE73F67D",
-        "name": "PHRM9505-93",
-        "sisID": "4162",
-        "courseName": "",
-        "deliveryTypeId": "{D10A7167-7807-4332-AF49-B0C43B88FDDB}",
-        "campusId": "{D0574CAF-DF04-4732-B1B3-CC3539797F1F}",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "C8AA56891E874038AC0179148CA94C31",
+  "sisId": "PHRM9505",
+  "name": "Sterile Compounding Recertification - Hazardous",
+  "description": "",
+  "credits": 0,
+  "sections": [
+    {
+      "id": "EFC7D840256A43AF8CB6768DB49BDA6B",
+      "name": "PHRM9505-91",
+      "sisId": "11226",
+      "deliveryType": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 15,
+      "credits": 0,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260413T000000",
+      "endDate": "20260515T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 329,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "15",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20251126T000000",
-        "endDate": "20251215T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Domestic",
-            "feeTypeId": "{516310D8-79C2-4F0E-AEF7-98F911689E41}",
-            "feeType": {
-              "id": "516310D879C24F0EAEF798F911689E41",
-              "name": "Domestic",
-              "displayName": "Domestic",
-              "slug": "domestic"
-            },
-            "amount": "329.00000000",
-            "timeBlock": null,
-            "day": ""
-          },
-          {
-            "containerName": "Fees",
-            "feeItemName": "International",
-            "feeTypeId": "{81F1879F-87F4-457C-98D5-1F933D6BFE51}",
-            "feeType": {
-              "id": "81F1879F87F4457C98D51F933D6BFE51",
-              "name": "International",
-              "displayName": "International",
-              "slug": "international"
-            },
-            "amount": "329.00000000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 2,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Domestic",
-            "International"
-          ],
-          "timeBlockCount": 0
+        "international": {
+          "amount": 329,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 2,
-      "totalTimeBlocks": 0,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }

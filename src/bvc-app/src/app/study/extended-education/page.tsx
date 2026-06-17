@@ -1,8 +1,6 @@
 // src/app/study/extended-education/courses/page.tsx
 import Link from "next/link";
 import { getCourseStatistics, type CourseSummary } from "@/lib/courseUtils";
-import Breadcrumb from '@/components/common/Breadcrumb';
-import { getBreadcrumbData } from '@/lib/navigationBreadcrumbUtils';
 
 
 // Static generation for the courses landing page
@@ -142,14 +140,6 @@ function CourseCard({ course }: { course: CourseSummary }) {
             <div className="text-xs text-green-700">With Fees</div>
           </div>
         </div>
-
-        {/* Metadata */}
-        {course.metadata && (
-          <div className="text-xs text-gray-500 border-t border-gray-100 pt-3">
-            <div>Updated: {new Date(course.metadata.generatedAt).toLocaleDateString()}</div>
-            <div>Version: {course.metadata.version}</div>
-          </div>
-        )}
 
         {/* Hover indicator */}
         <div className="mt-4 flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">

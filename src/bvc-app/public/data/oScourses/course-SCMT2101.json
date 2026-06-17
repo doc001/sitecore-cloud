@@ -1,254 +1,133 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-10T22:11:01.013Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "SCMT2101",
-    "courseName": "Introduction to Supply Chain Management"
-  },
-  "course": {
-    "id": "0255664CFA534D1FA6C72058B72F81D8",
-    "sisID": "SCMT2101",
-    "name": "Introduction to Supply Chain Management",
-    "credits": "3",
-    "children": [
-      {
-        "id": "0D7EB5ED54604DCBB28AB8E22DCCC4C3",
-        "name": "SCMT2101-01",
-        "sisID": "17251",
-        "courseName": "",
-        "deliveryTypeId": "1DDD3461-AF47-4EB7-BB87-1F8AD754052F",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "FFFA9DCFC5BE4E0198304A716125DBDF",
+  "sisId": "SCMT2101",
+  "name": "Introduction to Supply Chain Management",
+  "description": "Supply chain management SCM is the movement of material and information through integrated processes in a supply chain to provide the highest degree of customer satisfaction at the lowest possible cost to achieve a sustainable competitive advantage. The key building blocks of a supply chain, logistics, procurement, and operations execution, will be covered. Learners will explore the scope of SCM and its impact on organizations. ",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "6D139A857D5140438FFB3722F98E6FD1",
+      "name": "SCMT2101-01",
+      "sisId": "24932",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260505T000000",
+      "endDate": "20260626T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260505T000000",
-        "endDate": "20260626T000000",
-        "seatsAvailable": "0",
-        "fees": [
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271816",
-            "feeItemNameSanitized": "271816",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271816",
-              "displayName": "271816",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271816",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271818",
-            "feeItemNameSanitized": "271818",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271818",
-              "displayName": "271818",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271818",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271820",
-            "feeItemNameSanitized": "271820",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271820",
-              "displayName": "271820",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271820",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271822",
-            "feeItemNameSanitized": "271822",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271822",
-              "displayName": "271822",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271822",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271824",
-            "feeItemNameSanitized": "271824",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271824",
-              "displayName": "271824",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271824",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271827",
-            "feeItemNameSanitized": "271827",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271827",
-              "displayName": "271827",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271827",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271830",
-            "feeItemNameSanitized": "271830",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271830",
-              "displayName": "271830",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271830",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "271833",
-            "feeItemNameSanitized": "271833",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "271833",
-              "displayName": "271833",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "271833",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "312280",
-            "feeItemNameSanitized": "312280",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "312280",
-              "displayName": "312280",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "312280",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "2"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "312281",
-            "feeItemNameSanitized": "312281",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "312281",
-              "displayName": "312281",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "312281",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "2"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 10,
-          "containers": [
-            "TimeBlock"
-          ],
-          "feeTypes": [],
-          "timeBlockCount": 10
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 1,
-      "totalFees": 10,
-      "totalTimeBlocks": 10,
-      "sectionsWithFees": 1
+      },
+      "timeBlocks": [
+        {
+          "sisId": "9586",
+          "name": "9586",
+          "startTime": "20250902T000000",
+          "endTime": "20251216T000000",
+          "frequency": "Weekly",
+          "schedule": "T 9:30 AM - 10:50 AM"
+        },
+        {
+          "sisId": "9960",
+          "name": "9960",
+          "startTime": "20250904T000000",
+          "endTime": "20251218T000000",
+          "frequency": "Weekly",
+          "schedule": "Th 9:30 AM - 10:50 AM"
+        }
+      ]
+    },
+    {
+      "id": "A91691CA2FB7499FBA6C2D3955505AC9",
+      "name": "SCMT2101-02",
+      "sisId": "24931",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "9589",
+          "name": "9589",
+          "startTime": "20260108T000000",
+          "endTime": "20260423T000000",
+          "frequency": "Weekly",
+          "schedule": "Th 11:00 AM - 12:20 PM"
+        },
+        {
+          "sisId": "9964",
+          "name": "9964",
+          "startTime": "20260113T000000",
+          "endTime": "20260428T000000",
+          "frequency": "Weekly",
+          "schedule": "T 11:00 AM - 12:20 PM"
+        }
+      ]
+    },
+    {
+      "id": "FD1A3876104847568034BBB568CF084F",
+      "name": "SCMT2101-03",
+      "sisId": "24922",
+      "deliveryType": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "9962",
+          "name": "9962",
+          "startTime": "20260107T000000",
+          "endTime": "20260422T000000",
+          "frequency": "Weekly",
+          "schedule": "W 5:00 PM - 7:50 PM"
+        }
+      ]
     }
-  }
+  ]
 }

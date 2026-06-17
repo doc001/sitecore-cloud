@@ -1,282 +1,72 @@
 {
-  "metadata": {
-    "generatedAt": "2026-03-10T22:09:48.364Z",
-    "version": "4.0.0",
-    "source": "Sitecore XMC GraphQL - Individual Course Data",
-    "sisID": "HRES2204",
-    "courseName": "Talent Acquisition and Retention"
-  },
-  "course": {
-    "id": "48E5E218A4C24F7AB21D90AEE797364D",
-    "sisID": "HRES2204",
-    "name": "Talent Acquisition and Retention",
-    "credits": "3",
-    "children": [
-      {
-        "id": "48B30B0A62764EA1B615ED28602D80D0",
-        "name": "HRES2204-01",
-        "sisID": "11461",
-        "courseName": "",
-        "deliveryTypeId": "1DDD3461-AF47-4EB7-BB87-1F8AD754052F",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
+  "id": "18164920BA874C04BBD5EF7DF87F4A1C",
+  "sisId": "HRES2204",
+  "name": "Talent Acquisition and Retention",
+  "description": "This course explores strategic, ethical, and technological dimensions of talent acquisition in the Canadian context. Students design and implement talent acquisition and retention processes that align with organizational strategy while leveraging workforce planning, AI, and people analytics. Emphasis will be placed on enhancing candidate experience, optimizing Employee Value Proposition EVP, and fostering inclusion and diversity. Students will evaluate the legal frameworks governing HR practices, examine the role of data and innovation in recruitment, and develop skills to support workforce mobility, retention, and collaboration in a rapidly evolving, digital-driven environment.",
+  "credits": 3,
+  "sections": [
+    {
+      "id": "5CDD3F3480AC4DE88C46179AC90B877F",
+      "name": "HRES2204-01",
+      "sisId": "14099",
+      "deliveryType": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260505T000000",
+      "endDate": "20260626T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260505T000000",
-        "endDate": "20260626T000000",
-        "seatsAvailable": "0",
-        "fees": [
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272236",
-            "feeItemNameSanitized": "272236",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272236",
-              "displayName": "272236",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272236",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272239",
-            "feeItemNameSanitized": "272239",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272239",
-              "displayName": "272239",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272239",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272242",
-            "feeItemNameSanitized": "272242",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272242",
-              "displayName": "272242",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272242",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272243",
-            "feeItemNameSanitized": "272243",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272243",
-              "displayName": "272243",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272243",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272244",
-            "feeItemNameSanitized": "272244",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272244",
-              "displayName": "272244",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272244",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272245",
-            "feeItemNameSanitized": "272245",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272245",
-              "displayName": "272245",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272245",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272246",
-            "feeItemNameSanitized": "272246",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272246",
-              "displayName": "272246",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272246",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "272247",
-            "feeItemNameSanitized": "272247",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "272247",
-              "displayName": "272247",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "272247",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "4"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "310980",
-            "feeItemNameSanitized": "310980",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "310980",
-              "displayName": "310980",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "310980",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "2"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "310981",
-            "feeItemNameSanitized": "310981",
-            "feeTypeId": null,
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": null,
-              "name": "310981",
-              "displayName": "310981",
-              "endTime": "",
-              "startTime": "",
-              "sisId": "310981",
-              "created": "",
-              "updated": "",
-              "isFallback": true
-            },
-            "day": "2"
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 10,
-          "containers": [
-            "TimeBlock"
-          ],
-          "feeTypes": [],
-          "timeBlockCount": 10
+        "international": {
+          "amount": 1676,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      {
-        "id": "E124ED6A0D594EE0A2088D8E5AE2BBB4",
-        "name": "HRES2204-41",
-        "sisID": "11464",
-        "courseName": "",
-        "deliveryTypeId": "DD3C86D0-2E98-41AE-8C03-B3CD16D56584",
-        "campusId": "D0574CAF-DF04-4732-B1B3-CC3539797F1F",
-        "deliveryType": null,
-        "campus": {
-          "id": "D0574CAFDF044732B1B3CC3539797F1F",
-          "name": "Calgary Downtown Campus",
-          "displayName": "Calgary Downtown Campus",
-          "slug": "calgary-downtown-campus"
-        },
-        "hours": "45",
-        "registrationStart": "",
-        "registrationEnd": "",
-        "startDate": "20260505T000000",
-        "endDate": "20260821T000000",
-        "seatsAvailable": "0",
-        "fees": [],
-        "feesSummary": {
-          "totalFees": 0,
-          "containers": [],
-          "feeTypes": [],
-          "timeBlockCount": 0
+      "timeBlocks": [
+        {
+          "sisId": "6197",
+          "name": "6197",
+          "startTime": "20250902T000000",
+          "endTime": "20251216T000000",
+          "frequency": "Weekly",
+          "schedule": "T 9:30 AM - 12:20 PM"
         }
-      }
-    ],
-    "summary": {
-      "totalSections": 2,
-      "totalFees": 10,
-      "totalTimeBlocks": 10,
-      "sectionsWithFees": 1
+      ]
+    },
+    {
+      "id": "9AE458C575034A2EA05DAEDBDAF4F921",
+      "name": "HRES2204-41",
+      "sisId": "14082",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20250902T000000",
+      "endDate": "20251218T000000",
+      "seatsAvailable": true,
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1676,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": []
     }
-  }
+  ]
 }
