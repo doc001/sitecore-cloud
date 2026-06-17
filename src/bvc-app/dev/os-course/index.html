@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OS-Course sandbox</title>
+
+    <!--
+      Real component styles — the same minified file Webflow loads.
+      On Webflow:  <link rel="stylesheet" href="https://bvc-uat.vercel.app/css/os-course.css">
+    -->
+    <link rel="stylesheet" href="/css/os-course.css" />
+
+    <!--
+      Sandbox chrome only. The cart, overlay, notifications, spinner and
+      add-to-cart button *states* now come from the real os-course.css above.
+      The base .addtocartbutton look is provided here because on Webflow it
+      comes from the button's own classes (w-button / c-button_cart), not from
+      os-course.css. The id also satisfies the script's "styles present" check.
+    -->
+    <style id="os-course-styles">
+      body { font-family: system-ui, sans-serif; margin: 0; padding: 24px; background: #f6f7f9; color: #1a1a1a; }
+      .toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 24px; }
+      .opencartbutton { cursor: pointer; padding: 8px 16px; border: 1px solid #0a66c2; background: #0a66c2; color: #fff; border-radius: 6px; }
+      #cartProducts { display: none; min-width: 20px; padding: 2px 8px; margin-left: 6px; background: #d33; color: #fff; border-radius: 999px; font-size: 12px; }
+      #courseComponent { background: #fff; border: 1px solid #e3e6ea; border-radius: 8px; padding: 24px; max-width: 880px; }
+      .location-title { margin: 4px 0; color: #555; }
+      /* base button look — stands in for the Webflow w-button class */
+      .addtocartbutton { display: inline-block; cursor: pointer; padding: 8px 18px; background: #0a8d48; color: #fff; border-radius: 6px; text-decoration: none; margin-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <strong>OS-Course sandbox</strong>
+      <button class="opencartbutton">Open cart <span id="cartProducts">0</span></button>
+      <button onclick="sessionStorage.clear(); location.reload();">Reset session</button>
+    </div>
+
+    <!--
+      This mirrors the Webflow page contract: an empty #courseComponent with a
+      data-sisid. The script reads data-sisid, fetches the mock course JSON,
+      builds the offerings UI, then runs the availability sweep against the mock API.
+    -->
+    <div id="courseComponent" data-sisid="MOCK101"></div>
+
+    <!--
+      Point the script at THIS local server instead of UAT.
+      Must be set BEFORE the script tag runs.
+        dataOrigin '' -> fetches /data/* from this server (mock fixtures)
+        apiOrigin  '' -> hits /api/* on this server (mock token/availability/fee)
+    -->
+    <script>
+      window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '' };
+    </script>
+    <script src="/js/os-course.js"></script>
+  </body>
+</html>

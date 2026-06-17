@@ -23,6 +23,10 @@
 #data
 /src/data/*
 
+# generated bundles (built fresh on every build by scripts/build-os-course.mjs)
+/public/js/os-course.js
+/public/css/os-course.css
+
 # misc
 .DS_Store
 *.pem

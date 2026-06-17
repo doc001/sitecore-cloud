@@ -17,6 +17,10 @@
     "prelaunch:build": "node scripts/copy-folders.mjs",
     "postinstall": "flowbite-react patch",
     "getWebflowData": "node scripts/fetch-webflow-collections.mjs",
+    "js:build": "node scripts/build-os-course.mjs",
+    "js:watch": "node scripts/build-os-course.mjs --watch",
+    "os-course:sandbox": "node dev/os-course/server.mjs",
+    "os-course:dev": "node dev/os-course/dev.mjs",
     "generateCourses": "node scripts/export-valid-courses.mjs",
     "generateOpenStudies": "node scripts/export-os-valid-courses.mjs",
     "generateMap": "node scripts/generateSiSData.mjs",
@@ -25,7 +29,7 @@
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
     "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run prelaunch:build",
-    "build": "npm run bvcapp-scripts && next build"
+    "build": "npm run js:build && npm run bvcapp-scripts && next build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",
@@ -56,6 +60,7 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
     "browserlist": "^1.0.1",
+    "esbuild": "^0.28.1",
     "lightningcss": "^1.29.3",
     "node-fetch": "^3.3.2",
     "postcss": "^8.5.3",
