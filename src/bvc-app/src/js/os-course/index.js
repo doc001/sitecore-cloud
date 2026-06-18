@@ -8,13 +8,14 @@
  *   Sandbox (local mock + watch): npm run os-course:dev
  *
  * Loaded from Webflow via:
- *   <script src="https://bvc-uat.vercel.app/js/os-course.js" defer></script>
+ *   <script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
  *
- * Endpoints are overridable for local testing. Set BEFORE this script loads:
- *   window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '' };
- * Defaults (production/UAT):
- *   dataOrigin : https://bvc-uat.vercel.app          (this app's /data/*)
- *   apiOrigin  : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
+ * Endpoints/config are overridable. Set BEFORE this script loads:
+ *   window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '', feeApplicantId: 1 };
+ * Defaults (production):
+ *   dataOrigin     : https://bvc-thesis.vercel.app        (this app's /data/*)
+ *   apiOrigin      : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
+ *   feeApplicantId : 1   (required int in `fee/{skus}/{id}`; replaces old `null`)
  * ---------------------------------------------------------------------------
  */
 (function () {
@@ -23,8 +24,14 @@
   else {
     ((window.__bvcOsCourseLoaded = !0), console.log('[OS-Course] Script loaded'));
     var _cfg = (typeof window !== 'undefined' && window.__OS_COURSE_CONFIG__) || {},
-      e = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-uat.vercel.app',
+      e = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-thesis.vercel.app',
       t = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app',
+      // Fee endpoint is `fee/{skus}/{id}` where {id} must be a parseable integer (the
+      // new thesissitecorexm.api rejects the old literal `null` -> 500). The value does
+      // not change the returned fee amounts; it is a required applicant/student id the
+      // API loads. PLACEHOLDER pending the anonymous-cart contract — override per env via
+      // window.__OS_COURSE_CONFIG__ = { feeApplicantId: <id> }. See OS-COURSE-CART.md.
+      feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : 1,
       s = window.tokenStorage || {
         key: 'bvcToken',
         setToken: function (e) {
@@ -479,7 +486,7 @@
       0 === a.length)
     )
       return { status: 400, feeData: [], summary: { totalAmount: 0, totalTax: 0, grandTotal: 0, feeCount: 0 } };
-    var n = 'thesissitecorexm.api/fee/' + a.join(',') + '/null',
+    var n = 'thesissitecorexm.api/fee/' + a.join(',') + '/' + feeId,
       i = await fetch(t + '/api/bvcpayment?endpoint=' + encodeURIComponent(n), { method: 'GET', mode: 'cors', headers: { Authorization: 'Bearer ' + s, 'Content-Type': 'application/json' } });
     if (!i.ok) throw new Error('Fee API returned status ' + i.status);
     var o = await i.json(),

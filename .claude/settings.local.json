@@ -10,7 +10,14 @@
       "WebFetch(domain:www.npmjs.com)",
       "WebFetch(domain:github.com)",
       "Bash(npm view *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "PowerShell(vercel *)",
+      "PowerShell(npm install *)",
+      "PowerShell(npm i *)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "memory"
+  ]
 }
