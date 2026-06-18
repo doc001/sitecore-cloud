@@ -134,3 +134,61 @@ deploy. During active testing, append a version query to force a fresh fetch:
 ```html
 <script src="https://bvc-thesis.vercel.app/js/os-course.js?v=2" defer></script>
 ```
+
+## Checkout script (cart-checkout page)
+
+The registration/payment form on the Webflow **cart-checkout** page uses the same
+extract → build → serve pipeline as the cart.
+
+| Path | Role |
+|------|------|
+| `src/bvc-app/src/js/checkout/index.js` | **JS source — edit this.** Authored, readable. |
+| `src/bvc-app/public/js/checkout.js` | **Generated, git-ignored.** Built by `npm run js:build`. |
+
+Built by the same `scripts/build-os-course.mjs` (an extra esbuild target), so
+`npm run js:build` / `js:watch` rebuild it alongside the cart, and it ships on
+every `npm run build`.
+
+**Load from Webflow** (before `</body>`, on the cart-checkout page):
+
+```html
+<script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
+```
+
+The bundle is self-contained — it includes the shared `tokenStorage` / `getMsToken`
+helpers (reused if the cart already defined them) and reads cart state from
+`sessionStorage` (`cartItems`, `feeSession`). It drives the form on
+`?type=os` (Open Studies, ASN required) vs. Extended Ed.
+
+Config is overridable (set before the script loads):
+```js
+window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: 'https://bvc-uat-api-proxy.vercel.app' };
+```
+
+Endpoints (through the bvcpayment proxy, `thesissitecorexm.api` tenant):
+- `thesissitecorexm.api/registration/` (POST) → returns `newRegistration.id`
+- `thesissitecorexm.api/payment/submit-payment` (POST, query params) → returns `result.paymentUrl`
+
+> ⚠️ **Migrating from the inline setup:** remove the old inline `<script>` block
+> from the Webflow checkout page when you switch to `<script src>` so only one copy
+> runs. As with the cart, append `?v=N` while testing to defeat the CDN cache.
+
+### Fee handling (fixed) & remaining follow-ups
+
+**Fixed — fees are read from the cart/session level.** Fees are stored in
+`feeSession.feeData.fees` (de-duped) with totals in `feeSession.feeData.summary`,
+**not** per item. The checkout now reads them there:
+- `submitPayment()` sums course tuition, then adds `getSessionFeeTotals()`
+  (`summary.totalAmount + summary.totalTax`, falling back to summing the fees array).
+  Previously it summed the always-empty `item.fees`, so the payment amount dropped
+  fees entirely.
+- `getSessionFees()` now recognizes the canonical `{ feeData: { fees, summary } }`
+  shape, so the registration payload's `additionalFees` is populated.
+
+Remaining follow-ups:
+
+1. **`displayCartItems(items)`** ignores the `sessionFees` argument passed by
+   `loadCartItems()` and re-reads `feeSession` from `sessionStorage` instead (works,
+   but the dead parameter is misleading).
+2. Course/payment relies on `result.newRegistration.id` — make sure the registration
+   response shape matches before go-live.

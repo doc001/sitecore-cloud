@@ -1,10 +1,11 @@
 // scripts/build-os-course.mjs
-// Bundles + minifies the OS-Course assets:
+// Bundles + minifies the Webflow-embedded assets:
 //   src/js/os-course/index.js  -> public/js/os-course.js   (self-contained IIFE)
 //   src/css/os-course.css      -> public/css/os-course.css (minified)
+//   src/js/checkout/index.js   -> public/js/checkout.js     (self-contained IIFE)
 //
 //   node scripts/build-os-course.mjs            one-off minified build
-//   node scripts/build-os-course.mjs --watch    rebuild both on every save
+//   node scripts/build-os-course.mjs --watch    rebuild all on every save
 //
 // Output is plain static assets so they can be dropped onto any page —
 // including Webflow — via <script src> / <link rel="stylesheet">.
@@ -37,6 +38,16 @@ const targets = [
     legalComments: 'none',
     banner: { css: `/* os-course.css — ${GENERATED} */` },
   },
+  {
+    entryPoints: [path.join(root, 'src/js/checkout/index.js')],
+    outfile: path.join(root, 'public/js/checkout.js'),
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    target: ['es2017'],
+    legalComments: 'none',
+    banner: { js: `/* checkout.js — ${GENERATED} */` },
+  },
 ];
 
 const watch = process.argv.includes('--watch');
@@ -45,8 +56,8 @@ if (watch) {
   const contexts = await Promise.all(targets.map((t) => esbuild.context(t)));
   await Promise.all(contexts.map((c) => c.rebuild()));
   await Promise.all(contexts.map((c) => c.watch()));
-  console.log('👀 [os-course] watching src/js + src/css → public/{js,css}/os-course.* (minified). Ctrl+C to stop.');
+  console.log('👀 [webflow-assets] watching src/js + src/css → public/{js,css}/* (minified). Ctrl+C to stop.');
 } else {
   await Promise.all(targets.map((t) => esbuild.build(t)));
-  console.log('✅ [os-course] built public/js/os-course.js + public/css/os-course.css (minified).');
+  console.log('✅ [webflow-assets] built os-course.js, os-course.css, checkout.js (minified).');
 }
