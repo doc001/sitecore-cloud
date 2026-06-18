@@ -56,6 +56,17 @@ const targets = [
     drop: isProd ? ['console', 'debugger'] : [],
     banner: { js: `/* checkout.js — ${GENERATED} */` },
   },
+  {
+    entryPoints: [path.join(root, 'src/js/ee-course/index.js')],
+    outfile: path.join(root, 'public/js/ee-course.js'),
+    bundle: true,
+    minify: isProd,
+    format: 'iife',
+    target: ['es2017'],
+    legalComments: 'none',
+    drop: isProd ? ['console', 'debugger'] : [],
+    banner: { js: `/* ee-course.js — ${GENERATED} */` },
+  },
 ];
 
 const watch = process.argv.includes('--watch');
@@ -67,5 +78,5 @@ if (watch) {
   console.log('👀 [webflow-assets] watching src/js + src/css → public/{js,css}/* (minified). Ctrl+C to stop.');
 } else {
   await Promise.all(targets.map((t) => esbuild.build(t)));
-  console.log(`✅ [webflow-assets] built os-course.js, os-course.css, checkout.js (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
+  console.log(`✅ [webflow-assets] built os-course.js, os-course.css, checkout.js, ee-course.js (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
 }

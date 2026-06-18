@@ -158,16 +158,30 @@ every `npm run build`.
 The bundle is self-contained — it includes the shared `tokenStorage` / `getMsToken`
 helpers (reused if the cart already defined them) and reads cart state from
 `sessionStorage` (`cartItems`, `feeSession`). It drives the form on
-`?type=os` (Open Studies, ASN required) vs. Extended Ed.
+`?type=os` (Open Studies, ASN required); **any other value (e.g. `?type=ee`) or no
+`type` is treated as Extended Ed** (ASN not required).
 
 Config is overridable (set before the script loads):
 ```js
-window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: 'https://bvc-uat-api-proxy.vercel.app' };
+window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: 'https://bvc-uat-api-proxy.vercel.app', studentPk: 1 };
 ```
 
 Endpoints (through the bvcpayment proxy, `thesissitecorexm.api` tenant):
 - `thesissitecorexm.api/registration/` (POST) → returns `newRegistration.id`
-- `thesissitecorexm.api/payment/submit-payment` (POST, query params) → returns `result.paymentUrl`
+- `thesissitecorexm.api/payment/submit-payment` (POST, query params) → returns `result.paymentUrl` (a **Flywire** session URL)
+
+> ⚠️ **Two required values the API now enforces (both placeholders pending MSAL):**
+> - **Registration** requires a non-null `studentId`. The checkout sends
+>   `studentId: 0` (new/anonymous). `null` → `400 "The StudentId field is required."`
+> - **submit-payment** requires a `studentPk` query param. The checkout sends
+>   `studentPk: 1` (override via `__BVC_CHECKOUT_CONFIG__.studentPk`). Missing it →
+>   `500 "Object reference not set to an instance of an object."` (a non-existent
+>   `registrationId` throws the *same* 500, i.e. it fails before loading the record).
+>
+> The checkout swallows error bodies (`Registration failed: ${status} ${statusText}`,
+> and HTTP/2 `statusText` is empty) — but the **proxy returns the upstream body
+> verbatim**, so read the real validation message in the Network tab, or reproduce
+> with curl (`POST {proxy}/api/mstoken` for a token, then the endpoint).
 
 > ⚠️ **Migrating from the inline setup:** remove the old inline `<script>` block
 > from the Webflow checkout page when you switch to `<script src>` so only one copy
@@ -192,3 +206,55 @@ Remaining follow-ups:
    but the dead parameter is misleading).
 2. Course/payment relies on `result.newRegistration.id` — make sure the registration
    response shape matches before go-live.
+
+## Extended Education course script (EE course pages)
+
+EE course pages use the **same cart engine as Open Studies**, just pointed at the
+Extended Ed data. The bundle (`ee-course.js`) is a port of `os-course.js`: same data
+shape (`sections`, GUID `deliveryType`/`campus`, `fees.domestic/international`,
+`timeBlocks`), same `thesissitecorexm.api` availability + fee endpoints, same cart
+sessionStorage keys — so the shared **checkout** reads its cart identically.
+
+| Path | Role |
+|------|------|
+| `src/bvc-app/src/js/ee-course/index.js` | **JS source — edit this.** Authored, readable. |
+| `src/bvc-app/public/js/ee-course.js` | **Generated, git-ignored.** Built by `npm run js:build`. |
+
+Differences from `os-course.js`:
+- Reads **`/data/courses/course-{sisId}.json`** (not `/data/oScourses/`).
+- **No PDF outline** and no category-index slug lookup (EE has neither).
+- Checkout redirect is **`../cart-checkout?type=ee`** (Extended Ed, no ASN).
+- Config namespace is **`window.__EE_COURSE_CONFIG__`** (`{ dataOrigin, apiOrigin, feeApplicantId }`, same defaults as OS).
+
+The course `sisId` is resolved from **`#courseComponent[data-sisid]`**, falling back
+to the last URL path segment — there is **no Webflow `{{wf courseid}}` token** in the
+served file (it's static; tokens can't be injected into it).
+
+**Load from Webflow** (before `</body>`, on the EE course page). EE reuses the OS
+CSS classes, so `os-course.css` is required too:
+
+```html
+<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
+<script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
+```
+
+> ⚠️ **Migrating from the old inline EE script:** it targeted a stale data shape
+> (`course.children`, `section.fees[].containerName`, `section.deliveryType.name`,
+> `section.sisID`) and the old `sitecorexm.api` prefix (now 404) — it would render
+> nothing against current data. Replace the entire inline `<script>` block with the
+> `<link>` + `<script src>` above, keep a `#courseComponent` div on the page, and
+> append `?v=N` while testing to defeat the CDN cache.
+
+## Build modes (DEV/UAT vs PROD)
+
+`build-os-course.mjs` builds all bundles (`os-course.js`, `os-course.css`,
+`checkout.js`, `ee-course.js`) in one of two modes:
+
+| Mode | Command | Minified | Comments | `console`/`debugger` |
+|------|---------|----------|----------|----------------------|
+| **DEV/UAT** (default) | `npm run js:build` | no | kept | kept |
+| **PROD** | `npm run js:build:prod` | yes | stripped | dropped |
+
+PROD mode triggers on the `--prod` flag **or** env `STRIP_DEBUG=true`. To strip on a
+production Vercel deploy without touching UAT, set `STRIP_DEBUG=true` only in that
+project's environment variables; the default keeps logs/comments everywhere else.
