@@ -391,13 +391,23 @@
     if (a.length > 0) {
       var i = document.createElement('div');
       i.className = 'cart-shared-fees';
-      var o = '<hr><div class="cart-item-info"><strong>Additional fees:</strong></div>';
+      var o =
+        '<hr><button type="button" class="fees-toggle" aria-expanded="false"><span class="fees-toggle-label">Additional fees</span><span class="fees-toggle-amount">$' +
+        n.totalAmount.toFixed(2) +
+        '</span><span class="fees-toggle-caret" aria-hidden="true">&#9662;</span></button><div class="fees-breakdown" hidden>';
       (a.forEach(function (e) {
         ((o += '<div class="cart-item-info fee-item">• ' + e.description + ': $' + e.amount.toFixed(2)), e.tax && e.tax > 0 && (o += ' + $' + e.tax.toFixed(2) + ' tax'), (o += '</div>'));
       }),
-        (o += '<div class="cart-item-info"><strong>Total Fees:</strong> $' + n.totalAmount.toFixed(2) + '</div>'),
+        (o += '<div class="cart-item-info fees-breakdown-total"><strong>Total Fees:</strong> $' + n.totalAmount.toFixed(2) + '</div></div>'),
         (i.innerHTML = o),
         l.cartItemsContainer.appendChild(i));
+      var f = i.querySelector('.fees-toggle');
+      f &&
+        f.addEventListener('click', function () {
+          var e = 'true' === f.getAttribute('aria-expanded'),
+            t = i.querySelector('.fees-breakdown');
+          (f.setAttribute('aria-expanded', String(!e)), t && (t.hidden = e), i.classList.toggle('fees-open', !e));
+        });
     }
     var r = c.items.reduce(function (e, t) {
         return e + parseFloat(t.price) * t.quantity;
@@ -476,6 +486,21 @@
       });
     return (console.log('[API] Availability', e, '-> status', n.status), { status: n.status, data: i });
   }
+  // The fee API emits each fee line twice; collapse exact duplicates (same
+  // description + offering + amount + tax) so each shows once and the total is
+  // not double-counted. Genuinely different per-course fees are preserved.
+  // See OS-COURSE-CART.md (Backend API contract).
+  function dedupeFees(e) {
+    var t = {},
+      s = [];
+    return (
+      (Array.isArray(e) ? e : []).forEach(function (e) {
+        var a = (e.description || '') + '|' + (e.programOfferingId || e.offeringId || '') + '|' + (e.amount || 0) + '|' + (e.tax || 0);
+        t[a] || ((t[a] = 1), s.push(e));
+      }),
+      s
+    );
+  }
   async function B(e, s) {
     var a = e;
     if (
@@ -489,7 +514,7 @@
     var n = 'thesissitecorexm.api/fee/' + a.join(',') + '/' + feeId,
       i = await fetch(t + '/api/bvcpayment?endpoint=' + encodeURIComponent(n), { method: 'GET', mode: 'cors', headers: { Authorization: 'Bearer ' + s, 'Content-Type': 'application/json' } });
     if (!i.ok) throw new Error('Fee API returned status ' + i.status);
-    var o = await i.json(),
+    var o = dedupeFees(await i.json()),
       l = o.reduce(function (e, t) {
         return e + (t.amount || 0);
       }, 0),

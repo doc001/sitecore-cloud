@@ -422,6 +422,45 @@
 .cart-shared-fees {
   font-size: 0.9em;
 }
+/* Collapsible "Additional fees" drawer: total always visible, click to expand */
+.fees-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+.fees-toggle-label {
+  font-weight: 600;
+}
+.fees-toggle-amount {
+  margin-left: auto;
+  font-weight: 600;
+}
+.fees-toggle-caret {
+  transition: transform 0.2s ease;
+  font-size: 0.8em;
+}
+.cart-shared-fees.fees-open .fees-toggle-caret {
+  transform: rotate(180deg);
+}
+.fees-breakdown {
+  padding-left: 4px;
+}
+.fees-breakdown[hidden] {
+  display: none;
+}
+.fees-breakdown-total {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #eee;
+}
 .fee-item {
   color: #555;
 }

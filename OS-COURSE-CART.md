@@ -77,6 +77,15 @@ verbatim. Current `BASE_URL` = `https://devapi.bvc.dev/extended-edu-registration
 > public fee preview, or is there a designated preview id? Set the agreed value via
 > `__OS_COURSE_CONFIG__.feeApplicantId` (or change the source default) once known.
 
+> 🔁 **Duplicate fee lines.** For some courses the fee endpoint emits each fee
+> line **twice** (identical `description`/`programOfferingId`/`amount`/`tax`),
+> which would both list duplicates and **double the total**. The cart collapses
+> exact duplicates via `dedupeFees()` in `checkFees` before computing totals or
+> storing the fee session — idempotent, so a clean (non-duplicated) response is
+> unaffected. Fees render in a collapsible **“Additional fees” drawer** (total
+> always visible, click to expand the breakdown). Genuinely different per-course
+> fees (the API prorates them across a multi-course cart) are preserved.
+
 ### Reproduce / debug from the terminal
 
 ```bash
