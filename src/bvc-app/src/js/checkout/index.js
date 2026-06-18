@@ -10,9 +10,10 @@
  *   <script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
  *
  * Config is overridable. Set BEFORE this script loads:
- *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '' };
+ *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: 1 };
  * Default (production):
  *   apiOrigin : https://bvc-uat-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
+ *   studentPk : 1  (placeholder required by submit-payment; replace via MSAL later)
  *
  * Backend endpoints go through the bvcpayment proxy and use the
  * `thesissitecorexm.api` tenant prefix (the old `sitecorexm.api` now 404s).
@@ -25,6 +26,9 @@
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
   var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app';
+  // studentPk is required by submit-payment (the API null-refs without it). Placeholder
+  // until MSAL supplies the real student PK for a signed-in/registered student.
+  var studentPk = _cfg.studentPk != null ? _cfg.studentPk : 1;
 
   // --- shared token helpers (shared with the cart; reuse if already on page) ---
   var tokenStorage =
@@ -797,6 +801,7 @@
         params.append('coursesInCart', coursesInCartString);
         params.append('totalAmount', totalAmount.toFixed(2));
         params.append('registrationId', registrationId);
+        params.append('studentPk', studentPk);
 
         const payUrl = `${this.proxyBaseUrl}?${params.toString()}`;
         console.log('Submitting payment to:', payUrl);

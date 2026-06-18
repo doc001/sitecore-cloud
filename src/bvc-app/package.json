@@ -18,6 +18,7 @@
     "postinstall": "flowbite-react patch",
     "getWebflowData": "node scripts/fetch-webflow-collections.mjs",
     "js:build": "node scripts/build-os-course.mjs",
+    "js:build:prod": "node scripts/build-os-course.mjs --prod",
     "js:watch": "node scripts/build-os-course.mjs --watch",
     "os-course:sandbox": "node dev/os-course/server.mjs",
     "os-course:dev": "node dev/os-course/dev.mjs",
