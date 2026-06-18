@@ -32,20 +32,48 @@
       },
       "timeBlocks": [
         {
-          "sisId": "10015",
-          "name": "10015",
+          "sisId": "21459",
+          "name": "21459",
+          "startTime": "20260107T000000",
+          "endTime": "20260427T000000",
+          "frequency": "Weekly",
+          "schedule": "MW 2:00 PM - 3:20 PM"
+        }
+      ]
+    },
+    {
+      "id": "AB3B52A873314F7B83BD5C89337D4DEE",
+      "name": "SCMT2401-02",
+      "sisId": "30811",
+      "deliveryType": "{C45FFE75-0A40-4E30-A906-FC3C6FDD99FC}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": false,
+      "fees": {
+        "domestic": {
+          "amount": 612,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1613,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "20945",
+          "name": "20945",
           "startTime": "20260107T000000",
           "endTime": "20260422T000000",
           "frequency": "Weekly",
-          "schedule": "W 2:00 PM - 3:20 PM"
-        },
-        {
-          "sisId": "9776",
-          "name": "9776",
-          "startTime": "20260112T000000",
-          "endTime": "20260427T000000",
-          "frequency": "Weekly",
-          "schedule": "M 2:00 PM - 3:20 PM"
+          "schedule": "W 5:00 PM - 7:50 PM"
         }
       ]
     }

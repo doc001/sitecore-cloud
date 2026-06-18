@@ -1,12 +1,12 @@
 {
-  "id": "BCEA91A117EF431EA727EA26D7ACFF03",
+  "id": "97CEA3AABF5845709E5898E3556AA95E",
   "sisId": "HMSV9102",
   "name": "Personal Support Skills for Caregivers",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "DF2F802070594F8E82F8BC21C4459F4B",
+      "id": "D2FC61E0102B417EA9FBEB6DC701D450",
       "name": "HMSV9102-91",
       "sisId": "30601",
       "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
@@ -20,20 +20,29 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 419,
-          "tax": 20.95,
+          "amount": 409,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 419,
-          "tax": 20.95,
+          "amount": 409,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "14852",
+          "name": "14852",
+          "startTime": "20260107T000000",
+          "endTime": "20260411T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "B59026A5B5C64C70AD00B7E371EFC23D",
+      "id": "9571C52514FD43CFB26DEBB98E13170B",
       "name": "HMSV9102-92",
       "sisId": "30600",
       "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
@@ -47,20 +56,29 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 419,
-          "tax": 20.95,
+          "amount": 409,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 419,
-          "tax": 20.95,
+          "amount": 409,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "14853",
+          "name": "14853",
+          "startTime": "20260211T000000",
+          "endTime": "20260509T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "A1241E934E5546D080F2F1C86BE0F447",
+      "id": "12734666B9BC4B128108CB793528F3D4",
       "name": "HMSV9102-93",
       "sisId": "24012",
       "deliveryType": "{F6250694-BAD6-4615-BCB9-1693A45D76C5}",
@@ -75,16 +93,25 @@
       "fees": {
         "domestic": {
           "amount": 419,
-          "tax": 20.95,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 419,
-          "tax": 20.95,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "20901",
+          "name": "20901",
+          "startTime": "20260408T000000",
+          "endTime": "20260711T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

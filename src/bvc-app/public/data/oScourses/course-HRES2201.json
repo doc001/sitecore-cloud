@@ -32,20 +32,12 @@
       },
       "timeBlocks": [
         {
-          "sisId": "5984",
-          "name": "5984",
+          "sisId": "21383",
+          "name": "21383",
           "startTime": "20260108T000000",
-          "endTime": "20260423T000000",
-          "frequency": "Weekly",
-          "schedule": "Th 2:00 PM - 3:20 PM"
-        },
-        {
-          "sisId": "7219",
-          "name": "7219",
-          "startTime": "20260113T000000",
           "endTime": "20260428T000000",
           "frequency": "Weekly",
-          "schedule": "T 2:00 PM - 3:20 PM"
+          "schedule": "TTh 2:00 PM - 3:20 PM"
         }
       ]
     },
@@ -76,36 +68,28 @@
       },
       "timeBlocks": [
         {
-          "sisId": "6777",
-          "name": "6777",
-          "startTime": "20260112T000000",
+          "sisId": "21161",
+          "name": "21161",
+          "startTime": "20260107T000000",
           "endTime": "20260427T000000",
           "frequency": "Weekly",
-          "schedule": "M 9:30 AM - 10:50 AM"
-        },
-        {
-          "sisId": "7220",
-          "name": "7220",
-          "startTime": "20260107T000000",
-          "endTime": "20260422T000000",
-          "frequency": "Weekly",
-          "schedule": "W 9:30 AM - 10:50 AM"
+          "schedule": "MW 9:30 AM - 10:50 AM"
         }
       ]
     },
     {
       "id": "A44E1C33AA624A48B4759DE371DAE20F",
       "name": "HRES2201-03",
-      "sisId": "13903",
+      "sisId": "30679",
       "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
       "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
       "hours": 45,
       "credits": 3,
       "registrationStart": "",
       "registrationEnd": "",
-      "startDate": "20250902T000000",
-      "endDate": "20251218T000000",
-      "seatsAvailable": true,
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": false,
       "fees": {
         "domestic": {
           "amount": 633,
@@ -120,20 +104,12 @@
       },
       "timeBlocks": [
         {
-          "sisId": "5983",
-          "name": "5983",
-          "startTime": "20250904T000000",
-          "endTime": "20251218T000000",
+          "sisId": "21271",
+          "name": "21271",
+          "startTime": "20260113T000000",
+          "endTime": "20260428T000000",
           "frequency": "Weekly",
-          "schedule": "Th 8:00 AM - 9:20 AM"
-        },
-        {
-          "sisId": "7217",
-          "name": "7217",
-          "startTime": "20250902T000000",
-          "endTime": "20251216T000000",
-          "frequency": "Weekly",
-          "schedule": "T 8:00 AM - 9:20 AM"
+          "schedule": "T 5:00 PM - 7:50 PM"
         }
       ]
     },
@@ -164,20 +140,12 @@
       },
       "timeBlocks": [
         {
-          "sisId": "1469",
-          "name": "1469",
-          "startTime": "20260113T000000",
+          "sisId": "21006",
+          "name": "21006",
+          "startTime": "20260108T000000",
           "endTime": "20260428T000000",
           "frequency": "Weekly",
-          "schedule": "T 2:00 PM - 3:20 PM"
-        },
-        {
-          "sisId": "1552",
-          "name": "1552",
-          "startTime": "20260108T000000",
-          "endTime": "20260423T000000",
-          "frequency": "Weekly",
-          "schedule": "Th 2:00 PM - 3:20 PM"
+          "schedule": "TTh 2:00 PM - 3:20 PM"
         }
       ]
     },
@@ -278,7 +246,16 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "20908",
+          "name": "20908",
+          "startTime": "20260107T000000",
+          "endTime": "20260428T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
       "id": "7271D085F2B84131A6BF1549DB50947E",
@@ -305,7 +282,52 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21084",
+          "name": "21084",
+          "startTime": "20260107T000000",
+          "endTime": "20260428T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
+    },
+    {
+      "id": "DA7F8918567D4D12ACAC69D012500D56",
+      "name": "HRES2201-43",
+      "sisId": "30691",
+      "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260428T000000",
+      "seatsAvailable": false,
+      "fees": {
+        "domestic": {
+          "amount": 633,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1676,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "21248",
+          "name": "21248",
+          "startTime": "20260107T000000",
+          "endTime": "20260428T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

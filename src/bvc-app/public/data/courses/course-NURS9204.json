@@ -1,12 +1,12 @@
 {
-  "id": "9540670ACD1747A2AB3B23A83B8F40EF",
+  "id": "FB0B5C6420D8429D933604DFE8392E3E",
   "sisId": "NURS9204",
   "name": "Intramuscular And Intradermal Injections",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "5F76D198907E433EB3C8E1DFC805DF0C",
+      "id": "64A237C7D4D74A27AAA198D63C06C85D",
       "name": "NURS9204-91",
       "sisId": "25572",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -21,19 +21,19 @@
       "fees": {
         "domestic": {
           "amount": 249,
-          "tax": 12.45,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 249,
-          "tax": 12.45,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
       "timeBlocks": []
     },
     {
-      "id": "08D45CF1DE364BB289003344269F0CDE",
+      "id": "1745CBAF3A144554A2E6FDA639DB475A",
       "name": "NURS9204-92",
       "sisId": "25570",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -47,20 +47,28 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 249,
-          "tax": 12.45,
+          "amount": 239,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 249,
-          "tax": 12.45,
+          "amount": 239,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
       "timeBlocks": [
         {
-          "sisId": "13483",
-          "name": "13483",
+          "sisId": "13978",
+          "name": "13978",
+          "startTime": "20260408T000000",
+          "endTime": "20260418T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        },
+        {
+          "sisId": "14025",
+          "name": "14025",
           "startTime": "20260418T000000",
           "endTime": "20260418T000000",
           "frequency": "Weekly",

@@ -1,12 +1,12 @@
 {
-  "id": "18205A1DD2A7469F89C5B443E49434F8",
+  "id": "40E7F469804B4289ABFF549C0ABE20F0",
   "sisId": "ACCT9101",
   "name": "Financial Accounting - Introduction",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "586C6E9AD49A47D1816407D502FC6FCE",
+      "id": "3C8C9F90B96F4312B4290F0328B3AC3F",
       "name": "ACCT9101-92",
       "sisId": "2870",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -21,19 +21,28 @@
       "fees": {
         "domestic": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "14863",
+          "name": "14863",
+          "startTime": "20260114T000000",
+          "endTime": "20260514T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "A03E4B1F96064CCCB46C5E2DB2979E75",
+      "id": "FCBEB49582EA4875A6FED7DF5BD309CB",
       "name": "ACCT9101-93",
       "sisId": "2868",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -48,19 +57,28 @@
       "fees": {
         "domestic": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "14858",
+          "name": "14858",
+          "startTime": "20260408T000000",
+          "endTime": "20260808T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "145667B951F0439D960D6FB54904F40C",
+      "id": "574C42AF4663418F8DF198393F78288A",
       "name": "ACCT9101-94",
       "sisId": "2867",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -74,20 +92,29 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "14850",
+          "name": "14850",
+          "startTime": "20260211T000000",
+          "endTime": "20260611T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "3ADC868BD72D4471A30D4E83486B36CA",
+      "id": "2998407AA0904E3DBBC470528EBD0616",
       "name": "ACCT9101-95",
       "sisId": "2869",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -102,16 +129,25 @@
       "fees": {
         "domestic": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21280",
+          "name": "21280",
+          "startTime": "20260311T000000",
+          "endTime": "20260711T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

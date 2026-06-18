@@ -17,8 +17,7 @@
       "hours": 45,
       "seatsAvailable": true,
       "schedule": [
-        "Th 2:00 PM - 3:20 PM",
-        "T 2:00 PM - 3:20 PM"
+        "TTh 2:00 PM - 3:20 PM"
       ],
       "fees": {
         "domestic": 633,
@@ -36,8 +35,7 @@
       "hours": 45,
       "seatsAvailable": true,
       "schedule": [
-        "M 9:30 AM - 10:50 AM",
-        "W 9:30 AM - 10:50 AM"
+        "MW 9:30 AM - 10:50 AM"
       ],
       "fees": {
         "domestic": 633,
@@ -46,17 +44,16 @@
     },
     {
       "name": "HRES2201-03",
-      "sisId": "13903",
+      "sisId": "30679",
       "deliveryType": "Face to Face Synchronous",
       "campus": "Calgary Downtown Campus",
-      "startDate": "Sep 1, 2025",
-      "endDate": "Dec 17, 2025",
+      "startDate": "Jan 6, 2026",
+      "endDate": "Apr 27, 2026",
       "registrationStart": "",
       "hours": 45,
-      "seatsAvailable": true,
+      "seatsAvailable": false,
       "schedule": [
-        "Th 8:00 AM - 9:20 AM",
-        "T 8:00 AM - 9:20 AM"
+        "T 5:00 PM - 7:50 PM"
       ],
       "fees": {
         "domestic": 633,
@@ -74,8 +71,7 @@
       "hours": 45,
       "seatsAvailable": true,
       "schedule": [
-        "T 2:00 PM - 3:20 PM",
-        "Th 2:00 PM - 3:20 PM"
+        "TTh 2:00 PM - 3:20 PM"
       ],
       "fees": {
         "domestic": 633,
@@ -128,7 +124,9 @@
       "registrationStart": "",
       "hours": 45,
       "seatsAvailable": true,
-      "schedule": [],
+      "schedule": [
+        "SuMTWThFSa 12:00 AM - 12:00 AM"
+      ],
       "fees": {
         "domestic": 633,
         "international": 1676
@@ -144,7 +142,27 @@
       "registrationStart": "",
       "hours": 45,
       "seatsAvailable": true,
-      "schedule": [],
+      "schedule": [
+        "SuMTWThFSa 12:00 AM - 12:00 AM"
+      ],
+      "fees": {
+        "domestic": 633,
+        "international": 1676
+      }
+    },
+    {
+      "name": "HRES2201-43",
+      "sisId": "30691",
+      "deliveryType": "Blended Asynchronous",
+      "campus": "Calgary Downtown Campus",
+      "startDate": "Jan 6, 2026",
+      "endDate": "Apr 27, 2026",
+      "registrationStart": "",
+      "hours": 45,
+      "seatsAvailable": false,
+      "schedule": [
+        "SuMTWThFSa 12:00 AM - 12:00 AM"
+      ],
       "fees": {
         "domestic": 633,
         "international": 1676

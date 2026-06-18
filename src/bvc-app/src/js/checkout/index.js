@@ -612,7 +612,7 @@
       const useSameAddress = this.fields.billingCheckbox && this.fields.billingCheckbox.checked;
       // Format the data according to the required schema
       const data = {
-        studentId: null, // Can be left as null for new students
+        studentId: 0, // New/anonymous students: send 0. The API now rejects null ("The StudentId field is required.")
         firstName: formData.firstName || '',
         middleName: '',
         lastName: formData.lastName || '',

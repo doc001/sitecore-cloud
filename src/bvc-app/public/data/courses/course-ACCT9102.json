@@ -1,12 +1,12 @@
 {
-  "id": "D931C54E39E34A2DB04EAB0936D6A0D7",
+  "id": "E2AF01F6BDDD49D8B47E3A9D9F3F3068",
   "sisId": "ACCT9102",
   "name": "Financial Accounting - Intermediate",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "8112065354824FF4AE4C79786EF80592",
+      "id": "0CF10E1F7D914A7EBCC7840E65F881CC",
       "name": "ACCT9102-92",
       "sisId": "19372",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -21,19 +21,28 @@
       "fees": {
         "domestic": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "14820",
+          "name": "14820",
+          "startTime": "20260114T000000",
+          "endTime": "20260514T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "A5F5B22A74994A768BAC320A6D97DC27",
+      "id": "7F7577C9EBAF4B67A8A1773DA0F36EDD",
       "name": "ACCT9102-93",
       "sisId": "19289",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -47,20 +56,29 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "14874",
+          "name": "14874",
+          "startTime": "20260408T000000",
+          "endTime": "20260808T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "60BD3955E66545A8B0E04887030C2093",
+      "id": "490504A833A948BC8465FF603723A387",
       "name": "ACCT9102-94",
       "sisId": "19327",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -74,20 +92,29 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21309",
+          "name": "21309",
+          "startTime": "20260211T000000",
+          "endTime": "20260611T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "4D471302D2544A6EBC6392CE69FB9AC0",
+      "id": "125176FFBDE24F01A88F68C3395A282C",
       "name": "ACCT9102-95",
       "sisId": "19328",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -101,17 +128,26 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21684",
+          "name": "21684",
+          "startTime": "20260311T000000",
+          "endTime": "20260711T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
-  "id": "57A5CBF7177F4F94A4A5C658E733B1DA",
+  "id": "F5FD6CDF32F343218D89998F338428A7",
   "sisId": "ACCT9201",
   "name": "Budget and Financial Reports",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "A2103C524125494E856DCA4A410133B4",
+      "id": "1D0867F321CB49C7A98AF09E106EBE5B",
       "name": "ACCT9201-92",
       "sisId": "18851",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -21,19 +21,28 @@
       "fees": {
         "domestic": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 500,
-          "tax": 25,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21772",
+          "name": "21772",
+          "startTime": "20260114T000000",
+          "endTime": "20260514T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
-      "id": "7BC00156362B4B8C9379E44E7A4F147A",
+      "id": "2CABBDC08C2645468F91D3CC4FF202FE",
       "name": "ACCT9201-93",
       "sisId": "18764",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -47,13 +56,13 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 500,
-          "tax": 25,
+          "amount": 475,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },

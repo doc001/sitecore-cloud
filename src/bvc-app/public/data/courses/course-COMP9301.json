@@ -1,12 +1,12 @@
 {
-  "id": "E97578FD5C0E4B599F65D3D87CD85210",
+  "id": "71310388F93140A08EBAB99EFF5BC716",
   "sisId": "COMP9301",
   "name": "Microsoft Excel - Introduction",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "C199643AA28045AF925F39DC4A14D964",
+      "id": "1364566367A64423B267354C9B70E264",
       "name": "COMP9301-92",
       "sisId": "4049",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -20,12 +20,12 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 335,
+          "amount": 300,
           "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 335,
+          "amount": 300,
           "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
@@ -33,7 +33,7 @@
       "timeBlocks": []
     },
     {
-      "id": "BF90ABE31171483D84CB970C1602CC87",
+      "id": "F55E8D2599B947DDB4CDDE52459C404C",
       "name": "COMP9301-93",
       "sisId": "316",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -47,17 +47,26 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 335,
+          "amount": 300,
           "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 335,
+          "amount": 300,
           "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21892",
+          "name": "21892",
+          "startTime": "20260311T000000",
+          "endTime": "20260511T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

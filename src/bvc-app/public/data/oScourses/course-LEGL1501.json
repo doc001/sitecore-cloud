@@ -9,7 +9,7 @@
       "id": "FE8B73394DF042D0B782D32962021993",
       "name": "LEGL1501-01",
       "sisId": "6127",
-      "deliveryType": "{9754E29D-F075-4139-B125-292A81550174}",
+      "deliveryType": "{939C8DAC-A6C1-415E-BC83-1B3F062D4250}",
       "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
       "hours": 45,
       "credits": 3,
@@ -32,20 +32,12 @@
       },
       "timeBlocks": [
         {
-          "sisId": "1535",
-          "name": "1535",
+          "sisId": "20997",
+          "name": "20997",
           "startTime": "20260108T000000",
-          "endTime": "20260423T000000",
-          "frequency": "Weekly",
-          "schedule": "Th 12:30 PM - 1:50 PM"
-        },
-        {
-          "sisId": "2294",
-          "name": "2294",
-          "startTime": "20260113T000000",
           "endTime": "20260428T000000",
           "frequency": "Weekly",
-          "schedule": "T 12:30 PM - 1:50 PM"
+          "schedule": "TTh 12:30 PM - 1:50 PM"
         }
       ]
     },
@@ -74,7 +66,16 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21746",
+          "name": "21746",
+          "startTime": "20260107T000000",
+          "endTime": "20260428T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

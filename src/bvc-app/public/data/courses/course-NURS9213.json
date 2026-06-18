@@ -1,12 +1,12 @@
 {
-  "id": "F4011893792F49909A34D54FB435904A",
+  "id": "04F0D55EB4714F51AF660EBC9B707E37",
   "sisId": "NURS9213",
   "name": "Intravenous Initiation, Infusion and Medication Administration",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "DA9A1DC4F5774084834BF6CBD2E67943",
+      "id": "BB56F513A77B4B94A780B58FFFEB41C0",
       "name": "NURS9213-91",
       "sisId": "17219",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -21,19 +21,19 @@
       "fees": {
         "domestic": {
           "amount": 449,
-          "tax": 22.45,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 449,
-          "tax": 22.45,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
       "timeBlocks": []
     },
     {
-      "id": "D8AD0DDD82854F1F9EABC076E7DF4384",
+      "id": "E036D63747814F40AD033088E190E4D8",
       "name": "NURS9213-92",
       "sisId": "17254",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -47,17 +47,34 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 449,
-          "tax": 22.45,
+          "amount": 439,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 449,
-          "tax": 22.45,
+          "amount": 439,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "15314",
+          "name": "15314",
+          "startTime": "20260408T000000",
+          "endTime": "20260502T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        },
+        {
+          "sisId": "15617",
+          "name": "15617",
+          "startTime": "20260502T000000",
+          "endTime": "20260502T000000",
+          "frequency": "Weekly",
+          "schedule": "Sa 9:00 AM - 3:30 PM"
+        }
+      ]
     }
   ]
 }

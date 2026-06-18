@@ -1,12 +1,12 @@
 {
-  "id": "EC195403274444EA9E0E937794D91A17",
+  "id": "821E220B80DA41A7BF4E6FC460BF967C",
   "sisId": "NURS9504",
   "name": "Phlebotomy",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "AEF8B2C057764F30BB4D9124FB95CB4D",
+      "id": "6067552C961B4AD7B7B79F2F3985F050",
       "name": "NURS9504-91",
       "sisId": "17707",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -21,19 +21,19 @@
       "fees": {
         "domestic": {
           "amount": 399,
-          "tax": 19.95,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 399,
-          "tax": 19.95,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
       "timeBlocks": []
     },
     {
-      "id": "38F70DCED7C74049A24DFCAAF25D569F",
+      "id": "555D97EFEDF34870800B1434997B4D32",
       "name": "NURS9504-92",
       "sisId": "17705",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -48,19 +48,19 @@
       "fees": {
         "domestic": {
           "amount": 399,
-          "tax": 19.95,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
           "amount": 399,
-          "tax": 19.95,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
       "timeBlocks": []
     },
     {
-      "id": "5670DA444C4B46A897CA3C1F769286FC",
+      "id": "643DBBB2D4384BE595AF016E3DA85A53",
       "name": "NURS9504-93",
       "sisId": "17706",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -74,20 +74,28 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 399,
-          "tax": 19.95,
+          "amount": 389,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 399,
-          "tax": 19.95,
+          "amount": 389,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
       "timeBlocks": [
         {
-          "sisId": "7892",
-          "name": "7892",
+          "sisId": "22114",
+          "name": "22114",
+          "startTime": "20260311T000000",
+          "endTime": "20260411T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        },
+        {
+          "sisId": "22559",
+          "name": "22559",
           "startTime": "20260411T000000",
           "endTime": "20260411T000000",
           "frequency": "Weekly",
@@ -96,7 +104,7 @@
       ]
     },
     {
-      "id": "ADCC8FD04DB44DE1A23CE2BECF615D55",
+      "id": "319F1F38DD944938A61A6D272BFA46A2",
       "name": "NURS9504-94",
       "sisId": "17700",
       "deliveryType": "{0102087B-8DAB-4E96-B64F-49185C0B1FF8}",
@@ -110,17 +118,34 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 399,
-          "tax": 19.95,
+          "amount": 389,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 399,
-          "tax": 19.95,
+          "amount": 389,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "15307",
+          "name": "15307",
+          "startTime": "20260408T000000",
+          "endTime": "20260509T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        },
+        {
+          "sisId": "15650",
+          "name": "15650",
+          "startTime": "20260509T000000",
+          "endTime": "20260509T000000",
+          "frequency": "Weekly",
+          "schedule": "Sa 9:00 AM - 3:00 PM"
+        }
+      ]
     }
   ]
 }

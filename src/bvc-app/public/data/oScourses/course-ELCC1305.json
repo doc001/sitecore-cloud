@@ -84,7 +84,16 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "20946",
+          "name": "20946",
+          "startTime": "20260107T000000",
+          "endTime": "20260421T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
       "id": "24FBB523AE524B7B985252C474AA62C6",
@@ -111,7 +120,16 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21539",
+          "name": "21539",
+          "startTime": "20260107T000000",
+          "endTime": "20260421T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
       "id": "C206FDD459A7474EB620B4810D2E9D86",
@@ -140,8 +158,8 @@
       },
       "timeBlocks": [
         {
-          "sisId": "6378",
-          "name": "6378",
+          "sisId": "21584",
+          "name": "21584",
           "startTime": "20260109T000000",
           "endTime": "20260417T000000",
           "frequency": "Weekly",
@@ -176,8 +194,8 @@
       },
       "timeBlocks": [
         {
-          "sisId": "6380",
-          "name": "6380",
+          "sisId": "21888",
+          "name": "21888",
           "startTime": "20260108T000000",
           "endTime": "20260416T000000",
           "frequency": "Weekly",
@@ -212,8 +230,8 @@
       },
       "timeBlocks": [
         {
-          "sisId": "6381",
-          "name": "6381",
+          "sisId": "20947",
+          "name": "20947",
           "startTime": "20260112T000000",
           "endTime": "20260420T000000",
           "frequency": "Weekly",
@@ -275,8 +293,44 @@
       },
       "timeBlocks": [
         {
-          "sisId": "6396",
-          "name": "6396",
+          "sisId": "20927",
+          "name": "20927",
+          "startTime": "20260112T000000",
+          "endTime": "20260420T000000",
+          "frequency": "Weekly",
+          "schedule": "M 6:30 PM - 9:20 PM"
+        }
+      ]
+    },
+    {
+      "id": "C27D1A6F39A6426EA91E3331C5D139CD",
+      "name": "ELCC1305-67",
+      "sisId": "30814",
+      "deliveryType": "{71159BEB-070D-42C9-81D9-758B3108A0CD}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260421T000000",
+      "seatsAvailable": false,
+      "fees": {
+        "domestic": {
+          "amount": 339,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1130,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "21001",
+          "name": "21001",
           "startTime": "20260112T000000",
           "endTime": "20260420T000000",
           "frequency": "Weekly",
@@ -311,8 +365,8 @@
       },
       "timeBlocks": [
         {
-          "sisId": "6382",
-          "name": "6382",
+          "sisId": "21268",
+          "name": "21268",
           "startTime": "20260110T000000",
           "endTime": "20260418T000000",
           "frequency": "Weekly",

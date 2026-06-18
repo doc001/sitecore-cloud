@@ -30,7 +30,16 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21943",
+          "name": "21943",
+          "startTime": "20260107T000000",
+          "endTime": "20260421T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     },
     {
       "id": "54485DB4A4634062A0289598EF9EDD0A",
@@ -57,7 +66,52 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21644",
+          "name": "21644",
+          "startTime": "20260107T000000",
+          "endTime": "20260421T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
+    },
+    {
+      "id": "493B0E3FB0DC4EE28C4B44D7C57EC8C5",
+      "name": "FASD1101-13",
+      "sisId": "30815",
+      "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
+      "campus": "{8005CA67-F70B-43C2-BBB5-004FF89FA4E1}",
+      "hours": 45,
+      "credits": 3,
+      "registrationStart": "",
+      "registrationEnd": "",
+      "startDate": "20260107T000000",
+      "endDate": "20260421T000000",
+      "seatsAvailable": false,
+      "fees": {
+        "domestic": {
+          "amount": 520,
+          "tax": 0,
+          "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
+        },
+        "international": {
+          "amount": 1572,
+          "tax": 0,
+          "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
+        }
+      },
+      "timeBlocks": [
+        {
+          "sisId": "21519",
+          "name": "21519",
+          "startTime": "20260107T000000",
+          "endTime": "20260421T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
-  "id": "FCCCE1994E97400A94ABB5694A3D9DEE",
+  "id": "C3F52A610920499A8D9BC36C83513CD8",
   "sisId": "NURS9502",
   "name": "Leadership for Licensed Practical Nurses",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "2135D29AF1E5432C9B7F58C1A491CBF3",
+      "id": "2E2523B0EC8B4718A55117C559BBAA6B",
       "name": "NURS9502-91",
       "sisId": "17176",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -20,8 +20,8 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 360,
-          "tax": 18,
+          "amount": 429,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
@@ -33,7 +33,7 @@
       "timeBlocks": []
     },
     {
-      "id": "577736549D6B4E98A877C97DBA901C56",
+      "id": "E9D2D5B47EEF47B2ABF0CFC618C659EB",
       "name": "NURS9502-92",
       "sisId": "17552",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -47,8 +47,8 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 360,
-          "tax": 18,
+          "amount": 429,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
@@ -57,7 +57,16 @@
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21393",
+          "name": "21393",
+          "startTime": "20260408T000000",
+          "endTime": "20260808T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }

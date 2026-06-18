@@ -1,12 +1,12 @@
 {
-  "id": "5742649B94D54DC48FDD43FE22B34091",
+  "id": "D2681C94861449AAA7337930D34A7E2F",
   "sisId": "ACCT9402",
   "name": "Quickbooks Advanced",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "0114F1A7DC424482AD97AE7E36A5D0A7",
+      "id": "90540A3D9A2B40A3A8C90B7453FE7B4C",
       "name": "ACCT9402-92",
       "sisId": "2831",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -20,20 +20,20 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 430,
-          "tax": 21.5,
+          "amount": 410,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 430,
-          "tax": 21.5,
+          "amount": 410,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
       "timeBlocks": []
     },
     {
-      "id": "773D2C680C584E93A017032CBB8F99B6",
+      "id": "0E87AA37EF594C45932DF586699E80AC",
       "name": "ACCT9402-93",
       "sisId": "2830",
       "deliveryType": "{EC1C42ED-10C5-4C19-95A9-F2CFEAC79CD9}",
@@ -47,17 +47,26 @@
       "seatsAvailable": true,
       "fees": {
         "domestic": {
-          "amount": 430,
-          "tax": 21.5,
+          "amount": 410,
+          "tax": 0,
           "feeType": "{56C8D85F-506A-4CD2-B88A-30462453C204}"
         },
         "international": {
-          "amount": 430,
-          "tax": 21.5,
+          "amount": 410,
+          "tax": 0,
           "feeType": "{38A0B2C3-4626-4FBF-8F95-956E78B80C65}"
         }
       },
-      "timeBlocks": []
+      "timeBlocks": [
+        {
+          "sisId": "21047",
+          "name": "21047",
+          "startTime": "20260408T000000",
+          "endTime": "20260608T000000",
+          "frequency": "Weekly",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
     }
   ]
 }
