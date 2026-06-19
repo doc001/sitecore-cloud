@@ -25,6 +25,14 @@
   align-items: start;
 }
 
+/* When info column is empty, let offers take full width */
+.course-info-col:empty + .course-offers-col {
+  grid-column: 1 / -1;
+}
+.course-info-col:empty {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .course-page-grid {
     grid-template-columns: 1fr;
@@ -203,7 +211,7 @@
 
 .course-details {
   display: grid;
-  grid-template-columns: 4fr 0.5fr 1fr;
+  grid-template-columns: 1fr auto;
   gap: 20px;
   padding: 20px;
 }
