@@ -161,5 +161,35 @@ dotnet sitecore ser push --environment-name default
 > If you get a _401_ error, click **Home** and log in again if prompted.
 
 
+# VERCEL DEPLOYMENT (bvc-app)
+
+The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its` team scope.
+
+## Vercel Projects
+
+| Project | URL | Purpose |
+|---|---|---|
+| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — Webflow embeds load CSS/JS from here |
+| `bvc-uat` | https://bvc-uat.vercel.app | UAT / testing |
+
+## Deploying
+
+**Important:** Webflow course pages load assets from `bvc-thesis.vercel.app`. To deploy changes that are visible on Webflow, you **must** deploy to `bvc-thesis`:
+
+```bash
+vercel deploy --prod --scope=bvc-marketing-its --project=bvc-thesis
+```
+
+The `npm run deploy:bvcapp` script deploys to `bvc-uat` (UAT only).
+
+## Webflow Embed Asset URLs
+
+```html
+<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
+<script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
+<script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
+```
+
 # FRONT END
 Please refer to the README.md under _<REPODIR>/src/bvcrendering_ for the front end React/Next.JS and Storybook instructions.

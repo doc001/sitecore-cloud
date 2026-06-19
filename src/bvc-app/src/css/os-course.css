@@ -17,12 +17,18 @@
   padding: 20px;
 }
 
-/* Two-column page layout */
+/* Two-column page layout — only when info column has content (OS);
+   single column when info column is empty (EE). */
 .course-page-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: start;
+}
+.course-page-grid:has(.course-info-col:not(:empty)) {
+  grid-template-columns: 1fr 1fr;
+}
+.course-info-col:empty {
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -203,7 +209,7 @@
 
 .course-details {
   display: grid;
-  grid-template-columns: 4fr 0.5fr 1fr;
+  grid-template-columns: 1fr auto;
   gap: 20px;
   padding: 20px;
 }
