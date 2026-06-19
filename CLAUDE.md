@@ -15,6 +15,27 @@ src/
 
 Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
+### Vercel Projects (bvc-app)
+
+| Project | URL | Purpose |
+|---|---|---|
+| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — Webflow embeds load CSS/JS from here |
+| `bvc-uat` | https://bvc-uat.vercel.app | UAT / testing |
+
+**Webflow embeds reference `bvc-thesis` for CSS and JS:**
+```html
+<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
+<script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
+```
+
+**To deploy changes visible in Webflow, you MUST deploy to `bvc-thesis`:**
+```bash
+vercel deploy --prod --scope=bvc-marketing-its --project=bvc-thesis
+```
+
+Deploying to `bvc-uat` alone will NOT update what Webflow serves.
+
 ## Commands
 
 ### Root (Turborepo)
@@ -23,7 +44,9 @@ npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
 npm run build:bvcapp       # Build bvc-app only
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Deploy bvc-app to Vercel prod
+npm run deploy:bvcapp      # Deploy bvc-app to Vercel prod (deploys to bvc-uat)
+# To deploy to bvc-thesis (production, used by Webflow):
+# vercel deploy --prod --scope=bvc-marketing-its --project=bvc-thesis
 ```
 
 ### bvc-app (active development)
@@ -125,7 +148,7 @@ Key conventions:
 - **Accordion detail fields**: Credits (first), Fee, Dates, Days, Time. Seats are intentionally hidden (always show as available). Location is shown in the campus subheading rather than per-item.
 - **PDF course outlines** (OS only): fetched via `pdfFilename` from the course index JSON. Correct path is `/data/course-outlines-pdf/{pdfFilename}`. EE courses do not have PDF outlines.
 - **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
-- **`data-base-url`** on the container div points to the Vercel deployment (UAT: `https://bvc-uat.vercel.app`). Must be updated for production.
+- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-thesis.vercel.app`.
 
 ### bvc-app — Route Map
 

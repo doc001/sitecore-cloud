@@ -17,17 +17,15 @@
   padding: 20px;
 }
 
-/* Two-column page layout */
+/* Two-column page layout — only when info column has content (OS);
+   single column when info column is empty (EE). */
 .course-page-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: start;
 }
-
-/* When info column is empty, let offers take full width */
-.course-info-col:empty + .course-offers-col {
-  grid-column: 1 / -1;
+.course-page-grid:has(.course-info-col:not(:empty)) {
+  grid-template-columns: 1fr 1fr;
 }
 .course-info-col:empty {
   display: none;
