@@ -84,3 +84,7 @@ packages/
 node_modules
 
 .vercel
+
+# Turborepo local cache & daemon logs (do not commit; ~200MB blobs)
+.turbo/
+**/.turbo/
