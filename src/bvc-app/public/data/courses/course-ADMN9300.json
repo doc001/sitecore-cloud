@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-09T14:23:15.498Z",
+    "generatedAt": "2026-06-22T16:46:07.054Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ADMN9300",
@@ -12,17 +12,17 @@
     "name": "AI Enhanced Business Communications",
     "children": [
       {
-        "id": "75DDB5F972884D50820E76D9E0661A57",
-        "name": "26MAYMNOA90",
-        "sisID": "225530",
+        "id": "BDA30A958B2A4115933BAB749F67AFBB",
+        "name": "26SEPONOA90",
+        "sisID": "226929",
         "courseName": "",
-        "deliveryTypeId": "{2307E4CB-966D-4945-9B56-5069D6A015A3}",
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
         "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
         "deliveryType": {
-          "id": "2307E4CB966D49459B565069D6A015A3",
-          "name": "Online - Synchronous - Asynchronous",
-          "displayName": "Online - Synchronous - Asynchronous",
-          "slug": "online-synchronous-asynchronous"
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
         },
         "campus": {
           "id": "0D86BB64AC21416E971F3FD01D8C472B",
@@ -31,10 +31,10 @@
           "slug": "distance-learning"
         },
         "hours": "40",
-        "registrationStart": "20260327T000000",
-        "registrationEnd": "20260512T235959",
-        "startDate": "20260513T000000",
-        "endDate": "20260713T000000",
+        "registrationStart": "20260619T000000",
+        "registrationEnd": "20260908T235959",
+        "startDate": "20260909T000000",
+        "endDate": "20261109T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -50,105 +50,24 @@
             "amount": "600.000",
             "timeBlock": null,
             "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170S1-12450840",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-              "name": "170S1",
-              "displayName": "170S1",
-              "endTime": "20260101T205000",
-              "startTime": "20260101T180000",
-              "sisId": "170S1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160305Z",
-              "Updated": "20260101T070126Z"
-            },
-            "day": "5"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170S1-12450841",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-              "name": "170S1",
-              "displayName": "170S1",
-              "endTime": "20260101T205000",
-              "startTime": "20260101T180000",
-              "sisId": "170S1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160305Z",
-              "Updated": "20260101T070126Z"
-            },
-            "day": "5"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170S1-12450842",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-              "name": "170S1",
-              "displayName": "170S1",
-              "endTime": "20260101T205000",
-              "startTime": "20260101T180000",
-              "sisId": "170S1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160305Z",
-              "Updated": "20260101T070126Z"
-            },
-            "day": "5"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170S1-12450843",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-              "name": "170S1",
-              "displayName": "170S1",
-              "endTime": "20260101T205000",
-              "startTime": "20260101T180000",
-              "sisId": "170S1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160305Z",
-              "Updated": "20260101T070126Z"
-            },
-            "day": "5"
           }
         ],
         "feesSummary": {
-          "totalFees": 5,
+          "totalFees": 1,
           "containers": [
-            "Fees",
-            "TimeBlock"
+            "Fees"
           ],
           "feeTypes": [
             "Tuition"
           ],
-          "timeBlockCount": 4
+          "timeBlockCount": 0
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 5,
-      "totalTimeBlocks": 4,
+      "totalFees": 1,
+      "totalTimeBlocks": 0,
       "sectionsWithFees": 1
     }
   }

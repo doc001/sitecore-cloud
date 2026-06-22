@@ -176,7 +176,7 @@
                     ]
                 },
                 {
-                    "ruleType": "",
+                    "ruleType": "minimumCreditsFromList",
                     "description": "Complete at least 1 of the following courses:",
                     "courses": [
                         {
@@ -191,7 +191,8 @@
                             "credits": 3,
                             "url": ""
                         }
-                    ]
+                    ],
+                    "minimumCredits": 1
                 }
             ]
         }

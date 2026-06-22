@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generatedAt": "2026-05-14T21:32:08.915Z",
+    "generatedAt": "2026-06-22T16:46:37.194Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Course Index",
-    "totalCourses": 33
+    "totalCourses": 40
   },
   "courses": [
     {
@@ -11,10 +11,10 @@
       "name": "Financial Accounting - Introduction",
       "fileName": "course-ACCT9101.json",
       "summary": {
-        "totalSections": 8,
-        "totalFees": 9,
+        "totalSections": 7,
+        "totalFees": 8,
         "totalTimeBlocks": 1,
-        "sectionsWithFees": 8,
+        "sectionsWithFees": 7,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -32,10 +32,10 @@
       "name": "Financial Accounting - Intermediate",
       "fileName": "course-ACCT9102.json",
       "summary": {
-        "totalSections": 4,
-        "totalFees": 4,
+        "totalSections": 3,
+        "totalFees": 3,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 4,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -52,10 +52,10 @@
       "name": "Financial Accounting - Advanced",
       "fileName": "course-ACCT9103.json",
       "summary": {
-        "totalSections": 4,
-        "totalFees": 4,
+        "totalSections": 3,
+        "totalFees": 3,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 4,
+        "sectionsWithFees": 3,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -92,10 +92,10 @@
       "name": "QuickBooks Introduction",
       "fileName": "course-ACCT9401.json",
       "summary": {
-        "totalSections": 5,
-        "totalFees": 5,
+        "totalSections": 4,
+        "totalFees": 4,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 5,
+        "sectionsWithFees": 4,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -116,6 +116,26 @@
         "totalFees": 3,
         "totalTimeBlocks": 0,
         "sectionsWithFees": 3,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "ADMN9300",
+      "name": "AI Enhanced Business Communications",
+      "fileName": "course-ADMN9300.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 1,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -192,10 +212,10 @@
       "name": "Microsoft Excel - Introduction",
       "fileName": "course-COMP9301.json",
       "summary": {
-        "totalSections": 2,
-        "totalFees": 2,
+        "totalSections": 1,
+        "totalFees": 1,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 2,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -216,6 +236,26 @@
         "totalFees": 2,
         "totalTimeBlocks": 0,
         "sectionsWithFees": 2,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "DESN9312",
+      "name": "Motion Design in Digital Design",
+      "fileName": "course-DESN9312.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 1,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -308,14 +348,34 @@
       }
     },
     {
+      "sisID": "DESN9317",
+      "name": "Entrepreneurship in Digital Design",
+      "fileName": "course-DESN9317.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 1,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
       "sisID": "FACP9101",
       "name": "Basic Life Support CPR",
       "fileName": "course-FACP9101.json",
       "summary": {
-        "totalSections": 14,
-        "totalFees": 28,
-        "totalTimeBlocks": 14,
-        "sectionsWithFees": 14,
+        "totalSections": 11,
+        "totalFees": 22,
+        "totalTimeBlocks": 11,
+        "sectionsWithFees": 11,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -333,10 +393,10 @@
       "name": "Basic Life Support CPR Renewal",
       "fileName": "course-FACP9102.json",
       "summary": {
-        "totalSections": 4,
-        "totalFees": 8,
-        "totalTimeBlocks": 4,
-        "sectionsWithFees": 4,
+        "totalSections": 6,
+        "totalFees": 12,
+        "totalTimeBlocks": 6,
+        "sectionsWithFees": 6,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -374,10 +434,10 @@
       "name": "Understanding and Applying the DSM-5-TR in Healthcare Practice",
       "fileName": "course-HMSV9503.json",
       "summary": {
-        "totalSections": 5,
-        "totalFees": 5,
+        "totalSections": 4,
+        "totalFees": 4,
         "totalTimeBlocks": 0,
-        "sectionsWithFees": 5,
+        "sectionsWithFees": 4,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": false,
@@ -513,6 +573,26 @@
       }
     },
     {
+      "sisID": "ISEC9210",
+      "name": "Building Cybersecurity Crisis Communication Strategies",
+      "fileName": "course-ISEC9210.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 1,
+        "totalTimeBlocks": 0,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": false,
+        "containers": [
+          "Fees"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
       "sisID": "ISEC9211",
       "name": "Implementing Cybersecurity Resilience Strategies",
       "fileName": "course-ISEC9211.json",
@@ -553,9 +633,72 @@
       }
     },
     {
-      "sisID": "MMPR9105",
-      "name": "Maintenance Strategy Development",
-      "fileName": "course-MMPR9105.json",
+      "sisID": "MMPR9101",
+      "name": "An Integrated Strategy for Maintenance Management",
+      "fileName": "course-MMPR9101.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 3,
+        "totalTimeBlocks": 2,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": true,
+        "containers": [
+          "Fees",
+          "TimeBlock"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "MMPR9103",
+      "name": "Human Resources Management for Maintenance Manager",
+      "fileName": "course-MMPR9103.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 5,
+        "totalTimeBlocks": 4,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": true,
+        "containers": [
+          "Fees",
+          "TimeBlock"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "MMPR9106",
+      "name": "Maintenance Work Management",
+      "fileName": "course-MMPR9106.json",
+      "summary": {
+        "totalSections": 1,
+        "totalFees": 5,
+        "totalTimeBlocks": 4,
+        "sectionsWithFees": 1,
+        "hasDeliveryTypes": true,
+        "hasCampuses": true,
+        "hasTimeBlocks": true,
+        "containers": [
+          "Fees",
+          "TimeBlock"
+        ],
+        "feeTypes": [
+          "Tuition"
+        ]
+      }
+    },
+    {
+      "sisID": "MMPR9107",
+      "name": "Maintenance Information Management",
+      "fileName": "course-MMPR9107.json",
       "summary": {
         "totalSections": 1,
         "totalFees": 5,
@@ -640,10 +783,10 @@
       "name": "Phlebotomy",
       "fileName": "course-NURS9504.json",
       "summary": {
-        "totalSections": 6,
-        "totalFees": 12,
-        "totalTimeBlocks": 6,
-        "sectionsWithFees": 6,
+        "totalSections": 5,
+        "totalFees": 10,
+        "totalTimeBlocks": 5,
+        "sectionsWithFees": 5,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,
@@ -661,10 +804,10 @@
       "name": "N95 Mask Fitting",
       "fileName": "course-SAFT9406.json",
       "summary": {
-        "totalSections": 32,
-        "totalFees": 64,
-        "totalTimeBlocks": 32,
-        "sectionsWithFees": 32,
+        "totalSections": 28,
+        "totalFees": 56,
+        "totalTimeBlocks": 28,
+        "sectionsWithFees": 28,
         "hasDeliveryTypes": true,
         "hasCampuses": true,
         "hasTimeBlocks": true,

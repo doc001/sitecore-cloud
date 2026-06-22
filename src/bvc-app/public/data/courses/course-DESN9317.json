@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-09T14:23:17.307Z",
+    "generatedAt": "2026-06-22T16:46:11.392Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "DESN9317",
@@ -12,17 +12,17 @@
     "name": "Entrepreneurship in Digital Design",
     "children": [
       {
-        "id": "3A3F4F0B339D4FF9AC8DA5744AA8A64E",
-        "name": "26MAYMNOA90",
-        "sisID": "225527",
+        "id": "C853FBCD1FCD426C959AA37D28A2E91C",
+        "name": "26SEPONOA90",
+        "sisID": "226931",
         "courseName": "",
-        "deliveryTypeId": "{2307E4CB-966D-4945-9B56-5069D6A015A3}",
+        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
         "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
         "deliveryType": {
-          "id": "2307E4CB966D49459B565069D6A015A3",
-          "name": "Online - Synchronous - Asynchronous",
-          "displayName": "Online - Synchronous - Asynchronous",
-          "slug": "online-synchronous-asynchronous"
+          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
+          "name": "Online - Asynchronous",
+          "displayName": "Online - Asynchronous",
+          "slug": "online-asynchronous"
         },
         "campus": {
           "id": "0D86BB64AC21416E971F3FD01D8C472B",
@@ -31,10 +31,10 @@
           "slug": "distance-learning"
         },
         "hours": "20",
-        "registrationStart": "20260326T000000",
-        "registrationEnd": "20260512T235959",
-        "startDate": "20260513T000000",
-        "endDate": "20260713T000000",
+        "registrationStart": "20260619T000000",
+        "registrationEnd": "20260908T235959",
+        "startDate": "20260909T000000",
+        "endDate": "20261109T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -50,65 +50,24 @@
             "amount": "300.000",
             "timeBlock": null,
             "day": ""
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170S1-12450848",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-              "name": "170S1",
-              "displayName": "170S1",
-              "endTime": "20260101T205000",
-              "startTime": "20260101T180000",
-              "sisId": "170S1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160305Z",
-              "Updated": "20260101T070126Z"
-            },
-            "day": "3"
-          },
-          {
-            "containerName": "TimeBlock",
-            "feeItemName": "170S1-12450849",
-            "feeTypeId": "",
-            "feeType": null,
-            "amount": "",
-            "timeBlock": {
-              "id": "3672CC03418B40D7BD6D33F633B7E9E7",
-              "name": "170S1",
-              "displayName": "170S1",
-              "endTime": "20260101T205000",
-              "startTime": "20260101T180000",
-              "sisId": "170S1",
-              "created": "",
-              "updated": "",
-              "Created": "20250520T160305Z",
-              "Updated": "20260101T070126Z"
-            },
-            "day": "3"
           }
         ],
         "feesSummary": {
-          "totalFees": 3,
+          "totalFees": 1,
           "containers": [
-            "Fees",
-            "TimeBlock"
+            "Fees"
           ],
           "feeTypes": [
             "Tuition"
           ],
-          "timeBlockCount": 2
+          "timeBlockCount": 0
         }
       }
     ],
     "summary": {
       "totalSections": 1,
-      "totalFees": 3,
-      "totalTimeBlocks": 2,
+      "totalFees": 1,
+      "totalTimeBlocks": 0,
       "sectionsWithFees": 1
     }
   }

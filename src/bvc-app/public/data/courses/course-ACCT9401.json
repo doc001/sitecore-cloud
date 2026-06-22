@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2026-05-14T21:31:37.521Z",
+    "generatedAt": "2026-06-22T16:46:05.919Z",
     "version": "4.0.0",
     "source": "Sitecore XMC GraphQL - Individual Course Data",
     "sisID": "ACCT9401",
@@ -35,58 +35,6 @@
         "registrationEnd": "20260811T235959",
         "startDate": "20260812T000000",
         "endDate": "20261012T000000",
-        "seatsAvailable": "1",
-        "fees": [
-          {
-            "containerName": "Fees",
-            "feeItemName": "Tuition",
-            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
-            "feeType": {
-              "id": "1351EB1B28D645AEA28EA8442152E100",
-              "name": "Tuition",
-              "displayName": "Tuition",
-              "slug": "tuition"
-            },
-            "amount": "430.000",
-            "timeBlock": null,
-            "day": ""
-          }
-        ],
-        "feesSummary": {
-          "totalFees": 1,
-          "containers": [
-            "Fees"
-          ],
-          "feeTypes": [
-            "Tuition"
-          ],
-          "timeBlockCount": 0
-        }
-      },
-      {
-        "id": "CB5DC928F34B4498A01DCB9252B4D714",
-        "name": "26JUNMNOA91",
-        "sisID": "224597",
-        "courseName": "",
-        "deliveryTypeId": "{E3BBEE30-E8A2-44CA-A5D1-3F22FCCD799F}",
-        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
-        "deliveryType": {
-          "id": "E3BBEE30E8A244CAA5D13F22FCCD799F",
-          "name": "Online - Asynchronous",
-          "displayName": "Online - Asynchronous",
-          "slug": "online-asynchronous"
-        },
-        "campus": {
-          "id": "0D86BB64AC21416E971F3FD01D8C472B",
-          "name": "Distance Learning",
-          "displayName": "Distance Learning",
-          "slug": "distance-learning"
-        },
-        "hours": "21",
-        "registrationStart": "20260105T000000",
-        "registrationEnd": "20260609T235959",
-        "startDate": "20260610T000000",
-        "endDate": "20260810T000000",
         "seatsAvailable": "1",
         "fees": [
           {
@@ -273,10 +221,10 @@
       }
     ],
     "summary": {
-      "totalSections": 5,
-      "totalFees": 5,
+      "totalSections": 4,
+      "totalFees": 4,
       "totalTimeBlocks": 0,
-      "sectionsWithFees": 5
+      "sectionsWithFees": 4
     }
   }
 }

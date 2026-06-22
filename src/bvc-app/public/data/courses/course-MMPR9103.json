@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "generatedAt": "2026-06-22T16:46:23.108Z",
+    "version": "4.0.0",
+    "source": "Sitecore XMC GraphQL - Individual Course Data",
+    "sisID": "MMPR9103",
+    "courseName": "Human Resources Management for Maintenance Manager"
+  },
+  "course": {
+    "id": "7F0944066E3F4A078383F766D8770776",
+    "sisID": "MMPR9103",
+    "name": "Human Resources Management for Maintenance Manager",
+    "children": [
+      {
+        "id": "9549051C8EC746FE989405E6480A5459",
+        "name": "26SEPONOA90",
+        "sisID": "226902",
+        "courseName": "",
+        "deliveryTypeId": "{2307E4CB-966D-4945-9B56-5069D6A015A3}",
+        "campusId": "{0D86BB64-AC21-416E-971F-3FD01D8C472B}",
+        "deliveryType": {
+          "id": "2307E4CB966D49459B565069D6A015A3",
+          "name": "Online - Synchronous - Asynchronous",
+          "displayName": "Online - Synchronous - Asynchronous",
+          "slug": "online-synchronous-asynchronous"
+        },
+        "campus": {
+          "id": "0D86BB64AC21416E971F3FD01D8C472B",
+          "name": "Distance Learning",
+          "displayName": "Distance Learning",
+          "slug": "distance-learning"
+        },
+        "hours": "30",
+        "registrationStart": "20260603T000000",
+        "registrationEnd": "20260916T235959",
+        "startDate": "20260918T000000",
+        "endDate": "20261017T000000",
+        "seatsAvailable": "1",
+        "fees": [
+          {
+            "containerName": "Fees",
+            "feeItemName": "Tuition",
+            "feeTypeId": "{1351EB1B-28D6-45AE-A28E-A8442152E100}",
+            "feeType": {
+              "id": "1351EB1B28D645AEA28EA8442152E100",
+              "name": "Tuition",
+              "displayName": "Tuition",
+              "slug": "tuition"
+            },
+            "amount": "925.000",
+            "timeBlock": null,
+            "day": ""
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "530A1-12712345",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
+              "startTime": "20260101T080000",
+              "sisId": "530A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
+            },
+            "day": "6"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "530A1-12712346",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
+              "startTime": "20260101T080000",
+              "sisId": "530A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
+            },
+            "day": "5"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "530A1-12712347",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
+              "startTime": "20260101T080000",
+              "sisId": "530A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
+            },
+            "day": "5"
+          },
+          {
+            "containerName": "TimeBlock",
+            "feeItemName": "530A1-12712348",
+            "feeTypeId": "",
+            "feeType": null,
+            "amount": "",
+            "timeBlock": {
+              "id": "71DF9D2314CB436BBA13F18A2E40A9FC",
+              "name": "530A1",
+              "displayName": "530A1",
+              "endTime": "20260101T165000",
+              "startTime": "20260101T080000",
+              "sisId": "530A1",
+              "created": "",
+              "updated": "",
+              "Created": "20250520T160310Z",
+              "Updated": "20260101T070129Z"
+            },
+            "day": "6"
+          }
+        ],
+        "feesSummary": {
+          "totalFees": 5,
+          "containers": [
+            "Fees",
+            "TimeBlock"
+          ],
+          "feeTypes": [
+            "Tuition"
+          ],
+          "timeBlockCount": 4
+        }
+      }
+    ],
+    "summary": {
+      "totalSections": 1,
+      "totalFees": 5,
+      "totalTimeBlocks": 4,
+      "sectionsWithFees": 1
+    }
+  }
+}
