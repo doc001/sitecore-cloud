@@ -14,7 +14,7 @@
     "breadcrumbs:all": "node scripts/generateNavigationBreadcrumbs.mjs all",
     "prebuild": "npm run breadcrumbs:all && node scripts/copy-folders.mjs",
     "predev": "npm run breadcrumbs:build",
-    "prelaunch:build": "npm run createCourses && npm run generateOpenStudiesByArea && node scripts/copy-folders.mjs",
+    "prelaunch:build": "npm run generateOpenStudiesByArea && node scripts/copy-folders.mjs",
     "postinstall": "flowbite-react patch",
     "getWebflowData": "node scripts/fetch-webflow-collections.mjs",
     "parsePrograms": "node scripts/parsePrograms.mjs",
@@ -28,7 +28,7 @@
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
     "generateProgramRequirementsManifest": "node scripts/generateProgramRequirementsManifest.mjs",
-    "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirementsManifest && npm run prelaunch:build",
+    "bvcapp-scripts": "npm run createCourses && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirementsManifest && npm run prelaunch:build",
     "build": "npm run bvcapp-scripts && next build"
   },
   "dependencies": {

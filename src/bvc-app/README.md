@@ -75,3 +75,41 @@ Production state = whatever was in your local `public/` at the moment you ran `d
 - **Never hand-edit files under `public/data/`** — the next local build overwrites them. Edit the source under `src/data/` instead.
 - `public/data/static/navigation-breadcrumbs.json` is also written directly by `scripts/generateNavigationBreadcrumbs.mjs`; the rest of `public/data/` comes exclusively from the copy script.
 - `.gitignore` ignores `/src/data` only (the generated-data folder). The Vercel CLI also uses `.gitignore` to filter uploads (no `.vercelignore` exists), so `src/data/`, `out/`, `node_modules/`, `.next/`, and `.env*` are excluded from the upload — Vercel reproduces `out/` from `public/` during its own `next build`.
+
+### Build dependency graph (data flow)
+
+`npm run build:bvcapp` (monorepo root) runs the **complete** flow: `turbo run build --filter=bvc-app` → npm runs bvc-app's `build`, which fires the `prebuild` hook (`breadcrumbs:all` + `copy-folders`), then `bvcapp-scripts`, then `next build`.
+
+> ⚠️ The `build` task is turbo-**cached**. Webflow/Sitecore responses are external and not part of turbo's input hash, so a re-run with no local source changes can be a **cache hit that skips the data fetch**. Run `turbo run build --filter=bvc-app --force` (or change a tracked input) to force a fresh pull.
+
+**External sources**
+
+- **Sitecore GraphQL** (`SITECORE_GRAPHQL_ENDPOINT` + `SC_APIKEY` / `SITECORE_API_KEY`) → SIS / course data.
+- **Webflow API v2** (`WEBFLOW_API_KEY`) → CMS: programs, open-studies, program-areas, courses, … (40 collections).
+- **SharePoint sync** (`C:\wamp64\www\coursesDB\sharepoint_course_outlines`, an *external* process) → `public/data/course-outlines-pdf/*.pdf`. Not part of this build; it adds outlines but never removes stale ones, so a course can have several `(<term>_Current).pdf` files. `buildOpenStudiesByArea.mjs` only reads them and `resolvePdf()` picks the newest by start term (year, then Winter→Spring→Summer→Fall), with `_Current)` used only as a tiebreaker.
+
+**Order, inputs → outputs** (everything writes to gitignored `src/data/`, then `copy-folders.mjs` mirrors to `public/data/`):
+
+```
+1. createCourses
+   a. getWebflowData   Webflow API ─────────────▶ src/data/cms/*.json (programs, open-studies, program-areas, …)
+   b. parsePrograms    cms/programs.json ────────▶ src/data/cms/programs.parsed.json
+2. generateCourses     Sitecore(Courses) ────────▶ src/data/validCourses.json
+3. generateOpenStudies Sitecore(Credit Courses) ─▶ src/data/osValidCourses.json
+4. generateMap         Sitecore(lookups) ────────▶ src/data/sis-data.json, sis-data-lookup.json, src/types/sis-data.ts
+5. generateCourseData  validCourses + sis-data-lookup ─▶ src/data/courses/course-*.json, course-index.json,
+                                                          coursesData.json, summary-stats.json
+6. generateOpenStudiesData  osValidCourses + sis-data-lookup ─▶ src/data/oScourses/course-*.json, course-index.json,
+                                                          coursesData.os.json, summary-stats.os.json   ◀ .os suffix
+7. generateNavigationBreadcrumbs  navigation-data.json + cms/programs.json ─▶ src/data/static/navigation-breadcrumbs.json
+8. generateProgramRequirementsManifest  static/program-requirements/*.json ─▶ static/program-requirements-manifest.json
+9. prelaunch:build
+   a. generateOpenStudiesByArea  cms/open-studies.json + cms/program-areas.json + osValidCourses.json
+                                 + public/data/course-outlines-pdf/ ─▶ src/data/open-studies-by-area.json
+   b. copy-folders.mjs           src/data/** ─────▶ public/data/**
+→ next build  public/data → out/data
+```
+
+**Why `createCourses` runs first:** `generateNavigationBreadcrumbs` (#7) and `generateOpenStudiesByArea` (#9a) consume Webflow `cms/*` data. The fetch used to run *last*, so they read the previous run's data. (Removing `createCourses` from `prelaunch:build` means running that script standalone no longer fetches — it assumes `src/data/cms/*` exists.)
+
+**Output-collision note:** #5 and #6 both write into `src/data/`. #6 now writes `coursesData.os.json` / `summary-stats.os.json` instead of clobbering #5's `coursesData.json` / `summary-stats.json`. Neither file currently has a runtime consumer (the app uses per-course files plus `validCourses.json`, `cms/programs*.json`, and `static/*`).

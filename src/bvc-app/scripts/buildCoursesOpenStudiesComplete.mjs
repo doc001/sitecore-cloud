@@ -976,9 +976,11 @@ function generateSummaryStats(stats, enhancedCourseData, outputDir) {
     )].sort()
   };
   
-  const statsPath = path.join(outputDir, 'summary-stats.json');
+  // Open Studies writes its own stats file so it does not clobber the regular
+  // courses build's summary-stats.json (both scripts share src/data/).
+  const statsPath = path.join(outputDir, 'summary-stats.os.json');
   fs.writeFileSync(statsPath, JSON.stringify(summaryStats, null, 2), "utf-8");
-  console.log(`📊 Generated summary statistics: summary-stats.json`);
+  console.log(`📊 Generated summary statistics: summary-stats.os.json`);
   
   return summaryStats;
 }
@@ -1125,8 +1127,10 @@ async function buildAllCoursesComplete() {
   // Generate additional files for SSG optimization
   console.log(`\n📋 Generating index and summary files...`);
   
-  // 1. Main combined file (for backwards compatibility)
-  const mainOutputPath = path.resolve(dataDir, "coursesData.json");
+  // 1. Main combined file (for backwards compatibility).
+  // Open Studies writes coursesData.os.json so it does not clobber the regular
+  // courses build's coursesData.json (both scripts share src/data/).
+  const mainOutputPath = path.resolve(dataDir, "coursesData.os.json");
   const mainOutputData = {
     metadata: {
       generatedAt: new Date().toISOString(),
@@ -1150,7 +1154,7 @@ async function buildAllCoursesComplete() {
   };
   
   fs.writeFileSync(mainOutputPath, JSON.stringify(mainOutputData, null, 2), "utf-8");
-  console.log(`✅ Generated main file: coursesData.json`);
+  console.log(`✅ Generated main file: coursesData.os.json`);
   
   // 2. Course index file
   generateCourseIndex(enhancedCourseData, coursesDir);
@@ -1186,8 +1190,8 @@ async function buildAllCoursesComplete() {
   
   console.log(`\n📋 Generated Files Structure:`);
   console.log(`   📁 src/data/`);
-  console.log(`   ├── coursesData.json (main combined file)`);
-  console.log(`   ├── summary-stats.json (statistics)`);
+  console.log(`   ├── coursesData.os.json (main combined file)`);
+  console.log(`   ├── summary-stats.os.json (statistics)`);
   console.log(`   └── oScourses/`);
   console.log(`       ├── course-index.json (course list with summaries)`);
   console.log(`       ├── course-{sisID}.json (individual course files)`);
@@ -1196,8 +1200,8 @@ async function buildAllCoursesComplete() {
   console.log(`\n🔧 SSG Usage Examples:`);
   console.log(`   • Load specific course: import courseData from '@/data/oScourses/course-ACCT101.json'`);
   console.log(`   • Get course list: import courseIndex from '@/data/oScourses/course-index.json'`);
-  console.log(`   • Load statistics: import stats from '@/data/summary-stats.json'`);
-  console.log(`   • Main data: import allCourses from '@/data/coursesData.json'`);
+  console.log(`   • Load statistics: import stats from '@/data/summary-stats.os.json'`);
+  console.log(`   • Main data: import allCourses from '@/data/coursesData.os.json'`);
   
   console.log(`\n✨ Benefits for SSG:`);
   console.log(`   • Smaller bundle sizes (load only needed courses)`);
