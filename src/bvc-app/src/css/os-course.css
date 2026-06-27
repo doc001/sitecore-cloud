@@ -578,6 +578,10 @@
     right: -100%;
   }
 
+  .course-page-grid:has(.course-info-col:not(:empty)) {
+    grid-template-columns: 1fr;
+  }
+
   .course-details {
     grid-template-columns: 1fr;
   }
