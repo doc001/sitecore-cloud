@@ -175,15 +175,12 @@ The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its
 
 ## Deploying
 
-All deployments target `bvc-thesis`. Use the npm script or the manual commands below:
+All deployments target `bvc-thesis`. Run on demand from the repo root:
 
-```bash
-# From repo root (recommended):
-npm run deploy:bvcapp
-
-# Manual steps from src/bvc-app/:
-vercel pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-thesis
-vercel deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-thesis
+```powershell
+npm run deploy:bvcapp   # runs the full pipeline: build → package → deploy → cleanup
+# or equivalently:
+node pipeline.mjs
 ```
 
 ## Webflow Embed Asset URLs

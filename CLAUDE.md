@@ -29,14 +29,11 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 ```
 
 **All deployments target `bvc-thesis`. Vercel is a static host only — it never rebuilds.**
-The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`:
-```bash
-# Manual one-off deploy:
-npm run deploy:bvcapp
+The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`.
 
-# Or from src/bvc-app/:
-vercel pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-thesis
-vercel deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-thesis
+On-demand deploy (same steps as the hourly PM2 cron):
+```bash
+npm run deploy:bvcapp   # or: node pipeline.mjs
 ```
 
 ## Commands
