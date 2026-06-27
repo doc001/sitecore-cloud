@@ -22,6 +22,24 @@ function notify(title, message) {
 
 console.log(`\n[${ts()}] ===== BVC hourly pipeline started =====`);
 
+// 0. Pre-build clean — wipe stale data so removed Sitecore sections don't persist across builds.
+//    Without this, a section deleted from Sitecore leaves behind its old JSON file and
+//    the stale sisID gets deployed, causing 404s from the availability API.
+const dataDirs = [
+  join(BVC_APP, 'src', 'data', 'courses'),
+  join(BVC_APP, 'src', 'data', 'oScourses'),
+  join(BVC_APP, 'public', 'data', 'courses'),
+  join(BVC_APP, 'public', 'data', 'oScourses'),
+  join(BVC_APP, 'public', 'data', 'open-studies'),
+];
+for (const dir of dataDirs) {
+  if (existsSync(dir)) {
+    rmSync(dir, { recursive: true });
+    mkdirSync(dir, { recursive: true });
+    console.log(`[${ts()}] Cleaned: ${dir.replace(ROOT, '.')}`);
+  }
+}
+
 // 1. Build — data scripts + breadcrumbs + next build → out/
 //    Then package out/ into .vercel/output/ (Vercel Build Output API v3).
 //    This lets vercel deploy --prebuilt upload static files directly — no Vercel rebuild.
