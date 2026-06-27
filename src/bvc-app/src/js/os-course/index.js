@@ -366,7 +366,7 @@
   function A() {
     (l.cart.classList.remove('open'), l.overlay.classList.remove('open'));
   }
-  function C() {
+  function C(feesLoading) {
     var e = document.createDocumentFragment();
     (c.items.forEach(function (t) {
       var s = document.createElement('div');
@@ -384,6 +384,18 @@
     }),
       (l.cartItemsContainer.innerHTML = ''),
       l.cartItemsContainer.appendChild(e));
+    if (feesLoading) {
+      var feeLoadEl = document.createElement('div');
+      feeLoadEl.className = 'cart-fees-loading';
+      feeLoadEl.innerHTML = '<div class="cart-fees-spinner"></div>Calculating fees…';
+      l.cartItemsContainer.appendChild(feeLoadEl);
+      var summaryLoadEl = document.createElement('div');
+      summaryLoadEl.className = 'cart-summary';
+      summaryLoadEl.innerHTML = '<hr /><div class="cart-item-info"><strong>Total:</strong> Calculating…</div>';
+      l.cartItemsContainer.appendChild(summaryLoadEl);
+      l.totalAmount.textContent = '…';
+      return;
+    }
     var t = sessionStorage.getItem('feeSession'),
       s = t ? JSON.parse(t) : null,
       a = s && s.feeData && s.feeData.fees ? s.feeData.fees : [],
@@ -458,13 +470,16 @@
           if (!n.data || !n.data.seatsAreAvailable) return (u.markAsUnavailable(a.sku), t.classList.add('unavailable'), void d('No seats available for this date', 'error'));
           if (c.addItem(a)) {
             c.updateAddedButtonStates();
+            C(true);
+            g();
+            t.classList.remove('loading');
             var i = c.items.map(function (e) {
               return e.sku;
             });
             try {
-              (await B(i, s), C(), g(), d('Item added to cart!', 'success'));
+              (await B(i, s), C(), d('Item added to cart!', 'success'));
             } catch (e) {
-              (console.error('Error checking fees:', e), C(), g(), d('Item added to cart! (Fee calculation pending)', 'warning'));
+              (console.error('Error checking fees:', e), C(), d('Item added to cart! (Fee calculation pending)', 'warning'));
             }
           } else d('Item is already in your cart', 'error');
         } else {
