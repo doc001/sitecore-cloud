@@ -126,12 +126,6 @@
       }
     }
 
-    validatePostalCode(postalCode) {
-      const formattedPostalCode = postalCode.toUpperCase().replace(/\s+/g, '').replace(/(.{3})(.*)/, '$1 $2');
-      const canadianFormat = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
-      return canadianFormat.test(formattedPostalCode);
-    }
-
     checkForPaymentErrors() {
       // Get URL parameters
       const urlParams = new URLSearchParams(window.location.search);
@@ -470,9 +464,9 @@
     }
 
     validatePostalCode(postalCode) {
-      // Canadian postal code format or general minimum length
-      const canadianFormat = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
-      return canadianFormat.test(postalCode) || postalCode.length >= 5;
+      const normalized = postalCode.toUpperCase().replace(/\s+/g, '');
+      const canadianFormat = /^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/;
+      return canadianFormat.test(normalized) || normalized.length >= 5;
     }
 
     validateBirthDate(birthDate) {
