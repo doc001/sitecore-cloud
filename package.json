@@ -12,12 +12,13 @@
     "build:bvcapp": "turbo run build --filter=bvc-app",
     "build": "turbo run build",
     "deploy:jamstack": "cd src/nextjs-jamstack && vercel --scope=bvc-marketing-its --prod",
-    "deploy:bvcapp": "cd src/bvc-app && vercel --scope=bvc-marketing-its --prod && npm run cleanup"
+    "deploy:bvcapp": "cd src/bvc-app && vercel build && vercel deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-thesis && npm run cleanup"
   },
   "devDependencies": {
     "turbo": "^2.5.4"
   },
   "dependencies": {
+    "node-notifier": "^10.0.1",
     "vercel": "^54.14.2"
   }
 }

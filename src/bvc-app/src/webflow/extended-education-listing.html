@@ -152,14 +152,14 @@
   .bvc-ee-error { color: #dc2626; }
 </style>
 
-<div id="bvc-ee-listing" data-base-url="https://bvc-uat.vercel.app"></div>
+<div id="bvc-ee-listing" data-base-url="https://bvc-thesis.vercel.app"></div>
 
 <script>
 (function () {
   var container = document.getElementById('bvc-ee-listing');
   if (!container) return;
 
-  var baseUrl    = (container.getAttribute('data-base-url') || 'https://bvc-uat.vercel.app').replace(/\/$/, '');
+  var baseUrl    = (container.getAttribute('data-base-url') || 'https://bvc-thesis.vercel.app').replace(/\/$/, '');
   var courseBase = (container.getAttribute('data-course-base-url') || '').replace(/\/$/, '')
                    || (window.location.origin + '/extended-education');
   var jsonUrl    = baseUrl + '/data/coursesIndex.json';
