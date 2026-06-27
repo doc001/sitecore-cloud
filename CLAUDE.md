@@ -19,22 +19,25 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — Webflow embeds load CSS/JS from here |
-| `bvc-uat` | https://bvc-uat.vercel.app | UAT / testing |
+| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
 
-**Webflow embeds reference `bvc-thesis` for CSS and JS:**
+**Webflow embeds reference `bvc-thesis` for CSS, JS, and course data:**
 ```html
 <link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
 <script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
 <script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
 ```
 
-**To deploy changes visible in Webflow, you MUST deploy to `bvc-thesis`:**
+**All deployments target `bvc-thesis`. Vercel is a static host only — it never rebuilds.**
+The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`:
 ```bash
-vercel deploy --prod --scope=bvc-marketing-its --project=bvc-thesis
-```
+# Manual one-off deploy:
+npm run deploy:bvcapp
 
-Deploying to `bvc-uat` alone will NOT update what Webflow serves.
+# Or from src/bvc-app/:
+vercel pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-thesis
+vercel deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-thesis
+```
 
 ## Commands
 
@@ -42,12 +45,40 @@ Deploying to `bvc-uat` alone will NOT update what Webflow serves.
 ```bash
 npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
-npm run build:bvcapp       # Build bvc-app only
+npm run build:bvcapp       # Build bvc-app only (Turbo, cache bypassed with -- --force)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Deploy bvc-app to Vercel prod (deploys to bvc-uat)
-# To deploy to bvc-thesis (production, used by Webflow):
-# vercel deploy --prod --scope=bvc-marketing-its --project=bvc-thesis
+npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-thesis
 ```
+
+### Hourly Automated Pipeline (PM2)
+
+`pipeline.mjs` (root) runs the full data refresh + deploy automatically every hour.
+
+```bash
+# One-off manual run:
+node pipeline.mjs
+
+# PM2 setup (run once to activate the hourly schedule):
+npm install -g pm2
+pm2 start ecosystem.config.js   # starts cron at :55 every hour
+pm2 save                        # persist across reboots
+pm2 startup                     # register PM2 as a Windows startup service
+
+# PM2 day-to-day commands:
+pm2 status                      # check if pipeline is running/scheduled
+pm2 logs bvc-hourly-deploy      # live log tail
+pm2 restart bvc-hourly-deploy   # force an immediate run now
+pm2 stop bvc-hourly-deploy      # pause the schedule
+```
+
+**Pipeline steps** (total ~5 min):
+1. `npm run build:bvcapp --force` — data scripts + breadcrumbs + Next.js build → `out/`
+2. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
+3. `vercel pull` — refreshes `.vercel/project.json` project link
+4. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild
+5. `cleanup-data.mjs` — removes intermediate JSON files
+
+On build or deploy failure a **Windows toast notification** fires. Logs are written to `logs/` (git-ignored).
 
 ### bvc-app (active development)
 Run from `src/bvc-app/` or use `--filter`:

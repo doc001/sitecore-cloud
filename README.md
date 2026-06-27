@@ -169,20 +169,26 @@ The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — Webflow embeds load CSS/JS from here |
-| `bvc-uat` | https://bvc-uat.vercel.app | UAT / testing |
+| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — sole deployment target; all Webflow embeds load CSS/JS/data from here |
+
+**Vercel is a static host only.** The site is built locally; the pre-built `out/` folder is packaged and uploaded directly using `vercel deploy --prebuilt`. Vercel never runs a build on its servers.
 
 ## Deploying
 
-**Important:** Webflow course pages load assets from `bvc-thesis.vercel.app`. To deploy changes that are visible on Webflow, you **must** deploy to `bvc-thesis`:
+All deployments target `bvc-thesis`. Use the npm script or the manual commands below:
 
 ```bash
-vercel deploy --prod --scope=bvc-marketing-its --project=bvc-thesis
+# From repo root (recommended):
+npm run deploy:bvcapp
+
+# Manual steps from src/bvc-app/:
+vercel pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-thesis
+vercel deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-thesis
 ```
 
-The `npm run deploy:bvcapp` script deploys to `bvc-uat` (UAT only).
-
 ## Webflow Embed Asset URLs
+
+All Webflow embeds (course listings, course detail pages) load assets and data from `bvc-thesis.vercel.app`:
 
 ```html
 <link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
@@ -190,6 +196,50 @@ The `npm run deploy:bvcapp` script deploys to `bvc-uat` (UAT only).
 <script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
 <script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
 ```
+
+---
+
+# HOURLY AUTOMATED PIPELINE (PM2)
+
+`pipeline.mjs` runs a full data refresh and deploys to `bvc-thesis` every hour at `:55`. It uses PM2 as a process manager and fires a Windows toast notification on failure.
+
+## Pipeline steps (~5 min total)
+
+| Step | What happens |
+|---|---|
+| Build | `npm run build:bvcapp --force` — fetches data from Webflow + Sitecore XMC, generates breadcrumbs, runs Next.js static export → `out/` |
+| Package | Copies `out/` into `.vercel/output/static/` with a `config.json` (Vercel Build Output API v3) |
+| Link project | `vercel pull` — refreshes `.vercel/project.json` for `bvc-thesis` |
+| Deploy | `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild |
+| Cleanup | Removes intermediate JSON files from `src/data/` |
+
+## PM2 setup (run once)
+
+```bash
+npm install -g pm2
+pm2 start ecosystem.config.js   # registers the cron (fires at :55 every hour)
+pm2 save                        # persist the schedule across reboots
+pm2 startup                     # register PM2 as a Windows startup service
+```
+
+## PM2 day-to-day
+
+```bash
+pm2 status                      # check schedule and last run status
+pm2 logs bvc-hourly-deploy      # live log tail
+pm2 restart bvc-hourly-deploy   # trigger an immediate run right now
+pm2 stop bvc-hourly-deploy      # pause the schedule
+```
+
+## Manual one-off run
+
+```bash
+node pipeline.mjs
+```
+
+Logs are written to `logs/` (git-ignored). To adjust the cron offset, edit `cron_restart` in `ecosystem.config.js`.
+
+---
 
 # FRONT END
 Please refer to the README.md under _<REPODIR>/src/bvcrendering_ for the front end React/Next.JS and Storybook instructions.
