@@ -215,11 +215,16 @@ All Webflow embeds (course listings, course detail pages) load assets and data f
 
 ## PM2 setup (run once)
 
-```bash
+> **Windows machine** — `pm2 startup` does not work on Windows. Use `pm2-windows-startup` instead to auto-start PM2 on login.
+
+```powershell
 npm install -g pm2
-pm2 start ecosystem.config.js   # registers the cron (fires at :55 every hour)
-pm2 save                        # persist the schedule across reboots
-pm2 startup                     # register PM2 as a Windows startup service
+pm2 start ecosystem.config.js       # registers the cron (fires at :50 every hour)
+pm2 save                            # save process list to ~/.pm2/dump.pm2
+
+# Auto-start on Windows login:
+npm install -g pm2-windows-startup
+pm2-startup install
 ```
 
 ## PM2 day-to-day

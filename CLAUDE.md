@@ -59,10 +59,12 @@ npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package �
 node pipeline.mjs
 
 # PM2 setup (run once to activate the hourly schedule):
+# Note: pm2 startup does NOT work on Windows — use pm2-windows-startup instead
 npm install -g pm2
-pm2 start ecosystem.config.js   # starts cron at :55 every hour
-pm2 save                        # persist across reboots
-pm2 startup                     # register PM2 as a Windows startup service
+pm2 start ecosystem.config.js       # starts cron at :50 every hour
+pm2 save                            # save process list to ~/.pm2/dump.pm2
+npm install -g pm2-windows-startup  # Windows auto-start on login
+pm2-startup install
 
 # PM2 day-to-day commands:
 pm2 status                      # check if pipeline is running/scheduled
