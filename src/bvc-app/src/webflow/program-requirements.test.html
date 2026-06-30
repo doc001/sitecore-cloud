@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BVC program-requirements embed — test harness</title>
+  <style>
+    /* Harness UI styles are prefixed .th- so they never collide with the
+       embed's own .bvc-accordion rules. */
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; color: #1a1a1a; }
+    .th-panel { background: #0b1f63; color: #fff; padding: 1rem 1.25rem; }
+    .th-panel h1 { margin: 0 0 .25rem; font-size: 1.15rem; }
+    .th-panel p { margin: .25rem 0; font-size: .9rem; opacity: .9; }
+    .th-row { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin-top: .6rem; }
+    .th-row input { padding: .4rem .5rem; border: none; border-radius: 4px; font-size: .9rem; min-width: 180px; }
+    .th-btn { padding: .4rem .7rem; border: none; border-radius: 4px; background: #00a3e0; color: #fff; cursor: pointer; font-size: .85rem; }
+    .th-btn:hover { background: #008ec5; }
+    .th-chip { padding: .35rem .6rem; border-radius: 999px; background: rgba(255,255,255,.15); color: #fff; cursor: pointer; font-size: .8rem; border: 1px solid rgba(255,255,255,.25); }
+    .th-chip:hover { background: rgba(255,255,255,.3); }
+    .th-status { background: #f1f4ff; border-bottom: 1px solid #d7defc; padding: .6rem 1.25rem; font-size: .85rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .th-status b { font-family: system-ui, sans-serif; }
+    .th-ok { color: #0a7d28; } .th-bad { color: #b4232b; }
+    .th-body { padding: 1.25rem; max-width: 900px; }
+    .th-body h2 { font-size: 1rem; color: #555; border-bottom: 1px solid #eee; padding-bottom: .3rem; }
+  </style>
+</head>
+<body>
+  <div class="th-panel">
+    <h1>program-requirements.js — test harness</h1>
+    <p>Loads the real <code>program-requirements.js</code> from this folder and renders it below.
+       Pick a program by <b>Kuali code</b> (set as <code>data-program-code</code> on the mount, exactly like Webflow).</p>
+    <div class="th-row">
+      <input id="th-input" type="text" placeholder="Enter a code, e.g. SD" autocomplete="off">
+      <button class="th-btn" id="th-load">Load</button>
+      <span style="opacity:.7;font-size:.8rem">or quick-pick:</span>
+      <span id="th-chips"></span>
+    </div>
+  </div>
+
+  <div class="th-status" id="th-status">Resolving…</div>
+
+  <div class="th-body">
+    <h2>Rendered embed output</h2>
+    <!-- The embed's preferred mount target. The harness sets data-program-code below. -->
+    <div id="mount" data-bvc-program-requirements></div>
+  </div>
+
+  <!-- 1) Harness: wire ?code / ?base into the page BEFORE the embed script loads. -->
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var code = (params.get('code') || '').trim();
+      var base = (params.get('base') || '').trim();
+      if (base) window.BVC_PR_BASE = base;                 // optional data-origin override
+      if (code) document.getElementById('mount').setAttribute('data-program-code', code);
+      window.__th = {
+        code: code,
+        base: (window.BVC_PR_BASE || 'https://bvc-app.vercel.app/data/static')
+      };
+    })();
+  </script>
+
+  <!-- 2) Harness UI: quick-picks, input, and an independent resolver preview. -->
+  <script>
+    (function () {
+      var KNOWN = ['SD', 'SDP', 'SDAS', 'CSS', 'FP-BVC', 'RM-BVC', 'OS', 'HECA', 'NOPE-BAD'];
+      var BASE = window.__th.base;
+      var code = window.__th.code;
+
+      function go(c) {
+        var p = new URLSearchParams(location.search);
+        if (c) p.set('code', c); else p.delete('code');
+        location.search = p.toString();
+      }
+
+      // quick-pick chips
+      var chips = document.getElementById('th-chips');
+      KNOWN.forEach(function (c) {
+        var el = document.createElement('span');
+        el.className = 'th-chip'; el.textContent = c;
+        el.onclick = function () { go(c); };
+        chips.appendChild(el);
+      });
+
+      // free input
+      var input = document.getElementById('th-input');
+      input.value = code;
+      document.getElementById('th-load').onclick = function () { go(input.value.trim()); };
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(input.value.trim()); });
+
+      // independent resolver preview (mirrors the embed's code-index logic)
+      var status = document.getElementById('th-status');
+      function buildCodeIndex(m) {
+        var idx = {};
+        Object.keys(m).forEach(function (k) {
+          var file = m[k]; var i = file.indexOf('_-_');
+          if (i > 0) { var cc = file.slice(0, i).toUpperCase(); if (!(cc in idx)) idx[cc] = file; }
+        });
+        return idx;
+      }
+      if (!code) {
+        status.innerHTML = '<b>No code selected.</b> Pick one above (the embed would otherwise fall back to the URL slug).';
+        return;
+      }
+      fetch(BASE + '/program-requirements-manifest.json', { cache: 'no-cache' })
+        .then(function (r) { return r.json(); })
+        .then(function (m) {
+          var file = buildCodeIndex(m)[code.toUpperCase()] || null;
+          if (file) {
+            status.innerHTML = '<b>Code</b> <span class="th-ok">' + code + '</span> → <b>file</b> ' + file +
+              '  <span style="opacity:.6">(base: ' + BASE + ')</span>';
+          } else {
+            status.innerHTML = '<b>Code</b> <span class="th-bad">' + code + '</span> → <span class="th-bad">no match</span>' +
+              ' — the embed will try slug fallback and likely show its error block below.';
+          }
+        })
+        .catch(function (e) {
+          status.innerHTML = '<span class="th-bad">Could not load manifest from ' + BASE + '</span> — ' + (e && e.message);
+        });
+    })();
+  </script>
+
+  <!-- 3) The REAL embed, loaded from the file next to this page (no copy → no drift). -->
+  <script src="program-requirements.js"></script>
+</body>
+</html>

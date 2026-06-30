@@ -8,9 +8,17 @@ Replaces the static `#Courses > div.w-richtext` block on each program detail pag
 
 ### How it picks the JSON
 
-1. Reads the **last segment** of `window.location.pathname` (e.g. `cybersecurity-solutions`) and lowercases it.
-2. Fetches `https://bvc-app.vercel.app/data/static/program-requirements-manifest.json`.
-3. Resolves the slug against the manifest, trying these candidates in order:
+The script always fetches `https://bvc-app.vercel.app/data/static/program-requirements-manifest.json` first, then resolves a program two ways — **code first, slug fallback**:
+
+**1. By Kuali CODE (preferred, most reliable).** Every coded program's JSON filename starts with its code then `_-_` (e.g. `SD_-_Software_Development__Diploma_.json`). The script builds a `CODE → filename` index from the manifest values, so you can address a program by code alone — no slug guessing. The code is read from, in priority:
+
+   1. `data-program-code="SD"` on the mount element — **recommended: bind this to the CMS "Code" field** so each program page supplies its own code.
+   2. the value of `data-bvc-program-requirements="SD"` (mark the mount and pass the code in one attribute).
+   3. a `?code=SD` URL query param (handy for testing/preview).
+
+   Matching is case-insensitive. Because a static host can't list files by prefix, the manifest is still required to turn the code into the full filename — but you never have to know or hardcode that filename.
+
+**2. By URL slug (fallback).** If no code is given, the script reads the **last segment** of `window.location.pathname` (e.g. `cybersecurity-solutions`), lowercases it, and tries these candidates against the manifest in order:
 
    ```
    <slug>
@@ -21,9 +29,9 @@ Replaces the static `#Courses > div.w-richtext` block on each program detail pag
    <slug>-bridging
    ```
 
-   This is needed because BVC's marketing URLs often drop the program-type suffix that the source JSON filenames include. For example `/programs/cybersecurity-solutions` has no exact key, but `cybersecurity-solutions-diploma` does → resolves to `CSS_-_Cybersecurity_Solutions_Diploma.json`. If you ever hit a BVC URL pattern not covered by these suffixes, extend `SLUG_SUFFIXES` in the script.
+   BVC's marketing URLs often drop the program-type suffix the JSON filenames include — e.g. `/programs/cybersecurity-solutions` has no exact key, but `cybersecurity-solutions-diploma` does → `CSS_-_Cybersecurity_Solutions_Diploma.json`. If you hit a URL pattern not covered, extend `SLUG_SUFFIXES`. **Providing a code avoids this whole class of slug-mismatch problem.**
 
-4. Fetches the resolved JSON and renders the accordion.
+Once a file is resolved (by either path), the script fetches it and renders the accordion.
 
 The manifest itself is built by `scripts/generateProgramRequirementsManifest.mjs` and ships with the next `npm run build:bvcapp` → `npm run deploy:bvcapp` cycle.
 
@@ -32,15 +40,17 @@ The manifest itself is built by `scripts/generateProgramRequirementsManifest.mjs
 1. On the program detail page template (or a single page), add an **Embed** element where you want the accordion. Inside, paste:
 
    ```html
-   <div data-bvc-program-requirements></div>
+   <div data-bvc-program-requirements data-program-code="SD"></div>
    <script>
      /* paste contents of program-requirements.js here */
    </script>
    ```
 
+   **Recommended (CMS collection page):** bind `data-program-code` to the program's **Code** field instead of hardcoding it — in Webflow, select the `<div>`, add the custom attribute `data-program-code`, and set its value to the Code field. Each program page then loads its own JSON by code, regardless of how its URL slug is spelled.
+
    Alternatively, host the JS somewhere and `<script src="..."></script>` it.
 
-2. If you'd rather replace the existing rich-text block in `#Courses` without adding a new container, you can skip the `<div data-bvc-program-requirements>` — the script will fall back to `#Courses > .w-richtext`, then `#Courses`.
+2. **No code?** The script still works by URL slug — skip `data-program-code` and it falls back to slug resolution. And if you'd rather replace the existing rich-text block in `#Courses` without adding a new container, skip the `<div>` entirely — the script falls back to `#Courses > .w-richtext`, then `#Courses`. (You can still pass a code via `?code=` for testing in that case.)
 
 ### Editing the script vs. editing the data
 
@@ -75,14 +85,33 @@ Run `node scripts/generateProgramRequirementsManifest.mjs` to preview the full m
 
 When the script can't render, the embed shows an error block with:
 
+- `Code:` — the program code it read (from the mount attribute or `?code=`), or `—` if none
 - `Slug:` — what was derived from the URL
 - `Detail:` — the underlying error (HTTP 404, network failure, "No program-requirements entry for...", etc.)
 
 For more, open DevTools → Console; the script logs `[bvc-program-requirements] <err>` with the full stack. Common cases:
 
 - **`HTTP 404 fetching .../program-requirements-manifest.json`** — the manifest isn't deployed. Confirm it exists at `public/data/static/program-requirements-manifest.json` locally, then `deploy:bvcapp`.
-- **`No program-requirements entry for "<slug>" (also tried suffix variants)`** — the URL slug doesn't match any manifest key even after suffix fallbacks. Either rename the source JSON, or add a new suffix to `SLUG_SUFFIXES` in the script.
+- **`No program-requirements entry for code "<code>" / slug "<slug>"`** — neither the code nor the slug resolved. If you passed a code, check it matches the JSON filename prefix (before `_-_`) and that the program's JSON is deployed; if relying on the slug, either rename the source JSON or add a new suffix to `SLUG_SUFFIXES`.
 - **CORS / blocked request** — bowvalleycollege.ca's CSP may not allow `connect-src` to `bvc-app.vercel.app`. Check the Network tab in DevTools; if blocked by CSP, the request shows status `(blocked:csp)`. Fix is on the BVC site CSP side, not in this script.
+
+### Testing locally (`program-requirements.test.html`)
+
+A self-contained harness sits next to the script. It loads the **real** `program-requirements.js` via `<script src>` (so there's nothing to keep in sync) and fetches live data from production (`bvc-app.vercel.app` sends `Access-Control-Allow-Origin: *`, so cross-origin fetch from localhost works).
+
+```bash
+# from this folder (src/bvc-app/src/webflow)
+python -m http.server 8099
+# then open:
+#   http://localhost:8099/program-requirements.test.html?code=SD
+```
+
+- Pick a program by **code** with the quick-pick chips or the input box; the harness sets `data-program-code` on the mount exactly like a Webflow CMS binding, then the embed resolves and renders it.
+- A status line shows the independent resolution (`code → file`, or “no match → slug fallback”), so you can tell a *resolution* failure from a *render* failure.
+- `?base=<url>` overrides the data origin (via `window.BVC_PR_BASE`) to test against a local/staging copy instead of production — e.g. serve `src/bvc-app/src/data/static` somewhere and pass its URL.
+- Try `?code=NOPE-BAD` to see the on-page error block (now showing `Code:` and `Slug:`).
+
+> The test page and the `window.BVC_PR_BASE` hook are dev-only conveniences; production behaviour is unchanged when neither is used.
 
 ### Customizing the look
 
