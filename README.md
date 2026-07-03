@@ -7,22 +7,18 @@ You must have the following software components on your workstation:
 
 2. Windows PowerShell
 
-3. The current long-term support (LTS) version of Node.js. Check your installed version with `node -v` https://nodejs.org/ (v20 as of project start)
+3. **Node.js v22 LTS** (includes npm — no separate npm install needed). Check your installed version with `node -v` and `npm -v`. Download from https://nodejs.org/
 
-    - If you do not have node installed then use `nvm install 20.10.0`
+    - If Node is not installed, download the v22 LTS installer from https://nodejs.org/ and run it. npm is bundled automatically.
 
-    - If you do have node installed, but it is a later version, run:
-
-    ```ps1
-    nvm install 20.10.0
-    ```
+    - If you manage multiple Node versions with **nvm**:
 
     ```ps1
-    nvm use 20.10.0
+    nvm install 22
+    nvm use 22
     ```
 
-    This installs version 20.10.0 and switches to it.
-    If you need to switch between versions for other projects you can use the command, `nvm use <VERSIONNUMBER>`
+    To switch between versions for other projects: `nvm use <VERSION>`
     
 4. .NET Core 6.0 SDK (check your installed version with the `dotnet --version` command). https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 

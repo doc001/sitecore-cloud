@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Prerequisites
+
+- **Node.js v22 LTS** — download from https://nodejs.org/ (npm is bundled, no separate install needed). Verify with `node -v` and `npm -v`.
+- If using nvm: `nvm install 22 && nvm use 22`
+
 ## Repository Overview
 
 This is `bvc-monorepo`, a Turborepo monorepo for **Bow Valley College (BVC)** web properties. It contains two Next.js apps and Sitecore XM Cloud content modules.
