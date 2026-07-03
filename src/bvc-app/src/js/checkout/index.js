@@ -358,6 +358,7 @@
         return;
       }
       let productTotal = 0;
+      let tuitionTax = 0;
       let cartHtml = `<div class="shopping-cart-items">`;
 
       items.forEach((item) => {
@@ -366,6 +367,7 @@
         const quantity = item.quantity || 1;
         const itemTotal = price * quantity;
         productTotal += itemTotal;
+        tuitionTax += (parseFloat(item.tax) || 0) * quantity;
 
         const productName = item.productName || item.name || 'Unknown Product';
         const productDelivery = item.productDelivery || '';
@@ -379,6 +381,7 @@
                 <div><strong>${item.productName || item.sku}</strong></div>
                 <div class="cart-item-info"><span style="font-weight: 600;">Credits: </span> ${item.credits}</div>
                 <div class="cart-item-info"><span style="font-weight: 600;">Tuition:</span> $${item.price} x ${item.quantity}</div>
+                ${parseFloat(item.tax) > 0 ? `<div class="cart-item-info"><span style="font-weight: 600;">Tuition Tax:</span> $${parseFloat(item.tax).toFixed(2)}</div>` : ''}
                 <div class="cart-item-info"><span style="font-weight: 600;">Delivery:</span> ${item.productDelivery || 'Standard'}</div>
                 <div class="cart-item-info"><span style="font-weight: 600;">Dates:</span> ${item.productdates || 'Not specified'}</div>
                 ${item.timeblocks && item.timeblocks.length > 0
@@ -402,7 +405,7 @@
       let sessionFees = sessionFeeData ? JSON.parse(sessionFeeData) : null;
 
       let totalFees = 0;
-      let totalTax = 0;
+      let totalTax = tuitionTax;
       let grandTotal = productTotal;
 
       if (sessionFees && sessionFees.feeData && sessionFees.feeData.fees) {
@@ -766,18 +769,22 @@
         // Fees are stored at the cart/session level (feeSession), NOT per item,
         // so sum tuition here and add the session fee total (amount + tax) below.
         let totalAmount = 0;
+        let tuitionTax = 0;
         cartItems.forEach((item) => {
           const price = typeof item.price === 'string' ? parseFloat(item.price) : item.price || 0;
           const quantity = item.quantity || 1;
           totalAmount += price * quantity;
+          tuitionTax += (parseFloat(item.tax) || 0) * quantity;
         });
+        totalAmount += tuitionTax;
 
         const feeTotals = this.getSessionFeeTotals();
         totalAmount += feeTotals.amount + feeTotals.tax;
         console.log('Payment total breakdown:', {
-          tuition: (totalAmount - feeTotals.amount - feeTotals.tax).toFixed(2),
+          tuition: (totalAmount - tuitionTax - feeTotals.amount - feeTotals.tax).toFixed(2),
+          tuitionTax: tuitionTax.toFixed(2),
           fees: feeTotals.amount.toFixed(2),
-          tax: feeTotals.tax.toFixed(2),
+          feeTax: feeTotals.tax.toFixed(2),
           total: totalAmount.toFixed(2),
         });
 
