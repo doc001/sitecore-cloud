@@ -384,6 +384,7 @@
     }),
       (l.cartItemsContainer.innerHTML = ''),
       l.cartItemsContainer.appendChild(e));
+    var checkoutBtn = document.querySelector('.checkout-button');
     if (feesLoading) {
       var feeLoadEl = document.createElement('div');
       feeLoadEl.className = 'cart-fees-loading';
@@ -394,8 +395,10 @@
       summaryLoadEl.innerHTML = '<hr /><div class="cart-item-info"><strong>Total:</strong> Calculating…</div>';
       l.cartItemsContainer.appendChild(summaryLoadEl);
       l.totalAmount.textContent = '…';
+      if (checkoutBtn) checkoutBtn.disabled = true;
       return;
     }
+    if (checkoutBtn) checkoutBtn.disabled = false;
     var t = sessionStorage.getItem('feeSession'),
       s = t ? JSON.parse(t) : null,
       a = s && s.feeData && s.feeData.fees ? s.feeData.fees : [],

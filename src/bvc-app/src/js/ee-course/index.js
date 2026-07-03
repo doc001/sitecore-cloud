@@ -467,10 +467,14 @@
             var i = c.items.map(function (e) {
               return e.sku;
             });
+            var checkoutBtn = document.querySelector('.checkout-button');
+            if (checkoutBtn) checkoutBtn.disabled = true;
             try {
               (await B(i, s), C(), g(), d('Item added to cart!', 'success'));
             } catch (e) {
               (console.error('Error checking fees:', e), C(), g(), d('Item added to cart! (Fee calculation pending)', 'warning'));
+            } finally {
+              if (checkoutBtn) checkoutBtn.disabled = false;
             }
           } else d('Item is already in your cart', 'error');
         } else {
