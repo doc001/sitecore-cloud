@@ -161,6 +161,34 @@ dotnet sitecore ser push --environment-name default
 > If you get a _401_ error, click **Home** and log in again if prompted.
 
 
+# ENVIRONMENT SETUP
+
+Environment files are **gitignored** — they are never committed to the repo. Each developer must create them locally. The actual values (API keys, endpoints, credentials) are stored in the team's **local OneNote notebook**.
+
+## `src/bvc-app/.env.local`
+
+```
+WEBFLOW_API_KEY=...
+SITECORE_GRAPHQL_ENDPOINT=...
+SITECORE_GRAPHQL_API_KEY=...
+SC_APIKEY=...
+SITECORE_USERNAME=...
+SITECORE_PASSWORD=...
+# Optional: Teams incoming webhook URL for pipeline failure alerts
+TEAMS_WEBHOOK_URL=
+```
+
+## `src/nextjs-jamstack/.env.local`
+
+```
+SITECORE_GRAPHQL_ENDPOINT=...
+SITECORE_GRAPHQL_API_KEY=...
+```
+
+> **Note:** Root `.env.template` covers Sitecore Docker/XM Cloud variables for local CM development. It is not required for frontend-only work.
+
+---
+
 # VERCEL DEPLOYMENT (bvc-app)
 
 The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its` team scope.

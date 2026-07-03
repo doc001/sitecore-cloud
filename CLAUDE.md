@@ -197,6 +197,8 @@ Older Next.js 14 app backed by Sitecore XMC GraphQL. School-specific pages (Chiu
 
 ## Environment Variables
 
+These files are **gitignored and must be created manually** on each developer machine. The actual values (API keys, endpoints, credentials) are stored in the team's **local OneNote notebook** — ask a team member for access if you don't have it.
+
 Create `.env.local` in each app root:
 
 **`src/bvc-app/.env.local`**
@@ -204,6 +206,11 @@ Create `.env.local` in each app root:
 WEBFLOW_API_KEY=...
 SITECORE_GRAPHQL_ENDPOINT=...
 SITECORE_GRAPHQL_API_KEY=...
+SC_APIKEY=...
+SITECORE_USERNAME=...
+SITECORE_PASSWORD=...
+# Optional: Teams incoming webhook URL for pipeline failure alerts
+TEAMS_WEBHOOK_URL=
 ```
 
 **`src/nextjs-jamstack/` (uses root `.env` or `.env.local`)**
