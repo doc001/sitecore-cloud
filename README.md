@@ -157,6 +157,18 @@ dotnet sitecore ser push --environment-name default
 > If you get a _401_ error, click **Home** and log in again if prompted.
 
 
+# INSTALL DEPENDENCIES
+
+Run **once from the repo root** — npm workspaces installs dependencies for all packages (`src/bvc-app`, `src/nextjs-jamstack`) in a single command:
+
+```powershell
+npm install
+```
+
+Do **not** run `npm install` inside individual app folders — the root install covers everything.
+
+---
+
 # ENVIRONMENT SETUP
 
 Environment files are **gitignored** — they are never committed to the repo. Each developer must create them locally. The actual values (API keys, endpoints, credentials) are stored in the team's **local OneNote notebook**.

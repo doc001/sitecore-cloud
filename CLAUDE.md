@@ -6,6 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **Node.js v22 LTS** — download from https://nodejs.org/ (npm is bundled, no separate install needed). Verify with `node -v` and `npm -v`.
 - If using nvm: `nvm install 22 && nvm use 22`
+- Run `npm install` **once from the repo root** — this is an npm workspaces monorepo, so all packages (`src/bvc-app`, `src/nextjs-jamstack`) are installed in one shot. Do not run `npm install` inside individual app folders.
 
 ## Repository Overview
 
