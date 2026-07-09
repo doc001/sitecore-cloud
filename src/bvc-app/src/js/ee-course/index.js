@@ -369,7 +369,7 @@
   function A() {
     (l.cart.classList.remove('open'), l.overlay.classList.remove('open'));
   }
-  function C() {
+  function C(feesLoading) {
     var e = document.createDocumentFragment();
     (c.items.forEach(function (t) {
       var s = document.createElement('div');
@@ -387,10 +387,39 @@
     }),
       (l.cartItemsContainer.innerHTML = ''),
       l.cartItemsContainer.appendChild(e));
+    var checkoutBtn = document.querySelector('.checkout-button');
+    if (feesLoading) {
+      var feeLoadEl = document.createElement('div');
+      feeLoadEl.className = 'cart-fees-loading';
+      feeLoadEl.innerHTML = '<div class="cart-fees-spinner"></div>Calculating fees…';
+      l.cartItemsContainer.appendChild(feeLoadEl);
+      var summaryLoadEl = document.createElement('div');
+      summaryLoadEl.className = 'cart-summary';
+      summaryLoadEl.innerHTML = '<hr /><div class="cart-item-info"><strong>Total:</strong> Calculating…</div>';
+      l.cartItemsContainer.appendChild(summaryLoadEl);
+      l.totalAmount.textContent = '…';
+      if (checkoutBtn) checkoutBtn.disabled = true;
+      return;
+    }
     var t = sessionStorage.getItem('feeSession'),
       s = t ? JSON.parse(t) : null,
       a = s && s.feeData && s.feeData.fees ? s.feeData.fees : [],
       n = s && s.feeData && s.feeData.summary ? s.feeData.summary : { totalAmount: 0, totalTax: 0, grandTotal: 0 };
+    // Checkout is allowed ONLY once fees have been successfully calculated for the
+    // current cart. If the fee API failed (no feeSession), keep the button grayed.
+    var feesLoaded = !!(s && s.feeData);
+    if (checkoutBtn) {
+      checkoutBtn.disabled = !(c.items.length > 0 && feesLoaded);
+      if (c.items.length > 0 && !feesLoaded) {
+        var feeErrEl = document.createElement('div');
+        feeErrEl.className = 'cart-fees-error';
+        feeErrEl.style.color = '#b00020';
+        feeErrEl.style.fontSize = '13px';
+        feeErrEl.style.margin = '8px 0';
+        feeErrEl.textContent = 'Additional fees could not be calculated. Checkout is unavailable — please try again.';
+        l.cartItemsContainer.appendChild(feeErrEl);
+      }
+    }
     if (a.length > 0) {
       var i = document.createElement('div');
       i.className = 'cart-shared-fees';
@@ -464,17 +493,16 @@
           if (!n.data || !n.data.seatsAreAvailable) return (u.markAsUnavailable(a.sku), t.classList.add('unavailable'), void d('No seats available for this date', 'error'));
           if (c.addItem(a)) {
             c.updateAddedButtonStates();
+            C(true);
+            g();
+            t.classList.remove('loading');
             var i = c.items.map(function (e) {
               return e.sku;
             });
-            var checkoutBtn = document.querySelector('.checkout-button');
-            if (checkoutBtn) checkoutBtn.disabled = true;
             try {
-              (await B(i, s), C(), g(), d('Item added to cart!', 'success'));
+              (await B(i, s), C(), d('Item added to cart!', 'success'));
             } catch (e) {
-              (console.error('Error checking fees:', e), C(), g(), d('Item added to cart! (Fee calculation pending)', 'warning'));
-            } finally {
-              if (checkoutBtn) checkoutBtn.disabled = false;
+              (console.error('Error checking fees:', e), r.clearFeeSession(), C(), d('Item added, but fees could not be calculated. Checkout is unavailable.', 'error'));
             }
           } else d('Item is already in your cart', 'error');
         } else {
@@ -661,7 +689,7 @@
                       C(),
                       d('Item removed from cart', 'success'));
                   } catch (e) {
-                    (console.error('Failed to update fees after removal:', e), C(), d('Item removed, but could not update fees.', 'warning'));
+                    (console.error('Failed to update fees after removal:', e), r.clearFeeSession(), C(), d('Item removed, but fees could not be recalculated. Checkout is unavailable.', 'warning'));
                   }
                   l.cartMessage.classList.toggle('visible', c.isCartFull());
                 }
@@ -671,7 +699,8 @@
               }
             })(e.target.dataset.sku);
         }),
-        document.querySelector('.checkout-button').addEventListener('click', function () {
+        document.querySelector('.checkout-button').addEventListener('click', function (ev) {
+          if (this.disabled) return void ev.preventDefault();
           c.items.length > 0 ? (window.location.href = '../cart-checkout?type=ee') : d('Your cart is empty', 'error');
         }));
       var s = document.querySelector('.opencartbutton');
