@@ -10,10 +10,11 @@
  *   <script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
  *
  * Config is overridable. Set BEFORE this script loads:
- *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: 1 };
+ *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: '' };
  * Default (production):
  *   apiOrigin : https://bvc-uat-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
- *   studentPk : 1  (placeholder required by submit-payment; replace via MSAL later)
+ *   studentPk : '' (empty — these are new/anonymous registrations; submit-payment
+ *               null-refs with a 500 if a non-empty studentPk is sent)
  *
  * Backend endpoints go through the bvcpayment proxy and use the
  * `thesissitecorexm.api` tenant prefix (the old `sitecorexm.api` now 404s).
@@ -26,9 +27,10 @@
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
   var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app';
-  // studentPk is required by submit-payment (the API null-refs without it). Placeholder
-  // until MSAL supplies the real student PK for a signed-in/registered student.
-  var studentPk = _cfg.studentPk != null ? _cfg.studentPk : 1;
+  // studentPk must be EMPTY for new/anonymous registrations — submit-payment now
+  // null-refs (500) if a non-empty value is sent. Left overridable via config for a
+  // future signed-in/MSAL flow, but the default for this public checkout is empty.
+  var studentPk = _cfg.studentPk != null ? _cfg.studentPk : '';
 
   // --- shared token helpers (shared with the cart; reuse if already on page) ---
   var tokenStorage =
