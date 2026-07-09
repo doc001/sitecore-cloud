@@ -405,21 +405,9 @@
       s = t ? JSON.parse(t) : null,
       a = s && s.feeData && s.feeData.fees ? s.feeData.fees : [],
       n = s && s.feeData && s.feeData.summary ? s.feeData.summary : { totalAmount: 0, totalTax: 0, grandTotal: 0 };
-    // Checkout is allowed ONLY once fees have been successfully calculated for the
-    // current cart. If the fee API failed (no feeSession), keep the button grayed.
-    var feesLoaded = !!(s && s.feeData);
-    if (checkoutBtn) {
-      checkoutBtn.disabled = !(c.items.length > 0 && feesLoaded);
-      if (c.items.length > 0 && !feesLoaded) {
-        var feeErrEl = document.createElement('div');
-        feeErrEl.className = 'cart-fees-error';
-        feeErrEl.style.color = '#b00020';
-        feeErrEl.style.fontSize = '13px';
-        feeErrEl.style.margin = '8px 0';
-        feeErrEl.textContent = 'Additional fees could not be calculated. Checkout is unavailable — please try again.';
-        l.cartItemsContainer.appendChild(feeErrEl);
-      }
-    }
+    // Fees are OPTIONAL for Extended Ed. If the fee API fails to connect we fail
+    // silently and still allow checkout — the button is gated only on cart contents.
+    if (checkoutBtn) checkoutBtn.disabled = !(c.items.length > 0);
     if (a.length > 0) {
       var i = document.createElement('div');
       i.className = 'cart-shared-fees';
@@ -502,7 +490,8 @@
             try {
               (await B(i, s), C(), d('Item added to cart!', 'success'));
             } catch (e) {
-              (console.error('Error checking fees:', e), r.clearFeeSession(), C(), d('Item added, but fees could not be calculated. Checkout is unavailable.', 'error'));
+              // Fees are optional for EE — fail silently and let the shopper proceed.
+              (console.warn('[Fees] Could not calculate fees — proceeding without them.', e), r.clearFeeSession(), C(), d('Item added to cart!', 'success'));
             }
           } else d('Item is already in your cart', 'error');
         } else {
@@ -689,7 +678,8 @@
                       C(),
                       d('Item removed from cart', 'success'));
                   } catch (e) {
-                    (console.error('Failed to update fees after removal:', e), r.clearFeeSession(), C(), d('Item removed, but fees could not be recalculated. Checkout is unavailable.', 'warning'));
+                    // Fees are optional for EE — fail silently and keep checkout available.
+                    (console.warn('[Fees] Could not recalculate fees after removal — proceeding without them.', e), r.clearFeeSession(), C(), d('Item removed from cart', 'success'));
                   }
                   l.cartMessage.classList.toggle('visible', c.isCartFull());
                 }
