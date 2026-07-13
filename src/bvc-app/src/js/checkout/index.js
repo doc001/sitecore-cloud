@@ -36,22 +36,22 @@
   var tokenStorage =
     window.tokenStorage || {
       key: 'bvcToken',
-      setToken: function (t) {
-        sessionStorage.setItem(this.key, JSON.stringify({ token: t, timestamp: Date.now() }));
+      setToken: function (token) {
+        sessionStorage.setItem(this.key, JSON.stringify({ token: token, timestamp: Date.now() }));
       },
       isTokenExpired: function () {
         try {
-          var e = JSON.parse(sessionStorage.getItem(this.key));
-          return !(e && e.token && e.timestamp) || Date.now() - e.timestamp > 36e5;
-        } catch (e) {
+          var storedEntry = JSON.parse(sessionStorage.getItem(this.key));
+          return !(storedEntry && storedEntry.token && storedEntry.timestamp) || Date.now() - storedEntry.timestamp > 36e5;
+        } catch (error) {
           return true;
         }
       },
       getToken: function () {
         try {
-          var e = JSON.parse(sessionStorage.getItem(this.key));
-          return (e && e.token) || null;
-        } catch (e) {
+          var storedEntry = JSON.parse(sessionStorage.getItem(this.key));
+          return (storedEntry && storedEntry.token) || null;
+        } catch (error) {
           return null;
         }
       },
@@ -327,25 +327,25 @@
     // pre-computed summary; falls back to summing the (de-duped) fees array.
     getSessionFeeTotals() {
       try {
-        const fs = JSON.parse(sessionStorage.getItem('feeSession') || 'null');
-        const fd = fs && fs.feeData;
-        if (fd && fd.summary) {
+        const feeSession = JSON.parse(sessionStorage.getItem('feeSession') || 'null');
+        const feeData = feeSession && feeSession.feeData;
+        if (feeData && feeData.summary) {
           return {
-            amount: parseFloat(fd.summary.totalAmount) || 0,
-            tax: parseFloat(fd.summary.totalTax) || 0,
+            amount: parseFloat(feeData.summary.totalAmount) || 0,
+            tax: parseFloat(feeData.summary.totalTax) || 0,
           };
         }
-        if (fd && Array.isArray(fd.fees)) {
-          return fd.fees.reduce(
-            (acc, f) => ({
-              amount: acc.amount + (parseFloat(f.amount) || 0),
-              tax: acc.tax + (parseFloat(f.tax) || 0),
+        if (feeData && Array.isArray(feeData.fees)) {
+          return feeData.fees.reduce(
+            (totals, fee) => ({
+              amount: totals.amount + (parseFloat(fee.amount) || 0),
+              tax: totals.tax + (parseFloat(fee.tax) || 0),
             }),
             { amount: 0, tax: 0 }
           );
         }
-      } catch (e) {
-        console.error('Error reading session fee totals:', e);
+      } catch (error) {
+        console.error('Error reading session fee totals:', error);
       }
       return { amount: 0, tax: 0 };
     }

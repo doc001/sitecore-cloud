@@ -54,7 +54,7 @@ function mockBvcPayment(endpoint) {
   if (endpoint.includes('courseofferings/')) {
     return { status: 200, body: { seatsAreAvailable: true, seatsAvailable: 12 } };
   }
-  // Fee calc: thesissitecorexm.api/fee/<sku1,sku2,...>/<id>  (id required int, was `null`)
+  // Fee calc: thesissitecorexm.api/fee/<sku1,sku2,...>/<id>  (id is the literal string `null`)
   if (endpoint.includes('fee/')) {
     const skus = (endpoint.split('fee/')[1] || '').split('/')[0].split(',').filter(Boolean);
     const fees = skus.map((sku) => ({

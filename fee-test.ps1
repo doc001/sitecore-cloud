@@ -8,7 +8,7 @@
 $ErrorActionPreference = 'Stop'
 $Origin = 'https://bvc-uat-api-proxy.vercel.app'
 $Base   = "$Origin/api/bvcpayment"
-$Sku    = '10014'          # a real OS section sisId (change to test others, e.g. 10044)
+$Sku    = '30836'          # a real OS section sisId (change to test others, e.g. 10044)
 
 Write-Host '=== 1) Requesting token ===' -ForegroundColor Cyan
 $token = (Invoke-RestMethod -Method Post -Uri "$Origin/api/mstoken" `
@@ -35,11 +35,7 @@ function Test-Fee([string]$Sku, $Id, [string]$Label) {
     }
 }
 
-Write-Host "`n=== 2) Fee endpoint for sku $Sku across id values ===" -ForegroundColor Cyan
-Test-Fee $Sku '1'   'id = 1  (value os-course.js sends today)'
-Test-Fee $Sku '0'   'id = 0'
-Test-Fee $Sku '2'   'id = 2'
-Test-Fee $Sku ''    'id EMPTY   (trailing slash)'
-Test-Fee $Sku $null 'id OMITTED (no segment)'
+Write-Host "`n=== 2) Fee endpoint for sku $Sku (literal 'null' id) ===" -ForegroundColor Cyan
+Test-Fee $Sku 'null' "id = 'null' (literal word)"
 
 Write-Host "`nDone." -ForegroundColor Cyan

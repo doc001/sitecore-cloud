@@ -7,7 +7,7 @@
 $ErrorActionPreference = 'Stop'
 $TokenUrl = 'https://bvc-uat-api-proxy.vercel.app/api/mstoken'   # OAuth token (same Azure AD token the backend expects)
 $Base     = 'https://devapi.bvc.dev/ths-extended-edu/v1/thesissitecorexm.api/fee'   # DIRECT backend, no proxy
-$Sku      = '24232'          # a real OS section sisId (change to test others)
+$Sku      = '30836'          # a real OS section sisId (change to test others)
 
 Write-Host '=== 1) Requesting token ===' -ForegroundColor Cyan
 $token = (Invoke-RestMethod -Method Post -Uri $TokenUrl -ContentType 'application/json' -Body '{}').access_token
@@ -31,12 +31,7 @@ function Test-Fee([string]$Method, [string]$Sku, $Id, [string]$Label) {
     }
 }
 
-Write-Host "`n=== 2) Direct backend fee endpoint (sku $Sku) ===" -ForegroundColor Cyan
-Test-Fee 'GET'  $Sku '3'   'id = 3  (value os-course.js sends)'
-Test-Fee 'GET'  $Sku '0'   'id = 0'
-Test-Fee 'GET'  $Sku '2'   'id = 2'
-Test-Fee 'GET'  $Sku ''    'id EMPTY (trailing slash)'
-Test-Fee 'GET'  $Sku $null 'id OMITTED (no segment)'
-Test-Fee 'POST' $Sku '1'   'POST id = 1'
+Write-Host "`n=== 2) Direct backend fee endpoint (sku $Sku, literal 'null' id) ===" -ForegroundColor Cyan
+Test-Fee 'GET'  $Sku 'null' "id = 'null' (literal word)"
 
 Write-Host "`nDone." -ForegroundColor Cyan

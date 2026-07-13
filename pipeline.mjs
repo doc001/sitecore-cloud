@@ -11,6 +11,13 @@ const VERCEL = join(ROOT, 'node_modules', '.bin', process.platform === 'win32' ?
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });
 
+// PROD deploys minify + strip console from the Webflow embed bundles
+// (os-course.js / ee-course.js / checkout.js). UAT/DEV deploys leave them
+// readable for debugging. `STRIP_DEBUG=true` is read by scripts/build-os-course.mjs
+// (declared in turbo.json `env` so it reaches the build task in strict env mode).
+const IS_PROD = process.argv.includes('--prod') || process.env.STRIP_DEBUG === 'true';
+if (IS_PROD) process.env.STRIP_DEBUG = 'true';
+
 const ts = () => new Date().toISOString();
 
 function run(cmd, cwd = ROOT) {
@@ -62,7 +69,7 @@ async function runWithRetry(cmd, cwd = ROOT, maxAttempts = 3, retryDelayMs = 60_
 }
 
 async function main() {
-  console.log(`\n[${ts()}] ===== BVC hourly pipeline started =====`);
+  console.log(`\n[${ts()}] ===== BVC hourly pipeline started (${IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS'}) =====`);
 
   // 0. Pre-build clean — wipe stale data so removed Sitecore sections don't persist across builds.
   //    Without this, a section deleted from Sitecore leaves behind its old JSON file and
