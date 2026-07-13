@@ -591,15 +591,18 @@
     console.log('[API] Availability', sku, '-> status', response.status);
     return { status: response.status, data: data };
   }
-  // The fee API emits each fee line twice; collapse exact duplicates (same
-  // description + offering + amount + tax) so each shows once and the total is
-  // not double-counted. Genuinely different per-course fees are preserved.
-  // See OS-COURSE-CART.md (Backend API contract).
+  // Additional fees are CART-LEVEL — charged once per registration, never per
+  // course. The fee API returns a set PER course/offering, so a multi-course cart
+  // comes back with the same institutional fees repeated (each stamped with a
+  // program-offering id, and amounts that can differ by program). Collapse to ONE
+  // set by fee type (description) so each fee — Student Association, Services,
+  // Technology, Learner Wellness — shows exactly once for the whole cart. First
+  // occurrence wins. See OS-COURSE-CART.md (Backend API contract).
   function dedupeFees(fees) {
     var seen = {},
       result = [];
     (Array.isArray(fees) ? fees : []).forEach(function (fee) {
-      var key = (fee.description || '') + '|' + (fee.programOfferingId || fee.offeringId || '') + '|' + (fee.amount || 0) + '|' + (fee.tax || 0);
+      var key = (fee.description || '').trim().toLowerCase();
       seen[key] || ((seen[key] = 1), result.push(fee));
     });
     return result;
