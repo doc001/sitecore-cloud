@@ -1,0 +1,611 @@
+/*
+ * OS-Course — course component styles — SOURCE
+ * ---------------------------------------------------------------------------
+ * EDIT THIS FILE. Do not edit public/css/os-course.css (it is generated).
+ *   Build : npm run js:build   (also minifies this -> public/css/os-course.css)
+ *   Watch : npm run js:watch
+ *
+ * Covers BOTH: (1) the course component / offerings / accordion, and
+ * (2) the sliding cart, overlay, notifications, availability spinner and
+ * add-to-cart button states injected at runtime by os-course.js.
+ * ---------------------------------------------------------------------------
+ */
+
+/* Component Styles */
+.course-component {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Two-column page layout — only when info column has content (OS);
+   single column when info column is empty (EE). */
+.course-page-grid {
+  display: grid;
+  gap: 48px;
+  align-items: start;
+}
+.course-page-grid:has(.course-info-col:not(:empty)) {
+  grid-template-columns: 1fr 1fr;
+}
+.course-info-col:empty {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .course-page-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Left column — info */
+.course-info-col {
+}
+
+.c-course_credits {
+  margin-bottom: 24px;
+}
+
+.c-course_credits-box {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f0f4ff;
+  border: 2px solid #d0dbff;
+  border-radius: 8px;
+  padding: 12px 20px;
+  min-width: 80px;
+}
+
+.c-course_credits-txt {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1;
+}
+
+.c-course__col1 {
+  color: #2c3e50;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.w-richtext p {
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+
+.course-pdf-section {
+  margin-top: 24px;
+}
+
+.course-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #00a3ff;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid #00a3ff;
+  border-radius: 4px;
+  padding: 8px 16px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.course-pdf-link:hover {
+  background: #00a3ff;
+  color: #fff;
+}
+
+/* Right column — offers */
+.course-offers-col {
+  min-width: 0;
+}
+
+.enrollment-section {
+  background: white;
+  border: 1px solid #e1e5e9;
+  overflow: hidden;
+}
+
+.enrollment-header {
+  background: #00a3ff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.course-offering {
+  padding: 20px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.course-offering:last-child {
+  border-bottom: none;
+}
+
+.offering-title {
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.date-label {
+  color: #6c757d;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.accordion-item {
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.accordion-toggle {
+  width: 100%;
+  background: #f8f9fa;
+  border: none;
+  padding: 15px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-toggle:hover {
+  background: #e9ecef;
+}
+
+.accordion-toggle.active {
+  background: #e3f2fd;
+}
+
+.date-range {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 500;
+}
+
+.dropdown-icon {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+  font-size: 12px;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.accordion-toggle.active .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: white;
+}
+
+.accordion-content.open {
+  max-height: 800px;
+}
+
+.course-details {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 20px;
+}
+
+.detail-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  color: #6c757d;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  color: #2c3e50;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.detail-value.producthours {
+  text-align: center;
+}
+
+.price-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price-display {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.currency {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 5px;
+}
+
+.currency-code {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.student-type {
+  font-size: 12px;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+
+.course-info-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+  min-width: 120px;
+}
+
+.course-info-btn:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.additional-fees {
+  font-size: 11px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.offering-summary {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+  border-left: 4px solid #007bff;
+}
+
+.summary-title {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+/* ===========================================================================
+ * Cart, overlay, notifications, availability — injected by os-course.js
+ * =========================================================================== */
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
+}
+.cart-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.sliding-cart {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  padding: 24px;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.sliding-cart.open {
+  right: 0;
+}
+.sliding-cart h2 {
+  margin: 0 0 16px;
+  font-size: 1.4em;
+}
+.cart-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  color: #333;
+}
+.cart-close:hover {
+  color: #000;
+}
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+.cart-item {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+  position: relative;
+}
+.cart-item-details {
+  font-size: 0.9em;
+}
+.cart-item-info {
+  margin: 4px 0;
+  color: #444;
+}
+.remove-item {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-bottom: 8px;
+}
+.remove-item:hover {
+  background: #c0392b;
+}
+.cart-total {
+  font-size: 1.1em;
+  font-weight: 700;
+  padding: 12px 0;
+  border-top: 2px solid #333;
+}
+.cart-summary {
+  font-size: 0.9em;
+  margin-top: 8px;
+}
+.cart-shared-fees {
+  font-size: 0.9em;
+}
+/* Collapsible "Additional fees" drawer: total always visible, click to expand */
+.fees-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+.fees-toggle-label {
+  font-weight: 600;
+}
+.fees-toggle-amount {
+  margin-left: auto;
+  font-weight: 600;
+}
+.fees-toggle-caret {
+  transition: transform 0.2s ease;
+  font-size: 0.8em;
+}
+.cart-shared-fees.fees-open .fees-toggle-caret {
+  transform: rotate(180deg);
+}
+.fees-breakdown {
+  padding-left: 4px;
+}
+.fees-breakdown[hidden] {
+  display: none;
+}
+.fees-breakdown-total {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #eee;
+}
+.fee-item {
+  color: #555;
+}
+.cart-message {
+  color: #e74c3c;
+  font-size: 0.85em;
+  display: none;
+  margin: 8px 0;
+}
+.cart-message.visible {
+  display: block;
+}
+.checkout-button {
+  width: 100%;
+  padding: 12px;
+  background: #0066cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.checkout-button:hover {
+  background: #0052a3;
+}
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.9em;
+  z-index: 10000;
+  animation: os-slide-in 0.3s;
+}
+.notification-success {
+  background: #27ae60;
+}
+.notification-error {
+  background: #e74c3c;
+}
+.notification-warning {
+  background: #f39c12;
+}
+@keyframes os-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.availability-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-size: 14px;
+  color: #555;
+  gap: 12px;
+  border-radius: 8px;
+}
+.availability-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #ddd;
+  border-top-color: #0066cc;
+  border-radius: 50%;
+  animation: os-spin 0.8s linear infinite;
+}
+@keyframes os-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.addtocartbutton.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: progress;
+}
+.addtocartbutton.in-cart,
+.addtocartbutton:disabled {
+  background-color: #ccc !important;
+  background-image: none !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  opacity: 1;
+}
+.addtocartbutton.unavailable {
+  background-color: #ccc !important;
+  background-image: none !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+@media (max-width: 768px) {
+  .sliding-cart {
+    width: 100%;
+    right: -100%;
+  }
+
+  .course-page-grid:has(.course-info-col:not(:empty)) {
+    grid-template-columns: 1fr;
+  }
+
+  .course-details {
+    grid-template-columns: 1fr;
+  }
+
+  .price-section {
+    align-items: flex-start;
+  }
+}
+
+.cart-fees-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  color: #888;
+  font-size: 0.85em;
+}
+
+.cart-fees-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ddd;
+  border-top-color: #0066cc;
+  border-radius: 50%;
+  animation: os-spin 0.8s linear infinite;
+  flex-shrink: 0;
+}

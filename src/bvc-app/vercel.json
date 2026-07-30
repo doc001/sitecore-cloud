@@ -1,6 +1,7 @@
 {
   "name": "bvc-app",
-  "buildCommand": "npx next build",
+  "ignoreCommand": "exit 0",
+  "buildCommand": "npm run build",
   "outputDirectory": "out",
   "installCommand": "npm install",
   "framework": null,

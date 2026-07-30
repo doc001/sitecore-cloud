@@ -1,0 +1,361 @@
+<!--
+  WEBFLOW EMBED — Extended Education Course Detail (Display + Cart-ready)
+  =======================================================================
+  Renders into the existing #courseComponent div on the Webflow page.
+  Reads raw course JSON from /data/courses/course-{sisId}.json.
+
+  Resolves course key from:
+    1. data-sisid attribute on #courseComponent
+    2. Last URL path segment (SIS ID from URL)
+
+  The add-to-cart buttons use data attributes compatible with the
+  existing CartManager / add-to-cart script (separate embed).
+
+  Place BEFORE the cart/ecommerce script in the page.
+-->
+
+<script>
+  const EE_GUID_LOOKUP = {
+    // Delivery Types
+    '1AE082FF1070438CBAA776B245B6F75D': 'Any-time Online',
+    C38BDD5C70E34955AD170B6C6A1EC5E8: 'AudioVideo Based Instruction',
+    '481341DF9A144AC8A315112B97377EC9': 'Blended',
+    '0102087B8DAB4E96B64F49185C0B1FF8': 'Blended Asynchronous',
+    '914480483DE14389ABD9EE4F1D28589E': 'Blended Self-Paced',
+    C45FFE750A404E30A906FC3C6FDD99FC: 'Blended Synchronous',
+    '6BF78E16E03F462FAEE8F223086CFB35': 'Blended Synchronous Asynchronous',
+    '5969AC19010546B5B9834F6F8D2F3B29': 'BVC Online',
+    '2E7F9F03DDB84D6BB91FDC2D4464372A': 'Challenge',
+    '6F3515869E4C4C5599F470A7A58B13F0': 'Combined Online',
+    C5BAA31D7BC0449890F790E897A92261: 'Computer Assisted Instruction',
+    '2B0F27FC3A764DBB941F2644DB71B7D6': 'Correspondence Based Instruction',
+    E27E365D5A3341629CFDB4DB6DE64FCA: 'Distributed Learning ecampus 2',
+    '467A978F3823421BBDF788D21BC7B09C': 'ECampus Alberta - online learning',
+    B146327974D348BD8306F957AE47CECD: 'eCampusAlberta Online',
+    EE331EC390BC4D329910C5911DF970A7: 'Face to Face Self-Paced',
+    '939C8DACA6C1415EBC831B3F062D4250': 'Face to Face Synchronous',
+    '8317C7933CC449C2984E7F1CCD6FF5B8': 'Flexclass',
+    F8EBCF8BF2D147AA9F76522DCBEDFA75: 'Home Study',
+    '9754E29DF0754139B125292A81550174': 'Hyflex',
+    E9F804275D3C4B61A685F63DF5134F14: 'In Class',
+    '8AFAF1DADDEF4B71AC14DA272E952D0A': 'Micro-Credential Assessment',
+    '5D448378DA984E9986E737C02BEA8F46': 'Mixed',
+    C570FE50B9824FD6906B571CDE435CF3: 'Off-Site',
+    EC1C42ED10C54C1995A9F2CFEAC79CD9: 'Online Asynchronous',
+    '9FA504584ED84FABB0748D043A306BC3': 'Online Self-Paced',
+    '71159BEB070D42C981D9758B3108A0CD': 'Online Synchronous',
+    F6250694BAD64615BCB91693A45D76C5: 'Online Synchronous Asynchronous',
+    '40817BFE87E1432EB3E68929DF8C9965': 'Real-time Online',
+    '60C2E33F37514B7E884D1BEFB7155785': 'Teleconferencing / Videoconferencing',
+    '63ADFB9EB3484A00BD66C043F43DEBE4': 'Traditional and Self Paced',
+    '05A8F1DF96624B67A7F9DC22C32B4A5F': 'Work Experience',
+    // Campuses
+    '00D83EDBF5B642ADA6493FBFE3EC116A': 'Airdrie',
+    '481D28AD75CA4F12B5B10C078AA05F35': 'Banff',
+    '0B44F9AE85B9426F9A3876762BBA5B5A': 'Calgary',
+    '8005CA67F70B43C2BBB5004FF89FA4E1': 'Calgary Downtown Campus',
+    A9B98CE5F1D5460F8812E36A93FDF320: 'Cochrane',
+    '82E8438804E84947BAAF251119943A6A': 'Distance Learning',
+    '5AA49765063A4B0BB623C0404A92406A': 'High River',
+    '2B4E485287444409AA1E828DA53BFC0C': 'Okotoks',
+    D8ECBBFE90E944FA8526B7A90ED56FC5: 'Online',
+    D532C4A03C6C42E99C3C5569D3B7F59F: 'Regional',
+    '05A9B93BC41A4F5CBE72FC9B97548AFF': 'Rural',
+    A7B3BDCF1E404C32890EF853D2DCFDF2: 'Strathmore',
+    FBE851B811DA49F0A8795BD188113BDB: 'Three Gorges Medical College',
+    AF5967FBE4D446E3BA1212EFEE54B86C: 'Three Hills',
+    '1B561481FF05406A897B1FEB28F98004': 'Yukon',
+  };
+
+  function eeResolveGuid(rawGuid) {
+    if (!rawGuid) return 'N/A';
+    const key = rawGuid.replace(/[{}\-]/g, '').toUpperCase();
+    return EE_GUID_LOOKUP[key] || rawGuid;
+  }
+
+  function eeFormatDate(dateString) {
+    if (!dateString) return '';
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    const date = new Date(year, month - 1, day);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  function eeGenerateId() {
+    return Math.random().toString(36).substr(2, 9);
+  }
+
+  function eeGenerateTimeBlockInfo(section) {
+    if (!Array.isArray(section.timeBlocks) || !section.timeBlocks.length) return '';
+    const blocksHtml = section.timeBlocks
+      .map((tb) => `
+        <div>
+            <span class="producthours">${tb.schedule || ''}</span>
+            ${tb.frequency ? `<span class="productdays"> &mdash; ${tb.frequency}</span>` : ''}
+        </div>`)
+      .join('');
+    return `<div class="timeblock-info">
+        <div class="detail-label">Schedule</div>
+        <div class="timeblock-details">${blocksHtml}</div>
+    </div>`;
+  }
+
+  function eeResolveDates(section) {
+    const tbs = Array.isArray(section.timeBlocks) ? section.timeBlocks.filter(tb => tb.startTime) : [];
+    if (tbs.length === 0) return { start: section.startDate, end: section.endDate };
+    const starts = tbs.map(tb => tb.startTime).sort();
+    const ends   = tbs.map(tb => tb.endTime).filter(Boolean).sort();
+    return {
+      start: starts[0],
+      end:   ends.length ? ends[ends.length - 1] : section.endDate
+    };
+  }
+
+  function eeGenerateAccordionItem(section, courseName, credits) {
+    const id = eeGenerateId();
+    const dates = eeResolveDates(section);
+    const startDate = eeFormatDate(dates.start);
+    const endDate = eeFormatDate(dates.end);
+
+    const domesticAmount = section.fees?.domestic?.amount ?? 0;
+    const domesticTax = section.fees?.domestic?.tax ?? 0;
+    const price = parseFloat(domesticAmount).toFixed(0);
+
+    const intlAmount = section.fees?.international?.amount ?? null;
+    const intlPrice = intlAmount !== null ? parseFloat(intlAmount).toFixed(0) : null;
+
+    const deliveryName = eeResolveGuid(section.deliveryType);
+    const timeBlockInfo = eeGenerateTimeBlockInfo(section);
+    const sectionCredits = section.credits || credits;
+
+    const regInfo = section.registrationStart
+      ? `<div class="detail-item">
+               <div class="detail-label">Registration</div>
+               <div class="detail-value">${eeFormatDate(section.registrationStart)}${section.registrationEnd ? ' &ndash; ' + eeFormatDate(section.registrationEnd) : ''}</div>
+           </div>`
+      : '';
+
+    return `
+        <div class="accordion-item-${id}">
+            <button class="accordion-toggle" onclick="eeToggleAccordion('${id}')">
+                <div class="date-range">
+                    <span class="productdates">${startDate} &ndash; ${endDate}</span>
+                    <span class="dropdown-icon">&#9660;</span>
+                </div>
+            </button>
+            <div class="accordion-content" id="ee-accordion-${id}">
+                <div class="course-details">
+                    <div class="detail-group">
+                        <div class="detail-item">
+                            <div class="detail-label">Credits</div>
+                            <div class="detail-value">${sectionCredits}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Hours</div>
+                            <div class="detail-value">${section.hours}</div>
+                        </div>
+                        ${regInfo}
+                        ${timeBlockInfo}
+                    </div>
+
+                    <div class="price-section">
+                        <div class="price-info">
+                            <div class="price-display">
+                                <span class="currency">$</span>
+                                <span class="price">${price}</span>
+                                <span class="currency-code">CAD</span>
+                            </div>
+                            <div class="student-type">Domestic Student</div>
+                            ${domesticTax > 0 ? `<div class="tax-note">+ $${parseFloat(domesticTax).toFixed(2)} tax</div>` : ''}
+                            ${intlPrice !== null ? `
+                            <div class="price-display intl" style="margin-top:8px;">
+                                <span class="currency">$</span>
+                                <span class="price">${intlPrice}</span>
+                                <span class="currency-code">CAD</span>
+                            </div>
+                            <div class="student-type">International Student</div>` : ''}
+                        </div>
+                        <div class="action-section">
+                            <a href="#"
+                                data-accordion-id="${id}"
+                                data-product-name="${courseName}"
+                                data-product-id="${section.sisId}"
+                                data-product-credits="${sectionCredits}"
+                                data-quantity="1"
+                                data-product-price="${price}"
+                                data-product-tax="${parseFloat(domesticTax).toFixed(2)}"
+                                data-product-delivery="${deliveryName}"
+                                class="c-button_cart addtocartbutton w-button"
+                                tabindex="0">Add</a>
+                            <p class="additional-fees">Additional fees apply</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+  }
+
+  // ── Two-level grouping: Delivery Type > Campus ────────────────────────────
+
+  function eeGroupSections(sections) {
+    const grouped = {};
+    sections.forEach((section) => {
+      const delivery = eeResolveGuid(section.deliveryType);
+      const campus = eeResolveGuid(section.campus);
+      if (!grouped[delivery]) grouped[delivery] = {};
+      if (!grouped[delivery][campus]) grouped[delivery][campus] = [];
+      grouped[delivery][campus].push(section);
+    });
+    return grouped;
+  }
+
+  function eeGenerateCourseOfferings(sections, courseName, courseCredits) {
+    const sorted = sections.slice().sort((a, b) => {
+      const toDate = (s) => new Date(s.startDate.substring(0, 4), s.startDate.substring(4, 6) - 1, s.startDate.substring(6, 8));
+      return toDate(a) - toDate(b);
+    });
+
+    const grouped = eeGroupSections(sorted);
+    let html = '';
+    Object.entries(grouped).forEach(([deliveryType, campuses]) => {
+      html += `<div class="course-offering">
+            <h3 class="offering-title">${deliveryType}</h3>`;
+      Object.entries(campuses).forEach(([campus, secs]) => {
+        html += `<div class="offering-location">
+                <h4 class="location-title">${campus}</h4>
+                <div class="date-label">START / END DATE</div>
+                ${secs.map((s) => eeGenerateAccordionItem(s, courseName, s.credits || courseCredits)).join('')}
+            </div>`;
+      });
+      html += `</div>`;
+    });
+    return html;
+  }
+
+  // ── Main component ────────────────────────────────────────────────────────
+
+  function eeGenerateCourseComponent(data) {
+    const name = data.name || '';
+    const description = data.description || '';
+    const credits = Number(data.credits || 0);
+    const sections = Array.isArray(data.sections) ? data.sections : [];
+
+    const creditsHtml =
+      credits > 0
+        ? `<div class="c-course_credits">
+               <div class="c-course_credits-box">
+                   <div class="c-course_credits-txt">${credits}</div>
+                   <div>Credits</div>
+               </div>
+           </div>`
+        : '';
+
+    const descHtml = description
+      ? `<h2 class="c-course__col1">Course Description</h2>
+           <div class="w-richtext"><p>${description}</p></div>`
+      : '';
+
+    const enrollHtml =
+      sections.length > 0
+        ? `<div class="enrollment-section">
+               <div class="enrollment-header">Enroll now</div>
+               ${eeGenerateCourseOfferings(sections, name, credits)}
+           </div>`
+        : `<p class="no-sections">No sections currently available.</p>`;
+
+    return `
+        <div class="course-page-grid">
+            <div class="course-info-col">
+                ${creditsHtml}
+                ${descHtml}
+            </div>
+            <div class="course-offers-col">
+                ${enrollHtml}
+            </div>
+        </div>`;
+  }
+
+  // ── Accordion toggle ──────────────────────────────────────────────────────
+
+  function eeToggleAccordion(id) {
+    const content = document.getElementById(`ee-accordion-${id}`);
+    const btn = content.previousElementSibling;
+    if (content.classList.contains('open')) {
+      content.classList.remove('open');
+      btn.classList.remove('active');
+    } else {
+      document.querySelectorAll('#courseComponent .accordion-content.open').forEach((c) => {
+        c.classList.remove('open');
+        c.previousElementSibling.classList.remove('active');
+      });
+      content.classList.add('open');
+      btn.classList.add('active');
+    }
+  }
+  window.eeToggleAccordion = eeToggleAccordion;
+
+  // ─── Course key resolution ─────────────────────────────────────────────────
+
+  function eeResolveCourseKey() {
+    var container = document.getElementById('courseComponent');
+    var key = container && container.getAttribute('data-sisid');
+    if (key && key.trim()) return key.trim();
+    var parts = window.location.pathname.replace(/\/$/, '').split('/');
+    return parts[parts.length - 1] || '';
+  }
+
+  // ─── Initialize ─────────────────────────────────────────────────────────────
+
+  async function initEeCourse() {
+    const container = document.getElementById('courseComponent');
+    if (!container) return;
+
+    const baseUrl = 'https://bvc-thesis.vercel.app';
+    const courseKey = eeResolveCourseKey();
+
+    if (!courseKey) {
+      container.innerHTML = '<p style="color:red;">Course ID not found in URL.</p>';
+      return;
+    }
+
+    try {
+      const jsonUrl = baseUrl + '/data/courses/course-' + encodeURIComponent(courseKey) + '.json';
+
+      const [data] = await Promise.all([
+        fetch(jsonUrl, { mode: 'cors' }).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
+          return r.json();
+        }),
+        fetch(baseUrl + '/data/sis-data-lookup.json', { mode: 'cors' })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((lookup) => {
+            if (!lookup) return;
+            const dt = lookup?.lookups?.deliveryTypes?.byId || {};
+            const cam = lookup?.lookups?.campuses?.byId || {};
+            [...Object.entries(dt), ...Object.entries(cam)].forEach(([id, entry]) => {
+              EE_GUID_LOOKUP[id.toUpperCase()] = entry.displayName || entry.name;
+            });
+          })
+          .catch(() => {}),
+      ]);
+
+      container.innerHTML = eeGenerateCourseComponent(data);
+
+      container.querySelectorAll('.addtocartbutton').forEach((button) => {
+        if (typeof handleAddToCart === 'function') {
+          button.addEventListener('click', handleAddToCart);
+        }
+      });
+    } catch (err) {
+      container.innerHTML = `<p style="color:red;">Failed to load course data: ${err.message}</p>`;
+      console.error('[bvc-ee-course]', err);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEeCourse);
+  } else {
+    initEeCourse();
+  }
+</script>

@@ -11,12 +11,15 @@
     "build:jamstack": "turbo run build --filter=nextjs-jamstack",
     "build:bvcapp": "turbo run build --filter=bvc-app",
     "build": "turbo run build",
-    "deploy:jamstack": "cd src/nextjs-jamstack && vercel --scope=bvc-marketing-its --prod --token=$VERCEL_TOKEN",
-    "deploy:bvcapp": "node ./deploy.mjs bvcapp"
+    "deploy:jamstack": "cd src/nextjs-jamstack && vercel --scope=bvc-marketing-its --prod",
+    "deploy:bvcapp": "node pipeline.mjs",
+    "deploy:bvcapp:prod": "node pipeline.mjs --prod"
   },
   "devDependencies": {
-    "dotenv-cli": "^11.0.0",
-    "node-schedule": "^2.1.1",
     "turbo": "^2.5.4"
+  },
+  "dependencies": {
+    "node-notifier": "^10.0.1",
+    "vercel": "^54.14.2"
   }
 }

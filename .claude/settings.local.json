@@ -1,18 +1,39 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir C:wamp64wwwsitecore-cloud *)",
-      "Bash(git *)",
-      "Bash(node scripts/copy-folders.mjs)",
-      "Bash(echo \"\\(exit $?: 1 = not ignored ✓, 0 = ignored ✗\\)\")",
-      "Bash(echo \"\\(exit $?: 1 = not ignored ✓\\)\")",
-      "WebFetch(domain:www.bowvalleycollege.ca)",
-      "Bash(node scripts/generateProgramRequirementsManifest.mjs)",
-      "Bash(node -e \"const m = require\\('./src/data/static/program-requirements-manifest.json'\\); ['addiction-studies-diploma','esports-business-management-diploma','justice-studies-law-enforcement','social-work-diploma'].forEach\\(s => console.log\\(s.padEnd\\(45\\), '→', m[s] || '\\(not found\\)'\\)\\);\")",
-      "Bash(curl -sI \"https://bvc-app.vercel.app/data/static/program-requirements-manifest.json\")",
-      "Bash(curl -sI \"https://bvc-app.vercel.app/data/static/program-requirements/AASD_-_Addiction_Studies_Diploma.json\")",
-      "Bash(curl -s \"https://bvc-app.vercel.app/data/static/program-requirements-manifest.json\")",
-      "Bash(curl -sI \"https://bvc-app.vercel.app/data/static/program-requirements-manifest.json/\")"
+      "Bash(npm install *)",
+      "Bash(git -C \"C:/www/sitecore-cloud\" status)",
+      "Bash(git -C \"C:/www/sitecore-cloud\" log --oneline -3)",
+      "Bash(git -C \"C:/www/sitecore-cloud\" add src/sxastarter/package.json src/sxastarter/package-lock.json)",
+      "Bash(git -C C:/www/sitecore-cloud commit -m ' *)",
+      "WebSearch",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm view *)",
+      "Bash(node *)",
+      "PowerShell(vercel *)",
+      "PowerShell(npm install *)",
+      "PowerShell(npm i *)",
+      "mcp__memory__read_graph",
+      "Bash(grep -E \"\\\\.json$|\\\\.js$\")",
+      "Bash(grep -r \"EE\\\\|Extended Education\" /Users/doc/Public/www/sitecore-cloud/src/bvc-app/README*)",
+      "Bash(npm run:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(vercel whoami:*)",
+      "Bash(vercel teams:*)",
+      "Bash(vercel:*)",
+      "Bash(git fetch *)",
+      "mcp__claude_ai_Claude_Code_Remote__list_triggers",
+      "PowerShell(./fee-test.ps1)",
+      "PowerShell(git *)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "memory"
+  ],
+  "disabledMcpjsonServers": [
+    "memory"
+  ]
 }

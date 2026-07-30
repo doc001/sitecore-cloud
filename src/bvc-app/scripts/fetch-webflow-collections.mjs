@@ -115,6 +115,7 @@ async function fetchAllCollectionItems(siteId, collectionId) {
 
 async function fetchAllCollections(siteId = SITE_ID, collections = COLLECTIONS) {
   console.log(`🌐 Site ID: ${siteId}`);
+  const failed = [];
   for (const { name, id } of collections) {
     console.log(`\n🚀 Fetching collection: "${name}" (ID: ${id})`);
     try {
@@ -124,17 +125,24 @@ async function fetchAllCollections(siteId = SITE_ID, collections = COLLECTIONS) 
       console.log(`🎉 Finished: "${name}" (${data.items.length} items)\n`);
     } catch (err) {
       console.error(`❌ Failed: "${name}" —`, err.message);
+      failed.push(name);
       continue; // Move to the next collection
     }
   }
   console.log('✨ All collections processed.');
+  return failed;
 }
 
 // Entrypoint: Only runs if executed, not imported
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   (async () => {
     try {
-      await fetchAllCollections();
+      const failed = await fetchAllCollections();
+      if (failed.length > 0) {
+        console.error(`\n❌ ${failed.length} collection(s) failed to fetch: ${failed.join(', ')}`);
+        console.error('Exiting non-zero to prevent shipping partial/stale CMS data.');
+        process.exit(1);
+      }
       process.exit(0);
     } catch (err) {
       console.error('💥 Script failed:', err);

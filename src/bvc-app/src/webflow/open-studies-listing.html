@@ -1,0 +1,288 @@
+<!--
+  WEBFLOW EMBED — Open Studies Course Listing
+  ============================================
+  Paste this into a Webflow "Embed" block on the Open Studies program page.
+
+  data-base-url        — base URL of the bvc-app Vercel deployment (JSON source)
+  data-course-base-url — (optional) base path for Webflow course pages.
+                         Defaults to window.location.origin + /open-studies
+                         e.g. https://uat.bowvalleycollege.ca/open-studies/anatomy-and-physiology
+-->
+
+<style>
+  .bvc-os * { box-sizing: border-box; }
+  .bvc-os { font-family: inherit; }
+
+  /* ── Accordion ──────────────────────────────────────────────────── */
+  .bvc-os-panel {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .bvc-os-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #f8fafc;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    gap: 12px;
+  }
+  .bvc-os-summary::-webkit-details-marker { display: none; }
+  .bvc-os-summary:hover { background: #f1f5f9; }
+  .bvc-os-summary-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .bvc-os-cat-name { font-size: 15px; font-weight: 600; color: #1e293b; }
+  .bvc-os-badge {
+    background: #e0edfb; color: #005596;
+    border-radius: 99px; padding: 2px 10px;
+    font-size: 12px; font-weight: 500;
+  }
+  .bvc-os-chevron {
+    width: 18px; height: 18px; flex-shrink: 0; color: #64748b;
+    transition: transform 0.2s ease;
+  }
+  details[open] .bvc-os-chevron { transform: rotate(180deg); }
+  .bvc-os-body { padding: 8px 0; }
+
+  /* ── Desktop header row ─────────────────────────────────────────── */
+  .bvc-os-header-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 70px 44px;
+    padding: 6px 16px 6px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    gap: 12px;
+  }
+  .bvc-os-header-row .col-r { text-align: center; }
+
+  /* ── Course row — desktop grid ──────────────────────────────────── */
+  .bvc-os-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 70px 44px;
+    padding: 10px 16px;
+    gap: 12px;
+    align-items: start;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .bvc-os-row:last-child { border-bottom: none; }
+  .bvc-os-row:nth-child(even) { background: #fafafa; }
+
+  /* ── Code cell ──────────────────────────────────────────────────── */
+  .bvc-os-code {
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #005596;
+    text-decoration: none;
+    line-height: 1.4;
+  }
+  .bvc-os-code:hover { text-decoration: underline; }
+
+  /* ── Name + description cell ────────────────────────────────────── */
+  .bvc-os-name-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e293b;
+    text-decoration: none;
+    display: block;
+    line-height: 1.4;
+  }
+  .bvc-os-name-link:hover { color: #005596; text-decoration: underline; }
+  .bvc-os-desc {
+    margin-top: 3px;
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ── Credits cell ───────────────────────────────────────────────── */
+  .bvc-os-credits {
+    text-align: center;
+    font-size: 13.5px;
+    color: #475569;
+    padding-top: 1px;
+  }
+
+  /* ── PDF cell ───────────────────────────────────────────────────── */
+  .bvc-os-pdf-wrap { display: flex; justify-content: center; }
+  .bvc-os-pdf-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #dc2626; text-decoration: none;
+  }
+  .bvc-os-pdf-link:hover { color: #991b1b; }
+  .bvc-os-pdf-link svg { width: 18px; height: 18px; }
+  .bvc-os-pdf-none { color: #cbd5e1; font-size: 13px; display: flex; justify-content: center; }
+
+  /* ── Desktop: hide mobile-only elements ──────────────────────────── */
+  .bvc-os-row-top { display: none; }
+  .bvc-os-code-desktop { display: block; }
+
+  /* ── Tablet portrait + mobile (≤ 640px) ────────────────────────── */
+  @media (max-width: 640px) {
+    .bvc-os-header-row { display: none; }
+
+    .bvc-os-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 12px 16px;
+    }
+
+    /* Show mobile top bar, hide desktop-only cells */
+    .bvc-os-row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .bvc-os-row-top-left { display: flex; align-items: center; gap: 10px; }
+    .bvc-os-code-desktop { display: none; }
+    .bvc-os-row > .bvc-os-credits[aria-hidden],
+    .bvc-os-row > .bvc-os-pdf-wrap[aria-hidden] { display: none; }
+
+    .bvc-os-credits {
+      text-align: left;
+      font-size: 12px;
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 99px;
+      padding: 2px 8px;
+    }
+
+    /* Name below top bar */
+    .bvc-os-cell-name { order: 2; }
+
+    /* Collapse mobile-only wrapper */
+    .bvc-os-pdf-wrap { justify-content: flex-start; }
+  }
+
+  /* ── Loading / error ────────────────────────────────────────────── */
+  .bvc-os-loading, .bvc-os-error {
+    padding: 32px; text-align: center; color: #64748b; font-size: 14px;
+  }
+  .bvc-os-error { color: #dc2626; }
+</style>
+
+<div id="bvc-os-listing" data-base-url="https://bvc-thesis.vercel.app"></div>
+
+<script>
+(function () {
+  var container = document.getElementById('bvc-os-listing');
+  if (!container) return;
+
+  var baseUrl     = (container.getAttribute('data-base-url') || 'https://bvc-thesis.vercel.app').replace(/\/$/, '');
+  var courseBase  = (container.getAttribute('data-course-base-url') || '').replace(/\/$/, '')
+                    || (window.location.origin + '/open-studies');
+  var jsonUrl     = baseUrl + '/data/open-studies/index.json';
+
+  container.innerHTML = '<div class="bvc-os-loading">Loading courses…</div>';
+
+  fetch(jsonUrl)
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      var html = '<div class="bvc-os">';
+
+      data.categories.forEach(function (cat, catIdx) {
+        html += '<details class="bvc-os-panel"' + (catIdx === 0 ? ' open' : '') + '>';
+
+        // Summary
+        html += '<summary class="bvc-os-summary">'
+          + '<span class="bvc-os-summary-left">'
+          + '<span class="bvc-os-cat-name">' + esc(cat.name) + '</span>'
+          + '<span class="bvc-os-badge">' + cat.courses.length + ' course' + (cat.courses.length !== 1 ? 's' : '') + '</span>'
+          + '</span>'
+          + chevron()
+          + '</summary>';
+
+        html += '<div class="bvc-os-body">';
+
+        // Desktop header row
+        html += '<div class="bvc-os-header-row">'
+          + '<div>Code</div><div>Course</div>'
+          + '<div class="col-r">Credits</div><div class="col-r">PDF</div>'
+          + '</div>';
+
+        cat.courses.forEach(function (course) {
+          var courseUrl = courseBase + '/' + course.slug;
+          var pdfUrl    = course.pdfFilename
+            ? baseUrl + '/data/course-outlines-pdf/' + encodeURIComponent(course.pdfFilename)
+            : null;
+
+          html += '<div class="bvc-os-row">';
+
+          // Desktop-only code cell (grid column 1)
+          html += '<a class="bvc-os-code bvc-os-code-desktop" href="' + courseUrl + '">' + esc(course.sisId) + '</a>';
+
+          // Mobile-only top bar (flex row: code | credits | pdf)
+          html += '<div class="bvc-os-row-top">'
+            + '<div class="bvc-os-row-top-left">'
+            + '<a class="bvc-os-code" href="' + courseUrl + '">' + esc(course.sisId) + '</a>'
+            + '<span class="bvc-os-credits">' + (course.credits > 0 ? course.credits.toFixed(1) + ' cr' : '—') + '</span>'
+            + '</div>'
+            + '<div class="bvc-os-pdf-wrap">'
+            + (pdfUrl ? pdfIcon(pdfUrl, course.name) : '<span class="bvc-os-pdf-none">—</span>')
+            + '</div>'
+            + '</div>';
+
+          // Name + description
+          html += '<div class="bvc-os-cell-name">'
+            + '<a class="bvc-os-name-link" href="' + courseUrl + '">' + esc(course.name) + '</a>'
+            + (course.description ? '<div class="bvc-os-desc">' + esc(course.description) + '</div>' : '')
+            + '</div>';
+
+          // Desktop-only: credits and pdf columns (hidden on mobile via the grid)
+          // These cells are still in the DOM for the desktop grid to use
+          html += '<div class="bvc-os-credits" aria-hidden="true">'
+            + (course.credits > 0 ? course.credits.toFixed(1) : '—') + '</div>';
+          html += '<div class="bvc-os-pdf-wrap" aria-hidden="true">'
+            + (pdfUrl ? pdfIcon(pdfUrl, course.name) : '<span class="bvc-os-pdf-none">—</span>')
+            + '</div>';
+
+          html += '</div>'; // .bvc-os-row
+        });
+
+        html += '</div></details>'; // body + details
+      });
+
+      html += '</div>';
+      container.innerHTML = html;
+    })
+    .catch(function (err) {
+      container.innerHTML = '<div class="bvc-os-error">Could not load course data. Please try again later.</div>';
+      console.error('[bvc-os-listing]', err);
+    });
+
+  // ── Helpers ──────────────────────────────────────────────────────
+
+  function chevron() {
+    return '<svg class="bvc-os-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">'
+      + '<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>'
+      + '</svg>';
+  }
+
+  function pdfIcon(url, name) {
+    return '<a class="bvc-os-pdf-link" href="' + url + '" target="_blank" rel="noopener" title="' + esc(name) + ' outline">'
+      + '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">'
+      + '<path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z"/>'
+      + '<path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z"/>'
+      + '</svg></a>';
+  }
+
+  function esc(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+})();
+</script>

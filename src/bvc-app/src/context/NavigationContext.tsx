@@ -83,9 +83,11 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
   useEffect(() => {
     const handleResize = () => {
       const newMode = window.innerWidth > 768 ? 'desktop' : 'mobile';
-      if (newMode !== state.currentMode) {
-        setState(prevState => ({ ...prevState, currentMode: newMode }));
-      }
+      setState(prevState =>
+        prevState.currentMode === newMode
+          ? prevState
+          : { ...prevState, currentMode: newMode }
+      );
     };
 
     // Set initial mode
@@ -93,12 +95,12 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
 
     // Add resize listener
     window.addEventListener('resize', handleResize);
-    
+
     // Clean up
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [state.currentMode]);
+  }, []);
 
   // Save state to localStorage when active tabs change
   useEffect(() => {

@@ -32,14 +32,21 @@
                             "title": "Microeconomics",
                             "credits": 3,
                             "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1401_Microeconomics_(Winter 2025_Current).pdf"
-                        },
+                        }
+                    ]
+                },
+                {
+                    "ruleType": "minimumGrade",
+                    "description": "Earn a minimum grade of B- in each of the following courses:",
+                    "courses": [
                         {
                             "code": "MGMT1201",
                             "title": "Business Communication",
                             "credits": 3,
                             "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1201_Business Communication_(Winter 2025_Current).pdf"
                         }
-                    ]
+                    ],
+                    "minimumGrade": "B-"
                 }
             ]
         },
@@ -162,7 +169,7 @@
                     ]
                 },
                 {
-                    "ruleType": "minimumCreditsFromList",
+                    "ruleType": "",
                     "description": "Complete at least 1 of the following courses:",
                     "courses": [
                         {
@@ -176,15 +183,8 @@
                             "title": "Human Resources Specialization: Service Learning Project",
                             "credits": 3,
                             "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2999_Human Resources Specialization Service Learning Project_(Fall 2025_Current).pdf"
-                        },
-                        {
-                            "code": "MGMT2992",
-                            "title": "Business Administration Diploma Field Placement",
-                            "credits": 3,
-                            "url": ""
                         }
-                    ],
-                    "minimumCredits": 1
+                    ]
                 }
             ]
         }

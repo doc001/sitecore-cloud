@@ -84,7 +84,7 @@ const Programs = () => {
           <li className="list-item">
             To find out about Regional programming, contact us at 403-476-2233 or
             <strong className="font-bold"> </strong>
-            <a className="text-sky-500" href="https://www.bowvalleycollege.ca/mailto:regional@bowvalleycollege.ca">
+            <a className="text-sky-500" href="mailto:regional@bowvalleycollege.ca">
               regional@bowvalleycollege.ca
             </a>
           </li>
@@ -203,14 +203,14 @@ const Programs = () => {
         <ul className="pl-10 list-disc">
           <li className="list-item">
             email{" "}
-            <a className="text-sky-500" href="https://www.bowvalleycollege.ca/mailto:registrar@bowvalleycollege.ca">
+            <a className="text-sky-500" href="mailto:registrar@bowvalleycollege.ca">
               registrar@bowvalleycollege.ca
             </a>{" "}
             indicating the course you would like to take,{" "}
           </li>
           <li className="list-item">
             or phone{" "}
-            <a className="text-sky-500" href="https://www.bowvalleycollege.ca/tel:4034101400">
+            <a className="text-sky-500" href="tel:4034101400">
               403-410-1400
             </a>
             ,{" "}

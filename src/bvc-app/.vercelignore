@@ -1,0 +1,12 @@
+# Rebuildable artifacts — must NOT be uploaded to Vercel.
+# Vercel reinstalls deps (installCommand) and rebuilds (buildCommand -> out/),
+# so uploading these only bloats the deployment payload (and overflows the
+# CLI's buffer -> "Array buffer allocation failed").
+node_modules
+.next
+out
+.vercel
+
+# Local-only sandbox + logs
+dev
+*.log

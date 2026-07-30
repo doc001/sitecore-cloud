@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "WebFetch(domain:uat.bowvalleycollege.ca)",
+      "Bash(node scripts/generateOpenStudiesPublicJson.mjs)",
+      "Bash(node -e ' *)",
+      "Read(//c/www/sitecore-cloud/**)",
+      "Bash(cat vercel.json)",
+      "Bash(ls *.json)",
+      "Bash(cat .vercel/project.json)",
+      "Bash(npx vercel *)",
+      "Bash(curl -s \"https://bvc-uat.vercel.app/data/open-studies/index.json\")",
+      "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\)\\); d.categories.forEach\\(c=>console.log\\(c.name+':',c.courses.length,'courses'\\)\\);\")",
+      "Bash(curl -s \"https://bvc-uat.vercel.app/data/open-studies/index.json\" -o tmp_check.json)",
+      "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('tmp_check.json','utf8'\\)\\); d.categories.forEach\\(c=>console.log\\(c.name+':',c.courses.length,'courses'\\)\\); require\\('fs'\\).unlinkSync\\('tmp_check.json'\\)\")",
+      "Bash(curl *)",
+      "Bash(node *)",
+      "Bash(wc -l *.mjs)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "WebFetch(domain:bvc-uat.vercel.app)",
+      "WebFetch(domain:www.bowvalleycollege.ca)"
+    ]
+  }
+}

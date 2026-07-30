@@ -82,9 +82,12 @@ packages/
 /src/rendering/src/temp/!GraphQLFragmentTypes.json
 /src/rendering/src/temp/!GraphQLIntrospectionResult.json
 node_modules
+
 .vercel
-/src/bvc-app/.flowbite-react/*
-/src/bvc-app/.next/*
-/src/bvc-app/.vercel/*
-/src/bvc-app/out/*
-/src/bvc-app/.env*
+
+# Turborepo local cache & daemon logs (do not commit; ~200MB blobs)
+.turbo/
+**/.turbo/
+
+# PM2 pipeline logs
+logs/

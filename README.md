@@ -7,22 +7,18 @@ You must have the following software components on your workstation:
 
 2. Windows PowerShell
 
-3. The current long-term support (LTS) version of Node.js. Check your installed version with `node -v` https://nodejs.org/ (v20 as of project start)
+3. **Node.js v22 LTS** (includes npm — no separate npm install needed). Check your installed version with `node -v` and `npm -v`. Download from https://nodejs.org/
 
-    - If you do not have node installed then use `nvm install 20.10.0`
+    - If Node is not installed, download the v22 LTS installer from https://nodejs.org/ and run it. npm is bundled automatically.
 
-    - If you do have node installed, but it is a later version, run:
-
-    ```ps1
-    nvm install 20.10.0
-    ```
+    - If you manage multiple Node versions with **nvm**:
 
     ```ps1
-    nvm use 20.10.0
+    nvm install 22
+    nvm use 22
     ```
 
-    This installs version 20.10.0 and switches to it.
-    If you need to switch between versions for other projects you can use the command, `nvm use <VERSIONNUMBER>`
+    To switch between versions for other projects: `nvm use <VERSION>`
     
 4. .NET Core 6.0 SDK (check your installed version with the `dotnet --version` command). https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 
@@ -160,6 +156,128 @@ dotnet sitecore ser push --environment-name default
 > **Note**
 > If you get a _401_ error, click **Home** and log in again if prompted.
 
+
+# INSTALL DEPENDENCIES
+
+Run **once from the repo root** — npm workspaces installs dependencies for all packages (`src/bvc-app`, `src/nextjs-jamstack`) in a single command:
+
+```powershell
+npm install
+```
+
+Do **not** run `npm install` inside individual app folders — the root install covers everything.
+
+---
+
+# ENVIRONMENT SETUP
+
+Environment files are **gitignored** — they are never committed to the repo. Each developer must create them locally. The actual values (API keys, endpoints, credentials) are stored in the team's **local OneNote notebook**.
+
+## `src/bvc-app/.env.local`
+
+```
+WEBFLOW_API_KEY=...
+SITECORE_GRAPHQL_ENDPOINT=...
+SITECORE_GRAPHQL_API_KEY=...
+SC_APIKEY=...
+SITECORE_USERNAME=...
+SITECORE_PASSWORD=...
+# Optional: Teams incoming webhook URL for pipeline failure alerts
+TEAMS_WEBHOOK_URL=
+```
+
+## `src/nextjs-jamstack/.env.local`
+
+```
+SITECORE_GRAPHQL_ENDPOINT=...
+SITECORE_GRAPHQL_API_KEY=...
+```
+
+> **Note:** Root `.env.template` covers Sitecore Docker/XM Cloud variables for local CM development. It is not required for frontend-only work.
+
+---
+
+# VERCEL DEPLOYMENT (bvc-app)
+
+The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its` team scope.
+
+## Vercel Projects
+
+| Project | URL | Purpose |
+|---|---|---|
+| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — sole deployment target; all Webflow embeds load CSS/JS/data from here |
+
+**Vercel is a static host only.** The site is built locally; the pre-built `out/` folder is packaged and uploaded directly using `vercel deploy --prebuilt`. Vercel never runs a build on its servers.
+
+## Deploying
+
+All deployments target `bvc-thesis`. Run on demand from the repo root:
+
+```powershell
+npm run deploy:bvcapp   # runs the full pipeline: build → package → deploy → cleanup
+# or equivalently:
+node pipeline.mjs
+```
+
+## Webflow Embed Asset URLs
+
+All Webflow embeds (course listings, course detail pages) load assets and data from `bvc-thesis.vercel.app`:
+
+```html
+<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
+<script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
+<script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
+```
+
+---
+
+# HOURLY AUTOMATED PIPELINE (PM2)
+
+`pipeline.mjs` runs a full data refresh and deploys to `bvc-thesis` every hour at `:55`. It uses PM2 as a process manager and fires a Windows toast notification on failure.
+
+## Pipeline steps (~5 min total)
+
+| Step | What happens |
+|---|---|
+| Build | `npm run build:bvcapp --force` — fetches data from Webflow + Sitecore XMC, generates breadcrumbs, runs Next.js static export → `out/` |
+| Package | Copies `out/` into `.vercel/output/static/` with a `config.json` (Vercel Build Output API v3) |
+| Link project | `vercel pull` — refreshes `.vercel/project.json` for `bvc-thesis` |
+| Deploy | `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild |
+| Cleanup | Removes intermediate JSON files from `src/data/` |
+
+## PM2 setup (run once)
+
+> **Windows machine** — `pm2 startup` does not work on Windows. Use `pm2-windows-startup` instead to auto-start PM2 on login.
+
+```powershell
+npm install -g pm2
+pm2 start ecosystem.config.js       # registers the cron (fires at :50 every hour)
+pm2 save                            # save process list to ~/.pm2/dump.pm2
+
+# Auto-start on Windows login:
+npm install -g pm2-windows-startup
+pm2-startup install
+```
+
+## PM2 day-to-day
+
+```bash
+pm2 status                      # check schedule and last run status
+pm2 logs bvc-hourly-deploy      # live log tail
+pm2 restart bvc-hourly-deploy   # trigger an immediate run right now
+pm2 stop bvc-hourly-deploy      # pause the schedule
+```
+
+## Manual one-off run
+
+```bash
+node pipeline.mjs
+```
+
+Logs are written to `logs/` (git-ignored). To adjust the cron offset, edit `cron_restart` in `ecosystem.config.js`.
+
+---
 
 # FRONT END
 Please refer to the README.md under _<REPODIR>/src/bvcrendering_ for the front end React/Next.JS and Storybook instructions.

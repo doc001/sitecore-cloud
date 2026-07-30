@@ -20,12 +20,14 @@
 # production
 /build
 
-# generated data — Webflow / SiS / breadcrumbs scripts write here locally;
-# the contents are propagated to public/data/ by scripts/copy-folders.mjs
-# and public/ is what actually ships to Vercel.
-/src/data
+#data
+/src/data/*
 
-
+# generated bundles (built fresh on every build by scripts/build-os-course.mjs)
+/public/js/os-course.js
+/public/css/os-course.css
+/public/js/checkout.js
+/public/js/ee-course.js
 
 # misc
 .DS_Store
@@ -43,4 +45,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-.vercel

@@ -16,7 +16,7 @@ import fs from "fs";
 import path from "path";
 
 const ROOT = process.cwd();
-const PDF_BASE = "https://bvc-app.vercel.app/data/course-outlines-pdf";
+const PDF_BASE = "https://bvc-thesis.vercel.app/data/course-outlines-pdf";
 const OUTPUT = path.resolve(ROOT, "src", "data", "open-studies-by-area.json");
 
 const openStudies = JSON.parse(
@@ -44,43 +44,16 @@ const pdfFiles = fs.existsSync(pdfDir)
   ? fs.readdirSync(pdfDir).filter((f) => /\.pdf$/i.test(f))
   : [];
 
-// Rank terms chronologically within a year: Winter < Spring < Summer < Fall.
-const SEASON_RANK = { winter: 0, spring: 1, summer: 2, fall: 3 };
-
-// Parse the leading (start) term inside the parens, e.g.
-//   "ACCT2103_..._(Fall 2026_Current).pdf" -> { year: 2026, season: 3 }
-// Returns a sentinel that sorts first when no term can be parsed.
-function termKey(filename) {
-  const m = filename.match(/\(([A-Za-z]+)\s+(\d{4})/);
-  if (!m) return { year: -1, season: -1 };
-  return { year: parseInt(m[2], 10), season: SEASON_RANK[m[1].toLowerCase()] ?? -1 };
-}
-
-// Pick the best outline PDF for a SIS id. The PDFs are synced from SharePoint
-// (C:\wamp64\www\coursesDB\sharepoint_course_outlines) and stale outlines are
-// never removed, so a course can have several "_Current)" files for different
-// years. Rank by start term (most recent wins); a "_Current)" file only breaks
-// ties between equal terms. Files look like:
-//   ACCT2103_Advanced Financial Accounting_(Fall 2026_Current).pdf
+// Pick the best outline PDF for a SIS id: prefer the "_Current)" outline,
+// otherwise the latest by name. Files look like:
+//   ACCT1103_Introduction to Financial Accounting_(Fall 2023_Current).pdf
 function resolvePdf(code) {
   if (!code) return null;
   const prefix = code.toUpperCase() + "_";
   const matches = pdfFiles.filter((f) => f.toUpperCase().startsWith(prefix));
   if (!matches.length) return null;
-
-  return matches
-    .slice()
-    .sort((a, b) => {
-      const ka = termKey(a);
-      const kb = termKey(b);
-      if (ka.year !== kb.year) return ka.year - kb.year;
-      if (ka.season !== kb.season) return ka.season - kb.season;
-      const ac = /_current\)\.pdf$/i.test(a) ? 1 : 0;
-      const bc = /_current\)\.pdf$/i.test(b) ? 1 : 0;
-      if (ac !== bc) return ac - bc; // "_Current)" wins the tie
-      return a.localeCompare(b); // stable, deterministic final fallback
-    })
-    .pop(); // most recent is last
+  const current = matches.find((f) => /_current\)\.pdf$/i.test(f));
+  return current || matches.sort().pop();
 }
 
 // Credits as shown in the table, e.g. "3" -> "3.0", "4.5" -> "4.5".
