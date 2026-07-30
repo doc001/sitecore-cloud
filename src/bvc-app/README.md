@@ -4,6 +4,8 @@ Next.js 15 / React 19 application for Bow Valley College. Statically generated a
 
 ## Getting Started
 
+Use the instructions in this README to setup the project in a different machine. The code here is for UAT
+
 ```bash
 npm install
 npm run dev
