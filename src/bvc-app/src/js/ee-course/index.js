@@ -18,7 +18,7 @@
  * Defaults (production):
  *   dataOrigin     : https://bvc-thesis.vercel.app        (this app /data/*)
  *   apiOrigin      : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
- *   feeApplicantId : 'null'  (literal string in fee/{skus}/{id}; backend expects it)
+ *   feeApplicantId : ''  (empty studentNo segment in fee/{skus}/{studentNo}; backend expects it)
  * ---------------------------------------------------------------------------
  */
 (function () {
@@ -31,12 +31,12 @@
     var _cfg = (typeof window !== 'undefined' && window.__EE_COURSE_CONFIG__) || {},
       dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-thesis.vercel.app',
       apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app',
-      // Fee endpoint is `fee/{skus}/{id}` where {id} must be the literal string 'null'
-      // for an anonymous fee preview. The backend expects this spelled-out value; an
-      // integer id (e.g. 1) returns a 500 NRE, and an omitted segment 404s. The value
-      // does not change the returned fee amounts. Override per env (e.g. a real applicant
-      // id) via window.__EE_COURSE_CONFIG__ = { feeApplicantId: <id> }. See OS-COURSE-CART.md.
-      feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : 'null',
+      // Fee endpoint is `fee/{skus}/{studentNo}` where {studentNo} must be EMPTY for an
+      // anonymous fee preview — the URL ends in a trailing slash (`fee/2595/`). Verified
+      // 2026-07-28: empty → 200 with fee data; the literal string 'null' now 404s. The
+      // value does not change the returned fee amounts. Override per env (e.g. a real
+      // applicant id) via window.__EE_COURSE_CONFIG__ = { feeApplicantId: <id> }. See OS-COURSE-CART.md.
+      feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '',
       tokenStorage = window.tokenStorage || {
         key: 'bvcToken',
         setToken: function (token) {
