@@ -109,6 +109,20 @@ npm run breadcrumbs:all         # Regenerate navigation breadcrumbs
 npm run bvcapp-scripts
 ```
 
+**Webflow-embedded JS/CSS assets** (bundled by esbuild — see `scripts/build-os-course.mjs`):
+
+```bash
+npm run js:build        # Bundle src/js/*/index.js + src/css/*.css → public/{js,css}/* (readable, DEV/UAT)
+npm run js:build:prod   # Same, minified + console/debugger stripped (PROD)
+npm run js:watch        # Rebuild on every save
+npm run checkout-cart:html  # Regenerate src/webflow/checkout-cart.html from content.js
+```
+
+`js:build` is the first step of `npm run build`, so a normal build/deploy
+always refreshes these. Sources live under `src/js/<name>/index.js` (ES modules,
+esbuild follows imports) and `src/css/<name>.css`; each bundles to a
+self-contained IIFE at `public/js/<name>.js` served at `/js/<name>.js`.
+
 ### nextjs-jamstack
 Run from `src/nextjs-jamstack/`:
 ```bash
@@ -172,7 +186,12 @@ src/webflow/
   open-studies-course.html           # OS course detail — description, credits, accordion offerings, add-to-cart
   extended-education-listing.html    # EE program page — searchable flat table
   extended-education-course.html     # EE course detail — same layout as OS, reads from /data/courses/
+  checkout-cart.html                 # /cart-checkout personal-info form (GENERATED from content.js — do not hand-edit)
 ```
+
+Two flavours of embed live here:
+- **Inline snippets** (the course listing/detail files above) — self-contained HTML+CSS+JS pasted whole into an Embed block.
+- **Bundled-asset embeds** (`checkout-cart.html`, and the `os-course` / `ee-course` / `checkout` runtimes) — the HTML is just markup carrying `data-*` hooks; the CSS and JS are separate bundled files loaded from Vercel via `<link>` / `<script src>`. Source is `src/js/<name>/` + `src/css/<name>.css`, built by `js:build`. See the JS/CSS build commands above.
 
 Key conventions:
 - **Course detail embeds target `#courseComponent`** — the existing Webflow div on course pages.
@@ -185,6 +204,7 @@ Key conventions:
 - **PDF course outlines** (OS only): fetched via `pdfFilename` from the course index JSON. Correct path is `/data/course-outlines-pdf/{pdfFilename}`. EE courses do not have PDF outlines.
 - **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
 - **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-thesis.vercel.app`.
+- **Checkout-cart embed** (`/cart-checkout`): a multi-step personal-info form, not a course renderer. Root hook is `[data-checkout]`; the runtime binds to `data-*` attributes (`data-step`, `data-field`, `data-next/back`, `data-student-type`, terms/refund consent). Load order on the page: `<link rel="stylesheet" href=".../css/checkout-cart.css">` and `<script src=".../js/checkout-cart.js" defer></script>` in page settings, then paste `src/webflow/checkout-cart.html` into an Embed. `content.js` is the single source of truth for fields, options, copy, and MSAL config — the HTML is regenerated from it (`npm run checkout-cart:html`), so never hand-edit the markup. Note the separate `public/js/checkout.js` is a *different* script (cart/payment handler) on the same page.
 
 ### bvc-app — Route Map
 
