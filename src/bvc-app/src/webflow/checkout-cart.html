@@ -95,11 +95,12 @@
       <p class="bvc-field__error" id="phoneCountryCode-error" data-error hidden></p>
     </div>
     <div class="bvc-field" data-field="phone">
-      <label class="bvc-field__label" for="phone">Phone Number<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <input id="phone" name="phone" required aria-describedby="phone-hint phone-error" autocomplete="tel" type="tel" maxlength="14" inputmode="tel">
+      <label class="bvc-field__label" for="phoneNumber">Phone Number<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="phoneNumber" name="phone" required aria-describedby="phone-hint phone-error" autocomplete="tel" type="tel" maxlength="14" inputmode="tel">
       <p class="bvc-field__hint" id="phone-hint">10 digits, numbers only</p>
       <p class="bvc-field__error" id="phone-error" data-error hidden></p>
     </div>
+    <input type="hidden" id="phone" name="phoneCombined" data-phone-combined>
     <div class="bvc-field" data-field="birthDate">
       <label class="bvc-field__label" for="birthDate">Birth Date<span class="bvc-field__required" aria-hidden="true">*</span></label>
       <input id="birthDate" name="birthDate" required aria-describedby="birthDate-hint birthDate-error" autocomplete="bday" type="date">
@@ -107,8 +108,8 @@
       <p class="bvc-field__error" id="birthDate-error" data-error hidden></p>
     </div>
     <div class="bvc-field" data-field="asn">
-      <label class="bvc-field__label" for="asn">Alberta Student #<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <input id="asn" name="asn" required aria-describedby="asn-hint asn-error" type="text" maxlength="9" inputmode="numeric">
+      <label class="bvc-field__label" for="asn-os">Alberta Student #<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="asn-os" name="asn" required aria-describedby="asn-hint asn-error" type="text" maxlength="9" inputmode="numeric">
       <p class="bvc-field__hint" id="asn-hint">9 digits, numbers only</p>
       <p class="bvc-field__error" id="asn-error" data-error hidden></p>
     </div>
@@ -269,7 +270,7 @@
       </div>
       <p class="bvc-field__hint" data-terms-hint>Scroll to the end of the terms to enable the checkbox below.</p>
       <label class="bvc-check">
-        <input type="checkbox" data-terms-accept disabled>
+        <input type="checkbox" id="checkbox-2" data-terms-accept disabled>
         <span>I have read and accept the terms and conditions.</span>
       </label>
       <p class="bvc-field__error" data-terms-error hidden></p>
@@ -336,8 +337,8 @@
       <p class="bvc-field__error" id="province-error" data-error hidden></p>
     </div>
     <div class="bvc-field" data-field="postalCode">
-      <label class="bvc-field__label" for="postalCode">Postal Code<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <input id="postalCode" name="postalCode" required aria-describedby="postalCode-hint postalCode-error" autocomplete="postal-code" type="text" maxlength="7">
+      <label class="bvc-field__label" for="postalcode">Postal Code<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="postalcode" name="postalCode" required aria-describedby="postalCode-hint postalCode-error" autocomplete="postal-code" type="text" maxlength="7">
       <p class="bvc-field__hint" id="postalCode-hint">Format: A1A 1A1</p>
       <p class="bvc-field__error" id="postalCode-error" data-error hidden></p>
     </div>
@@ -419,7 +420,7 @@
     </div>
 
     <label class="bvc-check bvc-check--billing">
-      <input type="checkbox" data-billing-same checked>
+      <input type="checkbox" id="checkbox" data-billing-same checked>
       <span>Billing Address same as above?</span>
     </label>
 
@@ -427,18 +428,18 @@
       <h3 class="bvc-subheading">Billing Address</h3>
       <div class="bvc-grid">
     <div class="bvc-field bvc-field--wide" data-field="billingAddress">
-      <label class="bvc-field__label" for="billingAddress">Street Address<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <input id="billingAddress" name="billingAddress" required aria-describedby="billingAddress-error" autocomplete="section-billing street-address" type="text" maxlength="100" data-address-autocomplete="billing">
+      <label class="bvc-field__label" for="streetAddress-2">Street Address<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="streetAddress-2" name="billingAddress" required aria-describedby="billingAddress-error" autocomplete="section-billing street-address" type="text" maxlength="100" data-address-autocomplete="billing">
       <p class="bvc-field__error" id="billingAddress-error" data-error hidden></p>
     </div>
     <div class="bvc-field" data-field="billingCity">
-      <label class="bvc-field__label" for="billingCity">City<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <input id="billingCity" name="billingCity" required aria-describedby="billingCity-error" autocomplete="section-billing address-level2" type="text" maxlength="60">
+      <label class="bvc-field__label" for="city-2">City<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="city-2" name="billingCity" required aria-describedby="billingCity-error" autocomplete="section-billing address-level2" type="text" maxlength="60">
       <p class="bvc-field__error" id="billingCity-error" data-error hidden></p>
     </div>
     <div class="bvc-field bvc-field--wide" data-field="billingProvince">
-      <label class="bvc-field__label" for="billingProvince">Province<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <select id="billingProvince" name="billingProvince" required aria-describedby="billingProvince-error" autocomplete="section-billing address-level1">
+      <label class="bvc-field__label" for="province-2">Province<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <select id="province-2" name="billingProvince" required aria-describedby="billingProvince-error" autocomplete="section-billing address-level1">
         <option value="">Please select…</option>
         <option value="AB">Alberta</option>
         <option value="BC">British Columbia</option>
@@ -457,14 +458,14 @@
       <p class="bvc-field__error" id="billingProvince-error" data-error hidden></p>
     </div>
     <div class="bvc-field" data-field="billingPostalCode">
-      <label class="bvc-field__label" for="billingPostalCode">Postal Code<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <input id="billingPostalCode" name="billingPostalCode" required aria-describedby="billingPostalCode-hint billingPostalCode-error" autocomplete="section-billing postal-code" type="text" maxlength="7">
+      <label class="bvc-field__label" for="postalCode-2">Postal Code<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="postalCode-2" name="billingPostalCode" required aria-describedby="billingPostalCode-hint billingPostalCode-error" autocomplete="section-billing postal-code" type="text" maxlength="7">
       <p class="bvc-field__hint" id="billingPostalCode-hint">Format: A1A 1A1</p>
       <p class="bvc-field__error" id="billingPostalCode-error" data-error hidden></p>
     </div>
     <div class="bvc-field bvc-field--wide" data-field="billingCountry">
-      <label class="bvc-field__label" for="billingCountry">Country<span class="bvc-field__required" aria-hidden="true">*</span></label>
-      <select id="billingCountry" name="billingCountry" required aria-describedby="billingCountry-error" autocomplete="section-billing country">
+      <label class="bvc-field__label" for="country-2">Country<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <select id="country-2" name="billingCountry" required aria-describedby="billingCountry-error" autocomplete="section-billing country">
         <option value="">Please select…</option>
         <option value="CA" selected>Canada</option>
         <option value="US">United States</option>

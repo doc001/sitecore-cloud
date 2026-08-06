@@ -199,6 +199,9 @@
       narrow: true
     },
     {
+      // The visible input holds the 10 digits (validated). The dialling code is
+      // combined into a hidden #phone (+1XXXXXXXXXX) that the cart submitter
+      // (checkout.js) reads — so this input takes a different id.
       name: "phone",
       label: "Phone Number",
       type: "tel",
@@ -207,7 +210,8 @@
       maxLength: 14,
       autocomplete: "tel",
       inputMode: "tel",
-      hint: "10 digits, numbers only"
+      hint: "10 digits, numbers only",
+      submitId: "phoneNumber"
     },
     {
       name: "birthDate",
@@ -219,6 +223,7 @@
       hint: `Format: ${config.dateFormat}`
     },
     {
+      // OS-only. The submitter reads Open Studies ASN from #asn-os.
       name: "asn",
       label: "Alberta Student #",
       type: "text",
@@ -226,7 +231,8 @@
       validate: "asn",
       maxLength: config.asnLength,
       inputMode: "numeric",
-      hint: `${config.asnLength} digits, numbers only`
+      hint: `${config.asnLength} digits, numbers only`,
+      submitId: "asn-os"
     },
     {
       name: "gender",
@@ -331,7 +337,8 @@
       hint: "Format: A1A 1A1",
       step: "mailing",
       group: "mailing",
-      addressRole: "postalCode"
+      addressRole: "postalCode",
+      submitId: "postalcode"
     },
     {
       name: "country",
@@ -358,7 +365,8 @@
       step: "mailing",
       group: "billing",
       addressRole: "street",
-      autocompleteAddress: true
+      autocompleteAddress: true,
+      submitId: "streetAddress-2"
     },
     {
       name: "billingCity",
@@ -370,7 +378,8 @@
       autocomplete: "section-billing address-level2",
       step: "mailing",
       group: "billing",
-      addressRole: "city"
+      addressRole: "city",
+      submitId: "city-2"
     },
     {
       name: "billingProvince",
@@ -382,7 +391,8 @@
       autocomplete: "section-billing address-level1",
       step: "mailing",
       group: "billing",
-      addressRole: "province"
+      addressRole: "province",
+      submitId: "province-2"
     },
     {
       name: "billingPostalCode",
@@ -395,7 +405,8 @@
       hint: "Format: A1A 1A1",
       step: "mailing",
       group: "billing",
-      addressRole: "postalCode"
+      addressRole: "postalCode",
+      submitId: "postalCode-2"
     },
     {
       name: "billingCountry",
@@ -408,7 +419,8 @@
       autocomplete: "section-billing country",
       step: "mailing",
       group: "billing",
-      addressRole: "country"
+      addressRole: "country",
+      submitId: "country-2"
     }
   ];
   var messages = {
@@ -1108,10 +1120,18 @@
     });
     const countryField = fields2.get("country");
     const phoneCodeField = fields2.get("phoneCountryCode");
+    const phoneNumberField = fields2.get("phone");
+    const phoneCombined = root.querySelector("[data-phone-combined]");
     countryField == null ? void 0 : countryField.control.addEventListener("change", () => {
       const code = config.phone.dialCodeByCountry[countryField.value];
       if (code && phoneCodeField) phoneCodeField.value = code;
     });
+    function updateCombinedPhone() {
+      if (!phoneCombined) return;
+      const code = (phoneCodeField == null ? void 0 : phoneCodeField.value) || config.phone.defaultDialCode || "";
+      const digits = ((phoneNumberField == null ? void 0 : phoneNumberField.value) || "").replace(/\D/g, "");
+      phoneCombined.value = digits ? `${code}${digits}` : "";
+    }
     const draft = readDraft(config.draftKey);
     fields2.forEach((field) => {
       if (draft[field.name]) field.control.value = draft[field.name];
@@ -1160,6 +1180,7 @@
     });
     function refresh() {
       applyConditionals();
+      updateCombinedPhone();
       stepper.refreshNextButton(config.hardDisableNext);
       saveDraft();
     }

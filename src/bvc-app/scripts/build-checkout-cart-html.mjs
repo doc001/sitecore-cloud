@@ -38,13 +38,17 @@ const esc = (value) => String(value)
   .replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
 
+/** The DOM id a control is submitted under — may differ from its logical name
+ *  so the cart submitter (checkout.js) can read it by the id it expects. */
+const controlId = (field) => field.submitId || field.name;
+
 /** Requirement 3 — optional fields are labelled; mandatory ones get a *. */
 function renderLabel(field) {
   const suffix = field.required
     ? '<span class="bvc-field__required" aria-hidden="true">*</span>'
     : ` <span class="bvc-field__optional">(${optionalSuffix})</span>`;
 
-  return `<label class="bvc-field__label" for="${field.name}">${esc(field.label)}${suffix}</label>`;
+  return `<label class="bvc-field__label" for="${controlId(field)}">${esc(field.label)}${suffix}</label>`;
 }
 
 function renderControl(field) {
@@ -54,7 +58,7 @@ function renderControl(field) {
   ].filter(Boolean).join(' ');
 
   const shared = [
-    `id="${field.name}"`,
+    `id="${controlId(field)}"`,
     `name="${field.name}"`,
     field.required ? 'required' : '',
     `aria-describedby="${describedBy}"`,
@@ -95,11 +99,19 @@ function renderField(field) {
     ? `\n      <p class="bvc-field__hint" id="${field.name}-hint">${esc(field.hint)}</p>`
     : '';
 
-  return `    <div class="bvc-field${wide}" data-field="${field.name}"${hidden}>
+  const wrapper = `    <div class="bvc-field${wide}" data-field="${field.name}"${hidden}>
       ${renderLabel(field)}
 ${renderControl(field)}${hint}
       <p class="bvc-field__error" id="${field.name}-error" data-error hidden></p>
     </div>`;
+
+  // The phone number is entered as digits; the runtime writes the combined
+  // "+1XXXXXXXXXX" value into this hidden input, which the cart submitter reads.
+  if (field.name === 'phone') {
+    return `${wrapper}\n    <input type="hidden" id="phone" name="phoneCombined" data-phone-combined>`;
+  }
+
+  return wrapper;
 }
 
 function renderProgress() {
@@ -130,7 +142,7 @@ ${mailingAddress.map(renderField).join('\n')}
     </div>
 
     <label class="bvc-check bvc-check--billing">
-      <input type="checkbox" data-billing-same checked>
+      <input type="checkbox" id="checkbox" data-billing-same checked>
       <span>Billing Address same as above?</span>
     </label>
 
@@ -202,7 +214,7 @@ ${fieldsForStep('personal').map(renderField).join('\n')}
       </div>
       <p class="bvc-field__hint" data-terms-hint>Scroll to the end of the terms to enable the checkbox below.</p>
       <label class="bvc-check">
-        <input type="checkbox" data-terms-accept disabled>
+        <input type="checkbox" id="checkbox-2" data-terms-accept disabled>
         <span>I have read and accept the terms and conditions.</span>
       </label>
       <p class="bvc-field__error" data-terms-error hidden></p>

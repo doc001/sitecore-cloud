@@ -355,9 +355,12 @@ export const fields = [
     validate: 'choice', options: 'phoneCountryCode', defaultValue: '+1', narrow: true
   },
   {
+    // The visible input holds the 10 digits (validated). The dialling code is
+    // combined into a hidden #phone (+1XXXXXXXXXX) that the cart submitter
+    // (checkout.js) reads — so this input takes a different id.
     name: 'phone', label: 'Phone Number', type: 'tel', required: true,
     validate: 'phone', maxLength: 14, autocomplete: 'tel',
-    inputMode: 'tel', hint: '10 digits, numbers only'
+    inputMode: 'tel', hint: '10 digits, numbers only', submitId: 'phoneNumber'
   },
   {
     name: 'birthDate', label: 'Birth Date', type: 'date', required: true,
@@ -365,9 +368,10 @@ export const fields = [
     hint: `Format: ${config.dateFormat}`
   },
   {
+    // OS-only. The submitter reads Open Studies ASN from #asn-os.
     name: 'asn', label: 'Alberta Student #', type: 'text', required: true,
     validate: 'asn', maxLength: config.asnLength, inputMode: 'numeric',
-    hint: `${config.asnLength} digits, numbers only`
+    hint: `${config.asnLength} digits, numbers only`, submitId: 'asn-os'
   },
   {
     name: 'gender', label: 'Gender', type: 'select', required: true,
@@ -426,7 +430,7 @@ export const fields = [
     name: 'postalCode', label: 'Postal Code', type: 'text', required: true,
     validate: 'postalCode', maxLength: 7, autocomplete: 'postal-code',
     hint: 'Format: A1A 1A1', step: 'mailing', group: 'mailing',
-    addressRole: 'postalCode'
+    addressRole: 'postalCode', submitId: 'postalcode'
   },
   {
     name: 'country', label: 'Country', type: 'select', required: true,
@@ -440,29 +444,29 @@ export const fields = [
     name: 'billingAddress', label: 'Street Address', type: 'text', required: true,
     validate: 'address', maxLength: 100, autocomplete: 'section-billing street-address',
     step: 'mailing', group: 'billing', addressRole: 'street',
-    autocompleteAddress: true
+    autocompleteAddress: true, submitId: 'streetAddress-2'
   },
   {
     name: 'billingCity', label: 'City', type: 'text', required: true,
     validate: 'personName', maxLength: 60, autocomplete: 'section-billing address-level2',
-    step: 'mailing', group: 'billing', addressRole: 'city'
+    step: 'mailing', group: 'billing', addressRole: 'city', submitId: 'city-2'
   },
   {
     name: 'billingProvince', label: 'Province', type: 'select', required: true,
     validate: 'choice', options: 'province', autocomplete: 'section-billing address-level1',
-    step: 'mailing', group: 'billing', addressRole: 'province'
+    step: 'mailing', group: 'billing', addressRole: 'province', submitId: 'province-2'
   },
   {
     name: 'billingPostalCode', label: 'Postal Code', type: 'text', required: true,
     validate: 'postalCode', maxLength: 7, autocomplete: 'section-billing postal-code',
     hint: 'Format: A1A 1A1', step: 'mailing', group: 'billing',
-    addressRole: 'postalCode'
+    addressRole: 'postalCode', submitId: 'postalCode-2'
   },
   {
     name: 'billingCountry', label: 'Country', type: 'select', required: true,
     validate: 'choice', options: 'country', defaultValue: 'CA',
     autocomplete: 'section-billing country', step: 'mailing', group: 'billing',
-    addressRole: 'country'
+    addressRole: 'country', submitId: 'country-2'
   }
 ];
 

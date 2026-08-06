@@ -100,10 +100,22 @@ function start() {
   // and the user can still override it afterwards.
   const countryField = fields.get('country');
   const phoneCodeField = fields.get('phoneCountryCode');
+  const phoneNumberField = fields.get('phone');
+  const phoneCombined = root.querySelector('[data-phone-combined]');
+
   countryField?.control.addEventListener('change', () => {
     const code = config.phone.dialCodeByCountry[countryField.value];
     if (code && phoneCodeField) phoneCodeField.value = code;
   });
+
+  /** Mirror "<dialCode><digits>" (e.g. +14035550134) into the hidden #phone
+   *  that the cart submitter reads. No separator, per the agreed format. */
+  function updateCombinedPhone() {
+    if (!phoneCombined) return;
+    const code = phoneCodeField?.value || config.phone.defaultDialCode || '';
+    const digits = (phoneNumberField?.value || '').replace(/\D/g, '');
+    phoneCombined.value = digits ? `${code}${digits}` : '';
+  }
 
   // --- draft persistence -------------------------------------------------
 
@@ -171,6 +183,7 @@ function start() {
   /** Called after any change anywhere in the form. */
   function refresh() {
     applyConditionals();
+    updateCombinedPhone();
     stepper.refreshNextButton(config.hardDisableNext);
     saveDraft();
   }
