@@ -40,6 +40,19 @@ function start() {
     birthDate.control.max = toISODateString(todayUTC());
   }
 
+  // --- cart type: Alberta Student # is mandatory only for Open Studies -----
+  //
+  // The registration submitter (checkout.js) requires ASN only when the cart
+  // is Open Studies, read from the ?type query parameter. Mirror that here so
+  // Extended Ed registrations are not blocked by a field that does not apply.
+  const cartParams = new URLSearchParams(window.location.search);
+  const isOpenStudies =
+    cartParams.get(config.cart.typeParam) === config.cart.openStudiesValue;
+  const asnField = fields.get('asn');
+  if (asnField && !isOpenStudies) {
+    asnField.setVisible(false); // hidden => cleared and exempt from validation
+  }
+
   // --- conditional fields (requirements 2.12 and 2.13) --------------------
 
   function applyConditionals() {
@@ -78,6 +91,18 @@ function start() {
   billingSame?.addEventListener('change', () => {
     applyBillingVisibility();
     refresh();
+  });
+
+  // --- phone dialling code follows the mailing country --------------------
+  //
+  // Requirement: the phone prefix is based on the country (Canada/US = +1).
+  // The number keeps its own field; picking a mailing Country sets the code,
+  // and the user can still override it afterwards.
+  const countryField = fields.get('country');
+  const phoneCodeField = fields.get('phoneCountryCode');
+  countryField?.control.addEventListener('change', () => {
+    const code = config.phone.dialCodeByCountry[countryField.value];
+    if (code && phoneCodeField) phoneCodeField.value = code;
   });
 
   // --- draft persistence -------------------------------------------------

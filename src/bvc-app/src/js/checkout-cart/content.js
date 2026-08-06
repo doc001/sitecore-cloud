@@ -72,6 +72,40 @@ export const config = {
     apiKey: '',
     countryRestriction: ['ca'],
     mapsJsBase: 'https://maps.googleapis.com/maps/api/js'
+  },
+
+  /**
+   * Phone country/dialling code. The number is stored in its own field; the
+   * dialling code lives in `phoneCountryCode`. Canada and the US share +1, so
+   * that is the default. `dialCodeByCountry` lets the mailing Country selection
+   * drive the code (still user-overridable) — requirement: "add the prefix
+   * based on the country, for Canada and US is 1".
+   */
+  phone: {
+    defaultDialCode: '+1',
+    dialCodeByCountry: {
+      CA: '+1', US: '+1', MX: '+52', GB: '+44', IE: '+353', FR: '+33',
+      DE: '+49', IT: '+39', ES: '+34', PL: '+48', UA: '+380', RU: '+7',
+      IN: '+91', PK: '+92', LK: '+94', NP: '+977', CN: '+86', HK: '+852',
+      TW: '+886', JP: '+81', KR: '+82', PH: '+63', VN: '+84', ID: '+62',
+      MY: '+60', SG: '+65', TH: '+66', BD: '+880', IR: '+98', IQ: '+964',
+      IL: '+972', JO: '+962', LB: '+961', SA: '+966', AE: '+971', TR: '+90',
+      EG: '+20', DZ: '+213', MA: '+212', NG: '+234', GH: '+233', KE: '+254',
+      ET: '+251', TZ: '+255', SO: '+252', SD: '+249', ER: '+291', SN: '+221',
+      CM: '+237', CD: '+243', ZA: '+27', ZW: '+263', BR: '+55', AR: '+54',
+      CL: '+56', CO: '+57', PE: '+51', VE: '+58', GT: '+502', HN: '+504',
+      SV: '+503', JM: '+1', AU: '+61'
+    }
+  },
+
+  /**
+   * Which cart the form is serving. Open Studies (`os`) makes the Alberta
+   * Student # mandatory; every other type hides it — this mirrors the cart
+   * submitter (checkout.js), which reads the same `?type` query parameter.
+   */
+  cart: {
+    typeParam: 'type',
+    openStudiesValue: 'os'
   }
 };
 
@@ -252,6 +286,35 @@ export const options = {
     { value: 'GB', label: 'United Kingdom' },
     { value: 'VE', label: 'Venezuela' }, { value: 'VN', label: 'Vietnam' },
     { value: 'ZW', label: 'Zimbabwe' }, { value: 'OTHER', label: 'Other' }
+  ],
+
+  /**
+   * Phone dialling codes. Value is the code that gets prefixed to the number;
+   * Canada and the US both use +1, which is the default. Ordered by BVC intake
+   * volume, then alphabetical. The mailing Country can auto-select the matching
+   * entry via config.phone.dialCodeByCountry.
+   */
+  phoneCountryCode: [
+    { value: '+1', label: '+1 (Canada / United States)' },
+    { value: '+91', label: '+91 (India)' },
+    { value: '+63', label: '+63 (Philippines)' },
+    { value: '+234', label: '+234 (Nigeria)' },
+    { value: '+86', label: '+86 (China)' },
+    { value: '+92', label: '+92 (Pakistan)' },
+    { value: '+44', label: '+44 (United Kingdom)' },
+    { value: '+52', label: '+52 (Mexico)' },
+    { value: '+55', label: '+55 (Brazil)' },
+    { value: '+33', label: '+33 (France)' },
+    { value: '+49', label: '+49 (Germany)' },
+    { value: '+81', label: '+81 (Japan)' },
+    { value: '+82', label: '+82 (South Korea)' },
+    { value: '+84', label: '+84 (Vietnam)' },
+    { value: '+880', label: '+880 (Bangladesh)' },
+    { value: '+971', label: '+971 (United Arab Emirates)' },
+    { value: '+966', label: '+966 (Saudi Arabia)' },
+    { value: '+254', label: '+254 (Kenya)' },
+    { value: '+27', label: '+27 (South Africa)' },
+    { value: '+61', label: '+61 (Australia)' }
   ]
 };
 
@@ -284,6 +347,12 @@ export const fields = [
     name: 'email', label: 'Email Address', type: 'email', required: true,
     validate: 'email', maxLength: 254, autocomplete: 'email',
     inputMode: 'email'
+  },
+  {
+    // Dialling code prefix. Defaults to +1 (Canada / US); the mailing Country
+    // can update it (see index.js). `narrow` keeps it beside the number.
+    name: 'phoneCountryCode', label: 'Country Code', type: 'select', required: true,
+    validate: 'choice', options: 'phoneCountryCode', defaultValue: '+1', narrow: true
   },
   {
     name: 'phone', label: 'Phone Number', type: 'tel', required: true,

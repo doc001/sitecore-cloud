@@ -87,7 +87,7 @@ function renderControl(field) {
 function renderField(field) {
   // Conditional fields start hidden; the runtime reveals them.
   const hidden = field.showWhen ? ' hidden' : '';
-  const wide = field.type === 'select' || field.name === 'email' || field.addressRole === 'street'
+  const wide = (field.type === 'select' && !field.narrow) || field.name === 'email' || field.addressRole === 'street'
     ? ' bvc-field--wide'
     : '';
 

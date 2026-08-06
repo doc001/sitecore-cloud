@@ -67,6 +67,33 @@
       <input id="email" name="email" required aria-describedby="email-error" autocomplete="email" type="email" maxlength="254" inputmode="email">
       <p class="bvc-field__error" id="email-error" data-error hidden></p>
     </div>
+    <div class="bvc-field" data-field="phoneCountryCode">
+      <label class="bvc-field__label" for="phoneCountryCode">Country Code<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <select id="phoneCountryCode" name="phoneCountryCode" required aria-describedby="phoneCountryCode-error">
+        <option value="">Please select…</option>
+        <option value="+1" selected>+1 (Canada / United States)</option>
+        <option value="+91">+91 (India)</option>
+        <option value="+63">+63 (Philippines)</option>
+        <option value="+234">+234 (Nigeria)</option>
+        <option value="+86">+86 (China)</option>
+        <option value="+92">+92 (Pakistan)</option>
+        <option value="+44">+44 (United Kingdom)</option>
+        <option value="+52">+52 (Mexico)</option>
+        <option value="+55">+55 (Brazil)</option>
+        <option value="+33">+33 (France)</option>
+        <option value="+49">+49 (Germany)</option>
+        <option value="+81">+81 (Japan)</option>
+        <option value="+82">+82 (South Korea)</option>
+        <option value="+84">+84 (Vietnam)</option>
+        <option value="+880">+880 (Bangladesh)</option>
+        <option value="+971">+971 (United Arab Emirates)</option>
+        <option value="+966">+966 (Saudi Arabia)</option>
+        <option value="+254">+254 (Kenya)</option>
+        <option value="+27">+27 (South Africa)</option>
+        <option value="+61">+61 (Australia)</option>
+      </select>
+      <p class="bvc-field__error" id="phoneCountryCode-error" data-error hidden></p>
+    </div>
     <div class="bvc-field" data-field="phone">
       <label class="bvc-field__label" for="phone">Phone Number<span class="bvc-field__required" aria-hidden="true">*</span></label>
       <input id="phone" name="phone" required aria-describedby="phone-hint phone-error" autocomplete="tel" type="tel" maxlength="14" inputmode="tel">

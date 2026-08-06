@@ -54,6 +54,90 @@
       apiKey: "",
       countryRestriction: ["ca"],
       mapsJsBase: "https://maps.googleapis.com/maps/api/js"
+    },
+    /**
+     * Phone country/dialling code. The number is stored in its own field; the
+     * dialling code lives in `phoneCountryCode`. Canada and the US share +1, so
+     * that is the default. `dialCodeByCountry` lets the mailing Country selection
+     * drive the code (still user-overridable) — requirement: "add the prefix
+     * based on the country, for Canada and US is 1".
+     */
+    phone: {
+      defaultDialCode: "+1",
+      dialCodeByCountry: {
+        CA: "+1",
+        US: "+1",
+        MX: "+52",
+        GB: "+44",
+        IE: "+353",
+        FR: "+33",
+        DE: "+49",
+        IT: "+39",
+        ES: "+34",
+        PL: "+48",
+        UA: "+380",
+        RU: "+7",
+        IN: "+91",
+        PK: "+92",
+        LK: "+94",
+        NP: "+977",
+        CN: "+86",
+        HK: "+852",
+        TW: "+886",
+        JP: "+81",
+        KR: "+82",
+        PH: "+63",
+        VN: "+84",
+        ID: "+62",
+        MY: "+60",
+        SG: "+65",
+        TH: "+66",
+        BD: "+880",
+        IR: "+98",
+        IQ: "+964",
+        IL: "+972",
+        JO: "+962",
+        LB: "+961",
+        SA: "+966",
+        AE: "+971",
+        TR: "+90",
+        EG: "+20",
+        DZ: "+213",
+        MA: "+212",
+        NG: "+234",
+        GH: "+233",
+        KE: "+254",
+        ET: "+251",
+        TZ: "+255",
+        SO: "+252",
+        SD: "+249",
+        ER: "+291",
+        SN: "+221",
+        CM: "+237",
+        CD: "+243",
+        ZA: "+27",
+        ZW: "+263",
+        BR: "+55",
+        AR: "+54",
+        CL: "+56",
+        CO: "+57",
+        PE: "+51",
+        VE: "+58",
+        GT: "+502",
+        HN: "+504",
+        SV: "+503",
+        JM: "+1",
+        AU: "+61"
+      }
+    },
+    /**
+     * Which cart the form is serving. Open Studies (`os`) makes the Alberta
+     * Student # mandatory; every other type hides it — this mirrors the cart
+     * submitter (checkout.js), which reads the same `?type` query parameter.
+     */
+    cart: {
+      typeParam: "type",
+      openStudiesValue: "os"
     }
   };
   var fields = [
@@ -101,6 +185,18 @@
       maxLength: 254,
       autocomplete: "email",
       inputMode: "email"
+    },
+    {
+      // Dialling code prefix. Defaults to +1 (Canada / US); the mailing Country
+      // can update it (see index.js). `narrow` keeps it beside the number.
+      name: "phoneCountryCode",
+      label: "Country Code",
+      type: "select",
+      required: true,
+      validate: "choice",
+      options: "phoneCountryCode",
+      defaultValue: "+1",
+      narrow: true
     },
     {
       name: "phone",
@@ -979,6 +1075,12 @@
       birthDate.control.min = toISODateString(earliestBirthDate());
       birthDate.control.max = toISODateString(todayUTC());
     }
+    const cartParams = new URLSearchParams(window.location.search);
+    const isOpenStudies = cartParams.get(config.cart.typeParam) === config.cart.openStudiesValue;
+    const asnField = fields2.get("asn");
+    if (asnField && !isOpenStudies) {
+      asnField.setVisible(false);
+    }
     function applyConditionals() {
       fields.forEach((definition) => {
         if (!definition.showWhen) return;
@@ -1003,6 +1105,12 @@
     billingSame == null ? void 0 : billingSame.addEventListener("change", () => {
       applyBillingVisibility();
       refresh();
+    });
+    const countryField = fields2.get("country");
+    const phoneCodeField = fields2.get("phoneCountryCode");
+    countryField == null ? void 0 : countryField.control.addEventListener("change", () => {
+      const code = config.phone.dialCodeByCountry[countryField.value];
+      if (code && phoneCodeField) phoneCodeField.value = code;
     });
     const draft = readDraft(config.draftKey);
     fields2.forEach((field) => {
