@@ -94,7 +94,13 @@ export function createConsent(root, onChange) {
     if (typeof ResizeObserver === 'function') {
       new ResizeObserver(unlockIfScrolled).observe(scrollBox);
     }
-    unlockIfScrolled(); // Case (a), on load.
+    // Case (a), on load — deferred by a microtask. When the terms box is too
+    // short to scroll, atEnd() is true immediately and this fires onChange
+    // synchronously; but the caller (start()) wires `stepper` and `consent`
+    // AFTER createConsent returns, so a synchronous callback here reaches them
+    // while they are still in the temporal dead zone. Deferring lets start()
+    // finish wiring before the first unlock runs.
+    queueMicrotask(unlockIfScrolled);
   } else if (termsCheckbox) {
     hasScrolledToEnd = true;
     termsCheckbox.disabled = false;

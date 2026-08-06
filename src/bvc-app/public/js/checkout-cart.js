@@ -398,7 +398,7 @@
       if (typeof ResizeObserver === "function") {
         new ResizeObserver(unlockIfScrolled).observe(scrollBox);
       }
-      unlockIfScrolled();
+      queueMicrotask(unlockIfScrolled);
     } else if (termsCheckbox) {
       hasScrolledToEnd = true;
       termsCheckbox.disabled = false;
