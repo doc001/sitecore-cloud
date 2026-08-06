@@ -115,6 +115,22 @@
   border-color: var(--bvc-error);
   background: var(--bvc-error-bg);
 }
+.bvc-subheading {
+  font-size: 1.125rem;
+  margin: 1.75rem 0 0.75rem;
+}
+.bvc-step__heading + .bvc-step__intro + .bvc-subheading {
+  margin-top: 1rem;
+}
+.bvc-check--billing {
+  font-weight: 600;
+}
+.bvc-billing {
+  margin-top: 0.5rem;
+}
+.bvc-billing[hidden] {
+  display: none;
+}
 .bvc-consent {
   margin-top: 2rem;
 }

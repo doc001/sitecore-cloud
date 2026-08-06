@@ -18,7 +18,6 @@ export function createStepper(root, { steps, validateStep, onEnterStep }) {
   });
 
   const order = steps.map((s) => s.id).filter((id) => sections.has(id));
-  const summary = root.querySelector('[data-error-summary]');
   const progressItems = root.querySelectorAll('[data-progress-step]');
 
   let index = 0;
@@ -32,6 +31,9 @@ export function createStepper(root, { steps, validateStep, onEnterStep }) {
   }
 
   function announce(errorCount) {
+    // Each step carries its own summary, so resolve it against the step the
+    // user is actually looking at.
+    const summary = currentSection()?.querySelector('[data-error-summary]');
     if (!summary) return;
     if (!errorCount) {
       summary.textContent = '';

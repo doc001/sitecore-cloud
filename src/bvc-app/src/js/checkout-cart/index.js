@@ -16,6 +16,7 @@ import { createField } from './field.js';
 import { createConsent } from './consent.js';
 import { createStepper } from './stepper.js';
 import { createStudentAuth } from './msal-auth.js';
+import { initAddressAutocomplete } from './address-autocomplete.js';
 import { readDraft, writeDraft, debounce } from './storage.js';
 import { earliestBirthDate, todayUTC, toISODateString } from './validators.js';
 
@@ -51,6 +52,33 @@ function start() {
       field.setVisible(definition.showWhen.equals.includes(controller.value));
     });
   }
+
+  // --- billing address (requirement: "Billing Address same as above?") ----
+  //
+  // When checked, the billing fields are hidden AND exempt from validation
+  // (setVisible(false) does both). Default is checked — most people bill to
+  // the address they just typed.
+
+  const billingSame = root.querySelector('[data-billing-same]');
+  const billingBlock = root.querySelector('[data-billing-block]');
+  const billingFieldNames = fieldDefinitions
+    .filter((definition) => definition.group === 'billing')
+    .map((definition) => definition.name);
+
+  function applyBillingVisibility() {
+    if (!billingSame) return;
+    const sameAsMailing = billingSame.checked;
+    if (billingBlock) billingBlock.hidden = sameAsMailing;
+    billingFieldNames.forEach((name) => {
+      const field = fields.get(name);
+      if (field) field.setVisible(!sameAsMailing);
+    });
+  }
+
+  billingSame?.addEventListener('change', () => {
+    applyBillingVisibility();
+    refresh();
+  });
 
   // --- draft persistence -------------------------------------------------
 
@@ -186,8 +214,26 @@ function start() {
   // If the user signed in earlier in the cart flow, prefill without a click.
   studentAuth.restoreSession();
 
+  // --- address autocomplete (requirement: Google Maps integration) -------
+  //
+  // Build role -> field maps per address group from the field metadata, so the
+  // Google module can fill the right controls without knowing field names.
+  const addressGroups = {};
+  fieldDefinitions.forEach((definition) => {
+    if (!definition.group || !definition.addressRole) return;
+    const field = fields.get(definition.name);
+    if (!field) return;
+    (addressGroups[definition.group] ||= {})[definition.addressRole] = field;
+  });
+
+  // Rejects when no API key is set or Maps is unavailable — harmless; the
+  // fields already work as manual entry.
+  initAddressAutocomplete({ root, groups: addressGroups, onFill: refresh })
+    .catch(() => {});
+
   // --- go ----------------------------------------------------------------
 
+  applyBillingVisibility();
   stepper.show(0, { focusHeading: false });
   refresh();
 }

@@ -75,7 +75,10 @@ function renderControl(field) {
   const extras = [
     `type="${field.type}"`,
     field.maxLength ? `maxlength="${field.maxLength}"` : '',
-    field.inputMode ? `inputmode="${field.inputMode}"` : ''
+    field.inputMode ? `inputmode="${field.inputMode}"` : '',
+    // Street fields carry the Google Places hook; the value is the address
+    // group so the runtime fills the right siblings.
+    field.autocompleteAddress ? `data-address-autocomplete="${field.group}"` : ''
   ].filter(Boolean).join(' ');
 
   return `      <input ${shared} ${extras}>`;
@@ -84,7 +87,9 @@ function renderControl(field) {
 function renderField(field) {
   // Conditional fields start hidden; the runtime reveals them.
   const hidden = field.showWhen ? ' hidden' : '';
-  const wide = field.type === 'select' || field.name === 'email' ? ' bvc-field--wide' : '';
+  const wide = field.type === 'select' || field.name === 'email' || field.addressRole === 'street'
+    ? ' bvc-field--wide'
+    : '';
 
   const hint = field.hint
     ? `\n      <p class="bvc-field__hint" id="${field.name}-hint">${esc(field.hint)}</p>`
@@ -103,6 +108,46 @@ function renderProgress() {
   ).join('\n');
 
   return `  <ol class="bvc-progress" aria-label="Checkout progress">\n${items}\n  </ol>`;
+}
+
+/** Fields belonging to a step (defaults to the personal step). */
+const fieldsForStep = (stepId) => fields.filter((field) => (field.step || 'personal') === stepId);
+const inGroup = (list, group) => list.filter((field) => field.group === group);
+
+function renderMailingStep() {
+  const mailingFields = fieldsForStep('mailing');
+  const mailingAddress = inGroup(mailingFields, 'mailing');
+  const billingAddress = inGroup(mailingFields, 'billing');
+
+  return `  <!-- Step 3 — Mailing Information (mailing + billing address) -->
+  <section class="bvc-step" data-step="mailing" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Mailing Information</h2>
+    <p class="bvc-step__intro">Start typing a street address to autofill. Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
+
+    <h3 class="bvc-subheading">Mailing Address</h3>
+    <div class="bvc-grid">
+${mailingAddress.map(renderField).join('\n')}
+    </div>
+
+    <label class="bvc-check bvc-check--billing">
+      <input type="checkbox" data-billing-same checked>
+      <span>Billing Address same as above?</span>
+    </label>
+
+    <div class="bvc-billing" data-billing-block hidden>
+      <h3 class="bvc-subheading">Billing Address</h3>
+      <div class="bvc-grid">
+${billingAddress.map(renderField).join('\n')}
+      </div>
+    </div>
+
+    <p class="bvc-summary" data-error-summary role="alert" hidden></p>
+
+    <div class="bvc-actions">
+      <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
+      <button type="button" class="bvc-button" data-next>Continue to Payment Information</button>
+    </div>
+  </section>`;
 }
 
 function renderForm() {
@@ -145,7 +190,7 @@ ${renderProgress()}
     <p class="bvc-step__intro">Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
 
     <div class="bvc-grid">
-${fields.map(renderField).join('\n')}
+${fieldsForStep('personal').map(renderField).join('\n')}
     </div>
 
     <!-- Requirement 6 — terms and conditions -->
@@ -186,9 +231,11 @@ ${fields.map(renderField).join('\n')}
     </div>
   </section>
 
-  <!-- Step 3 — Mailing Information (placeholder for the next requirement set) -->
-  <section class="bvc-step" data-step="mailing" hidden>
-    <h2 class="bvc-step__heading" data-step-heading>Mailing Information</h2>
+${renderMailingStep()}
+
+  <!-- Step 4 — Payment Information (placeholder for the next requirement set) -->
+  <section class="bvc-step" data-step="payment" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Payment Information</h2>
     <p class="bvc-step__intro">Next section goes here.</p>
     <div class="bvc-actions">
       <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>

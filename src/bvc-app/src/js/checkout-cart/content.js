@@ -53,6 +53,25 @@ export const config = {
     // v4 exposes initialize(); the 2.12.0 build in the original embed does not.
     msalCdn: 'https://alcdn.msauth.net/browser/4.5.0/js/msal-browser.min.js',
     studentApiBase: 'https://nextjs-jamstack-dev.vercel.app/api/bvcpayment/'
+  },
+
+  /**
+   * Google Maps Places autocomplete for the address fields (NGEW-217).
+   *
+   * `apiKey` is intentionally empty here — provision a browser key in Google
+   * Cloud, restrict it by HTTP referrer to the hosts that serve this page
+   * (uat.bowvalleycollege.ca, the Webflow staging domain, production), enable
+   * the "Maps JavaScript API" + "Places API", and drop it in. Until a key is
+   * set the module no-ops and every address field stays fully usable as plain
+   * manual entry.
+   *
+   * `countryRestriction` biases suggestions; null = worldwide. It is aligned
+   * to Canada by default because the Province list is Canadian.
+   */
+  googleMaps: {
+    apiKey: '',
+    countryRestriction: ['ca'],
+    mapsJsBase: 'https://maps.googleapis.com/maps/api/js'
   }
 };
 
@@ -169,6 +188,70 @@ export const options = {
     { value: 'GB', label: 'United Kingdom' }, { value: 'US', label: 'United States' },
     { value: 'VE', label: 'Venezuela' }, { value: 'VN', label: 'Vietnam' },
     { value: 'ZW', label: 'Zimbabwe' }, { value: 'OTHER', label: 'Other' }
+  ],
+
+  /**
+   * Canadian provinces and territories. Values are the two-letter codes that
+   * Google Places returns as `administrative_area_level_1.short_name`, so an
+   * autocompleted address selects the right option with no translation.
+   */
+  province: [
+    { value: 'AB', label: 'Alberta' },
+    { value: 'BC', label: 'British Columbia' },
+    { value: 'MB', label: 'Manitoba' },
+    { value: 'NB', label: 'New Brunswick' },
+    { value: 'NL', label: 'Newfoundland and Labrador' },
+    { value: 'NS', label: 'Nova Scotia' },
+    { value: 'NT', label: 'Northwest Territories' },
+    { value: 'NU', label: 'Nunavut' },
+    { value: 'ON', label: 'Ontario' },
+    { value: 'PE', label: 'Prince Edward Island' },
+    { value: 'QC', label: 'Quebec' },
+    { value: 'SK', label: 'Saskatchewan' },
+    { value: 'YT', label: 'Yukon' }
+  ],
+
+  /**
+   * Mailing country. Values are ISO 3166-1 alpha-2 codes (Google Places
+   * `country.short_name`). Canada is the default; the list mirrors the
+   * international intake covered by countryOfCitizenship.
+   */
+  country: [
+    { value: 'CA', label: 'Canada' }, { value: 'US', label: 'United States' },
+    { value: 'AF', label: 'Afghanistan' }, { value: 'DZ', label: 'Algeria' },
+    { value: 'AR', label: 'Argentina' }, { value: 'AU', label: 'Australia' },
+    { value: 'BD', label: 'Bangladesh' }, { value: 'BR', label: 'Brazil' },
+    { value: 'CM', label: 'Cameroon' }, { value: 'CL', label: 'Chile' },
+    { value: 'CN', label: 'China' }, { value: 'CO', label: 'Colombia' },
+    { value: 'CD', label: 'Congo (DRC)' }, { value: 'EG', label: 'Egypt' },
+    { value: 'SV', label: 'El Salvador' }, { value: 'ER', label: 'Eritrea' },
+    { value: 'ET', label: 'Ethiopia' }, { value: 'FR', label: 'France' },
+    { value: 'DE', label: 'Germany' }, { value: 'GH', label: 'Ghana' },
+    { value: 'GT', label: 'Guatemala' }, { value: 'HN', label: 'Honduras' },
+    { value: 'HK', label: 'Hong Kong' }, { value: 'IN', label: 'India' },
+    { value: 'ID', label: 'Indonesia' }, { value: 'IR', label: 'Iran' },
+    { value: 'IQ', label: 'Iraq' }, { value: 'IE', label: 'Ireland' },
+    { value: 'IL', label: 'Israel' }, { value: 'IT', label: 'Italy' },
+    { value: 'JM', label: 'Jamaica' }, { value: 'JP', label: 'Japan' },
+    { value: 'JO', label: 'Jordan' }, { value: 'KE', label: 'Kenya' },
+    { value: 'KR', label: 'Korea, South' }, { value: 'LB', label: 'Lebanon' },
+    { value: 'MY', label: 'Malaysia' }, { value: 'MX', label: 'Mexico' },
+    { value: 'MA', label: 'Morocco' }, { value: 'NP', label: 'Nepal' },
+    { value: 'NG', label: 'Nigeria' }, { value: 'PK', label: 'Pakistan' },
+    { value: 'PS', label: 'Palestine' }, { value: 'PE', label: 'Peru' },
+    { value: 'PH', label: 'Philippines' }, { value: 'PL', label: 'Poland' },
+    { value: 'RO', label: 'Romania' }, { value: 'RU', label: 'Russia' },
+    { value: 'SA', label: 'Saudi Arabia' }, { value: 'SN', label: 'Senegal' },
+    { value: 'SG', label: 'Singapore' }, { value: 'SO', label: 'Somalia' },
+    { value: 'ZA', label: 'South Africa' }, { value: 'ES', label: 'Spain' },
+    { value: 'LK', label: 'Sri Lanka' }, { value: 'SD', label: 'Sudan' },
+    { value: 'SY', label: 'Syria' }, { value: 'TW', label: 'Taiwan' },
+    { value: 'TZ', label: 'Tanzania' }, { value: 'TH', label: 'Thailand' },
+    { value: 'TR', label: 'Türkiye' }, { value: 'UA', label: 'Ukraine' },
+    { value: 'AE', label: 'United Arab Emirates' },
+    { value: 'GB', label: 'United Kingdom' },
+    { value: 'VE', label: 'Venezuela' }, { value: 'VN', label: 'Vietnam' },
+    { value: 'ZW', label: 'Zimbabwe' }, { value: 'OTHER', label: 'Other' }
   ]
 };
 
@@ -241,6 +324,76 @@ export const fields = [
     name: 'countryOfCitizenship', label: 'Country of Citizenship', type: 'select',
     required: true, validate: 'choice', options: 'countryOfCitizenship',
     showWhen: { field: 'citizenshipStatus', equals: ['PR', 'REF', 'STUDY', 'WORK', 'OTHER'] }
+  },
+
+  // ==========================================================================
+  // Mailing Information step
+  //
+  // `step`        — which section the field is rendered into.
+  // `group`       — 'mailing' or 'billing'; billing fields are hidden and
+  //                 exempt from validation while "same as above" is checked.
+  // `addressRole` — which part of an address this control holds, so the Google
+  //                 Places autocomplete can map a picked place onto the group.
+  // ==========================================================================
+
+  // --- Mailing address ----------------------------------------------------
+  {
+    name: 'address', label: 'Street Address', type: 'text', required: true,
+    validate: 'address', maxLength: 100, autocomplete: 'street-address',
+    step: 'mailing', group: 'mailing', addressRole: 'street',
+    autocompleteAddress: true
+  },
+  {
+    name: 'city', label: 'City', type: 'text', required: true,
+    validate: 'personName', maxLength: 60, autocomplete: 'address-level2',
+    step: 'mailing', group: 'mailing', addressRole: 'city'
+  },
+  {
+    name: 'province', label: 'Province', type: 'select', required: true,
+    validate: 'choice', options: 'province', autocomplete: 'address-level1',
+    step: 'mailing', group: 'mailing', addressRole: 'province'
+  },
+  {
+    name: 'postalCode', label: 'Postal Code', type: 'text', required: true,
+    validate: 'postalCode', maxLength: 7, autocomplete: 'postal-code',
+    hint: 'Format: A1A 1A1', step: 'mailing', group: 'mailing',
+    addressRole: 'postalCode'
+  },
+  {
+    name: 'country', label: 'Country', type: 'select', required: true,
+    validate: 'choice', options: 'country', defaultValue: 'CA',
+    autocomplete: 'country', step: 'mailing', group: 'mailing',
+    addressRole: 'country'
+  },
+
+  // --- Billing address (mirrors mailing; hidden when "same as above") ------
+  {
+    name: 'billingAddress', label: 'Street Address', type: 'text', required: true,
+    validate: 'address', maxLength: 100, autocomplete: 'section-billing street-address',
+    step: 'mailing', group: 'billing', addressRole: 'street',
+    autocompleteAddress: true
+  },
+  {
+    name: 'billingCity', label: 'City', type: 'text', required: true,
+    validate: 'personName', maxLength: 60, autocomplete: 'section-billing address-level2',
+    step: 'mailing', group: 'billing', addressRole: 'city'
+  },
+  {
+    name: 'billingProvince', label: 'Province', type: 'select', required: true,
+    validate: 'choice', options: 'province', autocomplete: 'section-billing address-level1',
+    step: 'mailing', group: 'billing', addressRole: 'province'
+  },
+  {
+    name: 'billingPostalCode', label: 'Postal Code', type: 'text', required: true,
+    validate: 'postalCode', maxLength: 7, autocomplete: 'section-billing postal-code',
+    hint: 'Format: A1A 1A1', step: 'mailing', group: 'billing',
+    addressRole: 'postalCode'
+  },
+  {
+    name: 'billingCountry', label: 'Country', type: 'select', required: true,
+    validate: 'choice', options: 'country', defaultValue: 'CA',
+    autocomplete: 'section-billing country', step: 'mailing', group: 'billing',
+    addressRole: 'country'
   }
 ];
 
@@ -255,6 +408,8 @@ export const messages = {
   birthDateFuture: 'Birth date cannot be in the future.',
   birthDateTooOld: `Birth date cannot be more than ${config.maxAgeYears} years ago.`,
   asn: `Your Alberta Student # must be exactly ${config.asnLength} digits.`,
+  address: 'Enter a valid street address.',
+  postalCode: 'Enter a valid postal code, for example T2P 5C5.',
   termsScroll: 'Please scroll to the end of the terms and conditions first.',
   termsRequired: 'You must accept the terms and conditions to continue.',
   refundRequired: 'You must confirm you have read the refund policies and extension processes.',
@@ -266,5 +421,6 @@ export const messages = {
 export const steps = [
   { id: 'student-type', title: 'Student Type', short: 'Start' },
   { id: 'personal', title: 'Personal Information', short: 'Personal' },
-  { id: 'mailing', title: 'Mailing Information', short: 'Mailing' }
+  { id: 'mailing', title: 'Mailing Information', short: 'Mailing' },
+  { id: 'payment', title: 'Payment Information', short: 'Payment' }
 ];

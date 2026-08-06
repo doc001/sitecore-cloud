@@ -22,6 +22,15 @@ import { config, messages } from './content.js';
 const NAME_PATTERN = /^[\p{L}\p{M}0-9 .'’\-]+$/u;
 
 /**
+ * Street address — as permissive as NAME_PATTERN but also allows the comma,
+ * number sign, and slash that real addresses carry ("12 Main St, Unit #3B").
+ */
+const ADDRESS_PATTERN = /^[\p{L}\p{M}0-9 .,#'’\-\/]+$/u;
+
+/** Canadian postal code, spaces optional: A1A 1A1. */
+const CANADIAN_POSTAL_PATTERN = /^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/;
+
+/**
  * Pragmatic email check. Full RFC 5322 is unreadable and rejects nothing real;
  * this catches the mistakes people actually make (missing @, missing dot,
  * trailing space) and leaves true verification to the confirmation email.
@@ -106,6 +115,21 @@ export const validators = {
     return digits.length === config.asnLength && digits === value
       ? null
       : messages.asn;
+  },
+
+  address(value) {
+    return ADDRESS_PATTERN.test(value) ? null : messages.address;
+  },
+
+  /**
+   * Canadian format when it looks Canadian, otherwise any reasonably-sized
+   * string so international addresses are not rejected. Mirrors the rule the
+   * legacy cart submitter uses (checkout.js validatePostalCode).
+   */
+  postalCode(value) {
+    const normalized = value.toUpperCase().replace(/\s+/g, '');
+    const ok = CANADIAN_POSTAL_PATTERN.test(normalized) || normalized.length >= 5;
+    return ok ? null : messages.postalCode;
   },
 
   /** Any <select>: the placeholder option carries an empty value. */

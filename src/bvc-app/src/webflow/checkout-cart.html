@@ -16,6 +16,7 @@
     <li class="bvc-progress__item" data-progress-step="student-type">Start</li>
     <li class="bvc-progress__item" data-progress-step="personal">Personal</li>
     <li class="bvc-progress__item" data-progress-step="mailing">Mailing</li>
+    <li class="bvc-progress__item" data-progress-step="payment">Payment</li>
   </ol>
 
   <!-- Step 1 — current student or new student -->
@@ -270,9 +271,259 @@
     </div>
   </section>
 
-  <!-- Step 3 — Mailing Information (placeholder for the next requirement set) -->
+  <!-- Step 3 — Mailing Information (mailing + billing address) -->
   <section class="bvc-step" data-step="mailing" hidden>
     <h2 class="bvc-step__heading" data-step-heading>Mailing Information</h2>
+    <p class="bvc-step__intro">Start typing a street address to autofill. Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
+
+    <h3 class="bvc-subheading">Mailing Address</h3>
+    <div class="bvc-grid">
+    <div class="bvc-field bvc-field--wide" data-field="address">
+      <label class="bvc-field__label" for="address">Street Address<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="address" name="address" required aria-describedby="address-error" autocomplete="street-address" type="text" maxlength="100" data-address-autocomplete="mailing">
+      <p class="bvc-field__error" id="address-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field" data-field="city">
+      <label class="bvc-field__label" for="city">City<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="city" name="city" required aria-describedby="city-error" autocomplete="address-level2" type="text" maxlength="60">
+      <p class="bvc-field__error" id="city-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field bvc-field--wide" data-field="province">
+      <label class="bvc-field__label" for="province">Province<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <select id="province" name="province" required aria-describedby="province-error" autocomplete="address-level1">
+        <option value="">Please select…</option>
+        <option value="AB">Alberta</option>
+        <option value="BC">British Columbia</option>
+        <option value="MB">Manitoba</option>
+        <option value="NB">New Brunswick</option>
+        <option value="NL">Newfoundland and Labrador</option>
+        <option value="NS">Nova Scotia</option>
+        <option value="NT">Northwest Territories</option>
+        <option value="NU">Nunavut</option>
+        <option value="ON">Ontario</option>
+        <option value="PE">Prince Edward Island</option>
+        <option value="QC">Quebec</option>
+        <option value="SK">Saskatchewan</option>
+        <option value="YT">Yukon</option>
+      </select>
+      <p class="bvc-field__error" id="province-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field" data-field="postalCode">
+      <label class="bvc-field__label" for="postalCode">Postal Code<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="postalCode" name="postalCode" required aria-describedby="postalCode-hint postalCode-error" autocomplete="postal-code" type="text" maxlength="7">
+      <p class="bvc-field__hint" id="postalCode-hint">Format: A1A 1A1</p>
+      <p class="bvc-field__error" id="postalCode-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field bvc-field--wide" data-field="country">
+      <label class="bvc-field__label" for="country">Country<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <select id="country" name="country" required aria-describedby="country-error" autocomplete="country">
+        <option value="">Please select…</option>
+        <option value="CA" selected>Canada</option>
+        <option value="US">United States</option>
+        <option value="AF">Afghanistan</option>
+        <option value="DZ">Algeria</option>
+        <option value="AR">Argentina</option>
+        <option value="AU">Australia</option>
+        <option value="BD">Bangladesh</option>
+        <option value="BR">Brazil</option>
+        <option value="CM">Cameroon</option>
+        <option value="CL">Chile</option>
+        <option value="CN">China</option>
+        <option value="CO">Colombia</option>
+        <option value="CD">Congo (DRC)</option>
+        <option value="EG">Egypt</option>
+        <option value="SV">El Salvador</option>
+        <option value="ER">Eritrea</option>
+        <option value="ET">Ethiopia</option>
+        <option value="FR">France</option>
+        <option value="DE">Germany</option>
+        <option value="GH">Ghana</option>
+        <option value="GT">Guatemala</option>
+        <option value="HN">Honduras</option>
+        <option value="HK">Hong Kong</option>
+        <option value="IN">India</option>
+        <option value="ID">Indonesia</option>
+        <option value="IR">Iran</option>
+        <option value="IQ">Iraq</option>
+        <option value="IE">Ireland</option>
+        <option value="IL">Israel</option>
+        <option value="IT">Italy</option>
+        <option value="JM">Jamaica</option>
+        <option value="JP">Japan</option>
+        <option value="JO">Jordan</option>
+        <option value="KE">Kenya</option>
+        <option value="KR">Korea, South</option>
+        <option value="LB">Lebanon</option>
+        <option value="MY">Malaysia</option>
+        <option value="MX">Mexico</option>
+        <option value="MA">Morocco</option>
+        <option value="NP">Nepal</option>
+        <option value="NG">Nigeria</option>
+        <option value="PK">Pakistan</option>
+        <option value="PS">Palestine</option>
+        <option value="PE">Peru</option>
+        <option value="PH">Philippines</option>
+        <option value="PL">Poland</option>
+        <option value="RO">Romania</option>
+        <option value="RU">Russia</option>
+        <option value="SA">Saudi Arabia</option>
+        <option value="SN">Senegal</option>
+        <option value="SG">Singapore</option>
+        <option value="SO">Somalia</option>
+        <option value="ZA">South Africa</option>
+        <option value="ES">Spain</option>
+        <option value="LK">Sri Lanka</option>
+        <option value="SD">Sudan</option>
+        <option value="SY">Syria</option>
+        <option value="TW">Taiwan</option>
+        <option value="TZ">Tanzania</option>
+        <option value="TH">Thailand</option>
+        <option value="TR">Türkiye</option>
+        <option value="UA">Ukraine</option>
+        <option value="AE">United Arab Emirates</option>
+        <option value="GB">United Kingdom</option>
+        <option value="VE">Venezuela</option>
+        <option value="VN">Vietnam</option>
+        <option value="ZW">Zimbabwe</option>
+        <option value="OTHER">Other</option>
+      </select>
+      <p class="bvc-field__error" id="country-error" data-error hidden></p>
+    </div>
+    </div>
+
+    <label class="bvc-check bvc-check--billing">
+      <input type="checkbox" data-billing-same checked>
+      <span>Billing Address same as above?</span>
+    </label>
+
+    <div class="bvc-billing" data-billing-block hidden>
+      <h3 class="bvc-subheading">Billing Address</h3>
+      <div class="bvc-grid">
+    <div class="bvc-field bvc-field--wide" data-field="billingAddress">
+      <label class="bvc-field__label" for="billingAddress">Street Address<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="billingAddress" name="billingAddress" required aria-describedby="billingAddress-error" autocomplete="section-billing street-address" type="text" maxlength="100" data-address-autocomplete="billing">
+      <p class="bvc-field__error" id="billingAddress-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field" data-field="billingCity">
+      <label class="bvc-field__label" for="billingCity">City<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="billingCity" name="billingCity" required aria-describedby="billingCity-error" autocomplete="section-billing address-level2" type="text" maxlength="60">
+      <p class="bvc-field__error" id="billingCity-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field bvc-field--wide" data-field="billingProvince">
+      <label class="bvc-field__label" for="billingProvince">Province<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <select id="billingProvince" name="billingProvince" required aria-describedby="billingProvince-error" autocomplete="section-billing address-level1">
+        <option value="">Please select…</option>
+        <option value="AB">Alberta</option>
+        <option value="BC">British Columbia</option>
+        <option value="MB">Manitoba</option>
+        <option value="NB">New Brunswick</option>
+        <option value="NL">Newfoundland and Labrador</option>
+        <option value="NS">Nova Scotia</option>
+        <option value="NT">Northwest Territories</option>
+        <option value="NU">Nunavut</option>
+        <option value="ON">Ontario</option>
+        <option value="PE">Prince Edward Island</option>
+        <option value="QC">Quebec</option>
+        <option value="SK">Saskatchewan</option>
+        <option value="YT">Yukon</option>
+      </select>
+      <p class="bvc-field__error" id="billingProvince-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field" data-field="billingPostalCode">
+      <label class="bvc-field__label" for="billingPostalCode">Postal Code<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <input id="billingPostalCode" name="billingPostalCode" required aria-describedby="billingPostalCode-hint billingPostalCode-error" autocomplete="section-billing postal-code" type="text" maxlength="7">
+      <p class="bvc-field__hint" id="billingPostalCode-hint">Format: A1A 1A1</p>
+      <p class="bvc-field__error" id="billingPostalCode-error" data-error hidden></p>
+    </div>
+    <div class="bvc-field bvc-field--wide" data-field="billingCountry">
+      <label class="bvc-field__label" for="billingCountry">Country<span class="bvc-field__required" aria-hidden="true">*</span></label>
+      <select id="billingCountry" name="billingCountry" required aria-describedby="billingCountry-error" autocomplete="section-billing country">
+        <option value="">Please select…</option>
+        <option value="CA" selected>Canada</option>
+        <option value="US">United States</option>
+        <option value="AF">Afghanistan</option>
+        <option value="DZ">Algeria</option>
+        <option value="AR">Argentina</option>
+        <option value="AU">Australia</option>
+        <option value="BD">Bangladesh</option>
+        <option value="BR">Brazil</option>
+        <option value="CM">Cameroon</option>
+        <option value="CL">Chile</option>
+        <option value="CN">China</option>
+        <option value="CO">Colombia</option>
+        <option value="CD">Congo (DRC)</option>
+        <option value="EG">Egypt</option>
+        <option value="SV">El Salvador</option>
+        <option value="ER">Eritrea</option>
+        <option value="ET">Ethiopia</option>
+        <option value="FR">France</option>
+        <option value="DE">Germany</option>
+        <option value="GH">Ghana</option>
+        <option value="GT">Guatemala</option>
+        <option value="HN">Honduras</option>
+        <option value="HK">Hong Kong</option>
+        <option value="IN">India</option>
+        <option value="ID">Indonesia</option>
+        <option value="IR">Iran</option>
+        <option value="IQ">Iraq</option>
+        <option value="IE">Ireland</option>
+        <option value="IL">Israel</option>
+        <option value="IT">Italy</option>
+        <option value="JM">Jamaica</option>
+        <option value="JP">Japan</option>
+        <option value="JO">Jordan</option>
+        <option value="KE">Kenya</option>
+        <option value="KR">Korea, South</option>
+        <option value="LB">Lebanon</option>
+        <option value="MY">Malaysia</option>
+        <option value="MX">Mexico</option>
+        <option value="MA">Morocco</option>
+        <option value="NP">Nepal</option>
+        <option value="NG">Nigeria</option>
+        <option value="PK">Pakistan</option>
+        <option value="PS">Palestine</option>
+        <option value="PE">Peru</option>
+        <option value="PH">Philippines</option>
+        <option value="PL">Poland</option>
+        <option value="RO">Romania</option>
+        <option value="RU">Russia</option>
+        <option value="SA">Saudi Arabia</option>
+        <option value="SN">Senegal</option>
+        <option value="SG">Singapore</option>
+        <option value="SO">Somalia</option>
+        <option value="ZA">South Africa</option>
+        <option value="ES">Spain</option>
+        <option value="LK">Sri Lanka</option>
+        <option value="SD">Sudan</option>
+        <option value="SY">Syria</option>
+        <option value="TW">Taiwan</option>
+        <option value="TZ">Tanzania</option>
+        <option value="TH">Thailand</option>
+        <option value="TR">Türkiye</option>
+        <option value="UA">Ukraine</option>
+        <option value="AE">United Arab Emirates</option>
+        <option value="GB">United Kingdom</option>
+        <option value="VE">Venezuela</option>
+        <option value="VN">Vietnam</option>
+        <option value="ZW">Zimbabwe</option>
+        <option value="OTHER">Other</option>
+      </select>
+      <p class="bvc-field__error" id="billingCountry-error" data-error hidden></p>
+    </div>
+      </div>
+    </div>
+
+    <p class="bvc-summary" data-error-summary role="alert" hidden></p>
+
+    <div class="bvc-actions">
+      <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
+      <button type="button" class="bvc-button" data-next>Continue to Payment Information</button>
+    </div>
+  </section>
+
+  <!-- Step 4 — Payment Information (placeholder for the next requirement set) -->
+  <section class="bvc-step" data-step="payment" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Payment Information</h2>
     <p class="bvc-step__intro">Next section goes here.</p>
     <div class="bvc-actions">
       <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>

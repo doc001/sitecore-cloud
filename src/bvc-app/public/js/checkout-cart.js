@@ -36,6 +36,24 @@
       // v4 exposes initialize(); the 2.12.0 build in the original embed does not.
       msalCdn: "https://alcdn.msauth.net/browser/4.5.0/js/msal-browser.min.js",
       studentApiBase: "https://nextjs-jamstack-dev.vercel.app/api/bvcpayment/"
+    },
+    /**
+     * Google Maps Places autocomplete for the address fields (NGEW-217).
+     *
+     * `apiKey` is intentionally empty here — provision a browser key in Google
+     * Cloud, restrict it by HTTP referrer to the hosts that serve this page
+     * (uat.bowvalleycollege.ca, the Webflow staging domain, production), enable
+     * the "Maps JavaScript API" + "Places API", and drop it in. Until a key is
+     * set the module no-ops and every address field stays fully usable as plain
+     * manual entry.
+     *
+     * `countryRestriction` biases suggestions; null = worldwide. It is aligned
+     * to Canada by default because the Province list is Canadian.
+     */
+    googleMaps: {
+      apiKey: "",
+      countryRestriction: ["ca"],
+      mapsJsBase: "https://maps.googleapis.com/maps/api/js"
     }
   };
   var fields = [
@@ -158,6 +176,143 @@
       validate: "choice",
       options: "countryOfCitizenship",
       showWhen: { field: "citizenshipStatus", equals: ["PR", "REF", "STUDY", "WORK", "OTHER"] }
+    },
+    // ==========================================================================
+    // Mailing Information step
+    //
+    // `step`        — which section the field is rendered into.
+    // `group`       — 'mailing' or 'billing'; billing fields are hidden and
+    //                 exempt from validation while "same as above" is checked.
+    // `addressRole` — which part of an address this control holds, so the Google
+    //                 Places autocomplete can map a picked place onto the group.
+    // ==========================================================================
+    // --- Mailing address ----------------------------------------------------
+    {
+      name: "address",
+      label: "Street Address",
+      type: "text",
+      required: true,
+      validate: "address",
+      maxLength: 100,
+      autocomplete: "street-address",
+      step: "mailing",
+      group: "mailing",
+      addressRole: "street",
+      autocompleteAddress: true
+    },
+    {
+      name: "city",
+      label: "City",
+      type: "text",
+      required: true,
+      validate: "personName",
+      maxLength: 60,
+      autocomplete: "address-level2",
+      step: "mailing",
+      group: "mailing",
+      addressRole: "city"
+    },
+    {
+      name: "province",
+      label: "Province",
+      type: "select",
+      required: true,
+      validate: "choice",
+      options: "province",
+      autocomplete: "address-level1",
+      step: "mailing",
+      group: "mailing",
+      addressRole: "province"
+    },
+    {
+      name: "postalCode",
+      label: "Postal Code",
+      type: "text",
+      required: true,
+      validate: "postalCode",
+      maxLength: 7,
+      autocomplete: "postal-code",
+      hint: "Format: A1A 1A1",
+      step: "mailing",
+      group: "mailing",
+      addressRole: "postalCode"
+    },
+    {
+      name: "country",
+      label: "Country",
+      type: "select",
+      required: true,
+      validate: "choice",
+      options: "country",
+      defaultValue: "CA",
+      autocomplete: "country",
+      step: "mailing",
+      group: "mailing",
+      addressRole: "country"
+    },
+    // --- Billing address (mirrors mailing; hidden when "same as above") ------
+    {
+      name: "billingAddress",
+      label: "Street Address",
+      type: "text",
+      required: true,
+      validate: "address",
+      maxLength: 100,
+      autocomplete: "section-billing street-address",
+      step: "mailing",
+      group: "billing",
+      addressRole: "street",
+      autocompleteAddress: true
+    },
+    {
+      name: "billingCity",
+      label: "City",
+      type: "text",
+      required: true,
+      validate: "personName",
+      maxLength: 60,
+      autocomplete: "section-billing address-level2",
+      step: "mailing",
+      group: "billing",
+      addressRole: "city"
+    },
+    {
+      name: "billingProvince",
+      label: "Province",
+      type: "select",
+      required: true,
+      validate: "choice",
+      options: "province",
+      autocomplete: "section-billing address-level1",
+      step: "mailing",
+      group: "billing",
+      addressRole: "province"
+    },
+    {
+      name: "billingPostalCode",
+      label: "Postal Code",
+      type: "text",
+      required: true,
+      validate: "postalCode",
+      maxLength: 7,
+      autocomplete: "section-billing postal-code",
+      hint: "Format: A1A 1A1",
+      step: "mailing",
+      group: "billing",
+      addressRole: "postalCode"
+    },
+    {
+      name: "billingCountry",
+      label: "Country",
+      type: "select",
+      required: true,
+      validate: "choice",
+      options: "country",
+      defaultValue: "CA",
+      autocomplete: "section-billing country",
+      step: "mailing",
+      group: "billing",
+      addressRole: "country"
     }
   ];
   var messages = {
@@ -170,6 +325,8 @@
     birthDateFuture: "Birth date cannot be in the future.",
     birthDateTooOld: `Birth date cannot be more than ${config.maxAgeYears} years ago.`,
     asn: `Your Alberta Student # must be exactly ${config.asnLength} digits.`,
+    address: "Enter a valid street address.",
+    postalCode: "Enter a valid postal code, for example T2P 5C5.",
     termsScroll: "Please scroll to the end of the terms and conditions first.",
     termsRequired: "You must accept the terms and conditions to continue.",
     refundRequired: "You must confirm you have read the refund policies and extension processes.",
@@ -179,11 +336,14 @@
   var steps = [
     { id: "student-type", title: "Student Type", short: "Start" },
     { id: "personal", title: "Personal Information", short: "Personal" },
-    { id: "mailing", title: "Mailing Information", short: "Mailing" }
+    { id: "mailing", title: "Mailing Information", short: "Mailing" },
+    { id: "payment", title: "Payment Information", short: "Payment" }
   ];
 
   // src/js/checkout-cart/validators.js
   var NAME_PATTERN = /^[\p{L}\p{M}0-9 .'’\-]+$/u;
+  var ADDRESS_PATTERN = /^[\p{L}\p{M}0-9 .,#'’\-\/]+$/u;
+  var CANADIAN_POSTAL_PATTERN = /^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/;
   var EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   function digitsOnly(value) {
     return String(value != null ? value : "").replace(/\D/g, "");
@@ -233,6 +393,19 @@
     asn(value) {
       const digits = digitsOnly(value);
       return digits.length === config.asnLength && digits === value ? null : messages.asn;
+    },
+    address(value) {
+      return ADDRESS_PATTERN.test(value) ? null : messages.address;
+    },
+    /**
+     * Canadian format when it looks Canadian, otherwise any reasonably-sized
+     * string so international addresses are not rejected. Mirrors the rule the
+     * legacy cart submitter uses (checkout.js validatePostalCode).
+     */
+    postalCode(value) {
+      const normalized = value.toUpperCase().replace(/\s+/g, "");
+      const ok = CANADIAN_POSTAL_PATTERN.test(normalized) || normalized.length >= 5;
+      return ok ? null : messages.postalCode;
     },
     /** Any <select>: the placeholder option carries an empty value. */
     choice(value) {
@@ -420,7 +593,6 @@
       if (el) sections.set(step.id, el);
     });
     const order = steps2.map((s) => s.id).filter((id) => sections.has(id));
-    const summary = root.querySelector("[data-error-summary]");
     const progressItems = root.querySelectorAll("[data-progress-step]");
     let index = 0;
     function currentId() {
@@ -430,6 +602,8 @@
       return sections.get(currentId());
     }
     function announce(errorCount) {
+      var _a;
+      const summary = (_a = currentSection()) == null ? void 0 : _a.querySelector("[data-error-summary]");
       if (!summary) return;
       if (!errorCount) {
         summary.textContent = "";
@@ -676,6 +850,95 @@
     return { signIn, restoreSession };
   }
 
+  // src/js/checkout-cart/address-autocomplete.js
+  var maps = config.googleMaps || {};
+  var loadPromise = null;
+  function loadMaps() {
+    var _a, _b;
+    if ((_b = (_a = window.google) == null ? void 0 : _a.maps) == null ? void 0 : _b.places) return Promise.resolve(window.google.maps);
+    if (loadPromise) return loadPromise;
+    const key = maps.apiKey;
+    if (!key) return Promise.reject(new Error("google-maps: no api key configured"));
+    loadPromise = new Promise((resolve, reject) => {
+      const cbName = `__bvcMapsReady_${String(key).length}_${window.location.pathname.length}`;
+      window[cbName] = () => {
+        var _a2, _b2;
+        delete window[cbName];
+        ((_b2 = (_a2 = window.google) == null ? void 0 : _a2.maps) == null ? void 0 : _b2.places) ? resolve(window.google.maps) : reject(new Error("google-maps: places missing"));
+      };
+      const script = document.createElement("script");
+      const params = new URLSearchParams({
+        key,
+        libraries: "places",
+        loading: "async",
+        callback: cbName
+      });
+      script.src = `${maps.mapsJsBase}?${params.toString()}`;
+      script.async = true;
+      script.onerror = () => {
+        delete window[cbName];
+        reject(new Error("google-maps: script failed to load"));
+      };
+      document.head.appendChild(script);
+    });
+    return loadPromise;
+  }
+  function pick(components, type, short = false) {
+    const hit = components.find((c) => c.types.includes(type));
+    if (!hit) return "";
+    return short ? hit.short_name : hit.long_name;
+  }
+  function toAddress(components) {
+    const streetNumber = pick(components, "street_number");
+    const route = pick(components, "route");
+    return {
+      street: [streetNumber, route].filter(Boolean).join(" "),
+      // Big cities use `locality`; some regions only populate the alternatives.
+      city: pick(components, "locality") || pick(components, "postal_town") || pick(components, "sublocality") || pick(components, "administrative_area_level_2"),
+      province: pick(components, "administrative_area_level_1", true),
+      postalCode: pick(components, "postal_code"),
+      country: pick(components, "country", true)
+    };
+  }
+  async function initAddressAutocomplete({ root, groups, onFill }) {
+    var _a;
+    const inputs = [...root.querySelectorAll("[data-address-autocomplete]")];
+    if (!inputs.length) return;
+    const google = await loadMaps();
+    if (!((_a = google.maps.places) == null ? void 0 : _a.Autocomplete)) {
+      throw new Error("google-maps: Autocomplete widget unavailable");
+    }
+    inputs.forEach((input) => {
+      const groupName = input.getAttribute("data-address-autocomplete");
+      const group = groups[groupName];
+      if (!group) return;
+      const options = {
+        fields: ["address_components"],
+        types: ["address"]
+      };
+      if (Array.isArray(maps.countryRestriction) && maps.countryRestriction.length) {
+        options.componentRestrictions = { country: maps.countryRestriction };
+      }
+      const widget = new google.maps.places.Autocomplete(input, options);
+      widget.addListener("place_changed", () => {
+        const place = widget.getPlace();
+        if (!(place == null ? void 0 : place.address_components)) return;
+        const parsed = toAddress(place.address_components);
+        const assign = (role, value) => {
+          if (!value) return;
+          const field = group[role];
+          if (field) field.value = value;
+        };
+        assign("street", parsed.street);
+        assign("city", parsed.city);
+        assign("province", parsed.province);
+        assign("postalCode", parsed.postalCode);
+        assign("country", parsed.country);
+        onFill == null ? void 0 : onFill();
+      });
+    });
+  }
+
   // src/js/checkout-cart/storage.js
   function readDraft(key) {
     try {
@@ -725,6 +988,22 @@
         field.setVisible(definition.showWhen.equals.includes(controller.value));
       });
     }
+    const billingSame = root.querySelector("[data-billing-same]");
+    const billingBlock = root.querySelector("[data-billing-block]");
+    const billingFieldNames = fields.filter((definition) => definition.group === "billing").map((definition) => definition.name);
+    function applyBillingVisibility() {
+      if (!billingSame) return;
+      const sameAsMailing = billingSame.checked;
+      if (billingBlock) billingBlock.hidden = sameAsMailing;
+      billingFieldNames.forEach((name) => {
+        const field = fields2.get(name);
+        if (field) field.setVisible(!sameAsMailing);
+      });
+    }
+    billingSame == null ? void 0 : billingSame.addEventListener("change", () => {
+      applyBillingVisibility();
+      refresh();
+    });
     const draft = readDraft(config.draftKey);
     fields2.forEach((field) => {
       if (draft[field.name]) field.control.value = draft[field.name];
@@ -828,6 +1107,17 @@
       stepper.goTo("personal");
     });
     studentAuth.restoreSession();
+    const addressGroups = {};
+    fields.forEach((definition) => {
+      var _a2;
+      if (!definition.group || !definition.addressRole) return;
+      const field = fields2.get(definition.name);
+      if (!field) return;
+      (addressGroups[_a2 = definition.group] || (addressGroups[_a2] = {}))[definition.addressRole] = field;
+    });
+    initAddressAutocomplete({ root, groups: addressGroups, onFill: refresh }).catch(() => {
+    });
+    applyBillingVisibility();
     stepper.show(0, { focusHeading: false });
     refresh();
   }
