@@ -143,12 +143,14 @@
       this.createErrorElements();
       this.checkForPaymentErrors();
 
-      // The multi-step checkout-cart form reaches the payment step long after
-      // load; re-read and re-render the cart then, so a cart populated after
-      // this constructor ran (or on another page) still shows up.
-      document.addEventListener('bvc:checkout-step', (e) => {
-        if (e && e.detail && e.detail.step === 'payment') this.loadCartItems();
-      });
+      // Re-render the cart whenever the multi-step form changes step, so a cart
+      // populated after this constructor ran (prior page / cart script) still
+      // shows up in the page's cart column.
+      document.addEventListener('bvc:checkout-step', () => this.loadCartItems());
+
+      // The form's final "Proceed to Payment" button hands off here: run the
+      // registration -> submit-payment -> Flywire redirect flow.
+      document.addEventListener('bvc:checkout-submit', () => this.handleSubmit());
     }
 
     getAsnField() {

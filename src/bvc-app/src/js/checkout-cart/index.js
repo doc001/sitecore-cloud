@@ -255,6 +255,24 @@ function start() {
     stepper.goTo('personal');
   });
 
+  // --- proceed to payment (final step hand-off) --------------------------
+  //
+  // Mailing is the last step. Its forward button validates the step and then
+  // hands off to the cart submitter (checkout.js) via a DOM event; checkout.js
+  // runs registration -> submit-payment -> redirect to the Flywire page.
+  root.querySelector('[data-checkout-submit]')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    const { valid, focusTarget } = validateStep(stepper.stepId, true);
+    if (!valid) {
+      if (focusTarget) {
+        focusTarget.focus({ preventScroll: true });
+        focusTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+    document.dispatchEvent(new CustomEvent('bvc:checkout-submit'));
+  });
+
   // If the user signed in earlier in the cart flow, prefill without a click.
   studentAuth.restoreSession();
 

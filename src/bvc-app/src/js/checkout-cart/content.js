@@ -494,6 +494,5 @@ export const messages = {
 export const steps = [
   { id: 'student-type', title: 'Student Type', short: 'Start' },
   { id: 'personal', title: 'Personal Information', short: 'Personal' },
-  { id: 'mailing', title: 'Mailing Information', short: 'Mailing' },
-  { id: 'payment', title: 'Payment Information', short: 'Payment' }
+  { id: 'mailing', title: 'Mailing Information', short: 'Mailing' }
 ];

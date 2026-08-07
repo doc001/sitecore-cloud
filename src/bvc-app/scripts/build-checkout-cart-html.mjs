@@ -157,7 +157,7 @@ ${billingAddress.map(renderField).join('\n')}
 
     <div class="bvc-actions">
       <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
-      <button type="button" class="bvc-button" data-next>Continue to Payment Information</button>
+      <button type="button" class="bvc-button" data-checkout-submit>Proceed to Payment</button>
     </div>
   </section>`;
 }
@@ -244,22 +244,6 @@ ${fieldsForStep('personal').map(renderField).join('\n')}
   </section>
 
 ${renderMailingStep()}
-
-  <!-- Step 4 — Payment Information -->
-  <!--
-    The cart summary (#shoppingCart) and the register/pay button
-    (#registerToCourse) are provided by the Webflow PAGE, not this embed — the
-    submitter (checkout.js) renders/binds to them there. Do NOT add those ids
-    here or they collide (duplicate id) and shadow the page's, leaving the
-    page's cart column empty.
-  -->
-  <section class="bvc-step" data-step="payment" hidden>
-    <h2 class="bvc-step__heading" data-step-heading>Payment Information</h2>
-    <p class="bvc-step__intro">Review your order in the cart, then use the Register / Pay button to continue to secure payment.</p>
-    <div class="bvc-actions">
-      <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
-    </div>
-  </section>
 </div>
 `;
 }

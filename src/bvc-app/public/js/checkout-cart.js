@@ -444,8 +444,7 @@
   var steps = [
     { id: "student-type", title: "Student Type", short: "Start" },
     { id: "personal", title: "Personal Information", short: "Personal" },
-    { id: "mailing", title: "Mailing Information", short: "Mailing" },
-    { id: "payment", title: "Payment Information", short: "Payment" }
+    { id: "mailing", title: "Mailing Information", short: "Mailing" }
   ];
 
   // src/js/checkout-cart/validators.js
@@ -1074,7 +1073,7 @@
 
   // src/js/checkout-cart/index.js
   function start() {
-    var _a, _b;
+    var _a, _b, _c;
     const root = document.querySelector("[data-checkout]");
     if (!root) return;
     const fields2 = /* @__PURE__ */ new Map();
@@ -1237,6 +1236,18 @@
     (_b = root.querySelector('[data-student-type="new"]')) == null ? void 0 : _b.addEventListener("click", (event) => {
       event.preventDefault();
       stepper.goTo("personal");
+    });
+    (_c = root.querySelector("[data-checkout-submit]")) == null ? void 0 : _c.addEventListener("click", (event) => {
+      event.preventDefault();
+      const { valid, focusTarget } = validateStep(stepper.stepId, true);
+      if (!valid) {
+        if (focusTarget) {
+          focusTarget.focus({ preventScroll: true });
+          focusTarget.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        return;
+      }
+      document.dispatchEvent(new CustomEvent("bvc:checkout-submit"));
     });
     studentAuth.restoreSession();
     const addressGroups = {};
