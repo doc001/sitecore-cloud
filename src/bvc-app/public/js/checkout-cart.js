@@ -1176,7 +1176,10 @@
     const stepper = createStepper(root, {
       steps,
       validateStep,
-      onEnterStep: () => stepper.refreshNextButton(config.hardDisableNext)
+      onEnterStep: (stepId) => {
+        stepper.refreshNextButton(config.hardDisableNext);
+        document.dispatchEvent(new CustomEvent("bvc:checkout-step", { detail: { step: stepId } }));
+      }
     });
     function refresh() {
       applyConditionals();

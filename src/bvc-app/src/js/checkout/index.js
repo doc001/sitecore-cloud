@@ -142,6 +142,13 @@
       this.setupPostalCodeAutoFormat();
       this.createErrorElements();
       this.checkForPaymentErrors();
+
+      // The multi-step checkout-cart form reaches the payment step long after
+      // load; re-read and re-render the cart then, so a cart populated after
+      // this constructor ran (or on another page) still shows up.
+      document.addEventListener('bvc:checkout-step', (e) => {
+        if (e && e.detail && e.detail.step === 'payment') this.loadCartItems();
+      });
     }
 
     getAsnField() {

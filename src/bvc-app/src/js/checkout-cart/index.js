@@ -177,7 +177,13 @@ function start() {
   const stepper = createStepper(root, {
     steps,
     validateStep,
-    onEnterStep: () => stepper.refreshNextButton(config.hardDisableNext)
+    onEnterStep: (stepId) => {
+      stepper.refreshNextButton(config.hardDisableNext);
+      // Let the cart submitter (checkout.js) refresh the order summary when the
+      // payment step is shown — decoupled via a DOM event. The cart may have
+      // been populated after checkout.js ran its one-time load.
+      document.dispatchEvent(new CustomEvent('bvc:checkout-step', { detail: { step: stepId } }));
+    }
   });
 
   /** Called after any change anywhere in the form. */
