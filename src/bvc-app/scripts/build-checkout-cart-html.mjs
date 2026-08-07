@@ -245,12 +245,18 @@ ${fieldsForStep('personal').map(renderField).join('\n')}
 
 ${renderMailingStep()}
 
-  <!-- Step 4 — Payment Information (placeholder for the next requirement set) -->
+  <!-- Step 4 — Payment Information -->
   <section class="bvc-step" data-step="payment" hidden>
     <h2 class="bvc-step__heading" data-step-heading>Payment Information</h2>
-    <p class="bvc-step__intro">Next section goes here.</p>
+    <p class="bvc-step__intro">Review your order, then complete registration to continue to secure payment.</p>
+
+    <!-- The cart submitter (checkout.js) renders the cart summary here and
+         binds submission to #registerToCourse. -->
+    <div id="shoppingCart" class="bvc-cart-summary" aria-live="polite"></div>
+
     <div class="bvc-actions">
       <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
+      <button type="button" class="bvc-button" id="registerToCourse" data-checkout-submit>Complete Registration &amp; Pay</button>
     </div>
   </section>
 </div>

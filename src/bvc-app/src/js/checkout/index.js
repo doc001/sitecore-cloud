@@ -78,11 +78,27 @@
     };
   window.getMsToken = getMsToken;
 
+  // --- form value -> backend code maps (Option B) ------------------------
+  //
+  // The registration schema has a fixed set of coded fields. We now source
+  // them from the richer checkout-cart form instead of hardcoding, BUT only
+  // the values proven against the SiS enum are sent live; the rest fall back
+  // to the previously hardcoded known-good default so a wrong code can never
+  // 400 the registration. Fill these in and flip DEFAULTS once confirmed.
+  var GENDER_MAP = { M: 'M', F: 'F', X: 'X', U: 'U' };            // confirmed set on the form
+  var LANGUAGE_MAP = { EN: 'ENG' };                              // only ENG confirmed; extend when known
+  var LEGAL_STATUS_MAP = { CAN: '1' };                           // only CAN('1') confirmed; extend when known
+  var DEFAULTS = { gender: 'U', language: 'ENG', legalStatus: '1', ethnicity: '6', country: 'CA' };
+  function mapCode(table, key, fallback) {
+    return key && Object.prototype.hasOwnProperty.call(table, key) ? table[key] : fallback;
+  }
+
   // Shopping Cart and Form Integration
   class CheckoutFormHandler {
     constructor() {
-      // Initialize form
-      this.form = document.getElementById('email-form');
+      // Container for cart display / messages. Prefer the Webflow form wrapper,
+      // fall back to the checkout-cart root so nothing throws if it is absent.
+      this.form = document.getElementById('email-form') || document.querySelector('[data-checkout]');
       this.shoppingCartElement = document.getElementById('shoppingCart');
       this.registerButton = document.getElementById('registerToCourse');
       // Save type globally
@@ -90,13 +106,21 @@
       this.type = urlParams.get('type');
       // Set the proxy base URL (config-overridable)
       this.proxyBaseUrl = apiOrigin + '/api/bvcpayment';
-      // Form fields mapping
+      // Form fields mapping. ids match the checkout-cart form (Option A):
+      // #phone is the hidden combined "+1XXXXXXXXXX"; #phoneNumber is the
+      // visible digits input. Richer fields feed the coded schema values.
       this.fields = {
         firstName: document.getElementById('firstName'),
+        middleName: document.getElementById('middleName'),
         lastName: document.getElementById('lastName'),
+        previousLastName: document.getElementById('previousLastName'),
         email: document.getElementById('email'),
-        phone: document.getElementById('phone'),
+        phone: document.getElementById('phone'), // combined +1XXXXXXXXXX
         birthDate: document.getElementById('birthDate'),
+        gender: document.getElementById('gender'),
+        firstLanguage: document.getElementById('firstLanguage'),
+        citizenshipStatus: document.getElementById('citizenshipStatus'),
+        countryOfCitizenship: document.getElementById('countryOfCitizenship'),
         asn: this.getAsnField(),
         address: document.getElementById('address'),
         city: document.getElementById('city'),
@@ -614,28 +638,32 @@
       // Determine billing address
       const useSameAddress = this.fields.billingCheckbox && this.fields.billingCheckbox.checked;
       // Format the data according to the required schema
+      // Coded fields: send the mapped form value when confirmed, else the
+      // known-good default (see the *_MAP / DEFAULTS at the top of this file).
+      const isCanadianCitizen = formData.citizenshipStatus === 'CAN';
       const data = {
         studentId: 0, // New/anonymous students: send 0. The API now rejects null ("The StudentId field is required.")
         firstName: formData.firstName || '',
-        middleName: '',
+        middleName: formData.middleName || '',
         lastName: formData.lastName || '',
-        previousLastName: '',
+        previousLastName: formData.previousLastName || '',
         birthDate: this.formatDate(formData.birthDate),
-        gender: 'U', // Default to 'N' as specified in the schema
+        gender: mapCode(GENDER_MAP, formData.gender, DEFAULTS.gender),
         address: formData.address || '',
         city: formData.city || '',
         province: formData.province || '',
         postalCode: formData.postalCode || '',
-        country: formData.country || 'CA',
+        country: formData.country || DEFAULTS.country,
         email: formData.email || '',
-        phone: formData.phone || '',
+        phone: formData.phone || '', // combined +1XXXXXXXXXX from the form
         asn: formData.asn || '',
         courses: courseIds.length > 0 ? courseIds : [219369], // Default course ID if none provided
-        legalStatus: '1',
-        language: 'ENG',
-        ethnicity: '6',
+        legalStatus: mapCode(LEGAL_STATUS_MAP, formData.citizenshipStatus, DEFAULTS.legalStatus),
+        language: mapCode(LANGUAGE_MAP, formData.firstLanguage, DEFAULTS.language),
+        ethnicity: DEFAULTS.ethnicity, // not collected on the form yet
         feeGroup: 'Tuition',
-        country_Citizenship: 'CA',
+        // Canadian citizens => 'CA'; otherwise the selected country of citizenship (ISO alpha-2).
+        country_Citizenship: isCanadianCitizen ? 'CA' : (formData.countryOfCitizenship || DEFAULTS.country),
       };
 
       // If we have session fees, add them to the data
@@ -841,12 +869,18 @@
       // Collect form data from fields
       const formData = {};
 
-      // Personal information
+      // Personal information (Option B — richer fields sourced from the form)
       formData.firstName = this.fields.firstName ? this.fields.firstName.value : '';
+      formData.middleName = this.fields.middleName ? this.fields.middleName.value : '';
       formData.lastName = this.fields.lastName ? this.fields.lastName.value : '';
+      formData.previousLastName = this.fields.previousLastName ? this.fields.previousLastName.value : '';
       formData.email = this.fields.email ? this.fields.email.value : '';
-      formData.phone = this.fields.phone ? this.fields.phone.value : '';
+      formData.phone = this.fields.phone ? this.fields.phone.value : ''; // combined +1XXXXXXXXXX
       formData.birthDate = this.fields.birthDate ? this.fields.birthDate.value : '';
+      formData.gender = this.fields.gender ? this.fields.gender.value : '';
+      formData.firstLanguage = this.fields.firstLanguage ? this.fields.firstLanguage.value : '';
+      formData.citizenshipStatus = this.fields.citizenshipStatus ? this.fields.citizenshipStatus.value : '';
+      formData.countryOfCitizenship = this.fields.countryOfCitizenship ? this.fields.countryOfCitizenship.value : '';
       formData.asn = this.fields.asn ? this.fields.asn.value : '';
 
       // Mailing information
@@ -941,27 +975,31 @@
   document.addEventListener('DOMContentLoaded', () => {
     const queryParams = new URLSearchParams(window.location.search);
     const type = queryParams.get('type');
+    // These scaffold elements are optional (the checkout-cart form does not
+    // include them and manages ASN visibility itself). Guard every access so
+    // a missing element can never throw and abort the handler.
+    const show = (id, display) => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = display;
+    };
     if (type === 'os') {
-      document.getElementById('openStudiesFields').style.display = 'block';
-      document.getElementById('os-hide').style.display = 'none';
-      // Disable regular ASN field (if exists)
+      show('openStudiesFields', 'block');
+      show('os-hide', 'none');
+      // Disable regular ASN field (if it exists)
       const regularAsn = document.getElementById('asn');
       if (regularAsn) {
         regularAsn.disabled = true;
-        regularAsn.style.display = 'none'; // Optional
+        regularAsn.style.display = 'none';
       }
     } else {
-      // Disable open studies ASN field
+      // Disable open studies ASN field (if it exists)
       const openStudiesAsn = document.getElementById('asn-os');
       if (openStudiesAsn) {
         openStudiesAsn.disabled = true;
-        openStudiesAsn.style.display = 'none'; // Optional
+        openStudiesAsn.style.display = 'none';
       }
     }
-    const form = document.getElementById('email-form');
-    if (form) {
-      form.style.display = 'block';
-    }
+    show('email-form', 'block');
     const formHandler = new CheckoutFormHandler();
     formHandler.createErrorElements();
   });

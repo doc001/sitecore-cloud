@@ -113,6 +113,10 @@
 .bvc-billing { margin-top: 0.5rem; }
 .bvc-billing[hidden] { display: none; }
 
+/* --- payment: cart summary rendered by the submitter (checkout.js) ------ */
+.bvc-cart-summary { margin: 1rem 0 1.5rem; }
+.bvc-cart-summary:empty { display: none; }
+
 /* --- consent ----------------------------------------------------------- */
 
 .bvc-consent { margin-top: 2rem; }
