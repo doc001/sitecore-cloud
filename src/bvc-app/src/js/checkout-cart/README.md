@@ -55,9 +55,9 @@ field can never exist in one and not the other. **Add/rename a field in
 **1. Page settings → Before `</body>`:**
 
 ```html
-<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/checkout-cart.css">
-<script src="https://bvc-thesis.vercel.app/js/checkout-cart.js" defer></script>
-<script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/checkout-cart.css">
+<script src="https://bvc-app-uat.vercel.app/js/checkout-cart.js" defer></script>
+<script src="https://bvc-app-uat.vercel.app/js/checkout.js" defer></script>
 ```
 
 **2. Drop an Embed where the form should go and paste `src/webflow/checkout-cart.html`.**

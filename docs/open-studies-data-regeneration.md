@@ -64,7 +64,7 @@ not real content divergence. Resolution strategy:
 Regenerated data is only live once deployed to Vercel. Per the project setup:
 
 - `bvc-uat` (https://bvc-uat.vercel.app) — UAT / testing.
-- `bvc-thesis` (https://bvc-thesis.vercel.app) — **production; the Open Studies
+- `bvc-thesis` (https://bvc-app-uat.vercel.app) — **production; the Open Studies
   listing embed fetches `index.json` from here.** Deploying to `bvc-uat` alone
   does **not** update what Webflow serves.
 

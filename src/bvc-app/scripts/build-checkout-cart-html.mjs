@@ -29,7 +29,7 @@ const OUT_FILE = join(OUT_DIR, 'checkout-cart.html');
 
 // Where Vercel serves the bundled assets. Production Webflow embeds point at
 // bvc-thesis; swap for a UAT/preview deployment while testing.
-const ASSET_ORIGIN = 'https://bvc-thesis.vercel.app';
+const ASSET_ORIGIN = 'https://bvc-app-uat.vercel.app';
 
 /** Minimal HTML escaping — enough for attribute and text content. */
 const esc = (value) => String(value)

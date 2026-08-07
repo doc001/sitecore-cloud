@@ -205,7 +205,7 @@ The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — sole deployment target; all Webflow embeds load CSS/JS/data from here |
+| `bvc-thesis` | https://bvc-app-uat.vercel.app | **Production** — sole deployment target; all Webflow embeds load CSS/JS/data from here |
 
 **Vercel is a static host only.** The site is built locally; the pre-built `out/` folder is packaged and uploaded directly using `vercel deploy --prebuilt`. Vercel never runs a build on its servers.
 
@@ -221,13 +221,13 @@ node pipeline.mjs
 
 ## Webflow Embed Asset URLs
 
-All Webflow embeds (course listings, course detail pages) load assets and data from `bvc-thesis.vercel.app`:
+All Webflow embeds (course listings, course detail pages) load assets and data from `bvc-app-uat.vercel.app`:
 
 ```html
-<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
-<script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
-<script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
-<script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
+<script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
+<script src="https://bvc-app-uat.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-app-uat.vercel.app/js/checkout.js" defer></script>
 ```
 
 ---
