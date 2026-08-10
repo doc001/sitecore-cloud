@@ -25,16 +25,16 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-thesis` | https://bvc-app-uat.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
+| `bvc-app-uat` | https://bvc-app-uat.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
 
-**Webflow embeds reference `bvc-thesis` for CSS, JS, and course data:**
+**Webflow embeds reference `bvc-app-uat` for CSS, JS, and course data:**
 ```html
 <link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
 <script src="https://bvc-app-uat.vercel.app/js/ee-course.js" defer></script>
 <script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
 ```
 
-**All deployments target `bvc-thesis`. Vercel is a static host only — it never rebuilds.**
+**All deployments target `bvc-app-uat`. Vercel is a static host only — it never rebuilds.**
 The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`.
 
 On-demand deploy (same steps as the hourly PM2 cron):
@@ -50,7 +50,7 @@ npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
 npm run build:bvcapp       # Build bvc-app only (Turbo, cache bypassed with -- --force)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-thesis
+npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app-uat
 ```
 
 ### Hourly Automated Pipeline (PM2)

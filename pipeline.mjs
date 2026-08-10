@@ -114,8 +114,8 @@ async function main() {
 
   // 2. Upload pre-built static output — Vercel is a host only, no rebuild triggered
   try {
-    run(`"${VERCEL}" pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-thesis`, BVC_APP);
-    run(`"${VERCEL}" deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-thesis`, BVC_APP);
+    run(`"${VERCEL}" pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
+    run(`"${VERCEL}" deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
     console.log(`\n[${ts()}] Deploy succeeded`);
   } catch (err) {
     await notify(
