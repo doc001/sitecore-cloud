@@ -7,7 +7,7 @@
  *   Watch : npm run js:watch      (rebuild on save)
  *
  * Loaded from Webflow on the cart-checkout page via:
- *   <script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
+ *   <script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
  *
  * Config is overridable. Set BEFORE this script loads:
  *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: '' };

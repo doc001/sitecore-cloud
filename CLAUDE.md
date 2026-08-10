@@ -25,16 +25,16 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-thesis` | https://bvc-thesis.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
+| `bvc-app` | https://bvc-app.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
 
-**Webflow embeds reference `bvc-thesis` for CSS, JS, and course data:**
+**Webflow embeds reference `bvc-app` for CSS, JS, and course data:**
 ```html
-<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
-<script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
-<script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
+<script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
 ```
 
-**All deployments target `bvc-thesis`. Vercel is a static host only — it never rebuilds.**
+**All deployments target `bvc-app`. Vercel is a static host only — it never rebuilds.**
 The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`.
 
 On-demand deploy (same steps as the hourly PM2 cron):
@@ -50,7 +50,7 @@ npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
 npm run build:bvcapp       # Build bvc-app only (Turbo, cache bypassed with -- --force)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-thesis
+npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app
 ```
 
 ### Hourly Automated Pipeline (PM2)
@@ -184,7 +184,7 @@ Key conventions:
 - **Accordion detail fields**: Credits (first), Fee, Dates, Days, Time. Seats are intentionally hidden (always show as available). Location is shown in the campus subheading rather than per-item.
 - **PDF course outlines** (OS only): fetched via `pdfFilename` from the course index JSON. Correct path is `/data/course-outlines-pdf/{pdfFilename}`. EE courses do not have PDF outlines.
 - **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
-- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-thesis.vercel.app`.
+- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-app.vercel.app`.
 
 ### bvc-app — Route Map
 

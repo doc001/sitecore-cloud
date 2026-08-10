@@ -7,7 +7,7 @@
  *   Watch : npm run js:watch      (rebuild on save)
  *
  * Loaded from Webflow (Extended Education course pages) via:
- *   <script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
+ *   <script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
  *
  * Mirrors the Open Studies cart (same data shape, same thesissitecorexm.api
  * availability + fee endpoints) but reads /data/courses/ and sends shoppers to
@@ -16,7 +16,7 @@
  * Endpoints/config are overridable. Set BEFORE this script loads:
  *   window.__EE_COURSE_CONFIG__ = { dataOrigin: "", apiOrigin: "", feeApplicantId: 1 };
  * Defaults (production):
- *   dataOrigin     : https://bvc-thesis.vercel.app        (this app /data/*)
+ *   dataOrigin     : https://bvc-app.vercel.app        (this app /data/*)
  *   apiOrigin      : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
  *   feeApplicantId : ''  (empty studentNo segment in fee/{skus}/{studentNo}; backend expects it)
  * ---------------------------------------------------------------------------
@@ -29,7 +29,7 @@
     window.__bvcEeCourseLoaded = true;
     console.log('[EE-Course] Script loaded');
     var _cfg = (typeof window !== 'undefined' && window.__EE_COURSE_CONFIG__) || {},
-      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-thesis.vercel.app',
+      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app.vercel.app',
       apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app',
       // Fee endpoint is `fee/{skus}/{studentNo}` where {studentNo} must be EMPTY for an
       // anonymous fee preview — the URL ends in a trailing slash (`fee/2595/`). Verified

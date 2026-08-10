@@ -47,7 +47,7 @@ The sandbox points the script at itself via:
 ```js
 window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '', feeApplicantId: 1 };
 ```
-In production these default to the live origins (data: `bvc-thesis.vercel.app`, api: `bvc-uat-api-proxy.vercel.app`, feeApplicantId: `1`).
+In production these default to the live origins (data: `bvc-app.vercel.app`, api: `bvc-uat-api-proxy.vercel.app`, feeApplicantId: `1`).
 
 ## Backend API contract (`bvcpayment` proxy)
 
@@ -113,8 +113,8 @@ npm run os-course:sandbox # server only (no watch)
 Add this to the page (before `</body>`):
 
 ```html
-<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
-<script src="https://bvc-thesis.vercel.app/js/os-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
+<script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
 ```
 
 This is the complete embed — `os-course.css` contains all the component **and**
@@ -132,7 +132,7 @@ The file URLs are stable, so Webflow/browsers may cache an old copy after a
 deploy. During active testing, append a version query to force a fresh fetch:
 
 ```html
-<script src="https://bvc-thesis.vercel.app/js/os-course.js?v=2" defer></script>
+<script src="https://bvc-app.vercel.app/js/os-course.js?v=2" defer></script>
 ```
 
 ## Checkout script (cart-checkout page)
@@ -152,7 +152,7 @@ every `npm run build`.
 **Load from Webflow** (before `</body>`, on the cart-checkout page):
 
 ```html
-<script src="https://bvc-thesis.vercel.app/js/checkout.js" defer></script>
+<script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
 ```
 
 The bundle is self-contained — it includes the shared `tokenStorage` / `getMsToken`
@@ -234,8 +234,8 @@ served file (it's static; tokens can't be injected into it).
 CSS classes, so `os-course.css` is required too:
 
 ```html
-<link rel="stylesheet" href="https://bvc-thesis.vercel.app/css/os-course.css" />
-<script src="https://bvc-thesis.vercel.app/js/ee-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
+<script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
 ```
 
 > ⚠️ **Migrating from the old inline EE script:** it targeted a stale data shape
