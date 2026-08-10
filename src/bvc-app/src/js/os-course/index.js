@@ -15,7 +15,7 @@
  * Defaults (production):
  *   dataOrigin     : https://bvc-thesis.vercel.app        (this app's /data/*)
  *   apiOrigin      : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
- *   feeApplicantId : 'null'  (literal string in `fee/{skus}/{id}`; backend expects it)
+ *   feeApplicantId : ''  (empty studentNo segment in `fee/{skus}/{studentNo}`; backend expects it)
  * ---------------------------------------------------------------------------
  */
 (function () {
@@ -27,12 +27,12 @@
     var _cfg = (typeof window !== 'undefined' && window.__OS_COURSE_CONFIG__) || {},
       dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-thesis.vercel.app',
       apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app',
-      // Fee endpoint is `fee/{skus}/{id}` where {id} must be the literal string 'null'
-      // for an anonymous fee preview. The backend expects this spelled-out value; an
-      // integer id (e.g. 1) returns a 500 NRE, and an omitted segment 404s. The value
-      // does not change the returned fee amounts. Override per env (e.g. a real applicant
-      // id) via window.__OS_COURSE_CONFIG__ = { feeApplicantId: <id> }. See OS-COURSE-CART.md.
-      feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : 'null',
+      // Fee endpoint is `fee/{skus}/{studentNo}` where {studentNo} must be EMPTY for an
+      // anonymous fee preview — the URL ends in a trailing slash (`fee/2595/`). Verified
+      // 2026-07-28: empty → 200 with fee data; the literal string 'null' now 404s. The
+      // value does not change the returned fee amounts. Override per env (e.g. a real
+      // applicant id) via window.__OS_COURSE_CONFIG__ = { feeApplicantId: <id> }. See OS-COURSE-CART.md.
+      feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '',
       tokenStorage = window.tokenStorage || {
         key: 'bvcToken',
         setToken: function (token) {
@@ -598,15 +598,18 @@
     console.log('[API] Availability', sku, '-> status', response.status);
     return { status: response.status, data: data };
   }
-  // The fee API emits each fee line twice; collapse exact duplicates (same
-  // description + offering + amount + tax) so each shows once and the total is
-  // not double-counted. Genuinely different per-course fees are preserved.
-  // See OS-COURSE-CART.md (Backend API contract).
+  // Additional fees are CART-LEVEL — charged once per registration, never per
+  // course. The fee API returns a set PER course/offering, so a multi-course cart
+  // comes back with the same institutional fees repeated (each stamped with a
+  // program-offering id, and amounts that can differ by program). Collapse to ONE
+  // set by fee type (description) so each fee — Student Association, Services,
+  // Technology, Learner Wellness — shows exactly once for the whole cart. First
+  // occurrence wins. See OS-COURSE-CART.md (Backend API contract).
   function dedupeFees(fees) {
     var seen = {},
       result = [];
     (Array.isArray(fees) ? fees : []).forEach(function (fee) {
-      var key = (fee.description || '') + '|' + (fee.programOfferingId || fee.offeringId || '') + '|' + (fee.amount || 0) + '|' + (fee.tax || 0);
+      var key = (fee.description || '').trim().toLowerCase();
       seen[key] || ((seen[key] = 1), result.push(fee));
     });
     return result;
