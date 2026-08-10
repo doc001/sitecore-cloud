@@ -48,7 +48,7 @@ npm run deploy:bvcapp   # or: node pipeline.mjs
 ```bash
 npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
-npm run build:bvcapp       # Build bvc-app only (Turbo, cache bypassed with -- --force)
+npm run build:bvcapp       # Build bvc-app only (Turbo; pass -- --cache=local: to skip cache read AND write)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
 npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app-uat
 ```
@@ -77,7 +77,9 @@ pm2 stop bvc-hourly-deploy      # pause the schedule
 ```
 
 **Pipeline steps** (total ~5 min):
-1. `npm run build:bvcapp --force` — data scripts + breadcrumbs + Next.js build → `out/`
+1. `npm run build:bvcapp -- --cache=local:` — data scripts + breadcrumbs + Next.js build → `out/`
+   (no cache read **or** write — a plain `--force` still writes ~200 MB/run to `.turbo/cache`,
+   which Turbo never prunes; that once grew to 35 GB and filled the disk)
 2. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
 3. `vercel pull` — refreshes `.vercel/project.json` project link
 4. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild

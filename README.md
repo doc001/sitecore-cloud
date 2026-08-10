@@ -240,7 +240,7 @@ All Webflow embeds (course listings, course detail pages) load assets and data f
 
 | Step | What happens |
 |---|---|
-| Build | `npm run build:bvcapp --force` — fetches data from Webflow + Sitecore XMC, generates breadcrumbs, runs Next.js static export → `out/` |
+| Build | `npm run build:bvcapp -- --cache=local:` — fetches data from Webflow + Sitecore XMC, generates breadcrumbs, runs Next.js static export → `out/`. Cache read *and* write are disabled: `--force` only skips the read, and the resulting ~200 MB/run write into `.turbo/cache` (never pruned by Turbo) once filled the disk. |
 | Package | Copies `out/` into `.vercel/output/static/` with a `config.json` (Vercel Build Output API v3) |
 | Link project | `vercel pull` — refreshes `.vercel/project.json` for `bvc-app-uat` |
 | Deploy | `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild |
