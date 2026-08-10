@@ -120,7 +120,7 @@
                     ]
                 },
                 {
-                    "ruleType": "",
+                    "ruleType": "minimumCreditsFromList",
                     "description": "Complete at least 1 of the following courses:",
                     "courses": [
                         {
@@ -165,7 +165,8 @@
                             "credits": 3,
                             "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT2801_International Business_(Winter 2024_Current).pdf"
                         }
-                    ]
+                    ],
+                    "minimumCredits": 1
                 }
             ]
         },
@@ -215,7 +216,7 @@
                         },
                         {
                             "code": "SCMT2998",
-                            "title": "Supply Chain Specialization:  Capstone Project",
+                            "title": "Supply Chain Specialization: Capstone Project",
                             "credits": 3,
                             "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCMT2998_Supply Chain Specialization  Capstone Project_(Winter 2026_Current).pdf"
                         },
