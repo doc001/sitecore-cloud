@@ -1,8 +1,11 @@
 // scripts/build-os-course.mjs
 // Bundles + minifies the Webflow-embedded assets:
-//   src/js/os-course/index.js  -> public/js/os-course.js   (self-contained IIFE)
-//   src/css/os-course.css      -> public/css/os-course.css (minified)
-//   src/js/checkout/index.js   -> public/js/checkout.js     (self-contained IIFE)
+//   src/js/os-course/index.js     -> public/js/os-course.js      (self-contained IIFE)
+//   src/css/os-course.css         -> public/css/os-course.css    (minified)
+//   src/js/checkout/index.js      -> public/js/checkout.js        (self-contained IIFE)
+//   src/js/ee-course/index.js     -> public/js/ee-course.js       (self-contained IIFE)
+//   src/js/checkout-cart/index.js -> public/js/checkout-cart.js   (self-contained IIFE)
+//   src/css/checkout-cart.css     -> public/css/checkout-cart.css (minified)
 //
 //   node scripts/build-os-course.mjs            one-off minified build
 //   node scripts/build-os-course.mjs --watch    rebuild all on every save
@@ -67,6 +70,25 @@ const targets = [
     drop: isProd ? ['console', 'debugger'] : [],
     banner: { js: `/* ee-course.js — ${GENERATED} */` },
   },
+  {
+    entryPoints: [path.join(root, 'src/js/checkout-cart/index.js')],
+    outfile: path.join(root, 'public/js/checkout-cart.js'),
+    bundle: true,
+    minify: isProd,
+    format: 'iife',
+    target: ['es2017'],
+    legalComments: 'none',
+    drop: isProd ? ['console', 'debugger'] : [],
+    banner: { js: `/* checkout-cart.js — ${GENERATED} */` },
+  },
+  {
+    entryPoints: [path.join(root, 'src/css/checkout-cart.css')],
+    outfile: path.join(root, 'public/css/checkout-cart.css'),
+    bundle: true,
+    minify: isProd,
+    legalComments: 'none',
+    banner: { css: `/* checkout-cart.css — ${GENERATED} */` },
+  },
 ];
 
 const watch = process.argv.includes('--watch');
@@ -78,5 +100,5 @@ if (watch) {
   console.log('👀 [webflow-assets] watching src/js + src/css → public/{js,css}/* (minified). Ctrl+C to stop.');
 } else {
   await Promise.all(targets.map((t) => esbuild.build(t)));
-  console.log(`✅ [webflow-assets] built os-course.js, os-course.css, checkout.js, ee-course.js (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
+  console.log(`✅ [webflow-assets] built os-course.js, os-course.css, checkout.js, ee-course.js, checkout-cart.js, checkout-cart.css (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
 }

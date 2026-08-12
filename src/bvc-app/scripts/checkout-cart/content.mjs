@@ -1,0 +1,270 @@
+/**
+ * content.mjs
+ * ---------------------------------------------------------------------------
+ * SINGLE SOURCE OF TRUTH for the checkout form.
+ *
+ * Everything a non-developer might need to change lives in this file:
+ * labels, hints, error messages, and every drop-down list. The build script
+ * renders the HTML from this file, and the runtime validates against it, so
+ * the two can never drift apart.
+ *
+ * To add a language, a country, or change an error message: edit here, rebuild.
+ * Nothing else needs to be touched.
+ */
+
+export const config = {
+  // Shown next to the birth date field and used by the date validator.
+  dateFormat: 'YYYY-MM-DD',
+
+  // Requirement 2.7.3 — no year earlier than 100 years prior.
+  maxAgeYears: 100,
+
+  // Requirement 2.8 — Alberta Student Number is exactly this many digits.
+  asnLength: 9,
+
+  // North American phone number, digits only.
+  phoneDigits: 10,
+
+  /**
+   * Requirement 8.1 asks for a genuinely disabled "Next" button.
+   *
+   * A truly `disabled` button cannot be focused, cannot be clicked, and
+   * announces nothing to a screen reader — the user is stuck with no way to
+   * find out WHY they are stuck. So the default here is a button that LOOKS
+   * disabled (aria-disabled + styling) but still accepts a click, which then
+   * reveals every error and focuses the first offending field.
+   *
+   * Set this to true if the business owner insists on a hard `disabled`.
+   */
+  hardDisableNext: false,
+
+  // Draft answers survive a back-navigation or accidental refresh.
+  draftKey: 'bvc.checkout.draft',
+
+  // Requirement 7 — opens in a new tab.
+  refundPolicyUrl: 'https://bowvalleycollege.ca/about-us/policies/refund-policy',
+  termsPolicyUrl: 'https://bowvalleycollege.ca/about-us/policies',
+
+  // MSAL — see msal-auth.mjs. Override per environment if needed.
+  auth: {
+    clientId: '74ec0abb-7354-4176-9a9e-e9886b631c78',
+    tenantId: '8f11c6f4-648e-4c0c-bb99-96e8408a8e2a',
+    scopes: ['openid', 'profile', 'email', 'https://bowvalleycollege.ca/ngew/test/login'],
+    // v4 exposes initialize(); the 2.12.0 build in the original embed does not.
+    msalCdn: 'https://alcdn.msauth.net/browser/4.5.0/js/msal-browser.min.js',
+    studentApiBase: 'https://nextjs-jamstack-dev.vercel.app/api/bvcpayment/'
+  }
+};
+
+/** Appended to the label of every non-mandatory field. Requirement 3. */
+export const optionalSuffix = 'optional';
+
+/**
+ * Drop-down data.
+ *
+ * `value` is what gets submitted to the SiS (the business meaning name /
+ * code from the attachments). `label` is what the user reads. Swap the
+ * `value` strings for the exact SiS codes once confirmed — the runtime never
+ * inspects them, so nothing else breaks.
+ */
+export const options = {
+  // Requirement 2.9 — see Gender.png for business meaning names.
+  gender: [
+    { value: 'M', label: 'Male' },
+    { value: 'F', label: 'Female' },
+    { value: 'X', label: 'X (Non-Binary, Gender Diverse)' },
+    { value: 'U', label: 'Unreported' }
+  ],
+
+  // Requirement 2.11 — see PermanentResidentStatus.jpg.
+  citizenshipStatus: [
+    { value: 'CAN', label: 'Canadian' },
+    { value: 'PR', label: 'Permanent Resident' },
+    { value: 'REF', label: 'Refugee' },
+    { value: 'STUDY', label: 'Study Permit' },
+    { value: 'WORK', label: 'Work Permit' },
+    { value: 'OTHER', label: 'Other' }
+  ],
+
+  // Requirement 2.12 — see Indigenous Status.png.
+  indigenousStatus: [
+    { value: 'FN_STATUS', label: 'First Nations - Status' },
+    { value: 'FN_NONSTATUS', label: 'First Nations - Non Status' },
+    { value: 'METIS', label: 'Metis' },
+    { value: 'INUIT', label: 'Inuit' },
+    { value: 'NA', label: 'Not Applicable' }
+  ],
+
+  // Requirement 2.10 — first language. Extend freely.
+  firstLanguage: [
+    { value: 'EN', label: 'English' },
+    { value: 'FR', label: 'French' },
+    { value: 'AR', label: 'Arabic' },
+    { value: 'ZH', label: 'Chinese (Mandarin)' },
+    { value: 'YUE', label: 'Chinese (Cantonese)' },
+    { value: 'NL', label: 'Dutch' },
+    { value: 'TL', label: 'Filipino / Tagalog' },
+    { value: 'DE', label: 'German' },
+    { value: 'GU', label: 'Gujarati' },
+    { value: 'HI', label: 'Hindi' },
+    { value: 'IT', label: 'Italian' },
+    { value: 'JA', label: 'Japanese' },
+    { value: 'KO', label: 'Korean' },
+    { value: 'CR', label: 'Cree' },
+    { value: 'BLA', label: 'Blackfoot' },
+    { value: 'OJ', label: 'Ojibwe' },
+    { value: 'FA', label: 'Persian / Farsi' },
+    { value: 'PL', label: 'Polish' },
+    { value: 'PT', label: 'Portuguese' },
+    { value: 'PA', label: 'Punjabi' },
+    { value: 'RU', label: 'Russian' },
+    { value: 'SO', label: 'Somali' },
+    { value: 'ES', label: 'Spanish' },
+    { value: 'TA', label: 'Tamil' },
+    { value: 'TI', label: 'Tigrinya' },
+    { value: 'UK', label: 'Ukrainian' },
+    { value: 'UR', label: 'Urdu' },
+    { value: 'VI', label: 'Vietnamese' },
+    { value: 'OTHER', label: 'Other' }
+  ],
+
+  /**
+   * Requirement 2.13 — Country of Citizenship.
+   * ISO 3166-1 alpha-2 codes. This is a working subset covering the bulk of
+   * BVC's international intake; paste the full ISO list here when SiS
+   * confirms its country codes.
+   */
+  countryOfCitizenship: [
+    { value: 'AF', label: 'Afghanistan' }, { value: 'DZ', label: 'Algeria' },
+    { value: 'AR', label: 'Argentina' }, { value: 'AU', label: 'Australia' },
+    { value: 'BD', label: 'Bangladesh' }, { value: 'BR', label: 'Brazil' },
+    { value: 'CM', label: 'Cameroon' }, { value: 'CL', label: 'Chile' },
+    { value: 'CN', label: 'China' }, { value: 'CO', label: 'Colombia' },
+    { value: 'CD', label: 'Congo (DRC)' }, { value: 'EG', label: 'Egypt' },
+    { value: 'SV', label: 'El Salvador' }, { value: 'ER', label: 'Eritrea' },
+    { value: 'ET', label: 'Ethiopia' }, { value: 'FR', label: 'France' },
+    { value: 'DE', label: 'Germany' }, { value: 'GH', label: 'Ghana' },
+    { value: 'GT', label: 'Guatemala' }, { value: 'HN', label: 'Honduras' },
+    { value: 'HK', label: 'Hong Kong' }, { value: 'IN', label: 'India' },
+    { value: 'ID', label: 'Indonesia' }, { value: 'IR', label: 'Iran' },
+    { value: 'IQ', label: 'Iraq' }, { value: 'IE', label: 'Ireland' },
+    { value: 'IL', label: 'Israel' }, { value: 'IT', label: 'Italy' },
+    { value: 'JM', label: 'Jamaica' }, { value: 'JP', label: 'Japan' },
+    { value: 'JO', label: 'Jordan' }, { value: 'KE', label: 'Kenya' },
+    { value: 'KR', label: 'Korea, South' }, { value: 'LB', label: 'Lebanon' },
+    { value: 'MY', label: 'Malaysia' }, { value: 'MX', label: 'Mexico' },
+    { value: 'MA', label: 'Morocco' }, { value: 'NP', label: 'Nepal' },
+    { value: 'NG', label: 'Nigeria' }, { value: 'PK', label: 'Pakistan' },
+    { value: 'PS', label: 'Palestine' }, { value: 'PE', label: 'Peru' },
+    { value: 'PH', label: 'Philippines' }, { value: 'PL', label: 'Poland' },
+    { value: 'RO', label: 'Romania' }, { value: 'RU', label: 'Russia' },
+    { value: 'SA', label: 'Saudi Arabia' }, { value: 'SN', label: 'Senegal' },
+    { value: 'SG', label: 'Singapore' }, { value: 'SO', label: 'Somalia' },
+    { value: 'ZA', label: 'South Africa' }, { value: 'ES', label: 'Spain' },
+    { value: 'LK', label: 'Sri Lanka' }, { value: 'SD', label: 'Sudan' },
+    { value: 'SY', label: 'Syria' }, { value: 'TW', label: 'Taiwan' },
+    { value: 'TZ', label: 'Tanzania' }, { value: 'TH', label: 'Thailand' },
+    { value: 'TR', label: 'Türkiye' }, { value: 'UA', label: 'Ukraine' },
+    { value: 'AE', label: 'United Arab Emirates' },
+    { value: 'GB', label: 'United Kingdom' }, { value: 'US', label: 'United States' },
+    { value: 'VE', label: 'Venezuela' }, { value: 'VN', label: 'Vietnam' },
+    { value: 'ZW', label: 'Zimbabwe' }, { value: 'OTHER', label: 'Other' }
+  ]
+};
+
+/**
+ * Field definitions.
+ *
+ * name       — the DOM id, the data-field value, and the draft-storage key.
+ * validate   — key into the validators registry (see validators.mjs).
+ * showWhen   — conditional display; the field is hidden AND exempt from
+ *              validation whenever the condition is false.
+ */
+export const fields = [
+  {
+    name: 'firstName', label: 'First Name', type: 'text', required: true,
+    validate: 'personName', maxLength: 50, autocomplete: 'given-name'
+  },
+  {
+    name: 'middleName', label: 'Middle Name or Initial', type: 'text', required: false,
+    validate: 'personName', maxLength: 50, autocomplete: 'additional-name'
+  },
+  {
+    name: 'lastName', label: 'Last Name', type: 'text', required: true,
+    validate: 'personName', maxLength: 50, autocomplete: 'family-name'
+  },
+  {
+    name: 'previousLastName', label: 'Previous Legal Last Name', type: 'text',
+    required: false, validate: 'personName', maxLength: 50
+  },
+  {
+    name: 'email', label: 'Email Address', type: 'email', required: true,
+    validate: 'email', maxLength: 254, autocomplete: 'email',
+    inputMode: 'email'
+  },
+  {
+    name: 'phone', label: 'Phone Number', type: 'tel', required: true,
+    validate: 'phone', maxLength: 14, autocomplete: 'tel',
+    inputMode: 'tel', hint: '10 digits, numbers only'
+  },
+  {
+    name: 'birthDate', label: 'Birth Date', type: 'date', required: true,
+    validate: 'birthDate', autocomplete: 'bday',
+    hint: `Format: ${config.dateFormat}`
+  },
+  {
+    name: 'asn', label: 'Alberta Student #', type: 'text', required: true,
+    validate: 'asn', maxLength: config.asnLength, inputMode: 'numeric',
+    hint: `${config.asnLength} digits, numbers only`
+  },
+  {
+    name: 'gender', label: 'Gender', type: 'select', required: true,
+    validate: 'choice', options: 'gender'
+  },
+  {
+    name: 'firstLanguage', label: 'First Language', type: 'select', required: true,
+    validate: 'choice', options: 'firstLanguage'
+  },
+  {
+    name: 'citizenshipStatus', label: 'Citizenship Status', type: 'select',
+    required: true, validate: 'choice', options: 'citizenshipStatus'
+  },
+  {
+    // Requirement 2.12 — only when Canadian, defaults to "Not Applicable".
+    name: 'indigenousStatus', label: 'Indigenous Status', type: 'select',
+    required: true, validate: 'choice', options: 'indigenousStatus',
+    defaultValue: 'NA',
+    showWhen: { field: 'citizenshipStatus', equals: ['CAN'] }
+  },
+  {
+    // Requirement 2.13 — every non-Canadian status.
+    name: 'countryOfCitizenship', label: 'Country of Citizenship', type: 'select',
+    required: true, validate: 'choice', options: 'countryOfCitizenship',
+    showWhen: { field: 'citizenshipStatus', equals: ['PR', 'REF', 'STUDY', 'WORK', 'OTHER'] }
+  }
+];
+
+/** Every user-facing error string, in one place. */
+export const messages = {
+  required: 'This field is required.',
+  requiredSelect: 'Please choose an option.',
+  personName: 'Use letters, numbers, spaces, hyphens, apostrophes or periods only.',
+  email: 'Enter a valid email address, for example name@example.com.',
+  phone: `Enter a ${config.phoneDigits}-digit phone number.`,
+  birthDateFormat: `Enter the date as ${config.dateFormat}.`,
+  birthDateFuture: 'Birth date cannot be in the future.',
+  birthDateTooOld: `Birth date cannot be more than ${config.maxAgeYears} years ago.`,
+  asn: `Your Alberta Student # must be exactly ${config.asnLength} digits.`,
+  termsScroll: 'Please scroll to the end of the terms and conditions first.',
+  termsRequired: 'You must accept the terms and conditions to continue.',
+  refundRequired: 'You must confirm you have read the refund policies and extension processes.',
+  summaryOne: 'There is 1 item that needs your attention.',
+  summaryMany: (n) => `There are ${n} items that need your attention.`
+};
+
+/** Step definitions — drives the progress indicator and the stepper. */
+export const steps = [
+  { id: 'student-type', title: 'Student Type', short: 'Start' },
+  { id: 'personal', title: 'Personal Information', short: 'Personal' },
+  { id: 'mailing', title: 'Mailing Information', short: 'Mailing' }
+];

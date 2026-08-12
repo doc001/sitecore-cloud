@@ -93,8 +93,16 @@ async function main() {
   //    Then package out/ into .vercel/output/ (Vercel Build Output API v3 static format).
   //    This lets vercel deploy --prebuilt upload static files directly — no Vercel rebuild.
   //    Retries up to 3 times (60 s apart) to survive transient network/DNS blips.
+  //
+  //    --cache=local: (empty permissions) = no cache read, no cache write. We used to
+  //    pass --force, but that is an alias for --cache=local:w,remote:w — it skips the
+  //    cache on READ while still WRITING ~200 MB of build output to .turbo/cache every
+  //    run. Turbo never prunes, so an hourly cron grew the cache to 35 GB and filled the
+  //    disk; the build then "succeeded" but Turbo crashed writing its report (os error
+  //    112), which this script saw as a build failure. Reading is pointless here anyway
+  //    (source data changes every run), so disable both directions.
   try {
-    await runWithRetry('npm run build:bvcapp -- --force', ROOT, 3, 60_000);
+    await runWithRetry('npm run build:bvcapp -- --cache=local:', ROOT, 3, 60_000);
 
     const outDir = join(BVC_APP, 'out');
     const vercelOutput = join(BVC_APP, '.vercel', 'output');

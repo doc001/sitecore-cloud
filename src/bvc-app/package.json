@@ -20,6 +20,7 @@
     "js:build": "node scripts/build-os-course.mjs",
     "js:build:prod": "node scripts/build-os-course.mjs --prod",
     "js:watch": "node scripts/build-os-course.mjs --watch",
+    "checkout-cart:html": "node scripts/build-checkout-cart-html.mjs",
     "os-course:sandbox": "node dev/os-course/server.mjs",
     "os-course:dev": "node dev/os-course/dev.mjs",
     "generateCourses": "node scripts/generate-courses-to-build.mjs",
