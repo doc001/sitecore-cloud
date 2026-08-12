@@ -99,13 +99,16 @@ export const config = {
   },
 
   /**
-   * Which cart the form is serving. Open Studies (`os`) makes the Alberta
-   * Student # mandatory; every other type hides it — this mirrors the cart
-   * submitter (checkout.js), which reads the same `?type` query parameter.
+   * Where the cart lives. A cart can mix Open Studies and Extended Ed items,
+   * so the `?type` query parameter no longer decides whether the Alberta
+   * Student # applies — the cart contents do. ASN is shown and mandatory when
+   * at least one item carries credits, and hidden otherwise. Both keys are
+   * written by os-course.js / ee-course.js; `itemsKey` is authoritative and
+   * `totalCreditsKey` is the fallback mirror.
    */
   cart: {
-    typeParam: 'type',
-    openStudiesValue: 'os'
+    itemsKey: 'cartItems',
+    totalCreditsKey: 'totalCredits'
   }
 };
 

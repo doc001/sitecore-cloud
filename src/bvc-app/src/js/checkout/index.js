@@ -153,11 +153,39 @@
       document.addEventListener('bvc:checkout-submit', () => this.handleSubmit());
     }
 
+    /**
+     * The ASN input, whichever id the page ships it under. The legacy Webflow
+     * page has BOTH #asn-os and #asn and disables the one that does not apply
+     * (see the DOMContentLoaded block at the bottom); the checkout-cart form
+     * ships only #asn-os and shows it whenever the cart has credits. So pick
+     * the first enabled one rather than keying off ?type — a mixed cart is
+     * Extended Ed by ?type yet still needs the Open Studies ASN input.
+     */
     getAsnField() {
-      if (this.type === 'os') {
-        return document.getElementById('asn-os');
-      } else {
-        return document.getElementById('asn');
+      const candidates = [document.getElementById('asn-os'), document.getElementById('asn')].filter(Boolean);
+      return candidates.find((el) => !el.disabled) || candidates[0] || null;
+    }
+
+    /**
+     * ASN is mandatory when the cart contains credit-bearing courses, not when
+     * ?type=os — carts can mix Open Studies and Extended Ed items. Mirrors
+     * cartHasCredits() in src/js/checkout-cart/index.js. Read fresh each call
+     * so a cart populated after this handler was constructed still counts.
+     */
+    cartRequiresAsn() {
+      try {
+        const storedCart = sessionStorage.getItem('cartItems');
+        const items = storedCart ? JSON.parse(storedCart) : null;
+        if (Array.isArray(items)) {
+          return items.some((item) => parseFloat(item && item.credits) > 0);
+        }
+      } catch (error) {
+        // Unreadable cart — fall through to the totalCredits mirror.
+      }
+      try {
+        return parseFloat(sessionStorage.getItem('totalCredits')) > 0;
+      } catch (error) {
+        return false;
       }
     }
 
@@ -179,8 +207,8 @@
     createErrorElements() {
       // For each field that needs validation, create an error span if it doesn't exist
       const fieldsToValidate = ['firstName', 'lastName', 'email', 'phone', 'birthDate', 'address', 'city', 'province', 'postalCode', 'country'];
-      // If type=os, ASN is also required
-      if (this.type === 'os') {
+      // A credit-bearing cart also requires the ASN.
+      if (this.cartRequiresAsn()) {
         fieldsToValidate.push('asn');
       }
       fieldsToValidate.forEach((field) => {
@@ -546,7 +574,7 @@
         country: 'Country is required',
       };
 
-      if (this.type === 'os') {
+      if (this.cartRequiresAsn()) {
         requiredFields['asn'] = 'ASN is required';
       }
 
@@ -583,8 +611,8 @@
         this.fields.postalCode.classList.add('error-field');
       }
 
-      // ASN Final Validation
-      if (this.type === 'os' && this.fields.asn) {
+      // ASN Final Validation — credit courses in the cart, not ?type=os.
+      if (this.cartRequiresAsn() && this.fields.asn) {
         const asnValue = this.fields.asn.value.trim();
 
         if (!asnValue) {
@@ -1001,9 +1029,13 @@
         regularAsn.style.display = 'none';
       }
     } else {
-      // Disable open studies ASN field (if it exists)
+      // Legacy page only: it ships BOTH ASN inputs, so the Open Studies one is
+      // switched off when the other is in play. The checkout-cart form ships
+      // #asn-os alone and decides its own visibility from the cart's credits
+      // (a mixed EE + OS cart is ?type=ee yet still needs the ASN), so leave a
+      // lone #asn-os enabled.
       const openStudiesAsn = document.getElementById('asn-os');
-      if (openStudiesAsn) {
+      if (openStudiesAsn && document.getElementById('asn')) {
         openStudiesAsn.disabled = true;
         openStudiesAsn.style.display = 'none';
       }

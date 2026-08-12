@@ -157,9 +157,15 @@ every `npm run build`.
 
 The bundle is self-contained — it includes the shared `tokenStorage` / `getMsToken`
 helpers (reused if the cart already defined them) and reads cart state from
-`sessionStorage` (`cartItems`, `feeSession`). It drives the form on
-`?type=os` (Open Studies, ASN required); **any other value (e.g. `?type=ee`) or no
-`type` is treated as Extended Ed** (ASN not required).
+`sessionStorage` (`cartItems`, `feeSession`).
+
+**ASN is gated on credits, not on `?type`.** A cart can mix Open Studies and
+Extended Ed items, so `cartRequiresAsn()` requires the ASN whenever any
+`cartItems[].credits > 0` (falling back to `sessionStorage.totalCredits`), and
+skips it otherwise. `getAsnField()` picks the first *enabled* of `#asn-os` /
+`#asn`, so it works on the legacy page (which ships both and disables the one
+that does not apply) and on the checkout-cart form (which ships `#asn-os`
+alone and shows/hides it by the same credits rule).
 
 Config is overridable (set before the script loads):
 ```js
@@ -223,7 +229,8 @@ sessionStorage keys — so the shared **checkout** reads its cart identically.
 Differences from `os-course.js`:
 - Reads **`/data/courses/course-{sisId}.json`** (not `/data/oScourses/`).
 - **No PDF outline** and no category-index slug lookup (EE has neither).
-- Checkout redirect is **`../cart-checkout?type=ee`** (Extended Ed, no ASN).
+- Checkout redirect is **`../cart-checkout?type=ee`** (Extended Ed). Note the
+  ASN is not keyed off this parameter — see the credits rule above.
 - Config namespace is **`window.__EE_COURSE_CONFIG__`** (`{ dataOrigin, apiOrigin, feeApplicantId }`, same defaults as OS).
 
 The course `sisId` is resolved from **`#courseComponent[data-sisid]`**, falling back

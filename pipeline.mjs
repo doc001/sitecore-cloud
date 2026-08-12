@@ -22,7 +22,12 @@ const ts = () => new Date().toISOString();
 
 function run(cmd, cwd = ROOT) {
   console.log(`\n[${ts()}] ▶ ${cmd}`);
-  execSync(cmd, { stdio: 'inherit', cwd, shell: true });
+  // windowsHide stops the shell PM2 spawns here from flashing up a console window
+  // every few seconds during a run. It only covers the shells this line creates —
+  // npm/turbo spawn their own nested `cmd /d /s /c` children we don't control, so
+  // some windows may still appear. Harmless either way; stdio is still inherited,
+  // so all output continues to reach logs/pipeline-out.log.
+  execSync(cmd, { stdio: 'inherit', cwd, shell: true, windowsHide: true });
 }
 
 async function notifyTeams(title, message, isFailure = true) {

@@ -131,13 +131,16 @@
       }
     },
     /**
-     * Which cart the form is serving. Open Studies (`os`) makes the Alberta
-     * Student # mandatory; every other type hides it — this mirrors the cart
-     * submitter (checkout.js), which reads the same `?type` query parameter.
+     * Where the cart lives. A cart can mix Open Studies and Extended Ed items,
+     * so the `?type` query parameter no longer decides whether the Alberta
+     * Student # applies — the cart contents do. ASN is shown and mandatory when
+     * at least one item carries credits, and hidden otherwise. Both keys are
+     * written by os-course.js / ee-course.js; `itemsKey` is authoritative and
+     * `totalCreditsKey` is the fallback mirror.
      */
     cart: {
-      typeParam: "type",
-      openStudiesValue: "os"
+      itemsKey: "cartItems",
+      totalCreditsKey: "totalCredits"
     }
   };
   var fields = [
@@ -1086,11 +1089,24 @@
       birthDate.control.min = toISODateString(earliestBirthDate());
       birthDate.control.max = toISODateString(todayUTC());
     }
-    const cartParams = new URLSearchParams(window.location.search);
-    const isOpenStudies = cartParams.get(config.cart.typeParam) === config.cart.openStudiesValue;
+    function cartHasCredits() {
+      try {
+        const raw = sessionStorage.getItem(config.cart.itemsKey);
+        const items = raw ? JSON.parse(raw) : null;
+        if (Array.isArray(items)) {
+          return items.some((item) => Number.parseFloat(item == null ? void 0 : item.credits) > 0);
+        }
+      } catch (e) {
+      }
+      try {
+        return Number.parseFloat(sessionStorage.getItem(config.cart.totalCreditsKey)) > 0;
+      } catch (e) {
+        return false;
+      }
+    }
     const asnField = fields2.get("asn");
-    if (asnField && !isOpenStudies) {
-      asnField.setVisible(false);
+    function applyAsnVisibility() {
+      asnField == null ? void 0 : asnField.setVisible(cartHasCredits());
     }
     function applyConditionals() {
       fields.forEach((definition) => {
@@ -1136,6 +1152,7 @@
       if (draft[field.name]) field.control.value = draft[field.name];
     });
     applyConditionals();
+    applyAsnVisibility();
     const saveDraft = debounce(() => {
       const snapshot = {};
       fields2.forEach((field) => {
@@ -1176,6 +1193,7 @@
       steps,
       validateStep,
       onEnterStep: (stepId) => {
+        applyAsnVisibility();
         stepper.refreshNextButton(config.hardDisableNext);
         document.dispatchEvent(new CustomEvent("bvc:checkout-step", { detail: { step: stepId } }));
       }
