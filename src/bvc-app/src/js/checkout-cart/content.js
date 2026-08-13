@@ -493,9 +493,21 @@ export const messages = {
   summaryMany: (n) => `There are ${n} items that need your attention.`
 };
 
+export const features = {
+  /**
+   * Microsoft SSO ("I'm a current student — sign in") and the Start step that
+   * hosts it. Off until SSO is tested against production: the Start step is not
+   * rendered, no MSAL session is restored, and the form opens on Personal.
+   * Set to true to bring both back — nothing else needs changing.
+   */
+  studentSignIn: false
+};
+
 /** Step definitions — drives the progress indicator and the stepper. */
 export const steps = [
-  { id: 'student-type', title: 'Student Type', short: 'Start' },
+  ...(features.studentSignIn
+    ? [{ id: 'student-type', title: 'Student Type', short: 'Start' }]
+    : []),
   { id: 'personal', title: 'Personal Information', short: 'Personal' },
   { id: 'mailing', title: 'Mailing Information', short: 'Mailing' }
 ];

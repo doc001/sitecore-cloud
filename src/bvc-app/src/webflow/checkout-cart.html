@@ -13,29 +13,12 @@
 -->
 <div data-checkout>
   <ol class="bvc-progress" aria-label="Checkout progress">
-    <li class="bvc-progress__item" data-progress-step="student-type">Start</li>
     <li class="bvc-progress__item" data-progress-step="personal">Personal</li>
     <li class="bvc-progress__item" data-progress-step="mailing">Mailing</li>
   </ol>
 
-  <!-- Step 1 — current student or new student -->
-  <section class="bvc-step" data-step="student-type" hidden>
-    <h2 class="bvc-step__heading" data-step-heading>Have you studied at Bow Valley College before?</h2>
-    <p class="bvc-step__intro">Signing in fills in most of this form for you.</p>
 
-    <p class="bvc-notice" data-auth-notice hidden></p>
-
-    <div class="bvc-choice">
-      <button type="button" class="bvc-button" data-student-type="current">
-        I'm a current student — sign in
-      </button>
-      <button type="button" class="bvc-button bvc-button--secondary" data-student-type="new">
-        I'm a new student
-      </button>
-    </div>
-  </section>
-
-  <!-- Step 2 — Personal Information -->
+  <!-- Personal Information -->
   <section class="bvc-step" data-step="personal" hidden>
     <h2 class="bvc-step__heading" data-step-heading>Personal Information</h2>
     <p class="bvc-step__intro">Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
