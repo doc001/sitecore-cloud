@@ -1,13 +1,16 @@
 {
   "metadata": {
-    "generatedAt": "2026-08-12T22:26:55.232Z",
+    "generatedAt": "2026-08-13T19:48:05.383Z",
+    "sourceFetchedAt": "2026-08-13T19:44:43.667Z",
+    "sourceAgeHours": 0,
     "source": "Webflow CMS (open-studies + program-areas) and course-outlines-pdf",
     "totalAreas": 5,
-    "totalCourses": 97,
-    "coursesWithoutArea": 27,
-    "coursesWithResolvedPdf": 132,
-    "coursesAvailable": 70,
-    "duplicatesRemoved": 37
+    "totalCourses": 104,
+    "coursesWithoutArea": 19,
+    "coursesUnpublished": 0,
+    "coursesWithResolvedPdf": 103,
+    "coursesAvailable": 78,
+    "duplicatesRemoved": 36
   },
   "areas": [
     {
@@ -46,6 +49,16 @@
           "pdfFile": "BIOL1402_Fundamentals of Bioenergetics_(Fall 2024_Current).pdf"
         },
         {
+          "code": "BIOL1403",
+          "name": "DNA, Inheritance, and Evolution",
+          "credits": "4.0",
+          "slug": "dna-inheritance-and-evolution",
+          "pageUrl": "/open-studies/dna-inheritance-and-evolution",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1403_DNA%2C%20Inheritance%2C%20and%20Evolution_(Fall%202026_Current).pdf",
+          "pdfFile": "BIOL1403_DNA, Inheritance, and Evolution_(Fall 2026_Current).pdf"
+        },
+        {
           "code": "CHEM1901",
           "name": "General Chemistry: Structure and Bonding",
           "credits": "4.0",
@@ -54,6 +67,16 @@
           "available": true,
           "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1901_General%20Chemistry%20Structure%20and%20Bonding_(Fall%202024_Current).pdf",
           "pdfFile": "CHEM1901_General Chemistry Structure and Bonding_(Fall 2024_Current).pdf"
+        },
+        {
+          "code": "CHEM1902",
+          "name": "General Chemistry: Change and Equilibrium",
+          "credits": "4.0",
+          "slug": "general-chemistry-change-and-equilibrium",
+          "pageUrl": "/open-studies/general-chemistry-change-and-equilibrium",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1902_General%20Chemistry%20Change%20and%20Equilibrium%20_(Fall%202025_Current).pdf",
+          "pdfFile": "CHEM1902_General Chemistry Change and Equilibrium _(Fall 2025_Current).pdf"
         },
         {
           "code": "CNST1100",
@@ -76,6 +99,16 @@
           "pdfFile": "COMM1101_Interpersonal Relationships And Communication Skills_(Fall 2026_Current).pdf"
         },
         {
+          "code": "ECON1100",
+          "name": "Principles of Microeconomics",
+          "credits": "3.0",
+          "slug": "principles-of-microeconomics",
+          "pageUrl": "/open-studies/principles-of-microeconomics",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ECON1100_Principles%20of%20Microeconomics_(Fall%202026_Current).pdf",
+          "pdfFile": "ECON1100_Principles of Microeconomics_(Fall 2026_Current).pdf"
+        },
+        {
           "code": "ENGL1201",
           "name": "English Composition",
           "credits": "3.0",
@@ -94,6 +127,16 @@
           "available": true,
           "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1302_Literature%20and%20Society_(Fall%202025_Current).pdf",
           "pdfFile": "ENGL1302_Literature and Society_(Fall 2025_Current).pdf"
+        },
+        {
+          "code": "ENGL2301",
+          "name": "Children's Literature",
+          "credits": "3.0",
+          "slug": "childrens-literature",
+          "pageUrl": "/open-studies/childrens-literature",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2301_Children's%20Literature_(Fall%202024_Current).pdf",
+          "pdfFile": "ENGL2301_Children's Literature_(Fall 2024_Current).pdf"
         },
         {
           "code": "ENGL2302",
@@ -206,6 +249,16 @@
           "pdfFile": "PSYC1202_Child and Adolescent Development_(Fall 2026_Current).pdf"
         },
         {
+          "code": "PSYC2101",
+          "name": "Personality",
+          "credits": "3.0",
+          "slug": "personality",
+          "pageUrl": "/open-studies/personality",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality%20_(Fall%202024_Current).pdf",
+          "pdfFile": "PSYC2101_Personality _(Fall 2024_Current).pdf"
+        },
+        {
           "code": "PSYC2401",
           "name": "Abnormal Psychology",
           "credits": "3.0",
@@ -246,6 +299,16 @@
           "pdfFile": "SOCI1301_Sociology of Aging_(Spring 2026_Current).pdf"
         },
         {
+          "code": "SOCI2302",
+          "name": "Sociology of Death and Dying",
+          "credits": "3.0",
+          "slug": "sociology-of-death-and-dying",
+          "pageUrl": "/open-studies/sociology-of-death-and-dying",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology%20of%20Death%20and%20Dying_(Fall%202024_Current).pdf",
+          "pdfFile": "SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
+        },
+        {
           "code": "STAT1151",
           "name": "Statistics I",
           "credits": "3.0",
@@ -256,7 +319,7 @@
           "pdfFile": null
         }
       ],
-      "courseCount": 24
+      "courseCount": 30
     },
     {
       "id": "66e88fd785912baaa400769f",
@@ -454,6 +517,16 @@
           "pdfFile": "HRES2203_Compensation & Benefits_(Fall 2025_Current).pdf"
         },
         {
+          "code": "HRES2204",
+          "name": "Talent Acquisition and Retention",
+          "credits": "3.0",
+          "slug": "talent-acquisition-and-retention",
+          "pageUrl": "/open-studies/talent-acquisition-and-retention",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2204_Talent%20Acquisition%20and%20Retention_(Fall%202025_Current).pdf",
+          "pdfFile": "HRES2204_Talent Acquisition and Retention_(Fall 2025_Current).pdf"
+        },
+        {
           "code": "HRES2301",
           "name": "Employment Law",
           "credits": "3.0",
@@ -575,7 +648,7 @@
         },
         {
           "code": "MGMT1201",
-          "name": "Business Communications",
+          "name": "Business Communication",
           "credits": "3.0",
           "slug": "business-communication",
           "pageUrl": "/open-studies/business-communication",
@@ -734,16 +807,6 @@
           "pdfFile": "SCMT2401_Logistics & Transportation_(Fall 2022_Current).pdf"
         },
         {
-          "code": "V",
-          "name": "Talent Acquisition and Retention",
-          "credits": "3.0",
-          "slug": "talent-acquisition-and-retention",
-          "pageUrl": "/open-studies/talent-acquisition-and-retention",
-          "available": false,
-          "pdf": null,
-          "pdfFile": null
-        },
-        {
           "code": "VOAS1100",
           "name": "Introduction to the Veterinary Profession",
           "credits": "3.0",
@@ -882,6 +945,16 @@
           "pdfFile": "FASD1101_Fetal Alcohol Spectrum Awareness  for Human Service Professionals_(Winter 2026_Current).pdf"
         },
         {
+          "code": "HMSV1105",
+          "name": "Health, Wellness, and Professional Practice in Canada’s Health Care System",
+          "credits": "3.0",
+          "slug": "health-wellness-and-professional-practice-in-canadas-health-care-system",
+          "pageUrl": "/open-studies/health-wellness-and-professional-practice-in-canadas-health-care-system",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV1105_Health%2C%20Wellness%2C%20and%20Professional%20Practice%20in%20Canada%E2%80%99s%20Health%20Care%20System_(Fall%202026_Current).pdf",
+          "pdfFile": "HMSV1105_Health, Wellness, and Professional Practice in Canada’s Health Care System_(Fall 2026_Current).pdf"
+        },
+        {
           "code": "HMSV3201",
           "name": "Program Design and Evaluation",
           "credits": "3.0",
@@ -962,7 +1035,7 @@
           "pdfFile": "JUST1102_Diversity and Criminal Justice in Canada_(Fall 2024_Current).pdf"
         }
       ],
-      "courseCount": 20
+      "courseCount": 21
     },
     {
       "id": "66e8900ccb1a14afe9fb969b",
