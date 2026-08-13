@@ -32,7 +32,7 @@
     "generateOpenStudiesByArea": "node scripts/buildOpenStudiesByArea.mjs",
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
     "generateNavigationBreadcrumbs": "node scripts/generateNavigationBreadcrumbs.mjs",
-    "bvcapp-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateNavigationBreadcrumbs && npm run prelaunch:build",
+    "bvcapp-scripts": "npm run getWebflowData && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateNavigationBreadcrumbs && npm run prelaunch:build",
     "build": "npm run js:build && npm run bvcapp-scripts && next build",
     "cleanup": "node scripts/cleanup-data.mjs"
   },
