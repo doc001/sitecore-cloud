@@ -12,7 +12,7 @@
  * Config is overridable. Set BEFORE this script loads:
  *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: '' };
  * Default (production):
- *   apiOrigin : https://bvc-uat-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
+ *   apiOrigin : https://bvc-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
  *   studentPk : '' (empty — these are new/anonymous registrations; submit-payment
  *               null-refs with a 500 if a non-empty studentPk is sent)
  *
@@ -26,7 +26,7 @@
 
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
-  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app';
+  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app';
   // studentPk must be EMPTY for new/anonymous registrations — submit-payment now
   // null-refs (500) if a non-empty value is sent. Left overridable via config for a
   // future signed-in/MSAL flow, but the default for this public checkout is empty.
@@ -78,11 +78,27 @@
     };
   window.getMsToken = getMsToken;
 
+  // --- form value -> backend code maps (Option B) ------------------------
+  //
+  // The registration schema has a fixed set of coded fields. We now source
+  // them from the richer checkout-cart form instead of hardcoding, BUT only
+  // the values proven against the SiS enum are sent live; the rest fall back
+  // to the previously hardcoded known-good default so a wrong code can never
+  // 400 the registration. Fill these in and flip DEFAULTS once confirmed.
+  var GENDER_MAP = { M: 'M', F: 'F', X: 'X', U: 'U' };            // confirmed set on the form
+  var LANGUAGE_MAP = { EN: 'ENG' };                              // only ENG confirmed; extend when known
+  var LEGAL_STATUS_MAP = { CAN: '1' };                           // only CAN('1') confirmed; extend when known
+  var DEFAULTS = { gender: 'U', language: 'ENG', legalStatus: '1', ethnicity: '6', country: 'CA' };
+  function mapCode(table, key, fallback) {
+    return key && Object.prototype.hasOwnProperty.call(table, key) ? table[key] : fallback;
+  }
+
   // Shopping Cart and Form Integration
   class CheckoutFormHandler {
     constructor() {
-      // Initialize form
-      this.form = document.getElementById('email-form');
+      // Container for cart display / messages. Prefer the Webflow form wrapper,
+      // fall back to the checkout-cart root so nothing throws if it is absent.
+      this.form = document.getElementById('email-form') || document.querySelector('[data-checkout]');
       this.shoppingCartElement = document.getElementById('shoppingCart');
       this.registerButton = document.getElementById('registerToCourse');
       // Save type globally
@@ -90,13 +106,21 @@
       this.type = urlParams.get('type');
       // Set the proxy base URL (config-overridable)
       this.proxyBaseUrl = apiOrigin + '/api/bvcpayment';
-      // Form fields mapping
+      // Form fields mapping. ids match the checkout-cart form (Option A):
+      // #phone is the hidden combined "+1XXXXXXXXXX"; #phoneNumber is the
+      // visible digits input. Richer fields feed the coded schema values.
       this.fields = {
         firstName: document.getElementById('firstName'),
+        middleName: document.getElementById('middleName'),
         lastName: document.getElementById('lastName'),
+        previousLastName: document.getElementById('previousLastName'),
         email: document.getElementById('email'),
-        phone: document.getElementById('phone'),
+        phone: document.getElementById('phone'), // combined +1XXXXXXXXXX
         birthDate: document.getElementById('birthDate'),
+        gender: document.getElementById('gender'),
+        firstLanguage: document.getElementById('firstLanguage'),
+        citizenshipStatus: document.getElementById('citizenshipStatus'),
+        countryOfCitizenship: document.getElementById('countryOfCitizenship'),
         asn: this.getAsnField(),
         address: document.getElementById('address'),
         city: document.getElementById('city'),
@@ -118,13 +142,50 @@
       this.setupPostalCodeAutoFormat();
       this.createErrorElements();
       this.checkForPaymentErrors();
+
+      // Re-render the cart whenever the multi-step form changes step, so a cart
+      // populated after this constructor ran (prior page / cart script) still
+      // shows up in the page's cart column.
+      document.addEventListener('bvc:checkout-step', () => this.loadCartItems());
+
+      // The form's final "Proceed to Payment" button hands off here: run the
+      // registration -> submit-payment -> Flywire redirect flow.
+      document.addEventListener('bvc:checkout-submit', () => this.handleSubmit());
     }
 
+    /**
+     * The ASN input, whichever id the page ships it under. The legacy Webflow
+     * page has BOTH #asn-os and #asn and disables the one that does not apply
+     * (see the DOMContentLoaded block at the bottom); the checkout-cart form
+     * ships only #asn-os and shows it whenever the cart has credits. So pick
+     * the first enabled one rather than keying off ?type — a mixed cart is
+     * Extended Ed by ?type yet still needs the Open Studies ASN input.
+     */
     getAsnField() {
-      if (this.type === 'os') {
-        return document.getElementById('asn-os');
-      } else {
-        return document.getElementById('asn');
+      const candidates = [document.getElementById('asn-os'), document.getElementById('asn')].filter(Boolean);
+      return candidates.find((el) => !el.disabled) || candidates[0] || null;
+    }
+
+    /**
+     * ASN is mandatory when the cart contains credit-bearing courses, not when
+     * ?type=os — carts can mix Open Studies and Extended Ed items. Mirrors
+     * cartHasCredits() in src/js/checkout-cart/index.js. Read fresh each call
+     * so a cart populated after this handler was constructed still counts.
+     */
+    cartRequiresAsn() {
+      try {
+        const storedCart = sessionStorage.getItem('cartItems');
+        const items = storedCart ? JSON.parse(storedCart) : null;
+        if (Array.isArray(items)) {
+          return items.some((item) => parseFloat(item && item.credits) > 0);
+        }
+      } catch (error) {
+        // Unreadable cart — fall through to the totalCredits mirror.
+      }
+      try {
+        return parseFloat(sessionStorage.getItem('totalCredits')) > 0;
+      } catch (error) {
+        return false;
       }
     }
 
@@ -146,8 +207,8 @@
     createErrorElements() {
       // For each field that needs validation, create an error span if it doesn't exist
       const fieldsToValidate = ['firstName', 'lastName', 'email', 'phone', 'birthDate', 'address', 'city', 'province', 'postalCode', 'country'];
-      // If type=os, ASN is also required
-      if (this.type === 'os') {
+      // A credit-bearing cart also requires the ASN.
+      if (this.cartRequiresAsn()) {
         fieldsToValidate.push('asn');
       }
       fieldsToValidate.forEach((field) => {
@@ -513,7 +574,7 @@
         country: 'Country is required',
       };
 
-      if (this.type === 'os') {
+      if (this.cartRequiresAsn()) {
         requiredFields['asn'] = 'ASN is required';
       }
 
@@ -550,8 +611,8 @@
         this.fields.postalCode.classList.add('error-field');
       }
 
-      // ASN Final Validation
-      if (this.type === 'os' && this.fields.asn) {
+      // ASN Final Validation — credit courses in the cart, not ?type=os.
+      if (this.cartRequiresAsn() && this.fields.asn) {
         const asnValue = this.fields.asn.value.trim();
 
         if (!asnValue) {
@@ -614,28 +675,32 @@
       // Determine billing address
       const useSameAddress = this.fields.billingCheckbox && this.fields.billingCheckbox.checked;
       // Format the data according to the required schema
+      // Coded fields: send the mapped form value when confirmed, else the
+      // known-good default (see the *_MAP / DEFAULTS at the top of this file).
+      const isCanadianCitizen = formData.citizenshipStatus === 'CAN';
       const data = {
         studentId: 0, // New/anonymous students: send 0. The API now rejects null ("The StudentId field is required.")
         firstName: formData.firstName || '',
-        middleName: '',
+        middleName: formData.middleName || '',
         lastName: formData.lastName || '',
-        previousLastName: '',
+        previousLastName: formData.previousLastName || '',
         birthDate: this.formatDate(formData.birthDate),
-        gender: 'U', // Default to 'N' as specified in the schema
+        gender: mapCode(GENDER_MAP, formData.gender, DEFAULTS.gender),
         address: formData.address || '',
         city: formData.city || '',
         province: formData.province || '',
         postalCode: formData.postalCode || '',
-        country: formData.country || 'CA',
+        country: formData.country || DEFAULTS.country,
         email: formData.email || '',
-        phone: formData.phone || '',
+        phone: formData.phone || '', // combined +1XXXXXXXXXX from the form
         asn: formData.asn || '',
         courses: courseIds.length > 0 ? courseIds : [219369], // Default course ID if none provided
-        legalStatus: '1',
-        language: 'ENG',
-        ethnicity: '6',
+        legalStatus: mapCode(LEGAL_STATUS_MAP, formData.citizenshipStatus, DEFAULTS.legalStatus),
+        language: mapCode(LANGUAGE_MAP, formData.firstLanguage, DEFAULTS.language),
+        ethnicity: DEFAULTS.ethnicity, // not collected on the form yet
         feeGroup: 'Tuition',
-        country_Citizenship: 'CA',
+        // Canadian citizens => 'CA'; otherwise the selected country of citizenship (ISO alpha-2).
+        country_Citizenship: isCanadianCitizen ? 'CA' : (formData.countryOfCitizenship || DEFAULTS.country),
       };
 
       // If we have session fees, add them to the data
@@ -841,12 +906,18 @@
       // Collect form data from fields
       const formData = {};
 
-      // Personal information
+      // Personal information (Option B — richer fields sourced from the form)
       formData.firstName = this.fields.firstName ? this.fields.firstName.value : '';
+      formData.middleName = this.fields.middleName ? this.fields.middleName.value : '';
       formData.lastName = this.fields.lastName ? this.fields.lastName.value : '';
+      formData.previousLastName = this.fields.previousLastName ? this.fields.previousLastName.value : '';
       formData.email = this.fields.email ? this.fields.email.value : '';
-      formData.phone = this.fields.phone ? this.fields.phone.value : '';
+      formData.phone = this.fields.phone ? this.fields.phone.value : ''; // combined +1XXXXXXXXXX
       formData.birthDate = this.fields.birthDate ? this.fields.birthDate.value : '';
+      formData.gender = this.fields.gender ? this.fields.gender.value : '';
+      formData.firstLanguage = this.fields.firstLanguage ? this.fields.firstLanguage.value : '';
+      formData.citizenshipStatus = this.fields.citizenshipStatus ? this.fields.citizenshipStatus.value : '';
+      formData.countryOfCitizenship = this.fields.countryOfCitizenship ? this.fields.countryOfCitizenship.value : '';
       formData.asn = this.fields.asn ? this.fields.asn.value : '';
 
       // Mailing information
@@ -941,27 +1012,35 @@
   document.addEventListener('DOMContentLoaded', () => {
     const queryParams = new URLSearchParams(window.location.search);
     const type = queryParams.get('type');
+    // These scaffold elements are optional (the checkout-cart form does not
+    // include them and manages ASN visibility itself). Guard every access so
+    // a missing element can never throw and abort the handler.
+    const show = (id, display) => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = display;
+    };
     if (type === 'os') {
-      document.getElementById('openStudiesFields').style.display = 'block';
-      document.getElementById('os-hide').style.display = 'none';
-      // Disable regular ASN field (if exists)
+      show('openStudiesFields', 'block');
+      show('os-hide', 'none');
+      // Disable regular ASN field (if it exists)
       const regularAsn = document.getElementById('asn');
       if (regularAsn) {
         regularAsn.disabled = true;
-        regularAsn.style.display = 'none'; // Optional
+        regularAsn.style.display = 'none';
       }
     } else {
-      // Disable open studies ASN field
+      // Legacy page only: it ships BOTH ASN inputs, so the Open Studies one is
+      // switched off when the other is in play. The checkout-cart form ships
+      // #asn-os alone and decides its own visibility from the cart's credits
+      // (a mixed EE + OS cart is ?type=ee yet still needs the ASN), so leave a
+      // lone #asn-os enabled.
       const openStudiesAsn = document.getElementById('asn-os');
-      if (openStudiesAsn) {
+      if (openStudiesAsn && document.getElementById('asn')) {
         openStudiesAsn.disabled = true;
-        openStudiesAsn.style.display = 'none'; // Optional
+        openStudiesAsn.style.display = 'none';
       }
     }
-    const form = document.getElementById('email-form');
-    if (form) {
-      form.style.display = 'block';
-    }
+    show('email-form', 'block');
     const formHandler = new CheckoutFormHandler();
     formHandler.createErrorElements();
   });

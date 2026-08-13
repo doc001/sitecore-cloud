@@ -40,18 +40,42 @@ function start() {
     birthDate.control.max = toISODateString(todayUTC());
   }
 
-  // --- cart type: Alberta Student # is mandatory only for Open Studies -----
+  // --- Alberta Student # follows the cart, not the ?type parameter ---------
   //
-  // The registration submitter (checkout.js) requires ASN only when the cart
-  // is Open Studies, read from the ?type query parameter. Mirror that here so
-  // Extended Ed registrations are not blocked by a field that does not apply.
-  const cartParams = new URLSearchParams(window.location.search);
-  const isOpenStudies =
-    cartParams.get(config.cart.typeParam) === config.cart.openStudiesValue;
-  const asnField = fields.get('asn');
-  if (asnField && !isOpenStudies) {
-    asnField.setVisible(false); // hidden => cleared and exempt from validation
+  // A cart can mix Open Studies and Extended Ed items, so `?type` says nothing
+  // useful about whether the ASN applies. The rule is credits: any cart item
+  // carrying credits makes the ASN visible and mandatory; a cart with no
+  // credit-bearing items hides it (hidden => cleared and exempt from
+  // validation), so a non-credit registration is never blocked by it.
+  // The submitter (checkout.js) applies the same rule before it validates.
+
+  /** True when at least one item in the session cart carries credits. */
+  function cartHasCredits() {
+    try {
+      const raw = sessionStorage.getItem(config.cart.itemsKey);
+      const items = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(items)) {
+        return items.some((item) => Number.parseFloat(item?.credits) > 0);
+      }
+    } catch {
+      // Unreadable cart — fall through to the totalCredits mirror.
+    }
+    try {
+      return Number.parseFloat(sessionStorage.getItem(config.cart.totalCreditsKey)) > 0;
+    } catch {
+      return false;
+    }
   }
+
+  const asnField = fields.get('asn');
+
+  function applyAsnVisibility() {
+    asnField?.setVisible(cartHasCredits());
+  }
+
+  // Called once after the draft is restored (below), so a stale ASN saved when
+  // the cart still had credits is cleared rather than re-filled, then again on
+  // every step change.
 
   // --- conditional fields (requirements 2.12 and 2.13) --------------------
 
@@ -124,6 +148,7 @@ function start() {
     if (draft[field.name]) field.control.value = draft[field.name];
   });
   applyConditionals();
+  applyAsnVisibility();
 
   const saveDraft = debounce(() => {
     const snapshot = {};
@@ -178,6 +203,10 @@ function start() {
     steps,
     validateStep,
     onEnterStep: (stepId) => {
+      // The cart can be written after this script ran, so re-read it on every
+      // step. setVisible is a no-op when nothing changed, which keeps an
+      // already-typed ASN intact.
+      applyAsnVisibility();
       stepper.refreshNextButton(config.hardDisableNext);
       // Let the cart submitter (checkout.js) refresh the order summary when the
       // payment step is shown — decoupled via a DOM event. The cart may have

@@ -98,8 +98,13 @@ into the hidden copy and the page's cart column stays empty.
 - `config.phone` — `defaultDialCode` (`+1`) and `dialCodeByCountry` (mailing
   Country → dial code). The visible number input is `#phoneNumber`; the runtime
   writes the combined `+1XXXXXXXXXX` into the hidden `#phone`.
-- `config.cart` — `typeParam` (`type`) + `openStudiesValue` (`os`): ASN is
-  required/visible only when `?type=os`.
+- `config.cart` — `itemsKey` (`cartItems`) + `totalCreditsKey` (`totalCredits`),
+  the sessionStorage keys the course-page cart writes. ASN is visible and
+  mandatory when **any cart item carries credits**, and hidden (cleared, exempt
+  from validation) when none do. It is re-read on every step change, since the
+  cart can be written after this script runs. `?type` is deliberately NOT used:
+  a cart can mix Open Studies and Extended Ed items. The submitter
+  (`checkout.js`) applies the same rule in `cartRequiresAsn()`.
 - `fields[]` — each field's DOM id is `submitId || name`; `submitId` is used to
   match the ids the submitter reads (`postalcode`, `streetAddress-2`, `city-2`,
   `province-2`, `postalCode-2`, `country-2`, `asn-os`). `group` (`mailing` /
