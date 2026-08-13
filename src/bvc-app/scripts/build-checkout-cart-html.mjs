@@ -20,7 +20,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  config, fields, options, optionalSuffix, steps
+  config, features, fields, options, optionalSuffix, steps
 } from '../src/js/checkout-cart/content.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -122,6 +122,33 @@ function renderProgress() {
   return `  <ol class="bvc-progress" aria-label="Checkout progress">\n${items}\n  </ol>`;
 }
 
+/**
+ * Step 1 — current student or new student. Rendered only when
+ * features.studentSignIn is on; otherwise the form opens on Personal and the
+ * MSAL sign-in button never reaches the page.
+ */
+function renderStudentTypeStep() {
+  if (!features.studentSignIn) return '';
+  return `  <!-- Step 1 — current student or new student -->
+  <section class="bvc-step" data-step="student-type" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Have you studied at Bow Valley College before?</h2>
+    <p class="bvc-step__intro">Signing in fills in most of this form for you.</p>
+
+    <p class="bvc-notice" data-auth-notice hidden></p>
+
+    <div class="bvc-choice">
+      <button type="button" class="bvc-button" data-student-type="current">
+        I'm a current student — sign in
+      </button>
+      <button type="button" class="bvc-button bvc-button--secondary" data-student-type="new">
+        I'm a new student
+      </button>
+    </div>
+  </section>
+
+`;
+}
+
 /** Fields belonging to a step (defaults to the personal step). */
 const fieldsForStep = (stepId) => fields.filter((field) => (field.step || 'personal') === stepId);
 const inGroup = (list, group) => list.filter((field) => field.group === group);
@@ -179,24 +206,8 @@ function renderForm() {
 <div data-checkout>
 ${renderProgress()}
 
-  <!-- Step 1 — current student or new student -->
-  <section class="bvc-step" data-step="student-type" hidden>
-    <h2 class="bvc-step__heading" data-step-heading>Have you studied at Bow Valley College before?</h2>
-    <p class="bvc-step__intro">Signing in fills in most of this form for you.</p>
-
-    <p class="bvc-notice" data-auth-notice hidden></p>
-
-    <div class="bvc-choice">
-      <button type="button" class="bvc-button" data-student-type="current">
-        I'm a current student — sign in
-      </button>
-      <button type="button" class="bvc-button bvc-button--secondary" data-student-type="new">
-        I'm a new student
-      </button>
-    </div>
-  </section>
-
-  <!-- Step 2 — Personal Information -->
+${renderStudentTypeStep()}
+  <!-- Personal Information -->
   <section class="bvc-step" data-step="personal" hidden>
     <h2 class="bvc-step__heading" data-step-heading>Personal Information</h2>
     <p class="bvc-step__intro">Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>

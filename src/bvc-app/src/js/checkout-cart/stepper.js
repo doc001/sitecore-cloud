@@ -82,6 +82,13 @@ export function createStepper(root, { steps, validateStep, onEnterStep }) {
       section.hidden = position !== index;
     });
 
+    // The first step has nowhere to go back to, so its Back button is hidden
+    // rather than left as a dead control in the tab order. Driven by position,
+    // not by step id, so it stays right when steps are added or removed
+    // (e.g. features.studentSignIn putting the Start step back in front).
+    const back = currentSection()?.querySelector('[data-back]');
+    if (back) back.hidden = index === 0;
+
     announce(0);
     updateProgress();
     onEnterStep?.(currentId());

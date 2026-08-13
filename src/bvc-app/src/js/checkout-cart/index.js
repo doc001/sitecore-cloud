@@ -11,7 +11,7 @@
  * live alongside this file.
  */
 
-import { config, fields as fieldDefinitions, steps } from './content.js';
+import { config, features, fields as fieldDefinitions, steps } from './content.js';
 import { createField } from './field.js';
 import { createConsent } from './consent.js';
 import { createStepper } from './stepper.js';
@@ -303,7 +303,9 @@ function start() {
   });
 
   // If the user signed in earlier in the cart flow, prefill without a click.
-  studentAuth.restoreSession();
+  // Skipped while studentSignIn is off, so MSAL is never loaded and a session
+  // left over from elsewhere cannot silently prefill an untested path.
+  if (features.studentSignIn) studentAuth.restoreSession();
 
   // --- address autocomplete (requirement: Google Maps integration) -------
   //
