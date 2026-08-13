@@ -35,7 +35,9 @@
       "Bash(grep -o \"feeApplicantId[^,]\\\\{0,40\\\\}\" src/bvc-app/public/js/os-course.js)",
       "Bash(grep -o \"feeApplicantId[^,]\\\\{0,40\\\\}\" src/bvc-app/public/js/ee-course.js)",
       "Bash(grep -o '\\\\.description||\"\"[^;]\\\\{0,50\\\\}' src/bvc-app/public/js/os-course.js)",
-      "Bash(grep -o 'programOfferingId[^;]\\\\{0,40\\\\}' src/bvc-app/public/js/os-course.js)"
+      "Bash(grep -o 'programOfferingId[^;]\\\\{0,40\\\\}' src/bvc-app/public/js/os-course.js)",
+      "Bash(grep -vE '\\\\.json$')",
+      "Bash(grep -v '^$')"
     ]
   },
   "enableAllProjectMcpServers": true,
