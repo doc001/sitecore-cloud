@@ -1,5 +1,8 @@
-﻿# Environment files
+﻿# Environment files. `.env` alone does NOT match `.env.local` / `.env.<name>`,
+# which is how a live credential file ended up tracked before — hence the glob.
 .env
+.env.*
+!.env.template
 
 # may contain OAuth secrets, do not commit
 .sitecore/user.json
@@ -95,3 +98,17 @@ logs/
 # Pipeline state carried between runs (fee-guard baseline). Machine-local:
 # it records what THIS machine last deployed, so it must not be shared.
 .pipeline-state/
+
+# Ad-hoc PowerShell test/scratch scripts. These routinely hold live client
+# secrets and bearer tokens, so nothing matching *.ps1 is committable by default.
+*.ps1
+
+# ...except the Sitecore Docker tooling the repo genuinely needs. A negation
+# cannot resurrect a file inside an ignored *directory*, but these are plain
+# file matches, so the re-includes work.
+!up.ps1
+!down.ps1
+!init.ps1
+!upFunctions.ps1
+!docker/clean.ps1
+!docker/build/cm/templates/import-templates.ps1
