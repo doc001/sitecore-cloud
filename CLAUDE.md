@@ -104,6 +104,7 @@ npm run generateMap             # Generate SIS data mapping → src/data/sis-dat
 npm run generateCourseData      # Fetch Ext Ed courses from Sitecore XMC → src/data/courses/*.json
 npm run generateOpenStudiesData # Fetch Open Studies from Sitecore XMC → src/data/oScourses/*.json
 npm run breadcrumbs:all         # Regenerate navigation breadcrumbs
+npm run generateProgramRequirements  # Program requirements keyed by CMS program code → src/data/static/program-requirements-by-code/*.json + program-requirements-index.json
 
 # Run the full pipeline (data + copy) in one command:
 npm run bvcapp-scripts
@@ -172,7 +173,17 @@ src/webflow/
   open-studies-course.html           # OS course detail — description, credits, accordion offerings, add-to-cart
   extended-education-listing.html    # EE program page — searchable flat table
   extended-education-course.html     # EE course detail — same layout as OS, reads from /data/courses/
+  program-requirements.html          # NOT an embed — the two loader tags for the hosted
+                                     # program-requirements asset pair (see below)
 ```
+
+**Program requirements are a hosted asset pair, not an embed.** `src/js/program-requirements/index.js`
+and `src/css/program-requirements.css` build (via `npm run js:build`) to `/js/program-requirements.js`
+and `/css/program-requirements.css`, loaded once from the program template head. The program is
+identified by its CMS `code` (`data-program-code` on `#Courses`, `<meta name="bvc-program-code">`, or
+an exact slug match in `program-requirements-index.json`) — never by guessing suffixes on the slug,
+which used to serve the ECED diploma dataset on the ECE certificate page. The script's JSON origin
+defaults to the origin it was itself served from, so the tags survive a move to a single-origin deploy.
 
 Key conventions:
 - **Course detail embeds target `#courseComponent`** — the existing Webflow div on course pages.

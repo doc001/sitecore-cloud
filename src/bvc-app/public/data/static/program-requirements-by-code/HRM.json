@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "code": "HRM",
+    "slug": "human-resources",
+    "name": "Human Resources",
+    "programType": "Certificate",
+    "credential": "certificate",
+    "sourceFile": "HRM_-_Human_Resources__Certificate_.json",
+    "generatedAt": "2026-08-14T22:29:06.364Z"
+  },
+  "sectionLabel": "Program Completion Requirements",
+  "groupings": [
+    {
+      "termLabel": "Term 1",
+      "totalCredits": 15,
+      "rules": [
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "HRES2101",
+              "title": "Change Management",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2101_Change Management_(Fall 2020_Current).pdf"
+            },
+            {
+              "code": "HRES2201",
+              "title": "Introduction to Human Resources",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2201_Introduction to Human Resources_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "HRES2301",
+              "title": "Employment Law",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2301_Employment Law_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "HRES2303",
+              "title": "Occupational Health and Safety",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2303_Occupational Health and Safety_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "HRES1101",
+              "title": "Organizational Behaviour",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES1101_Organizational Behaviour_(Winter 2026_Current).pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "termLabel": "Term 2",
+      "totalCredits": 15,
+      "rules": [
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "HRES2203",
+              "title": "Compensation & Benefits",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2203_Compensation & Benefits_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "HRES2302",
+              "title": "Labour Relations",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2302_Labour Relations_(Fall 2023_Current).pdf"
+            },
+            {
+              "code": "HRES2401",
+              "title": "Employee Learning and Development",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2401_Employee Learning and Development_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "HRES2204",
+              "title": "Talent Acquisition and Retention",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2204_Talent Acquisition and Retention_(Fall 2025_Current).pdf"
+            }
+          ]
+        },
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 3 credits from the following courses:",
+          "courses": [
+            {
+              "code": "HRES1998",
+              "title": "Human Resources Capstone Project",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES1998_Human Resources Capstone Project_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "HRES1999",
+              "title": "Human Resources Field Placement",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES1999_Human Resources Field Placement_(Fall 2025_Current).pdf"
+            }
+          ],
+          "minimumCredits": 3
+        }
+      ]
+    }
+  ],
+  "grandTotalCredits": 30
+}

@@ -6,6 +6,8 @@
 //   src/js/ee-course/index.js     -> public/js/ee-course.js       (self-contained IIFE)
 //   src/js/checkout-cart/index.js -> public/js/checkout-cart.js   (self-contained IIFE)
 //   src/css/checkout-cart.css     -> public/css/checkout-cart.css (minified)
+//   src/js/program-requirements/index.js -> public/js/program-requirements.js  (self-contained IIFE)
+//   src/css/program-requirements.css     -> public/css/program-requirements.css (minified)
 //
 //   node scripts/build-os-course.mjs            one-off minified build
 //   node scripts/build-os-course.mjs --watch    rebuild all on every save
@@ -89,6 +91,25 @@ const targets = [
     legalComments: 'none',
     banner: { css: `/* checkout-cart.css — ${GENERATED} */` },
   },
+  {
+    entryPoints: [path.join(root, 'src/js/program-requirements/index.js')],
+    outfile: path.join(root, 'public/js/program-requirements.js'),
+    bundle: true,
+    minify: isProd,
+    format: 'iife',
+    target: ['es2017'],
+    legalComments: 'none',
+    drop: isProd ? ['console', 'debugger'] : [],
+    banner: { js: `/* program-requirements.js — ${GENERATED} */` },
+  },
+  {
+    entryPoints: [path.join(root, 'src/css/program-requirements.css')],
+    outfile: path.join(root, 'public/css/program-requirements.css'),
+    bundle: true,
+    minify: isProd,
+    legalComments: 'none',
+    banner: { css: `/* program-requirements.css — ${GENERATED} */` },
+  },
 ];
 
 const watch = process.argv.includes('--watch');
@@ -100,5 +121,5 @@ if (watch) {
   console.log('👀 [webflow-assets] watching src/js + src/css → public/{js,css}/* (minified). Ctrl+C to stop.');
 } else {
   await Promise.all(targets.map((t) => esbuild.build(t)));
-  console.log(`✅ [webflow-assets] built os-course.js, os-course.css, checkout.js, ee-course.js, checkout-cart.js, checkout-cart.css (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
+  console.log(`✅ [webflow-assets] built os-course.js, os-course.css, checkout.js, ee-course.js, checkout-cart.js, checkout-cart.css, program-requirements.js, program-requirements.css (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
 }

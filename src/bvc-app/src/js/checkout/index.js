@@ -411,6 +411,68 @@
       return { amount: 0, tax: 0 };
     }
 
+    /**
+     * Fees are mandatory when the cart contains credit-bearing (Open Studies)
+     * courses, not when ?type=os — carts can mix OS and EE items, same reasoning
+     * as cartRequiresAsn(). Extended Ed is deliberately fee-optional: see
+     * src/js/ee-course/index.js, which gates its checkout button on cart
+     * contents alone and fails silently when the fee API is unreachable.
+     */
+    cartRequiresFees(items) {
+      const list = Array.isArray(items) ? items : [];
+      return list.some((item) => parseFloat(item && item.credits) > 0);
+    }
+
+    /**
+     * Whether feeSession holds fees calculated for THIS cart.
+     *
+     * os-course.js only enables its checkout button once fees are in the session
+     * (renderCart, `feesLoaded`), but that gate lives in the cart drawer — a
+     * student who reaches this page by bookmark, history, or a back/forward step
+     * after a fee failure arrives with cartItems and no feeSession, and the
+     * payment link would be created for tuition only. This is the same check,
+     * repeated where the money is committed.
+     *
+     * courseIds is written by calculateFees() in os-course.js / ee-course.js as
+     * the comma-joined SKU list the fees were calculated for; comparing it to the
+     * cart is what catches a *stale* session, not just a missing one.
+     */
+    getFeeSessionState(items) {
+      const cartSkus = (Array.isArray(items) ? items : [])
+        .map((item) => String((item && (item.id || item.sku)) || '').trim())
+        .filter(Boolean)
+        .sort();
+
+      let feeData = null;
+      try {
+        const feeSession = JSON.parse(sessionStorage.getItem('feeSession') || 'null');
+        feeData = feeSession && feeSession.feeData;
+      } catch (error) {
+        return { ok: false, reason: 'the stored fee session could not be read' };
+      }
+
+      if (!feeData || !Array.isArray(feeData.fees)) {
+        return { ok: false, reason: 'no fees have been calculated for this cart' };
+      }
+
+      const feeSkus = String(feeData.courseIds || '')
+        .split(',')
+        .map((sku) => sku.trim())
+        .filter(Boolean)
+        .sort();
+
+      if (feeSkus.length === 0) {
+        return { ok: false, reason: 'the stored fees are not linked to any course' };
+      }
+      if (feeSkus.join(',') !== cartSkus.join(',')) {
+        return {
+          ok: false,
+          reason: `the stored fees are for a different set of courses (fees: ${feeSkus.join(',') || 'none'}; cart: ${cartSkus.join(',') || 'none'})`,
+        };
+      }
+      return { ok: true, reason: '' };
+    }
+
     displayCartItems(items) {
       if (!this.shoppingCartElement) {
         console.error('Shopping cart element not found');
@@ -666,6 +728,25 @@
       } catch (error) {
         console.error('Error loading cart items:', error);
       }
+
+      // Fail fast, BEFORE registration/. submitPayment() repeats this check as
+      // the last line of defence, but by then the student is registered in SiS
+      // with no payment against it — an orphan record a human has to clean up.
+      if (this.cartRequiresFees(cartItems)) {
+        const feeState = this.getFeeSessionState(cartItems);
+        if (!feeState.ok) {
+          console.error('[Checkout] Blocking registration — fee check failed:', feeState.reason, {
+            cart: cartItems.map((item) => (item && (item.id || item.sku)) || ''),
+            feeSession: sessionStorage.getItem('feeSession'),
+          });
+          this.showErrorMessage(
+            `Additional fees have not been confirmed for your cart (${feeState.reason}). ` +
+              'Please return to your cart, remove and re-add a course so fees recalculate, then try again.'
+          );
+          return;
+        }
+      }
+
       // Get session fees if they exist
       const sessionFees = this.getSessionFees();
       // Extract course IDs
@@ -861,6 +942,22 @@
 
         if (!coursesInCartString || !registrationId) {
           throw new Error('Missing course ID(s) or registration ID.');
+        }
+
+        // Refuse to create a payment link for a credit cart whose fees are
+        // missing or stale — totalAmount above would silently bill tuition only.
+        if (this.cartRequiresFees(cartItems)) {
+          const feeState = this.getFeeSessionState(cartItems);
+          if (!feeState.ok) {
+            console.error('[Checkout] Blocking payment — fee check failed:', feeState.reason, {
+              cart: courseIds,
+              feeSession: sessionStorage.getItem('feeSession'),
+            });
+            throw new Error(
+              `Additional fees have not been confirmed for your cart (${feeState.reason}). ` +
+                'Please return to your cart, remove and re-add a course so fees recalculate, then try again.'
+            );
+          }
         }
 
         // Construct final URL

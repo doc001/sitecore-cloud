@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "code": "PNRN-LPN",
+    "slug": "perioperative-nursing-for-licensed-practical-nurses-and-registered-nurses",
+    "name": "Perioperative Nursing for Licensed Practical Nurses and Registered Nurses",
+    "programType": "Post-Diploma Certificate",
+    "credential": null,
+    "sourceFile": "PON_-_Perioperative_Nursing.json",
+    "generatedAt": "2026-08-14T22:29:06.364Z"
+  },
+  "sectionLabel": "Program Completion Requirements",
+  "groupings": [
+    {
+      "termLabel": "Term 1",
+      "totalCredits": 18,
+      "rules": [
+        {
+          "ruleType": "minimumGrade",
+          "description": "Earn a minimum grade of C in each of the following courses:",
+          "courses": [
+            {
+              "code": "NURS3301",
+              "title": "Introduction to Perioperative Nursing Concepts",
+              "credits": 2,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NURS3301_Introduction to Perioperative Nursing Concepts_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "NURS3302",
+              "title": "Perioperative Pharmacology and Anesthesia",
+              "credits": 2,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NURS3302_Perioperative Pharmacology and Anesthesia_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "NURS3303",
+              "title": "Perioperative Nursing Theory",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NURS3303_Perioperative Nursing Theory_(Fall 2025_Current).pdf"
+            }
+          ],
+          "minimumGrade": "C"
+        },
+        {
+          "ruleType": "minimumGrade",
+          "description": "Earn a minimum grade of B+ in each of the following courses:",
+          "courses": [
+            {
+              "code": "NURS3304",
+              "title": "Perioperative Nursing Skills Lab",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NURS3304_Perioperative Nursing Skills Lab_(Fall 2025_Current).pdf"
+            }
+          ],
+          "minimumGrade": "B+"
+        },
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "NURS3999",
+              "title": "Perioperative Nursing Preceptorship",
+              "credits": 6,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/NURS3999_Perioperative Nursing Preceptorship_(Fall 2025_Current).pdf"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "grandTotalCredits": 18
+}

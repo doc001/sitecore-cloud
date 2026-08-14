@@ -1,0 +1,989 @@
+{
+  "meta": {
+    "code": "GASD",
+    "slug": "general-arts-and-sciences-diploma",
+    "name": "General Arts and Sciences Diploma",
+    "programType": "Diploma",
+    "credential": "diploma",
+    "sourceFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
+    "generatedAt": "2026-08-14T22:29:06.364Z"
+  },
+  "sectionLabel": "Program Completion Requirements",
+  "groupings": [
+    {
+      "termLabel": "Term 1",
+      "totalCredits": 15,
+      "rules": [
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 3 credits from the following courses:",
+          "courses": [
+            {
+              "code": "ENGL1201",
+              "title": "English Composition",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1201_English Composition_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "ENGL1302",
+              "title": "Literature and Society",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1302_Literature and Society_(Fall 2025_Current).pdf"
+            }
+          ],
+          "minimumCredits": 3
+        },
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "INDG1101",
+              "title": "Introduction to Indigenous Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/INDG1101_Introduction to Indigenous Studies_(Fall 2024_Current).pdf"
+            }
+          ]
+        },
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 3 credits from the following courses:",
+          "courses": [
+            {
+              "code": "BIOL1401",
+              "title": "The Organization and Diversity of Life",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1401_The Organization and Diversity of Life_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "BIOL1402",
+              "title": "Fundamentals of Bioenergetics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1402_Fundamentals of Bioenergetics_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "BIOL1403",
+              "title": "DNA, Inheritance, and Evolution",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1403_DNA, Inheritance, and Evolution_(Winter 2025_Current).pdf"
+            },
+            {
+              "code": "CHEM1901",
+              "title": "General Chemistry: Structure and Bonding",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1901_General Chemistry Structure and Bonding_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "CHEM1902",
+              "title": "General Chemistry: Change and Equilibrium",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1902_General Chemistry Change and Equilibrium _(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "MATH1600",
+              "title": "Introduction to Statistics I",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1600_Introduction to Statistics I_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "MATH1601",
+              "title": "Introduction to Statistics II",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1601_Introduction to Statistics II_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "MATH1902",
+              "title": "Introductory Calculus",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1902_Introductory Calculus_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MATH1903",
+              "title": "Introductory Calculus II",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1903_Introductory Calculus II_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MATH1904",
+              "title": "Linear Methods I",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1904_Linear Methods I_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PHYS1900",
+              "title": "Mechanics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS1900_Mechanics_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "PHYS1901",
+              "title": "Modern Physics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS1901_Modern Physics_(Fall 2025_Current).pdf"
+            }
+          ],
+          "minimumCredits": 3
+        },
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 6 credits from the following courses:",
+          "courses": [
+            {
+              "code": "CNST1100",
+              "title": "Introduction to Canadian Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CNST1100_Introduction to Canadian Studies_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "ECON1100",
+              "title": "Principles of Microeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ECON1200",
+              "title": "Principles of Macroeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ENGL1201",
+              "title": "English Composition",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1201_English Composition_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "ENGL1302",
+              "title": "Literature and Society",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1302_Literature and Society_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "ENGL2301",
+              "title": "Children's Literature",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2301_Children's Literature_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "FIPR2102",
+              "title": "Topics in Film Genre",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FIPR2102_Topics in Film Genre_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PHIL1201",
+              "title": "Ethics",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHIL1201_Ethics_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC1101",
+              "title": "Introduction to Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1101_Introduction to Psychology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "PSYC2101",
+              "title": "Personality",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2102",
+              "title": "Social Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2102_Social Psychology _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2301",
+              "title": "Adolescence",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2301_Adolescence_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2401",
+              "title": "Psychopathology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "SOCI1101",
+              "title": "Introduction to Sociology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1101_Introduction to Sociology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1201",
+              "title": "Sociology of the Family",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1201_Sociology of the Family_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1301",
+              "title": "Sociology of Aging",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1301_Sociology of Aging_(Spring 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI2301",
+              "title": "Sociology of Health and Illness",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2301_Sociology of Health and Illness_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOCI2302",
+              "title": "Sociology of Death and Dying",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOWR1101",
+              "title": "Introduction to Social Work",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOWR1101_Introduction to Social Work_(Spring 2025_Current).pdf"
+            },
+            {
+              "code": "WGST2101",
+              "title": "Introduction to Women and Gender Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WGST2101_Introduction to Women and Gender Studies_(Fall 2024_Current).pdf"
+            }
+          ],
+          "minimumCredits": 6
+        }
+      ]
+    },
+    {
+      "termLabel": "Term 2",
+      "totalCredits": 15,
+      "rules": [
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 6 credits from the following courses:",
+          "courses": [
+            {
+              "code": "CNST1100",
+              "title": "Introduction to Canadian Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CNST1100_Introduction to Canadian Studies_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "ECON1100",
+              "title": "Principles of Microeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ECON1200",
+              "title": "Principles of Macroeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ENGL1201",
+              "title": "English Composition",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1201_English Composition_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "ENGL1302",
+              "title": "Literature and Society",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1302_Literature and Society_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "ENGL2301",
+              "title": "Children's Literature",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2301_Children's Literature_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "FIPR2102",
+              "title": "Topics in Film Genre",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FIPR2102_Topics in Film Genre_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PHIL1201",
+              "title": "Ethics",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHIL1201_Ethics_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC1101",
+              "title": "Introduction to Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1101_Introduction to Psychology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "PSYC2101",
+              "title": "Personality",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2102",
+              "title": "Social Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2102_Social Psychology _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2301",
+              "title": "Adolescence",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2301_Adolescence_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2401",
+              "title": "Psychopathology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "SOCI1101",
+              "title": "Introduction to Sociology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1101_Introduction to Sociology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1201",
+              "title": "Sociology of the Family",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1201_Sociology of the Family_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1301",
+              "title": "Sociology of Aging",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1301_Sociology of Aging_(Spring 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI2301",
+              "title": "Sociology of Health and Illness",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2301_Sociology of Health and Illness_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOCI2302",
+              "title": "Sociology of Death and Dying",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "WGST2101",
+              "title": "Introduction to Women and Gender Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WGST2101_Introduction to Women and Gender Studies_(Fall 2024_Current).pdf"
+            }
+          ],
+          "minimumCredits": 6
+        },
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 9 credits from the following courses:",
+          "courses": [
+            {
+              "code": "ANAT1101",
+              "title": "Anatomy and Physiology",
+              "credits": 6,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ANAT1101_Anatomy And Physiology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "BIOL1401",
+              "title": "The Organization and Diversity of Life",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1401_The Organization and Diversity of Life_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "BIOL1402",
+              "title": "Fundamentals of Bioenergetics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1402_Fundamentals of Bioenergetics_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "BIOL1403",
+              "title": "DNA, Inheritance, and Evolution",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1403_DNA, Inheritance, and Evolution_(Winter 2025_Current).pdf"
+            },
+            {
+              "code": "CHEM1901",
+              "title": "General Chemistry: Structure and Bonding",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1901_General Chemistry Structure and Bonding_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "CHEM1902",
+              "title": "General Chemistry: Change and Equilibrium",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1902_General Chemistry Change and Equilibrium _(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "CNST1100",
+              "title": "Introduction to Canadian Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CNST1100_Introduction to Canadian Studies_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "ECON1100",
+              "title": "Principles of Microeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ECON1200",
+              "title": "Principles of Macroeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ENGL1201",
+              "title": "English Composition",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1201_English Composition_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "ENGL1302",
+              "title": "Literature and Society",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1302_Literature and Society_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "FIPR2102",
+              "title": "Topics in Film Genre",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FIPR2102_Topics in Film Genre_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "HRES1101",
+              "title": "Organizational Behaviour",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES1101_Organizational Behaviour_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "MATH1600",
+              "title": "Introduction to Statistics I",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1600_Introduction to Statistics I_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "MATH1601",
+              "title": "Introduction to Statistics II",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1601_Introduction to Statistics II_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "MATH1902",
+              "title": "Introductory Calculus",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1902_Introductory Calculus_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MATH1903",
+              "title": "Introductory Calculus II",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1903_Introductory Calculus II_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MATH1904",
+              "title": "Linear Methods I",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1904_Linear Methods I_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MKTG1101",
+              "title": "Introduction to Marketing",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MKTG1101_Introduction to Marketing_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PHIL1201",
+              "title": "Ethics",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHIL1201_Ethics_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PHYS1900",
+              "title": "Mechanics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS1900_Mechanics_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "PHYS1901",
+              "title": "Modern Physics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS1901_Modern Physics_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "POSC1201",
+              "title": "Canadian Politics: Institutions and Issues",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/POSC1201_Canadian Politics Institutions and Issues_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "PSYC1101",
+              "title": "Introduction to Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1101_Introduction to Psychology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "PSYC1201",
+              "title": "Human Growth And Development Across The Life Span",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1201_Human Growth And Development Across The Life Span_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "PSYC2101",
+              "title": "Personality",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2102",
+              "title": "Social Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2102_Social Psychology _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2301",
+              "title": "Adolescence",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2301_Adolescence_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2401",
+              "title": "Psychopathology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "SOCI1101",
+              "title": "Introduction to Sociology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1101_Introduction to Sociology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1201",
+              "title": "Sociology of the Family",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1201_Sociology of the Family_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1301",
+              "title": "Sociology of Aging",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1301_Sociology of Aging_(Spring 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI2301",
+              "title": "Sociology of Health and Illness",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2301_Sociology of Health and Illness_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOCI2302",
+              "title": "Sociology of Death and Dying",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOWR1101",
+              "title": "Introduction to Social Work",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOWR1101_Introduction to Social Work_(Spring 2025_Current).pdf"
+            },
+            {
+              "code": "WGST2101",
+              "title": "Introduction to Women and Gender Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WGST2101_Introduction to Women and Gender Studies_(Fall 2024_Current).pdf"
+            }
+          ],
+          "minimumCredits": 9
+        }
+      ]
+    },
+    {
+      "termLabel": "Term 3",
+      "totalCredits": 15,
+      "rules": [
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 12 credits from the following courses:",
+          "courses": [
+            {
+              "code": "ANAT1101",
+              "title": "Anatomy and Physiology",
+              "credits": 6,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ANAT1101_Anatomy And Physiology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "BIOL1401",
+              "title": "The Organization and Diversity of Life",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1401_The Organization and Diversity of Life_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "BIOL1402",
+              "title": "Fundamentals of Bioenergetics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1402_Fundamentals of Bioenergetics_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "BIOL1403",
+              "title": "DNA, Inheritance, and Evolution",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1403_DNA, Inheritance, and Evolution_(Winter 2025_Current).pdf"
+            },
+            {
+              "code": "CHEM1901",
+              "title": "General Chemistry: Structure and Bonding",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1901_General Chemistry Structure and Bonding_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "CHEM1902",
+              "title": "General Chemistry: Change and Equilibrium",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1902_General Chemistry Change and Equilibrium _(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "CNST1100",
+              "title": "Introduction to Canadian Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CNST1100_Introduction to Canadian Studies_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "ECON1100",
+              "title": "Principles of Microeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ECON1200",
+              "title": "Principles of Macroeconomics",
+              "credits": 3,
+              "url": ""
+            },
+            {
+              "code": "ENGL1201",
+              "title": "English Composition",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1201_English Composition_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "ENGL1302",
+              "title": "Literature and Society",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1302_Literature and Society_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "FIPR2102",
+              "title": "Topics in Film Genre",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FIPR2102_Topics in Film Genre_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "HRES1101",
+              "title": "Organizational Behaviour",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES1101_Organizational Behaviour_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "MATH1600",
+              "title": "Introduction to Statistics I",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1600_Introduction to Statistics I_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "MATH1601",
+              "title": "Introduction to Statistics II",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1601_Introduction to Statistics II_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "MATH1902",
+              "title": "Introductory Calculus",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1902_Introductory Calculus_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MATH1903",
+              "title": "Introductory Calculus II",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1903_Introductory Calculus II_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MATH1904",
+              "title": "Linear Methods I",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1904_Linear Methods I_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "MKTG1101",
+              "title": "Introduction to Marketing",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MKTG1101_Introduction to Marketing_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PHIL1201",
+              "title": "Ethics",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHIL1201_Ethics_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PHYS1900",
+              "title": "Mechanics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS1900_Mechanics_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "PHYS1901",
+              "title": "Modern Physics",
+              "credits": 4,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS1901_Modern Physics_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "POSC1201",
+              "title": "Canadian Politics: Institutions and Issues",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/POSC1201_Canadian Politics Institutions and Issues_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "PSYC1101",
+              "title": "Introduction to Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1101_Introduction to Psychology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "PSYC1201",
+              "title": "Human Growth And Development Across The Life Span",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1201_Human Growth And Development Across The Life Span_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "PSYC2101",
+              "title": "Personality",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2102",
+              "title": "Social Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2102_Social Psychology _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2301",
+              "title": "Adolescence",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2301_Adolescence_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2401",
+              "title": "Psychopathology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "SOCI1101",
+              "title": "Introduction to Sociology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1101_Introduction to Sociology_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1201",
+              "title": "Sociology of the Family",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1201_Sociology of the Family_(Winter 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI1301",
+              "title": "Sociology of Aging",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1301_Sociology of Aging_(Spring 2026_Current).pdf"
+            },
+            {
+              "code": "SOCI2301",
+              "title": "Sociology of Health and Illness",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2301_Sociology of Health and Illness_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOCI2302",
+              "title": "Sociology of Death and Dying",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOWR1101",
+              "title": "Introduction to Social Work",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOWR1101_Introduction to Social Work_(Spring 2025_Current).pdf"
+            },
+            {
+              "code": "WGST2101",
+              "title": "Introduction to Women and Gender Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WGST2101_Introduction to Women and Gender Studies_(Fall 2024_Current).pdf"
+            }
+          ],
+          "minimumCredits": 12
+        },
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 3 credits from the following courses:",
+          "courses": [
+            {
+              "code": "ENGL2301",
+              "title": "Children's Literature",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2301_Children's Literature_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "ENGL2302",
+              "title": "Crime Narrative",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2302_Crime Narrative_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "FIPR2102",
+              "title": "Topics in Film Genre",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FIPR2102_Topics in Film Genre_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2101",
+              "title": "Personality",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2102",
+              "title": "Social Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2102_Social Psychology _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2301",
+              "title": "Adolescence",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2301_Adolescence_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2401",
+              "title": "Psychopathology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "SOCI2301",
+              "title": "Sociology of Health and Illness",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2301_Sociology of Health and Illness_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOCI2302",
+              "title": "Sociology of Death and Dying",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "WGST2101",
+              "title": "Introduction to Women and Gender Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WGST2101_Introduction to Women and Gender Studies_(Fall 2024_Current).pdf"
+            }
+          ],
+          "minimumCredits": 3
+        }
+      ]
+    },
+    {
+      "termLabel": "Term 4",
+      "totalCredits": 15,
+      "rules": [
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "GNST1999",
+              "title": "Capstone Project for General Arts and Sciences",
+              "credits": 3,
+              "url": ""
+            }
+          ]
+        },
+        {
+          "ruleType": "minimumCreditsFromList",
+          "description": "Earn at least 12 credits from the following courses:",
+          "courses": [
+            {
+              "code": "ENGL2301",
+              "title": "Children's Literature",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2301_Children's Literature_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "ENGL2302",
+              "title": "Crime Narrative",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2302_Crime Narrative_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "FIPR2102",
+              "title": "Topics in Film Genre",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FIPR2102_Topics in Film Genre_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2101",
+              "title": "Personality",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2102",
+              "title": "Social Psychology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2102_Social Psychology _(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2301",
+              "title": "Adolescence",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2301_Adolescence_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "PSYC2401",
+              "title": "Psychopathology",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_(Fall 2025_Current).pdf"
+            },
+            {
+              "code": "SOCI2301",
+              "title": "Sociology of Health and Illness",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2301_Sociology of Health and Illness_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "SOCI2302",
+              "title": "Sociology of Death and Dying",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
+            },
+            {
+              "code": "WGST2101",
+              "title": "Introduction to Women and Gender Studies",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WGST2101_Introduction to Women and Gender Studies_(Fall 2024_Current).pdf"
+            }
+          ],
+          "minimumCredits": 12
+        }
+      ]
+    }
+  ],
+  "grandTotalCredits": 60
+}
