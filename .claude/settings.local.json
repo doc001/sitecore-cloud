@@ -31,7 +31,14 @@
       "PowerShell(pwsh -ExecutionPolicy Bypass -File ./token-test.ps1)",
       "WebFetch(domain:bvc-app-uat.vercel.app)",
       "Bash(npm -v)",
-      "Bash(tee \"C:/Users/jcueto/AppData/Local/Temp/claude/C--www-sitecore-cloud/2a7b978c-668c-406b-8cd1-9dc09fe2c134/scratchpad/deploy.log\")"
+      "Bash(tee \"C:/Users/jcueto/AppData/Local/Temp/claude/C--www-sitecore-cloud/2a7b978c-668c-406b-8cd1-9dc09fe2c134/scratchpad/deploy.log\")",
+      "PowerShell(pm2 jlist *)",
+      "PowerShell(pm2 status *)",
+      "Bash(sed -i \"s/import { execFileSync } from 'child_process';/import { execFile } from 'child_process';\\\\nimport { promisify } from 'util';\\\\nconst execFileAsync = promisify\\(execFile\\);/\" test-cooldown.mjs)",
+      "Bash(sed -i \"s/^const run = \\(\\) =>$/const run = async \\(\\) =>/\" test-cooldown.mjs)",
+      "Bash(sed -i \"s/  execFileSync\\('node', \\\\['sitecore-fee-watch.mjs'\\\\], {/  \\(await execFileAsync\\('node', ['sitecore-fee-watch.mjs'], {/\" test-cooldown.mjs)",
+      "Bash(sed -i \"s/^    env: { ...process.env, TEAMS_WEBHOOK_URL: fake, FEE_WATCH_ALERT_COOLDOWN_H: '6' },$/    env: { ...process.env, TEAMS_WEBHOOK_URL: fake, FEE_WATCH_ALERT_COOLDOWN_H: '6' },/\" test-cooldown.mjs)",
+      "Bash(sed -i \"s/^  }\\);$/  }\\)\\).stdout;/\" test-cooldown.mjs)"
     ]
   },
   "enableAllProjectMcpServers": true,

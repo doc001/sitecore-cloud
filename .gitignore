@@ -91,3 +91,7 @@ node_modules
 
 # PM2 pipeline logs
 logs/
+
+# Pipeline state carried between runs (fee-guard baseline). Machine-local:
+# it records what THIS machine last deployed, so it must not be shared.
+.pipeline-state/

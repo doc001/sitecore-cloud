@@ -64,7 +64,7 @@ node pipeline.mjs
 # PM2 setup (run once to activate the hourly schedule):
 # Note: pm2 startup does NOT work on Windows — use pm2-windows-startup instead
 npm install -g pm2
-pm2 start ecosystem.config.js       # starts cron at :50 every hour
+pm2 start ecosystem.config.js       # starts cron at :15 every hour
 pm2 save                            # save process list to ~/.pm2/dump.pm2
 npm install -g pm2-windows-startup  # Windows auto-start on login
 pm2-startup install
@@ -73,19 +73,125 @@ pm2-startup install
 pm2 status                      # check if pipeline is running/scheduled
 pm2 logs bvc-hourly-deploy      # live log tail
 pm2 restart bvc-hourly-deploy   # force an immediate run now
-pm2 stop bvc-hourly-deploy      # pause the schedule
+pm2 delete bvc-hourly-deploy && pm2 save --force   # disable the schedule
 ```
+
+**`pm2 stop` does NOT disable the cron.** `cron_restart` fires on stopped apps — that
+is the whole point of pairing it with `autorestart: false`. To actually halt the
+schedule use `pm2 delete`, then `pm2 save --force` so a reboot cannot resurrect it
+from `~/.pm2/dump.pm2`.
+
+**The cron must use six fields** (`'0 15 * * * *'`, leading `0` = second). A five-field
+`'15 * * * *'` matches on *every second* of that minute, and PM2 fires ~1 s early: it
+started a run at :49:59, matched again at :50:00, SIGINT-killed the in-flight run and
+started a second one — every hour.
+
+**Schedule rationale**: the upstream SIS → Sitecore sync starts on the hour and
+finishes ~:06, so :15 reads freshly-synced data.
 
 **Pipeline steps** (total ~5 min):
 1. `npm run build:bvcapp -- --cache=local:` — data scripts + breadcrumbs + Next.js build → `out/`
    (no cache read **or** write — a plain `--force` still writes ~200 MB/run to `.turbo/cache`,
    which Turbo never prunes; that once grew to 35 GB and filled the disk)
-2. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
-3. `vercel pull` — refreshes `.vercel/project.json` project link
-4. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild
-5. `cleanup-data.mjs` — removes intermediate JSON files
+2. **Fee guard** (`fee-guard.mjs`) — compares freshly-extracted section fees against the
+   last set that reached the site; blocks the deploy if too much of the catalogue
+   repriced at once (see below)
+3. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
+4. `vercel pull` — refreshes `.vercel/project.json` project link
+5. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild
+6. `cleanup-data.mjs` — removes intermediate JSON files (only touches `src/data/`;
+   `public/data/` survives, which is what the fee guard reads)
 
-On build or deploy failure a **Windows toast notification** fires. Logs are written to `logs/` (git-ignored).
+Logs are written to `logs/` (git-ignored).
+
+### Alerting (`notify.mjs`)
+
+Two channels, covering different failures. **Neither may ever fail a deploy** — every
+function swallows its own errors and returns a boolean, because a monitoring outage
+must not become an outage.
+
+| Channel | Env var | Answers |
+|---|---|---|
+| Windows toast | — | (always on; only visible to whoever is logged into that machine) |
+| Teams | `TEAMS_WEBHOOK_URL` | *what* broke — fires only when the pipeline runs |
+| Heartbeat | `HEARTBEAT_URL` | *that* it ran — the monitor alerts when a ping fails to arrive |
+
+Fires on: Build FAILED, Package FAILED, Deploy FAILED, and Deploy BLOCKED (fee guard).
+
+**A fee-guard block pings the heartbeat as a SUCCESS, not a failure.** Blocked is not
+broken — the run executed and correctly declined to publish. While the upstream sync
+flips, a block is the expected outcome of roughly every second run, so sending `/fail`
+would leave the dead-man's switch red half the time; a permanently-red monitor is one
+nobody reads, and it would be red for the wrong reason exactly when a real outage hit.
+Teams still carries the block detail. `notify()`'s 4th argument is the heartbeat suffix
+(`'/fail'` default, `''` for "completed as designed").
+
+**The heartbeat is the one that catches silence.** If the machine sleeps, the PM2 daemon
+dies, or the cron is deleted, nothing else produces a single alert — and that is
+indistinguishable from a healthy site. The pipeline pings `<url>/start` when a run
+begins, `<url>` on success, `<url>/fail` on any failure. A *local* watchdog cannot cover
+this, since it dies with the machine it is watching.
+
+**Teams payload format**: Microsoft retired the O365 connector webhooks; their
+replacement is a Power Automate **Workflows** webhook, which rejects the old MessageCard
+shape and expects an Adaptive Card in a message envelope. `teamsPayload()` picks the
+format from the webhook host, so a still-working legacy `*.office.com` URL is handled
+too. Workflows answers `202` with an empty body; connectors answer `200 "1"`.
+
+> Historical note: 28 failure alerts fired between 2026-07 and 2026-08 — 23 build, 5
+> deploy — and **none reached anyone**, because `TEAMS_WEBHOOK_URL` was never set and the
+> toast went to an unattended machine at 01:54 AM. Setting these two env vars is what
+> makes the alerting real.
+
+### Fee guard
+
+The SIS → Sitecore sync has been observed emitting **two different datasets on alternating
+hourly runs** (2026-08-12/13): e.g. `ANAT1101-20` Domestic flipped 1020 → 1000 → 1020 every
+hour, catalogue-wide, with International amounts also swapping between sections. The pipeline
+is a faithful reader — no script in this repo writes to Sitecore — so it published whichever
+half of the flip it caught, and roughly every second deploy shipped wrong prices.
+
+A real price update touches a handful of courses; a sync fault touches nearly all of them.
+The guard blocks the deploy when **≥25% of comparable sections and ≥10 sections** change
+price in one run, and leaves the site on the previous data.
+
+- Baseline: `.pipeline-state/fee-baseline.json` (git-ignored, machine-local). Advanced
+  **only after a successful deploy**, so a blocked run keeps comparing against the last
+  dataset that actually reached the site.
+- Publish anyway (genuine catalogue-wide change): `node pipeline.mjs --skip-fee-guard`
+  or `SKIP_FEE_GUARD=1`.
+- Tune: `FEE_GUARD_THRESHOLD` (default `0.25`), `FEE_GUARD_MIN_CHANGED` (default `10`).
+- Exit code `2` = blocked by the guard (distinct from `1` = build/deploy failure).
+
+### Fee watcher (`sitecore-fee-watch.mjs`)
+
+Second PM2 app, `bvc-fee-watch`, cron `'0 */5 * * * *'`. Read-only GraphQL polls
+against Sitecore Edge — no build, no deploy, nothing written.
+
+Separate from the fee guard on purpose. The guard sees the catalogue once an hour,
+only while the pipeline runs, and reports a percentage; it answers *"should we deploy
+this?"*. The watcher answers *"when exactly did upstream change, and to what?"* — it
+keeps reporting when the hourly deploy is disabled, and pins the write to ~5 minutes
+instead of an hour, which is the precision the SIS team needs to match a flip against
+their own job logs.
+
+```bash
+node sitecore-fee-watch.mjs            # one poll, prints current state
+node sitecore-fee-watch.mjs --history  # every recorded flip, with __Updated stamps
+```
+
+- Probes a handful of sections across **both** trees (`Credit Courses` and `Courses`),
+  so a future fault can be identified as catalogue-wide or confined to one tree.
+- State: `.pipeline-state/fee-watch-last.json`; flip log: `fee-watch-history.jsonl`.
+- On a change it alerts through `notify.mjs` (Teams) with `from → to` and the
+  `__Updated` stamp — but **at most once per 6 h** (`FEE_WATCH_ALERT_COOLDOWN_H`).
+  The known fault flips twice an hour; alerting on each would be ~48 messages a day,
+  and an alert nobody reads is worse than no alert. The history file still records
+  **every** flip — that is the artefact, the Teams message is just the nudge.
+- **`__Updated` is the field that proves a write rather than a stale cache** — a cache
+  keeps serving an old timestamp. That single field is what identified this as an
+  upstream Sitecore write in the first place.
+- Always exits 0. Monitoring must never become an outage.
 
 ### bvc-app (active development)
 Run from `src/bvc-app/` or use `--filter`:
@@ -244,8 +350,14 @@ SITECORE_GRAPHQL_API_KEY=...
 SC_APIKEY=...
 SITECORE_USERNAME=...
 SITECORE_PASSWORD=...
-# Optional: Teams incoming webhook URL for pipeline failure alerts
+# Optional: Teams webhook for pipeline alerts. Create it as a Power Automate
+# "Workflows" webhook (the old O365 connectors are retired). notify.mjs picks the
+# payload format from the host, so a legacy *.office.com URL still works.
 TEAMS_WEBHOOK_URL=
+# Optional: dead-man's switch. healthchecks.io (or compatible) ping URL. The
+# pipeline pings <url>/start, then <url> on success or <url>/fail on failure —
+# so the monitor alerts when a run stops happening at all.
+HEARTBEAT_URL=
 ```
 
 **`src/nextjs-jamstack/` (uses root `.env` or `.env.local`)**

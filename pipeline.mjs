@@ -4,12 +4,21 @@ import { dirname, join } from 'path';
 import { mkdirSync, writeFileSync, cpSync, rmSync, existsSync } from 'fs';
 import notifier from 'node-notifier';
 import dotenv from 'dotenv';
+import { checkFeeGuard } from './fee-guard.mjs';
+import { sendTeams, pingHeartbeat } from './notify.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const BVC_APP = join(ROOT, 'src', 'bvc-app');
 const VERCEL = join(ROOT, 'node_modules', '.bin', process.platform === 'win32' ? 'vercel.cmd' : 'vercel');
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });
+
+// Fee guard — blocks the deploy when a suspiciously large share of course
+// sections change price in a single run (see fee-guard.mjs for the why).
+const FEE_BASELINE = join(ROOT, '.pipeline-state', 'fee-baseline.json');
+const SKIP_FEE_GUARD = process.argv.includes('--skip-fee-guard') || process.env.SKIP_FEE_GUARD === '1';
+const FEE_GUARD_THRESHOLD = Number(process.env.FEE_GUARD_THRESHOLD ?? 0.25);
+const FEE_GUARD_MIN_CHANGED = Number(process.env.FEE_GUARD_MIN_CHANGED ?? 10);
 
 // PROD deploys minify + strip console from the Webflow embed bundles
 // (os-course.js / ee-course.js / checkout.js). UAT/DEV deploys leave them
@@ -30,31 +39,22 @@ function run(cmd, cwd = ROOT) {
   execSync(cmd, { stdio: 'inherit', cwd, shell: true, windowsHide: true });
 }
 
-async function notifyTeams(title, message, isFailure = true) {
-  const webhookUrl = process.env.TEAMS_WEBHOOK_URL;
-  if (!webhookUrl) return;
-  try {
-    await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        '@type': 'MessageCard',
-        '@context': 'https://schema.org/extensions',
-        themeColor: isFailure ? 'FF0000' : '00C853',
-        summary: title,
-        title,
-        text: message,
-      }),
-    });
-  } catch (err) {
-    console.warn(`[${ts()}] Teams notification failed: ${err.message}`);
-  }
-}
+const warn = (msg) => console.warn(`[${ts()}] ${msg}`);
 
-async function notify(title, message, isFailure = true) {
+const heartbeat = (suffix = '') =>
+  pingHeartbeat({ baseUrl: process.env.HEARTBEAT_URL, suffix, log: warn });
+
+/**
+ * `heartbeatSignal` is the suffix sent to the monitor: '/fail' for a genuine
+ * breakage, '' for "this run completed as designed" (see the fee-guard branch).
+ */
+async function notify(title, message, isFailure = true, heartbeatSignal = '/fail') {
   console.error(`[${ts()}] ALERT: ${title} — ${message}`);
   notifier.notify({ title, message, sound: true });
-  await notifyTeams(title, message, isFailure);
+  await sendTeams({ url: process.env.TEAMS_WEBHOOK_URL, title, message, isFailure, log: warn });
+  // Tell the monitor too, so it alerts immediately instead of waiting for the
+  // next ping to go missing.
+  await heartbeat(heartbeatSignal);
 }
 
 async function runWithRetry(cmd, cwd = ROOT, maxAttempts = 3, retryDelayMs = 60_000) {
@@ -75,6 +75,7 @@ async function runWithRetry(cmd, cwd = ROOT, maxAttempts = 3, retryDelayMs = 60_
 
 async function main() {
   console.log(`\n[${ts()}] ===== BVC hourly pipeline started (${IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS'}) =====`);
+  await heartbeat('/start');
 
   // 0. Pre-build clean — wipe stale data so removed Sitecore sections don't persist across builds.
   //    Without this, a section deleted from Sitecore leaves behind its old JSON file and
@@ -95,9 +96,9 @@ async function main() {
   }
 
   // 1. Build — data scripts + breadcrumbs + next build → out/
-  //    Then package out/ into .vercel/output/ (Vercel Build Output API v3 static format).
-  //    This lets vercel deploy --prebuilt upload static files directly — no Vercel rebuild.
   //    Retries up to 3 times (60 s apart) to survive transient network/DNS blips.
+  //    Packaging happens separately in 1c, so the fee guard can reject a bad
+  //    dataset before we spend time copying it.
   //
   //    --cache=local: (empty permissions) = no cache read, no cache write. We used to
   //    pass --force, but that is an alias for --cache=local:w,remote:w — it skips the
@@ -108,7 +109,48 @@ async function main() {
   //    (source data changes every run), so disable both directions.
   try {
     await runWithRetry('npm run build:bvcapp -- --cache=local:', ROOT, 3, 60_000);
+    console.log(`\n[${ts()}] Build succeeded`);
+  } catch (err) {
+    await notify(
+      'BVC Build FAILED',
+      `Build failed after 3 attempts at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
+    );
+    process.exit(1);
+  }
 
+  // 1b. Fee guard — compare freshly-extracted fees against the last set we
+  //     deployed. The upstream SIS → Sitecore sync has been observed emitting
+  //     two different datasets on alternating hourly runs; without this check
+  //     the pipeline faithfully publishes whichever half it catches.
+  const guard = checkFeeGuard({
+    bvcAppDir: BVC_APP,
+    statePath: FEE_BASELINE,
+    threshold: FEE_GUARD_THRESHOLD,
+    minChanged: FEE_GUARD_MIN_CHANGED,
+    skip: SKIP_FEE_GUARD,
+    log: (msg) => console.log(`[${ts()}] ${msg}`),
+  });
+
+  if (!guard.ok) {
+    // Blocked is not broken. The run executed and correctly declined to publish,
+    // so the heartbeat records a SUCCESS ('' suffix) rather than a failure.
+    // While the upstream sync flips, a block is the expected outcome of roughly
+    // every second run — sending '/fail' would leave the dead-man's switch red
+    // half the time, and a permanently-red monitor is one nobody reads. Teams
+    // still carries the detail.
+    await notify(
+      'BVC Deploy BLOCKED — fee anomaly',
+      `${guard.reason}. Likely an upstream SIS→Sitecore sync fault, not a real price change. ` +
+        `Site left on the previous data. Verify in Sitecore, then re-run with --skip-fee-guard to publish anyway.`,
+      true,
+      ''
+    );
+    process.exit(2);
+  }
+
+  // 1c. Package out/ into .vercel/output/ (Vercel Build Output API v3 static
+  //     format) so `vercel deploy --prebuilt` uploads without rebuilding.
+  try {
     const outDir = join(BVC_APP, 'out');
     const vercelOutput = join(BVC_APP, '.vercel', 'output');
     if (existsSync(vercelOutput)) rmSync(vercelOutput, { recursive: true });
@@ -116,11 +158,11 @@ async function main() {
     writeFileSync(join(vercelOutput, 'config.json'), JSON.stringify({ version: 3 }));
     cpSync(outDir, join(vercelOutput, 'static'), { recursive: true });
 
-    console.log(`\n[${ts()}] Build + package succeeded`);
+    console.log(`\n[${ts()}] Package succeeded`);
   } catch (err) {
     await notify(
-      'BVC Build FAILED',
-      `Build failed after 3 attempts at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
+      'BVC Package FAILED',
+      `Packaging out/ failed at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
     );
     process.exit(1);
   }
@@ -130,6 +172,9 @@ async function main() {
     run(`"${VERCEL}" pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
     run(`"${VERCEL}" deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
     console.log(`\n[${ts()}] Deploy succeeded`);
+    // Advance the fee baseline only now — a blocked or failed run must leave
+    // it pointing at the last dataset that actually reached the site.
+    guard.commit();
   } catch (err) {
     await notify(
       'BVC Deploy FAILED',
@@ -144,6 +189,10 @@ async function main() {
   } catch (err) {
     console.warn(`[${ts()}] Cleanup warning (non-fatal):`, err.message);
   }
+
+  // 4. Tell the monitor we made it. Missing this ping is what raises the alarm
+  //    when the pipeline stops running altogether.
+  await heartbeat();
 
   console.log(`[${ts()}] ===== Pipeline complete =====\n`);
 }
