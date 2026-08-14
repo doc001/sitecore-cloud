@@ -26,6 +26,10 @@
   padding-top: 0.5rem;
   font-size: 0.8125rem;
   color: var(--bvc-muted);
+  list-style: none;
+}
+.bvc-progress__item::marker {
+  content: none;
 }
 .bvc-progress__item.is-current {
   border-top-color: var(--bvc-accent);
@@ -36,6 +40,9 @@
   border-top-color: var(--bvc-accent);
 }
 .bvc-step[hidden] {
+  display: none;
+}
+.bvc-actions [data-back][hidden] {
   display: none;
 }
 .bvc-step__heading {

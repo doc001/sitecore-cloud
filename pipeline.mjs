@@ -13,8 +13,15 @@ const VERCEL = join(ROOT, 'node_modules', '.bin', process.platform === 'win32' ?
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });
 
-// Fee guard — blocks the deploy when a suspiciously large share of course
-// sections change price in a single run (see fee-guard.mjs for the why).
+// Fee guard — reports when a suspiciously large share of course sections change
+// price in a single run (see fee-guard.mjs for the why).
+//
+// ADVISORY ONLY. It used to hold the deploy (exit 2) and leave the site on the
+// previous data. That traded one failure for a worse one: Sitecore publishes
+// hourly, so a held run drops that hour's *real* content changes too, not just
+// the suspect prices — and while the upstream sync flips, roughly every second
+// run was held, so the site silently fell hours behind. Detection and reporting
+// are unchanged; only the veto is gone.
 const FEE_BASELINE = join(ROOT, '.pipeline-state', 'fee-baseline.json');
 const SKIP_FEE_GUARD = process.argv.includes('--skip-fee-guard') || process.env.SKIP_FEE_GUARD === '1';
 const FEE_GUARD_THRESHOLD = Number(process.env.FEE_GUARD_THRESHOLD ?? 0.25);
@@ -52,8 +59,10 @@ async function notify(title, message, isFailure = true, heartbeatSignal = '/fail
   console.error(`[${ts()}] ALERT: ${title} — ${message}`);
   notifier.notify({ title, message, sound: true });
   await sendTeams({ url: process.env.TEAMS_WEBHOOK_URL, title, message, isFailure, log: warn });
-  // Tell the monitor too, so it alerts immediately instead of waiting for the
-  // next ping to go missing.
+  // `null` means "report this, but do not touch the monitor": the run is still
+  // going and its real outcome will ping at the end. Anything else pings now, so
+  // the monitor alerts immediately instead of waiting for a ping to go missing.
+  if (heartbeatSignal === null) return;
   await heartbeat(heartbeatSignal);
 }
 
@@ -132,20 +141,22 @@ async function main() {
   });
 
   if (!guard.ok) {
-    // Blocked is not broken. The run executed and correctly declined to publish,
-    // so the heartbeat records a SUCCESS ('' suffix) rather than a failure.
-    // While the upstream sync flips, a block is the expected outcome of roughly
-    // every second run — sending '/fail' would leave the dead-man's switch red
-    // half the time, and a permanently-red monitor is one nobody reads. Teams
-    // still carries the detail.
+    // Report and keep going. The heartbeat suffix is `null` on purpose: this run
+    // has not finished, and its genuine outcome — deployed or failed — sends the
+    // real ping further down. Pinging here would tell the monitor the run is
+    // over while it is still working.
+    //
+    // isFailure stays true so the Teams card renders in the attention colour: an
+    // anomaly is still something a human should look at, it just no longer stops
+    // the release.
     await notify(
-      'BVC Deploy BLOCKED — fee anomaly',
-      `${guard.reason}. Likely an upstream SIS→Sitecore sync fault, not a real price change. ` +
-        `Site left on the previous data. Verify in Sitecore, then re-run with --skip-fee-guard to publish anyway.`,
+      'BVC fee anomaly — PUBLISHED anyway',
+      `${guard.reason}. Possibly an upstream SIS→Sitecore sync fault rather than a real ` +
+        `price change — but the deploy was NOT held, so these prices are going live. ` +
+        `Verify in Sitecore; see fee-watch-history.jsonl for when upstream last wrote.`,
       true,
-      ''
+      null
     );
-    process.exit(2);
   }
 
   // 1c. Package out/ into .vercel/output/ (Vercel Build Output API v3 static
@@ -172,8 +183,10 @@ async function main() {
     run(`"${VERCEL}" pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
     run(`"${VERCEL}" deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
     console.log(`\n[${ts()}] Deploy succeeded`);
-    // Advance the fee baseline only now — a blocked or failed run must leave
-    // it pointing at the last dataset that actually reached the site.
+    // Advance the fee baseline only now — a failed run must leave it pointing at
+    // the last dataset that actually reached the site. Since the guard no longer
+    // vetoes, this normally advances every run, which is what makes the anomaly
+    // report mean "changed since last publish" rather than "since some older run".
     guard.commit();
   } catch (err) {
     await notify(

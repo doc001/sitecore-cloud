@@ -444,8 +444,17 @@
     summaryOne: "There is 1 item that needs your attention.",
     summaryMany: (n) => `There are ${n} items that need your attention.`
   };
+  var features = {
+    /**
+     * Microsoft SSO ("I'm a current student — sign in") and the Start step that
+     * hosts it. Off until SSO is tested against production: the Start step is not
+     * rendered, no MSAL session is restored, and the form opens on Personal.
+     * Set to true to bring both back — nothing else needs changing.
+     */
+    studentSignIn: false
+  };
   var steps = [
-    { id: "student-type", title: "Student Type", short: "Start" },
+    ...features.studentSignIn ? [{ id: "student-type", title: "Student Type", short: "Start" }] : [],
     { id: "personal", title: "Personal Information", short: "Personal" },
     { id: "mailing", title: "Mailing Information", short: "Mailing" }
   ];
@@ -745,11 +754,14 @@
       if (hardDisable) next.disabled = !valid;
     }
     function show(nextIndex, { focusHeading = true } = {}) {
+      var _a;
       index = Math.max(0, Math.min(nextIndex, order.length - 1));
       order.forEach((id, position) => {
         const section = sections.get(id);
         section.hidden = position !== index;
       });
+      const back = (_a = currentSection()) == null ? void 0 : _a.querySelector("[data-back]");
+      if (back) back.hidden = index === 0;
       announce(0);
       updateProgress();
       onEnterStep == null ? void 0 : onEnterStep(currentId());
@@ -1267,7 +1279,7 @@
       }
       document.dispatchEvent(new CustomEvent("bvc:checkout-submit"));
     });
-    studentAuth.restoreSession();
+    if (features.studentSignIn) studentAuth.restoreSession();
     const addressGroups = {};
     fields.forEach((definition) => {
       var _a2;

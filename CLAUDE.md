@@ -94,8 +94,8 @@ finishes ~:06, so :15 reads freshly-synced data.
    (no cache read **or** write — a plain `--force` still writes ~200 MB/run to `.turbo/cache`,
    which Turbo never prunes; that once grew to 35 GB and filled the disk)
 2. **Fee guard** (`fee-guard.mjs`) — compares freshly-extracted section fees against the
-   last set that reached the site; blocks the deploy if too much of the catalogue
-   repriced at once (see below)
+   last set that reached the site and **reports** if too much of the catalogue repriced
+   at once. Advisory since 2026-08-14: it alerts, it never stops the deploy (see below)
 3. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
 4. `vercel pull` — refreshes `.vercel/project.json` project link
 5. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild
@@ -116,15 +116,16 @@ must not become an outage.
 | Teams | `TEAMS_WEBHOOK_URL` | *what* broke — fires only when the pipeline runs |
 | Heartbeat | `HEARTBEAT_URL` | *that* it ran — the monitor alerts when a ping fails to arrive |
 
-Fires on: Build FAILED, Package FAILED, Deploy FAILED, and Deploy BLOCKED (fee guard).
+Fires on: Build FAILED, Package FAILED, Deploy FAILED, and fee anomaly (advisory).
 
-**A fee-guard block pings the heartbeat as a SUCCESS, not a failure.** Blocked is not
-broken — the run executed and correctly declined to publish. While the upstream sync
-flips, a block is the expected outcome of roughly every second run, so sending `/fail`
-would leave the dead-man's switch red half the time; a permanently-red monitor is one
-nobody reads, and it would be red for the wrong reason exactly when a real outage hit.
-Teams still carries the block detail. `notify()`'s 4th argument is the heartbeat suffix
-(`'/fail'` default, `''` for "completed as designed").
+**The fee anomaly alert must not touch the heartbeat.** It fires mid-run, while the
+pipeline is still working, so pinging there would tell the monitor the run had ended
+when it had not — and the genuine outcome (deploy succeeded or failed) pings a few
+steps later anyway. `notify()`'s 4th argument is the heartbeat suffix: `'/fail'`
+(default) for a real breakage, `''` for "completed as designed", and **`null` to send
+Teams + toast without pinging at all**, which is what the anomaly alert passes. The
+card still renders in the attention colour — an anomaly is worth a human look, it just
+no longer stops the release.
 
 **The heartbeat is the one that catches silence.** If the machine sleeps, the PM2 daemon
 dies, or the cron is deleted, nothing else produces a single alert — and that is
@@ -152,16 +153,25 @@ is a faithful reader — no script in this repo writes to Sitecore — so it pub
 half of the flip it caught, and roughly every second deploy shipped wrong prices.
 
 A real price update touches a handful of courses; a sync fault touches nearly all of them.
-The guard blocks the deploy when **≥25% of comparable sections and ≥10 sections** change
-price in one run, and leaves the site on the previous data.
+The guard raises an alert when **≥25% of comparable sections and ≥10 sections** change
+price in one run.
+
+**It is advisory — it never stops a deploy** (changed 2026-08-14). It used to `exit(2)`
+and hold the site on the previous data, which traded one failure for a worse one:
+Sitecore publishes hourly, so a held run dropped that hour's *real* content changes too,
+not just the suspect prices. With the sync flipping, roughly every second run was held
+and the site silently fell hours behind — three consecutive hours went unpublished on
+2026-08-14 before anyone noticed, because a held run looks identical to a healthy one
+from the outside. Detection and reporting are unchanged; only the veto is gone.
 
 - Baseline: `.pipeline-state/fee-baseline.json` (git-ignored, machine-local). Advanced
-  **only after a successful deploy**, so a blocked run keeps comparing against the last
-  dataset that actually reached the site.
-- Publish anyway (genuine catalogue-wide change): `node pipeline.mjs --skip-fee-guard`
-  or `SKIP_FEE_GUARD=1`.
+  after a successful deploy — so now normally every run, which makes the report mean
+  "changed since the last publish" rather than "since some older run".
+- Suppress the check entirely (skips the *reporting* too): `node pipeline.mjs
+  --skip-fee-guard` or `SKIP_FEE_GUARD=1`. Rarely wanted now that it cannot block.
 - Tune: `FEE_GUARD_THRESHOLD` (default `0.25`), `FEE_GUARD_MIN_CHANGED` (default `10`).
-- Exit code `2` = blocked by the guard (distinct from `1` = build/deploy failure).
+- Exit codes: `0` = ran (with or without an anomaly), `1` = build/package/deploy failure.
+  **Exit `2` no longer occurs.**
 
 ### Fee watcher (`sitecore-fee-watch.mjs`)
 
@@ -169,8 +179,9 @@ Second PM2 app, `bvc-fee-watch`, cron `'0 */5 * * * *'`. Read-only GraphQL polls
 against Sitecore Edge — no build, no deploy, nothing written.
 
 Separate from the fee guard on purpose. The guard sees the catalogue once an hour,
-only while the pipeline runs, and reports a percentage; it answers *"should we deploy
-this?"*. The watcher answers *"when exactly did upstream change, and to what?"* — it
+only while the pipeline runs, and reports a percentage; it answers *"how much of the
+catalogue moved in this release?"*. Neither is a gate — both are notification channels.
+The watcher answers *"when exactly did upstream change, and to what?"* — it
 keeps reporting when the hourly deploy is disabled, and pins the write to ~5 minutes
 instead of an hour, which is the precision the SIS team needs to match a flip against
 their own job logs.
