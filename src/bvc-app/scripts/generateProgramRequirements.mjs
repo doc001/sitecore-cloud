@@ -42,6 +42,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const APP_ROOT = path.resolve(__dirname, '..');
 
 const SRC_DATA = path.join(APP_ROOT, 'src', 'data', 'static', 'program-requirements');
+// Tracked mirror — present on a clean clone even when src/data (gitignored) is not.
+const PUBLIC_DATA = path.join(APP_ROOT, 'public', 'data', 'static', 'program-requirements');
+let SOURCE_DIR = SRC_DATA;
 const CMS_PROGRAMS = path.join(APP_ROOT, 'src', 'data', 'cms', 'programs.json');
 const CMS_PROGRAM_TYPES = path.join(APP_ROOT, 'src', 'data', 'cms', 'program-types.json');
 const OUT_DIR = path.join(APP_ROOT, 'src', 'data', 'static', 'program-requirements-by-code');
@@ -121,14 +124,45 @@ function credentialConflict(programType, credential) {
   return false;
 }
 
+/**
+ * Where the hand-maintained datasets live. coursesDB writes them into
+ * src/data/static/program-requirements/, which is gitignored — so on a clean
+ * clone (or any machine that has not run the coursesDB cascade) that folder is
+ * absent, while the public/ mirror IS tracked and present. Prefer src/ when it
+ * exists so a fresh cascade wins, and fall back to public/ rather than throwing
+ * mid-build: bvcapp-scripts is &&-chained, so an unguarded readdir here takes
+ * the whole build down.
+ */
+async function resolveSourceDir() {
+  for (const dir of [SRC_DATA, PUBLIC_DATA]) {
+    try {
+      const files = (await fs.readdir(dir)).filter((f) => f.endsWith('.json'));
+      if (files.length) {
+        if (dir === PUBLIC_DATA) {
+          flag('warning', `${path.relative(APP_ROOT, SRC_DATA)} is empty or missing — falling back to the tracked public/ mirror. Run the coursesDB cascade for fresh Kuali data.`);
+        }
+        return { dir, files };
+      }
+    } catch (err) {
+      if (err.code !== 'ENOENT') throw err;
+    }
+  }
+  return { dir: SRC_DATA, files: [] };
+}
+
 async function loadDatasets() {
-  const files = (await fs.readdir(SRC_DATA)).filter((f) => f.endsWith('.json'));
+  const { dir: sourceDir, files } = await resolveSourceDir();
+  SOURCE_DIR = sourceDir;
+
+  if (!files.length) {
+    flag('blocking', `No program-requirements datasets found in ${path.relative(APP_ROOT, SRC_DATA)} or ${path.relative(APP_ROOT, PUBLIC_DATA)}. Run the coursesDB cascade (update_all.py) to produce them.`);
+  }
   const byFile = new Map();
   const byPrefix = new Map();
 
   for (const file of files) {
     const prefix = file.split('_-_')[0].toUpperCase();
-    const data = await readJson(path.join(SRC_DATA, file));
+    const data = await readJson(path.join(SOURCE_DIR, file));
     if (!Array.isArray(data.groupings)) {
       flag('warning', `${file}: no "groupings" array — dataset looks malformed, skipped`);
       continue;
