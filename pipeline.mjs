@@ -37,6 +37,22 @@ if (IS_PROD) process.env.STRIP_DEBUG = 'true';
 // the current output without re-fetching Webflow/Sitecore.
 const DEPLOY_ONLY = process.argv.includes('--deploy-only');
 
+// --data-only: the HOURLY job. Only Open Studies + Extended Education course
+// data changes hourly — Sitecore syncs with Thesis in the backend and we pull it
+// over GraphQL. Everything else on the site (programs, requirements, PDFs,
+// navigation) is static by nature and only moves when the coursesDB cascade
+// runs, which is what triggers a FULL build + deploy.
+//
+// So this mode refreshes the course JSON, overlays it onto the static output
+// left by the last full build, and deploys. No Webflow fetch, no breadcrumbs, no
+// program-requirements regeneration, no `next build`.
+//
+// Trade-off, deliberate: the prerendered /study/**/courses/[sisID] pages keep the
+// data from the last full build. Nothing in the Webflow embeds or the published
+// JSON links to those routes — the live course experience is a Webflow page
+// fetching /data/*.json at runtime, which this mode DOES refresh.
+const DATA_ONLY = process.argv.includes('--data-only');
+
 const ts = () => new Date().toISOString();
 
 function run(cmd, cwd = ROOT) {
@@ -88,19 +104,24 @@ async function runWithRetry(cmd, cwd = ROOT, maxAttempts = 3, retryDelayMs = 60_
 }
 
 async function main() {
-  const mode = DEPLOY_ONLY ? 'DEPLOY ONLY: no clean, no build' : (IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS');
-  console.log(`\n[${ts()}] ===== BVC hourly pipeline started (${mode}) =====`);
+  const mode = DEPLOY_ONLY
+    ? 'DEPLOY ONLY: no clean, no build'
+    : DATA_ONLY
+      ? 'DATA ONLY: hourly course refresh, no full build'
+      : (IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS');
+  console.log(`\n[${ts()}] ===== BVC pipeline started (${mode}) =====`);
 
-  if (DEPLOY_ONLY) {
+  // Both light modes reuse the static output from the last full build.
+  if (DEPLOY_ONLY || DATA_ONLY) {
     const packaged = join(BVC_APP, '.vercel', 'output', 'static');
     if (!existsSync(packaged)) {
       await notify(
         'BVC Deploy FAILED',
-        'Nothing to deploy: .vercel/output/static is missing. Run the full pipeline (node pipeline.mjs) first.'
+        `Nothing to build on: .vercel/output/static is missing. Run the full pipeline (node pipeline.mjs) first.`
       );
       process.exit(1);
     }
-    console.log(`[${ts()}] Uploading the output already packaged in .vercel/output/ — skipping clean + build.`);
+    console.log(`[${ts()}] ${DEPLOY_ONLY ? 'Uploading the output already packaged in' : 'Refreshing course data into'} .vercel/output/ — skipping the full build.`);
   }
 
   // 0. Pre-build clean — wipe stale data so removed Sitecore sections don't persist across builds.
@@ -134,7 +155,22 @@ async function main() {
   //    112), which this script saw as a build failure. Reading is pointless here anyway
   //    (source data changes every run), so disable both directions.
   try {
-    if (!DEPLOY_ONLY) {
+    if (DATA_ONLY) {
+      // Sitecore/Thesis course data only, then mirror src/data → public/data.
+      await runWithRetry('npm run hourly-scripts', BVC_APP, 3, 60_000);
+
+      // Overlay the refreshed JSON onto the packaged output from the last full
+      // build. course-outlines-pdf is excluded deliberately: 1.5 GB of files this
+      // job never touches, already sitting in the package.
+      const publicData = join(BVC_APP, 'public', 'data');
+      const staticData = join(BVC_APP, '.vercel', 'output', 'static', 'data');
+      cpSync(publicData, staticData, {
+        recursive: true,
+        filter: (src) => !src.includes('course-outlines-pdf'),
+      });
+
+      console.log(`\n[${ts()}] Course data refreshed and overlaid into .vercel/output/`);
+    } else if (!DEPLOY_ONLY) {
       await runWithRetry('npm run build:bvcapp -- --cache=local:', ROOT, 3, 60_000);
 
       const outDir = join(BVC_APP, 'out');
@@ -148,8 +184,8 @@ async function main() {
     }
   } catch (err) {
     await notify(
-      'BVC Build FAILED',
-      `Build failed after 3 attempts at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
+      DATA_ONLY ? 'BVC Course Data Refresh FAILED' : 'BVC Build FAILED',
+      `${DATA_ONLY ? 'Course data refresh' : 'Build'} failed after 3 attempts at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
     );
     process.exit(1);
   }

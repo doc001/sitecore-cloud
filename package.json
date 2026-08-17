@@ -14,7 +14,8 @@
     "deploy:jamstack": "cd src/nextjs-jamstack && vercel --scope=bvc-marketing-its --prod",
     "deploy:bvcapp": "node pipeline.mjs",
     "deploy:bvcapp:prod": "node pipeline.mjs --prod",
-    "deploy:bvcapp:only": "node pipeline.mjs --deploy-only"
+    "deploy:bvcapp:only": "node pipeline.mjs --deploy-only",
+    "deploy:bvcapp:hourly": "node pipeline.mjs --data-only"
   },
   "devDependencies": {
     "turbo": "^2.5.4",

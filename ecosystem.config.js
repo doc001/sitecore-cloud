@@ -3,8 +3,17 @@ module.exports = {
     {
       name: 'bvc-hourly-deploy',
       script: 'pipeline.mjs',
-      // Build takes ~3.5 min. Starts at :50 → done by :54 → deploy fires immediately after.
-      // Adjust if build time grows significantly.
+      // HOURLY = course data only. Open Studies + Extended Education JSON come
+      // from Sitecore (synced with Thesis in the backend) and are the only things
+      // that move hourly; the rest of the site is static by nature. This refreshes
+      // that JSON, overlays it onto the last full build's output, and deploys —
+      // no Webflow fetch, no next build.
+      //
+      // A FULL build + deploy (`node pipeline.mjs`) is triggered by the coursesDB
+      // cascade, which is what changes programs, requirements and PDFs. Run one
+      // manually after publishing a new program or slug change in Webflow —
+      // program-requirements-index.json only picks those up on a full build.
+      args: '--data-only',
       cron_restart: '50 * * * *',
       autorestart: false,
       watch: false,
