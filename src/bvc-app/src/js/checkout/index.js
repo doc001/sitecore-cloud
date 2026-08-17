@@ -21,12 +21,28 @@
  * See OS-COURSE-CART.md (Backend API contract).
  * ---------------------------------------------------------------------------
  */
+import { fetchCartFees, feesForSku } from '../shared/fees.js';
+import { validateCart, readValidation } from '../shared/validation.js';
+
 (function () {
   'use strict';
 
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
   var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app';
+  // Empty studentNo segment in `fee/{skus}/{studentNo}` — matches the course pages.
+  var feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '';
+  // Re-check the cart when the checkout page loads. The cart lives in sessionStorage
+  // and can sit there for a whole session, so a course can fill or be withdrawn
+  // between the add and this page. Doing it at LOAD rather than at submit is
+  // deliberate: nothing has been typed yet, so a course dropping out reads as the
+  // cart refreshing rather than as a promise being retracted after ten minutes of
+  // form filling.
+  var repairOnLoad = _cfg.repairOnLoad !== false;
+  // Each item is checked ON ITS OWN. Sending the whole cart in one call would trip
+  // the conflict defect in docs/sis-api.md and prune a perfectly good cart to one
+  // item. Opt in once that is fixed upstream.
+  var validateConflicts = true === _cfg.validateConflicts;
   // studentPk must be EMPTY for new/anonymous registrations — submit-payment now
   // null-refs (500) if a non-empty value is sent. Left overridable via config for a
   // future signed-in/MSAL flow, but the default for this public checkout is empty.
@@ -138,6 +154,12 @@
       // Initialize everything
       this.initializeFormHandlers();
       this.loadCartItems();
+      // Render first, then reconcile — the cart paints immediately and corrects
+      // itself a beat later, rather than the column sitting empty during the calls.
+      if (repairOnLoad)
+        this.repairCart().catch(function (error) {
+          console.error('[Repair] cart repair failed; cart left as-is', error);
+        });
       this.setupBillingAddressToggle();
       this.setupPostalCodeAutoFormat();
       this.createErrorElements();
@@ -291,6 +313,142 @@
       if (this.registerButton) {
         this.registerButton.addEventListener('click', this.handleSubmit.bind(this));
       }
+    }
+
+    async getToken(forceRefresh) {
+      let token = tokenStorage.getToken();
+      if (forceRefresh || !token || tokenStorage.isTokenExpired()) {
+        token = await getMsToken();
+        tokenStorage.setToken(token);
+      }
+      return token;
+    }
+
+    /**
+     * Re-validate the cart on page load and drop anything that can no longer be
+     * registered, then recalculate fees for whatever is left.
+     *
+     * Fails OPEN in every direction: an item is dropped only on an explicit verdict
+     * from the API. A missing token, a network error, or a response shape we do not
+     * recognise leaves the cart exactly as it was — a validation outage must never
+     * empty somebody's basket on the way to paying.
+     *
+     * Returns the items it removed, so handleSubmit() can abort on a non-empty result.
+     */
+    async repairCart() {
+      let items = [];
+      try {
+        items = JSON.parse(sessionStorage.getItem('cartItems') || '[]');
+      } catch (error) {
+        return [];
+      }
+      if (!Array.isArray(items) || 0 === items.length) return [];
+
+      let token;
+      try {
+        token = await this.getToken();
+      } catch (error) {
+        console.warn('[Repair] no token; leaving the cart untouched', error);
+        return [];
+      }
+
+      const skus = items.map((item) => item.sku);
+      const verdicts = await Promise.all(
+        items.map(async (item) => {
+          // Solo by default. Sending the rest of the cart as context would trip the
+          // conflict defect and prune a healthy cart down to one item.
+          const context = validateConflicts ? skus.filter((sku) => sku !== item.sku) : [];
+          try {
+            let response = await validateCart({ apiOrigin, sku: item.sku, cartSkus: context, token });
+            if (401 === response.status) {
+              token = await this.getToken(true);
+              response = await validateCart({ apiOrigin, sku: item.sku, cartSkus: context, token });
+            }
+            return readValidation(response);
+          } catch (error) {
+            console.warn('[Repair] validation failed for', item.sku, '— keeping it', error);
+            return null;
+          }
+        })
+      );
+
+      const isDropped = (index) => !!verdicts[index] && !verdicts[index].ok;
+      const removed = items.filter((_, index) => isDropped(index));
+      if (0 === removed.length) return [];
+
+      const kept = items.filter((_, index) => !isDropped(index));
+      console.log('[Repair] dropping', removed.map((item) => item.sku).join(', '));
+
+      // Fees are CART-LEVEL, so removing a course changes the whole set. Recalculate
+      // before re-rendering, or the page bills the previous cart's fees.
+      try {
+        const result = await fetchCartFees({ apiOrigin, skus: kept.map((item) => item.sku), feeId, token });
+        kept.forEach((item) => {
+          const perCourse = feesForSku(result.feeData, item.sku);
+          item.fees = perCourse.fees;
+          item.feeSummary = perCourse.summary;
+        });
+        if (0 === kept.length) sessionStorage.removeItem('feeSession');
+        else
+          sessionStorage.setItem(
+            'feeSession',
+            JSON.stringify({
+              active: true,
+              createdAt: new Date().toISOString(),
+              // Shape must match what the cart writes — getSessionFees() reads
+              // feeSession.feeData.fees / .summary.
+              feeData: { courseIds: kept.map((item) => item.sku).join(','), fees: result.feeData, summary: result.summary, timestamp: new Date().toISOString() },
+              relatedTo: 'cartSession',
+            })
+          );
+      } catch (error) {
+        // Showing no fees beats showing the previous cart's fees on a cart that changed.
+        console.error('[Repair] fee recalculation failed; clearing the fee session', error);
+        sessionStorage.removeItem('feeSession');
+      }
+
+      sessionStorage.setItem('cartItems', JSON.stringify(kept));
+      // Keep the credits mirror in step — ASN visibility falls back to it when the
+      // cart cannot be read, and dropping the only credit course must hide the field.
+      try {
+        if (null !== sessionStorage.getItem('totalCredits'))
+          sessionStorage.setItem(
+            'totalCredits',
+            String(
+              kept.reduce(function (total, item) {
+                return total + (parseInt(item.credits, 10) || 0);
+              }, 0)
+            )
+          );
+      } catch (error) {
+        /* non-fatal */
+      }
+
+      const names = removed.map((item) => item.productName || item.name || item.sku);
+      this.showCartNotice(
+        1 === names.length
+          ? `${names[0]} is no longer available and has been removed from your cart.`
+          : `These courses are no longer available and have been removed from your cart: ${names.join(', ')}.`
+      );
+      this.loadCartItems();
+      // Lets the form re-evaluate anything derived from the cart (ASN visibility).
+      document.dispatchEvent(new CustomEvent('bvc:cart-updated', { detail: { removed: removed.length, remaining: kept.length } }));
+      return removed;
+    }
+
+    showCartNotice(text) {
+      if (!this.shoppingCartElement || !this.shoppingCartElement.parentNode) return;
+      let notice = document.getElementById('bvc-cart-notice');
+      if (!notice) {
+        notice = document.createElement('div');
+        notice.id = 'bvc-cart-notice';
+        notice.setAttribute('role', 'status');
+        // Inserted as a SIBLING: displayCartItems() overwrites the cart element's
+        // innerHTML, so a notice placed inside it would vanish on the next render.
+        notice.style.cssText = 'padding:12px;margin-bottom:12px;border-left:4px solid #b00020;background:#fdf0f2;color:#5c0011;font-size:14px;line-height:1.4;';
+        this.shoppingCartElement.parentNode.insertBefore(notice, this.shoppingCartElement);
+      }
+      notice.textContent = text;
     }
 
     loadCartItems() {
@@ -655,6 +813,24 @@
       // Validate the form
       if (!this.validateForm()) {
         return;
+      }
+      // Last line of defence. The load-time repair can be minutes old by now — a
+      // section can fill while the shopper works through the three form steps. Catch
+      // it here rather than creating a registration that submit-payment will reject
+      // with a generic "please try again" the shopper can do nothing about.
+      // Fails open: repairCart() only ever returns items the API explicitly refused.
+      try {
+        const droppedAtSubmit = await this.repairCart();
+        if (droppedAtSubmit.length) {
+          this.showErrorMessage(
+            1 === droppedAtSubmit.length
+              ? `${droppedAtSubmit[0].productName || droppedAtSubmit[0].sku} is no longer available and has been removed. Please review your cart before continuing to payment.`
+              : 'Some courses are no longer available and have been removed. Please review your cart before continuing to payment.'
+          );
+          return;
+        }
+      } catch (error) {
+        console.error('[Repair] pre-submit check failed; continuing', error);
       }
       // Get cart items
       let cartItems = [];

@@ -1120,6 +1120,7 @@
     function applyAsnVisibility() {
       asnField == null ? void 0 : asnField.setVisible(cartHasCredits());
     }
+    document.addEventListener("bvc:cart-updated", applyAsnVisibility);
     function applyConditionals() {
       fields.forEach((definition) => {
         if (!definition.showWhen) return;

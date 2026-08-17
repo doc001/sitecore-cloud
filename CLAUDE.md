@@ -268,6 +268,21 @@ always refreshes these. Sources live under `src/js/<name>/index.js` (ES modules,
 esbuild follows imports) and `src/css/<name>.css`; each bundles to a
 self-contained IIFE at `public/js/<name>.js` served at `/js/<name>.js`.
 
+**`src/js/shared/`** holds logic imported by more than one bundle. It is not an
+entry point — esbuild inlines it into each one, so there is no runtime dependency
+between the bundles.
+
+| Module | Exports | Used by |
+|---|---|---|
+| `fees.js` | `fetchCartFees`, `dedupeFees`, `summariseFees`, `feesForSku` | os-course, ee-course, checkout |
+| `validation.js` | `validateCart`, `readValidation`, `isConflict` | os-course, ee-course, checkout |
+
+Both are free of cart/session/DOM coupling — callers own their own storage and
+rendering. They exist because checkout has to recalculate fees after pruning a
+course from the cart, and because the fail-open rules for `/validation` are subtle
+enough that three copies would drift. See "Cart availability checks" below and
+`docs/sis-api.md`.
+
 ### nextjs-jamstack
 Run from `src/nextjs-jamstack/`:
 ```bash
@@ -357,6 +372,55 @@ Key conventions:
   - **Submission**: the Mailing step's **"Proceed to Payment"** button (`data-checkout-submit`) validates, then dispatches a `bvc:checkout-submit` DOM event. The separate `public/js/checkout.js` (source `src/js/checkout/index.js`) listens and runs the purchase: **create token → registration → submit-payment → redirect to the Flywire payment page**. It reads courses/fees from the session cart (`sessionStorage.cartItems` / `feeSession`) and richer fields from the form. Contract: `studentId:0`, **empty `studentPk`** (a non-empty value 500s for new registrations); coded enums (gender/language/legalStatus/ethnicity) pass through `*_MAP` tables in checkout.js with known-good defaults — fill them from the SiS enum to send real values.
   - **Page-owned scaffold**: the Webflow **page** provides `#shoppingCart` (the cart column) and optionally `#registerToCourse`. The embed must **not** declare those ids (a duplicate id shadows the page's, leaving its cart empty). checkout.js renders the cart into the page's `#shoppingCart` and re-renders it on every `bvc:checkout-step` event. Its `DOMContentLoaded` is null-guarded so missing scaffold never throws.
   - The course-page cart button ("Proceed to Checkout") in `os-course.js` / `ee-course.js` navigates to the checkout page with `?type=os` / `?type=ee`.
+
+### bvc-app — Cart availability checks
+
+Nothing is registerable just because it rendered. The course pages are statically
+generated hourly, and the cart then sits in `sessionStorage` for the whole session,
+so what the shopper sees can be hours stale. Three checks run against the SiS API —
+full API contract and its known defects are in **`docs/sis-api.md`**.
+
+| When | Check | Catches |
+|---|---|---|
+| Add to cart | `courseofferings/{sku}` | 404s, and the seats it does know about |
+| Add to cart | `validation` (solo) | full **and** withdrawn sections, accurately |
+| Checkout load | `validation` per item | anything that died since it was added |
+| Checkout submit | `validation` per item | anything that died while the form was filled in |
+
+**`seatsAreAvailable` is not a reliable seat check.** It reported seats for 37 of the
+42 sections the SiS refuses to register, including one confirmed full on the live
+site. `/validation` is the only trustworthy source, and it reports a full section as
+`Offering Missing` — the same code it uses for a withdrawn one, so user-facing copy
+has to stay generic.
+
+**Reading a validation response**: an invalid cart arrives as **HTTP 200** with the
+verdict in the body, so `response.ok` only ever means the call was well-formed. All
+three bundles go through `readValidation()` in `src/js/shared/validation.js`, which
+returns `null` for anything it cannot interpret. Every caller **fails open** on
+`null` — a validation outage must never become a cart outage, and registration still
+gates the transaction server-side.
+
+**Checkout repair** (`checkout.repairCart()`) runs after the first paint and again
+before submit. It validates each item **on its own**, drops explicit failures,
+recalculates the cart-level fees for what remains (`shared/fees.js` — stale fees
+would otherwise be billed), rewrites `cartItems` / `feeSession` / `totalCredits`,
+shows a notice naming what went, and dispatches `bvc:cart-updated` so the form
+re-evaluates ASN visibility. A non-empty result aborts the submit rather than
+creating a registration that `submit-payment` would reject.
+
+**Config flags** — set before the scripts load, no rebuild needed:
+
+| Flag | Default | Where |
+|---|---|---|
+| `validateOnAdd` | `true` | `__OS_COURSE_CONFIG__`, `__EE_COURSE_CONFIG__` |
+| `validateConflicts` | **`false`** | all three configs |
+| `repairOnLoad` | `true` | `__BVC_CHECKOUT_CONFIG__` |
+
+> **`validateConflicts` is off for a reason.** Sending the whole cart lets the API
+> report a clash *between* items — the one thing a per-offering call cannot see — but
+> as of 2026-08-17 UAT returns `Timeblock Conflict` for **every** pair of courses,
+> including ones meeting on different days (0 of 12 disjoint-day pairs passed). Turn
+> it on only once that is fixed upstream; today it would cap the cart at one course.
 
 ### bvc-app — Route Map
 

@@ -73,6 +73,11 @@ function start() {
     asnField?.setVisible(cartHasCredits());
   }
 
+  // checkout.js prunes unavailable courses from the cart on page load. If the only
+  // credit-bearing course goes, ASN has to stop being required — otherwise the form
+  // blocks on a field the shopper can no longer see a reason for.
+  document.addEventListener('bvc:cart-updated', applyAsnVisibility);
+
   // Called once after the draft is restored (below), so a stale ASN saved when
   // the cart still had credits is cleared rather than re-filled, then again on
   // every step change.
