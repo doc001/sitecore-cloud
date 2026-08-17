@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { execSync, spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { mkdirSync, writeFileSync, cpSync, rmSync, existsSync } from 'fs';
@@ -10,6 +10,13 @@ import { sendTeams, pingHeartbeat } from './notify.mjs';
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const BVC_APP = join(ROOT, 'src', 'bvc-app');
 const VERCEL = join(ROOT, 'node_modules', '.bin', process.platform === 'win32' ? 'vercel.cmd' : 'vercel');
+
+// Single source for the deploy target. These were repeated inline on the pull
+// and deploy lines; the verification step below has to inspect the SAME project,
+// so a drift between them would silently check the wrong thing.
+const VERCEL_SCOPE = 'bvc-marketing-its';
+const VERCEL_PROJECT = 'bvc-app-uat';
+const PROD_ALIAS = `${VERCEL_PROJECT}.vercel.app`;
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });
 
@@ -44,6 +51,73 @@ function run(cmd, cwd = ROOT) {
   // some windows may still appear. Harmless either way; stdio is still inherited,
   // so all output continues to reach logs/pipeline-out.log.
   execSync(cmd, { stdio: 'inherit', cwd, shell: true, windowsHide: true });
+}
+
+/**
+ * Like `run`, but captures output instead of inheriting stdio, and returns the
+ * exit code rather than throwing. Everything captured is echoed straight back
+ * out — without that, piping would erase the deploy from logs/pipeline-out.log,
+ * which is the log used to diagnose deploys in the first place.
+ */
+function runCapture(cmd, cwd = ROOT) {
+  console.log(`\n[${ts()}] ▶ ${cmd}`);
+  const r = spawnSync(cmd, {
+    cwd,
+    shell: true,
+    windowsHide: true,
+    encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
+  });
+  const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+  if (out) process.stdout.write(out);
+  return { code: r.status ?? 1, out };
+}
+
+const ANSI_RE = new RegExp(String.fromCharCode(27) + '\\[[0-9;]*[A-Za-z]', 'g');
+const stripAnsi = (s) => s.replace(ANSI_RE, '');
+
+/**
+ * Decide whether a deploy that exited non-zero actually published.
+ *
+ * The CLI has exited non-zero on deploys that reached production four times
+ * between 2026-08-11 and 2026-08-14 — always `Not authorized`, always thrown
+ * *after* the upload was accepted, on a post-deploy step. The deployment was
+ * Ready and holding the production alias every time. Reporting those as
+ * failures pages a human for a release that worked, and an alert that is wrong
+ * most of the time is one nobody reads.
+ *
+ * So the exit code is treated as a hint, and the API as the authority: this asks
+ * what the production alias is serving RIGHT NOW and requires it to be the exact
+ * deployment this run created, and Ready. A genuinely failed deploy leaves the
+ * alias on the previous deployment, so it still reports. Anything that cannot be
+ * proven — no URL in the output, inspect erroring, alias serving something else —
+ * counts as a failure.
+ */
+function verifyPublished(deployOut) {
+  const text = stripAnsi(deployOut);
+  // The CLI prints `Production   https://<project>-<hash>-<team>.vercel.app`.
+  const line = text.match(/Production\s+(https:\/\/[a-z0-9.-]+\.vercel\.app)/i);
+  const url =
+    (line && line[1]) ||
+    (text.match(/https:\/\/[a-z0-9-]+\.vercel\.app/gi) || []).find((u) => !u.endsWith(`//${PROD_ALIAS}`));
+  if (!url) return { ok: false, reason: 'no deployment URL found in deploy output' };
+
+  // Inspect the ALIAS, not our own deployment. Inspecting the deployment is not
+  // sufficient: its Aliases block lists every alias it has ever been given, so a
+  // superseded deployment still reports the production alias and would be waved
+  // through (verified 2026-08-14 against a real superseded deployment).
+  // Inspecting the alias instead resolves to whatever is serving it right now.
+  const insp = runCapture(`"${VERCEL}" inspect ${PROD_ALIAS} --scope=${VERCEL_SCOPE}`, BVC_APP);
+  if (insp.code !== 0) return { ok: false, url, reason: `vercel inspect exited ${insp.code}` };
+
+  const i = stripAnsi(insp.out);
+  const serving = (i.match(/^\s*url\s+(https:\/\/\S+)/im) || [])[1];
+  const ready = /status\s+[^\S\n]*[●•]?\s*Ready/i.test(i);
+
+  if (!serving) return { ok: false, url, reason: 'could not read the alias target from inspect' };
+  if (serving !== url) return { ok: false, url, reason: `${PROD_ALIAS} serves ${serving}, not this run's deployment` };
+  if (!ready) return { ok: false, url, reason: `${PROD_ALIAS} target is not Ready` };
+  return { ok: true, url };
 }
 
 const warn = (msg) => console.warn(`[${ts()}] ${msg}`);
@@ -180,8 +254,31 @@ async function main() {
 
   // 2. Upload pre-built static output — Vercel is a host only, no rebuild triggered
   try {
-    run(`"${VERCEL}" pull --yes --environment=production --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
-    run(`"${VERCEL}" deploy --prebuilt --prod --scope=bvc-marketing-its --project=bvc-app-uat`, BVC_APP);
+    run(`"${VERCEL}" pull --yes --environment=production --scope=${VERCEL_SCOPE} --project=${VERCEL_PROJECT}`, BVC_APP);
+
+    const dep = runCapture(
+      `"${VERCEL}" deploy --prebuilt --prod --scope=${VERCEL_SCOPE} --project=${VERCEL_PROJECT}`,
+      BVC_APP
+    );
+    if (dep.code !== 0) {
+      // Non-zero is not proof of failure here — see verifyPublished().
+      const v = verifyPublished(dep.out);
+      if (!v.ok) throw new Error(`deploy exited ${dep.code} and could not be verified (${v.reason})`);
+      warn(
+        `Deploy CLI exited ${dep.code}, but ${v.url} is Ready and holds ${PROD_ALIAS} — ` +
+          `publishing succeeded. Treating as success.`
+      );
+      // Worth a human look (the CLI is erroring on a working deploy) but NOT a
+      // failure, so the heartbeat is left to the real outcome below.
+      await notify(
+        'BVC deploy CLI errored — published anyway',
+        `vercel deploy exited ${dep.code}, but ${v.url} is Ready and serving ${PROD_ALIAS}, ` +
+          `so the release did reach the site. Known intermittent "Not authorized" thrown after ` +
+          `the upload is accepted. No action needed unless this becomes constant.`,
+        true,
+        null
+      );
+    }
     console.log(`\n[${ts()}] Deploy succeeded`);
     // Advance the fee baseline only now — a failed run must leave it pointing at
     // the last dataset that actually reached the site. Since the guard no longer

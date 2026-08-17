@@ -98,7 +98,8 @@ finishes ~:06, so :15 reads freshly-synced data.
    at once. Advisory since 2026-08-14: it alerts, it never stops the deploy (see below)
 3. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
 4. `vercel pull` — refreshes `.vercel/project.json` project link
-5. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild
+5. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild.
+   **A non-zero exit is verified, not trusted** — see "Deploy verification" below
 6. `cleanup-data.mjs` — removes intermediate JSON files (only touches `src/data/`;
    `public/data/` survives, which is what the fee guard reads)
 
@@ -116,7 +117,32 @@ must not become an outage.
 | Teams | `TEAMS_WEBHOOK_URL` | *what* broke — fires only when the pipeline runs |
 | Heartbeat | `HEARTBEAT_URL` | *that* it ran — the monitor alerts when a ping fails to arrive |
 
-Fires on: Build FAILED, Package FAILED, Deploy FAILED, and fee anomaly (advisory).
+Fires on: Build FAILED, Package FAILED, Deploy FAILED, fee anomaly (advisory), and
+deploy-CLI-errored-but-published (advisory).
+
+### Deploy verification
+
+`vercel deploy` has exited non-zero on deploys that actually reached production —
+2026-08-11 (×2), 08-12, and 08-14, always `Error: Not authorized` thrown *after* the
+upload was accepted. Every one of those deployments was `Ready` and serving the
+production alias, so four "Deploy FAILED" pages were for releases that worked.
+
+`verifyPublished()` in `pipeline.mjs` therefore treats the exit code as a hint and the
+API as the authority. On a non-zero deploy it parses the deployment URL out of the
+deploy output, then asks **what the production alias is serving right now**, and
+requires it to be that exact deployment, and `Ready`.
+
+- **Inspect the alias, not the deployment.** `vercel inspect <deployment>` lists every
+  alias the deployment has *ever* held, so a superseded one still looks aliased and
+  would be waved through — confirmed against a real superseded deployment. Inspecting
+  `bvc-app-uat.vercel.app` instead resolves to whatever currently serves it.
+- Anything unprovable is a failure: no URL in the output, `inspect` erroring, or the
+  alias serving something else. A genuinely failed deploy leaves the alias on the
+  previous deployment, so it still reports.
+- When it does confirm a publish, the run continues and Teams gets an **advisory**
+  card (heartbeat suffix `null` — the run's real outcome pings a few steps later).
+- Scope/project live in `VERCEL_SCOPE` / `VERCEL_PROJECT`; verification must target
+  the same project as the deploy, so they are single-sourced rather than inline.
 
 **The fee anomaly alert must not touch the heartbeat.** It fires mid-run, while the
 pipeline is still working, so pinging there would tell the monitor the run had ended
