@@ -35,6 +35,14 @@
  * Data is produced by scripts/generateProgramRequirements.mjs:
  *   /data/static/program-requirements-by-code/{CODE}.json
  *   /data/static/program-requirements-index.json
+ *
+ * OPEN STUDIES
+ * Open Studies is a program page in Webflow but not a credential — it has no
+ * terms, so its by-code dataset is empty. There is exactly one such page and it
+ * is matched on the URL (last segment === OS_PROGRAM_SLUG); it renders the course
+ * catalogue grouped by school/area from /data/open-studies-by-area.json instead,
+ * replacing the src/webflow/open-studies-courses.html embed. Layout follows that
+ * embed: the code links to the course page when the course has availability.
  * ---------------------------------------------------------------------------
  */
 (function () {
@@ -51,6 +59,11 @@
   var FALLBACK_ORIGIN = 'https://bvc-app.vercel.app';
   var INDEX_PATH = '/data/static/program-requirements-index.json';
   var BY_CODE_PATH = '/data/static/program-requirements-by-code/';
+  // Open Studies has no term structure — it is a catalogue of individual courses
+  // grouped by school/area, built by scripts/buildOpenStudiesByArea.mjs. One page
+  // only, matched on the full URL path: /programs/open-studies.
+  var OS_BY_AREA_PATH = '/data/open-studies-by-area.json';
+  var OS_PROGRAM_PATH = /\/programs\/open-studies\/?$/i;
   var CSS_PATH = '/css/program-requirements.css';
   var CSS_MARKER = 'data-bvc-pr-styles';
   var MOUNT_SELECTORS = ['[data-bvc-program-requirements]', '#Courses .w-richtext', '#Courses'];
@@ -150,6 +163,17 @@
     return (segments[segments.length - 1] || '').toLowerCase();
   }
 
+  /**
+   * There is exactly one Open Studies program, at /programs/open-studies, and
+   * ONLY that URL gets the courses-by-area view. It is not a credential — no
+   * terms, so its by-code dataset is empty and there is nothing to lay out as an
+   * accordion of terms. Every other program page is untouched by this branch and
+   * keeps rendering its requirements from the by-code dataset.
+   */
+  function isOpenStudiesPage() {
+    return OS_PROGRAM_PATH.test(window.location.pathname);
+  }
+
   function fetchJson(url) {
     return fetch(url, { cache: 'no-cache' }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status + ' for ' + url);
@@ -232,21 +256,112 @@
     return '<div class="bvc-accordion">' + terms.map(renderTerm).join('') + total + '</div>';
   }
 
+  /* ── Open Studies: courses by area ────────────────────────────────── */
+
+  /**
+   * Layout follows src/webflow/open-studies-courses.html, the embed this
+   * replaces: the CODE cell carries the link, and only when the course has
+   * availability. `available` is set by buildOpenStudiesByArea.mjs from
+   * osValidCourses.json (the SIS codes with purchasable offerings) expressly to
+   * decide that; unavailable courses still list, with a "No availability this
+   * term" note under the name.
+   */
+  function renderAreaCourseRow(course) {
+    var code = escapeHtml(course.code);
+    var codeCell = course.available && course.pageUrl
+      ? '<a href="' + escapeHtml(coursePageUrl(course.pageUrl)) + '">' + code + '</a>'
+      : '<span>' + code + '</span>';
+
+    var nameCell = escapeHtml(course.name);
+    if (!course.available) {
+      nameCell += '<br><span class="no-availability">No availability this term</span>';
+    }
+
+    var pdf = '';
+    if (course.pdf) {
+      var label = 'Course outline PDF for ' + (course.code || course.name || 'this course');
+      pdf = '<a class="icon tooltip" href="' + escapeHtml(course.pdf) + '" target="_blank" rel="noopener noreferrer"'
+        + ' title="' + escapeHtml(label) + '" aria-label="' + escapeHtml(label) + '">' + PDF_SVG + '</a>';
+    }
+
+    return '<tr>'
+      + '<td>' + codeCell + '</td>'
+      + '<td>' + nameCell + '</td>'
+      + '<td class="table-center">' + escapeHtml(course.credits || '') + '</td>'
+      + '<td class="table-center">' + pdf + '</td>'
+      + '</tr>';
+  }
+
+  /**
+   * pageUrl is site-relative ("/open-studies/anatomy-and-physiology"), so it
+   * resolves against whichever host is serving the page — production, UAT or a
+   * webflow.io preview. Set coursePageOrigin in the config only if the Open
+   * Studies pages ever live on a different domain than the program pages.
+   */
+  function coursePageUrl(pageUrl) {
+    var origin = CFG.coursePageOrigin ? trimSlash(CFG.coursePageOrigin) : '';
+    return origin + pageUrl;
+  }
+
+  function renderArea(area) {
+    var id = 'bvc-pr-panel-' + (++uid);
+    return '<div class="accordion-item">'
+      + '<button type="button" class="accordion-button" aria-expanded="false" aria-controls="' + id + '">'
+      + '<span>' + escapeHtml(area.name) + '</span>'
+      + '</button>'
+      + '<div class="accordion-content" id="' + id + '" role="region">'
+      + '<div class="accordion-section"><div class="accordion-table-wrap"><table>'
+      + '<thead><tr><th scope="col">Code</th><th scope="col">Course</th>'
+      + '<th scope="col" class="table-center">Credits</th>'
+      + '<th scope="col" class="table-center">PDF</th></tr></thead>'
+      + '<tbody>' + (area.courses || []).map(renderAreaCourseRow).join('') + '</tbody>'
+      + '</table></div></div>'
+      + '</div></div>';
+  }
+
+  function renderByArea(data) {
+    var areas = ((data && data.areas) || []).filter(function (area) {
+      return area && (area.courses || []).length > 0;
+    });
+    if (!areas.length) return '';
+
+    return '<div class="bvc-accordion">'
+      + '<div class="os-controls">'
+      + '<button type="button" data-os-expand>Expand all</button>'
+      + '<button type="button" data-os-collapse>Collapse all</button>'
+      + '</div>'
+      + areas.map(renderArea).join('')
+      + '</div>';
+  }
+
+  function setPanelOpen(button, content, open) {
+    button.setAttribute('aria-expanded', String(open));
+    if (open) {
+      content.classList.add('open');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    } else {
+      content.classList.remove('open');
+      content.style.maxHeight = '';
+    }
+  }
+
   function attachHandlers(root) {
     root.querySelectorAll('.accordion-button').forEach(function (button) {
       button.addEventListener('click', function () {
-        var content = button.nextElementSibling;
-        var expanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', String(!expanded));
-        if (expanded) {
-          content.style.maxHeight = '';
-          content.classList.remove('open');
-        } else {
-          content.classList.add('open');
-          content.style.maxHeight = content.scrollHeight + 'px';
-        }
+        setPanelOpen(button, button.nextElementSibling, button.getAttribute('aria-expanded') !== 'true');
       });
     });
+
+    // Open Studies view only — the controls are absent from the term accordion.
+    function setAll(open) {
+      root.querySelectorAll('.accordion-item').forEach(function (item) {
+        setPanelOpen(item.querySelector('.accordion-button'), item.querySelector('.accordion-content'), open);
+      });
+    }
+    var expandAll = root.querySelector('[data-os-expand]');
+    var collapseAll = root.querySelector('[data-os-collapse]');
+    if (expandAll) expandAll.addEventListener('click', function () { setAll(true); });
+    if (collapseAll) collapseAll.addEventListener('click', function () { setAll(false); });
 
     // Keep an open panel sized correctly when the layout reflows.
     window.addEventListener('resize', function () {
@@ -289,17 +404,29 @@
     ensureStylesheet(origin);
     renderStatus(target, 'Loading program requirements…');
 
-    resolveCode(target, origin)
-      .then(function (code) {
-        return fetchJson(origin + BY_CODE_PATH + encodeURIComponent(code) + '.json');
-      })
-      .then(function (data) {
-        var html = renderAccordion(data);
-        if (!html) {
-          renderStatus(target, 'Course requirements for this program are not published yet.');
+    function loadOpenStudies() {
+      return fetchJson(origin + OS_BY_AREA_PATH).then(function (data) {
+        return { html: renderByArea(data), empty: 'Open Studies courses are not published yet.' };
+      });
+    }
+
+    // The Open Studies page is decided by the URL alone — no code lookup, so it
+    // renders even if the program is missing from the requirements index.
+    var loading = isOpenStudiesPage()
+      ? loadOpenStudies()
+      : resolveCode(target, origin).then(function (code) {
+          return fetchJson(origin + BY_CODE_PATH + encodeURIComponent(code) + '.json').then(function (data) {
+            return { html: renderAccordion(data), empty: 'Course requirements for this program are not published yet.' };
+          });
+        });
+
+    loading
+      .then(function (result) {
+        if (!result.html) {
+          renderStatus(target, result.empty);
           return;
         }
-        target.innerHTML = html;
+        target.innerHTML = result.html;
         attachHandlers(target);
       })
       .catch(function (err) {

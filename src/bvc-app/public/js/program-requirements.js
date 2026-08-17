@@ -13,6 +13,8 @@
     var FALLBACK_ORIGIN = "https://bvc-app.vercel.app";
     var INDEX_PATH = "/data/static/program-requirements-index.json";
     var BY_CODE_PATH = "/data/static/program-requirements-by-code/";
+    var OS_BY_AREA_PATH = "/data/open-studies-by-area.json";
+    var OS_PROGRAM_PATH = /\/programs\/open-studies\/?$/i;
     var CSS_PATH = "/css/program-requirements.css";
     var CSS_MARKER = "data-bvc-pr-styles";
     var MOUNT_SELECTORS = ["[data-bvc-program-requirements]", "#Courses .w-richtext", "#Courses"];
@@ -78,6 +80,9 @@
       var segments = window.location.pathname.split("/").filter(Boolean);
       return (segments[segments.length - 1] || "").toLowerCase();
     }
+    function isOpenStudiesPage() {
+      return OS_PROGRAM_PATH.test(window.location.pathname);
+    }
     function fetchJson(url) {
       return fetch(url, { cache: "no-cache" }).then(function(res) {
         if (!res.ok) throw new Error("HTTP " + res.status + " for " + url);
@@ -123,20 +128,63 @@
       var total = data.grandTotalCredits != null ? '<div class="accordion-grand-total"><span>Total program credits</span><span>' + escapeHtml(data.grandTotalCredits) + "</span></div>" : "";
       return '<div class="bvc-accordion">' + terms.map(renderTerm).join("") + total + "</div>";
     }
+    function renderAreaCourseRow(course) {
+      var code = escapeHtml(course.code);
+      var codeCell = course.available && course.pageUrl ? '<a href="' + escapeHtml(coursePageUrl(course.pageUrl)) + '">' + code + "</a>" : "<span>" + code + "</span>";
+      var nameCell = escapeHtml(course.name);
+      if (!course.available) {
+        nameCell += '<br><span class="no-availability">No availability this term</span>';
+      }
+      var pdf = "";
+      if (course.pdf) {
+        var label = "Course outline PDF for " + (course.code || course.name || "this course");
+        pdf = '<a class="icon tooltip" href="' + escapeHtml(course.pdf) + '" target="_blank" rel="noopener noreferrer" title="' + escapeHtml(label) + '" aria-label="' + escapeHtml(label) + '">' + PDF_SVG + "</a>";
+      }
+      return "<tr><td>" + codeCell + "</td><td>" + nameCell + '</td><td class="table-center">' + escapeHtml(course.credits || "") + '</td><td class="table-center">' + pdf + "</td></tr>";
+    }
+    function coursePageUrl(pageUrl) {
+      var origin = CFG.coursePageOrigin ? trimSlash(CFG.coursePageOrigin) : "";
+      return origin + pageUrl;
+    }
+    function renderArea(area) {
+      var id = "bvc-pr-panel-" + ++uid;
+      return '<div class="accordion-item"><button type="button" class="accordion-button" aria-expanded="false" aria-controls="' + id + '"><span>' + escapeHtml(area.name) + '</span></button><div class="accordion-content" id="' + id + '" role="region"><div class="accordion-section"><div class="accordion-table-wrap"><table><thead><tr><th scope="col">Code</th><th scope="col">Course</th><th scope="col" class="table-center">Credits</th><th scope="col" class="table-center">PDF</th></tr></thead><tbody>' + (area.courses || []).map(renderAreaCourseRow).join("") + "</tbody></table></div></div></div></div>";
+    }
+    function renderByArea(data) {
+      var areas = (data && data.areas || []).filter(function(area) {
+        return area && (area.courses || []).length > 0;
+      });
+      if (!areas.length) return "";
+      return '<div class="bvc-accordion"><div class="os-controls"><button type="button" data-os-expand>Expand all</button><button type="button" data-os-collapse>Collapse all</button></div>' + areas.map(renderArea).join("") + "</div>";
+    }
+    function setPanelOpen(button, content, open) {
+      button.setAttribute("aria-expanded", String(open));
+      if (open) {
+        content.classList.add("open");
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        content.classList.remove("open");
+        content.style.maxHeight = "";
+      }
+    }
     function attachHandlers(root) {
       root.querySelectorAll(".accordion-button").forEach(function(button) {
         button.addEventListener("click", function() {
-          var content = button.nextElementSibling;
-          var expanded = button.getAttribute("aria-expanded") === "true";
-          button.setAttribute("aria-expanded", String(!expanded));
-          if (expanded) {
-            content.style.maxHeight = "";
-            content.classList.remove("open");
-          } else {
-            content.classList.add("open");
-            content.style.maxHeight = content.scrollHeight + "px";
-          }
+          setPanelOpen(button, button.nextElementSibling, button.getAttribute("aria-expanded") !== "true");
         });
+      });
+      function setAll(open) {
+        root.querySelectorAll(".accordion-item").forEach(function(item) {
+          setPanelOpen(item.querySelector(".accordion-button"), item.querySelector(".accordion-content"), open);
+        });
+      }
+      var expandAll = root.querySelector("[data-os-expand]");
+      var collapseAll = root.querySelector("[data-os-collapse]");
+      if (expandAll) expandAll.addEventListener("click", function() {
+        setAll(true);
+      });
+      if (collapseAll) collapseAll.addEventListener("click", function() {
+        setAll(false);
       });
       window.addEventListener("resize", function() {
         root.querySelectorAll(".accordion-content.open").forEach(function(content) {
@@ -167,15 +215,22 @@
       var origin = resolveOrigin(target);
       ensureStylesheet(origin);
       renderStatus(target, "Loading program requirements\u2026");
-      resolveCode(target, origin).then(function(code) {
-        return fetchJson(origin + BY_CODE_PATH + encodeURIComponent(code) + ".json");
-      }).then(function(data) {
-        var html = renderAccordion(data);
-        if (!html) {
-          renderStatus(target, "Course requirements for this program are not published yet.");
+      function loadOpenStudies() {
+        return fetchJson(origin + OS_BY_AREA_PATH).then(function(data) {
+          return { html: renderByArea(data), empty: "Open Studies courses are not published yet." };
+        });
+      }
+      var loading = isOpenStudiesPage() ? loadOpenStudies() : resolveCode(target, origin).then(function(code) {
+        return fetchJson(origin + BY_CODE_PATH + encodeURIComponent(code) + ".json").then(function(data) {
+          return { html: renderAccordion(data), empty: "Course requirements for this program are not published yet." };
+        });
+      });
+      loading.then(function(result) {
+        if (!result.html) {
+          renderStatus(target, result.empty);
           return;
         }
-        target.innerHTML = html;
+        target.innerHTML = result.html;
         attachHandlers(target);
       }).catch(function(err) {
         console.error("[ProgramRequirements]", err);
