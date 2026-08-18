@@ -81,6 +81,38 @@ const DATA_ONLY = process.argv.includes('--data-only');
 
 const ts = () => new Date().toISOString();
 
+/**
+ * rmSync that survives Windows file locks.
+ *
+ * Deleting thousands of small JSON files trips EBUSY/EPERM whenever an
+ * antivirus scanner, the search indexer, or an open editor is holding a handle —
+ * it is transient and clears in milliseconds. Node retries these exact codes for
+ * us when asked; the default is zero retries, which is why an hourly run died on
+ * a single course JSON. force:true also makes a missing path a no-op.
+ */
+function removeDir(dir) {
+  rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 250 });
+}
+
+/**
+ * cpSync has no retry option of its own, and the overlay writes thousands of
+ * small JSON files into the packaged output — same lock exposure as removeDir.
+ * Re-running the copy is safe: it overwrites, so a partial pass costs nothing.
+ */
+async function copyWithRetry(from, to, options, attempts = 5) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      cpSync(from, to, options);
+      return;
+    } catch (err) {
+      const locked = err.code === 'EBUSY' || err.code === 'EPERM';
+      if (!locked || attempt >= attempts) throw err;
+      console.log(`[${ts()}] Copy hit ${err.code} (${err.path}) — attempt ${attempt}/${attempts}, retrying...`);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
+  }
+}
+
 function run(cmd, cwd = ROOT) {
   console.log(`\n[${ts()}] ▶ ${cmd}`);
   // windowsHide stops the shell PM2 spawns here from flashing up a console window
@@ -227,12 +259,25 @@ async function main() {
     join(BVC_APP, 'public', 'data', 'oScourses'),
     join(BVC_APP, 'public', 'data', 'open-studies'),
   ];
-  for (const dir of DEPLOY_ONLY ? [] : dataDirs) {
-    if (existsSync(dir)) {
-      rmSync(dir, { recursive: true });
-      mkdirSync(dir, { recursive: true });
-      console.log(`[${ts()}] Cleaned: ${dir.replace(ROOT, '.')}`);
+  //
+  //    Wrapped in try/catch: this runs OUTSIDE the build's error handling, so an
+  //    unhandled throw here would crash the process with a stack trace and NO
+  //    Teams/toast alert — a silent failure under PM2.
+  try {
+    for (const dir of DEPLOY_ONLY ? [] : dataDirs) {
+      if (existsSync(dir)) {
+        removeDir(dir);
+        mkdirSync(dir, { recursive: true });
+        console.log(`[${ts()}] Cleaned: ${dir.replace(ROOT, '.')}`);
+      }
     }
+  } catch (err) {
+    await notify(
+      'BVC Pre-clean FAILED',
+      `Could not clear stale course data (${err.code || 'error'}: ${err.path || err.message}). ` +
+        'Usually a Windows file lock — antivirus, an open editor, or a concurrent run. Nothing was deployed.'
+    );
+    process.exit(1);
   }
 
   // 1. Build — data scripts + breadcrumbs + next build → out/  (full build only)
@@ -259,7 +304,7 @@ async function main() {
       // job never touches, already sitting in the package.
       const publicData = join(BVC_APP, 'public', 'data');
       const staticData = join(BVC_APP, '.vercel', 'output', 'static', 'data');
-      cpSync(publicData, staticData, {
+      await copyWithRetry(publicData, staticData, {
         recursive: true,
         filter: (src) => !src.includes('course-outlines-pdf'),
       });
@@ -322,7 +367,7 @@ async function main() {
     try {
       const outDir = join(BVC_APP, 'out');
       const vercelOutput = join(BVC_APP, '.vercel', 'output');
-      if (existsSync(vercelOutput)) rmSync(vercelOutput, { recursive: true });
+      if (existsSync(vercelOutput)) removeDir(vercelOutput);
       mkdirSync(join(vercelOutput, 'static'), { recursive: true });
       writeFileSync(join(vercelOutput, 'config.json'), JSON.stringify({ version: 3 }));
       cpSync(outDir, join(vercelOutput, 'static'), { recursive: true });
