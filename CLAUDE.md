@@ -25,16 +25,16 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-app` | https://bvc-app.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
+| `bvc-app-uat` | https://bvc-app-uat.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
 
-**Webflow embeds reference `bvc-app` for CSS, JS, and course data:**
+**Webflow embeds reference `bvc-app-uat` for CSS, JS, and course data:**
 ```html
-<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
-<script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
-<script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
+<script src="https://bvc-app-uat.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
 ```
 
-**All deployments target `bvc-app`. Vercel is a static host only — it never rebuilds.**
+**All deployments target `bvc-app-uat`. Vercel is a static host only — it never rebuilds.**
 The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`.
 
 On-demand deploy (same steps as the hourly PM2 cron):
@@ -48,9 +48,9 @@ npm run deploy:bvcapp   # or: node pipeline.mjs
 ```bash
 npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
-npm run build:bvcapp       # Build bvc-app only (Turbo, cache bypassed with -- --force)
+npm run build:bvcapp       # Build bvc-app only (Turbo; pass -- --cache=local: to skip cache read AND write)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app
+npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app-uat
 ```
 
 ### Hourly Automated Pipeline (PM2)
@@ -64,7 +64,7 @@ node pipeline.mjs
 # PM2 setup (run once to activate the hourly schedule):
 # Note: pm2 startup does NOT work on Windows — use pm2-windows-startup instead
 npm install -g pm2
-pm2 start ecosystem.config.js       # starts cron at :50 every hour
+pm2 start ecosystem.config.js       # starts cron at :15 every hour
 pm2 save                            # save process list to ~/.pm2/dump.pm2
 npm install -g pm2-windows-startup  # Windows auto-start on login
 pm2-startup install
@@ -73,17 +73,162 @@ pm2-startup install
 pm2 status                      # check if pipeline is running/scheduled
 pm2 logs bvc-hourly-deploy      # live log tail
 pm2 restart bvc-hourly-deploy   # force an immediate run now
-pm2 stop bvc-hourly-deploy      # pause the schedule
+pm2 delete bvc-hourly-deploy && pm2 save --force   # disable the schedule
 ```
 
-**Pipeline steps** (total ~5 min):
-1. `npm run build:bvcapp --force` — data scripts + breadcrumbs + Next.js build → `out/`
-2. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
-3. `vercel pull` — refreshes `.vercel/project.json` project link
-4. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild
-5. `cleanup-data.mjs` — removes intermediate JSON files
+**`pm2 stop` does NOT disable the cron.** `cron_restart` fires on stopped apps — that
+is the whole point of pairing it with `autorestart: false`. To actually halt the
+schedule use `pm2 delete`, then `pm2 save --force` so a reboot cannot resurrect it
+from `~/.pm2/dump.pm2`.
 
-On build or deploy failure a **Windows toast notification** fires. Logs are written to `logs/` (git-ignored).
+**The cron must use six fields** (`'0 15 * * * *'`, leading `0` = second). A five-field
+`'15 * * * *'` matches on *every second* of that minute, and PM2 fires ~1 s early: it
+started a run at :49:59, matched again at :50:00, SIGINT-killed the in-flight run and
+started a second one — every hour.
+
+**Schedule rationale**: the upstream SIS → Sitecore sync starts on the hour and
+finishes ~:06, so :15 reads freshly-synced data.
+
+**Pipeline steps** (total ~5 min):
+1. `npm run build:bvcapp -- --cache=local:` — data scripts + breadcrumbs + Next.js build → `out/`
+   (no cache read **or** write — a plain `--force` still writes ~200 MB/run to `.turbo/cache`,
+   which Turbo never prunes; that once grew to 35 GB and filled the disk)
+2. **Fee guard** (`fee-guard.mjs`) — compares freshly-extracted section fees against the
+   last set that reached the site and **reports** if too much of the catalogue repriced
+   at once. Advisory since 2026-08-14: it alerts, it never stops the deploy (see below)
+3. Package `out/` into `.vercel/output/` (Vercel Build Output API v3 static format)
+4. `vercel pull` — refreshes `.vercel/project.json` project link
+5. `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild.
+   **A non-zero exit is verified, not trusted** — see "Deploy verification" below
+6. `cleanup-data.mjs` — removes intermediate JSON files (only touches `src/data/`;
+   `public/data/` survives, which is what the fee guard reads)
+
+Logs are written to `logs/` (git-ignored).
+
+### Alerting (`notify.mjs`)
+
+Two channels, covering different failures. **Neither may ever fail a deploy** — every
+function swallows its own errors and returns a boolean, because a monitoring outage
+must not become an outage.
+
+| Channel | Env var | Answers |
+|---|---|---|
+| Windows toast | — | (always on; only visible to whoever is logged into that machine) |
+| Teams | `TEAMS_WEBHOOK_URL` | *what* broke — fires only when the pipeline runs |
+| Heartbeat | `HEARTBEAT_URL` | *that* it ran — the monitor alerts when a ping fails to arrive |
+
+Fires on: Build FAILED, Package FAILED, Deploy FAILED, fee anomaly (advisory), and
+deploy-CLI-errored-but-published (advisory).
+
+### Deploy verification
+
+`vercel deploy` has exited non-zero on deploys that actually reached production —
+2026-08-11 (×2), 08-12, and 08-14, always `Error: Not authorized` thrown *after* the
+upload was accepted. Every one of those deployments was `Ready` and serving the
+production alias, so four "Deploy FAILED" pages were for releases that worked.
+
+`verifyPublished()` in `pipeline.mjs` therefore treats the exit code as a hint and the
+API as the authority. On a non-zero deploy it parses the deployment URL out of the
+deploy output, then asks **what the production alias is serving right now**, and
+requires it to be that exact deployment, and `Ready`.
+
+- **Inspect the alias, not the deployment.** `vercel inspect <deployment>` lists every
+  alias the deployment has *ever* held, so a superseded one still looks aliased and
+  would be waved through — confirmed against a real superseded deployment. Inspecting
+  `bvc-app-uat.vercel.app` instead resolves to whatever currently serves it.
+- Anything unprovable is a failure: no URL in the output, `inspect` erroring, or the
+  alias serving something else. A genuinely failed deploy leaves the alias on the
+  previous deployment, so it still reports.
+- When it does confirm a publish, the run continues and Teams gets an **advisory**
+  card (heartbeat suffix `null` — the run's real outcome pings a few steps later).
+- Scope/project live in `VERCEL_SCOPE` / `VERCEL_PROJECT`; verification must target
+  the same project as the deploy, so they are single-sourced rather than inline.
+
+**The fee anomaly alert must not touch the heartbeat.** It fires mid-run, while the
+pipeline is still working, so pinging there would tell the monitor the run had ended
+when it had not — and the genuine outcome (deploy succeeded or failed) pings a few
+steps later anyway. `notify()`'s 4th argument is the heartbeat suffix: `'/fail'`
+(default) for a real breakage, `''` for "completed as designed", and **`null` to send
+Teams + toast without pinging at all**, which is what the anomaly alert passes. The
+card still renders in the attention colour — an anomaly is worth a human look, it just
+no longer stops the release.
+
+**The heartbeat is the one that catches silence.** If the machine sleeps, the PM2 daemon
+dies, or the cron is deleted, nothing else produces a single alert — and that is
+indistinguishable from a healthy site. The pipeline pings `<url>/start` when a run
+begins, `<url>` on success, `<url>/fail` on any failure. A *local* watchdog cannot cover
+this, since it dies with the machine it is watching.
+
+**Teams payload format**: Microsoft retired the O365 connector webhooks; their
+replacement is a Power Automate **Workflows** webhook, which rejects the old MessageCard
+shape and expects an Adaptive Card in a message envelope. `teamsPayload()` picks the
+format from the webhook host, so a still-working legacy `*.office.com` URL is handled
+too. Workflows answers `202` with an empty body; connectors answer `200 "1"`.
+
+> Historical note: 28 failure alerts fired between 2026-07 and 2026-08 — 23 build, 5
+> deploy — and **none reached anyone**, because `TEAMS_WEBHOOK_URL` was never set and the
+> toast went to an unattended machine at 01:54 AM. Setting these two env vars is what
+> makes the alerting real.
+
+### Fee guard
+
+The SIS → Sitecore sync has been observed emitting **two different datasets on alternating
+hourly runs** (2026-08-12/13): e.g. `ANAT1101-20` Domestic flipped 1020 → 1000 → 1020 every
+hour, catalogue-wide, with International amounts also swapping between sections. The pipeline
+is a faithful reader — no script in this repo writes to Sitecore — so it published whichever
+half of the flip it caught, and roughly every second deploy shipped wrong prices.
+
+A real price update touches a handful of courses; a sync fault touches nearly all of them.
+The guard raises an alert when **≥25% of comparable sections and ≥10 sections** change
+price in one run.
+
+**It is advisory — it never stops a deploy** (changed 2026-08-14). It used to `exit(2)`
+and hold the site on the previous data, which traded one failure for a worse one:
+Sitecore publishes hourly, so a held run dropped that hour's *real* content changes too,
+not just the suspect prices. With the sync flipping, roughly every second run was held
+and the site silently fell hours behind — three consecutive hours went unpublished on
+2026-08-14 before anyone noticed, because a held run looks identical to a healthy one
+from the outside. Detection and reporting are unchanged; only the veto is gone.
+
+- Baseline: `.pipeline-state/fee-baseline.json` (git-ignored, machine-local). Advanced
+  after a successful deploy — so now normally every run, which makes the report mean
+  "changed since the last publish" rather than "since some older run".
+- Suppress the check entirely (skips the *reporting* too): `node pipeline.mjs
+  --skip-fee-guard` or `SKIP_FEE_GUARD=1`. Rarely wanted now that it cannot block.
+- Tune: `FEE_GUARD_THRESHOLD` (default `0.25`), `FEE_GUARD_MIN_CHANGED` (default `10`).
+- Exit codes: `0` = ran (with or without an anomaly), `1` = build/package/deploy failure.
+  **Exit `2` no longer occurs.**
+
+### Fee watcher (`sitecore-fee-watch.mjs`)
+
+Second PM2 app, `bvc-fee-watch`, cron `'0 */5 * * * *'`. Read-only GraphQL polls
+against Sitecore Edge — no build, no deploy, nothing written.
+
+Separate from the fee guard on purpose. The guard sees the catalogue once an hour,
+only while the pipeline runs, and reports a percentage; it answers *"how much of the
+catalogue moved in this release?"*. Neither is a gate — both are notification channels.
+The watcher answers *"when exactly did upstream change, and to what?"* — it
+keeps reporting when the hourly deploy is disabled, and pins the write to ~5 minutes
+instead of an hour, which is the precision the SIS team needs to match a flip against
+their own job logs.
+
+```bash
+node sitecore-fee-watch.mjs            # one poll, prints current state
+node sitecore-fee-watch.mjs --history  # every recorded flip, with __Updated stamps
+```
+
+- Probes a handful of sections across **both** trees (`Credit Courses` and `Courses`),
+  so a future fault can be identified as catalogue-wide or confined to one tree.
+- State: `.pipeline-state/fee-watch-last.json`; flip log: `fee-watch-history.jsonl`.
+- On a change it alerts through `notify.mjs` (Teams) with `from → to` and the
+  `__Updated` stamp — but **at most once per 6 h** (`FEE_WATCH_ALERT_COOLDOWN_H`).
+  The known fault flips twice an hour; alerting on each would be ~48 messages a day,
+  and an alert nobody reads is worse than no alert. The history file still records
+  **every** flip — that is the artefact, the Teams message is just the nudge.
+- **`__Updated` is the field that proves a write rather than a stale cache** — a cache
+  keeps serving an old timestamp. That single field is what identified this as an
+  upstream Sitecore write in the first place.
+- Always exits 0. Monitoring must never become an outage.
 
 ### bvc-app (active development)
 Run from `src/bvc-app/` or use `--filter`:
@@ -104,11 +249,39 @@ npm run generateMap             # Generate SIS data mapping → src/data/sis-dat
 npm run generateCourseData      # Fetch Ext Ed courses from Sitecore XMC → src/data/courses/*.json
 npm run generateOpenStudiesData # Fetch Open Studies from Sitecore XMC → src/data/oScourses/*.json
 npm run breadcrumbs:all         # Regenerate navigation breadcrumbs
-npm run generateProgramRequirements  # Program requirements keyed by CMS program code → src/data/static/program-requirements-by-code/*.json + program-requirements-index.json
 
 # Run the full pipeline (data + copy) in one command:
 npm run bvcapp-scripts
 ```
+
+**Webflow-embedded JS/CSS assets** (bundled by esbuild — see `scripts/build-os-course.mjs`):
+
+```bash
+npm run js:build        # Bundle src/js/*/index.js + src/css/*.css → public/{js,css}/* (readable, DEV/UAT)
+npm run js:build:prod   # Same, minified + console/debugger stripped (PROD)
+npm run js:watch        # Rebuild on every save
+npm run checkout-cart:html  # Regenerate src/webflow/checkout-cart.html from content.js
+```
+
+`js:build` is the first step of `npm run build`, so a normal build/deploy
+always refreshes these. Sources live under `src/js/<name>/index.js` (ES modules,
+esbuild follows imports) and `src/css/<name>.css`; each bundles to a
+self-contained IIFE at `public/js/<name>.js` served at `/js/<name>.js`.
+
+**`src/js/shared/`** holds logic imported by more than one bundle. It is not an
+entry point — esbuild inlines it into each one, so there is no runtime dependency
+between the bundles.
+
+| Module | Exports | Used by |
+|---|---|---|
+| `fees.js` | `fetchCartFees`, `dedupeFees`, `summariseFees`, `feesForSku` | os-course, ee-course, checkout |
+| `validation.js` | `validateCart`, `readValidation`, `isConflict` | os-course, ee-course, checkout |
+
+Both are free of cart/session/DOM coupling — callers own their own storage and
+rendering. They exist because checkout has to recalculate fees after pruning a
+course from the cart, and because the fail-open rules for `/validation` are subtle
+enough that three copies would drift. See "Cart availability checks" below and
+`docs/sis-api.md`.
 
 ### nextjs-jamstack
 Run from `src/nextjs-jamstack/`:
@@ -173,17 +346,12 @@ src/webflow/
   open-studies-course.html           # OS course detail — description, credits, accordion offerings, add-to-cart
   extended-education-listing.html    # EE program page — searchable flat table
   extended-education-course.html     # EE course detail — same layout as OS, reads from /data/courses/
-  program-requirements.html          # NOT an embed — the two loader tags for the hosted
-                                     # program-requirements asset pair (see below)
+  checkout-cart.html                 # checkout page multi-step form: Start→Personal→Mailing (GENERATED from content.js — do not hand-edit)
 ```
 
-**Program requirements are a hosted asset pair, not an embed.** `src/js/program-requirements/index.js`
-and `src/css/program-requirements.css` build (via `npm run js:build`) to `/js/program-requirements.js`
-and `/css/program-requirements.css`, loaded once from the program template head. The program is
-identified by its CMS `code` (`data-program-code` on `#Courses`, `<meta name="bvc-program-code">`, or
-an exact slug match in `program-requirements-index.json`) — never by guessing suffixes on the slug,
-which used to serve the ECED diploma dataset on the ECE certificate page. The script's JSON origin
-defaults to the origin it was itself served from, so the tags survive a move to a single-origin deploy.
+Two flavours of embed live here:
+- **Inline snippets** (the course listing/detail files above) — self-contained HTML+CSS+JS pasted whole into an Embed block.
+- **Bundled-asset embeds** (`checkout-cart.html`, and the `os-course` / `ee-course` / `checkout` runtimes) — the HTML is just markup carrying `data-*` hooks; the CSS and JS are separate bundled files loaded from Vercel via `<link>` / `<script src>`. Source is `src/js/<name>/` + `src/css/<name>.css`, built by `js:build`. See the JS/CSS build commands above.
 
 Key conventions:
 - **Course detail embeds target `#courseComponent`** — the existing Webflow div on course pages.
@@ -195,7 +363,64 @@ Key conventions:
 - **Accordion detail fields**: Credits (first), Fee, Dates, Days, Time. Seats are intentionally hidden (always show as available). Location is shown in the campus subheading rather than per-item.
 - **PDF course outlines** (OS only): fetched via `pdfFilename` from the course index JSON. Correct path is `/data/course-outlines-pdf/{pdfFilename}`. EE courses do not have PDF outlines.
 - **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
-- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-app.vercel.app`.
+- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-app-uat.vercel.app`.
+- **Checkout-cart embed**: a multi-step personal-info form (**Start → Personal → Mailing**; there is **no in-form payment tab and no in-form cart**), not a course renderer. Root hook is `[data-checkout]`; the runtime binds `data-*` attributes (`data-step`, `data-field`, `data-next/back`, `data-student-type`, terms/refund consent, `data-billing-same`, `data-billing-block`, `data-address-autocomplete`, `data-phone-combined`, `data-checkout-submit`). Load order: `<link .../css/checkout-cart.css>` + `<script .../js/checkout-cart.js defer>` in page settings, then paste `src/webflow/checkout-cart.html` into an Embed. `content.js` is the single source of truth (fields, options, copy, MSAL, and the `googleMaps` / `phone` / `cart` config); regenerate markup with `npm run checkout-cart:html` — never hand-edit. Modules: `field / consent / stepper / validators / storage / msal-auth / address-autocomplete`.
+  - **Mailing step** = a Mailing address + a Billing address (5 mandatory fields each: Street, City, Province, Postal Code, Country). "Billing Address same as above?" (`data-billing-same`, default checked) hides billing and exempts it from validation. Street fields have Google Places autocomplete (`address-autocomplete.js`) that fills the rest of the group — **inert until `config.googleMaps.apiKey` is set**; manual entry always works.
+  - **Phone**: visible `#phoneNumber` (10 digits) plus a `phoneCountryCode` select (default **+1**, auto-follows the mailing Country). Submitted as a **combined hidden `#phone` = `+1XXXXXXXXXX`** (no separator).
+  - **ASN** is visible/required **when the cart contains credit-bearing courses** (any `cartItems[].credits > 0`, falling back to `sessionStorage.totalCredits`), hidden and exempt from validation when none do. It is re-read on every step change. `?type` no longer gates it — a cart can mix Open Studies and Extended Ed items. The submitter mirrors this in `cartRequiresAsn()`.
+  - **Field ids** are aligned to what the submitter reads via a `submitId` override (`postalCode→postalcode`, billing `streetAddress-2/city-2/province-2/postalCode-2/country-2`, OS asn `asn-os`, billing-same checkbox `checkbox`, terms `checkbox-2`).
+  - **Submission**: the Mailing step's **"Proceed to Payment"** button (`data-checkout-submit`) validates, then dispatches a `bvc:checkout-submit` DOM event. The separate `public/js/checkout.js` (source `src/js/checkout/index.js`) listens and runs the purchase: **create token → registration → submit-payment → redirect to the Flywire payment page**. It reads courses/fees from the session cart (`sessionStorage.cartItems` / `feeSession`) and richer fields from the form. Contract: `studentId:0`, **empty `studentPk`** (a non-empty value 500s for new registrations); coded enums (gender/language/legalStatus/ethnicity) pass through `*_MAP` tables in checkout.js with known-good defaults — fill them from the SiS enum to send real values.
+  - **Page-owned scaffold**: the Webflow **page** provides `#shoppingCart` (the cart column) and optionally `#registerToCourse`. The embed must **not** declare those ids (a duplicate id shadows the page's, leaving its cart empty). checkout.js renders the cart into the page's `#shoppingCart` and re-renders it on every `bvc:checkout-step` event. Its `DOMContentLoaded` is null-guarded so missing scaffold never throws.
+  - The course-page cart button ("Proceed to Checkout") in `os-course.js` / `ee-course.js` navigates to the checkout page with `?type=os` / `?type=ee`.
+
+### bvc-app — Cart availability checks
+
+Nothing is registerable just because it rendered. The course pages are statically
+generated hourly, and the cart then sits in `sessionStorage` for the whole session,
+so what the shopper sees can be hours stale. Three checks run against the SiS API —
+full API contract and its known defects are in **`docs/sis-api.md`**.
+
+| When | Check | Catches |
+|---|---|---|
+| Add to cart | `courseofferings/{sku}` | 404s, and the seats it does know about |
+| Add to cart | `validation` (solo) | full **and** withdrawn sections, accurately |
+| Checkout load | `validation` per item | anything that died since it was added |
+| Checkout submit | `validation` per item | anything that died while the form was filled in |
+
+**`seatsAreAvailable` is not a reliable seat check.** It reported seats for 37 of the
+42 sections the SiS refuses to register, including one confirmed full on the live
+site. `/validation` is the only trustworthy source, and it reports a full section as
+`Offering Missing` — the same code it uses for a withdrawn one, so user-facing copy
+has to stay generic.
+
+**Reading a validation response**: an invalid cart arrives as **HTTP 200** with the
+verdict in the body, so `response.ok` only ever means the call was well-formed. All
+three bundles go through `readValidation()` in `src/js/shared/validation.js`, which
+returns `null` for anything it cannot interpret. Every caller **fails open** on
+`null` — a validation outage must never become a cart outage, and registration still
+gates the transaction server-side.
+
+**Checkout repair** (`checkout.repairCart()`) runs after the first paint and again
+before submit. It validates each item **on its own**, drops explicit failures,
+recalculates the cart-level fees for what remains (`shared/fees.js` — stale fees
+would otherwise be billed), rewrites `cartItems` / `feeSession` / `totalCredits`,
+shows a notice naming what went, and dispatches `bvc:cart-updated` so the form
+re-evaluates ASN visibility. A non-empty result aborts the submit rather than
+creating a registration that `submit-payment` would reject.
+
+**Config flags** — set before the scripts load, no rebuild needed:
+
+| Flag | Default | Where |
+|---|---|---|
+| `validateOnAdd` | `true` | `__OS_COURSE_CONFIG__`, `__EE_COURSE_CONFIG__` |
+| `validateConflicts` | **`false`** | all three configs |
+| `repairOnLoad` | `true` | `__BVC_CHECKOUT_CONFIG__` |
+
+> **`validateConflicts` is off for a reason.** Sending the whole cart lets the API
+> report a clash *between* items — the one thing a per-offering call cannot see — but
+> as of 2026-08-17 UAT returns `Timeblock Conflict` for **every** pair of courses,
+> including ones meeting on different days (0 of 12 disjoint-day pairs passed). Turn
+> it on only once that is fixed upstream; today it would cap the cart at one course.
 
 ### bvc-app — Route Map
 
@@ -226,8 +451,14 @@ SITECORE_GRAPHQL_API_KEY=...
 SC_APIKEY=...
 SITECORE_USERNAME=...
 SITECORE_PASSWORD=...
-# Optional: Teams incoming webhook URL for pipeline failure alerts
+# Optional: Teams webhook for pipeline alerts. Create it as a Power Automate
+# "Workflows" webhook (the old O365 connectors are retired). notify.mjs picks the
+# payload format from the host, so a legacy *.office.com URL still works.
 TEAMS_WEBHOOK_URL=
+# Optional: dead-man's switch. healthchecks.io (or compatible) ping URL. The
+# pipeline pings <url>/start, then <url> on success or <url>/fail on failure —
+# so the monitor alerts when a run stops happening at all.
+HEARTBEAT_URL=
 ```
 
 **`src/nextjs-jamstack/` (uses root `.env` or `.env.local`)**

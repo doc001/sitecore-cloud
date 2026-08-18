@@ -174,14 +174,14 @@
   .bvc-os-error { color: #dc2626; }
 </style>
 
-<div id="bvc-os-listing" data-base-url="https://bvc-app.vercel.app"></div>
+<div id="bvc-os-listing" data-base-url="https://bvc-app-uat.vercel.app"></div>
 
 <script>
 (function () {
   var container = document.getElementById('bvc-os-listing');
   if (!container) return;
 
-  var baseUrl     = (container.getAttribute('data-base-url') || 'https://bvc-app.vercel.app').replace(/\/$/, '');
+  var baseUrl     = (container.getAttribute('data-base-url') || 'https://bvc-app-uat.vercel.app').replace(/\/$/, '');
   var courseBase  = (container.getAttribute('data-course-base-url') || '').replace(/\/$/, '')
                     || (window.location.origin + '/open-studies');
   var jsonUrl     = baseUrl + '/data/open-studies/index.json';

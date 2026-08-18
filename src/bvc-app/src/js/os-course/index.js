@@ -8,16 +8,19 @@
  *   Sandbox (local mock + watch): npm run os-course:dev
  *
  * Loaded from Webflow via:
- *   <script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
+ *   <script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
  *
  * Endpoints/config are overridable. Set BEFORE this script loads:
  *   window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '', feeApplicantId: 1 };
  * Defaults (production):
- *   dataOrigin     : https://bvc-app.vercel.app        (this app's /data/*)
- *   apiOrigin      : https://bvc-api-proxy.vercel.app (mstoken, bvcpayment)
+ *   dataOrigin     : https://bvc-app-uat.vercel.app        (this app's /data/*)
+ *   apiOrigin      : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
  *   feeApplicantId : ''  (empty studentNo segment in `fee/{skus}/{studentNo}`; backend expects it)
  * ---------------------------------------------------------------------------
  */
+import { fetchCartFees, feesForSku } from '../shared/fees.js';
+import { validateCart, readValidation, isConflict } from '../shared/validation.js';
+
 (function () {
   'use strict';
   if (window.__bvcOsCourseLoaded) console.warn('[OS-Course] Already initialised — skipping duplicate load.');
@@ -25,14 +28,28 @@
     window.__bvcOsCourseLoaded = true;
     console.log('[OS-Course] Script loaded');
     var _cfg = (typeof window !== 'undefined' && window.__OS_COURSE_CONFIG__) || {},
-      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app.vercel.app',
-      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app',
+      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app-uat.vercel.app',
+      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app',
       // Fee endpoint is `fee/{skus}/{studentNo}` where {studentNo} must be EMPTY for an
       // anonymous fee preview — the URL ends in a trailing slash (`fee/2595/`). Verified
       // 2026-07-28: empty → 200 with fee data; the literal string 'null' now 404s. The
       // value does not change the returned fee amounts. Override per env (e.g. a real
       // applicant id) via window.__OS_COURSE_CONFIG__ = { feeApplicantId: <id> }. See OS-COURSE-CART.md.
       feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '',
+      // `thesissitecorexm.api/validation` is the only trustworthy availability check.
+      // courseofferings reports seats for sections the SiS considers full — it catches
+      // 5 of 42, and PSYC1101-50 is bookable on the live site today (docs/sis-api.md).
+      // Validating the course being added ON ITS OWN cannot trip the conflict defect
+      // below, so it runs on every add. Disable entirely with
+      //   window.__OS_COURSE_CONFIG__ = { validateOnAdd: false }
+      validateOnAdd = _cfg.validateOnAdd !== false,
+      // Opt-in: also send the current cart, letting the API report a clash BETWEEN
+      // items — the one thing courseofferings can never see. OFF by default because as
+      // of 2026-08-17 UAT returns `Timeblock Conflict` for EVERY pair, including
+      // courses that meet on different days, which would refuse every second add.
+      // Turn on once that is fixed upstream:
+      //   window.__OS_COURSE_CONFIG__ = { validateConflicts: true }
+      validateConflicts = true === _cfg.validateConflicts,
       tokenStorage = window.tokenStorage || {
         key: 'bvcToken',
         setToken: function (token) {
@@ -177,6 +194,9 @@
             (this.items = this.items.filter(function (item) {
               return item.sku !== sku;
             })),
+            // Removing an item can only ever resolve a conflict, so drop every
+            // conflict block and let the next add re-derive them against the new cart.
+            conflictStore.clear(),
             this.items.length < previousCount && (this.saveToSession(), this.updateAddedButtonStates(), this.updateCartCounter(), true)
           );
         },
@@ -272,6 +292,32 @@
         },
         get: function () {
           return JSON.parse(sessionStorage.getItem(this.sessionKey) || '[]');
+        },
+      },
+      // Deliberately NOT sessionStorage, unlike unavailableStore. A conflict is a
+      // relationship with what is currently in the cart, not a property of the
+      // offering — remove the other course and it is addable again. Persisting it
+      // would leave the button dead for the rest of the session.
+      conflictStore = {
+        skus: [],
+        mark: function (sku) {
+          if (-1 === this.skus.indexOf(sku)) this.skus.push(sku);
+        },
+        isConflicted: function (sku) {
+          return -1 !== this.skus.indexOf(sku);
+        },
+        clear: function () {
+          var cleared = this.skus;
+          this.skus = [];
+          // Re-enable only what this store blocked; anything in unavailableStore
+          // (no seats / 404) stays blocked on its own merits.
+          cleared.forEach(function (sku) {
+            if (unavailableStore.isUnavailable(sku)) return;
+            document.querySelectorAll('.addtocartbutton[data-product-id="' + sku + '"]').forEach(function (button) {
+              button.classList.remove('unavailable');
+              button.title = '';
+            });
+          });
         },
       };
     getValidToken().catch(function () {});
@@ -556,6 +602,35 @@
             button.classList.add('unavailable');
             return void showNotification('No seats available for this date', 'error');
           }
+          // Empty context unless conflict checking is switched on, so the default is
+          // the solo form: it answers "can this offering be registered at all", which
+          // is the question the seats check above gets wrong.
+          if (validateOnAdd) {
+            var contextSkus = validateConflicts
+                ? cart.items.map(function (item) {
+                    return item.sku;
+                  })
+                : [],
+              validationResp = await validateCart({ apiOrigin: apiOrigin, sku: cartItem.sku, cartSkus: contextSkus, token: token });
+            if (401 === validationResp.status) {
+              token = await getValidToken(true);
+              validationResp = await validateCart({ apiOrigin: apiOrigin, sku: cartItem.sku, cartSkus: contextSkus, token: token });
+            }
+            var verdict = readValidation(validationResp);
+            // A null verdict means the call failed or came back in a shape we do not
+            // recognise. Fail OPEN — a validation outage must not become a cart outage,
+            // and registration still gates the transaction server-side.
+            if (verdict && !verdict.ok) {
+              // A clash is relative to the current cart and must lift once the other
+              // course is removed. "No longer available" is a property of the offering
+              // itself, so it persists for the session like the seats check above.
+              if (isConflict(verdict)) conflictStore.mark(cartItem.sku);
+              else unavailableStore.markAsUnavailable(cartItem.sku);
+              button.classList.add('unavailable');
+              button.title = verdict.message;
+              return void showNotification(verdict.message, 'error');
+            }
+          }
           if (cart.addItem(cartItem)) {
             cart.updateAddedButtonStates();
             renderCart(true);
@@ -598,59 +673,24 @@
     console.log('[API] Availability', sku, '-> status', response.status);
     return { status: response.status, data: data };
   }
-  // Additional fees are CART-LEVEL — charged once per registration, never per
-  // course. The fee API returns a set PER course/offering, so a multi-course cart
-  // comes back with the same institutional fees repeated (each stamped with a
-  // program-offering id, and amounts that can differ by program). Collapse to ONE
-  // set by fee type (description) so each fee — Student Association, Services,
-  // Technology, Learner Wellness — shows exactly once for the whole cart. First
-  // occurrence wins. See OS-COURSE-CART.md (Backend API contract).
-  function dedupeFees(fees) {
-    var seen = {},
-      result = [];
-    (Array.isArray(fees) ? fees : []).forEach(function (fee) {
-      var key = (fee.description || '').trim().toLowerCase();
-      seen[key] || ((seen[key] = 1), result.push(fee));
-    });
-    return result;
-  }
+  // The fee fetch, dedupe and arithmetic live in ../shared/fees.js so the checkout
+  // page can recalculate after pruning a course. This wrapper keeps the parts that
+  // ARE cart-specific: per-item attribution and writing the session.
   async function calculateFees(skus, token) {
     var effectiveSkus = skus;
     if (!(Array.isArray(effectiveSkus) && 0 !== effectiveSkus.length))
       effectiveSkus = cart.items.map(function (item) {
         return item.sku;
       });
-    if (0 === effectiveSkus.length) return { status: 400, feeData: [], summary: { totalAmount: 0, totalTax: 0, grandTotal: 0, feeCount: 0 } };
-    var endpoint = 'thesissitecorexm.api/fee/' + effectiveSkus.join(',') + '/' + feeId,
-      response = await fetch(apiOrigin + '/api/bvcpayment?endpoint=' + encodeURIComponent(endpoint), { method: 'GET', mode: 'cors', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' } });
-    if (!response.ok) throw new Error('Fee API returned status ' + response.status);
-    var dedupedFees = dedupeFees(await response.json()),
-      totalAmount = dedupedFees.reduce(function (sum, fee) {
-        return sum + (fee.amount || 0);
-      }, 0),
-      totalTax = dedupedFees.reduce(function (sum, fee) {
-        return sum + (fee.tax || 0);
-      }, 0);
+    var result = await fetchCartFees({ apiOrigin: apiOrigin, skus: effectiveSkus, feeId: feeId, token: token });
+    if (0 === effectiveSkus.length) return result;
     cart.items.forEach(function (item) {
-      var courseFees = dedupedFees.filter(function (fee) {
-        return fee.courseSku === item.sku;
-      });
-      item.fees = courseFees;
-      item.feeSummary = {
-        totalAmount: courseFees.reduce(function (sum, fee) {
-          return sum + (fee.amount || 0);
-        }, 0),
-        totalTax: courseFees.reduce(function (sum, fee) {
-          return sum + (fee.tax || 0);
-        }, 0),
-        grandTotal: courseFees.reduce(function (sum, fee) {
-          return sum + (fee.amount || 0) + (fee.tax || 0);
-        }, 0),
-      };
+      var perCourse = feesForSku(result.feeData, item.sku);
+      item.fees = perCourse.fees;
+      item.feeSummary = perCourse.summary;
     });
     cart.saveToSession();
-    var result = { status: response.status, feeData: dedupedFees, summary: { totalAmount: totalAmount, totalTax: totalTax, grandTotal: totalAmount + totalTax, feeCount: dedupedFees.length } };
-    sessionManager.createFeeSession({ courseIds: effectiveSkus.join(','), fees: dedupedFees, summary: result.summary, timestamp: new Date().toISOString() });
+    sessionManager.createFeeSession({ courseIds: effectiveSkus.join(','), fees: result.feeData, summary: result.summary, timestamp: new Date().toISOString() });
     return result;
   }
   async function fetchCourseData(origin, slug) {

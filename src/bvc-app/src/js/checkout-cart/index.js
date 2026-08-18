@@ -4,7 +4,7 @@
  * Bundled by scripts/build-os-course.mjs (esbuild, IIFE) into
  * public/js/checkout-cart.js and loaded from Webflow as a plain script:
  *
- *   <script src="https://bvc-app.vercel.app/js/checkout-cart.js" defer></script>
+ *   <script src="https://bvc-app-uat.vercel.app/js/checkout-cart.js" defer></script>
  *
  * This module wires the pieces together and owns nothing itself. If you are
  * hunting a bug, it is almost certainly in one of the smaller modules that
@@ -72,6 +72,11 @@ function start() {
   function applyAsnVisibility() {
     asnField?.setVisible(cartHasCredits());
   }
+
+  // checkout.js prunes unavailable courses from the cart on page load. If the only
+  // credit-bearing course goes, ASN has to stop being required — otherwise the form
+  // blocks on a field the shopper can no longer see a reason for.
+  document.addEventListener('bvc:cart-updated', applyAsnVisibility);
 
   // Called once after the draft is restored (below), so a stale ASN saved when
   // the cart still had credits is cleared rather than re-filled, then again on

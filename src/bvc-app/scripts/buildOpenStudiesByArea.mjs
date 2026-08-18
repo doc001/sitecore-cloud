@@ -16,7 +16,7 @@ import fs from "fs";
 import path from "path";
 
 const ROOT = process.cwd();
-const PDF_BASE = "https://bvc-app.vercel.app/data/course-outlines-pdf";
+const PDF_BASE = "https://bvc-app-uat.vercel.app/data/course-outlines-pdf";
 const OUTPUT = path.resolve(ROOT, "src", "data", "open-studies-by-area.json");
 
 const OS_SOURCE = path.resolve(ROOT, "src", "data", "cms", "open-studies.json");

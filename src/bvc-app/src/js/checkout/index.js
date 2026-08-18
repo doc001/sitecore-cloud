@@ -7,12 +7,12 @@
  *   Watch : npm run js:watch      (rebuild on save)
  *
  * Loaded from Webflow on the cart-checkout page via:
- *   <script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
+ *   <script src="https://bvc-app-uat.vercel.app/js/checkout.js" defer></script>
  *
  * Config is overridable. Set BEFORE this script loads:
  *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: '' };
  * Default (production):
- *   apiOrigin : https://bvc-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
+ *   apiOrigin : https://bvc-uat-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
  *   studentPk : '' (empty — these are new/anonymous registrations; submit-payment
  *               null-refs with a 500 if a non-empty studentPk is sent)
  *
@@ -21,12 +21,28 @@
  * See OS-COURSE-CART.md (Backend API contract).
  * ---------------------------------------------------------------------------
  */
+import { fetchCartFees, feesForSku } from '../shared/fees.js';
+import { validateCart, readValidation } from '../shared/validation.js';
+
 (function () {
   'use strict';
 
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
-  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app';
+  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app';
+  // Empty studentNo segment in `fee/{skus}/{studentNo}` — matches the course pages.
+  var feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '';
+  // Re-check the cart when the checkout page loads. The cart lives in sessionStorage
+  // and can sit there for a whole session, so a course can fill or be withdrawn
+  // between the add and this page. Doing it at LOAD rather than at submit is
+  // deliberate: nothing has been typed yet, so a course dropping out reads as the
+  // cart refreshing rather than as a promise being retracted after ten minutes of
+  // form filling.
+  var repairOnLoad = _cfg.repairOnLoad !== false;
+  // Each item is checked ON ITS OWN. Sending the whole cart in one call would trip
+  // the conflict defect in docs/sis-api.md and prune a perfectly good cart to one
+  // item. Opt in once that is fixed upstream.
+  var validateConflicts = true === _cfg.validateConflicts;
   // studentPk must be EMPTY for new/anonymous registrations — submit-payment now
   // null-refs (500) if a non-empty value is sent. Left overridable via config for a
   // future signed-in/MSAL flow, but the default for this public checkout is empty.
@@ -138,6 +154,12 @@
       // Initialize everything
       this.initializeFormHandlers();
       this.loadCartItems();
+      // Render first, then reconcile — the cart paints immediately and corrects
+      // itself a beat later, rather than the column sitting empty during the calls.
+      if (repairOnLoad)
+        this.repairCart().catch(function (error) {
+          console.error('[Repair] cart repair failed; cart left as-is', error);
+        });
       this.setupBillingAddressToggle();
       this.setupPostalCodeAutoFormat();
       this.createErrorElements();
@@ -293,6 +315,142 @@
       }
     }
 
+    async getToken(forceRefresh) {
+      let token = tokenStorage.getToken();
+      if (forceRefresh || !token || tokenStorage.isTokenExpired()) {
+        token = await getMsToken();
+        tokenStorage.setToken(token);
+      }
+      return token;
+    }
+
+    /**
+     * Re-validate the cart on page load and drop anything that can no longer be
+     * registered, then recalculate fees for whatever is left.
+     *
+     * Fails OPEN in every direction: an item is dropped only on an explicit verdict
+     * from the API. A missing token, a network error, or a response shape we do not
+     * recognise leaves the cart exactly as it was — a validation outage must never
+     * empty somebody's basket on the way to paying.
+     *
+     * Returns the items it removed, so handleSubmit() can abort on a non-empty result.
+     */
+    async repairCart() {
+      let items = [];
+      try {
+        items = JSON.parse(sessionStorage.getItem('cartItems') || '[]');
+      } catch (error) {
+        return [];
+      }
+      if (!Array.isArray(items) || 0 === items.length) return [];
+
+      let token;
+      try {
+        token = await this.getToken();
+      } catch (error) {
+        console.warn('[Repair] no token; leaving the cart untouched', error);
+        return [];
+      }
+
+      const skus = items.map((item) => item.sku);
+      const verdicts = await Promise.all(
+        items.map(async (item) => {
+          // Solo by default. Sending the rest of the cart as context would trip the
+          // conflict defect and prune a healthy cart down to one item.
+          const context = validateConflicts ? skus.filter((sku) => sku !== item.sku) : [];
+          try {
+            let response = await validateCart({ apiOrigin, sku: item.sku, cartSkus: context, token });
+            if (401 === response.status) {
+              token = await this.getToken(true);
+              response = await validateCart({ apiOrigin, sku: item.sku, cartSkus: context, token });
+            }
+            return readValidation(response);
+          } catch (error) {
+            console.warn('[Repair] validation failed for', item.sku, '— keeping it', error);
+            return null;
+          }
+        })
+      );
+
+      const isDropped = (index) => !!verdicts[index] && !verdicts[index].ok;
+      const removed = items.filter((_, index) => isDropped(index));
+      if (0 === removed.length) return [];
+
+      const kept = items.filter((_, index) => !isDropped(index));
+      console.log('[Repair] dropping', removed.map((item) => item.sku).join(', '));
+
+      // Fees are CART-LEVEL, so removing a course changes the whole set. Recalculate
+      // before re-rendering, or the page bills the previous cart's fees.
+      try {
+        const result = await fetchCartFees({ apiOrigin, skus: kept.map((item) => item.sku), feeId, token });
+        kept.forEach((item) => {
+          const perCourse = feesForSku(result.feeData, item.sku);
+          item.fees = perCourse.fees;
+          item.feeSummary = perCourse.summary;
+        });
+        if (0 === kept.length) sessionStorage.removeItem('feeSession');
+        else
+          sessionStorage.setItem(
+            'feeSession',
+            JSON.stringify({
+              active: true,
+              createdAt: new Date().toISOString(),
+              // Shape must match what the cart writes — getSessionFees() reads
+              // feeSession.feeData.fees / .summary.
+              feeData: { courseIds: kept.map((item) => item.sku).join(','), fees: result.feeData, summary: result.summary, timestamp: new Date().toISOString() },
+              relatedTo: 'cartSession',
+            })
+          );
+      } catch (error) {
+        // Showing no fees beats showing the previous cart's fees on a cart that changed.
+        console.error('[Repair] fee recalculation failed; clearing the fee session', error);
+        sessionStorage.removeItem('feeSession');
+      }
+
+      sessionStorage.setItem('cartItems', JSON.stringify(kept));
+      // Keep the credits mirror in step — ASN visibility falls back to it when the
+      // cart cannot be read, and dropping the only credit course must hide the field.
+      try {
+        if (null !== sessionStorage.getItem('totalCredits'))
+          sessionStorage.setItem(
+            'totalCredits',
+            String(
+              kept.reduce(function (total, item) {
+                return total + (parseInt(item.credits, 10) || 0);
+              }, 0)
+            )
+          );
+      } catch (error) {
+        /* non-fatal */
+      }
+
+      const names = removed.map((item) => item.productName || item.name || item.sku);
+      this.showCartNotice(
+        1 === names.length
+          ? `${names[0]} is no longer available and has been removed from your cart.`
+          : `These courses are no longer available and have been removed from your cart: ${names.join(', ')}.`
+      );
+      this.loadCartItems();
+      // Lets the form re-evaluate anything derived from the cart (ASN visibility).
+      document.dispatchEvent(new CustomEvent('bvc:cart-updated', { detail: { removed: removed.length, remaining: kept.length } }));
+      return removed;
+    }
+
+    showCartNotice(text) {
+      if (!this.shoppingCartElement || !this.shoppingCartElement.parentNode) return;
+      let notice = document.getElementById('bvc-cart-notice');
+      if (!notice) {
+        notice = document.createElement('div');
+        notice.id = 'bvc-cart-notice';
+        notice.setAttribute('role', 'status');
+        // Inserted as a SIBLING: displayCartItems() overwrites the cart element's
+        // innerHTML, so a notice placed inside it would vanish on the next render.
+        notice.style.cssText = 'padding:12px;margin-bottom:12px;border-left:4px solid #b00020;background:#fdf0f2;color:#5c0011;font-size:14px;line-height:1.4;';
+        this.shoppingCartElement.parentNode.insertBefore(notice, this.shoppingCartElement);
+      }
+      notice.textContent = text;
+    }
+
     loadCartItems() {
       // Check if cart items exist in sessionStorage
       let cartItems = [];
@@ -409,68 +567,6 @@
         console.error('Error reading session fee totals:', error);
       }
       return { amount: 0, tax: 0 };
-    }
-
-    /**
-     * Fees are mandatory when the cart contains credit-bearing (Open Studies)
-     * courses, not when ?type=os — carts can mix OS and EE items, same reasoning
-     * as cartRequiresAsn(). Extended Ed is deliberately fee-optional: see
-     * src/js/ee-course/index.js, which gates its checkout button on cart
-     * contents alone and fails silently when the fee API is unreachable.
-     */
-    cartRequiresFees(items) {
-      const list = Array.isArray(items) ? items : [];
-      return list.some((item) => parseFloat(item && item.credits) > 0);
-    }
-
-    /**
-     * Whether feeSession holds fees calculated for THIS cart.
-     *
-     * os-course.js only enables its checkout button once fees are in the session
-     * (renderCart, `feesLoaded`), but that gate lives in the cart drawer — a
-     * student who reaches this page by bookmark, history, or a back/forward step
-     * after a fee failure arrives with cartItems and no feeSession, and the
-     * payment link would be created for tuition only. This is the same check,
-     * repeated where the money is committed.
-     *
-     * courseIds is written by calculateFees() in os-course.js / ee-course.js as
-     * the comma-joined SKU list the fees were calculated for; comparing it to the
-     * cart is what catches a *stale* session, not just a missing one.
-     */
-    getFeeSessionState(items) {
-      const cartSkus = (Array.isArray(items) ? items : [])
-        .map((item) => String((item && (item.id || item.sku)) || '').trim())
-        .filter(Boolean)
-        .sort();
-
-      let feeData = null;
-      try {
-        const feeSession = JSON.parse(sessionStorage.getItem('feeSession') || 'null');
-        feeData = feeSession && feeSession.feeData;
-      } catch (error) {
-        return { ok: false, reason: 'the stored fee session could not be read' };
-      }
-
-      if (!feeData || !Array.isArray(feeData.fees)) {
-        return { ok: false, reason: 'no fees have been calculated for this cart' };
-      }
-
-      const feeSkus = String(feeData.courseIds || '')
-        .split(',')
-        .map((sku) => sku.trim())
-        .filter(Boolean)
-        .sort();
-
-      if (feeSkus.length === 0) {
-        return { ok: false, reason: 'the stored fees are not linked to any course' };
-      }
-      if (feeSkus.join(',') !== cartSkus.join(',')) {
-        return {
-          ok: false,
-          reason: `the stored fees are for a different set of courses (fees: ${feeSkus.join(',') || 'none'}; cart: ${cartSkus.join(',') || 'none'})`,
-        };
-      }
-      return { ok: true, reason: '' };
     }
 
     displayCartItems(items) {
@@ -718,6 +814,24 @@
       if (!this.validateForm()) {
         return;
       }
+      // Last line of defence. The load-time repair can be minutes old by now — a
+      // section can fill while the shopper works through the three form steps. Catch
+      // it here rather than creating a registration that submit-payment will reject
+      // with a generic "please try again" the shopper can do nothing about.
+      // Fails open: repairCart() only ever returns items the API explicitly refused.
+      try {
+        const droppedAtSubmit = await this.repairCart();
+        if (droppedAtSubmit.length) {
+          this.showErrorMessage(
+            1 === droppedAtSubmit.length
+              ? `${droppedAtSubmit[0].productName || droppedAtSubmit[0].sku} is no longer available and has been removed. Please review your cart before continuing to payment.`
+              : 'Some courses are no longer available and have been removed. Please review your cart before continuing to payment.'
+          );
+          return;
+        }
+      } catch (error) {
+        console.error('[Repair] pre-submit check failed; continuing', error);
+      }
       // Get cart items
       let cartItems = [];
       try {
@@ -728,25 +842,6 @@
       } catch (error) {
         console.error('Error loading cart items:', error);
       }
-
-      // Fail fast, BEFORE registration/. submitPayment() repeats this check as
-      // the last line of defence, but by then the student is registered in SiS
-      // with no payment against it — an orphan record a human has to clean up.
-      if (this.cartRequiresFees(cartItems)) {
-        const feeState = this.getFeeSessionState(cartItems);
-        if (!feeState.ok) {
-          console.error('[Checkout] Blocking registration — fee check failed:', feeState.reason, {
-            cart: cartItems.map((item) => (item && (item.id || item.sku)) || ''),
-            feeSession: sessionStorage.getItem('feeSession'),
-          });
-          this.showErrorMessage(
-            `Additional fees have not been confirmed for your cart (${feeState.reason}). ` +
-              'Please return to your cart, remove and re-add a course so fees recalculate, then try again.'
-          );
-          return;
-        }
-      }
-
       // Get session fees if they exist
       const sessionFees = this.getSessionFees();
       // Extract course IDs
@@ -942,22 +1037,6 @@
 
         if (!coursesInCartString || !registrationId) {
           throw new Error('Missing course ID(s) or registration ID.');
-        }
-
-        // Refuse to create a payment link for a credit cart whose fees are
-        // missing or stale — totalAmount above would silently bill tuition only.
-        if (this.cartRequiresFees(cartItems)) {
-          const feeState = this.getFeeSessionState(cartItems);
-          if (!feeState.ok) {
-            console.error('[Checkout] Blocking payment — fee check failed:', feeState.reason, {
-              cart: courseIds,
-              feeSession: sessionStorage.getItem('feeSession'),
-            });
-            throw new Error(
-              `Additional fees have not been confirmed for your cart (${feeState.reason}). ` +
-                'Please return to your cart, remove and re-add a course so fees recalculate, then try again.'
-            );
-          }
         }
 
         // Construct final URL

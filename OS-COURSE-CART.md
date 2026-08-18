@@ -47,7 +47,7 @@ The sandbox points the script at itself via:
 ```js
 window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '', feeApplicantId: 1 };
 ```
-In production these default to the live origins (data: `bvc-app.vercel.app`, api: `bvc-uat-api-proxy.vercel.app`, feeApplicantId: `1`).
+In production these default to the live origins (data: `bvc-app-uat.vercel.app`, api: `bvc-uat-api-proxy.vercel.app`, feeApplicantId: `1`).
 
 ## Backend API contract (`bvcpayment` proxy)
 
@@ -113,8 +113,8 @@ npm run os-course:sandbox # server only (no watch)
 Add this to the page (before `</body>`):
 
 ```html
-<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
-<script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
+<script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
 ```
 
 This is the complete embed — `os-course.css` contains all the component **and**
@@ -132,7 +132,7 @@ The file URLs are stable, so Webflow/browsers may cache an old copy after a
 deploy. During active testing, append a version query to force a fresh fetch:
 
 ```html
-<script src="https://bvc-app.vercel.app/js/os-course.js?v=2" defer></script>
+<script src="https://bvc-app-uat.vercel.app/js/os-course.js?v=2" defer></script>
 ```
 
 ## Checkout script (cart-checkout page)
@@ -152,14 +152,20 @@ every `npm run build`.
 **Load from Webflow** (before `</body>`, on the cart-checkout page):
 
 ```html
-<script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
+<script src="https://bvc-app-uat.vercel.app/js/checkout.js" defer></script>
 ```
 
 The bundle is self-contained — it includes the shared `tokenStorage` / `getMsToken`
 helpers (reused if the cart already defined them) and reads cart state from
-`sessionStorage` (`cartItems`, `feeSession`). It drives the form on
-`?type=os` (Open Studies, ASN required); **any other value (e.g. `?type=ee`) or no
-`type` is treated as Extended Ed** (ASN not required).
+`sessionStorage` (`cartItems`, `feeSession`).
+
+**ASN is gated on credits, not on `?type`.** A cart can mix Open Studies and
+Extended Ed items, so `cartRequiresAsn()` requires the ASN whenever any
+`cartItems[].credits > 0` (falling back to `sessionStorage.totalCredits`), and
+skips it otherwise. `getAsnField()` picks the first *enabled* of `#asn-os` /
+`#asn`, so it works on the legacy page (which ships both and disables the one
+that does not apply) and on the checkout-cart form (which ships `#asn-os`
+alone and shows/hides it by the same credits rule).
 
 Config is overridable (set before the script loads):
 ```js
@@ -223,7 +229,8 @@ sessionStorage keys — so the shared **checkout** reads its cart identically.
 Differences from `os-course.js`:
 - Reads **`/data/courses/course-{sisId}.json`** (not `/data/oScourses/`).
 - **No PDF outline** and no category-index slug lookup (EE has neither).
-- Checkout redirect is **`../cart-checkout?type=ee`** (Extended Ed, no ASN).
+- Checkout redirect is **`../cart-checkout?type=ee`** (Extended Ed). Note the
+  ASN is not keyed off this parameter — see the credits rule above.
 - Config namespace is **`window.__EE_COURSE_CONFIG__`** (`{ dataOrigin, apiOrigin, feeApplicantId }`, same defaults as OS).
 
 The course `sisId` is resolved from **`#courseComponent[data-sisid]`**, falling back
@@ -234,8 +241,8 @@ served file (it's static; tokens can't be injected into it).
 CSS classes, so `os-course.css` is required too:
 
 ```html
-<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
-<script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
+<script src="https://bvc-app-uat.vercel.app/js/ee-course.js" defer></script>
 ```
 
 > ⚠️ **Migrating from the old inline EE script:** it targeted a stale data shape
