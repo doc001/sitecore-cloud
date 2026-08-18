@@ -48,5 +48,27 @@ module.exports = {
       merge_logs: true,
       time: true,
     },
+    {
+      name: 'bvc-sis-health',
+      script: 'sis-health-watch.mjs',
+      // Every 5 minutes, offset to :02/:07/:12… so it never starts in the same
+      // second as bvc-fee-watch and the two cannot contend for the runner.
+      //
+      // This is the highest-severity watcher of the three. The fee watch reports
+      // wrong PRICES; this one reports a cart that cannot take an order at all.
+      // It probes the live SiS API (courseofferings, validation, fee) through the
+      // production proxy and alerts on LATENCY, because that backend fails by
+      // answering late rather than by answering wrong — 15 identical requests on
+      // 2026-08-18 ranged 2.8 s to 90.3 s and every one returned HTTP 200.
+      //
+      // Read-only: no cart is created, no registration submitted.
+      cron_restart: '0 2-59/5 * * * *',
+      autorestart: false,
+      watch: false,
+      out_file: 'logs/sis-health-out.log',
+      error_file: 'logs/sis-health-error.log',
+      merge_logs: true,
+      time: true,
+    },
   ],
 };

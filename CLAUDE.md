@@ -230,6 +230,60 @@ node sitecore-fee-watch.mjs --history  # every recorded flip, with __Updated sta
   upstream Sitecore write in the first place.
 - Always exits 0. Monitoring must never become an outage.
 
+### SiS health watcher (`sis-health-watch.mjs`)
+
+Third PM2 app, `bvc-sis-health`, cron `'0 2-59/5 * * * *'` — every 5 minutes, offset
+from `bvc-fee-watch` so the two never start in the same second. Read-only: it creates
+no cart and submits no registration.
+
+**The highest-severity watcher of the three.** The fee guard and fee watcher report
+wrong *prices*; this one reports a cart that cannot take an order at all. Nothing else
+touches the live API a shopper hits on Add to Cart — the fee watcher polls Sitecore
+Edge, a different system holding catalogue data.
+
+```bash
+node sis-health-watch.mjs            # one poll, prints per-probe timings
+node sis-health-watch.mjs --history  # recorded state changes
+```
+
+**It alerts on LATENCY, not status codes.** Measured 2026-08-18 against production —
+15 identical requests to `courseofferings/2428`:
+
+```
+min 2.8s   median 10.9s   max 90.3s   mean 31.5s      every one HTTP 200
+```
+
+SiS does not fail by answering wrong; it fails by answering late. The `504 Gateway
+Timeout` the browser shows is the Vercel proxy giving up on a call SiS would
+eventually have completed. **A status-code check would have reported everything
+healthy throughout the entire outage**, which is why this watcher times every probe
+and treats the status code as secondary.
+
+- Probes all three endpoints the cart depends on — `courseofferings` (add to cart),
+  `validation` (seat check), `fee` (checkout total). All three degraded together on
+  2026-08-18, so probing one would under-report.
+- **`mstoken` is the control, and every alert carries it.** It runs on the *same*
+  Vercel project as the cart endpoints and held 0.29–0.90 s while they ranged to 90 s.
+  Fast control + slow probes = the fault is the SiS backend (`devapi.bvc.dev`), not the
+  proxy. That comparison is in the Teams card so nobody re-derives it under pressure.
+- `SLOW` at 8 s (`SIS_WATCH_SLOW_MS`) — above a healthy ~2 s call, below the 10.9 s
+  incident median. `DOWN` on non-2xx or past 30 s (`SIS_WATCH_TIMEOUT_MS`), because a
+  call that slow has already produced a 504 in someone's browser.
+- **Two consecutive bad polls before alerting** (`SIS_WATCH_FAILS_BEFORE_ALERT`). This
+  backend is erratic enough that one unlucky sample must not page anyone. Teams
+  alerts then cool down for 1 h (`SIS_WATCH_COOLDOWN_H`); a **recovery** message is
+  sent when it returns to OK, so an open alert never goes stale.
+- Its own heartbeat, `HEARTBEAT_SIS_URL` — success when healthy, `/fail` when not.
+  Separate from `HEARTBEAT_URL` because "SiS is unhealthy" and "the deploy pipeline
+  failed" are different conditions needing different alarms. This is also the only
+  thing that catches the watcher itself dying.
+- State: `.pipeline-state/sis-watch-last.json`; incidents: `sis-watch-history.jsonl`.
+- Always exits 0.
+
+> The repair is not in this repo. `bvc-api-proxy` is a separate Vercel project, and
+> the slow leg is the SiS backend behind it. This watcher exists to prove *when* it
+> degrades and hand the SiS team timestamps they can match to their own logs.
+
 ### bvc-app (active development)
 Run from `src/bvc-app/` or use `--filter`:
 
@@ -459,7 +513,22 @@ TEAMS_WEBHOOK_URL=
 # pipeline pings <url>/start, then <url> on success or <url>/fail on failure —
 # so the monitor alerts when a run stops happening at all.
 HEARTBEAT_URL=
+# Optional: separate dead-man's switch for the SiS health watcher. A DIFFERENT
+# check from HEARTBEAT_URL — "the cart's backend is unhealthy" and "the deploy
+# pipeline failed" need different alarms and different escalation.
+HEARTBEAT_SIS_URL=
 ```
+
+`sis-health-watch.mjs` also reads these, all optional with working defaults:
+
+| var | default | what it does |
+|---|---|---|
+| `SIS_API_ORIGIN` | `https://bvc-api-proxy.vercel.app` | proxy to probe; point at the UAT proxy to watch UAT |
+| `SIS_WATCH_SKU` | `2428` | offering id to time; change if that section is withdrawn |
+| `SIS_WATCH_SLOW_MS` | `8000` | at/over this, a probe is DEGRADED |
+| `SIS_WATCH_TIMEOUT_MS` | `30000` | give up and call it DOWN |
+| `SIS_WATCH_FAILS_BEFORE_ALERT` | `2` | consecutive bad polls before Teams fires |
+| `SIS_WATCH_COOLDOWN_H` | `1` | minimum gap between Teams alerts |
 
 **`src/nextjs-jamstack/` (uses root `.env` or `.env.local`)**
 ```
