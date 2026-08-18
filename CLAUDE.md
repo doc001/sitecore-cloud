@@ -25,16 +25,16 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-app-uat` | https://bvc-app-uat.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
+| `bvc-app` | https://bvc-app.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
 
-**Webflow embeds reference `bvc-app-uat` for CSS, JS, and course data:**
+**Webflow embeds reference `bvc-app` for CSS, JS, and course data:**
 ```html
-<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
-<script src="https://bvc-app-uat.vercel.app/js/ee-course.js" defer></script>
-<script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
+<script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
 ```
 
-**All deployments target `bvc-app-uat`. Vercel is a static host only — it never rebuilds.**
+**All deployments target `bvc-app`. Vercel is a static host only — it never rebuilds.**
 The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`.
 
 On-demand deploy (same steps as the hourly PM2 cron):
@@ -50,7 +50,7 @@ npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
 npm run build:bvcapp       # Build bvc-app only (Turbo; pass -- --cache=local: to skip cache read AND write)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app-uat
+npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app
 ```
 
 ### Hourly Automated Pipeline (PM2)
@@ -135,7 +135,7 @@ requires it to be that exact deployment, and `Ready`.
 - **Inspect the alias, not the deployment.** `vercel inspect <deployment>` lists every
   alias the deployment has *ever* held, so a superseded one still looks aliased and
   would be waved through — confirmed against a real superseded deployment. Inspecting
-  `bvc-app-uat.vercel.app` instead resolves to whatever currently serves it.
+  `bvc-app.vercel.app` instead resolves to whatever currently serves it.
 - Anything unprovable is a failure: no URL in the output, `inspect` erroring, or the
   alias serving something else. A genuinely failed deploy leaves the alias on the
   previous deployment, so it still reports.
@@ -363,7 +363,7 @@ Key conventions:
 - **Accordion detail fields**: Credits (first), Fee, Dates, Days, Time. Seats are intentionally hidden (always show as available). Location is shown in the campus subheading rather than per-item.
 - **PDF course outlines** (OS only): fetched via `pdfFilename` from the course index JSON. Correct path is `/data/course-outlines-pdf/{pdfFilename}`. EE courses do not have PDF outlines.
 - **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
-- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-app-uat.vercel.app`.
+- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-app.vercel.app`.
 - **Checkout-cart embed**: a multi-step personal-info form (**Start → Personal → Mailing**; there is **no in-form payment tab and no in-form cart**), not a course renderer. Root hook is `[data-checkout]`; the runtime binds `data-*` attributes (`data-step`, `data-field`, `data-next/back`, `data-student-type`, terms/refund consent, `data-billing-same`, `data-billing-block`, `data-address-autocomplete`, `data-phone-combined`, `data-checkout-submit`). Load order: `<link .../css/checkout-cart.css>` + `<script .../js/checkout-cart.js defer>` in page settings, then paste `src/webflow/checkout-cart.html` into an Embed. `content.js` is the single source of truth (fields, options, copy, MSAL, and the `googleMaps` / `phone` / `cart` config); regenerate markup with `npm run checkout-cart:html` — never hand-edit. Modules: `field / consent / stepper / validators / storage / msal-auth / address-autocomplete`.
   - **Mailing step** = a Mailing address + a Billing address (5 mandatory fields each: Street, City, Province, Postal Code, Country). "Billing Address same as above?" (`data-billing-same`, default checked) hides billing and exempts it from validation. Street fields have Google Places autocomplete (`address-autocomplete.js`) that fills the rest of the group — **inert until `config.googleMaps.apiKey` is set**; manual entry always works.
   - **Phone**: visible `#phoneNumber` (10 digits) plus a `phoneCountryCode` select (default **+1**, auto-follows the mailing Country). Submitted as a **combined hidden `#phone` = `+1XXXXXXXXXX`** (no separator).

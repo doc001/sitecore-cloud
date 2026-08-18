@@ -62,7 +62,7 @@ export function teamsPayload(url, title, message, isFailure = true) {
             {
               type: 'FactSet',
               facts: [
-                { title: 'Project', value: 'bvc-app-uat' },
+                { title: 'Project', value: 'bvc-app' },
                 { title: 'Host', value: process.env.COMPUTERNAME ?? 'unknown' },
                 { title: 'Time', value: new Date().toLocaleString() },
               ],

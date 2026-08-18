@@ -7,12 +7,12 @@
  *   Watch : npm run js:watch      (rebuild on save)
  *
  * Loaded from Webflow on the cart-checkout page via:
- *   <script src="https://bvc-app-uat.vercel.app/js/checkout.js" defer></script>
+ *   <script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
  *
  * Config is overridable. Set BEFORE this script loads:
  *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: '' };
  * Default (production):
- *   apiOrigin : https://bvc-uat-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
+ *   apiOrigin : https://bvc-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
  *   studentPk : '' (empty — these are new/anonymous registrations; submit-payment
  *               null-refs with a 500 if a non-empty studentPk is sent)
  *
@@ -29,7 +29,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
 
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
-  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app';
+  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app';
   // Empty studentNo segment in `fee/{skus}/{studentNo}` — matches the course pages.
   var feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '';
   // Re-check the cart when the checkout page loads. The cart lives in sessionStorage

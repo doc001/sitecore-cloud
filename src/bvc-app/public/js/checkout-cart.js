@@ -35,7 +35,7 @@
       scopes: ["openid", "profile", "email", "https://bowvalleycollege.ca/ngew/test/login"],
       // v4 exposes initialize(); the 2.12.0 build in the original embed does not.
       msalCdn: "https://alcdn.msauth.net/browser/4.5.0/js/msal-browser.min.js",
-      studentApiBase: "https://nextjs-jamstack-dev.vercel.app/api/bvcpayment/"
+      studentApiBase: "https://bvc-api-proxy.vercel.app/api/bvcpayment/"
     },
     /**
      * Google Maps Places autocomplete for the address fields (NGEW-217).

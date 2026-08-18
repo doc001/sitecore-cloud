@@ -4,7 +4,7 @@
  * Bundled by scripts/build-os-course.mjs (esbuild, IIFE) into
  * public/js/checkout-cart.js and loaded from Webflow as a plain script:
  *
- *   <script src="https://bvc-app-uat.vercel.app/js/checkout-cart.js" defer></script>
+ *   <script src="https://bvc-app.vercel.app/js/checkout-cart.js" defer></script>
  *
  * This module wires the pieces together and owns nothing itself. If you are
  * hunting a bug, it is almost certainly in one of the smaller modules that

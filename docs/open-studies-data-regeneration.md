@@ -64,12 +64,12 @@ not real content divergence. Resolution strategy:
 Regenerated data is only live once deployed to Vercel. Per the project setup:
 
 - `bvc-uat` (https://bvc-uat.vercel.app) — UAT / testing.
-- `bvc-app-uat` (https://bvc-app-uat.vercel.app) — **production; the Open Studies
+- `bvc-app` (https://bvc-app.vercel.app) — **production; the Open Studies
   listing embed fetches `index.json` from here.** Deploying to `bvc-uat` alone
   does **not** update what Webflow serves.
 
 ```bash
-vercel deploy --prod --scope=bvc-marketing-its --project=bvc-app-uat
+vercel deploy --prod --scope=bvc-marketing-its --project=bvc-app
 ```
 
 ## Session note (2026-06-19)
@@ -78,4 +78,4 @@ Resolved a `vercel-uat` pull merge (local "New course added by Thesis Team" vs
 incoming EE-CSS commits) by keeping local data (superset), regenerated the full OS
 dataset (86 courses, 348 sections, 388 timeBlocks; 172 public files; 84 breadcrumb
 routes), and committed as merge `af3e2ed1`. **Not pushed and not deployed** as of
-that session — remaining steps were `git push` and a `bvc-app-uat` deploy.
+that session — remaining steps were `git push` and a `bvc-app` deploy.

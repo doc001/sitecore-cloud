@@ -205,13 +205,13 @@ The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-app-uat` | https://bvc-app-uat.vercel.app | **Production** — sole deployment target; all Webflow embeds load CSS/JS/data from here |
+| `bvc-app` | https://bvc-app.vercel.app | **Production** — sole deployment target; all Webflow embeds load CSS/JS/data from here |
 
 **Vercel is a static host only.** The site is built locally; the pre-built `out/` folder is packaged and uploaded directly using `vercel deploy --prebuilt`. Vercel never runs a build on its servers.
 
 ## Deploying
 
-All deployments target `bvc-app-uat`. Run on demand from the repo root:
+All deployments target `bvc-app`. Run on demand from the repo root:
 
 ```powershell
 npm run deploy:bvcapp   # runs the full pipeline: build → package → deploy → cleanup
@@ -221,20 +221,20 @@ node pipeline.mjs
 
 ## Webflow Embed Asset URLs
 
-All Webflow embeds (course listings, course detail pages) load assets and data from `bvc-app-uat.vercel.app`:
+All Webflow embeds (course listings, course detail pages) load assets and data from `bvc-app.vercel.app`:
 
 ```html
-<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
-<script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
-<script src="https://bvc-app-uat.vercel.app/js/ee-course.js" defer></script>
-<script src="https://bvc-app-uat.vercel.app/js/checkout.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
+<script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
+<script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
 ```
 
 ---
 
 # HOURLY AUTOMATED PIPELINE (PM2)
 
-`pipeline.mjs` runs a full data refresh and deploys to `bvc-app-uat` every hour at `:55`. It uses PM2 as a process manager and fires a Windows toast notification on failure.
+`pipeline.mjs` runs a full data refresh and deploys to `bvc-app` every hour at `:55`. It uses PM2 as a process manager and fires a Windows toast notification on failure.
 
 ## Pipeline steps (~5 min total)
 
@@ -242,7 +242,7 @@ All Webflow embeds (course listings, course detail pages) load assets and data f
 |---|---|
 | Build | `npm run build:bvcapp -- --cache=local:` — fetches data from Webflow + Sitecore XMC, generates breadcrumbs, runs Next.js static export → `out/`. Cache read *and* write are disabled: `--force` only skips the read, and the resulting ~200 MB/run write into `.turbo/cache` (never pruned by Turbo) once filled the disk. |
 | Package | Copies `out/` into `.vercel/output/static/` with a `config.json` (Vercel Build Output API v3) |
-| Link project | `vercel pull` — refreshes `.vercel/project.json` for `bvc-app-uat` |
+| Link project | `vercel pull` — refreshes `.vercel/project.json` for `bvc-app` |
 | Deploy | `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild |
 | Cleanup | Removes intermediate JSON files from `src/data/` |
 

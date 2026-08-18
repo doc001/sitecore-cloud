@@ -1,7 +1,7 @@
 <!--
   Open Studies courses-by-school accordion.
   Paste this whole block into a Webflow Embed widget.
-  Data source: https://bvc-app-uat.vercel.app/data/open-studies-by-area.json
+  Data source: https://bvc-app.vercel.app/data/open-studies-by-area.json
   Rebuild the data with: npm run generateOpenStudiesByArea  (then deploy:bvcapp)
 
   Behaviour:
@@ -132,7 +132,7 @@
 
 <script>
   (function () {
-    var DATA_URL = "https://bvc-app-uat.vercel.app/data/open-studies-by-area.json";
+    var DATA_URL = "https://bvc-app.vercel.app/data/open-studies-by-area.json";
     var PAGE_BASE = "https://www.bowvalleycollege.ca"; // Open Studies pages live here
     var root = document.querySelector("[data-bvc-open-studies]");
     if (!root) return;

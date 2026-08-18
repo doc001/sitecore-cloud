@@ -8,13 +8,13 @@
  *   Sandbox (local mock + watch): npm run os-course:dev
  *
  * Loaded from Webflow via:
- *   <script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
+ *   <script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
  *
  * Endpoints/config are overridable. Set BEFORE this script loads:
  *   window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '', feeApplicantId: 1 };
  * Defaults (production):
- *   dataOrigin     : https://bvc-app-uat.vercel.app        (this app's /data/*)
- *   apiOrigin      : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
+ *   dataOrigin     : https://bvc-app.vercel.app        (this app's /data/*)
+ *   apiOrigin      : https://bvc-api-proxy.vercel.app (mstoken, bvcpayment)
  *   feeApplicantId : ''  (empty studentNo segment in `fee/{skus}/{studentNo}`; backend expects it)
  * ---------------------------------------------------------------------------
  */
@@ -28,8 +28,8 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     window.__bvcOsCourseLoaded = true;
     console.log('[OS-Course] Script loaded');
     var _cfg = (typeof window !== 'undefined' && window.__OS_COURSE_CONFIG__) || {},
-      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app-uat.vercel.app',
-      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app',
+      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app.vercel.app',
+      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app',
       // Fee endpoint is `fee/{skus}/{studentNo}` where {studentNo} must be EMPTY for an
       // anonymous fee preview — the URL ends in a trailing slash (`fee/2595/`). Verified
       // 2026-07-28: empty → 200 with fee data; the literal string 'null' now 404s. The

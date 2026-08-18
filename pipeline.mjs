@@ -15,7 +15,7 @@ const VERCEL = join(ROOT, 'node_modules', '.bin', process.platform === 'win32' ?
 // and deploy lines; the verification step below has to inspect the SAME project,
 // so a drift between them would silently check the wrong thing.
 const VERCEL_SCOPE = 'bvc-marketing-its';
-const VERCEL_PROJECT = 'bvc-app-uat';
+const VERCEL_PROJECT = 'bvc-app';
 const PROD_ALIAS = `${VERCEL_PROJECT}.vercel.app`;
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });
