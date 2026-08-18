@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "code": "RM-BVC",
+    "slug": "risk-management-certificate-of-achievement",
+    "name": "Risk Management",
+    "programType": "Certificate of Achievement",
+    "credential": "certificate of achievement",
+    "sourceFile": "RM-BVC_-_Risk_Management_Certificate_of_Achievement.json",
+    "generatedAt": "2026-08-17T15:18:45.685Z"
+  },
+  "sectionLabel": "Program Completion Requirements",
+  "groupings": [
+    {
+      "termLabel": "Term 1",
+      "totalCredits": 6,
+      "rules": [
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "FNSR2401",
+              "title": "Risk Management Principles and Practice",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2401_Risk Management Principles and Practice_(Spring 2024_Current).pdf"
+            },
+            {
+              "code": "FNSR2402",
+              "title": "Risk Assessment and Treatment",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2402_Risk Assessment and Treatment_(Spring 2024_Current).pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "termLabel": "Term 2",
+      "totalCredits": 3,
+      "rules": [
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "FNSR2403",
+              "title": "Risk Financing",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2403_Risk Financing_(Spring 2024_Current).pdf"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "grandTotalCredits": 9
+}

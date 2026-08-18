@@ -19,13 +19,25 @@ const ROOT = process.cwd();
 const PDF_BASE = "https://bvc-app-uat.vercel.app/data/course-outlines-pdf";
 const OUTPUT = path.resolve(ROOT, "src", "data", "open-studies-by-area.json");
 
-const openStudies = JSON.parse(
-  fs.readFileSync(path.resolve(ROOT, "src", "data", "cms", "open-studies.json"), "utf-8")
-).items;
+const OS_SOURCE = path.resolve(ROOT, "src", "data", "cms", "open-studies.json");
+const AREA_SOURCE = path.resolve(ROOT, "src", "data", "cms", "program-areas.json");
 
-const programAreas = JSON.parse(
-  fs.readFileSync(path.resolve(ROOT, "src", "data", "cms", "program-areas.json"), "utf-8")
-).items;
+// Webflow's collection-items API returns the *staged* list, which still
+// contains drafts and archived records — items an editor has already taken
+// off the live site. Without this filter they ship as real courses.
+// Same rule parsePrograms.mjs applies.
+const isPublished = (item) => !item.isArchived && !item.isDraft && !!item.lastPublished;
+
+const allOpenStudies = JSON.parse(fs.readFileSync(OS_SOURCE, "utf-8")).items;
+const openStudies = allOpenStudies.filter(isPublished);
+const skippedUnpublished = allOpenStudies.length - openStudies.length;
+
+const programAreas = JSON.parse(fs.readFileSync(AREA_SOURCE, "utf-8")).items.filter(isPublished);
+
+// The CMS snapshot is only as fresh as the last `npm run getWebflowData`.
+// Report its age so a stale input can't hide behind a fresh generatedAt stamp.
+const sourceFetchedAt = fs.statSync(OS_SOURCE).mtime;
+const sourceAgeHours = Math.round((Date.now() - sourceFetchedAt.getTime()) / 36e5);
 
 // SIS codes that actually have availability to purchase (backend offerings).
 // Used to flag which courses should link out to their Open Studies page.
@@ -66,7 +78,6 @@ function formatCredits(credits) {
 // ---- Group courses by area --------------------------------------------------
 const groups = new Map(); // area id -> { id, name, slug, courses: [] }
 let skippedNoArea = 0;
-let resolvedPdf = 0;
 
 for (const item of openStudies) {
   const fd = item.fieldData || {};
@@ -77,7 +88,6 @@ for (const item of openStudies) {
   }
 
   const pdfFile = resolvePdf(fd.courseid);
-  if (pdfFile) resolvedPdf++;
 
   if (!groups.has(fd.areas)) {
     groups.set(fd.areas, { id: fd.areas, name: area.name, slug: area.slug, courses: [] });
@@ -95,9 +105,10 @@ for (const item of openStudies) {
   });
 }
 
-// De-duplicate by course code. Webflow sometimes holds two records for the
-// same course: a canonical one (clean slug) and an accidental duplicate whose
-// slug carries a collision suffix like "-f1e3b". Keep the best single row.
+// De-duplicate by course code. Most of these were Webflow's staged copies of
+// a draft — the slug of one carries a collision suffix like "-f1e3b" — and are
+// now removed by the isPublished filter above. This stays as a safety net for
+// genuine duplicate records. Keep the best single row.
 const isHashedSlug = (slug) => /-[0-9a-f]{4,6}$/.test(slug || "");
 function preferred(a, b) {
   const ah = isHashedSlug(a.slug);
@@ -130,13 +141,21 @@ for (const a of areas) {
   a.courseCount = a.courses.length;
 }
 
+// Counted off the final rows, not the raw CMS items — duplicates resolving to
+// the same course used to be tallied separately, so this could exceed
+// totalCourses (e.g. 139/104).
+const resolvedPdf = areas.reduce((sum, a) => sum + a.courses.filter((c) => c.pdf).length, 0);
+
 const output = {
   metadata: {
     generatedAt: new Date().toISOString(),
+    sourceFetchedAt: sourceFetchedAt.toISOString(),
+    sourceAgeHours,
     source: "Webflow CMS (open-studies + program-areas) and course-outlines-pdf",
     totalAreas: areas.length,
     totalCourses: areas.reduce((sum, a) => sum + a.courses.length, 0),
     coursesWithoutArea: skippedNoArea,
+    coursesUnpublished: skippedUnpublished,
     coursesWithResolvedPdf: resolvedPdf,
     coursesAvailable: areas.reduce((s, a) => s + a.courses.filter((c) => c.available).length, 0),
     duplicatesRemoved,
@@ -147,8 +166,17 @@ const output = {
 fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2), "utf-8");
 
 console.log(`✅ Wrote ${path.relative(ROOT, OUTPUT)}`);
+if (sourceAgeHours >= 24) {
+  console.warn(
+    `⚠️  CMS snapshot is ${sourceAgeHours}h old (${sourceFetchedAt.toISOString()}).` +
+      ` Run "npm run getWebflowData" — this output is stale regardless of generatedAt.`
+  );
+}
 console.log(`   Areas: ${output.metadata.totalAreas}`);
-console.log(`   Courses: ${output.metadata.totalCourses} (skipped ${skippedNoArea} with no area)`);
+console.log(
+  `   Courses: ${output.metadata.totalCourses} (skipped ${skippedNoArea} with no area,` +
+    ` ${skippedUnpublished} draft/archived)`
+);
 console.log(`   PDFs resolved: ${resolvedPdf}/${output.metadata.totalCourses}`);
 for (const a of areas) {
   console.log(`   • ${a.name}: ${a.courseCount}`);

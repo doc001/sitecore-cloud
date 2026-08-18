@@ -41,8 +41,9 @@ const COLLECTIONS = [
     { name: 'Videos', id: '6765bc6f2f11625e349abe7a' },
     { name: 'Programs Additional Fees', id: '677ef16e3d99788155da70d8' },
     { name: 'Program Courses And Tuitions Fees Per Terms', id: '677ef3666371605a8d79568a' },
-    { name: 'Requirements', id: '678185f41faebc4d71871ef3' },
-    { name: 'Requirement categories', id: '678189f13151e8c1822d3a7f' },
+    // 'Requirements' (678185f4…) and 'Requirement categories' (678189f1…) were
+    // deleted from Webflow — both IDs 404. Their last successful fetch was
+    // 2026-04-09 and nothing in the app reads them. Removed 2026-08-12.
     { name: 'Program Term Numbers', id: '678541ef844f17a7fce0ce02' },
     { name: 'Courses', id: '678557c6de5ecf01f3e67171' },
     { name: 'Members', id: '67897827e6895f9780f07a2f' },
@@ -113,22 +114,55 @@ async function fetchAllCollectionItems(siteId, collectionId) {
   return { items: allItems };
 }
 
+function writeManifest(fetched, siteId, fetchedAt) {
+  const manifest = {
+    siteId,
+    fetchedAt,
+    collections: fetched.map(({ name, filename, data }) => ({
+      name,
+      file: `${filename}.json`,
+      items: data.items.length,
+    })),
+  };
+  const filePath = path.join(dataDir, '_fetch-manifest.json');
+  fs.writeFileSync(filePath, JSON.stringify(manifest, null, 2));
+  console.log(`🧾 Wrote ${filePath}`);
+}
+
 async function fetchAllCollections(siteId = SITE_ID, collections = COLLECTIONS) {
   console.log(`🌐 Site ID: ${siteId}`);
+  const fetched = [];
   const failed = [];
+
   for (const { name, id } of collections) {
     console.log(`\n🚀 Fetching collection: "${name}" (ID: ${id})`);
     try {
       const data = await fetchAllCollectionItems(siteId, id);
-      const filename = cleanFilename(name);
-      saveToFile(data, filename);
-      console.log(`🎉 Finished: "${name}" (${data.items.length} items)\n`);
+      fetched.push({ name, filename: cleanFilename(name), data });
+      console.log(`🎉 Fetched: "${name}" (${data.items.length} items)`);
     } catch (err) {
       console.error(`❌ Failed: "${name}" —`, err.message);
       failed.push(name);
-      continue; // Move to the next collection
+      continue; // Keep going so one run reports every broken collection.
     }
   }
+
+  // All-or-nothing. Writing only the collections that succeeded leaves the data
+  // dir at mixed vintages — some files current, others months old — and every
+  // downstream build then reads stale JSON that looks perfectly valid.
+  if (failed.length > 0) {
+    console.error(
+      `\n⛔ Nothing written. ${failed.length} of ${collections.length} collection(s) failed;` +
+        ` the existing files in ${dataDir} are unchanged and now known-stale.`
+    );
+    return failed;
+  }
+
+  for (const { name, filename, data } of fetched) {
+    saveToFile(data, filename);
+    console.log(`   "${name}" → ${filename}.json`);
+  }
+  writeManifest(fetched, siteId, new Date().toISOString());
   console.log('✨ All collections processed.');
   return failed;
 }
@@ -140,7 +174,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       const failed = await fetchAllCollections();
       if (failed.length > 0) {
         console.error(`\n❌ ${failed.length} collection(s) failed to fetch: ${failed.join(', ')}`);
-        console.error('Exiting non-zero to prevent shipping partial/stale CMS data.');
+        console.error('No files were written. Exiting non-zero to prevent shipping stale CMS data.');
         process.exit(1);
       }
       process.exit(0);

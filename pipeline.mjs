@@ -20,6 +20,18 @@ const PROD_ALIAS = `${VERCEL_PROJECT}.vercel.app`;
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });
 
+// The Vercel CLI checks for a newer version on every invocation and, when stdout
+// is a TTY, PROMPTS to upgrade — defaulting to YES. Under PM2 that prompt is
+// auto-accepted, the CLI shells out to `npm i vercel@latest`, and npm is not on
+// PM2's PATH, so it dies with `spawn npm ENOENT` and exit code -4058. That took
+// down an otherwise successful deploy (2026-08-17). The CLI gates the whole
+// check on this variable:
+//   SHOULD_CHECK_FOR_UPDATES = !process.env.NO_UPDATE_NOTIFIER && !process.env.VERCEL
+// (node_modules/vercel/dist/index.js). Setting it skips the check entirely, so no
+// prompt, no npm spawn, no bogus exit code. Upgrade the CLI deliberately instead:
+// npm i -D vercel@latest.
+process.env.NO_UPDATE_NOTIFIER = '1';
+
 // Fee guard — reports when a suspiciously large share of course sections change
 // price in a single run (see fee-guard.mjs for the why).
 //
@@ -40,6 +52,32 @@ const FEE_GUARD_MIN_CHANGED = Number(process.env.FEE_GUARD_MIN_CHANGED ?? 10);
 // (declared in turbo.json `env` so it reaches the build task in strict env mode).
 const IS_PROD = process.argv.includes('--prod') || process.env.STRIP_DEBUG === 'true';
 if (IS_PROD) process.env.STRIP_DEBUG = 'true';
+
+// --deploy-only: skip the clean + build and upload whatever is already packaged
+// in .vercel/output/. Vercel never builds — `deploy --prebuilt` only uploads —
+// so when a build has already succeeded and just the upload failed, rebuilding
+// for 4 minutes achieves nothing. Use it to retry a failed deploy, or to push
+// the current output without re-fetching Webflow/Sitecore.
+const DEPLOY_ONLY = process.argv.includes('--deploy-only');
+
+// --data-only: the HOURLY job. Only Open Studies + Extended Education course
+// data changes hourly — Sitecore syncs with Thesis in the backend and we pull it
+// over GraphQL. Everything else on the site (programs, requirements, PDFs,
+// navigation) is static by nature and only moves when the coursesDB cascade
+// runs, which is what triggers a FULL build + deploy.
+//
+// So this mode refreshes the course JSON, overlays it onto the static output
+// left by the last full build, and deploys. No Webflow fetch, no breadcrumbs, no
+// program-requirements regeneration, no `next build`.
+//
+// Trade-off, deliberate: the prerendered /study/**/courses/[sisID] pages keep the
+// data from the last full build. Nothing in the Webflow embeds or the published
+// JSON links to those routes — the live course experience is a Webflow page
+// fetching /data/*.json at runtime, which this mode DOES refresh.
+//
+// The fee guard still runs on --data-only (course fees are exactly what this mode
+// refreshes) but is skipped on --deploy-only (no new data that run).
+const DATA_ONLY = process.argv.includes('--data-only');
 
 const ts = () => new Date().toISOString();
 
@@ -157,12 +195,31 @@ async function runWithRetry(cmd, cwd = ROOT, maxAttempts = 3, retryDelayMs = 60_
 }
 
 async function main() {
-  console.log(`\n[${ts()}] ===== BVC hourly pipeline started (${IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS'}) =====`);
+  const mode = DEPLOY_ONLY
+    ? 'DEPLOY ONLY: no clean, no build'
+    : DATA_ONLY
+      ? 'DATA ONLY: hourly course refresh, no full build'
+      : (IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS');
+  console.log(`\n[${ts()}] ===== BVC pipeline started (${mode}) =====`);
   await heartbeat('/start');
+
+  // Both light modes reuse the static output from the last full build.
+  if (DEPLOY_ONLY || DATA_ONLY) {
+    const packaged = join(BVC_APP, '.vercel', 'output', 'static');
+    if (!existsSync(packaged)) {
+      await notify(
+        'BVC Deploy FAILED',
+        `Nothing to build on: .vercel/output/static is missing. Run the full pipeline (node pipeline.mjs) first.`
+      );
+      process.exit(1);
+    }
+    console.log(`[${ts()}] ${DEPLOY_ONLY ? 'Uploading the output already packaged in' : 'Refreshing course data into'} .vercel/output/ — skipping the full build.`);
+  }
 
   // 0. Pre-build clean — wipe stale data so removed Sitecore sections don't persist across builds.
   //    Without this, a section deleted from Sitecore leaves behind its old JSON file and
   //    the stale sisID gets deployed, causing 404s from the availability API.
+  //    Skipped on --deploy-only: nothing is regenerated, so the on-disk data is left intact.
   const dataDirs = [
     join(BVC_APP, 'src', 'data', 'courses'),
     join(BVC_APP, 'src', 'data', 'oScourses'),
@@ -170,7 +227,7 @@ async function main() {
     join(BVC_APP, 'public', 'data', 'oScourses'),
     join(BVC_APP, 'public', 'data', 'open-studies'),
   ];
-  for (const dir of dataDirs) {
+  for (const dir of DEPLOY_ONLY ? [] : dataDirs) {
     if (existsSync(dir)) {
       rmSync(dir, { recursive: true });
       mkdirSync(dir, { recursive: true });
@@ -178,10 +235,12 @@ async function main() {
     }
   }
 
-  // 1. Build — data scripts + breadcrumbs + next build → out/
+  // 1. Build — data scripts + breadcrumbs + next build → out/  (full build only)
+  //    --data-only refreshes just the Sitecore course JSON and overlays it onto the
+  //    last full build's package; --deploy-only builds nothing.
   //    Retries up to 3 times (60 s apart) to survive transient network/DNS blips.
-  //    Packaging happens separately in 1c, so the fee guard can reject a bad
-  //    dataset before we spend time copying it.
+  //    Packaging happens separately in 1c (full build only), so the fee guard can
+  //    reject a bad dataset before we spend time copying it.
   //
   //    --cache=local: (empty permissions) = no cache read, no cache write. We used to
   //    pass --force, but that is an alias for --cache=local:w,remote:w — it skips the
@@ -191,12 +250,29 @@ async function main() {
   //    112), which this script saw as a build failure. Reading is pointless here anyway
   //    (source data changes every run), so disable both directions.
   try {
-    await runWithRetry('npm run build:bvcapp -- --cache=local:', ROOT, 3, 60_000);
-    console.log(`\n[${ts()}] Build succeeded`);
+    if (DATA_ONLY) {
+      // Sitecore/Thesis course data only, then mirror src/data → public/data.
+      await runWithRetry('npm run hourly-scripts', BVC_APP, 3, 60_000);
+
+      // Overlay the refreshed JSON onto the packaged output from the last full
+      // build. course-outlines-pdf is excluded deliberately: 1.5 GB of files this
+      // job never touches, already sitting in the package.
+      const publicData = join(BVC_APP, 'public', 'data');
+      const staticData = join(BVC_APP, '.vercel', 'output', 'static', 'data');
+      cpSync(publicData, staticData, {
+        recursive: true,
+        filter: (src) => !src.includes('course-outlines-pdf'),
+      });
+
+      console.log(`\n[${ts()}] Course data refreshed and overlaid into .vercel/output/`);
+    } else if (!DEPLOY_ONLY) {
+      await runWithRetry('npm run build:bvcapp -- --cache=local:', ROOT, 3, 60_000);
+      console.log(`\n[${ts()}] Build succeeded`);
+    }
   } catch (err) {
     await notify(
-      'BVC Build FAILED',
-      `Build failed after 3 attempts at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
+      DATA_ONLY ? 'BVC Course Data Refresh FAILED' : 'BVC Build FAILED',
+      `${DATA_ONLY ? 'Course data refresh' : 'Build'} failed after 3 attempts at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
     );
     process.exit(1);
   }
@@ -205,51 +281,60 @@ async function main() {
   //     deployed. The upstream SIS → Sitecore sync has been observed emitting
   //     two different datasets on alternating hourly runs; without this check
   //     the pipeline faithfully publishes whichever half it catches.
-  const guard = checkFeeGuard({
-    bvcAppDir: BVC_APP,
-    statePath: FEE_BASELINE,
-    threshold: FEE_GUARD_THRESHOLD,
-    minChanged: FEE_GUARD_MIN_CHANGED,
-    skip: SKIP_FEE_GUARD,
-    log: (msg) => console.log(`[${ts()}] ${msg}`),
-  });
+  //     Runs on a full build and on --data-only (both refresh fees); skipped on
+  //     --deploy-only, which introduces no new data.
+  let guard = null;
+  if (!DEPLOY_ONLY) {
+    guard = checkFeeGuard({
+      bvcAppDir: BVC_APP,
+      statePath: FEE_BASELINE,
+      threshold: FEE_GUARD_THRESHOLD,
+      minChanged: FEE_GUARD_MIN_CHANGED,
+      skip: SKIP_FEE_GUARD,
+      log: (msg) => console.log(`[${ts()}] ${msg}`),
+    });
 
-  if (!guard.ok) {
-    // Report and keep going. The heartbeat suffix is `null` on purpose: this run
-    // has not finished, and its genuine outcome — deployed or failed — sends the
-    // real ping further down. Pinging here would tell the monitor the run is
-    // over while it is still working.
-    //
-    // isFailure stays true so the Teams card renders in the attention colour: an
-    // anomaly is still something a human should look at, it just no longer stops
-    // the release.
-    await notify(
-      'BVC fee anomaly — PUBLISHED anyway',
-      `${guard.reason}. Possibly an upstream SIS→Sitecore sync fault rather than a real ` +
-        `price change — but the deploy was NOT held, so these prices are going live. ` +
-        `Verify in Sitecore; see fee-watch-history.jsonl for when upstream last wrote.`,
-      true,
-      null
-    );
+    if (!guard.ok) {
+      // Report and keep going. The heartbeat suffix is `null` on purpose: this run
+      // has not finished, and its genuine outcome — deployed or failed — sends the
+      // real ping further down. Pinging here would tell the monitor the run is
+      // over while it is still working.
+      //
+      // isFailure stays true so the Teams card renders in the attention colour: an
+      // anomaly is still something a human should look at, it just no longer stops
+      // the release.
+      await notify(
+        'BVC fee anomaly — PUBLISHED anyway',
+        `${guard.reason}. Possibly an upstream SIS→Sitecore sync fault rather than a real ` +
+          `price change — but the deploy was NOT held, so these prices are going live. ` +
+          `Verify in Sitecore; see fee-watch-history.jsonl for when upstream last wrote.`,
+        true,
+        null
+      );
+    }
   }
 
   // 1c. Package out/ into .vercel/output/ (Vercel Build Output API v3 static
   //     format) so `vercel deploy --prebuilt` uploads without rebuilding.
-  try {
-    const outDir = join(BVC_APP, 'out');
-    const vercelOutput = join(BVC_APP, '.vercel', 'output');
-    if (existsSync(vercelOutput)) rmSync(vercelOutput, { recursive: true });
-    mkdirSync(join(vercelOutput, 'static'), { recursive: true });
-    writeFileSync(join(vercelOutput, 'config.json'), JSON.stringify({ version: 3 }));
-    cpSync(outDir, join(vercelOutput, 'static'), { recursive: true });
+  //     Full build only: --data-only already overlaid its JSON onto the existing
+  //     package (above), and --deploy-only uploads the package untouched.
+  if (!DATA_ONLY && !DEPLOY_ONLY) {
+    try {
+      const outDir = join(BVC_APP, 'out');
+      const vercelOutput = join(BVC_APP, '.vercel', 'output');
+      if (existsSync(vercelOutput)) rmSync(vercelOutput, { recursive: true });
+      mkdirSync(join(vercelOutput, 'static'), { recursive: true });
+      writeFileSync(join(vercelOutput, 'config.json'), JSON.stringify({ version: 3 }));
+      cpSync(outDir, join(vercelOutput, 'static'), { recursive: true });
 
-    console.log(`\n[${ts()}] Package succeeded`);
-  } catch (err) {
-    await notify(
-      'BVC Package FAILED',
-      `Packaging out/ failed at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
-    );
-    process.exit(1);
+      console.log(`\n[${ts()}] Package succeeded`);
+    } catch (err) {
+      await notify(
+        'BVC Package FAILED',
+        `Packaging out/ failed at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
+      );
+      process.exit(1);
+    }
   }
 
   // 2. Upload pre-built static output — Vercel is a host only, no rebuild triggered
@@ -284,7 +369,8 @@ async function main() {
     // the last dataset that actually reached the site. Since the guard no longer
     // vetoes, this normally advances every run, which is what makes the anomaly
     // report mean "changed since last publish" rather than "since some older run".
-    guard.commit();
+    // Skipped on --deploy-only, where the guard never ran.
+    if (guard) guard.commit();
   } catch (err) {
     await notify(
       'BVC Deploy FAILED',
@@ -293,11 +379,15 @@ async function main() {
     process.exit(1);
   }
 
-  // 3. Clean up intermediate data files (courses, oScourses, sis-data, etc.)
-  try {
-    run('node scripts/cleanup-data.mjs', BVC_APP);
-  } catch (err) {
-    console.warn(`[${ts()}] Cleanup warning (non-fatal):`, err.message);
+  // 3. Clean up intermediate data files (courses, oScourses, sis-data, etc.).
+  //    Skipped on --deploy-only: nothing was generated this run, and the files
+  //    on disk may be the inputs for a later manual build.
+  if (!DEPLOY_ONLY) {
+    try {
+      run('node scripts/cleanup-data.mjs', BVC_APP);
+    } catch (err) {
+      console.warn(`[${ts()}] Cleanup warning (non-fatal):`, err.message);
+    }
   }
 
   // 4. Tell the monitor we made it. Missing this ping is what raises the alarm

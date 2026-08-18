@@ -1,13 +1,16 @@
 {
   "metadata": {
-    "generatedAt": "2026-08-14T23:17:25.442Z",
+    "generatedAt": "2026-08-17T15:18:42.713Z",
+    "sourceFetchedAt": "2026-08-17T15:16:14.680Z",
+    "sourceAgeHours": 0,
     "source": "Webflow CMS (open-studies + program-areas) and course-outlines-pdf",
     "totalAreas": 5,
-    "totalCourses": 97,
-    "coursesWithoutArea": 27,
-    "coursesWithResolvedPdf": 130,
-    "coursesAvailable": 52,
-    "duplicatesRemoved": 37
+    "totalCourses": 104,
+    "coursesWithoutArea": 19,
+    "coursesUnpublished": 0,
+    "coursesWithResolvedPdf": 103,
+    "coursesAvailable": 60,
+    "duplicatesRemoved": 36
   },
   "areas": [
     {
@@ -22,8 +25,8 @@
           "slug": "anatomy-and-physiology",
           "pageUrl": "/open-studies/anatomy-and-physiology",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ANAT1101_Anatomy%20And%20Physiology_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "ANAT1101_Anatomy And Physiology_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ANAT1101_Anatomy%20And%20Physiology_(Fall%202025_Current).pdf",
+          "pdfFile": "ANAT1101_Anatomy And Physiology_(Fall 2025_Current).pdf"
         },
         {
           "code": "BIOL1401",
@@ -32,8 +35,8 @@
           "slug": "the-organization-and-diversity-of-life",
           "pageUrl": "/open-studies/the-organization-and-diversity-of-life",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/BIOL1401_The%20Organization%20and%20Diversity%20of%20Life_Fall%202024_Current.pdf",
-          "pdfFile": "BIOL1401_The Organization and Diversity of Life_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1401_The%20Organization%20and%20Diversity%20of%20Life_(Fall%202024_Current).pdf",
+          "pdfFile": "BIOL1401_The Organization and Diversity of Life_(Fall 2024_Current).pdf"
         },
         {
           "code": "BIOL1402",
@@ -42,8 +45,18 @@
           "slug": "fundamentals-of-bioenergetics",
           "pageUrl": "/open-studies/fundamentals-of-bioenergetics",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/BIOL1402_Fundamentals%20of%20Bioenergetics_Fall%202024_Current.pdf",
-          "pdfFile": "BIOL1402_Fundamentals of Bioenergetics_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1402_Fundamentals%20of%20Bioenergetics_(Fall%202024_Current).pdf",
+          "pdfFile": "BIOL1402_Fundamentals of Bioenergetics_(Fall 2024_Current).pdf"
+        },
+        {
+          "code": "BIOL1403",
+          "name": "DNA, Inheritance, and Evolution",
+          "credits": "4.0",
+          "slug": "dna-inheritance-and-evolution",
+          "pageUrl": "/open-studies/dna-inheritance-and-evolution",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL1403_DNA%2C%20Inheritance%2C%20and%20Evolution_(Fall%202026_Current).pdf",
+          "pdfFile": "BIOL1403_DNA, Inheritance, and Evolution_(Fall 2026_Current).pdf"
         },
         {
           "code": "CHEM1901",
@@ -52,8 +65,18 @@
           "slug": "general-chemistry-structure-and-bonding",
           "pageUrl": "/open-studies/general-chemistry-structure-and-bonding",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/CHEM1901_General%20Chemistry_%20Structure%20and%20Bonding_Fall%202024_Current.pdf",
-          "pdfFile": "CHEM1901_General Chemistry_ Structure and Bonding_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1901_General%20Chemistry%20Structure%20and%20Bonding_(Fall%202024_Current).pdf",
+          "pdfFile": "CHEM1901_General Chemistry Structure and Bonding_(Fall 2024_Current).pdf"
+        },
+        {
+          "code": "CHEM1902",
+          "name": "General Chemistry: Change and Equilibrium",
+          "credits": "4.0",
+          "slug": "general-chemistry-change-and-equilibrium",
+          "pageUrl": "/open-studies/general-chemistry-change-and-equilibrium",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM1902_General%20Chemistry%20Change%20and%20Equilibrium%20_(Fall%202025_Current).pdf",
+          "pdfFile": "CHEM1902_General Chemistry Change and Equilibrium _(Fall 2025_Current).pdf"
         },
         {
           "code": "CNST1100",
@@ -62,8 +85,8 @@
           "slug": "introduction-to-canadian-studies",
           "pageUrl": "/open-studies/introduction-to-canadian-studies",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/CNST1100_Introduction%20to%20Canadian%20Studies_Fall%202025_Current.pdf",
-          "pdfFile": "CNST1100_Introduction to Canadian Studies_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/CNST1100_Introduction%20to%20Canadian%20Studies_(Fall%202025_Current).pdf",
+          "pdfFile": "CNST1100_Introduction to Canadian Studies_(Fall 2025_Current).pdf"
         },
         {
           "code": "COMM1101",
@@ -72,8 +95,18 @@
           "slug": "interpersonal-relationships-and-communication-skills",
           "pageUrl": "/open-studies/interpersonal-relationships-and-communication-skills",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/COMM1101_Interpersonal%20Relationships%20And%20Communication%20Skills_Winter%202025_Current.pdf",
-          "pdfFile": "COMM1101_Interpersonal Relationships And Communication Skills_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMM1101_Interpersonal%20Relationships%20And%20Communication%20Skills_(Fall%202026_Current).pdf",
+          "pdfFile": "COMM1101_Interpersonal Relationships And Communication Skills_(Fall 2026_Current).pdf"
+        },
+        {
+          "code": "ECON1100",
+          "name": "Principles of Microeconomics",
+          "credits": "3.0",
+          "slug": "principles-of-microeconomics",
+          "pageUrl": "/open-studies/principles-of-microeconomics",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ECON1100_Principles%20of%20Microeconomics_(Fall%202026_Current).pdf",
+          "pdfFile": "ECON1100_Principles of Microeconomics_(Fall 2026_Current).pdf"
         },
         {
           "code": "ENGL1201",
@@ -82,8 +115,8 @@
           "slug": "english-composition",
           "pageUrl": "/open-studies/english-composition",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ENGL1201_English%20Composition_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "ENGL1201_English Composition_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1201_English%20Composition_(Fall%202024_Current).pdf",
+          "pdfFile": "ENGL1201_English Composition_(Fall 2024_Current).pdf"
         },
         {
           "code": "ENGL1302",
@@ -92,8 +125,18 @@
           "slug": "literature-and-society",
           "pageUrl": "/open-studies/literature-and-society",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ENGL1302_Literature%20and%20Society_Fall%202025_Current.pdf",
-          "pdfFile": "ENGL1302_Literature and Society_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL1302_Literature%20and%20Society_(Fall%202025_Current).pdf",
+          "pdfFile": "ENGL1302_Literature and Society_(Fall 2025_Current).pdf"
+        },
+        {
+          "code": "ENGL2301",
+          "name": "Children's Literature",
+          "credits": "3.0",
+          "slug": "childrens-literature",
+          "pageUrl": "/open-studies/childrens-literature",
+          "available": false,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2301_Children's%20Literature_(Fall%202024_Current).pdf",
+          "pdfFile": "ENGL2301_Children's Literature_(Fall 2024_Current).pdf"
         },
         {
           "code": "ENGL2302",
@@ -102,8 +145,8 @@
           "slug": "crime-narrative",
           "pageUrl": "/open-studies/crime-narrative",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ENGL2302_Crime%20Narrative_Fall%202025_Current.pdf",
-          "pdfFile": "ENGL2302_Crime Narrative_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL2302_Crime%20Narrative_(Fall%202025_Current).pdf",
+          "pdfFile": "ENGL2302_Crime Narrative_(Fall 2025_Current).pdf"
         },
         {
           "code": "FNSR2402",
@@ -112,8 +155,8 @@
           "slug": "risk-assessment-and-treatment",
           "pageUrl": "/open-studies/risk-assessment-and-treatment",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/FNSR2402_Risk%20Assessment%20and%20Treatment_Spring%202024_Current.pdf",
-          "pdfFile": "FNSR2402_Risk Assessment and Treatment_Spring 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2402_Risk%20Assessment%20and%20Treatment_(Spring%202024_Current).pdf",
+          "pdfFile": "FNSR2402_Risk Assessment and Treatment_(Spring 2024_Current).pdf"
         },
         {
           "code": "INDG1101",
@@ -122,8 +165,8 @@
           "slug": "introduction-to-indigenous-studies",
           "pageUrl": "/open-studies/introduction-to-indigenous-studies",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/INDG1101_Introduction%20to%20Indigenous%20Studies_Spring%202024_Spring%202024.pdf",
-          "pdfFile": "INDG1101_Introduction to Indigenous Studies_Spring 2024_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/INDG1101_Introduction%20to%20Indigenous%20Studies_(Fall%202024_Current).pdf",
+          "pdfFile": "INDG1101_Introduction to Indigenous Studies_(Fall 2024_Current).pdf"
         },
         {
           "code": "MATH1600",
@@ -132,8 +175,8 @@
           "slug": "introduction-to-statistics-i",
           "pageUrl": "/open-studies/introduction-to-statistics-i",
           "available": true,
-          "pdf": null,
-          "pdfFile": null
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1600_Introduction%20to%20Statistics%20I_(Fall%202025_Current).pdf",
+          "pdfFile": "MATH1600_Introduction to Statistics I_(Fall 2025_Current).pdf"
         },
         {
           "code": "MATH1601",
@@ -142,8 +185,8 @@
           "slug": "introduction-to-statistics-ii",
           "pageUrl": "/open-studies/introduction-to-statistics-ii",
           "available": false,
-          "pdf": null,
-          "pdfFile": null
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1601_Introduction%20to%20Statistics%20II_(Winter%202026_Current).pdf",
+          "pdfFile": "MATH1601_Introduction to Statistics II_(Winter 2026_Current).pdf"
         },
         {
           "code": "MATH1902",
@@ -152,8 +195,8 @@
           "slug": "introductory-calculus",
           "pageUrl": "/open-studies/introductory-calculus",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MATH1902_Introductory%20Calculus_Winter%202022_Spring%202023.pdf",
-          "pdfFile": "MATH1902_Introductory Calculus_Winter 2022_Spring 2023.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH1902_Introductory%20Calculus_(Fall%202024_Current).pdf",
+          "pdfFile": "MATH1902_Introductory Calculus_(Fall 2024_Current).pdf"
         },
         {
           "code": "PHYS1900",
@@ -162,8 +205,8 @@
           "slug": "mechanics",
           "pageUrl": "/open-studies/mechanics",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/PHYS1900_Mechanics_Fall%202025_Current.pdf",
-          "pdfFile": "PHYS1900_Mechanics_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS1900_Mechanics_(Fall%202025_Current).pdf",
+          "pdfFile": "PHYS1900_Mechanics_(Fall 2025_Current).pdf"
         },
         {
           "code": "POSC1201",
@@ -172,8 +215,8 @@
           "slug": "canadian-politics-institutions-and-issues",
           "pageUrl": "/open-studies/canadian-politics-institutions-and-issues",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/POSC1201_Canadian%20Politics_%20Institutions%20and%20Issues_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "POSC1201_Canadian Politics_ Institutions and Issues_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/POSC1201_Canadian%20Politics%20Institutions%20and%20Issues_(Winter%202026_Current).pdf",
+          "pdfFile": "POSC1201_Canadian Politics Institutions and Issues_(Winter 2026_Current).pdf"
         },
         {
           "code": "PSYC1101",
@@ -182,8 +225,8 @@
           "slug": "introduction-to-psychology",
           "pageUrl": "/open-studies/introduction-to-psychology",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/PSYC1101_Introduction%20To%20Psychology_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "PSYC1101_Introduction To Psychology_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1101_Introduction%20to%20Psychology_(Winter%202026_Current).pdf",
+          "pdfFile": "PSYC1101_Introduction to Psychology_(Winter 2026_Current).pdf"
         },
         {
           "code": "PSYC1201",
@@ -192,8 +235,8 @@
           "slug": "human-growth-and-development-across-the-life-span",
           "pageUrl": "/open-studies/human-growth-and-development-across-the-life-span",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/PSYC1201_Human%20Growth%20And%20Development%20Across%20The%20Life%20Span_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "PSYC1201_Human Growth And Development Across The Life Span_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1201_Human%20Growth%20And%20Development%20Across%20The%20Life%20Span_(Fall%202025_Current).pdf",
+          "pdfFile": "PSYC1201_Human Growth And Development Across The Life Span_(Fall 2025_Current).pdf"
         },
         {
           "code": "PSYC1202",
@@ -202,8 +245,18 @@
           "slug": "child-and-adolescent-development",
           "pageUrl": "/open-studies/child-and-adolescent-development",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/PSYC1202_Child%20and%20Adolescent%20Development_Winter%202023_Current.pdf",
-          "pdfFile": "PSYC1202_Child and Adolescent Development_Winter 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC1202_Child%20and%20Adolescent%20Development_(Fall%202026_Current).pdf",
+          "pdfFile": "PSYC1202_Child and Adolescent Development_(Fall 2026_Current).pdf"
+        },
+        {
+          "code": "PSYC2101",
+          "name": "Personality",
+          "credits": "3.0",
+          "slug": "personality",
+          "pageUrl": "/open-studies/personality",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2101_Personality%20_(Fall%202024_Current).pdf",
+          "pdfFile": "PSYC2101_Personality _(Fall 2024_Current).pdf"
         },
         {
           "code": "PSYC2401",
@@ -212,8 +265,8 @@
           "slug": "abnormal-psychology",
           "pageUrl": "/open-studies/abnormal-psychology",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_Fall%202025_Current.pdf",
-          "pdfFile": "PSYC2401_Psychopathology_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/PSYC2401_Psychopathology_(Fall%202025_Current).pdf",
+          "pdfFile": "PSYC2401_Psychopathology_(Fall 2025_Current).pdf"
         },
         {
           "code": "SOCI1101",
@@ -222,8 +275,8 @@
           "slug": "introduction-to-sociology",
           "pageUrl": "/open-studies/introduction-to-sociology",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SOCI1101_Introduction%20to%20Sociology_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "SOCI1101_Introduction to Sociology_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1101_Introduction%20to%20Sociology_(Winter%202026_Current).pdf",
+          "pdfFile": "SOCI1101_Introduction to Sociology_(Winter 2026_Current).pdf"
         },
         {
           "code": "SOCI1201",
@@ -232,8 +285,8 @@
           "slug": "sociology-of-the-family",
           "pageUrl": "/open-studies/sociology-of-the-family",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SOCI1201_Sociology%20of%20the%20Family_Winter%202025_Current.pdf",
-          "pdfFile": "SOCI1201_Sociology of the Family_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1201_Sociology%20of%20the%20Family_(Winter%202026_Current).pdf",
+          "pdfFile": "SOCI1201_Sociology of the Family_(Winter 2026_Current).pdf"
         },
         {
           "code": "SOCI1301",
@@ -242,8 +295,18 @@
           "slug": "sociology-of-aging",
           "pageUrl": "/open-studies/sociology-of-aging",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SOCI1301_Sociology%20of%20Aging_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "SOCI1301_Sociology of Aging_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI1301_Sociology%20of%20Aging_(Spring%202026_Current).pdf",
+          "pdfFile": "SOCI1301_Sociology of Aging_(Spring 2026_Current).pdf"
+        },
+        {
+          "code": "SOCI2302",
+          "name": "Sociology of Death and Dying",
+          "credits": "3.0",
+          "slug": "sociology-of-death-and-dying",
+          "pageUrl": "/open-studies/sociology-of-death-and-dying",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOCI2302_Sociology%20of%20Death%20and%20Dying_(Fall%202024_Current).pdf",
+          "pdfFile": "SOCI2302_Sociology of Death and Dying_(Fall 2024_Current).pdf"
         },
         {
           "code": "STAT1151",
@@ -256,7 +319,7 @@
           "pdfFile": null
         }
       ],
-      "courseCount": 24
+      "courseCount": 30
     },
     {
       "id": "66e88fd785912baaa400769f",
@@ -270,8 +333,8 @@
           "slug": "introduction-to-financial-accounting",
           "pageUrl": "/open-studies/introduction-to-financial-accounting",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ACCT1103_Introduction%20to%20Financial%20Accounting_Winter%202023_Spring%202023.pdf",
-          "pdfFile": "ACCT1103_Introduction to Financial Accounting_Winter 2023_Spring 2023.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ACCT1103_Introduction%20to%20Financial%20Accounting_(Fall%202023_Current).pdf",
+          "pdfFile": "ACCT1103_Introduction to Financial Accounting_(Fall 2023_Current).pdf"
         },
         {
           "code": "ACCT2201",
@@ -280,8 +343,8 @@
           "slug": "management-accounting-i",
           "pageUrl": "/open-studies/management-accounting-i",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ACCT2201_Management%20Accounting%20I_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "ACCT2201_Management Accounting I_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ACCT2201_Management%20Accounting%20I_(Winter%202026_Current).pdf",
+          "pdfFile": "ACCT2201_Management Accounting I_(Winter 2026_Current).pdf"
         },
         {
           "code": "ADMN1101",
@@ -290,8 +353,8 @@
           "slug": "introduction-to-professional-keyboarding",
           "pageUrl": "/open-studies/introduction-to-professional-keyboarding",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ADMN1101_Introduction%20to%20Professional%20Keyboarding_Winter%202025_Current.pdf",
-          "pdfFile": "ADMN1101_Introduction to Professional Keyboarding_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1101_Introduction%20to%20Professional%20Keyboarding_(Fall%202026_Current).pdf",
+          "pdfFile": "ADMN1101_Introduction to Professional Keyboarding_(Fall 2026_Current).pdf"
         },
         {
           "code": "ADMN1204",
@@ -300,8 +363,8 @@
           "slug": "administrative-procedures-i",
           "pageUrl": "/open-studies/administrative-procedures-i",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ADMN1204_Administrative%20Procedures%20I_Spring%202024_Spring%202024.pdf",
-          "pdfFile": "ADMN1204_Administrative Procedures I_Spring 2024_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ADMN1204_Administrative%20Procedures%20I%20_(Fall%202024_Current).pdf",
+          "pdfFile": "ADMN1204_Administrative Procedures I _(Fall 2024_Current).pdf"
         },
         {
           "code": "DATA2301",
@@ -310,8 +373,8 @@
           "slug": "fundamentals-of-digital-marketing-analytics",
           "pageUrl": "/open-studies/fundamentals-of-digital-marketing-analytics",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DATA2301_Fundamentals%20of%20Digital%20Marketing%20Analytics_Fall%202025_Current.pdf",
-          "pdfFile": "DATA2301_Fundamentals of Digital Marketing Analytics_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DATA2301_Fundamentals%20of%20Digital%20Marketing%20Analytics_(Fall%202025_Current).pdf",
+          "pdfFile": "DATA2301_Fundamentals of Digital Marketing Analytics_(Fall 2025_Current).pdf"
         },
         {
           "code": "DESN1201",
@@ -320,8 +383,8 @@
           "slug": "introduction-to-digital-media-production",
           "pageUrl": "/open-studies/introduction-to-digital-media-production",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DESN1201_Introduction%20to%20Digital%20Media%20Production_Spring%202025_Current.pdf",
-          "pdfFile": "DESN1201_Introduction to Digital Media Production_Spring 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DESN1201_Introduction%20to%20Digital%20Media%20Production_(Spring%202025_Current).pdf",
+          "pdfFile": "DESN1201_Introduction to Digital Media Production_(Spring 2025_Current).pdf"
         },
         {
           "code": "DESN2201",
@@ -330,8 +393,8 @@
           "slug": "introduction-to-web-design-for-digital-marketing",
           "pageUrl": "/open-studies/introduction-to-web-design-for-digital-marketing",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DESN2201_Introduction%20to%20Web%20Design%20for%20Digital%20Marketing_Fall%202024_Current.pdf",
-          "pdfFile": "DESN2201_Introduction to Web Design for Digital Marketing_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DESN2201_Introduction%20to%20Web%20Design%20for%20Digital%20Marketing_(Fall%202025_Current).pdf",
+          "pdfFile": "DESN2201_Introduction to Web Design for Digital Marketing_(Fall 2025_Current).pdf"
         },
         {
           "code": "ESPR1101",
@@ -340,8 +403,8 @@
           "slug": "introduction-to-esports",
           "pageUrl": "/open-studies/introduction-to-esports",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ESPR1101_Introduction%20to%20Esports_Winter%202025_Spring%202025.pdf",
-          "pdfFile": "ESPR1101_Introduction to Esports_Winter 2025_Spring 2025.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESPR1101_Introduction%20to%20Esports_(Fall%202025_Current).pdf",
+          "pdfFile": "ESPR1101_Introduction to Esports_(Fall 2025_Current).pdf"
         },
         {
           "code": "FNSR2101",
@@ -350,8 +413,8 @@
           "slug": "introduction-to-insurance-and-risk-management",
           "pageUrl": "/open-studies/introduction-to-insurance-and-risk-management",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/FNSR2101_Introduction%20to%20Insurance%20and%20Risk%20Management_Winter%202024_Current.pdf",
-          "pdfFile": "FNSR2101_Introduction to Insurance and Risk Management_Winter 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2101_Introduction%20to%20Insurance%20and%20Risk%20Management_(Winter%202024_Current).pdf",
+          "pdfFile": "FNSR2101_Introduction to Insurance and Risk Management_(Winter 2024_Current).pdf"
         },
         {
           "code": "FNSR2301",
@@ -360,8 +423,8 @@
           "slug": "financial-markets-products",
           "pageUrl": "/open-studies/financial-markets-products",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/FNSR2301_Financial%20Markets%20%26%20Products_Fall%202023_Current.pdf",
-          "pdfFile": "FNSR2301_Financial Markets & Products_Fall 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2301_Financial%20Markets%20%26%20Products_(Fall%202023_Current).pdf",
+          "pdfFile": "FNSR2301_Financial Markets & Products_(Fall 2023_Current).pdf"
         },
         {
           "code": "FNSR2302",
@@ -370,8 +433,8 @@
           "slug": "personal-financial-planning-i",
           "pageUrl": "/open-studies/personal-financial-planning-i",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/FNSR2302_Personal%20Financial%20Planning%20I_Fall%202025_Current.pdf",
-          "pdfFile": "FNSR2302_Personal Financial Planning I_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2302_Personal%20Financial%20Planning%20I_(Fall%202025_Current).pdf",
+          "pdfFile": "FNSR2302_Personal Financial Planning I_(Fall 2025_Current).pdf"
         },
         {
           "code": "FNSR2401",
@@ -380,8 +443,8 @@
           "slug": "risk-management-principles-and-practice",
           "pageUrl": "/open-studies/risk-management-principles-and-practice",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/FNSR2401_Risk%20Management%20Principles%20and%20Practice_Spring%202024_Current.pdf",
-          "pdfFile": "FNSR2401_Risk Management Principles and Practice_Spring 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2401_Risk%20Management%20Principles%20and%20Practice_(Spring%202024_Current).pdf",
+          "pdfFile": "FNSR2401_Risk Management Principles and Practice_(Spring 2024_Current).pdf"
         },
         {
           "code": "FNSR2403",
@@ -390,8 +453,8 @@
           "slug": "risk-financing",
           "pageUrl": "/open-studies/risk-financing",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/FNSR2403_Risk%20Financing_Spring%202024_Current.pdf",
-          "pdfFile": "FNSR2403_Risk Financing_Spring 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2403_Risk%20Financing_(Spring%202024_Current).pdf",
+          "pdfFile": "FNSR2403_Risk Financing_(Spring 2024_Current).pdf"
         },
         {
           "code": "HMSV3302",
@@ -400,8 +463,8 @@
           "slug": "chronic-illness-management",
           "pageUrl": "/open-studies/chronic-illness-management",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HMSV3302_Chronic%20Illness%20Management_Spring%202022_Spring%202023.pdf",
-          "pdfFile": "HMSV3302_Chronic Illness Management_Spring 2022_Spring 2023.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV3302_Chronic%20Illness%20Management_(Fall%202024_Current).pdf",
+          "pdfFile": "HMSV3302_Chronic Illness Management_(Fall 2024_Current).pdf"
         },
         {
           "code": "HRES1101",
@@ -410,8 +473,8 @@
           "slug": "organizational-behaviour",
           "pageUrl": "/open-studies/organizational-behaviour",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HRES1101_Organizational%20Behaviour_Winter%202025_Winter%202025.pdf",
-          "pdfFile": "HRES1101_Organizational Behaviour_Winter 2025_Winter 2025.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES1101_Organizational%20Behaviour_(Winter%202026_Current).pdf",
+          "pdfFile": "HRES1101_Organizational Behaviour_(Winter 2026_Current).pdf"
         },
         {
           "code": "HRES2101",
@@ -420,8 +483,8 @@
           "slug": "change-management",
           "pageUrl": "/open-studies/change-management",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HRES2101_Change%20Management_Fall%202020_Current.pdf",
-          "pdfFile": "HRES2101_Change Management_Fall 2020_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2101_Change%20Management_(Fall%202020_Current).pdf",
+          "pdfFile": "HRES2101_Change Management_(Fall 2020_Current).pdf"
         },
         {
           "code": "HRES2201",
@@ -430,8 +493,8 @@
           "slug": "introduction-to-human-resources",
           "pageUrl": "/open-studies/introduction-to-human-resources",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HRES2201_Introduction%20to%20Human%20Resources_Winter%202024_Spring%202025.pdf",
-          "pdfFile": "HRES2201_Introduction to Human Resources_Winter 2024_Spring 2025.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2201_Introduction%20to%20Human%20Resources_(Fall%202025_Current).pdf",
+          "pdfFile": "HRES2201_Introduction to Human Resources_(Fall 2025_Current).pdf"
         },
         {
           "code": "HRES2202",
@@ -440,8 +503,8 @@
           "slug": "talent-acquisition-engagement",
           "pageUrl": "/open-studies/talent-acquisition-engagement",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HRES2202_Talent%20Acquisition%20%26%20Engagement_Spring%202023_Current.pdf",
-          "pdfFile": "HRES2202_Talent Acquisition & Engagement_Spring 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2202_Talent%20Acquisition%20%26%20Engagement_(Spring%202023_Current).pdf",
+          "pdfFile": "HRES2202_Talent Acquisition & Engagement_(Spring 2023_Current).pdf"
         },
         {
           "code": "HRES2203",
@@ -450,8 +513,18 @@
           "slug": "compensation-benefits",
           "pageUrl": "/open-studies/compensation-benefits",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HRES2203_Compensation%20%26%20Benefits_Spring%202021_Spring%202021.pdf",
-          "pdfFile": "HRES2203_Compensation & Benefits_Spring 2021_Spring 2021.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2203_Compensation%20%26%20Benefits_(Fall%202025_Current).pdf",
+          "pdfFile": "HRES2203_Compensation & Benefits_(Fall 2025_Current).pdf"
+        },
+        {
+          "code": "HRES2204",
+          "name": "Talent Acquisition and Retention",
+          "credits": "3.0",
+          "slug": "talent-acquisition-and-retention",
+          "pageUrl": "/open-studies/talent-acquisition-and-retention",
+          "available": false,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2204_Talent%20Acquisition%20and%20Retention_(Fall%202025_Current).pdf",
+          "pdfFile": "HRES2204_Talent Acquisition and Retention_(Fall 2025_Current).pdf"
         },
         {
           "code": "HRES2301",
@@ -460,8 +533,8 @@
           "slug": "employment-law",
           "pageUrl": "/open-studies/employment-law",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HRES2301_Employment%20Law_Winter%202021_Spring%202021.pdf",
-          "pdfFile": "HRES2301_Employment Law_Winter 2021_Spring 2021.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2301_Employment%20Law_(Fall%202025_Current).pdf",
+          "pdfFile": "HRES2301_Employment Law_(Fall 2025_Current).pdf"
         },
         {
           "code": "HRES2401",
@@ -470,8 +543,8 @@
           "slug": "employee-learning-and-development",
           "pageUrl": "/open-studies/employee-learning-and-development",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HRES2401_Employee%20Learning%20and%20Development_Winter%202022_Spring%202023.pdf",
-          "pdfFile": "HRES2401_Employee Learning and Development_Winter 2022_Spring 2023.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HRES2401_Employee%20Learning%20and%20Development_(Fall%202025_Current).pdf",
+          "pdfFile": "HRES2401_Employee Learning and Development_(Fall 2025_Current).pdf"
         },
         {
           "code": "HUCL1101",
@@ -480,8 +553,8 @@
           "slug": "professional-practice-and-communication-in-health-care",
           "pageUrl": "/open-studies/professional-practice-and-communication-in-health-care",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HUCL1101_Role%20Concepts%20in%20Health%20Care_Fall%202023_Spring%202025.pdf",
-          "pdfFile": "HUCL1101_Role Concepts in Health Care_Fall 2023_Spring 2025.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HUCL1101_Professional%20Practice%20and%20Communication%20in%20Health%20Care_(Fall%202025_Current).pdf",
+          "pdfFile": "HUCL1101_Professional Practice and Communication in Health Care_(Fall 2025_Current).pdf"
         },
         {
           "code": "HUCL1201",
@@ -490,8 +563,8 @@
           "slug": "introduction-to-health-care-fundamentals",
           "pageUrl": "/open-studies/introduction-to-health-care-fundamentals",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HUCL1201_Introduction%20to%20Health%20Care%20Fundamentals_Fall%202023_Current.pdf",
-          "pdfFile": "HUCL1201_Introduction to Health Care Fundamentals_Fall 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HUCL1201_Introduction%20to%20Health%20Care%20Fundamentals_(Fall%202025_Current).pdf",
+          "pdfFile": "HUCL1201_Introduction to Health Care Fundamentals_(Fall 2025_Current).pdf"
         },
         {
           "code": "HUCL1401",
@@ -500,8 +573,8 @@
           "slug": "medical-terminology",
           "pageUrl": "/open-studies/medical-terminology",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HUCL1401_Medical%20Terminology_Winter%202024_Spring%202024.pdf",
-          "pdfFile": "HUCL1401_Medical Terminology_Winter 2024_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HUCL1401_Medical%20Terminology_(Fall%202023_Current).pdf",
+          "pdfFile": "HUCL1401_Medical Terminology_(Fall 2023_Current).pdf"
         },
         {
           "code": "IDEC1101",
@@ -510,8 +583,8 @@
           "slug": "colour-and-light-in-decorating",
           "pageUrl": "/open-studies/colour-and-light-in-decorating",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/IDEC1101_Colour%20and%20Light%20in%20Decorating_Winter%202021_Spring%202025.pdf",
-          "pdfFile": "IDEC1101_Colour and Light in Decorating_Winter 2021_Spring 2025.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/IDEC1101_Colour%20and%20Light%20in%20Decorating_(Fall%202025_Current).pdf",
+          "pdfFile": "IDEC1101_Colour and Light in Decorating_(Fall 2025_Current).pdf"
         },
         {
           "code": "IDEC1103",
@@ -520,8 +593,8 @@
           "slug": "principles-elements-of-design",
           "pageUrl": "/open-studies/principles-elements-of-design",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/IDEC1103_Principles%20%26%20Elements%20of%20Design_Winter%202021_Spring%202025.pdf",
-          "pdfFile": "IDEC1103_Principles & Elements of Design_Winter 2021_Spring 2025.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/IDEC1103_Principles%20%26%20Elements%20of%20Design_(Fall%202025_Current).pdf",
+          "pdfFile": "IDEC1103_Principles & Elements of Design_(Fall 2025_Current).pdf"
         },
         {
           "code": "IDEC1201",
@@ -530,8 +603,8 @@
           "slug": "drawing-and-sketching",
           "pageUrl": "/open-studies/drawing-and-sketching",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/IDEC1201_Drawing%20and%20Sketching_Fall%202025_Current.pdf",
-          "pdfFile": "IDEC1201_Drawing and Sketching_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/IDEC1201_Drawing%20and%20Sketching_(Fall%202025_Current).pdf",
+          "pdfFile": "IDEC1201_Drawing and Sketching_(Fall 2025_Current).pdf"
         },
         {
           "code": "LEGL1201",
@@ -540,8 +613,8 @@
           "slug": "introduction-to-the-legal-profession",
           "pageUrl": "/open-studies/introduction-to-the-legal-profession",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/LEGL1201_Introduction%20to%20the%20Legal%20Profession_Fall%202024_Current.pdf",
-          "pdfFile": "LEGL1201_Introduction to the Legal Profession_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1201_Introduction%20to%20the%20Legal%20Profession_(Fall%202024_Current).pdf",
+          "pdfFile": "LEGL1201_Introduction to the Legal Profession_(Fall 2024_Current).pdf"
         },
         {
           "code": "LEGL1501",
@@ -550,8 +623,8 @@
           "slug": "litigation-i",
           "pageUrl": "/open-studies/litigation-i",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/LEGL1501_Litigation%20I_Fall%202022_Current.pdf",
-          "pdfFile": "LEGL1501_Litigation I_Fall 2022_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/LEGL1501_Litigation%20I_(Fall%202022_Current).pdf",
+          "pdfFile": "LEGL1501_Litigation I_(Fall 2022_Current).pdf"
         },
         {
           "code": "MGMT1101",
@@ -560,8 +633,8 @@
           "slug": "introduction-to-management",
           "pageUrl": "/open-studies/introduction-to-management",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1101_Introduction%20to%20Management_Winter%202025_Winter%202025.pdf",
-          "pdfFile": "MGMT1101_Introduction to Management_Winter 2025_Winter 2025.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1101_Introduction%20to%20Management_(Spring%202025_Current).pdf",
+          "pdfFile": "MGMT1101_Introduction to Management_(Spring 2025_Current).pdf"
         },
         {
           "code": "MGMT1102",
@@ -570,18 +643,18 @@
           "slug": "introduction-to-organizations-and-sustainability",
           "pageUrl": "/open-studies/introduction-to-organizations-and-sustainability",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1102_Introduction%20to%20Organizations%20and%20Sustainability_Winter%202024_Spring%202024.pdf",
-          "pdfFile": "MGMT1102_Introduction to Organizations and Sustainability_Winter 2024_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1102_Introduction%20to%20Organizations%20and%20Sustainability%20_(Fall%202024_Current).pdf",
+          "pdfFile": "MGMT1102_Introduction to Organizations and Sustainability _(Fall 2024_Current).pdf"
         },
         {
           "code": "MGMT1201",
-          "name": "Business Communications",
+          "name": "Business Communication",
           "credits": "3.0",
           "slug": "business-communication",
           "pageUrl": "/open-studies/business-communication",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1201_Business%20Communication_Winter%202025_Current.pdf",
-          "pdfFile": "MGMT1201_Business Communication_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1201_Business%20Communication_(Fall%202024_Current).pdf",
+          "pdfFile": "MGMT1201_Business Communication_(Fall 2024_Current).pdf"
         },
         {
           "code": "MGMT1302",
@@ -590,8 +663,8 @@
           "slug": "computer-applications",
           "pageUrl": "/open-studies/computer-applications",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1302_Computer%20Applications_Winter%202024_Spring%202024.pdf",
-          "pdfFile": "MGMT1302_Computer Applications_Winter 2024_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1302_Computer%20Applications_(Fall%202024_Current).pdf",
+          "pdfFile": "MGMT1302_Computer Applications_(Fall 2024_Current).pdf"
         },
         {
           "code": "MGMT1303",
@@ -600,8 +673,8 @@
           "slug": "excel-for-administrative-professionals",
           "pageUrl": "/open-studies/excel-for-administrative-professionals",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1303_Office%20Finances%20and%20Spreadsheets_Spring%202021_Spring%202021.pdf",
-          "pdfFile": "MGMT1303_Office Finances and Spreadsheets_Spring 2021_Spring 2021.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1303_Excel%20for%20Administrative%20Professionals%20_(Fall%202023_Current).pdf",
+          "pdfFile": "MGMT1303_Excel for Administrative Professionals _(Fall 2023_Current).pdf"
         },
         {
           "code": "MGMT1401",
@@ -610,8 +683,8 @@
           "slug": "microeconomics",
           "pageUrl": "/open-studies/microeconomics",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1401_Microeconomics_Winter%202025_Current.pdf",
-          "pdfFile": "MGMT1401_Microeconomics_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1401_Microeconomics_(Winter%202025_Current).pdf",
+          "pdfFile": "MGMT1401_Microeconomics_(Winter 2025_Current).pdf"
         },
         {
           "code": "MGMT1402",
@@ -620,8 +693,8 @@
           "slug": "principles-of-economics",
           "pageUrl": "/open-studies/principles-of-economics",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1402_Principles%20of%20Economics_Fall%202025_Current.pdf",
-          "pdfFile": "MGMT1402_Principles of Economics_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1402_Principles%20of%20Economics_(Fall%202025_Current).pdf",
+          "pdfFile": "MGMT1402_Principles of Economics_(Fall 2025_Current).pdf"
         },
         {
           "code": "MGMT1501",
@@ -630,8 +703,8 @@
           "slug": "business-mathematics",
           "pageUrl": "/open-studies/business-mathematics",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1501_Business%20Mathematics_Fall%202023_Current.pdf",
-          "pdfFile": "MGMT1501_Business Mathematics_Fall 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1501_Business%20Mathematics_(Fall%202023_Current).pdf",
+          "pdfFile": "MGMT1501_Business Mathematics_(Fall 2023_Current).pdf"
         },
         {
           "code": "MGMT1601",
@@ -640,8 +713,8 @@
           "slug": "business-law",
           "pageUrl": "/open-studies/business-law",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT1601_Business%20Law_Winter%202022_Winter%202022.pdf",
-          "pdfFile": "MGMT1601_Business Law_Winter 2022_Winter 2022.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT1601_Business%20Law_(Fall%202024_Current).pdf",
+          "pdfFile": "MGMT1601_Business Law_(Fall 2024_Current).pdf"
         },
         {
           "code": "MGMT2301",
@@ -650,8 +723,8 @@
           "slug": "microsoft-excel",
           "pageUrl": "/open-studies/microsoft-excel",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT2301_Microsoft%20Excel_Winter%202025_Current.pdf",
-          "pdfFile": "MGMT2301_Microsoft Excel_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT2301_Microsoft%20Excel_(Winter%202025_Current).pdf",
+          "pdfFile": "MGMT2301_Microsoft Excel_(Winter 2025_Current).pdf"
         },
         {
           "code": "MGMT2304",
@@ -660,8 +733,8 @@
           "slug": "introduction-to-business-analytics",
           "pageUrl": "/open-studies/introduction-to-business-analytics",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT2304_Introduction%20to%20Business%20Analytics_Fall%202021_Current.pdf",
-          "pdfFile": "MGMT2304_Introduction to Business Analytics_Fall 2021_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT2304_Introduction%20to%20Business%20Analytics_(Fall%202021_Current).pdf",
+          "pdfFile": "MGMT2304_Introduction to Business Analytics_(Fall 2021_Current).pdf"
         },
         {
           "code": "MGMT2401",
@@ -670,8 +743,8 @@
           "slug": "macroeconomics",
           "pageUrl": "/open-studies/macroeconomics",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT2401_Macroeconomics_Winter%202024_Spring%202024.pdf",
-          "pdfFile": "MGMT2401_Macroeconomics_Winter 2024_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT2401_Macroeconomics_(Fall%202025_Current).pdf",
+          "pdfFile": "MGMT2401_Macroeconomics_(Fall 2025_Current).pdf"
         },
         {
           "code": "MGMT2503",
@@ -680,8 +753,8 @@
           "slug": "introductory-statistics-for-business-disciplines",
           "pageUrl": "/open-studies/introductory-statistics-for-business-disciplines",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MGMT2503_Introductory%20Statistics%20for%20Business%20Disciplines_Fall%202023_Current.pdf",
-          "pdfFile": "MGMT2503_Introductory Statistics for Business Disciplines_Fall 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MGMT2503_Introductory%20Statistics%20for%20Business%20Disciplines_(Fall%202026_Current).pdf",
+          "pdfFile": "MGMT2503_Introductory Statistics for Business Disciplines_(Fall 2026_Current).pdf"
         },
         {
           "code": "MKTG1101",
@@ -690,8 +763,8 @@
           "slug": "introduction-to-marketing",
           "pageUrl": "/open-studies/introduction-to-marketing",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/MKTG1101_Introduction%20to%20Marketing_Winter%202023_Spring%202023.pdf",
-          "pdfFile": "MKTG1101_Introduction to Marketing_Winter 2023_Spring 2023.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/MKTG1101_Introduction%20to%20Marketing_(Fall%202024_Current).pdf",
+          "pdfFile": "MKTG1101_Introduction to Marketing_(Fall 2024_Current).pdf"
         },
         {
           "code": "SCMT2101",
@@ -700,8 +773,8 @@
           "slug": "introduction-to-supply-chain-management",
           "pageUrl": "/open-studies/introduction-to-supply-chain-management",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SCMT2101_Introduction%20to%20Supply%20Chain%20Management_Winter%202022_Current.pdf",
-          "pdfFile": "SCMT2101_Introduction to Supply Chain Management_Winter 2022_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCMT2101_Introduction%20to%20Supply%20Chain%20Management_(Winter%202022_Current).pdf",
+          "pdfFile": "SCMT2101_Introduction to Supply Chain Management_(Winter 2022_Current).pdf"
         },
         {
           "code": "SCMT2201",
@@ -710,8 +783,8 @@
           "slug": "operations-management-i",
           "pageUrl": "/open-studies/operations-management-i",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SCMT2201_Operations%20Management%20I_Winter%202025_Current.pdf",
-          "pdfFile": "SCMT2201_Operations Management I_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCMT2201_Operations%20Management%20I_(Winter%202026_Current).pdf",
+          "pdfFile": "SCMT2201_Operations Management I_(Winter 2026_Current).pdf"
         },
         {
           "code": "SCMT2302",
@@ -720,8 +793,8 @@
           "slug": "negotiation-skills",
           "pageUrl": "/open-studies/negotiation-skills",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SCMT2302_Negotiation%20Skills_Fall%202023_Current.pdf",
-          "pdfFile": "SCMT2302_Negotiation Skills_Fall 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCMT2302_Negotiation%20Skills_(Fall%202026_Current).pdf",
+          "pdfFile": "SCMT2302_Negotiation Skills_(Fall 2026_Current).pdf"
         },
         {
           "code": "SCMT2401",
@@ -730,18 +803,8 @@
           "slug": "logistics-transportation",
           "pageUrl": "/open-studies/logistics-transportation",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SCMT2401_Logistics%20%26%20Transportation_Fall%202022_Current.pdf",
-          "pdfFile": "SCMT2401_Logistics & Transportation_Fall 2022_Current.pdf"
-        },
-        {
-          "code": "V",
-          "name": "Talent Acquisition and Retention",
-          "credits": "3.0",
-          "slug": "talent-acquisition-and-retention",
-          "pageUrl": "/open-studies/talent-acquisition-and-retention",
-          "available": false,
-          "pdf": null,
-          "pdfFile": null
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCMT2401_Logistics%20%26%20Transportation_(Fall%202022_Current).pdf",
+          "pdfFile": "SCMT2401_Logistics & Transportation_(Fall 2022_Current).pdf"
         },
         {
           "code": "VOAS1100",
@@ -750,8 +813,8 @@
           "slug": "introduction-to-the-veterinary-profession",
           "pageUrl": "/open-studies/introduction-to-the-veterinary-profession",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/VOAS1100_Introduction%20to%20the%20Veterinary%20Profession_Fall%202025_Current.pdf",
-          "pdfFile": "VOAS1100_Introduction to the Veterinary Profession_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/VOAS1100_Introduction%20to%20the%20Veterinary%20Profession_(Fall%202025_Current).pdf",
+          "pdfFile": "VOAS1100_Introduction to the Veterinary Profession_(Fall 2025_Current).pdf"
         }
       ],
       "courseCount": 49
@@ -768,7 +831,7 @@
           "slug": "introduction-to-addiction-studies",
           "pageUrl": "/open-studies/introduction-to-addiction-studies",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ADDC1101_Introduction%20to%20Addiction%20Studies_Fall%202025_Current.pdf",
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ADDC1101_Introduction%20to%20Addiction%20Studies_Fall%202025_Current.pdf",
           "pdfFile": "ADDC1101_Introduction to Addiction Studies_Fall 2025_Current.pdf"
         },
         {
@@ -778,8 +841,8 @@
           "slug": "intercultural-communication",
           "pageUrl": "/open-studies/intercultural-communication",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/COMM3201_Intercultural%20Communication_Fall%202020_Current.pdf",
-          "pdfFile": "COMM3201_Intercultural Communication_Fall 2020_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMM3201_Intercultural%20Communication_(Fall%202020_Current).pdf",
+          "pdfFile": "COMM3201_Intercultural Communication_(Fall 2020_Current).pdf"
         },
         {
           "code": "DAST1101",
@@ -788,8 +851,8 @@
           "slug": "introduction-to-disability-studies",
           "pageUrl": "/open-studies/introduction-to-disability-studies",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DAST1101_Introduction%20to%20Disability%20Studies_Winter%202025_Current.pdf",
-          "pdfFile": "DAST1101_Introduction to Disability Studies_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DAST1101_Introduction%20to%20Disability%20Studies_(Winter%202025_Current).pdf",
+          "pdfFile": "DAST1101_Introduction to Disability Studies_(Winter 2025_Current).pdf"
         },
         {
           "code": "DAST1102",
@@ -798,8 +861,8 @@
           "slug": "introduction-to-autism-spectrum-disorder",
           "pageUrl": "/open-studies/introduction-to-autism-spectrum-disorder",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DAST1102_Introduction%20to%20Autism%20Spectrum%20Disorder_Winter%202025_Current.pdf",
-          "pdfFile": "DAST1102_Introduction to Autism Spectrum Disorder_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DAST1102_Introduction%20to%20Autism%20Spectrum%20Disorder_(Fall%202026_Current).pdf",
+          "pdfFile": "DAST1102_Introduction to Autism Spectrum Disorder_(Fall 2026_Current).pdf"
         },
         {
           "code": "DAST1201",
@@ -808,8 +871,8 @@
           "slug": "person-centered-planning",
           "pageUrl": "/open-studies/person-centered-planning",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DAST1201_Person%20Centered%20Planning_Winter%202025_Current.pdf",
-          "pdfFile": "DAST1201_Person Centered Planning_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DAST1201_Person%20Centered%20Planning_(Winter%202025_Current).pdf",
+          "pdfFile": "DAST1201_Person Centered Planning_(Winter 2025_Current).pdf"
         },
         {
           "code": "DAST1202",
@@ -818,8 +881,8 @@
           "slug": "disability-work-management-and-supported-employment",
           "pageUrl": "/open-studies/disability-work-management-and-supported-employment",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DAST1202_Disability%20Work%20Management%20and%20Supported%20Employment_Winter%202025_Current.pdf",
-          "pdfFile": "DAST1202_Disability Work Management and Supported Employment_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DAST1202_Disability%20Work%20Management%20and%20Supported%20Employment_(Winter%202025_Current).pdf",
+          "pdfFile": "DAST1202_Disability Work Management and Supported Employment_(Winter 2025_Current).pdf"
         },
         {
           "code": "DAST1401",
@@ -827,9 +890,9 @@
           "credits": "3.0",
           "slug": "positive-behaviour-support",
           "pageUrl": "/open-studies/positive-behaviour-support",
-          "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DAST1401_Positive%20Behaviour%20Support_Winter%202025_Current.pdf",
-          "pdfFile": "DAST1401_Positive Behaviour Support_Winter 2025_Current.pdf"
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DAST1401_Positive%20Behaviour%20Support_(Winter%202025_Current).pdf",
+          "pdfFile": "DAST1401_Positive Behaviour Support_(Winter 2025_Current).pdf"
         },
         {
           "code": "EDAS1302",
@@ -838,8 +901,8 @@
           "slug": "introduction-to-exceptionalities",
           "pageUrl": "/open-studies/introduction-to-exceptionalities",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/EDAS1302_Introduction%20To%20Exceptionalities_Winter%202025_Current.pdf",
-          "pdfFile": "EDAS1302_Introduction To Exceptionalities_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/EDAS1302_Introduction%20To%20Exceptionalities_(Winter%202025_Current).pdf",
+          "pdfFile": "EDAS1302_Introduction To Exceptionalities_(Winter 2025_Current).pdf"
         },
         {
           "code": "ELCC1101",
@@ -848,8 +911,8 @@
           "slug": "introduction-to-early-childhood-education-and-development",
           "pageUrl": "/open-studies/introduction-to-early-childhood-education-and-development",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ELCC1101_Introduction%20to%20Early%20Childhood%20Education%20and%20Development_Fall%202024_Current.pdf",
-          "pdfFile": "ELCC1101_Introduction to Early Childhood Education and Development_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELCC1101_Introduction%20to%20Early%20Childhood%20Education%20and%20Development_(Fall%202024_Current).pdf",
+          "pdfFile": "ELCC1101_Introduction to Early Childhood Education and Development_(Fall 2024_Current).pdf"
         },
         {
           "code": "ELCC1301",
@@ -858,8 +921,8 @@
           "slug": "child-development",
           "pageUrl": "/open-studies/child-development",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ELCC1301_Child%20Development_Fall%202024_Current.pdf",
-          "pdfFile": "ELCC1301_Child Development_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELCC1301_Child%20Development%20_(Fall%202024_Current).pdf",
+          "pdfFile": "ELCC1301_Child Development _(Fall 2024_Current).pdf"
         },
         {
           "code": "ELCC1305",
@@ -868,8 +931,8 @@
           "slug": "developing-through-play",
           "pageUrl": "/open-studies/developing-through-play",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ELCC1305_Developing%20Through%20Play_Fall%202024_Current.pdf",
-          "pdfFile": "ELCC1305_Developing Through Play_Fall 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELCC1305_Developing%20Through%20Play_(Fall%202024_Current).pdf",
+          "pdfFile": "ELCC1305_Developing Through Play_(Fall 2024_Current).pdf"
         },
         {
           "code": "FASD1101",
@@ -878,8 +941,18 @@
           "slug": "fetal-alcohol-spectrum-awareness-for-human-service-professionals",
           "pageUrl": "/open-studies/fetal-alcohol-spectrum-awareness-for-human-service-professionals",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/FASD1101_Fetal%20Alcohol%20Spectrum%20Awareness%20%20for%20Human%20Service%20Professionals_Fall%202022_Current.pdf",
-          "pdfFile": "FASD1101_Fetal Alcohol Spectrum Awareness  for Human Service Professionals_Fall 2022_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/FASD1101_Fetal%20Alcohol%20Spectrum%20Awareness%20%20for%20Human%20Service%20Professionals_(Winter%202026_Current).pdf",
+          "pdfFile": "FASD1101_Fetal Alcohol Spectrum Awareness  for Human Service Professionals_(Winter 2026_Current).pdf"
+        },
+        {
+          "code": "HMSV1105",
+          "name": "Health, Wellness, and Professional Practice in Canada’s Health Care System",
+          "credits": "3.0",
+          "slug": "health-wellness-and-professional-practice-in-canadas-health-care-system",
+          "pageUrl": "/open-studies/health-wellness-and-professional-practice-in-canadas-health-care-system",
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV1105_Health%2C%20Wellness%2C%20and%20Professional%20Practice%20in%20Canada%E2%80%99s%20Health%20Care%20System_(Fall%202026_Current).pdf",
+          "pdfFile": "HMSV1105_Health, Wellness, and Professional Practice in Canada’s Health Care System_(Fall 2026_Current).pdf"
         },
         {
           "code": "HMSV3201",
@@ -888,8 +961,8 @@
           "slug": "program-design-and-evaluation",
           "pageUrl": "/open-studies/program-design-and-evaluation",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HMSV3201_Program%20Design%20and%20Evaluation_Spring%202024_Current.pdf",
-          "pdfFile": "HMSV3201_Program Design and Evaluation_Spring 2024_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV3201_Program%20Design%20and%20Evaluation_(Spring%202024_Current).pdf",
+          "pdfFile": "HMSV3201_Program Design and Evaluation_(Spring 2024_Current).pdf"
         },
         {
           "code": "HMSV3204",
@@ -898,8 +971,8 @@
           "slug": "digital-transformations-in-health-and-human-services",
           "pageUrl": "/open-studies/digital-transformations-in-health-and-human-services",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HMSV3204_Digital%20Transformations%20in%20Health%20and%20Human%20Services_Fall%202020_Current.pdf",
-          "pdfFile": "HMSV3204_Digital Transformations in Health and Human Services_Fall 2020_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV3204_Digital%20Transformations%20in%20Health%20and%20Human%20Services_(Fall%202020_Current).pdf",
+          "pdfFile": "HMSV3204_Digital Transformations in Health and Human Services_(Fall 2020_Current).pdf"
         },
         {
           "code": "HMSV3401",
@@ -908,8 +981,8 @@
           "slug": "social-determinants-of-health",
           "pageUrl": "/open-studies/social-determinants-of-health",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HMSV3401_Social%20Determinants%20of%20Health_Fall%202021_Current.pdf",
-          "pdfFile": "HMSV3401_Social Determinants of Health_Fall 2021_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV3401_Social%20Determinants%20of%20Health_(Fall%202021_Current).pdf",
+          "pdfFile": "HMSV3401_Social Determinants of Health_(Fall 2021_Current).pdf"
         },
         {
           "code": "HMSV3405",
@@ -918,8 +991,8 @@
           "slug": "implementing-trc-2015-calls-to-action-in-health-and-human-services",
           "pageUrl": "/open-studies/implementing-trc-2015-calls-to-action-in-health-and-human-services",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HMSV3405_Implementing%20TRC%20(2015)%20Calls%20to%20Action%20in%20Health%20and%20Human%20Services_Fall%202022_Current.pdf",
-          "pdfFile": "HMSV3405_Implementing TRC (2015) Calls to Action in Health and Human Services_Fall 2022_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV3405_Implementing%20TRC%20(2015)%20Calls%20to%20Action%20in%20Health%20and%20Human%20Services_(Fall%202022_Current).pdf",
+          "pdfFile": "HMSV3405_Implementing TRC (2015) Calls to Action in Health and Human Services_(Fall 2022_Current).pdf"
         },
         {
           "code": "HMSV3501",
@@ -928,8 +1001,8 @@
           "slug": "case-management",
           "pageUrl": "/open-studies/case-management",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HMSV3501_Case%20Management_Winter%202025_Current.pdf",
-          "pdfFile": "HMSV3501_Case Management_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV3501_Case%20Management_(Winter%202025_Current).pdf",
+          "pdfFile": "HMSV3501_Case Management_(Winter 2025_Current).pdf"
         },
         {
           "code": "HMSV3506",
@@ -938,8 +1011,8 @@
           "slug": "managing-and-the-canadian-health-system",
           "pageUrl": "/open-studies/managing-and-the-canadian-health-system",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/HMSV3506_Managing%20and%20the%20Canadian%20Health%20System_Winter%202023_Current.pdf",
-          "pdfFile": "HMSV3506_Managing and the Canadian Health System_Winter 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/HMSV3506_Managing%20and%20the%20Canadian%20Health%20System_(Winter%202023_Current).pdf",
+          "pdfFile": "HMSV3506_Managing and the Canadian Health System_(Winter 2023_Current).pdf"
         },
         {
           "code": "JUST1101",
@@ -948,8 +1021,8 @@
           "slug": "introduction-to-the-criminal-justice-system",
           "pageUrl": "/open-studies/introduction-to-the-criminal-justice-system",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/JUST1101_Introduction%20to%20the%20Criminal%20Justice%20System_Winter%202025_Current.pdf",
-          "pdfFile": "JUST1101_Introduction to the Criminal Justice System_Winter 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/JUST1101_Introduction%20to%20the%20Criminal%20Justice%20System_(Fall%202026_Current).pdf",
+          "pdfFile": "JUST1101_Introduction to the Criminal Justice System_(Fall 2026_Current).pdf"
         },
         {
           "code": "JUST1102",
@@ -958,11 +1031,11 @@
           "slug": "diversity-and-criminal-justice-in-canada",
           "pageUrl": "/open-studies/diversity-and-criminal-justice-in-canada",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/JUST1102_Diversity%20and%20Criminal%20Justice%20in%20Canada_Winter%202023_Spring%202024.pdf",
-          "pdfFile": "JUST1102_Diversity and Criminal Justice in Canada_Winter 2023_Spring 2024.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/JUST1102_Diversity%20and%20Criminal%20Justice%20in%20Canada_(Fall%202024_Current).pdf",
+          "pdfFile": "JUST1102_Diversity and Criminal Justice in Canada_(Fall 2024_Current).pdf"
         }
       ],
-      "courseCount": 20
+      "courseCount": 21
     },
     {
       "id": "66e8900ccb1a14afe9fb969b",
@@ -976,8 +1049,8 @@
           "slug": "sketching-for-communication",
           "pageUrl": "/open-studies/sketching-for-communication",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/ARTF1101_Sketching%20for%20Communication_Winter%202022_Current.pdf",
-          "pdfFile": "ARTF1101_Sketching for Communication_Winter 2022_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/ARTF1101_Sketching%20for%20Communication_(Winter%202022_Current).pdf",
+          "pdfFile": "ARTF1101_Sketching for Communication_(Winter 2022_Current).pdf"
         }
       ],
       "courseCount": 1
@@ -994,8 +1067,8 @@
           "slug": "fundamental-principles-of-digital-design",
           "pageUrl": "/open-studies/fundamental-principles-of-digital-design",
           "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/DESN1101_Fundamental%20Principles%20of%20Digital%20Design_Fall%202025_Current.pdf",
-          "pdfFile": "DESN1101_Fundamental Principles of Digital Design_Fall 2025_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/DESN1101_Fundamental%20Principles%20of%20Digital%20Design_(Fall%202025_Current).pdf",
+          "pdfFile": "DESN1101_Fundamental Principles of Digital Design_(Fall 2025_Current).pdf"
         },
         {
           "code": "SODV1101",
@@ -1003,9 +1076,9 @@
           "credits": "3.0",
           "slug": "programming-fundamentals",
           "pageUrl": "/open-studies/programming-fundamentals",
-          "available": false,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/SODV1101_Programming%20Fundamentals_Fall%202023_Current.pdf",
-          "pdfFile": "SODV1101_Programming Fundamentals_Fall 2023_Current.pdf"
+          "available": true,
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/SODV1101_Programming%20Fundamentals_(Fall%202023_Current).pdf",
+          "pdfFile": "SODV1101_Programming Fundamentals_(Fall 2023_Current).pdf"
         },
         {
           "code": "TECH1101",
@@ -1014,8 +1087,8 @@
           "slug": "web-and-internet-fundamentals",
           "pageUrl": "/open-studies/web-and-internet-fundamentals",
           "available": true,
-          "pdf": "https://bvc-app-uat.vercel.app/data/course-outlines-pdf/TECH1101_Web%20and%20Internet%20Fundamentals_Fall%202023_Current.pdf",
-          "pdfFile": "TECH1101_Web and Internet Fundamentals_Fall 2023_Current.pdf"
+          "pdf": "https://bvc-app.vercel.app/data/course-outlines-pdf/TECH1101_Web%20and%20Internet%20Fundamentals_(Fall%202023_Current).pdf",
+          "pdfFile": "TECH1101_Web and Internet Fundamentals_(Fall 2023_Current).pdf"
         }
       ],
       "courseCount": 3

@@ -33,7 +33,7 @@
         },
         {
             "termLabel": "Term 2",
-            "totalCredits": 12,
+            "totalCredits": 15,
             "rules": [
                 {
                     "ruleType": "completeAllCourses",
@@ -42,12 +42,18 @@
                         {
                             "code": "PNRS2200",
                             "title": "Evidence-informed Care Planning",
-                            "credits": 6,
+                            "credits": 3,
                             "url": ""
                         },
                         {
                             "code": "PNRS2201",
                             "title": "Nursing Interventions for Individuals, Families, Children, and Adolescents",
+                            "credits": 6,
+                            "url": ""
+                        },
+                        {
+                            "code": "PNRS2202",
+                            "title": "Nursing Interventions for Groups and Communities",
                             "credits": 6,
                             "url": ""
                         }
@@ -57,7 +63,7 @@
         },
         {
             "termLabel": "Term 3",
-            "totalCredits": 13,
+            "totalCredits": 19,
             "rules": [
                 {
                     "ruleType": "completeAllCourses",
@@ -76,15 +82,9 @@
                             "url": ""
                         },
                         {
-                            "code": "PNRS2202",
-                            "title": "Nursing Interventions for Groups and Communities",
-                            "credits": 3,
-                            "url": ""
-                        },
-                        {
                             "code": "PNRS2998",
-                            "title": "Psychiatric Nursing Preceptorship I",
-                            "credits": 4,
+                            "title": "Psychiatric Nursing Clinical",
+                            "credits": 13,
                             "url": ""
                         }
                     ]
@@ -93,7 +93,7 @@
         },
         {
             "termLabel": "Term 4",
-            "totalCredits": 13,
+            "totalCredits": 9,
             "rules": [
                 {
                     "ruleType": "completeAllCourses",
@@ -101,8 +101,8 @@
                     "courses": [
                         {
                             "code": "PNRS2999",
-                            "title": "Psychiatric Nursing Preceptorship II",
-                            "credits": 13,
+                            "title": "Psychiatric Nursing Preceptorship",
+                            "credits": 9,
                             "url": ""
                         }
                     ]
@@ -110,5 +110,5 @@
             ]
         }
     ],
-    "grandTotalCredits": 50
+    "grandTotalCredits": 55
 }

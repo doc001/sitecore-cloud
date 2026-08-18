@@ -1,0 +1,629 @@
+{
+  "version": 2,
+  "generatedAt": "2026-08-17T15:18:45.685Z",
+  "basePath": "/data/static/program-requirements-by-code",
+  "byCode": {
+    "GASD": {
+      "slug": "general-arts-and-sciences-diploma",
+      "name": "General Arts and Sciences Diploma",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "GASD_-_General_Arts_and_Sciences_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "GASC": {
+      "slug": "general-arts-and-sciences-certificate",
+      "name": "General Arts and Sciences Certificate",
+      "programType": "Certificate",
+      "credits": 30,
+      "terms": 2,
+      "source": "GASC_-_General_Arts_and_Sciences_Certificate.json",
+      "resolvedBy": "code"
+    },
+    "GASH": {
+      "slug": "general-arts-and-sciences-health-sciences",
+      "name": "General Arts and Sciences - Health Sciences",
+      "programType": "Certificate",
+      "credits": 30,
+      "terms": 2,
+      "source": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
+      "resolvedBy": "code"
+    },
+    "PSYN": {
+      "slug": "psychiatric-nurse",
+      "name": "Psychiatric Nurse",
+      "programType": "Diploma",
+      "credits": 55,
+      "terms": 4,
+      "source": "PSYN_-_Psychiatric_Nurse.json",
+      "resolvedBy": "code"
+    },
+    "CSD": {
+      "slug": "cybersecurity-solutions",
+      "name": "Cybersecurity Solutions",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "CSS_-_Cybersecurity_Solutions_Diploma.json",
+      "resolvedBy": "override"
+    },
+    "ITSD": {
+      "slug": "information-technology-solutions",
+      "name": "Information Technology Solutions",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "ITSS_-_Information_Technology_Solutions_Diploma.json",
+      "resolvedBy": "override"
+    },
+    "DCSC": {
+      "slug": "disability-studies-certificate",
+      "name": "Disability Studies",
+      "programType": "Certificate",
+      "credits": 33,
+      "terms": 2,
+      "source": "DCSC_-_Disability_Studies__Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "RNPCP": {
+      "slug": "registered-nurse-pathway-to-canadian-practice",
+      "name": "Registered Nurse Pathway to Canadian Practice",
+      "programType": "Certificate of Achievement",
+      "credits": 18,
+      "terms": 1,
+      "source": "RNPCP_-_Registered_Nurse_Pathway_to_Canadian_Practice.json",
+      "resolvedBy": "code"
+    },
+    "BADM": {
+      "slug": "business-administration-digital-marketing",
+      "name": "Business Administration - Digital Marketing",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BADM_-_Business_Administration_-_Digital_Marketing__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "OS": {
+      "slug": "open-studies",
+      "name": "Open Studies",
+      "programType": "Non-Credential",
+      "credits": 0,
+      "terms": 0,
+      "source": "OS_-_Open_Studies.json",
+      "resolvedBy": "code"
+    },
+    "BDA": {
+      "slug": "business-data-analytics",
+      "name": "Business Data Analytics",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BDA_-_Business_Data_Analytics.json",
+      "resolvedBy": "code"
+    },
+    "UT": {
+      "slug": "university-transfer",
+      "name": "University Transfer",
+      "programType": "Non-Credential",
+      "credits": 0,
+      "terms": 0,
+      "source": "UT_-_University_Transfer.json",
+      "resolvedBy": "code"
+    },
+    "ECED": {
+      "slug": "early-childhood-education-and-development-diploma",
+      "name": "Early Childhood Education and Development",
+      "programType": "Diploma",
+      "credits": 69,
+      "terms": 4,
+      "source": "ECED_-_Early_Childhood_Education_and_Development_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "HDA": {
+      "slug": "health-data-analytics",
+      "name": "Health Data Analytics",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "HDA_-_Health_Data_Analytics.json",
+      "resolvedBy": "code"
+    },
+    "SDAS": {
+      "slug": "software-development-apprenticeship-style",
+      "name": "Software Development - Apprenticeship Style",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "SDAS_-_Software_Development_-_Apprenticeship_Style__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "SD": {
+      "slug": "software-development",
+      "name": "Software Development",
+      "programType": "Diploma",
+      "credits": 54,
+      "terms": 4,
+      "source": "SD_-_Software_Development__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "PN": {
+      "slug": "practical-nurse",
+      "name": "Practical Nurse",
+      "programType": "Diploma",
+      "credits": 88,
+      "terms": 5,
+      "source": "PN_-_Practical_Nurse_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "VOA": {
+      "slug": "veterinary-assistant",
+      "name": "Veterinary Assistant",
+      "programType": "Certificate",
+      "credits": 33,
+      "terms": 2,
+      "source": "VOA_-_Veterinary_Assistant__Certificate_.json",
+      "resolvedBy": "override"
+    },
+    "RTA": {
+      "slug": "recreation-therapy-aide",
+      "name": "Recreation Therapy Aide",
+      "programType": "Certificate",
+      "credits": 15,
+      "terms": 2,
+      "source": "RTA_-_Recreation_Therapy_Aide__Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "SW": {
+      "slug": "social-work",
+      "name": "Social Work",
+      "programType": "Diploma",
+      "credits": 80,
+      "terms": 6,
+      "source": "SW_-_Social_Work__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "RM-BVC": {
+      "slug": "risk-management-certificate-of-achievement",
+      "name": "Risk Management",
+      "programType": "Certificate of Achievement",
+      "credits": 9,
+      "terms": 2,
+      "source": "RM-BVC_-_Risk_Management_Certificate_of_Achievement.json",
+      "resolvedBy": "code"
+    },
+    "MOA": {
+      "slug": "medical-office-assistant-and-unit-clerk",
+      "name": "Medical Office Assistant and Unit Clerk",
+      "programType": "Certificate",
+      "credits": 33,
+      "terms": 2,
+      "source": "MOA_-_Medical_Office_Assistant_and_Unit_Clerk__Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "PTE": {
+      "slug": "pharmacy-technician",
+      "name": "Pharmacy Technician",
+      "programType": "Diploma",
+      "credits": 74,
+      "terms": 4,
+      "source": "PTE_-_Pharmacy_Technician__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "PNRN-LPN": {
+      "slug": "perioperative-nursing-for-licensed-practical-nurses-and-registered-nurses",
+      "name": "Perioperative Nursing for Licensed Practical Nurses and Registered Nurses",
+      "programType": "Post-Diploma Certificate",
+      "credits": 18,
+      "terms": 1,
+      "source": "PON_-_Perioperative_Nursing.json",
+      "resolvedBy": "override"
+    },
+    "MLAD": {
+      "slug": "machine-learning-analyst",
+      "name": "Machine Learning Analyst",
+      "programType": "Diploma",
+      "credits": 62,
+      "terms": 4,
+      "source": "MLAD_-_Machine_Learning_Analyst.json",
+      "resolvedBy": "code"
+    },
+    "LAD": {
+      "slug": "legal-assistant",
+      "name": "Legal Assistant",
+      "programType": "Diploma",
+      "credits": 63,
+      "terms": 5,
+      "source": "LAD_-_Legal_Assistant_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "KBD": {
+      "slug": "kitchen-and-bath-design---post-diploma-certificate",
+      "name": "Kitchen and Bath Design - Post-Diploma Certificate",
+      "programType": "Post-Diploma Certificate",
+      "credits": 34,
+      "terms": 3,
+      "source": "KBD_-_Kitchen_and_Bath_Design__Post-diploma_Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "JSG": {
+      "slug": "justice-studies",
+      "name": "Justice Studies",
+      "programType": "Diploma",
+      "credits": 63,
+      "terms": 4,
+      "source": "JS_-_Justice_Studies.json",
+      "resolvedBy": "override"
+    },
+    "IDTA": {
+      "slug": "interdisciplinary-therapy-assistant",
+      "name": "Interdisciplinary Therapy Assistant",
+      "programType": "Diploma",
+      "credits": 79,
+      "terms": 6,
+      "source": "IDTA_-_Interdisciplinary_Therapy_Assistant__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "IDMD": {
+      "slug": "interior-decorating",
+      "name": "Interior Decorating",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "IDMD_-_Interior_Decorating_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "ITS": {
+      "slug": "information-technology-systems",
+      "name": "Information Technology Systems",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "ITS_-_Information_Technology_Systems__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "HRM": {
+      "slug": "human-resources",
+      "name": "Human Resources",
+      "programType": "Certificate",
+      "credits": 30,
+      "terms": 2,
+      "source": "HRM_-_Human_Resources__Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "UPGR": {
+      "slug": "upgrading",
+      "name": "Upgrading",
+      "programType": "Non-Credential",
+      "credits": 0,
+      "terms": 0,
+      "source": "UPGR_-_Upgrading.json",
+      "resolvedBy": "code"
+    },
+    "HECA": {
+      "slug": "health-care-aide",
+      "name": "Health Care Aide",
+      "programType": "Certificate",
+      "credits": 36,
+      "terms": 2,
+      "source": "HECA_-_Government_of_Alberta_Health_Care_Aide_Provincial_Curriculum_2019__Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "FEA": {
+      "slug": "foundation-in-entertainment-arts",
+      "name": "Foundation in Entertainment Arts",
+      "programType": "Certificate",
+      "credits": 33,
+      "terms": 3,
+      "source": "FEA_-_Foundation_in_Entertainment_Arts_Certificate.json",
+      "resolvedBy": "code"
+    },
+    "ELL": {
+      "slug": "english-for-academic-purposes",
+      "name": "English for Academic Purposes",
+      "programType": "Non-Credential",
+      "credits": 0,
+      "terms": 0,
+      "source": "ELL_-_English_Language_Learning.json",
+      "resolvedBy": "code"
+    },
+    "EBM": {
+      "slug": "esports-business-management",
+      "name": "Esports Business Management",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "EBM_-_Esports_Business_Management__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "FP-BVC": {
+      "slug": "financial-planning-certificate-of-achievement",
+      "name": "Financial Planning",
+      "programType": "Certificate of Achievement",
+      "credits": 12,
+      "terms": 2,
+      "source": "FP-BVC_-_Financial_Planning_Certificate_of_Achievement.json",
+      "resolvedBy": "code"
+    },
+    "EA": {
+      "slug": "education-assistant",
+      "name": "Education Assistant",
+      "programType": "Certificate",
+      "credits": 36,
+      "terms": 2,
+      "source": "EA_-_Education_Assistant__Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "DCSD": {
+      "slug": "disability-studies",
+      "name": "Disability Studies",
+      "programType": "Diploma",
+      "credits": 69,
+      "terms": 4,
+      "source": "DCSD_-_Disability_Studies_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "ECE": {
+      "slug": "early-childhood-education-and-development",
+      "name": "Early Childhood Education and Development",
+      "programType": "Certificate",
+      "credits": 36,
+      "terms": 2,
+      "source": "ECE_-_Early_Childhood_Education_and_Development_Certificate.json",
+      "resolvedBy": "code"
+    },
+    "CYCD": {
+      "slug": "child-and-youth-care",
+      "name": "Child and Youth Care",
+      "programType": "Diploma",
+      "credits": 72,
+      "terms": 4,
+      "source": "CYCD_-_Child_and_Youth_Care__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "DMP": {
+      "slug": "digital-marketing",
+      "name": "Digital Marketing",
+      "programType": "Post-Diploma Certificate",
+      "credits": 30,
+      "terms": 2,
+      "source": "DMP_-_Digital_Marketing_Post-diploma_Certificate.json",
+      "resolvedBy": "code"
+    },
+    "DDAS": {
+      "slug": "digital-design-apprenticeship-style",
+      "name": "Digital Design - Apprenticeship Style",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "DDAS_-_Digital_Design_-_Apprenticeship_Style__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "DD": {
+      "slug": "digital-design",
+      "name": "Digital Design",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "DD_-_Digital_Design__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "DMA": {
+      "slug": "data-management-and-analytics",
+      "name": "Data Management and Analytics",
+      "programType": "Post-Diploma Certificate",
+      "credits": 30,
+      "terms": 2,
+      "source": "DMA_-_Data_Management_and_Analytics__Post-diploma_Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "CSP": {
+      "slug": "cybersecurity",
+      "name": "Cybersecurity",
+      "programType": "Post-Diploma Certificate",
+      "credits": 36,
+      "terms": 2,
+      "source": "CSP_-_Cybersecurity__Post-diploma_Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "BASC": {
+      "slug": "business-administration-supply-chain-management",
+      "name": "Business Administration - Supply Chain Management  Major",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "BAM": {
+      "slug": "business-administration-integrated-marketing-communications",
+      "name": "Business Administration - Integrated Marketing Communications Major",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BAM_-_Business_Administration_-_Integrated_Marketing_Communications__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "BARM": {
+      "slug": "business-administration-insurance-and-risk-management",
+      "name": "Business Administration - Insurance and Risk Management Major",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BARM_-_Business_Administration_-_Insurance_and_Risk_Management__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "BAHR": {
+      "slug": "business-administration-human-resources",
+      "name": "Business Administration - Human Resources Major",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BAHR_-_Business_Administration_-_Human_Resources__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "BAGB": {
+      "slug": "business-administration-general-business",
+      "name": "Business Administration - General Business Major",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BAGB_-_Business_Administration_-_General_Business__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "AFM": {
+      "slug": "business-administration-certificate",
+      "name": "Business Administration",
+      "programType": "Certificate",
+      "credits": 30,
+      "terms": 2,
+      "source": "AFM_-_Business_Administration_Certificate.json",
+      "resolvedBy": "code"
+    },
+    "BAFS": {
+      "slug": "business-administration-financial-services",
+      "name": "Business Administration - Financial Services Major",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BAFS_-_Business_Administration_-_Financial_Services__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "BAA": {
+      "slug": "business-administration-accounting",
+      "name": "Business Administration - Accounting Major",
+      "programType": "Diploma",
+      "credits": 60,
+      "terms": 4,
+      "source": "BAA_-_Business_Administration_-_Accounting__Diploma_.json",
+      "resolvedBy": "code"
+    },
+    "AVFX": {
+      "slug": "advanced-visual-effects",
+      "name": "Advanced Visual Effects (VFX) and Virtual Production",
+      "programType": "Diploma",
+      "credits": 52,
+      "terms": 6,
+      "source": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "AFP": {
+      "slug": "advanced-film-production",
+      "name": "Advanced Film Production",
+      "programType": "Diploma",
+      "credits": 76,
+      "terms": 6,
+      "source": "AFP_-_Advanced_Film_Production_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "3DAM": {
+      "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+      "name": "Advanced 3D Animation & 3D Modelling",
+      "programType": "Diploma",
+      "credits": 52,
+      "terms": 6,
+      "source": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "AGD": {
+      "slug": "advanced-game-development",
+      "name": "Advanced Game Development",
+      "programType": "Diploma",
+      "credits": 76,
+      "terms": 6,
+      "source": "AGD_-_Advanced_Game_Development_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "OA": {
+      "slug": "administrative-professional",
+      "name": "Administrative Professional",
+      "programType": "Certificate",
+      "credits": 33,
+      "terms": 3,
+      "source": "OA_-_Administrative_Professional__Certificate_.json",
+      "resolvedBy": "code"
+    },
+    "AASD": {
+      "slug": "addiction-studies-diploma",
+      "name": "Addiction Studies",
+      "programType": "Diploma",
+      "credits": 48,
+      "terms": 4,
+      "source": "AASD_-_Addiction_Studies_Diploma.json",
+      "resolvedBy": "code"
+    },
+    "SDP": {
+      "slug": "software-development-post-diploma",
+      "name": "Software Development",
+      "programType": "Post-Diploma Certificate",
+      "credits": 30,
+      "terms": 2,
+      "source": "SDP_-_Software_Development_Post-diploma_Certificate.json",
+      "resolvedBy": "code"
+    }
+  },
+  "bySlug": {
+    "general-arts-and-sciences-diploma": "GASD",
+    "general-arts-and-sciences-certificate": "GASC",
+    "general-arts-and-sciences-health-sciences": "GASH",
+    "psychiatric-nurse": "PSYN",
+    "cybersecurity-solutions": "CSD",
+    "information-technology-solutions": "ITSD",
+    "disability-studies-certificate": "DCSC",
+    "registered-nurse-pathway-to-canadian-practice": "RNPCP",
+    "business-administration-digital-marketing": "BADM",
+    "open-studies": "OS",
+    "business-data-analytics": "BDA",
+    "university-transfer": "UT",
+    "early-childhood-education-and-development-diploma": "ECED",
+    "health-data-analytics": "HDA",
+    "software-development-apprenticeship-style": "SDAS",
+    "software-development": "SD",
+    "practical-nurse": "PN",
+    "veterinary-assistant": "VOA",
+    "recreation-therapy-aide": "RTA",
+    "social-work": "SW",
+    "risk-management-certificate-of-achievement": "RM-BVC",
+    "medical-office-assistant-and-unit-clerk": "MOA",
+    "pharmacy-technician": "PTE",
+    "perioperative-nursing-for-licensed-practical-nurses-and-registered-nurses": "PNRN-LPN",
+    "machine-learning-analyst": "MLAD",
+    "legal-assistant": "LAD",
+    "kitchen-and-bath-design---post-diploma-certificate": "KBD",
+    "justice-studies": "JSG",
+    "interdisciplinary-therapy-assistant": "IDTA",
+    "interior-decorating": "IDMD",
+    "information-technology-systems": "ITS",
+    "human-resources": "HRM",
+    "upgrading": "UPGR",
+    "health-care-aide": "HECA",
+    "foundation-in-entertainment-arts": "FEA",
+    "english-for-academic-purposes": "ELL",
+    "esports-business-management": "EBM",
+    "financial-planning-certificate-of-achievement": "FP-BVC",
+    "education-assistant": "EA",
+    "disability-studies": "DCSD",
+    "early-childhood-education-and-development": "ECE",
+    "child-and-youth-care": "CYCD",
+    "digital-marketing": "DMP",
+    "digital-design-apprenticeship-style": "DDAS",
+    "digital-design": "DD",
+    "data-management-and-analytics": "DMA",
+    "cybersecurity": "CSP",
+    "business-administration-supply-chain-management": "BASC",
+    "business-administration-integrated-marketing-communications": "BAM",
+    "business-administration-insurance-and-risk-management": "BARM",
+    "business-administration-human-resources": "BAHR",
+    "business-administration-general-business": "BAGB",
+    "business-administration-certificate": "AFM",
+    "business-administration-financial-services": "BAFS",
+    "business-administration-accounting": "BAA",
+    "advanced-visual-effects": "AVFX",
+    "advanced-film-production": "AFP",
+    "advanced-3d-animation-and-3d-modeling-diploma": "3DAM",
+    "advanced-game-development": "AGD",
+    "administrative-professional": "OA",
+    "addiction-studies-diploma": "AASD",
+    "software-development-post-diploma": "SDP"
+  }
+}

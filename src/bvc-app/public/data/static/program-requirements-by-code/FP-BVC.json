@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "code": "FP-BVC",
+    "slug": "financial-planning-certificate-of-achievement",
+    "name": "Financial Planning",
+    "programType": "Certificate of Achievement",
+    "credential": "certificate of achievement",
+    "sourceFile": "FP-BVC_-_Financial_Planning_Certificate_of_Achievement.json",
+    "generatedAt": "2026-08-17T15:18:45.685Z"
+  },
+  "sectionLabel": "Program Completion Requirements",
+  "groupings": [
+    {
+      "termLabel": "Term 1",
+      "totalCredits": 6,
+      "rules": [
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "FNSR2301",
+              "title": "Financial Markets & Products",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2301_Financial Markets & Products_(Fall 2023_Current).pdf"
+            },
+            {
+              "code": "FNSR2302",
+              "title": "Personal Financial Planning I",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2302_Personal Financial Planning I_(Fall 2025_Current).pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "termLabel": "Term 2",
+      "totalCredits": 6,
+      "rules": [
+        {
+          "ruleType": "completeAllCourses",
+          "description": "Complete the following courses:",
+          "courses": [
+            {
+              "code": "FNSR2303",
+              "title": "Investment Funds in Canada",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2303_Investment Funds in Canada_(Winter 2023_Current).pdf"
+            },
+            {
+              "code": "FNSR2304",
+              "title": "Personal Financial Planning II",
+              "credits": 3,
+              "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/FNSR2304_Personal Financial Planning II_(Fall 2023_Current).pdf"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "grandTotalCredits": 12
+}
