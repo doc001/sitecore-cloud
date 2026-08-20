@@ -721,25 +721,66 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
           } catch (error) {
             return void console.warn('[Availability] No token — skipping availability sweep.');
           }
-          for (var index = 0; index < buttons.length; index++) {
-            var button = buttons[index],
-              productId = button.getAttribute('data-product-id');
-            if (productId && !cart.isInCart(productId))
+          // A section can be unbuyable in two independent ways, and neither endpoint
+          // sees the other's case (docs/sis-api.md):
+          //   courseofferings 404          -> not in the SiS at all; published to
+          //                                   Sitecore but not yet propagated
+          //   validation `Offering Missing` -> the SiS knows it and refuses it — full.
+          //                                   courseofferings still reports seats here,
+          //                                   a day or more behind the truth
+          // So both run, and anything either one refuses is hidden rather than left on
+          // the page for someone to click and be turned away.
+          var jobs = [];
+          Array.prototype.forEach.call(buttons, function (button) {
+            var productId = button.getAttribute('data-product-id');
+            if (productId && !cart.isInCart(productId)) jobs.push({ button: button, sku: productId });
+          });
+
+          async function inspect(sku) {
+            var pair = await Promise.all([checkAvailability(sku, token), validateOnAdd ? validateCart({ apiOrigin: apiOrigin, sku: sku, cartSkus: [], token: token }) : null]);
+            if (401 === pair[0].status || (pair[1] && 401 === pair[1].status)) {
+              token = await getValidToken(true);
+              pair = await Promise.all([checkAvailability(sku, token), validateOnAdd ? validateCart({ apiOrigin: apiOrigin, sku: sku, cartSkus: [], token: token }) : null]);
+            }
+            var offering = pair[0],
+              seats = offering.data && offering.data.seatsAreAvailable,
+              // Documented as the string enum "Full"/"Available", serialised today as
+              // 0/1. Name both so a converter added upstream cannot silently turn every
+              // full section back into a bookable one.
+              isFull = 0 === seats || 'Full' === seats,
+              verdict = pair[1] ? readValidation(pair[1]) : null;
+            if (200 !== offering.status) return 'not in the SiS (' + offering.status + ')';
+            if (!offering.data || isFull) return 'no seats';
+            // A null verdict is "could not determine" — leave the section visible.
+            if (verdict && !verdict.ok) return 'validation: ' + verdict.codes.join(',');
+            return null;
+          }
+
+          // Bounded concurrency: a course can carry two dozen sections, and two calls
+          // each, run one after another, is ~50 round trips before the list settles.
+          var cursor = 0;
+          async function sweepWorker() {
+            while (cursor < jobs.length) {
+              var job = jobs[cursor++];
               try {
-                var availabilityResp = await checkAvailability(productId, token);
-                if ((401 === availabilityResp.status && ((token = await getValidToken(true)), (availabilityResp = await checkAvailability(productId, token))), 200 === availabilityResp.status && availabilityResp.data && availabilityResp.data.seatsAreAvailable)) {
-                  button.classList.remove('unavailable');
-                  button.title = '';
-                  button.textContent = 'Add';
+                var reason = await inspect(job.sku);
+                if (null === reason) {
+                  job.button.classList.remove('unavailable');
+                  job.button.title = '';
+                  job.button.textContent = 'Add';
                 } else {
-                  unavailableStore.markAsUnavailable(productId);
-                  var accordionEl = container.querySelector('.accordion-item-' + button.getAttribute('data-accordion-id'));
+                  console.log('[Availability] hiding', job.sku, '—', reason);
+                  unavailableStore.markAsUnavailable(job.sku);
+                  var accordionEl = container.querySelector('.accordion-item-' + job.button.getAttribute('data-accordion-id'));
                   accordionEl && (accordionEl.style.display = 'none');
                 }
               } catch (error) {
-                console.warn('Availability check failed for ' + productId, error);
+                // Fail open: a check that errors leaves the section on the page.
+                console.warn('Availability check failed for ' + job.sku, error);
               }
+            }
           }
+          await Promise.all([sweepWorker(), sweepWorker(), sweepWorker(), sweepWorker(), sweepWorker(), sweepWorker()]);
           container.querySelectorAll('.offering-location').forEach(function (locationEl) {
             var accordionItems = locationEl.querySelectorAll('[class^="accordion-item-"]');
             Array.prototype.every.call(accordionItems, function (accordionItem) {
