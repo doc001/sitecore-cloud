@@ -39,13 +39,14 @@ function start() {
   // picking OTHER opens a search over all 273 countries / 505 languages. The result
   // is injected into the select as a real option, so validation and the submitter
   // never see a special case — the control always holds a Sitecore SisId.
-  //
-  // Languages only. The country selects carry ISO alpha-2 — /registration validates
-  // those two fields as exactly 2 alphabetic characters — while form-options.json
-  // holds Sitecore SisIds, 127 of which are 3 characters (CAN, FRA, USA). Searching
-  // that list would inject a value the API rejects, so country search waits for an
-  // ISO-keyed list. `language` is a free string server-side, so SisIds are fine.
+  // form-options.json now carries a submittable 2-character code per country
+  // (generate-form-options.mjs converts Sitecore's three-character SisIds), so the
+  // country selects can search the full list without injecting a value /registration
+  // would reject.
   [
+    ['countryOfCitizenship', 'countries'],
+    ['country', 'countries'],
+    ['billingCountry', 'countries'],
     ['firstLanguage', 'languages'],
   ].forEach(([name, listKey]) => {
     const field = fields.get(name);
@@ -170,7 +171,12 @@ function start() {
 
   const draft = readDraft(config.draftKey);
   fields.forEach((field) => {
-    if (draft[field.name]) field.control.value = draft[field.name];
+    const saved = draft[field.name];
+    if (!saved) return;
+    // A <select> silently goes blank when assigned a value it does not offer, which
+    // would also strand anything keyed off it. Skip rather than clear.
+    if ('SELECT' === field.control.tagName && !Array.prototype.some.call(field.control.options, (o) => o.value === saved)) return;
+    field.control.value = saved;
   });
   applyConditionals();
   applyAsnVisibility();

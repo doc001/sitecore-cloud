@@ -328,9 +328,38 @@ Sitecore SisId**, because the API constrains their format:
 
 Sitecore's country SisIds are a mix of 146 two-character and 127 three-character
 codes, and even the two-character ones are not reliably ISO (`PO` for Poland, `XK`
-for the United Kingdom). So the country lists have to be maintained as ISO
-independently of Sitecore, and the "Other" typeahead cannot search the Sitecore
-country set — it would inject a value the API rejects.
+for the United Kingdom).
+
+**ISO overrides Sitecore for this field** (decision 2026-08-20). Everywhere else
+Sitecore is the source of truth, but country codes go out as ISO alpha-2, so the
+United Kingdom is `GB` rather than Sitecore's `XK`, and Poland `PL` rather than `PO`.
+
+`scripts/generate-form-options.mjs` resolves each country **from its name**, not its
+code — the code cannot be trusted, and `XK` is why: ICU resolves it happily, to
+**Kosovo**. Being well-formed is not the same as meaning the right country. Only when
+ICU does not recognise the Sitecore spelling ("Vietnam, Republic Of", "People's
+Republic of China", "American Somoa") does it fall back to the SisId, then to an
+ISO alpha-3 → alpha-2 table.
+
+> **ICU knows more codes than ISO assigns**, and the extras win a name lookup because
+> they sort after the canonical code — it maps `RH` to Zimbabwe, `UK` to the United
+> Kingdom, `SU` to Russia. Deprecated codes are therefore *detected*, not listed:
+> canonicalising `und-XX` returns a different region for an alias (`RH` → `ZW`,
+> `AN` → `CW`) and the same one for a live code. Only the exceptionally-reserved and
+> user-assigned codes, which alias nothing, are named explicitly.
+
+The four UK constituents Sitecore lists separately (`XF` England, `XG` Northern
+Ireland, `XH` Scotland, `XI` Wales) collapse to `GB`, so searching "Scotland" works.
+
+**253 of 273** countries end up with a valid code; the generator exits non-zero if
+any row would fail the 2-character rule. `form-options.json` carries
+`[isoAlpha2, sitecoreName, sisId]` so a mismatch traces back.
+
+> **Kosovo is the one casualty.** It has no officially assigned ISO alpha-2 — the
+> de-facto code is `XK`, which is exactly what Sitecore uses for the United Kingdom.
+> Emitting `XK` for Kosovo would file those learners as British in a SiS reading
+> Sitecore's table, so it is excluded instead. Needs a decision if any Kosovar
+> learner ever registers.
 
 **Nothing is validated beyond format.** Registrations 21–27 store `legalStatus=1`,
 `ethnicity=6`, `language=ENG` exactly as sent — values that exist nowhere in

@@ -48,7 +48,12 @@ export const config = {
   hardDisableNext: false,
 
   // Draft answers survive a back-navigation or accidental refresh.
-  draftKey: 'bvc.checkout.draft',
+  // Bump this whenever an option list's VALUES change. A draft saved under the old
+  // short codes ('CAN', 'EN', 'M') would otherwise be restored into selects that no
+  // longer contain them, leaving the control blank and the conditional fields —
+  // Indigenous Status, Country of Citizenship — silently unresolved. v2 = Sitecore
+  // SisIds, 2026-08-20.
+  draftKey: 'bvc.checkout.draft.v2',
 
   // Requirement 7 — opens in a new tab.
   refundPolicyUrl: 'https://bowvalleycollege.ca/about-us/policies/refund-policy',
@@ -105,7 +110,9 @@ export const config = {
       ET: '+251', TZ: '+255', SO: '+252', SD: '+249', ER: '+291', SN: '+221',
       CM: '+237', CD: '+243', ZA: '+27', ZW: '+263', BR: '+55', AR: '+54',
       CL: '+56', CO: '+57', PE: '+51', VE: '+58', GT: '+502', HN: '+504',
-      SV: '+503', JM: '+1', AU: '+61'
+      SV: '+503', JM: '+1', AU: '+61',
+      // The curated country list covers places the original table did not.
+      BS: '+1', BE: '+32', BG: '+359', CR: '+506', HT: '+509', MU: '+230', MM: '+95', NZ: '+64', RO: '+40', RS: '+381', SL: '+232', CH: '+41', TT: '+1', UG: '+256'
     }
   },
 

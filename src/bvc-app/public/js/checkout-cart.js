@@ -30,7 +30,12 @@
      */
     hardDisableNext: false,
     // Draft answers survive a back-navigation or accidental refresh.
-    draftKey: "bvc.checkout.draft",
+    // Bump this whenever an option list's VALUES change. A draft saved under the old
+    // short codes ('CAN', 'EN', 'M') would otherwise be restored into selects that no
+    // longer contain them, leaving the control blank and the conditional fields —
+    // Indigenous Status, Country of Citizenship — silently unresolved. v2 = Sitecore
+    // SisIds, 2026-08-20.
+    draftKey: "bvc.checkout.draft.v2",
     // Requirement 7 — opens in a new tab.
     refundPolicyUrl: "https://bowvalleycollege.ca/about-us/policies/refund-policy",
     termsPolicyUrl: "https://bowvalleycollege.ca/about-us/policies",
@@ -135,7 +140,22 @@
         HN: "+504",
         SV: "+503",
         JM: "+1",
-        AU: "+61"
+        AU: "+61",
+        // The curated country list covers places the original table did not.
+        BS: "+1",
+        BE: "+32",
+        BG: "+359",
+        CR: "+506",
+        HT: "+509",
+        MU: "+230",
+        MM: "+95",
+        NZ: "+64",
+        RO: "+40",
+        RS: "+381",
+        SL: "+232",
+        CH: "+41",
+        TT: "+1",
+        UG: "+256"
       }
     },
     /**
@@ -1226,6 +1246,9 @@
       if (field) fields2.set(definition.name, field);
     });
     [
+      ["countryOfCitizenship", "countries"],
+      ["country", "countries"],
+      ["billingCountry", "countries"],
       ["firstLanguage", "languages"]
     ].forEach(([name, listKey]) => {
       const field = fields2.get(name);
@@ -1297,7 +1320,10 @@
     }
     const draft = readDraft(config.draftKey);
     fields2.forEach((field) => {
-      if (draft[field.name]) field.control.value = draft[field.name];
+      const saved = draft[field.name];
+      if (!saved) return;
+      if ("SELECT" === field.control.tagName && !Array.prototype.some.call(field.control.options, (o) => o.value === saved)) return;
+      field.control.value = saved;
     });
     applyConditionals();
     applyAsnVisibility();
