@@ -11,7 +11,7 @@
  * live alongside this file.
  */
 
-import { config, features, fields as fieldDefinitions, steps } from './content.js';
+import { config, features, fields as fieldDefinitions, options, steps } from './content.js';
 import { createField } from './field.js';
 import { createConsent } from './consent.js';
 import { createStepper } from './stepper.js';
@@ -32,6 +32,57 @@ function start() {
     const field = createField(definition, root);
     if (field) fields.set(definition.name, field);
   });
+
+  // --- keep the markup's <option> values in step with content.js -----------
+  //
+  // The embed HTML is pasted into Webflow by hand while the bundle is deployed by
+  // the pipeline, so the two drift apart whenever an option list changes — and a
+  // drifted value fails silently. When the SisId switch landed, pages still serving
+  // `<option value="CAN">` stopped opening Indigenous Status entirely, because the
+  // rule matches on "1716" and nothing ever equalled it.
+  //
+  // So content.js is the authority at runtime: any select whose values disagree is
+  // rebuilt from it. The current choice is carried across by its LABEL, which is what
+  // makes the migration invisible — "Canadian" stays selected while its value changes
+  // from CAN to 1716. Markup only has to supply the field, not its values.
+  function syncSelectOptions() {
+    fieldDefinitions.forEach((definition) => {
+      if ('select' !== definition.type || !definition.options) return;
+      const field = fields.get(definition.name);
+      const list = options[definition.options];
+      if (!field || !Array.isArray(list) || 'SELECT' !== field.control.tagName) return;
+
+      const select = field.control;
+      // Offset by one: index 0 is the "Please select…" placeholder.
+      const inSync = select.options.length === list.length + 1 &&
+        list.every((option, i) => select.options[i + 1] && select.options[i + 1].value === option.value);
+      if (inSync) return;
+
+      const chosen = select.selectedIndex > 0 ? select.options[select.selectedIndex] : null;
+      const chosenLabel = chosen ? chosen.textContent.trim() : null;
+      const placeholder = select.options[0] && '' === select.options[0].value
+        ? select.options[0].textContent
+        : 'Please select…';
+
+      select.innerHTML = '';
+      const blank = document.createElement('option');
+      blank.value = '';
+      blank.textContent = placeholder;
+      select.appendChild(blank);
+      list.forEach((option) => {
+        const node = document.createElement('option');
+        node.value = option.value;
+        node.textContent = option.label;
+        select.appendChild(node);
+      });
+
+      const match = chosenLabel && list.find((option) => option.label === chosenLabel);
+      if (match) select.value = match.value;
+      else if (definition.defaultValue) select.value = definition.defaultValue;
+      console.warn('[checkout-cart] rebuilt "' + definition.name + '" options — the embedded markup is out of date. Re-paste src/webflow/checkout-cart.html.');
+    });
+  }
+  syncSelectOptions();
 
   // --- "Other" search over the full Sitecore lists ------------------------
   //

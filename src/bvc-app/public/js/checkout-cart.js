@@ -171,6 +171,261 @@
       totalCreditsKey: "totalCredits"
     }
   };
+  var options = {
+    // Requirement 2.9 — see Gender.png for business meaning names.
+    // EXCEPTION to the SisId rule below: /registration binds `gender` to a
+    // System.Char, so it takes a single letter and 400s on anything longer
+    // ("Error converting value \"21\" to type 'System.Char'", verified 2026-08-20).
+    // Labels come from Sitecore; the submitted value cannot. Sitecore's other three
+    // genders — Other (741), Information refused (1702), Not available (1703) — have
+    // no known letter, so they are not offered until the SiS team supplies one.
+    gender: [
+      { value: "M", label: "Male" },
+      { value: "F", label: "Female" },
+      { value: "X", label: "X (Non-Binary, Gender Diverse)" },
+      { value: "U", label: "Unreported" }
+    ],
+    // Requirement 2.11 — see PermanentResidentStatus.jpg.
+    // Drives BOTH the registration `legalStatus` and the domestic/international fee
+    // split. Domestic = Canadian, Permanent Resident, Refugee, Convention Refugee;
+    // Refugee Claimant is NOT (registrar, 2026-08-20). See DOMESTIC_LEGAL_STATUS.
+    citizenshipStatus: [
+      { value: "1716", label: "Canadian" },
+      { value: "1721", label: "Permanent Resident" },
+      { value: "2209", label: "Refugee" },
+      { value: "1717", label: "Convention Refugee" },
+      { value: "1722", label: "Refugee Claimant" },
+      { value: "2207", label: "Study Permit" },
+      { value: "2208", label: "Work Permit" },
+      { value: "1723", label: "Student Visa" },
+      { value: "1720", label: "Other Visa" },
+      { value: "1718", label: "Non-Canadian" },
+      { value: "2210", label: "Other" }
+    ],
+    // Requirement 2.12 — see Indigenous Status.png.
+    // Submitted as the registration `ethnicity` field.
+    indigenousStatus: [
+      { value: "16", label: "First Nations - Status" },
+      { value: "17", label: "First Nations - Non-Status" },
+      { value: "2", label: "M\xE9tis" },
+      { value: "4", label: "Inuit" },
+      { value: "18", label: "Not Applicable" }
+    ],
+    // Sitecore SisIds — `language` is a plain string on /registration and takes
+    // them (verified 2026-08-20). Curated from the languages of the college's
+    // student population; "Other" searches all 505 via the typeahead.
+    firstLanguage: [
+      { value: "121", label: "English" },
+      { value: "122", label: "French" },
+      { value: "124", label: "Spanish" },
+      { value: "1744", label: "Arabic" },
+      { value: "123", label: "German" },
+      { value: "1724", label: "Italian" },
+      { value: "1973", label: "Mandarin Chinese" },
+      { value: "2324", label: "Cantonese" },
+      { value: "2038", label: "Panjabi" },
+      { value: "2060", label: "Russian" },
+      { value: "2105", label: "Swahili" },
+      { value: "2146", label: "Urdu" },
+      { value: "1731", label: "Afrikaans" },
+      { value: "1787", label: "Bulgarian" },
+      { value: "1789", label: "Burmese" },
+      { value: "1357", label: "Dutch" },
+      { value: "1872", label: "Gujarati" },
+      { value: "1875", label: "Haitian Creole" },
+      { value: "1876", label: "Hausa" },
+      { value: "1878", label: "Hebrew" },
+      { value: "1882", label: "Hindi" },
+      { value: "1889", label: "Igbo" },
+      { value: "1895", label: "Indonesian" },
+      { value: "1902", label: "Japanese" },
+      { value: "1930", label: "Korean" },
+      { value: "1978", label: "Maori" },
+      { value: "2004", label: "Nepali" },
+      { value: "2042", label: "Persian" },
+      { value: "2047", label: "Portuguese" },
+      { value: "2056", label: "Romanian" },
+      { value: "2074", label: "Serbian" },
+      { value: "2077", label: "Shona" },
+      { value: "2110", label: "Tagalog" },
+      { value: "2115", label: "Tamil" },
+      { value: "2120", label: "Thai" },
+      { value: "2136", label: "Turkish" },
+      { value: "2143", label: "Ukrainian" },
+      { value: "2150", label: "Vietnamese" },
+      { value: "2164", label: "Yoruba" },
+      { value: "2171", label: "Zulu" },
+      { value: "OTHER", label: "Other (please specify)" }
+    ],
+    // Requirement 2.10 — first language. Extend freely.
+    // ISO alpha-2, NOT the Sitecore SisId. /registration validates these two
+    // fields as "exactly 2 alphabetic characters" and 400s on anything else, so
+    // Sitecore's mixed 2/3-char codes cannot be used here — Canada is CAN in
+    // Sitecore and CA to the API. Verified 2026-08-20; see docs/sis-api.md.
+    // The curated set is the college's actual student population.
+    countryOfCitizenship: [
+      { value: "BS", label: "Bahamas" },
+      { value: "BE", label: "Belgium" },
+      { value: "BR", label: "Brazil" },
+      { value: "BG", label: "Bulgaria" },
+      { value: "CM", label: "Cameroon" },
+      { value: "CA", label: "Canada" },
+      { value: "CL", label: "Chile" },
+      { value: "CN", label: "China" },
+      { value: "CO", label: "Colombia" },
+      { value: "CR", label: "Costa Rica" },
+      { value: "GH", label: "Ghana" },
+      { value: "HT", label: "Haiti" },
+      { value: "HN", label: "Honduras" },
+      { value: "HK", label: "Hong Kong" },
+      { value: "IN", label: "India" },
+      { value: "ID", label: "Indonesia" },
+      { value: "IR", label: "Iran" },
+      { value: "IL", label: "Israel" },
+      { value: "IT", label: "Italy" },
+      { value: "JM", label: "Jamaica" },
+      { value: "JP", label: "Japan" },
+      { value: "KE", label: "Kenya" },
+      { value: "MU", label: "Mauritius" },
+      { value: "MX", label: "Mexico" },
+      { value: "MA", label: "Morocco" },
+      { value: "MM", label: "Myanmar" },
+      { value: "NP", label: "Nepal" },
+      { value: "NZ", label: "New Zealand" },
+      { value: "NG", label: "Nigeria" },
+      { value: "PK", label: "Pakistan" },
+      { value: "PE", label: "Peru" },
+      { value: "PH", label: "Philippines" },
+      { value: "RO", label: "Romania" },
+      { value: "RU", label: "Russia" },
+      { value: "RS", label: "Serbia" },
+      { value: "SL", label: "Sierra Leone" },
+      { value: "ZA", label: "South Africa" },
+      { value: "KR", label: "South Korea" },
+      { value: "CH", label: "Switzerland" },
+      { value: "TW", label: "Taiwan" },
+      { value: "TH", label: "Thailand" },
+      { value: "TT", label: "Trinidad and Tobago" },
+      { value: "TR", label: "Turkey" },
+      { value: "UG", label: "Uganda" },
+      { value: "UA", label: "Ukraine" },
+      { value: "GB", label: "United Kingdom" },
+      { value: "US", label: "United States" },
+      { value: "VN", label: "Vietnam" },
+      { value: "ZW", label: "Zimbabwe" },
+      { value: "OTHER", label: "Other (please specify)" }
+    ],
+    /**
+     * Canadian provinces and territories. Values are the two-letter codes that
+     * Google Places returns as `administrative_area_level_1.short_name`, so an
+     * autocompleted address selects the right option with no translation.
+     */
+    province: [
+      { value: "AB", label: "Alberta" },
+      { value: "BC", label: "British Columbia" },
+      { value: "MB", label: "Manitoba" },
+      { value: "NB", label: "New Brunswick" },
+      { value: "NL", label: "Newfoundland and Labrador" },
+      { value: "NS", label: "Nova Scotia" },
+      { value: "NT", label: "Northwest Territories" },
+      { value: "NU", label: "Nunavut" },
+      { value: "ON", label: "Ontario" },
+      { value: "PE", label: "Prince Edward Island" },
+      { value: "QC", label: "Quebec" },
+      { value: "SK", label: "Saskatchewan" },
+      { value: "YT", label: "Yukon" }
+    ],
+    /**
+     * Mailing country. Values are ISO 3166-1 alpha-2 codes (Google Places
+     * `country.short_name`). Canada is the default; the list mirrors the
+     * international intake covered by countryOfCitizenship.
+     */
+    // ISO alpha-2, NOT the Sitecore SisId. /registration validates these two
+    // fields as "exactly 2 alphabetic characters" and 400s on anything else, so
+    // Sitecore's mixed 2/3-char codes cannot be used here — Canada is CAN in
+    // Sitecore and CA to the API. Verified 2026-08-20; see docs/sis-api.md.
+    // The curated set is the college's actual student population.
+    country: [
+      { value: "BS", label: "Bahamas" },
+      { value: "BE", label: "Belgium" },
+      { value: "BR", label: "Brazil" },
+      { value: "BG", label: "Bulgaria" },
+      { value: "CM", label: "Cameroon" },
+      { value: "CA", label: "Canada" },
+      { value: "CL", label: "Chile" },
+      { value: "CN", label: "China" },
+      { value: "CO", label: "Colombia" },
+      { value: "CR", label: "Costa Rica" },
+      { value: "GH", label: "Ghana" },
+      { value: "HT", label: "Haiti" },
+      { value: "HN", label: "Honduras" },
+      { value: "HK", label: "Hong Kong" },
+      { value: "IN", label: "India" },
+      { value: "ID", label: "Indonesia" },
+      { value: "IR", label: "Iran" },
+      { value: "IL", label: "Israel" },
+      { value: "IT", label: "Italy" },
+      { value: "JM", label: "Jamaica" },
+      { value: "JP", label: "Japan" },
+      { value: "KE", label: "Kenya" },
+      { value: "MU", label: "Mauritius" },
+      { value: "MX", label: "Mexico" },
+      { value: "MA", label: "Morocco" },
+      { value: "MM", label: "Myanmar" },
+      { value: "NP", label: "Nepal" },
+      { value: "NZ", label: "New Zealand" },
+      { value: "NG", label: "Nigeria" },
+      { value: "PK", label: "Pakistan" },
+      { value: "PE", label: "Peru" },
+      { value: "PH", label: "Philippines" },
+      { value: "RO", label: "Romania" },
+      { value: "RU", label: "Russia" },
+      { value: "RS", label: "Serbia" },
+      { value: "SL", label: "Sierra Leone" },
+      { value: "ZA", label: "South Africa" },
+      { value: "KR", label: "South Korea" },
+      { value: "CH", label: "Switzerland" },
+      { value: "TW", label: "Taiwan" },
+      { value: "TH", label: "Thailand" },
+      { value: "TT", label: "Trinidad and Tobago" },
+      { value: "TR", label: "Turkey" },
+      { value: "UG", label: "Uganda" },
+      { value: "UA", label: "Ukraine" },
+      { value: "GB", label: "United Kingdom" },
+      { value: "US", label: "United States" },
+      { value: "VN", label: "Vietnam" },
+      { value: "ZW", label: "Zimbabwe" },
+      { value: "OTHER", label: "Other (please specify)" }
+    ],
+    /**
+     * Phone dialling codes. Value is the code that gets prefixed to the number;
+     * Canada and the US both use +1, which is the default. Ordered by BVC intake
+     * volume, then alphabetical. The mailing Country can auto-select the matching
+     * entry via config.phone.dialCodeByCountry.
+     */
+    phoneCountryCode: [
+      { value: "+1", label: "+1 (Canada / United States)" },
+      { value: "+91", label: "+91 (India)" },
+      { value: "+63", label: "+63 (Philippines)" },
+      { value: "+234", label: "+234 (Nigeria)" },
+      { value: "+86", label: "+86 (China)" },
+      { value: "+92", label: "+92 (Pakistan)" },
+      { value: "+44", label: "+44 (United Kingdom)" },
+      { value: "+52", label: "+52 (Mexico)" },
+      { value: "+55", label: "+55 (Brazil)" },
+      { value: "+33", label: "+33 (France)" },
+      { value: "+49", label: "+49 (Germany)" },
+      { value: "+81", label: "+81 (Japan)" },
+      { value: "+82", label: "+82 (South Korea)" },
+      { value: "+84", label: "+84 (Vietnam)" },
+      { value: "+880", label: "+880 (Bangladesh)" },
+      { value: "+971", label: "+971 (United Arab Emirates)" },
+      { value: "+966", label: "+966 (Saudi Arabia)" },
+      { value: "+254", label: "+254 (Kenya)" },
+      { value: "+27", label: "+27 (South Africa)" },
+      { value: "+61", label: "+61 (Australia)" }
+    ]
+  };
   var fields = [
     {
       name: "firstName",
@@ -1062,14 +1317,14 @@
       const groupName = input.getAttribute("data-address-autocomplete");
       const group = groups[groupName];
       if (!group) return;
-      const options = {
+      const options2 = {
         fields: ["address_components"],
         types: ["address"]
       };
       if (Array.isArray(maps.countryRestriction) && maps.countryRestriction.length) {
-        options.componentRestrictions = { country: maps.countryRestriction };
+        options2.componentRestrictions = { country: maps.countryRestriction };
       }
-      const widget = new google.maps.places.Autocomplete(input, options);
+      const widget = new google.maps.places.Autocomplete(input, options2);
       widget.addListener("place_changed", () => {
         const place = widget.getPlace();
         if (!(place == null ? void 0 : place.address_components)) return;
@@ -1245,6 +1500,36 @@
       const field = createField(definition, root);
       if (field) fields2.set(definition.name, field);
     });
+    function syncSelectOptions() {
+      fields.forEach((definition) => {
+        if ("select" !== definition.type || !definition.options) return;
+        const field = fields2.get(definition.name);
+        const list = options[definition.options];
+        if (!field || !Array.isArray(list) || "SELECT" !== field.control.tagName) return;
+        const select = field.control;
+        const inSync = select.options.length === list.length + 1 && list.every((option, i) => select.options[i + 1] && select.options[i + 1].value === option.value);
+        if (inSync) return;
+        const chosen = select.selectedIndex > 0 ? select.options[select.selectedIndex] : null;
+        const chosenLabel = chosen ? chosen.textContent.trim() : null;
+        const placeholder = select.options[0] && "" === select.options[0].value ? select.options[0].textContent : "Please select\u2026";
+        select.innerHTML = "";
+        const blank = document.createElement("option");
+        blank.value = "";
+        blank.textContent = placeholder;
+        select.appendChild(blank);
+        list.forEach((option) => {
+          const node = document.createElement("option");
+          node.value = option.value;
+          node.textContent = option.label;
+          select.appendChild(node);
+        });
+        const match = chosenLabel && list.find((option) => option.label === chosenLabel);
+        if (match) select.value = match.value;
+        else if (definition.defaultValue) select.value = definition.defaultValue;
+        console.warn('[checkout-cart] rebuilt "' + definition.name + '" options \u2014 the embedded markup is out of date. Re-paste src/webflow/checkout-cart.html.');
+      });
+    }
+    syncSelectOptions();
     [
       ["countryOfCitizenship", "countries"],
       ["country", "countries"],
