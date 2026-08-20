@@ -36,9 +36,10 @@
     "generateProgramRequirements:check": "node scripts/generateProgramRequirements.mjs --check",
     "generateProgramRequirements:gate": "node scripts/generateProgramRequirements.mjs --check --strict",
     "hourly-scripts": "npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run prelaunch:build",
-    "bvcapp-scripts": "npm run getWebflowData && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirements && npm run prelaunch:build",
+    "bvcapp-scripts": "npm run getWebflowData && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateFormOptions && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirements && npm run prelaunch:build",
     "build": "npm run js:build && npm run bvcapp-scripts && next build",
-    "cleanup": "node scripts/cleanup-data.mjs"
+    "cleanup": "node scripts/cleanup-data.mjs",
+    "generateFormOptions": "node scripts/generate-form-options.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",

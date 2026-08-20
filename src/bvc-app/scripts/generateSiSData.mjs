@@ -113,6 +113,35 @@ const PATHS_CONFIG = [
   {
     key: 'timeBlocks',
     path: '/sitecore/content/BVC/BVC/Data/SisData/Time Blocks'
+  },
+  // Registration lookups. Sitecore is the source of truth for these codes: the
+  // value submitted to /thesissitecorexm.api/registration is the item's SisId,
+  // NOT the short form the checkout form uses internally. Confirmed with the
+  // registrar 2026-08-20. See docs/sis-api.md.
+  {
+    key: 'genders',
+    path: '/sitecore/content/BVC/BVC/Data/SisData/Genders'
+  },
+  {
+    key: 'legalStatuses',
+    path: '/sitecore/content/BVC/BVC/Data/SisData/Legal Statuses'
+  },
+  {
+    key: 'aboriginalStatus',
+    path: '/sitecore/content/BVC/BVC/Data/SisData/Aboriginal Status'
+  },
+  {
+    // 273 items. SisId is the 2-letter ISO code; also carries ValidatePostalCode,
+    // which is what the mailing/billing step needs to decide whether to enforce a
+    // postal-code format for that country.
+    key: 'countries',
+    path: '/sitecore/content/BVC/BVC/Data/SisData/Countries'
+  },
+  {
+    // 505 items — by far the deepest list, and the first real test of the cursor
+    // pagination (PAGE_SIZE 20 => 26 pages; the largest list before this was 32).
+    key: 'languages',
+    path: '/sitecore/content/BVC/BVC/Data/SisData/Language'
   }
 ];
 

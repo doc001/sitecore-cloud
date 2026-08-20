@@ -389,9 +389,15 @@ full API contract and its known defects are in **`docs/sis-api.md`**.
 
 **`seatsAreAvailable` is not a reliable seat check.** It reported seats for 37 of the
 42 sections the SiS refuses to register, including one confirmed full on the live
-site. `/validation` is the only trustworthy source, and it reports a full section as
-`Offering Missing` — the same code it uses for a withdrawn one, so user-facing copy
-has to stay generic.
+site, and it lagged `/validation` by a full day on `PSYC1101-50/-51`. `/validation`
+is the trustworthy source, and it reports a full section as `Offering Missing` — the
+same code it uses for a withdrawn one, so user-facing copy has to stay generic.
+
+**Both endpoints are called on add for a reason.** `Offering Missing` has two causes,
+and only `courseofferings` separates them: a `200` alongside a validation refusal
+means *known but full*; a `404` means *not in the SiS at all* — a section published
+to Sitecore that has not propagated yet, which the site lists and nobody can
+register.
 
 **Reading a validation response**: an invalid cart arrives as **HTTP 200** with the
 verdict in the body, so `response.ok` only ever means the call was well-formed. All

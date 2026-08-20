@@ -3,6 +3,12 @@
 (() => {
   // src/js/checkout-cart/content.js
   var config = {
+    /**
+     * Where the Vercel-hosted JSON lives. The form is embedded on a Webflow page, so
+     * a relative /data/... URL would resolve against the Webflow domain. Override with
+     * window.__CHECKOUT_CART_CONFIG__ = { dataOrigin: '...' } before the script loads.
+     */
+    dataOrigin: typeof window !== "undefined" && window.__CHECKOUT_CART_CONFIG__ && window.__CHECKOUT_CART_CONFIG__.dataOrigin || "https://bvc-app-uat.vercel.app",
     // Shown next to the birth date field and used by the date validator.
     dateFormat: "YYYY-MM-DD",
     // Requirement 2.7.3 — no year earlier than 100 years prior.
@@ -64,6 +70,8 @@
      */
     phone: {
       defaultDialCode: "+1",
+      // Keyed on ISO alpha-2, matching the `country` option values — which are
+      // ISO, not Sitecore SisIds, because /registration requires 2 alpha chars.
       dialCodeByCountry: {
         CA: "+1",
         US: "+1",
@@ -269,8 +277,8 @@
       required: true,
       validate: "choice",
       options: "indigenousStatus",
-      defaultValue: "NA",
-      showWhen: { field: "citizenshipStatus", equals: ["CAN"] }
+      defaultValue: "18",
+      showWhen: { field: "citizenshipStatus", equals: ["1716"] }
     },
     {
       // Requirement 2.13 — every non-Canadian status.
@@ -280,7 +288,7 @@
       required: true,
       validate: "choice",
       options: "countryOfCitizenship",
-      showWhen: { field: "citizenshipStatus", equals: ["PR", "REF", "STUDY", "WORK", "OTHER"] }
+      showWhen: { field: "citizenshipStatus", equals: ["1721", "2209", "1717", "1722", "2207", "2208", "1723", "1720", "1718", "2210"] }
     },
     // ==========================================================================
     // Mailing Information step
@@ -1061,6 +1069,127 @@
     });
   }
 
+  // src/js/checkout-cart/typeahead.js
+  var ENDPOINT = "/data/form-options.json";
+  var MAX_RESULTS = 8;
+  var cache = null;
+  var inFlight = null;
+  async function loadOptions(dataOrigin) {
+    if (cache) return cache;
+    if (!inFlight) {
+      inFlight = fetch((dataOrigin || "") + ENDPOINT, { mode: "cors" }).then((r) => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      }).then((json) => {
+        cache = json;
+        return json;
+      }).finally(() => {
+        inFlight = null;
+      });
+    }
+    return inFlight;
+  }
+  function score(name, query) {
+    const n = name.toLowerCase();
+    const i = n.indexOf(query);
+    if (i === -1) return -1;
+    return (i === 0 ? 0 : 100) + i + name.length / 1e3;
+  }
+  function search(list, query) {
+    const q = query.trim().toLowerCase();
+    if (q.length < 2) return [];
+    return list.map((row) => ({ code: row[0], name: row[1], s: score(row[1], q) })).filter((row) => row.s >= 0).sort((a, b) => a.s - b.s).slice(0, MAX_RESULTS);
+  }
+  function attachTypeahead(select, listKey, opts = {}) {
+    if (!select || select.dataset.typeaheadReady === "1") return;
+    select.dataset.typeaheadReady = "1";
+    const otherValue = opts.otherValue || "OTHER";
+    const wrapper = document.createElement("div");
+    wrapper.className = "bvc-typeahead";
+    wrapper.hidden = true;
+    wrapper.innerHTML = '<input type="text" class="bvc-typeahead__input" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" placeholder="Start typing to search\u2026"><ul class="bvc-typeahead__list" role="listbox" hidden></ul><p class="bvc-typeahead__hint">Search the full list.</p>';
+    select.insertAdjacentElement("afterend", wrapper);
+    const input = wrapper.querySelector(".bvc-typeahead__input");
+    const list = wrapper.querySelector(".bvc-typeahead__list");
+    let results = [];
+    let active = -1;
+    const closeList = () => {
+      list.hidden = true;
+      list.innerHTML = "";
+      input.setAttribute("aria-expanded", "false");
+      active = -1;
+    };
+    function pick2(row) {
+      let option = Array.prototype.find.call(select.options, (o) => o.value === row.code);
+      if (!option) {
+        option = document.createElement("option");
+        option.value = row.code;
+        option.textContent = row.name;
+        select.insertBefore(option, select.querySelector('option[value="' + otherValue + '"]'));
+      }
+      select.value = row.code;
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      select.dispatchEvent(new Event("input", { bubbles: true }));
+      wrapper.hidden = true;
+      input.value = "";
+      closeList();
+      if (typeof opts.onPick === "function") opts.onPick(row);
+    }
+    function render() {
+      if (!results.length) return closeList();
+      list.innerHTML = results.map((r, i) => '<li role="option" id="bvc-ta-' + i + '" aria-selected="' + (i === active) + '"' + (i === active ? ' class="is-active"' : "") + ">" + r.name + "</li>").join("");
+      list.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      Array.prototype.forEach.call(list.children, (li, i) => {
+        li.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+          pick2(results[i]);
+        });
+      });
+    }
+    async function onType() {
+      let data;
+      try {
+        data = await loadOptions(opts.dataOrigin);
+      } catch (error) {
+        console.warn("[Typeahead] could not load " + ENDPOINT, error);
+        wrapper.querySelector(".bvc-typeahead__hint").textContent = "Search is unavailable \u2014 please pick the closest match above.";
+        return;
+      }
+      results = search(data[listKey] || [], input.value);
+      active = results.length ? 0 : -1;
+      render();
+    }
+    input.addEventListener("input", onType);
+    input.addEventListener("blur", () => setTimeout(closeList, 120));
+    input.addEventListener("keydown", (event) => {
+      if (list.hidden) return;
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        active = (active + (event.key === "ArrowDown" ? 1 : results.length - 1)) % results.length;
+        render();
+      } else if (event.key === "Enter" && active > -1) {
+        event.preventDefault();
+        pick2(results[active]);
+      } else if (event.key === "Escape") {
+        closeList();
+      }
+    });
+    function sync() {
+      const on = select.value === otherValue;
+      wrapper.hidden = !on;
+      if (on) {
+        loadOptions(opts.dataOrigin).catch(() => {
+        });
+        input.focus();
+      } else {
+        closeList();
+      }
+    }
+    select.addEventListener("change", sync);
+    sync();
+  }
+
   // src/js/checkout-cart/storage.js
   function readDraft(key) {
     try {
@@ -1095,6 +1224,12 @@
     fields.forEach((definition) => {
       const field = createField(definition, root);
       if (field) fields2.set(definition.name, field);
+    });
+    [
+      ["firstLanguage", "languages"]
+    ].forEach(([name, listKey]) => {
+      const field = fields2.get(name);
+      if (field && field.control && "SELECT" === field.control.tagName) attachTypeahead(field.control, listKey, { dataOrigin: config.dataOrigin });
     });
     const birthDate = fields2.get("birthDate");
     if (birthDate) {

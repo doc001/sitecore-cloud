@@ -17,6 +17,7 @@ import { createConsent } from './consent.js';
 import { createStepper } from './stepper.js';
 import { createStudentAuth } from './msal-auth.js';
 import { initAddressAutocomplete } from './address-autocomplete.js';
+import { attachTypeahead } from './typeahead.js';
 import { readDraft, writeDraft, debounce } from './storage.js';
 import { earliestBirthDate, todayUTC, toISODateString } from './validators.js';
 
@@ -30,6 +31,25 @@ function start() {
   fieldDefinitions.forEach((definition) => {
     const field = createField(definition, root);
     if (field) fields.set(definition.name, field);
+  });
+
+  // --- "Other" search over the full Sitecore lists ------------------------
+  //
+  // The country and language selects ship a curated shortlist plus an OTHER entry;
+  // picking OTHER opens a search over all 273 countries / 505 languages. The result
+  // is injected into the select as a real option, so validation and the submitter
+  // never see a special case — the control always holds a Sitecore SisId.
+  //
+  // Languages only. The country selects carry ISO alpha-2 — /registration validates
+  // those two fields as exactly 2 alphabetic characters — while form-options.json
+  // holds Sitecore SisIds, 127 of which are 3 characters (CAN, FRA, USA). Searching
+  // that list would inject a value the API rejects, so country search waits for an
+  // ISO-keyed list. `language` is a free string server-side, so SisIds are fine.
+  [
+    ['firstLanguage', 'languages'],
+  ].forEach(([name, listKey]) => {
+    const field = fields.get(name);
+    if (field && field.control && 'SELECT' === field.control.tagName) attachTypeahead(field.control, listKey, { dataOrigin: config.dataOrigin });
   });
 
   // Requirement 2.7.3, enforced by the browser as well as by us. Native

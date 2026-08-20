@@ -94,20 +94,45 @@ import { validateCart, readValidation } from '../shared/validation.js';
     };
   window.getMsToken = getMsToken;
 
-  // --- form value -> backend code maps (Option B) ------------------------
+  // --- coded registration fields -----------------------------------------
   //
-  // The registration schema has a fixed set of coded fields. We now source
-  // them from the richer checkout-cart form instead of hardcoding, BUT only
-  // the values proven against the SiS enum are sent live; the rest fall back
-  // to the previously hardcoded known-good default so a wrong code can never
-  // 400 the registration. Fill these in and flip DEFAULTS once confirmed.
-  var GENDER_MAP = { M: 'M', F: 'F', X: 'X', U: 'U' };            // confirmed set on the form
-  var LANGUAGE_MAP = { EN: 'ENG' };                              // only ENG confirmed; extend when known
-  var LEGAL_STATUS_MAP = { CAN: '1' };                           // only CAN('1') confirmed; extend when known
-  var DEFAULTS = { gender: 'U', language: 'ENG', legalStatus: '1', ethnicity: '6', country: 'CA' };
-  function mapCode(table, key, fallback) {
-    return key && Object.prototype.hasOwnProperty.call(table, key) ? table[key] : fallback;
+  // The form now carries Sitecore SisIds directly as its option values, so there is
+  // nothing left to translate — what the shopper picked IS what /registration wants.
+  // The old GENDER_MAP / LANGUAGE_MAP / LEGAL_STATUS_MAP tables are gone with it;
+  // they mapped short codes onto values that turned out not to exist in Sitecore at
+  // all (legalStatus '1', ethnicity '6', language 'ENG', country 'CA').
+  //
+  // Sitecore is the source of truth for these codes — confirmed with the registrar
+  // 2026-08-20. See docs/sis-api.md and src/js/checkout-cart/content.js.
+  // Two of these are NOT Sitecore SisIds, because /registration constrains them:
+  //   gender  is bound to System.Char — a multi-character value 400s
+  //   country / country_Citizenship must be exactly 2 alphabetic characters,
+  //           so Sitecore's CAN / USA / FRA are rejected
+  // legalStatus, language and ethnicity are plain strings and do take SisIds
+  // (all verified against UAT 2026-08-20; see docs/sis-api.md).
+  var DEFAULTS = {
+    gender: 'U',         // Unreported — single char, not SisId 678
+    language: '121',     // English (SisId)
+    legalStatus: '1716', // Canadian (SisId)
+    ethnicity: '18',     // Not Applicable (SisId)
+    country: 'CA',       // Canada — ISO alpha-2, not Sitecore's CAN
+  };
+
+  // Legal statuses billed at domestic rates. Everything else — Student Visa, Work
+  // Permit, Non-Canadian, Other, and notably Refugee Claimant — is international.
+  // Registrar, 2026-08-20.
+  var DOMESTIC_LEGAL_STATUS = [
+    '1716', // Canadian
+    '1721', // Permanent Resident
+    '2209', // Refugee
+    '1717', // Convention Refugee
+  ];
+
+  /** Domestic unless the learner picked a status that is explicitly international. */
+  function isDomesticLegalStatus(code) {
+    return !code || -1 !== DOMESTIC_LEGAL_STATUS.indexOf(String(code));
   }
+  window.bvcIsDomesticLegalStatus = isDomesticLegalStatus;
 
   // Shopping Cart and Form Integration
   class CheckoutFormHandler {
@@ -136,6 +161,9 @@ import { validateCart, readValidation } from '../shared/validation.js';
         gender: document.getElementById('gender'),
         firstLanguage: document.getElementById('firstLanguage'),
         citizenshipStatus: document.getElementById('citizenshipStatus'),
+        // Submitted as `ethnicity`. Only rendered for Canadians, so it is often
+        // absent — DEFAULTS.ethnicity ('18' Not Applicable) covers that.
+        indigenousStatus: document.getElementById('indigenousStatus'),
         countryOfCitizenship: document.getElementById('countryOfCitizenship'),
         asn: this.getAsnField(),
         address: document.getElementById('address'),
@@ -850,10 +878,9 @@ import { validateCart, readValidation } from '../shared/validation.js';
       const formData = this.collectFormData();
       // Determine billing address
       const useSameAddress = this.fields.billingCheckbox && this.fields.billingCheckbox.checked;
-      // Format the data according to the required schema
-      // Coded fields: send the mapped form value when confirmed, else the
-      // known-good default (see the *_MAP / DEFAULTS at the top of this file).
-      const isCanadianCitizen = formData.citizenshipStatus === 'CAN';
+      // Format the data according to the required schema. Coded fields carry the
+      // Sitecore SisId the form supplied; DEFAULTS only covers a field left blank.
+      const isCanadianCitizen = formData.citizenshipStatus === '1716';
       const data = {
         studentId: 0, // New/anonymous students: send 0. The API now rejects null ("The StudentId field is required.")
         firstName: formData.firstName || '',
@@ -861,7 +888,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
         lastName: formData.lastName || '',
         previousLastName: formData.previousLastName || '',
         birthDate: this.formatDate(formData.birthDate),
-        gender: mapCode(GENDER_MAP, formData.gender, DEFAULTS.gender),
+        gender: formData.gender || DEFAULTS.gender,
         address: formData.address || '',
         city: formData.city || '',
         province: formData.province || '',
@@ -871,12 +898,13 @@ import { validateCart, readValidation } from '../shared/validation.js';
         phone: formData.phone || '', // combined +1XXXXXXXXXX from the form
         asn: formData.asn || '',
         courses: courseIds.length > 0 ? courseIds : [219369], // Default course ID if none provided
-        legalStatus: mapCode(LEGAL_STATUS_MAP, formData.citizenshipStatus, DEFAULTS.legalStatus),
-        language: mapCode(LANGUAGE_MAP, formData.firstLanguage, DEFAULTS.language),
-        ethnicity: DEFAULTS.ethnicity, // not collected on the form yet
+        legalStatus: formData.citizenshipStatus || DEFAULTS.legalStatus,
+        language: formData.firstLanguage || DEFAULTS.language,
+        // Indigenous Status only renders for Canadians; everyone else is Not Applicable.
+        ethnicity: formData.indigenousStatus || DEFAULTS.ethnicity,
         feeGroup: 'Tuition',
-        // Canadian citizens => 'CA'; otherwise the selected country of citizenship (ISO alpha-2).
-        country_Citizenship: isCanadianCitizen ? 'CA' : (formData.countryOfCitizenship || DEFAULTS.country),
+        // Canadians => Canada; otherwise the selected country of citizenship.
+        country_Citizenship: isCanadianCitizen ? DEFAULTS.country : (formData.countryOfCitizenship || DEFAULTS.country),
       };
 
       // If we have session fees, add them to the data
@@ -1093,6 +1121,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
       formData.gender = this.fields.gender ? this.fields.gender.value : '';
       formData.firstLanguage = this.fields.firstLanguage ? this.fields.firstLanguage.value : '';
       formData.citizenshipStatus = this.fields.citizenshipStatus ? this.fields.citizenshipStatus.value : '';
+      formData.indigenousStatus = this.fields.indigenousStatus ? this.fields.indigenousStatus.value : '';
       formData.countryOfCitizenship = this.fields.countryOfCitizenship ? this.fields.countryOfCitizenship.value : '';
       formData.asn = this.fields.asn ? this.fields.asn.value : '';
 

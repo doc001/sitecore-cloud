@@ -214,6 +214,61 @@
   .bvc-choice { grid-template-columns: 1fr 1fr; }
 }
 
+/* --- "Other" typeahead -----------------------------------------------------
+   Revealed under a country/language select when OTHER is chosen; searches the
+   full Sitecore list. See src/js/checkout-cart/typeahead.js. */
+.bvc-typeahead {
+  position: relative;
+  margin-top: 0.5rem;
+}
+.bvc-typeahead[hidden] { display: none; }
+
+.bvc-typeahead__input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--bvc-line);
+  border-radius: var(--bvc-radius);
+  color: var(--bvc-ink);
+  font: inherit;
+}
+.bvc-typeahead__input:focus {
+  outline: 2px solid var(--bvc-accent);
+  outline-offset: 1px;
+}
+
+.bvc-typeahead__list {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  max-height: 15rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--bvc-line);
+  border-radius: var(--bvc-radius);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+.bvc-typeahead__list[hidden] { display: none; }
+
+.bvc-typeahead__list li {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+.bvc-typeahead__list li.is-active,
+.bvc-typeahead__list li:hover {
+  background: var(--bvc-error-bg);
+  background: #eef4fa;
+}
+
+.bvc-typeahead__hint {
+  margin: 0.25rem 0 0;
+  color: var(--bvc-muted);
+  font-size: 0.8125rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
 }
