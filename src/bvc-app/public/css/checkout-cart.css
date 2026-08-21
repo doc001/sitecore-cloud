@@ -295,6 +295,21 @@
   color: var(--bvc-muted);
   font-size: 0.8125rem;
 }
+.bvc-checkout-layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .bvc-checkout-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+  }
+  .bvc-checkout-layout > .bvc-cart-column {
+    position: sticky;
+    top: 1.5rem;
+  }
+}
 .bvc-cart-column {
   margin-top: 2rem;
   padding: 1rem 1.25rem;

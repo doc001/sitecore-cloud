@@ -269,6 +269,27 @@
   font-size: 0.8125rem;
 }
 
+/* --- runtime-created layout -------------------------------------------------
+   Only applies when the bundle creates the cart column, i.e. a page carrying just
+   <div data-checkout></div>. A page that builds its own layout owns #shoppingCart
+   and never reaches this. Summary sits beside the form on desktop and below it on
+   narrow screens, and sticks while the form scrolls. */
+.bvc-checkout-layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .bvc-checkout-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+  }
+  .bvc-checkout-layout > .bvc-cart-column {
+    position: sticky;
+    top: 1.5rem;
+  }
+}
+
 /* --- runtime-created cart column ------------------------------------------
    checkout.js renders the order summary into #shoppingCart. On a page that
    hand-builds its layout, Webflow owns that element and this never applies. On a

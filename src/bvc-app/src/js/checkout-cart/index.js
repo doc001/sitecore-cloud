@@ -26,6 +26,25 @@ function start() {
   const root = document.querySelector('[data-checkout]');
   if (!root) return; // Not the checkout page.
 
+  // --- the stylesheet ships with the script -------------------------------
+  //
+  // "Webflow only holds the JS reference" has to include the CSS, or the promise is
+  // half true: a page that forgets the <link> renders the whole form as raw browser
+  // inputs with no grid and no spacing, which is exactly what happened on first
+  // migration. Injecting it here means one script tag is genuinely all a page needs.
+  // An existing <link> or <style> wins, so a page that self-hosts the styles, or
+  // overrides them deliberately, is left alone.
+  function ensureStylesheet() {
+    if (document.getElementById('bvc-checkout-cart-styles')) return;
+    if (document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) return;
+    const link = document.createElement('link');
+    link.id = 'bvc-checkout-cart-styles';
+    link.rel = 'stylesheet';
+    link.href = (config.dataOrigin || '') + '/css/checkout-cart.css';
+    document.head.appendChild(link);
+  }
+  ensureStylesheet();
+
   // --- the page supplies a container; the bundle supplies everything in it ---
   //
   // Webflow only has to hold <div data-checkout></div> and the script tag. Rendering
@@ -48,7 +67,16 @@ function start() {
     const cart = document.createElement('div');
     cart.id = 'shoppingCart';
     cart.className = 'bvc-cart-column';
-    root.insertAdjacentElement('afterend', cart);
+
+    // Form and order summary side by side. A page that builds its own layout already
+    // owns #shoppingCart, so this branch never runs there and Webflow keeps control;
+    // it only applies when the runtime is the one creating the column, where the
+    // alternative is the cart stacked a full page below the form.
+    const layout = document.createElement('div');
+    layout.className = 'bvc-checkout-layout';
+    root.insertAdjacentElement('beforebegin', layout);
+    layout.appendChild(root);
+    layout.appendChild(cart);
   }
 
   // --- fields ------------------------------------------------------------

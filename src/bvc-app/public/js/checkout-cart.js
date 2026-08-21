@@ -1677,6 +1677,16 @@ ${renderMailingStep()}`;
     var _a, _b, _c;
     const root = document.querySelector("[data-checkout]");
     if (!root) return;
+    function ensureStylesheet() {
+      if (document.getElementById("bvc-checkout-cart-styles")) return;
+      if (document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) return;
+      const link = document.createElement("link");
+      link.id = "bvc-checkout-cart-styles";
+      link.rel = "stylesheet";
+      link.href = (config.dataOrigin || "") + "/css/checkout-cart.css";
+      document.head.appendChild(link);
+    }
+    ensureStylesheet();
     if (!root.querySelector("[data-field]")) {
       root.innerHTML = renderFormInner();
     }
@@ -1684,7 +1694,11 @@ ${renderMailingStep()}`;
       const cart = document.createElement("div");
       cart.id = "shoppingCart";
       cart.className = "bvc-cart-column";
-      root.insertAdjacentElement("afterend", cart);
+      const layout = document.createElement("div");
+      layout.className = "bvc-checkout-layout";
+      root.insertAdjacentElement("beforebegin", layout);
+      layout.appendChild(root);
+      layout.appendChild(cart);
     }
     const fields2 = /* @__PURE__ */ new Map();
     fields.forEach((definition) => {
