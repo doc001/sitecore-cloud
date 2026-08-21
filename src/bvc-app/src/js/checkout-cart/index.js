@@ -18,12 +18,38 @@ import { createStepper } from './stepper.js';
 import { createStudentAuth } from './msal-auth.js';
 import { initAddressAutocomplete } from './address-autocomplete.js';
 import { attachTypeahead } from './typeahead.js';
+import { renderFormInner } from './markup.js';
 import { readDraft, writeDraft, clearDraft, debounce } from './storage.js';
 import { earliestBirthDate, todayUTC, toISODateString } from './validators.js';
 
 function start() {
   const root = document.querySelector('[data-checkout]');
   if (!root) return; // Not the checkout page.
+
+  // --- the page supplies a container; the bundle supplies everything in it ---
+  //
+  // Webflow only has to hold <div data-checkout></div> and the script tag. Rendering
+  // here rather than pasting markup is what stops the two drifting: a pasted embed is
+  // updated by hand while the bundle ships with the pipeline, so every change to a
+  // field or an option list needed a re-paste, and a missed one failed silently.
+  //
+  // Markup already in the container wins, so a page that still pastes the embed keeps
+  // working and can be migrated on its own schedule. syncSelectOptions() below then
+  // repairs any stale option VALUES in that markup; this only covers the structure.
+  if (!root.querySelector('[data-field]')) {
+    root.innerHTML = renderFormInner();
+  }
+
+  // checkout.js renders the order summary into #shoppingCart, which has always been
+  // page-owned. On a page that no longer hand-builds anything there is nothing to own
+  // it, so provide it — but only when absent: two elements with that id would leave
+  // the page's own cart empty, which is the failure the id was documented against.
+  if (!document.getElementById('shoppingCart')) {
+    const cart = document.createElement('div');
+    cart.id = 'shoppingCart';
+    cart.className = 'bvc-cart-column';
+    root.insertAdjacentElement('afterend', cart);
+  }
 
   // --- fields ------------------------------------------------------------
 

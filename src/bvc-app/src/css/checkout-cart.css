@@ -269,6 +269,19 @@
   font-size: 0.8125rem;
 }
 
+/* --- runtime-created cart column ------------------------------------------
+   checkout.js renders the order summary into #shoppingCart. On a page that
+   hand-builds its layout, Webflow owns that element and this never applies. On a
+   page carrying only <div data-checkout></div>, the runtime creates it, and these
+   are the minimum styles that keep it legible when it does. */
+.bvc-cart-column {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--bvc-line);
+  border-radius: var(--bvc-radius);
+}
+.bvc-cart-column:empty { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
 }

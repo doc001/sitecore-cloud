@@ -295,6 +295,15 @@
   color: var(--bvc-muted);
   font-size: 0.8125rem;
 }
+.bvc-cart-column {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--bvc-line);
+  border-radius: var(--bvc-radius);
+}
+.bvc-cart-column:empty {
+  display: none;
+}
 @media (prefers-reduced-motion: reduce) {
   * {
     scroll-behavior: auto !important;

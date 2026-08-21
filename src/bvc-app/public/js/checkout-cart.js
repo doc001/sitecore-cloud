@@ -171,6 +171,7 @@
       totalCreditsKey: "totalCredits"
     }
   };
+  var optionalSuffix = "optional";
   var options = {
     // Requirement 2.9 — see Gender.png for business meaning names.
     // EXCEPTION to the SisId rule below: /registration binds `gender` to a
@@ -1465,6 +1466,181 @@
     sync();
   }
 
+  // src/js/checkout-cart/markup.js
+  var esc = (value) => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  var controlId = (field) => field.submitId || field.name;
+  function renderLabel(field) {
+    const suffix = field.required ? '<span class="bvc-field__required" aria-hidden="true">*</span>' : ` <span class="bvc-field__optional">(${optionalSuffix})</span>`;
+    return `<label class="bvc-field__label" for="${controlId(field)}">${esc(field.label)}${suffix}</label>`;
+  }
+  function renderControl(field) {
+    const describedBy = [
+      field.hint ? `${field.name}-hint` : null,
+      `${field.name}-error`
+    ].filter(Boolean).join(" ");
+    const shared = [
+      `id="${controlId(field)}"`,
+      `name="${field.name}"`,
+      field.required ? "required" : "",
+      `aria-describedby="${describedBy}"`,
+      field.autocomplete ? `autocomplete="${field.autocomplete}"` : ""
+    ].filter(Boolean).join(" ");
+    if (field.type === "select") {
+      const list = options[field.options] || [];
+      const items = list.map((option) => {
+        const selected = field.defaultValue === option.value ? " selected" : "";
+        return `        <option value="${esc(option.value)}"${selected}>${esc(option.label)}</option>`;
+      }).join("\n");
+      return `      <select ${shared}>
+        <option value="">Please select\u2026</option>
+${items}
+      </select>`;
+    }
+    const extras = [
+      `type="${field.type}"`,
+      field.maxLength ? `maxlength="${field.maxLength}"` : "",
+      field.inputMode ? `inputmode="${field.inputMode}"` : "",
+      // Street fields carry the Google Places hook; the value is the address
+      // group so the runtime fills the right siblings.
+      field.autocompleteAddress ? `data-address-autocomplete="${field.group}"` : ""
+    ].filter(Boolean).join(" ");
+    return `      <input ${shared} ${extras}>`;
+  }
+  function renderField(field) {
+    const hidden = field.showWhen ? " hidden" : "";
+    const wide = field.type === "select" && !field.narrow || field.name === "email" || field.addressRole === "street" ? " bvc-field--wide" : "";
+    const hint = field.hint ? `
+      <p class="bvc-field__hint" id="${field.name}-hint">${esc(field.hint)}</p>` : "";
+    const wrapper = `    <div class="bvc-field${wide}" data-field="${field.name}"${hidden}>
+      ${renderLabel(field)}
+${renderControl(field)}${hint}
+      <p class="bvc-field__error" id="${field.name}-error" data-error hidden></p>
+    </div>`;
+    if (field.name === "phone") {
+      return `${wrapper}
+    <input type="hidden" id="phone" name="phoneCombined" data-phone-combined>`;
+    }
+    return wrapper;
+  }
+  function renderProgress() {
+    const items = steps.map(
+      (step) => `    <li class="bvc-progress__item" data-progress-step="${step.id}">${esc(step.short)}</li>`
+    ).join("\n");
+    return `  <ol class="bvc-progress" aria-label="Checkout progress">
+${items}
+  </ol>`;
+  }
+  function renderStudentTypeStep() {
+    if (!features.studentSignIn) return "";
+    return `  <!-- Step 1 \u2014 current student or new student -->
+  <section class="bvc-step" data-step="student-type" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Have you studied at Bow Valley College before?</h2>
+    <p class="bvc-step__intro">Signing in fills in most of this form for you.</p>
+
+    <p class="bvc-notice" data-auth-notice hidden></p>
+
+    <div class="bvc-choice">
+      <button type="button" class="bvc-button" data-student-type="current">
+        I'm a current student \u2014 sign in
+      </button>
+      <button type="button" class="bvc-button bvc-button--secondary" data-student-type="new">
+        I'm a new student
+      </button>
+    </div>
+  </section>
+
+`;
+  }
+  var fieldsForStep = (stepId) => fields.filter((field) => (field.step || "personal") === stepId);
+  var inGroup = (list, group) => list.filter((field) => field.group === group);
+  function renderMailingStep() {
+    const mailingFields = fieldsForStep("mailing");
+    const mailingAddress = inGroup(mailingFields, "mailing");
+    const billingAddress = inGroup(mailingFields, "billing");
+    return `  <!-- Step 3 \u2014 Mailing Information (mailing + billing address) -->
+  <section class="bvc-step" data-step="mailing" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Mailing Information</h2>
+    <p class="bvc-step__intro">Start typing a street address to autofill. Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
+
+    <h3 class="bvc-subheading">Mailing Address</h3>
+    <div class="bvc-grid">
+${mailingAddress.map(renderField).join("\n")}
+    </div>
+
+    <label class="bvc-check bvc-check--billing">
+      <input type="checkbox" id="checkbox" data-billing-same checked>
+      <span>Billing Address same as above?</span>
+    </label>
+
+    <div class="bvc-billing" data-billing-block hidden>
+      <h3 class="bvc-subheading">Billing Address</h3>
+      <div class="bvc-grid">
+${billingAddress.map(renderField).join("\n")}
+      </div>
+    </div>
+
+    <p class="bvc-summary" data-error-summary role="alert" hidden></p>
+
+    <div class="bvc-actions">
+      <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
+      <button type="button" class="bvc-button" data-checkout-submit>Proceed to Payment</button>
+    </div>
+  </section>`;
+  }
+  function renderFormInner() {
+    return `${renderProgress()}
+
+${renderStudentTypeStep()}
+  <!-- Personal Information -->
+  <section class="bvc-step" data-step="personal" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Personal Information</h2>
+    <p class="bvc-step__intro">Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
+
+    <div class="bvc-grid">
+${fieldsForStep("personal").map(renderField).join("\n")}
+    </div>
+
+    <!-- Requirement 6 \u2014 terms and conditions -->
+    <div class="bvc-consent">
+      <h3 class="bvc-consent__title" id="terms-title">Terms and Conditions</h3>
+      <div class="bvc-terms-box" data-terms-scroll role="region" aria-labelledby="terms-title" tabindex="0">
+        <!-- Replace with the approved terms copy, or a Webflow Rich Text element. -->
+        <p>Paste the full terms and conditions here.</p>
+      </div>
+      <p class="bvc-field__hint" data-terms-hint>Scroll to the end of the terms to enable the checkbox below.</p>
+      <label class="bvc-check">
+        <input type="checkbox" id="checkbox-2" data-terms-accept disabled>
+        <span>I have read and accept the terms and conditions.</span>
+      </label>
+      <p class="bvc-field__error" data-terms-error hidden></p>
+    </div>
+
+    <!-- Requirement 7 \u2014 refund policies and extension processes -->
+    <div class="bvc-consent">
+      <h3 class="bvc-consent__title">Refund Policies and Extension Processes</h3>
+      <p>
+        <a href="${esc(config.refundPolicyUrl)}" target="_blank" rel="noopener noreferrer" data-refund-link>
+          Read the refund policies and extension processes (opens in a new tab)
+        </a>
+      </p>
+      <label class="bvc-check">
+        <input type="checkbox" data-refund-accept>
+        <span>I have read and understood the refund policies and extension processes.</span>
+      </label>
+      <p class="bvc-field__error" data-refund-error hidden></p>
+    </div>
+
+    <p class="bvc-summary" data-error-summary role="alert" hidden></p>
+
+    <div class="bvc-actions">
+      <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
+      <button type="button" class="bvc-button" data-next>Continue to Mailing Information</button>
+    </div>
+  </section>
+
+${renderMailingStep()}`;
+  }
+
   // src/js/checkout-cart/storage.js
   function readDraft(key) {
     try {
@@ -1501,6 +1677,15 @@
     var _a, _b, _c;
     const root = document.querySelector("[data-checkout]");
     if (!root) return;
+    if (!root.querySelector("[data-field]")) {
+      root.innerHTML = renderFormInner();
+    }
+    if (!document.getElementById("shoppingCart")) {
+      const cart = document.createElement("div");
+      cart.id = "shoppingCart";
+      cart.className = "bvc-cart-column";
+      root.insertAdjacentElement("afterend", cart);
+    }
     const fields2 = /* @__PURE__ */ new Map();
     fields.forEach((definition) => {
       const field = createField(definition, root);
