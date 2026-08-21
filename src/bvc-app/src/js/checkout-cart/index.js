@@ -34,14 +34,39 @@ function start() {
   // migration. Injecting it here means one script tag is genuinely all a page needs.
   // An existing <link> or <style> wins, so a page that self-hosts the styles, or
   // overrides them deliberately, is left alone.
-  function ensureStylesheet() {
+  function stylesheetApplied() {
+    // The sentinel is set on :root by checkout-cart.css. Reading it answers the only
+    // question that matters — did the stylesheet APPLY — where a querySelector for a
+    // <link> merely proves someone wrote a tag. A tag that 404s, is blocked, or was
+    // escaped by the page builder looks identical to a working one.
+    return '' !== getComputedStyle(document.documentElement).getPropertyValue('--bvc-checkout-css').trim();
+  }
+
+  function injectStylesheet() {
     if (document.getElementById('bvc-checkout-cart-styles')) return;
-    if (document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) return;
     const link = document.createElement('link');
     link.id = 'bvc-checkout-cart-styles';
     link.rel = 'stylesheet';
     link.href = (config.dataOrigin || '') + '/css/checkout-cart.css';
     document.head.appendChild(link);
+  }
+
+  // "Webflow only holds the JS reference" has to cover the CSS too, or a page missing
+  // the <link> renders as raw browser inputs with no grid — which is how the first
+  // migrated page looked. Inject when nothing has declared the stylesheet, then check
+  // the sentinel once everything has settled and inject anyway if it never applied.
+  function ensureStylesheet() {
+    if (!document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) {
+      injectStylesheet();
+    }
+    const verify = () => {
+      if (stylesheetApplied()) return;
+      console.warn('[checkout-cart] checkout-cart.css did not apply — injecting it from ' + (config.dataOrigin || '(relative)'));
+      injectStylesheet();
+    };
+    // Stylesheets resolve asynchronously, so re-check after load rather than now.
+    if ('complete' === document.readyState) setTimeout(verify, 0);
+    else window.addEventListener('load', verify, { once: true });
   }
   ensureStylesheet();
 

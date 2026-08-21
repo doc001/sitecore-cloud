@@ -3,7 +3,14 @@
    the site's styles. Colours are custom properties: override them once in
    Webflow's site-wide custom code to match the brand. */
 
-[data-checkout] {
+/* Tokens live at :root, not on [data-checkout]. The runtime-created layout wrapper
+   is the form's PARENT and the cart column its SIBLING, so neither inherits anything
+   scoped to the form itself — their borders and radii silently fell back to initial.
+   Every name is --bvc- prefixed, so nothing here collides with the site's own.
+   `--bvc-checkout-css` is a sentinel: the runtime reads it to find out whether this
+   stylesheet actually applied, rather than trusting that a <link> tag exists. */
+:root {
+  --bvc-checkout-css: 1;
   --bvc-ink: #1c1c1c;
   --bvc-muted: #5c6470;
   --bvc-line: #cfd4dc;
@@ -12,7 +19,9 @@
   --bvc-error-bg: #fdf1f0;
   --bvc-radius: 6px;
   --bvc-gap: 1rem;
+}
 
+[data-checkout] {
   color: var(--bvc-ink);
   font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
   line-height: 1.5;

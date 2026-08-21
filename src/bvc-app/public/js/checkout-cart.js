@@ -1677,14 +1677,28 @@ ${renderMailingStep()}`;
     var _a, _b, _c;
     const root = document.querySelector("[data-checkout]");
     if (!root) return;
-    function ensureStylesheet() {
+    function stylesheetApplied() {
+      return "" !== getComputedStyle(document.documentElement).getPropertyValue("--bvc-checkout-css").trim();
+    }
+    function injectStylesheet() {
       if (document.getElementById("bvc-checkout-cart-styles")) return;
-      if (document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) return;
       const link = document.createElement("link");
       link.id = "bvc-checkout-cart-styles";
       link.rel = "stylesheet";
       link.href = (config.dataOrigin || "") + "/css/checkout-cart.css";
       document.head.appendChild(link);
+    }
+    function ensureStylesheet() {
+      if (!document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) {
+        injectStylesheet();
+      }
+      const verify = () => {
+        if (stylesheetApplied()) return;
+        console.warn("[checkout-cart] checkout-cart.css did not apply \u2014 injecting it from " + (config.dataOrigin || "(relative)"));
+        injectStylesheet();
+      };
+      if ("complete" === document.readyState) setTimeout(verify, 0);
+      else window.addEventListener("load", verify, { once: true });
     }
     ensureStylesheet();
     if (!root.querySelector("[data-field]")) {
