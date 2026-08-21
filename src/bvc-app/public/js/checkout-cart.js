@@ -1482,6 +1482,12 @@
       return false;
     }
   }
+  function clearDraft(key) {
+    try {
+      sessionStorage.removeItem(key);
+    } catch (e) {
+    }
+  }
   function debounce(fn, wait = 300) {
     let timer = null;
     return (...args) => {
@@ -1603,6 +1609,8 @@
       const digits = ((phoneNumberField == null ? void 0 : phoneNumberField.value) || "").replace(/\D/g, "");
       phoneCombined.value = digits ? `${code}${digits}` : "";
     }
+    clearDraft("bvc.checkout.draft");
+    document.addEventListener("bvc:checkout-complete", () => clearDraft(config.draftKey));
     const draft = readDraft(config.draftKey);
     fields2.forEach((field) => {
       const saved = draft[field.name];

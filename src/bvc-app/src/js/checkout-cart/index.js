@@ -18,7 +18,7 @@ import { createStepper } from './stepper.js';
 import { createStudentAuth } from './msal-auth.js';
 import { initAddressAutocomplete } from './address-autocomplete.js';
 import { attachTypeahead } from './typeahead.js';
-import { readDraft, writeDraft, debounce } from './storage.js';
+import { readDraft, writeDraft, clearDraft, debounce } from './storage.js';
 import { earliestBirthDate, todayUTC, toISODateString } from './validators.js';
 
 function start() {
@@ -219,6 +219,15 @@ function start() {
   }
 
   // --- draft persistence -------------------------------------------------
+
+  // Pre-SisId key. Bumping draftKey left the old one stranded in sessionStorage for
+  // the rest of the session; it holds the same personal data, so clear it too.
+  clearDraft('bvc.checkout.draft');
+
+  // checkout.js fires this once the registration exists and payment is handed off.
+  // The draft carries name, date of birth, email, phone, ASN and both addresses —
+  // it should not outlive the purchase on a shared machine.
+  document.addEventListener('bvc:checkout-complete', () => clearDraft(config.draftKey));
 
   const draft = readDraft(config.draftKey);
   fields.forEach((field) => {

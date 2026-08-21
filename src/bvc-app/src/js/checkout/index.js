@@ -1096,6 +1096,12 @@ import { validateCart, readValidation } from '../shared/validation.js';
 
         if (data.result && data.result.paymentUrl) {
           sessionStorage.setItem('bvcPayment', data.result.paymentUrl);
+          // The registration exists and payment is handed off, so the form draft has
+          // done its job — checkout-cart.js listens for this and drops it. Dispatch
+          // before navigating: dispatchEvent is synchronous, so the listener runs
+          // while this page is still alive. Leaving the draft would also risk a
+          // second registration if the shopper came back and resubmitted.
+          document.dispatchEvent(new CustomEvent('bvc:checkout-complete', { detail: { registrationId: registrationId } }));
           window.location.href = '../payment-page';
         } else {
           throw new Error('Payment URL not found in response.');
