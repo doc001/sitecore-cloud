@@ -602,13 +602,19 @@ import { validateCart, readValidation } from '../shared/validation.js';
         console.error('Shopping cart element not found');
         return;
       }
+      // Rendered here rather than added to the container once, because every render
+      // replaces innerHTML — a heading written by anything else would be wiped on the
+      // next bvc:checkout-step. Both branches carry it so the column is never a
+      // headless block of prices.
+      const cartTitle = '<h2 class="bvc-cart-title">Shopping Cart</h2>';
+
       if (items.length === 0) {
-        this.shoppingCartElement.innerHTML = '<p>Your shopping cart is empty.</p>';
+        this.shoppingCartElement.innerHTML = cartTitle + '<p class="bvc-cart-empty">Your shopping cart is empty.</p>';
         return;
       }
       let productTotal = 0;
       let tuitionTax = 0;
-      let cartHtml = `<div class="shopping-cart-items">`;
+      let cartHtml = cartTitle + `<div class="shopping-cart-items">`;
 
       items.forEach((item) => {
         const productId = item.id || item.sku;

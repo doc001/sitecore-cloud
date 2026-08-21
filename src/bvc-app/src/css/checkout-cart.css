@@ -295,7 +295,13 @@
   }
   .bvc-checkout-layout > .bvc-cart-column {
     position: sticky;
-    top: 1.5rem;
+    /* Clears the site's fixed SEARCH/MENU header, which the summary scrolled
+       underneath at the previous 1.5rem. Raise --bvc-cart-sticky-top if the header
+       ever gets taller. */
+    top: var(--bvc-cart-sticky-top, 80px);
+    /* Never let a long summary outgrow the viewport and strand the total. */
+    max-height: calc(100vh - var(--bvc-cart-sticky-top, 80px) - 1rem);
+    overflow-y: auto;
   }
 }
 
@@ -306,7 +312,8 @@
    are the minimum styles that keep it legible when it does. */
 .bvc-cart-column {
   margin-top: 2rem;
-  padding: 1rem 1.25rem;
+  /* Padding comes from the #shoppingCart rule above — kept in one place so left and
+     right can never drift apart. */
   border: 1px solid var(--bvc-line);
   border-radius: var(--bvc-radius);
 }
@@ -325,10 +332,27 @@
    Scale the whole column from one place: */
 #shoppingCart {
   --bvc-cart-scale: 95%;
+  --bvc-cart-pad: 1.25rem;
+  /* Padding lives on #shoppingCart, not .bvc-cart-column, so it applies whether the
+     runtime created the element or the Webflow page supplied it. box-sizing keeps the
+     padding inside the grid track instead of widening it. */
+  box-sizing: border-box;
+  padding: var(--bvc-cart-pad);
   font-size: var(--bvc-cart-scale);
   color: var(--bvc-ink);
   line-height: 1.45;
 }
+#shoppingCart * { box-sizing: border-box; }
+
+#shoppingCart .bvc-cart-title {
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--bvc-accent);
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--bvc-accent);
+}
+#shoppingCart .bvc-cart-empty { color: var(--bvc-muted); }
 
 #shoppingCart .shopping-cart-items { display: grid; gap: 0.75rem; }
 
