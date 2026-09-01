@@ -6,7 +6,7 @@
  *   Watch : npm run js:watch
  *
  * Covers BOTH: (1) the course component / offerings / accordion, and
- * (2) the sliding cart, overlay, notifications, availability spinner and
+ * (2) the sliding cart, overlay, notifications and
  * add-to-cart button states injected at runtime by os-course.js.
  * ---------------------------------------------------------------------------
  */
@@ -524,28 +524,10 @@
     opacity: 1;
   }
 }
-.availability-loading-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.85);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  font-size: 14px;
-  color: #555;
-  gap: 12px;
-  border-radius: 8px;
-}
-.availability-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid #ddd;
-  border-top-color: #0066cc;
-  border-radius: 50%;
-  animation: os-spin 0.8s linear infinite;
-}
+/* The .availability-loading-overlay / .availability-spinner pair that used to sit
+   here is gone with the render-time availability sweep: sections now render from
+   the Sitecore data alone, so nothing covers the enrolment list while it loads.
+   os-spin stays — .cart-fees-spinner still uses it. */
 @keyframes os-spin {
   to {
     transform: rotate(360deg);

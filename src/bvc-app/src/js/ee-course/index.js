@@ -319,7 +319,9 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             if (unavailableStore.isUnavailable(sku)) return;
             document.querySelectorAll('.addtocartbutton[data-product-id="' + sku + '"]').forEach(function (button) {
               button.classList.remove('unavailable');
+              button.removeAttribute('aria-disabled');
               button.title = '';
+              button.textContent = 'Add';
             });
           });
         },
@@ -551,7 +553,11 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         showNotification('Maximum number of products (6) has been reached', 'error');
         return void openCart();
       }
+      // The availability check is now the ONLY SiS call standing between the click
+      // and the cart, and that backend has a measured 10.9 s median (CLAUDE.md).
+      // Say so on the button rather than leaving a dimmed "Add" for ten seconds.
       button.classList.add('loading');
+      button.textContent = 'Checking…';
       try {
         var token = await getValidToken(),
           cartItem = (function (button) {
@@ -586,12 +592,15 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             }
             return item;
           })(button);
-        if (unavailableStore.isUnavailable(cartItem.sku)) return void showNotification('This date is not available', 'error');
+        if (unavailableStore.isUnavailable(cartItem.sku)) {
+          disableButton(button, 'This offering is no longer available.');
+          return void showNotification('This date is not available', 'error');
+        }
         var availabilityResp = await checkAvailability(cartItem.sku, token);
         if ((401 === availabilityResp.status && ((token = await getValidToken(true)), (availabilityResp = await checkAvailability(cartItem.sku, token))), 200 === availabilityResp.status)) {
           if (!availabilityResp.data || !availabilityResp.data.seatsAreAvailable) {
             unavailableStore.markAsUnavailable(cartItem.sku);
-            button.classList.add('unavailable');
+            disableButton(button, 'No seats available for this date.');
             return void showNotification('No seats available for this date', 'error');
           }
           // Empty context unless conflict checking is switched on, so the default is
@@ -618,8 +627,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
               // itself, so it persists for the session like the seats check above.
               if (isConflict(verdict)) conflictStore.mark(cartItem.sku);
               else unavailableStore.markAsUnavailable(cartItem.sku);
-              button.classList.add('unavailable');
-              button.title = verdict.message;
+              disableButton(button, verdict.message);
               return void showNotification(verdict.message, 'error');
             }
           }
@@ -646,7 +654,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         } else {
           if (404 !== availabilityResp.status) throw new Error('Failed to check course availability (status ' + availabilityResp.status + ')');
           unavailableStore.markAsUnavailable(cartItem.sku);
-          button.classList.add('unavailable');
+          disableButton(button, 'This offering is no longer available.');
           showNotification('This date is not available', 'error');
         }
       } catch (error) {
@@ -654,6 +662,9 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         showNotification(error.message, 'error');
       } finally {
         button.classList.remove('loading');
+        // Restore the label unless a terminal state already claimed it
+        // ("In cart" from updateAddedButtonStates, "Unavailable" from disableButton).
+        if (!button.classList.contains('in-cart') && !button.classList.contains('unavailable')) button.textContent = 'Add';
       }
     }
   }
@@ -698,73 +709,50 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       pdfFilename: null,
     };
   }
+  // Sections are rendered from the Sitecore data alone — no availability sweep.
+  //
+  // This used to time a `courseofferings` call PER section before showing the
+  // enrolment list, hiding any section that did not answer with seats. Three
+  // things were wrong with it. The seats flag it keyed on is not trustworthy
+  // (`seatsAreAvailable` reported seats for 37 of the 42 sections the SiS
+  // refuses to register — see docs/sis-api.md), so it hid the wrong rows. The
+  // calls are serial against a backend measured at a 10.9 s median and a 90 s
+  // max (see the SiS health watcher in CLAUDE.md), so the page sat behind a
+  // spinner for minutes. And any degradation there emptied the enrolment
+  // section entirely — a course with sections on sale rendered as "No sections
+  // currently available."
+  //
+  // Availability is now decided at the only moment it can be acted on: the Add
+  // click, in handleAddToCart(), which greys the button out when the SiS says
+  // no. One call, on demand, against the section the shopper actually chose.
   function bindOfferings(container) {
     container.querySelectorAll('.addtocartbutton').forEach(function (button) {
       button.addEventListener('click', handleAddToCart);
     });
+    // Anything already refused during this session stays greyed out across
+    // re-renders and back-navigation — sessionStorage, no network call.
+    markKnownUnavailable(container);
     cart.updateAddedButtonStates();
-    (async function (container) {
-      var buttons = container.querySelectorAll('.addtocartbutton');
-      if (0 !== buttons.length) {
-        var loadingOverlay,
-          enrollmentSection = container.querySelector('.enrollment-section');
-        if (enrollmentSection) {
-          enrollmentSection.style.position = 'relative';
-          (loadingOverlay = document.createElement('div')).className = 'availability-loading-overlay';
-          loadingOverlay.innerHTML = '<div class="availability-spinner"></div><div>Checking availability…</div>';
-          enrollmentSection.appendChild(loadingOverlay);
-        }
-        try {
-          var token;
-          try {
-            token = await getValidToken();
-          } catch (error) {
-            return void console.warn('[Availability] No token — skipping availability sweep.');
-          }
-          for (var index = 0; index < buttons.length; index++) {
-            var button = buttons[index],
-              productId = button.getAttribute('data-product-id');
-            if (productId && !cart.isInCart(productId))
-              try {
-                var availabilityResp = await checkAvailability(productId, token);
-                if ((401 === availabilityResp.status && ((token = await getValidToken(true)), (availabilityResp = await checkAvailability(productId, token))), 200 === availabilityResp.status && availabilityResp.data && availabilityResp.data.seatsAreAvailable)) {
-                  button.classList.remove('unavailable');
-                  button.title = '';
-                  button.textContent = 'Add';
-                } else {
-                  unavailableStore.markAsUnavailable(productId);
-                  var accordionEl = container.querySelector('.accordion-item-' + button.getAttribute('data-accordion-id'));
-                  accordionEl && (accordionEl.style.display = 'none');
-                }
-              } catch (error) {
-                console.warn('Availability check failed for ' + productId, error);
-              }
-          }
-          container.querySelectorAll('.offering-location').forEach(function (locationEl) {
-            var accordionItems = locationEl.querySelectorAll('[class^="accordion-item-"]');
-            Array.prototype.every.call(accordionItems, function (accordionItem) {
-              return 'none' === accordionItem.style.display;
-            }) && (locationEl.style.display = 'none');
-          });
-          container.querySelectorAll('.course-offering').forEach(function (offeringEl) {
-            var locations = offeringEl.querySelectorAll('.offering-location');
-            Array.prototype.every.call(locations, function (location) {
-              return 'none' === location.style.display;
-            }) && (offeringEl.style.display = 'none');
-          });
-          var offerings = container.querySelectorAll('.course-offering'),
-            hiddenOfferings = container.querySelectorAll('.course-offering[style*="display: none"]');
-          if (offerings.length > 0 && offerings.length === hiddenOfferings.length) {
-            var header = container.querySelector('.enrollment-header');
-            header && header.insertAdjacentHTML('afterend', '<p class="no-sections">No sections currently available.</p>');
-          }
-        } catch (error) {
-          console.error('Error during availability check:', error);
-        } finally {
-          loadingOverlay && loadingOverlay.remove();
-        }
-      }
-    })(container);
+  }
+  /**
+   * Re-apply the session's refusals to freshly-rendered buttons.
+   *
+   * Skips anything already in the cart: that button belongs to
+   * updateAddedButtonStates(), and greying it here would leave it stuck reading
+   * "In cart" after the item is removed instead of returning to "Add".
+   */
+  function markKnownUnavailable(container) {
+    (container || document).querySelectorAll('.addtocartbutton').forEach(function (button) {
+      var productId = button.getAttribute('data-product-id');
+      if (productId && !cart.isInCart(productId) && unavailableStore.isUnavailable(productId)) disableButton(button, 'This offering is no longer available.');
+    });
+  }
+  /** Grey out one Add button and say why. */
+  function disableButton(button, message) {
+    button.classList.add('unavailable');
+    button.setAttribute('aria-disabled', 'true');
+    button.title = message || 'This offering is no longer available.';
+    button.textContent = 'Unavailable';
   }
   async function init() {
     console.log('[Init] Starting OS Course initialisation...');

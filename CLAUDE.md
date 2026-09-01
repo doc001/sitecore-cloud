@@ -431,8 +431,9 @@ Key conventions:
 
 Nothing is registerable just because it rendered. The course pages are statically
 generated hourly, and the cart then sits in `sessionStorage` for the whole session,
-so what the shopper sees can be hours stale. Three checks run against the SiS API —
-full API contract and its known defects are in **`docs/sis-api.md`**.
+so what the shopper sees can be hours stale. Four checks run against the SiS API,
+all of them on an action the shopper took — **none on page render**, see below.
+Full API contract and its known defects are in **`docs/sis-api.md`**.
 
 | When | Check | Catches |
 |---|---|---|
@@ -461,6 +462,42 @@ would otherwise be billed), rewrites `cartItems` / `feeSession` / `totalCredits`
 shows a notice naming what went, and dispatches `bvc:cart-updated` so the form
 re-evaluates ASN visibility. A non-empty result aborts the submit rather than
 creating a registration that `submit-payment` would reject.
+
+**Nothing is checked to RENDER a section** (changed 2026-09-01). The course pages
+draw their offerings from the Sitecore JSON alone. `bindOfferings()` used to run a
+serial `courseofferings` sweep across every section before revealing the enrolment
+list, hiding any that did not answer with seats — three failures in one:
+
+- it keyed on `seatsAreAvailable`, which is the unreliable flag above, so it hid
+  sections that were on sale and kept ones the SiS refuses;
+- the calls are serial against a 10.9 s-median backend, so the list sat behind a
+  "Checking availability…" spinner for minutes on a course with many sections;
+- **any SiS degradation emptied the page**. Every probe failing hid every section,
+  and the fallback copy said "No sections currently available." — a healthy
+  catalogue rendered as a course nobody could buy, with nothing to say otherwise.
+
+Availability is now decided at the only moment it can be acted on — the **Add**
+click. The button reads "Checking…" while the call is in flight and, on a refusal,
+greys out (`.unavailable`) and reads "Unavailable" with the reason in its `title`.
+Refusals persist for the session in `unavailableStore`, so a greyed button stays
+greyed across re-renders and back-navigation without another call.
+
+**The checkout submit is covered by an overlay** (`submitOverlay` in
+`src/js/checkout/index.js`). "Proceed to Payment" fires validation → registration →
+`submit-payment` → the Flywire redirect: two SiS calls, so the page previously sat
+inert for anything up to ~90 s with no feedback, which invites a second click and a
+second registration. A fixed full-viewport overlay with a spinner goes up before the
+pre-submit repair, names each step as it advances, and blocks the repeat click. It
+is **never hidden on the success path** — the navigation is what removes it, so
+there is no bare-page gap before the redirect. Every failure path hides it
+explicitly, and `handleSubmit()` wraps `runSubmit()` so an unexpected throw cannot
+strand the shopper behind a spinner that never resolves. Styles are injected by the
+script rather than shipped in a stylesheet, because `checkout.js` has no paired CSS
+bundle and must not depend on `checkout-cart.css` being on the page.
+
+> Fixing that overlay exposed a second bug: the registration `catch` **swallowed
+> every error** — its two `alert()` calls were commented out — so a failed
+> registration did nothing visible at all. It now calls `showErrorMessage()`.
 
 **Config flags** — set before the scripts load, no rebuild needed:
 
