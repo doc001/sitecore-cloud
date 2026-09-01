@@ -275,6 +275,31 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
           notification.remove();
         }, 3e3);
       },
+      // A busy indicator that OUTLIVES the click. showNotification expires on a
+      // 3 s timer, which is useless for a call whose median is 10.9 s; and the
+      // button alone cannot be relied on — it can be scrolled out of view, and a
+      // successful add slides the cart and its overlay over the top of it. This
+      // stays up for exactly as long as the work does.
+      busyToast = {
+        el: null,
+        show: function (message) {
+          if (!this.el) {
+            this.el = document.createElement('div');
+            this.el.className = 'bvc-busy-toast';
+            this.el.setAttribute('role', 'status');
+            this.el.setAttribute('aria-live', 'polite');
+            this.el.innerHTML = '<span class="bvc-btn-spinner" aria-hidden="true"></span><span class="bvc-busy-text"></span>';
+            document.body.appendChild(this.el);
+          }
+          this.el.querySelector('.bvc-busy-text').textContent = message;
+        },
+        hide: function () {
+          if (this.el) {
+            this.el.remove();
+            this.el = null;
+          }
+        },
+      },
       unavailableStore = {
         sessionKey: 'unavailableCourses',
         init: function () {
@@ -561,11 +586,13 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         showNotification('Maximum number of products (6) has been reached', 'error');
         return void openCart();
       }
-      // The availability check is now the ONLY SiS call standing between the click
-      // and the cart, and that backend has a measured 10.9 s median (CLAUDE.md).
-      // Say so on the button rather than leaving a dimmed "Add" for ten seconds.
+      // The availability check is the ONLY SiS call standing between the click and
+      // the cart, and that backend has a measured 10.9 s median (CLAUDE.md). Say so
+      // in two places, because either one alone can go unseen: a spinner in the
+      // button itself, and a toast that survives the cart sliding over the button.
       button.classList.add('loading');
-      button.textContent = 'Checking…';
+      setButtonBusy(button, 'Checking…');
+      busyToast.show('Checking availability…');
       try {
         var token = await getValidToken(),
           cartItem = (function (button) {
@@ -643,6 +670,10 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             cart.updateAddedButtonStates();
             renderCart(true);
             openCart();
+            // The cart is now on screen with its own fee-loading spinner, so it
+            // takes over as the indicator. Two spinners saying different things
+            // is worse feedback than one.
+            busyToast.hide();
             button.classList.remove('loading');
             var skus = cart.items.map(function (item) {
               return item.sku;
@@ -669,6 +700,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         showNotification(error.message, 'error');
       } finally {
         button.classList.remove('loading');
+        busyToast.hide();
         // Restore the label unless a terminal state already claimed it
         // ("In cart" from updateAddedButtonStates, "Unavailable" from disableButton).
         if (!button.classList.contains('in-cart') && !button.classList.contains('unavailable')) button.textContent = 'Add';
@@ -761,6 +793,11 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       var productId = button.getAttribute('data-product-id');
       if (productId && !cart.isInCart(productId) && unavailableStore.isUnavailable(productId)) disableButton(button, 'This offering is no longer available.');
     });
+  }
+  /** Put one Add button into its busy state: spinner + label, still fully visible. */
+  function setButtonBusy(button, label) {
+    button.innerHTML = '<span class="bvc-btn-spinner" aria-hidden="true"></span>';
+    button.appendChild(document.createTextNode(label));
   }
   /** Grey out one Add button and say why. */
   function disableButton(button, message) {

@@ -477,10 +477,24 @@ list, hiding any that did not answer with seats — three failures in one:
   catalogue rendered as a course nobody could buy, with nothing to say otherwise.
 
 Availability is now decided at the only moment it can be acted on — the **Add**
-click. The button reads "Checking…" while the call is in flight and, on a refusal,
-greys out (`.unavailable`) and reads "Unavailable" with the reason in its `title`.
-Refusals persist for the session in `unavailableStore`, so a greyed button stays
-greyed across re-renders and back-navigation without another call.
+click. On a refusal the button greys out (`.unavailable`) and reads "Unavailable"
+with the reason in its `title`. Refusals persist for the session in
+`unavailableStore`, so a greyed button stays greyed across re-renders and
+back-navigation without another call.
+
+**The wait is signalled in two places, deliberately.** The button gets a spinner
+and a "Checking…" label at **full opacity** — the first version dimmed it to 0.6,
+which was reported as the button *disappearing* rather than working, and it is
+right: fading the one thing that changed is the opposite of feedback. Alongside it
+`busyToast` raises a fixed "Checking availability…" toast at `z-index: 10001`,
+above the sliding cart (9999) and its overlay (9998). Either indicator alone can
+go unseen — the button can be scrolled out of view or, on a successful add, be
+covered by the cart sliding over it; the toast is the one that survives both.
+Unlike `showNotification`, it has no timer: it is torn down when the work ends,
+not 3 s later, because 3 s is meaningless against a 10.9 s median. Once the cart
+is open it hands off — the cart's own fee spinner takes over and the toast hides,
+so there are never two spinners claiming different things.
+
 
 **The checkout submit is covered by an overlay** (`submitOverlay` in
 `src/js/checkout/index.js`). "Proceed to Payment" fires validation → registration →
