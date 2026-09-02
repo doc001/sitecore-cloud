@@ -496,6 +496,35 @@ is open it hands off — the cart's own fee spinner takes over and the toast hid
 so there are never two spinners claiming different things.
 
 
+**Extended Education has no international price and no additional fees.** Both
+were being displayed anyway, and both are now suppressed from the data rather
+than by hardcoding a rule per product line.
+
+| | international set | differs from domestic | fee API returns |
+|---|---|---|---|
+| Extended Ed | 83 of 87 sections | **0** | `[]` (12 courses sampled) |
+| Open Studies | 221 of 221 | **221** (e.g. 646 vs 1678) | 4 fees, $225 |
+
+- **The second price renders only when it actually differs** — the rendered
+  strings are compared, so equal-after-rounding is equal on the page. Sitecore
+  populates `international` for nearly every EE section, but it just repeats the
+  domestic figure, so the page printed "$120 Domestic Student / $120
+  International Student" and invited the reader to hunt for a difference that is
+  not there. Verified across the whole catalogue: EE 0 of 87 sections show it,
+  OS 221 of 221 keep it, and **no course is mixed** — so the rule cannot half-
+  apply to anything. It is data-driven on purpose: if an EE course ever gains a
+  real international rate it appears without a code change.
+- **"Domestic Student" goes with it.** With no second price to contrast against,
+  the qualifier implies a distinction that does not exist.
+- **`ee-course` drops the "Additional fees apply" note.** The fee API returns an
+  empty set for every EE offering tested (12 sections, 12 different courses)
+  against 4 fees for every OS section, so the note promised a charge that never
+  arrives. **The fee call itself is deliberately kept on add-to-cart**: checkout
+  totals the cart from the session rather than re-asking the API, so skipping it
+  would silently undercharge if EE ever does gain fees.
+- **Zero-value cart rows are omitted.** An EE cart has no additional fees and
+  often no tax, and was printing two `$0.00` lines.
+
 **Cart copy lives in one `MSG` map per course bundle.** The strings had drifted
 apart in three ways at once: four nouns for the same thing ("this date", "this
 offering", "Item", "products"), inconsistent terminal punctuation, and a button

@@ -465,12 +465,22 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       domesticPriceDisplay = parseFloat(domesticAmount).toFixed(0),
       internationalAmount = section.fees && section.fees.international && null != section.fees.international.amount ? section.fees.international.amount : null,
       internationalPriceDisplay = null !== internationalAmount ? parseFloat(internationalAmount).toFixed(0) : null,
+      // Only show a second price when there IS a second price. Sitecore populates
+      // `international` for nearly every section, but for Extended Education it
+      // simply repeats the domestic amount — 83 of 83 sections carrying the field,
+      // across all 39 EE courses, verified 2026-09-02 — so the page was printing
+      // "$120 Domestic Student / $120 International Student" and inviting the
+      // reader to find a difference that is not there. Open Studies genuinely
+      // differs on all 221 of its sections (e.g. 646 vs 1678), so the same rule
+      // keeps it. Compared as the rendered strings, which is what the shopper
+      // actually sees — equal after rounding is equal on the page.
+      hasDistinctInternationalPrice = null !== internationalPriceDisplay && internationalPriceDisplay !== domesticPriceDisplay,
       deliveryTypeName = resolveGuid(section.deliveryType),
       campusName = resolveGuid(section.campus),
       scheduleHtml = renderSchedule(section),
       credits = section.credits || fallbackCredits,
       registrationHtml = section.registrationStart ? '<div class="detail-item"><div class="detail-label">Registration</div><div class="detail-value">' + formatDate(section.registrationStart) + (section.registrationEnd ? ' &ndash; ' + formatDate(section.registrationEnd) : '') + '</div></div>' : '';
-    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group"><div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div><div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section"><div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">Domestic Student</div>' + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (null !== internationalPriceDisplay ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div><div class="action-section"><a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a><p class="additional-fees">Additional fees apply</p></div></div></div></div></div>';
+    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group"><div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div><div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section"><div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div>' + (hasDistinctInternationalPrice ? '<div class="student-type">Domestic Student</div>' : '') + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (hasDistinctInternationalPrice ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div><div class="action-section"><a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a><p class="additional-fees">Additional fees apply</p></div></div></div></div></div>';
   }
   function renderOfferings(sections, courseName, defaultCredits) {
     var groupedByDeliveryThenCampus = (function (sortedSections) {
@@ -617,7 +627,15 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       grandTotal = subtotal + taxTotal + feeSummary.totalAmount + feeSummary.totalTax,
       summaryEl = document.createElement('div');
     summaryEl.className = 'cart-summary';
-    summaryEl.innerHTML = '<hr /><div class="cart-item-info"><strong>Subtotal:</strong> $' + subtotal.toFixed(2) + '</div><div class="cart-item-info"><strong>Additional Fees:</strong> $' + feeSummary.totalAmount.toFixed(2) + '</div><div class="cart-item-info"><strong>Tax:</strong> $' + (taxTotal + feeSummary.totalTax).toFixed(2) + '</div>';
+    // Rows that would read $0.00 are omitted rather than printed. An Extended
+    // Education cart has no additional fees and often no tax, so it was showing
+    // two zero lines and inviting the shopper to wonder what they were for.
+    summaryEl.innerHTML =
+      '<hr /><div class="cart-item-info"><strong>Subtotal:</strong> $' +
+      subtotal.toFixed(2) +
+      '</div>' +
+      (feeSummary.totalAmount > 0 ? '<div class="cart-item-info"><strong>Additional Fees:</strong> $' + feeSummary.totalAmount.toFixed(2) + '</div>' : '') +
+      (taxTotal + feeSummary.totalTax > 0 ? '<div class="cart-item-info"><strong>Tax:</strong> $' + (taxTotal + feeSummary.totalTax).toFixed(2) + '</div>' : '');
     cartDom.cartItemsContainer.appendChild(summaryEl);
     cartDom.totalAmount.textContent = grandTotal.toFixed(2);
   }
