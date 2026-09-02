@@ -93,7 +93,31 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     window.getMsToken = getMsToken;
     var inFlightTokenPromise = null,
       guidLookup = { '1AE082FF1070438CBAA776B245B6F75D': 'Any-time Online', C38BDD5C70E34955AD170B6C6A1EC5E8: 'AudioVideo Based Instruction', '481341DF9A144AC8A315112B97377EC9': 'Blended', '0102087B8DAB4E96B64F49185C0B1FF8': 'Blended Asynchronous', '914480483DE14389ABD9EE4F1D28589E': 'Blended Self-Paced', C45FFE750A404E30A906FC3C6FDD99FC: 'Blended Synchronous', '6BF78E16E03F462FAEE8F223086CFB35': 'Blended Synchronous Asynchronous', '5969AC19010546B5B9834F6F8D2F3B29': 'BVC Online', '2E7F9F03DDB84D6BB91FDC2D4464372A': 'Challenge', '6F3515869E4C4C5599F470A7A58B13F0': 'Combined Online', C5BAA31D7BC0449890F790E897A92261: 'Computer Assisted Instruction', '2B0F27FC3A764DBB941F2644DB71B7D6': 'Correspondence Based Instruction', E27E365D5A3341629CFDB4DB6DE64FCA: 'Distributed Learning ecampus 2', '467A978F3823421BBDF788D21BC7B09C': 'ECampus Alberta - online learning', B146327974D348BD8306F957AE47CECD: 'eCampusAlberta Online', EE331EC390BC4D329910C5911DF970A7: 'Face to Face Self-Paced', '939C8DACA6C1415EBC831B3F062D4250': 'Face to Face Synchronous', '8317C7933CC449C2984E7F1CCD6FF5B8': 'Flexclass', F8EBCF8BF2D147AA9F76522DCBEDFA75: 'Home Study', '9754E29DF0754139B125292A81550174': 'Hyflex', E9F804275D3C4B61A685F63DF5134F14: 'In Class', '8AFAF1DADDEF4B71AC14DA272E952D0A': 'Micro-Credential Assessment', '5D448378DA984E9986E737C02BEA8F46': 'Mixed', C570FE50B9824FD6906B571CDE435CF3: 'Off-Site', EC1C42ED10C54C1995A9F2CFEAC79CD9: 'Online Asynchronous', '9FA504584ED84FABB0748D043A306BC3': 'Online Self-Paced', '71159BEB070D42C981D9758B3108A0CD': 'Online Synchronous', F6250694BAD64615BCB91693A45D76C5: 'Online Synchronous Asynchronous', '40817BFE87E1432EB3E68929DF8C9965': 'Real-time Online', '60C2E33F37514B7E884D1BEFB7155785': 'Teleconferencing / Videoconferencing', '63ADFB9EB3484A00BD66C043F43DEBE4': 'Traditional and Self Paced', '05A8F1DF96624B67A7F9DC22C32B4A5F': 'Work Experience', '00D83EDBF5B642ADA6493FBFE3EC116A': 'Airdrie', '481D28AD75CA4F12B5B10C078AA05F35': 'Banff', '0B44F9AE85B9426F9A3876762BBA5B5A': 'Calgary', '8005CA67F70B43C2BBB5004FF89FA4E1': 'Calgary Downtown Campus', A9B98CE5F1D5460F8812E36A93FDF320: 'Cochrane', '82E8438804E84947BAAF251119943A6A': 'Distance Learning', '5AA49765063A4B0BB623C0404A92406A': 'High River', '2B4E485287444409AA1E828DA53BFC0C': 'Okotoks', D8ECBBFE90E944FA8526B7A90ED56FC5: 'Online', D532C4A03C6C42E99C3C5569D3B7F59F: 'Regional', '05A9B93BC41A4F5CBE72FC9B97548AFF': 'Rural', A7B3BDCF1E404C32890EF853D2DCFDF2: 'Strathmore', FBE851B811DA49F0A8795BD188113BDB: 'Three Gorges Medical College', AF5967FBE4D446E3BA1212EFEE54B86C: 'Three Hills', '1B561481FF05406A897B1FEB28F98004': 'Yukon' },
-      dayCodeMap = { M: 'Mondays', T: 'Tuesdays', W: 'Wednesdays', R: 'Thursdays', F: 'Fridays', S: 'Saturdays', U: 'Sundays' };
+      // Day codes as Sitecore actually emits them. Every one of the 14 distinct
+      // tokens in the catalogue uses ONE scheme — Su M T W Th F Sa — verified
+      // 2026-09-02 across all 100 EE + OS course files. Note what is NOT here:
+      // no `R` for Thursday, no bare `S` for Saturday, no `U` for Sunday. The old
+      // map was built for that other (registrar) scheme and keyed whole tokens
+      // against single letters, so only 'M', 'T', 'W' and 'F' ever matched —
+      // 'Th', 'Sa', 'MW', 'TTh', 'FSa', 'ThF' and the rest fell through and were
+      // printed raw. That is why the page showed "Mondays" on one row and "TTh"
+      // on the next.
+      //
+      // `R`/`S`/`U` are still accepted below as a defensive fallback in case
+      // upstream ever switches schemes; they cost nothing and cannot collide with
+      // today's data, because two-character codes are matched FIRST and matching
+      // is case-sensitive. The one genuine ambiguity is an upper-cased 'SU': it
+      // does not equal 'Su', so it parses as S + U — Saturdays, Sundays. No
+      // parser can resolve that without knowing the scheme, and upstream emits
+      // 'Su'; noted so a future reader is not surprised by it.
+      dayCodeMap = { Su: 'Sundays', M: 'Mondays', T: 'Tuesdays', W: 'Wednesdays', Th: 'Thursdays', F: 'Fridays', Sa: 'Saturdays', Tu: 'Tuesdays', R: 'Thursdays', S: 'Saturdays', U: 'Sundays' },
+      // Longest-first, so 'Th' is consumed before 'T' and 'Sa'/'Su' before 'S'.
+      dayCodeTokens = ['Su', 'Sa', 'Th', 'Tu', 'M', 'T', 'W', 'R', 'F', 'S', 'U'],
+      // The whole week paired with a zero-length midnight window is Sitecore's
+      // placeholder for "there is no scheduled meeting time" — 100 occurrences,
+      // and the ONLY thing that window is ever paired with. Rendered literally it
+      // claims the class meets every day at midnight.
+      NO_MEETING_TIME = 'Self-paced — study any time';
     window.toggleAccordion = function (accordionId) {
       var content = document.getElementById('accordion-' + accordionId);
       if (content) {
@@ -424,17 +448,58 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       day = yyyymmdd.substring(6, 8);
     return new Date(year, month - 1, day).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
+  /**
+   * Expand a Sitecore day code into full day names.
+   *
+   * Greedy longest-match: 'MTWThF' -> M, T, W, Th, F. Returns null when the token
+   * cannot be fully consumed, so callers can fall back to printing it verbatim —
+   * showing an unrecognised code is bad, but inventing days is worse.
+   */
+  function expandDayCode(code) {
+    var remaining = String(code || ''),
+      names = [];
+    while (remaining.length) {
+      for (var index = 0, matched = false; index < dayCodeTokens.length; index++) {
+        var token = dayCodeTokens[index];
+        if (0 === remaining.indexOf(token)) {
+          names.push(dayCodeMap[token]);
+          remaining = remaining.slice(token.length);
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) return null;
+    }
+    return names.length ? names : null;
+  }
+  /**
+   * Normalise one `schedule` string ("MW 3:30 PM - 4:50 PM") into what the page
+   * should print. Returns { day, hours }; an empty `hours` means there is no
+   * meeting time to show and callers must not render a time alongside it.
+   */
+  function parseSchedule(schedule) {
+    if (!schedule) return { day: '', hours: '' };
+    var parts = String(schedule).trim().split(/\s+/),
+      code = parts[0],
+      hours = parts.slice(1).join(' '),
+      names = expandDayCode(code);
+    // Placeholder: the full week AND a zero-length midnight window. Both are
+    // required — all seven days with real hours would be a genuine schedule.
+    if (names && 7 === names.length && /^12:00\s*AM\s*-\s*12:00\s*AM$/i.test(hours)) return { day: NO_MEETING_TIME, hours: '' };
+    return { day: names ? names.join(', ') : code, hours: hours };
+  }
   function renderSchedule(section) {
     return Array.isArray(section.timeBlocks) && section.timeBlocks.length
       ? '<div class="timeblock-info"><div class="detail-label">Schedule</div><div class="timeblock-details">' +
           section.timeBlocks
             .map(function (timeBlock) {
-              var parsed = (function (schedule) {
-                if (!schedule) return { day: '', hours: '' };
-                var parts = schedule.trim().split(/\s+/);
-                return { day: dayCodeMap[parts[0]] || parts[0], hours: parts.slice(1).join(' ') };
-              })(timeBlock.schedule);
-              return '<div><span class="productdays">' + parsed.day + '</span>:<br/><span class="producthours">' + parsed.hours + '</span></div>';
+              var parsed = parseSchedule(timeBlock.schedule);
+              // No colon and no time element when there are no hours — otherwise
+              // the placeholder renders as "Self-paced — study any time:" with a
+              // dangling colon over an empty line.
+              return parsed.hours
+                ? '<div><span class="productdays">' + parsed.day + '</span>:<br/><span class="producthours">' + parsed.hours + '</span></div>'
+                : '<div><span class="productdays">' + parsed.day + '</span></div>';
             })
             .join('') +
           '</div></div>'
@@ -491,9 +556,19 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       deliveryTypeName = resolveGuid(section.deliveryType),
       campusName = resolveGuid(section.campus),
       scheduleHtml = renderSchedule(section),
+      // Credits are shown only when the section HAS credits. Extended Education
+      // carries `credits: 0` on all 126 of its sections (Open Studies is 3/4/6),
+      // so the page and the cart were both printing a literal "Credits 0".
+      // Data-driven rather than keyed off the bundle: an EE course that ever gains
+      // credits shows them, and OS is untouched.
+      //
+      // `data-product-credits` is deliberately still emitted at 0. Checkout reads
+      // it to decide whether the ASN field is required (any cartItems[].credits > 0),
+      // and a mixed EE + OS cart depends on the zero being present rather than
+      // missing. Hiding the DISPLAY must not change the DATA.
       credits = section.credits || fallbackCredits,
       registrationHtml = section.registrationStart ? '<div class="detail-item"><div class="detail-label">Registration</div><div class="detail-value">' + formatDate(section.registrationStart) + (section.registrationEnd ? ' &ndash; ' + formatDate(section.registrationEnd) : '') + '</div></div>' : '';
-    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group"><div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div><div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section"><div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div>' + (hasDistinctInternationalPrice ? '<div class="student-type">Domestic Student</div>' : '') + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (hasDistinctInternationalPrice ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div><div class="action-section"><a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a></div></div></div></div></div>';
+    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group">' + (parseFloat(credits) > 0 ? '<div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div>' : '') + '<div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section"><div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div>' + (hasDistinctInternationalPrice ? '<div class="student-type">Domestic Student</div>' : '') + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (hasDistinctInternationalPrice ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div><div class="action-section"><a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a></div></div></div></div></div>';
   }
   function renderOfferings(sections, courseName, defaultCredits) {
     var groupedByDeliveryThenCampus = (function (sortedSections) {
@@ -558,17 +633,22 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
           ? '<div class="cart-item-info"><span style="font-weight:600;">Schedule:</span></div>' +
             item.timeblocks
               .map(function (block) {
-                return '<div class="cart-item-info" style="padding-left:20px;">• ' + block.day + ': ' + block.hours + '</div>';
+                // Same rule as the accordion: no colon, no time, when the
+                // section has no meeting time to state.
+                return '<div class="cart-item-info" style="padding-left:20px;">• ' + block.day + (block.hours ? ': ' + block.hours : '') + '</div>';
               })
               .join('')
-          : '<div class="cart-item-info"><span style="font-weight:600;">Days:</span> ' + (item.productdays || 'Not specified') + '</div><div class="cart-item-info"><span style="font-weight:600;">Hours:</span> ' + (item.producthours || 'Not specified') + '</div>';
+          : '<div class="cart-item-info"><span style="font-weight:600;">Days:</span> ' + (item.productdays || 'Not specified') + '</div>' +
+            // "Hours: Not specified" underneath "Self-paced — study any time" is
+            // noise: the line above has already answered the question.
+            (item.producthours ? '<div class="cart-item-info"><span style="font-weight:600;">Hours:</span> ' + item.producthours + '</div>' : '');
       // The remove control comes AFTER the details in source order and is pulled to
       // the row's top-right by CSS (.cart-item was already position:relative for a
       // fix that had never been written). It used to be emitted FIRST as a solid red
       // "Remove" block, which put a destructive action where the row's heading
       // belongs and pushed the course name below it. `aria-label` names the course,
       // because "×" alone tells a screen-reader user nothing about what it removes.
-      itemEl.innerHTML = '<div class="cart-item-details"><div class="cart-item-name"><strong>' + (item.productName || item.sku) + '</strong></div><div class="cart-item-info"><span style="font-weight:600;">Credits: </span> ' + item.credits + '</div><div class="cart-item-info"><span style="font-weight:600;">Tuition:</span> $' + item.price + ' x ' + item.quantity + '</div>' + (parseFloat(item.tax) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Tuition Tax:</span> $' + parseFloat(item.tax).toFixed(2) + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Delivery:</span> ' + (item.productDelivery || 'Standard') + '</div><div class="cart-item-info"><span style="font-weight:600;">Dates:</span> ' + (item.productdates || 'Not specified') + '</div>' + scheduleHtml + '<div class="cart-item-info"><span style="font-weight:600;">Location:</span> ' + (item.productlocation || 'Not specified') + '</div></div><button class="remove-item" type="button" data-sku="' + item.sku + '" title="Remove from cart" aria-label="Remove ' + (item.productName || item.sku) + ' from cart">&times;</button>';
+      itemEl.innerHTML = '<div class="cart-item-details"><div class="cart-item-name"><strong>' + (item.productName || item.sku) + '</strong></div>' + (parseFloat(item.credits) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Credits:</span> ' + item.credits + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Tuition:</span> $' + item.price + ' x ' + item.quantity + '</div>' + (parseFloat(item.tax) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Tuition Tax:</span> $' + parseFloat(item.tax).toFixed(2) + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Delivery:</span> ' + (item.productDelivery || 'Standard') + '</div><div class="cart-item-info"><span style="font-weight:600;">Dates:</span> ' + (item.productdates || 'Not specified') + '</div>' + scheduleHtml + '<div class="cart-item-info"><span style="font-weight:600;">Location:</span> ' + (item.productlocation || 'Not specified') + '</div></div><button class="remove-item" type="button" data-sku="' + item.sku + '" title="Remove from cart" aria-label="Remove ' + (item.productName || item.sku) + ' from cart">&times;</button>';
       fragment.appendChild(itemEl);
     });
     cartDom.cartItemsContainer.innerHTML = '';

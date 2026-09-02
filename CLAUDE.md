@@ -525,6 +525,38 @@ than by hardcoding a rule per product line.
 - **Zero-value cart rows are omitted.** An EE cart has no additional fees and
   often no tax, and was printing two `$0.00` lines.
 
+**Credits are shown only when there are credits.** Extended Education carries
+`credits: 0` on all 126 of its sections (Open Studies is 3/4/6), so the accordion
+and the cart were both printing a literal "Credits 0". Data-driven like the price
+rule above, so an EE course that ever gains credits shows them. **The
+`data-product-credits` attribute is still emitted at 0** — checkout decides ASN
+visibility from `cartItems[].credits > 0`, and a mixed EE + OS cart needs the
+zero present rather than missing. Hiding the display must not change the data.
+
+**Schedule day codes are normalised by `parseSchedule()`.** Sitecore emits one
+scheme — **`Su M T W Th F Sa`** — confirmed across all 14 distinct tokens in the
+catalogue. Note what is absent: no `R` for Thursday, no bare `S`, no `U`. The old
+`dayCodeMap` was built for that other (registrar) scheme *and* looked up whole
+tokens as single letters, so only `M`/`T`/`W`/`F` ever matched — `Th`, `Sa`,
+`MW`, `TTh`, `FSa`, `ThF` all fell through and printed raw. That is why one row
+read "Mondays" and the next read "TTh".
+
+- Matching is **greedy longest-first** (`Su`,`Sa`,`Th`,`Tu` before `M`,`T`,`W`,
+  `F`), so `MTWThF` cannot mis-split. `R`/`S`/`U` are kept as a defensive
+  fallback against an upstream scheme change.
+- An unparseable token is **printed verbatim**, never guessed. Showing an
+  unrecognised code is bad; inventing days is worse.
+- **`SuMTWThFSa 12:00 AM - 12:00 AM` is a placeholder, not a schedule** — 100
+  occurrences (51 EE, 49 OS), the most common value in the data, and the only
+  thing that midnight window is ever paired with. Rendered literally it claims
+  the class meets every day at midnight. It now reads "Self-paced — study any
+  time" with no time. **Both conditions are required**: all seven days with real
+  hours is a genuine schedule and still renders as seven days.
+- Where there is no meeting time, the colon and the `Hours:` row are dropped in
+  both the accordion and the cart, rather than left dangling over an empty value.
+- Verified against all 84 distinct schedule strings in the catalogue: 0 printed
+  raw. The test drives the parser extracted from the BUILT bundle, not the source.
+
 **Cart copy lives in one `MSG` map per course bundle.** The strings had drifted
 apart in three ways at once: four nouns for the same thing ("this date", "this
 offering", "Item", "products"), inconsistent terminal punctuation, and a button
