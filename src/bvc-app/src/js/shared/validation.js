@@ -60,9 +60,14 @@ export function readValidation(response) {
   // API flags one side of the pair regardless of which one is new (verified across
   // five permutations). Callers validate one course at a time against a known-good
   // context, so the verdict belongs to that course and the ids are ignored.
-  var message = 'This offering cannot be added to your cart.';
-  if (-1 !== codes.indexOf('Timeblock Conflict')) message = 'This offering overlaps with another course in your cart.';
-  else if (-1 !== codes.indexOf('Offering Missing')) message = 'This offering is no longer available.';
+  // Copy convention, shared with the course bundles' MSG map: one noun for the
+  // thing the shopper clicked ("this date" — the accordion they opened is labelled
+  // with a date range; "offering"/"section" are internal words), full sentences,
+  // terminal period. `Offering Missing` covers full AND withdrawn, so it has to
+  // stay generic — see docs/sis-api.md.
+  var message = 'This date cannot be added to your cart.';
+  if (-1 !== codes.indexOf('Timeblock Conflict')) message = 'This date overlaps with another course in your cart.';
+  else if (-1 !== codes.indexOf('Offering Missing')) message = 'This date is no longer available.';
 
   return { ok: false, codes: codes, message: message };
 }

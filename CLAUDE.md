@@ -496,6 +496,35 @@ is open it hands off — the cart's own fee spinner takes over and the toast hid
 so there are never two spinners claiming different things.
 
 
+**Cart copy lives in one `MSG` map per course bundle.** The strings had drifted
+apart in three ways at once: four nouns for the same thing ("this date", "this
+offering", "Item", "products"), inconsistent terminal punctuation, and a button
+`title` that disagreed with the toast fired at the same moment. Worse,
+`showNotification(error.message)` put raw exception text in front of shoppers —
+"Failed to fetch", "Failed to check course availability (status 502)". Convention
+now: full sentences, terminal period, **"this date"** for the accordion the
+shopper opened (it is labelled with a date range — "offering"/"section" are
+internal words) and **"course"** for a cart row. `readValidation()` in
+`shared/validation.js` follows the same rules so API verdicts match. The raw
+error still reaches the console; the shopper gets `MSG.unexpected`.
+
+> Deliberate and preserved: **ee-course treats a failed fee calculation as
+> non-fatal** and still reports success, where os-course says checkout is
+> unavailable. That divergence is intentional (`// Fees are optional for EE`),
+> so only the wording was unified, not the behaviour.
+
+**The cart's remove control is an icon in the row's top-right**, not a red block
+above the course name. It used to be emitted *first* in the row markup and styled
+as a solid `#e74c3c` "Remove" button, which made the destructive action the
+loudest thing in every row and left the course name reading as its caption.
+`.cart-item` had carried `position: relative` all along for a fix that was never
+written. The control now renders last in source order, is pulled to the corner
+absolutely, and `.cart-item-name` reserves `padding-right: 32px` so a long course
+name wraps around it rather than under it (verified: 85-character name over three
+lines, 5 px clearance). The handler uses `closest('.remove-item')` and reads
+`data-sku` off that element rather than `event.target`, so a click landing on a
+child cannot lose the sku.
+
 **The checkout submit is covered by an overlay** (`submitOverlay` in
 `src/js/checkout/index.js`). "Proceed to Payment" fires validation → registration →
 `submit-payment` → the Flywire redirect: two SiS calls, so the page previously sat

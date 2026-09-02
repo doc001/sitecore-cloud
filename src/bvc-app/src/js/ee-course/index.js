@@ -270,6 +270,32 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
           this.cartMessage = document.querySelector('.cart-message');
         },
       },
+      // Every user-facing string in one place, so the toast, the button `title`
+      // and the in-cart warning cannot drift apart — they had, in wording,
+      // punctuation and vocabulary ("date" / "offering" / "item" / "product" for
+      // the same thing). Convention: full sentences, terminal period, and ONE noun
+      // per concept — "this date" for the accordion the shopper opened (it is
+      // labelled with a date range; "offering" and "section" are internal words),
+      // "course" for a row in the cart. Verdict copy from the API follows the same
+      // rules in ../shared/validation.js.
+      MSG = {
+        cartFull: 'Your cart is full (maximum 6 courses).',
+        unavailable: 'This date is no longer available.',
+        noSeats: 'No seats are available for this date.',
+        alreadyInCart: 'This course is already in your cart.',
+        added: 'Added to your cart.',
+        addedNoFees: 'Added to your cart, but fees could not be calculated. Checkout is unavailable.',
+        removed: 'Removed from your cart.',
+        removedNoFees: 'Removed from your cart, but fees could not be recalculated. Checkout is unavailable.',
+        cartEmptied: 'Your cart is now empty.',
+        cartEmpty: 'Your cart is empty.',
+        removeFailed: 'That course could not be removed. Please try again.',
+        // Shown instead of a raw exception string. `error.message` was going
+        // straight to the shopper — "Failed to fetch", "Failed to check course
+        // availability (status 502)" — which is noise to them and detail to
+        // anyone else. The real error still goes to the console.
+        unexpected: 'Something went wrong. Please try again.',
+      },
       showNotification = function (message, type) {
         var notification = document.createElement('div');
         notification.className = 'notification notification-' + type;
@@ -482,7 +508,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     cartDom.cart.classList.add('open');
     cartDom.overlay.classList.add('open');
     if (cart.isCartFull()) {
-      cartDom.cartMessage.textContent = 'Maximum number of products (6) has been reached.';
+      cartDom.cartMessage.textContent = MSG.cartFull;
       cartDom.cartMessage.classList.add('visible');
     } else {
       cartDom.cartMessage.classList.remove('visible');
@@ -506,7 +532,13 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
               })
               .join('')
           : '<div class="cart-item-info"><span style="font-weight:600;">Days:</span> ' + (item.productdays || 'Not specified') + '</div><div class="cart-item-info"><span style="font-weight:600;">Hours:</span> ' + (item.producthours || 'Not specified') + '</div>';
-      itemEl.innerHTML = '<button class="remove-item" data-sku="' + item.sku + '">Remove</button><div class="cart-item-details"><div><strong>' + (item.productName || item.sku) + '</strong></div><div class="cart-item-info"><span style="font-weight:600;">Credits: </span> ' + item.credits + '</div><div class="cart-item-info"><span style="font-weight:600;">Tuition:</span> $' + item.price + ' x ' + item.quantity + '</div>' + (parseFloat(item.tax) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Tuition Tax:</span> $' + parseFloat(item.tax).toFixed(2) + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Delivery:</span> ' + (item.productDelivery || 'Standard') + '</div><div class="cart-item-info"><span style="font-weight:600;">Dates:</span> ' + (item.productdates || 'Not specified') + '</div>' + scheduleHtml + '<div class="cart-item-info"><span style="font-weight:600;">Location:</span> ' + (item.productlocation || 'Not specified') + '</div></div>';
+      // The remove control comes AFTER the details in source order and is pulled to
+      // the row's top-right by CSS (.cart-item was already position:relative for a
+      // fix that had never been written). It used to be emitted FIRST as a solid red
+      // "Remove" block, which put a destructive action where the row's heading
+      // belongs and pushed the course name below it. `aria-label` names the course,
+      // because "×" alone tells a screen-reader user nothing about what it removes.
+      itemEl.innerHTML = '<div class="cart-item-details"><div class="cart-item-name"><strong>' + (item.productName || item.sku) + '</strong></div><div class="cart-item-info"><span style="font-weight:600;">Credits: </span> ' + item.credits + '</div><div class="cart-item-info"><span style="font-weight:600;">Tuition:</span> $' + item.price + ' x ' + item.quantity + '</div>' + (parseFloat(item.tax) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Tuition Tax:</span> $' + parseFloat(item.tax).toFixed(2) + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Delivery:</span> ' + (item.productDelivery || 'Standard') + '</div><div class="cart-item-info"><span style="font-weight:600;">Dates:</span> ' + (item.productdates || 'Not specified') + '</div>' + scheduleHtml + '<div class="cart-item-info"><span style="font-weight:600;">Location:</span> ' + (item.productlocation || 'Not specified') + '</div></div><button class="remove-item" type="button" data-sku="' + item.sku + '" title="Remove from cart" aria-label="Remove ' + (item.productName || item.sku) + ' from cart">&times;</button>';
       fragment.appendChild(itemEl);
     });
     cartDom.cartItemsContainer.innerHTML = '';
@@ -575,7 +607,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     var button = event.currentTarget;
     if (!button.classList.contains('in-cart') && !button.classList.contains('unavailable')) {
       if (cart.isCartFull()) {
-        showNotification('Maximum number of products (6) has been reached', 'error');
+        showNotification(MSG.cartFull, 'error');
         return void openCart();
       }
       // The availability check is the ONLY SiS call standing between the click and
@@ -620,15 +652,15 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             return item;
           })(button);
         if (unavailableStore.isUnavailable(cartItem.sku)) {
-          disableButton(button, 'This offering is no longer available.');
-          return void showNotification('This date is not available', 'error');
+          disableButton(button, MSG.unavailable);
+          return void showNotification(MSG.unavailable, 'error');
         }
         var availabilityResp = await checkAvailability(cartItem.sku, token);
         if ((401 === availabilityResp.status && ((token = await getValidToken(true)), (availabilityResp = await checkAvailability(cartItem.sku, token))), 200 === availabilityResp.status)) {
           if (!availabilityResp.data || !availabilityResp.data.seatsAreAvailable) {
             unavailableStore.markAsUnavailable(cartItem.sku);
-            disableButton(button, 'No seats available for this date.');
-            return void showNotification('No seats available for this date', 'error');
+            disableButton(button, MSG.noSeats);
+            return void showNotification(MSG.noSeats, 'error');
           }
           // Empty context unless conflict checking is switched on, so the default is
           // the solo form: it answers "can this offering be registered at all", which
@@ -673,24 +705,24 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             try {
               await calculateFees(skus, token);
               renderCart();
-              showNotification('Item added to cart!', 'success');
+              showNotification(MSG.added, 'success');
             } catch (error) {
               // Fees are optional for EE — fail silently and let the shopper proceed.
               console.warn('[Fees] Could not calculate fees — proceeding without them.', error);
               sessionManager.clearFeeSession();
               renderCart();
-              showNotification('Item added to cart!', 'success');
+              showNotification(MSG.added, 'success');
             }
-          } else showNotification('Item is already in your cart', 'error');
+          } else showNotification(MSG.alreadyInCart, 'error');
         } else {
           if (404 !== availabilityResp.status) throw new Error('Failed to check course availability (status ' + availabilityResp.status + ')');
           unavailableStore.markAsUnavailable(cartItem.sku);
-          disableButton(button, 'This offering is no longer available.');
-          showNotification('This date is not available', 'error');
+          disableButton(button, MSG.unavailable);
+          showNotification(MSG.unavailable, 'error');
         }
       } catch (error) {
         console.error('Error in handleAddToCart:', error);
-        showNotification(error.message, 'error');
+        showNotification(MSG.unexpected, 'error');
       } finally {
         button.classList.remove('loading');
         busyToast.hide();
@@ -776,7 +808,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
   function markKnownUnavailable(container) {
     (container || document).querySelectorAll('.addtocartbutton').forEach(function (button) {
       var productId = button.getAttribute('data-product-id');
-      if (productId && !cart.isInCart(productId) && unavailableStore.isUnavailable(productId)) disableButton(button, 'This offering is no longer available.');
+      if (productId && !cart.isInCart(productId) && unavailableStore.isUnavailable(productId)) disableButton(button, MSG.unavailable);
     });
   }
   /** Put one Add button into its busy state: spinner + label, still fully visible. */
@@ -788,7 +820,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
   function disableButton(button, message) {
     button.classList.add('unavailable');
     button.setAttribute('aria-disabled', 'true');
-    button.title = message || 'This offering is no longer available.';
+    button.title = message || MSG.unavailable;
     button.textContent = 'Unavailable';
   }
   async function init() {
@@ -805,7 +837,11 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       cartDom.closeButton.addEventListener('click', closeCart);
       cartDom.overlay.addEventListener('click', closeCart);
       cartDom.cartItemsContainer.addEventListener('click', function (event) {
-        event.target.matches('.remove-item') &&
+        // closest(), not matches(): the click can land on a child of the button.
+        // The sku is then read off THAT element rather than event.target, which
+        // would be the child and carry no data-sku.
+        var removeButton = event.target.closest('.remove-item');
+        removeButton &&
           (async function (sku) {
             try {
               if ((cart.removeItem(sku), 0 === cart.items.length)) {
@@ -814,7 +850,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
                   sessionStorage.removeItem(key);
                 });
                 renderCart();
-                showNotification('Your cart is now empty.', 'success');
+                showNotification(MSG.cartEmptied, 'success');
                 cartDom.cartMessage.classList.remove('visible');
               } else {
                 try {
@@ -826,26 +862,26 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
                     token,
                   );
                   renderCart();
-                  showNotification('Item removed from cart', 'success');
+                  showNotification(MSG.removed, 'success');
                 } catch (error) {
                   // Fees are optional for EE — fail silently and keep checkout available.
                   console.warn('[Fees] Could not recalculate fees after removal — proceeding without them.', error);
                   sessionManager.clearFeeSession();
                   renderCart();
-                  showNotification('Item removed from cart', 'success');
+                  showNotification(MSG.removed, 'success');
                 }
                 cartDom.cartMessage.classList.toggle('visible', cart.isCartFull());
               }
               cart.updateAddedButtonStates();
             } catch (error) {
               console.error('Error removing item:', error);
-              showNotification('Failed to remove item from cart', 'error');
+              showNotification(MSG.removeFailed, 'error');
             }
-          })(event.target.dataset.sku);
+          })(removeButton.dataset.sku);
       });
       document.querySelector('.checkout-button').addEventListener('click', function (event) {
         if (this.disabled) return void event.preventDefault();
-        cart.items.length > 0 ? (window.location.href = '../cart-checkout?type=ee') : showNotification('Your cart is empty', 'error');
+        cart.items.length > 0 ? (window.location.href = '../cart-checkout?type=ee') : showNotification(MSG.cartEmpty, 'error');
       });
       var openCartButton = document.querySelector('.opencartbutton');
       if ((openCartButton && openCartButton.addEventListener('click', openCart), console.log('[Init] Cart infrastructure ready'), courseComponent.querySelector('.addtocartbutton'))) {
