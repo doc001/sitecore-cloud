@@ -232,12 +232,12 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
               button.classList.add('in-cart');
               button.setAttribute('aria-disabled', 'true');
               button.title = 'Already in cart';
-              button.textContent = 'In cart';
+              button.textContent = LABEL.inCart;
             } else if (!unavailable) {
               button.classList.remove('in-cart');
               button.removeAttribute('aria-disabled');
               button.title = cartFull ? 'Cart is full (max 6)' : '';
-              button.textContent = 'Add';
+              button.textContent = LABEL.add;
               button.classList.toggle('in-cart', cartFull);
             }
           });
@@ -291,6 +291,17 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         // availability (status 502)" — which is noise to them and detail to
         // anyone else. The real error still goes to the console.
         unexpected: 'Something went wrong. Please try again.',
+        // In-cart fee error. Same sentence shape as addedNoFees rather than the
+        // em-dash variant it used to carry.
+        feeError: 'Additional fees could not be calculated. Checkout is unavailable.',
+      },
+      // Button labels. Here too, not inline: each appears in three or four places
+      // and has to agree with the `title` set alongside it.
+      LABEL = {
+        add: 'Add',
+        inCart: 'In cart',
+        checking: 'Checking…',
+        unavailable: 'Unavailable',
       },
       showNotification = function (message, type) {
         var notification = document.createElement('div');
@@ -368,7 +379,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
               button.classList.remove('unavailable');
               button.removeAttribute('aria-disabled');
               button.title = '';
-              button.textContent = 'Add';
+              button.textContent = LABEL.add;
             });
           });
         },
@@ -568,7 +579,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         feeErrorEl.style.color = '#b00020';
         feeErrorEl.style.fontSize = '13px';
         feeErrorEl.style.margin = '8px 0';
-        feeErrorEl.textContent = 'Additional fees could not be calculated. Checkout is unavailable — please try again.';
+        feeErrorEl.textContent = MSG.feeError;
         cartDom.cartItemsContainer.appendChild(feeErrorEl);
       }
     }
@@ -623,7 +634,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       // in two places, because either one alone can go unseen: a spinner in the
       // button itself, and a toast that survives the cart sliding over the button.
       button.classList.add('loading');
-      setButtonBusy(button, 'Checking…');
+      setButtonBusy(button, LABEL.checking);
       busyToast.show('Checking availability…');
       try {
         var token = await getValidToken(),
@@ -735,7 +746,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         busyToast.hide();
         // Restore the label unless a terminal state already claimed it
         // ("In cart" from updateAddedButtonStates, "Unavailable" from disableButton).
-        if (!button.classList.contains('in-cart') && !button.classList.contains('unavailable')) button.textContent = 'Add';
+        if (!button.classList.contains('in-cart') && !button.classList.contains('unavailable')) button.textContent = LABEL.add;
       }
     }
   }
@@ -836,7 +847,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     button.classList.add('unavailable');
     button.setAttribute('aria-disabled', 'true');
     button.title = message || MSG.unavailable;
-    button.textContent = 'Unavailable';
+    button.textContent = LABEL.unavailable;
   }
   async function init() {
     console.log('[Init] Starting OS Course initialisation...');
