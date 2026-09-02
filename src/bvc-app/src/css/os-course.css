@@ -408,7 +408,24 @@
    it belonged to read as a caption underneath it. .cart-item has carried
    position:relative all along for exactly this. The details column reserves
    space on the right so a long course name can never run under the button. */
+/* Base style = the OLD red block. Kept deliberately as a fallback: os-course.css
+   and os-course.js are separate files, so a browser can briefly hold a cached
+   copy of one and a fresh copy of the other. Styling the new corner icon on a
+   bare `.remove-item` would then squeeze the old markup's "Remove" text into a
+   28px box. The corner treatment is therefore scoped to the NEW row structure
+   (button follows the details block); old markup keeps the old look until its
+   JS catches up, and neither combination renders broken. */
 .remove-item {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-bottom: 8px;
+}
+.cart-item-details + .remove-item {
   position: absolute;
   top: 10px;
   right: 0;
@@ -427,8 +444,11 @@
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
-.remove-item:hover,
-.remove-item:focus-visible {
+.remove-item:hover {
+  background: #c0392b;
+}
+.cart-item-details + .remove-item:hover,
+.cart-item-details + .remove-item:focus-visible {
   background: #fdecea;
   color: #c0392b;
 }
