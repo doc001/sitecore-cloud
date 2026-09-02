@@ -488,12 +488,42 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     if (names && 7 === names.length && /^12:00\s*AM\s*-\s*12:00\s*AM$/i.test(hours)) return { day: NO_MEETING_TIME, hours: '' };
     return { day: names ? names.join(', ') : code, hours: hours };
   }
+  /**
+   * The timeblocks worth printing, parsed, deduped and de-contradicted.
+   *
+   * Sitecore hands back two kinds of noise. Sections repeat an identical block —
+   * 'FSa 8:00 AM - 4:50 PM' twice on the same section — which rendered as the same
+   * line printed twice. And 18 sections (11 EE, 7 OS) carry the all-week midnight
+   * placeholder ALONGSIDE real meeting times, which reads as a section that both
+   * has no set time and meets on Fridays. Where a real block exists it is the
+   * truth, so the placeholder is dropped; where it is alone it is the only thing
+   * there is to say.
+   */
+  function scheduleBlocks(section) {
+    var parsedBlocks = (section.timeBlocks || []).map(function (timeBlock) {
+        return parseSchedule(timeBlock.schedule);
+      }),
+      seen = {},
+      unique = parsedBlocks.filter(function (block) {
+        if (!block.day) return false;
+        var key = block.day + '|' + block.hours;
+        return !seen[key] && (seen[key] = true);
+      }),
+      hasRealBlock = unique.some(function (block) {
+        return !!block.hours;
+      });
+    return hasRealBlock
+      ? unique.filter(function (block) {
+          return !!block.hours;
+        })
+      : unique;
+  }
   function renderSchedule(section) {
-    return Array.isArray(section.timeBlocks) && section.timeBlocks.length
+    var blocks = scheduleBlocks(section);
+    return blocks.length
       ? '<div class="timeblock-info"><div class="detail-label">Schedule</div><div class="timeblock-details">' +
-          section.timeBlocks
-            .map(function (timeBlock) {
-              var parsed = parseSchedule(timeBlock.schedule);
+          blocks
+            .map(function (parsed) {
               // No colon and no time element when there are no hours — otherwise
               // the placeholder renders as "Self-paced — study any time:" with a
               // dangling colon over an empty line.

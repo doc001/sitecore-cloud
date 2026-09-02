@@ -554,6 +554,13 @@ read "Mondays" and the next read "TTh".
   hours is a genuine schedule and still renders as seven days.
 - Where there is no meeting time, the colon and the `Hours:` row are dropped in
   both the accordion and the cart, rather than left dangling over an empty value.
+- **`scheduleBlocks()` removes two kinds of upstream noise** before rendering.
+  Sections repeat an identical block (`FSa 8:00 AM - 4:50 PM` twice on the same
+  section), which printed the same line twice; and **18 sections (11 EE, 7 OS)
+  carry the placeholder ALONGSIDE real meeting times**, which read as a section
+  that both has no set time and meets on Fridays. Duplicates are collapsed, and
+  where a real block exists it wins — the placeholder is only shown when it is
+  the only thing there is to say.
 - Verified against all 84 distinct schedule strings in the catalogue: 0 printed
   raw. The test drives the parser extracted from the BUILT bundle, not the source.
 
