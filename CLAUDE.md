@@ -120,6 +120,24 @@ must not become an outage.
 Fires on: Build FAILED, Package FAILED, Deploy FAILED, fee anomaly (advisory), and
 deploy-CLI-errored-but-published (advisory).
 
+**Card shape.** `sendTeams` takes an optional `extra: { facts, mono }`. `facts` are
+label/value rows appended above the standard Project/Host/Time; `mono` is an **array
+of lines** rendered as a monospace block. Callers that pass neither get the same card
+as before — `pipeline.mjs` and `sitecore-fee-watch.mjs` are unchanged.
+
+- **`mono` is one `TextBlock` per line, deliberately.** A single TextBlock containing
+  `\n` does not reliably break in Teams — Adaptive Card markdown wants a blank line —
+  which silently collapses a timings table into one run-on line.
+- The severity band is a `Container` with `style: attention | good`. That is what
+  replaced MessageCard's `themeColor` bar; the text inside must **not** set `color`,
+  or it renders Attention-red on an Attention-red band.
+- `msteams: { width: 'Full' }` — without it the card is narrow and monospace rows wrap,
+  which defeats the alignment.
+- **Adaptive Cards have no code spans.** Backticks render literally, so command names
+  in alert copy use plain quotes.
+- The legacy `*.office.com` MessageCard path folds `facts` and `mono` into the text
+  body — plainer, but it carries the same information.
+
 ### Deploy verification
 
 `vercel deploy` has exited non-zero on deploys that actually reached production —
@@ -264,8 +282,17 @@ and treats the status code as secondary.
   2026-08-18, so probing one would under-report.
 - **`mstoken` is the control, and every alert carries it.** It runs on the *same*
   Vercel project as the cart endpoints and held 0.29–0.90 s while they ranged to 90 s.
-  Fast control + slow probes = the fault is the SiS backend (`devapi.bvc.dev`), not the
-  proxy. That comparison is in the Teams card so nobody re-derives it under pressure.
+  Fast control + slow probes = the fault is the SiS backend, not the proxy. That
+  comparison is in the Teams card so nobody re-derives it under pressure.
+- **Every log line and alert names the environment it measured** — proxy origin,
+  SiS backend, offering id, and the endpoint path per probe. The backend is read
+  from the proxy's `X-Api-Base` header on each poll rather than hardcoded, because
+  a hardcoded one was already wrong: prod forwards to `api.bowvalleycollege.ca`,
+  UAT to `apim-bvc-uat-001.azure-api.net`, and **`devapi.bvc.dev` is the dev host
+  that these docs and the alert text wrongly named until 2026-08-19**. Without the
+  stamp, a log line from a run with `SIS_API_ORIGIN` pointed at UAT is
+  indistinguishable from a prod one — and these logs go to the SiS team as
+  evidence. See `docs/sis-api.md` → *Environments*.
 - `SLOW` at 8 s (`SIS_WATCH_SLOW_MS`) — above a healthy ~2 s call, below the 10.9 s
   incident median. `DOWN` on non-2xx or past 30 s (`SIS_WATCH_TIMEOUT_MS`), because a
   call that slow has already produced a 504 in someone's browser.
@@ -283,6 +310,52 @@ and treats the status code as secondary.
 > The repair is not in this repo. `bvc-api-proxy` is a separate Vercel project, and
 > the slow leg is the SiS backend behind it. This watcher exists to prove *when* it
 > degrades and hand the SiS team timestamps they can match to their own logs.
+
+### Log archiver (`archive-logs.mjs`)
+
+Fourth PM2 app, `bvc-log-archive`, cron `'0 30 3 * * *'` — daily at 03:30. Moves
+every **complete** day out of `logs/` into OneDrive, filed by ISO week and day:
+
+```
+C:\Users\jcueto\OneDrive - Bow Valley College\General\Matrix\Open Cart\
+  2026-W34\2026-08-19\pipeline-out.log, sis-health-out.log, fee-watch-out.log, …
+```
+
+```bash
+node archive-logs.mjs --dry-run   # report what would move, touch nothing
+node archive-logs.mjs             # archive and truncate
+```
+
+`logs/` is append-only and nothing prunes it — `pipeline-out.log` alone grows
+~2 MB/day. But disk is the lesser reason. **Every log this project produces lives
+on one laptop**, including the SiS timings the SiS team is being asked to act on;
+if that machine is rebuilt or lost, so is the entire record. OneDrive is backed up
+and shareable.
+
+- **Only complete days move.** Today is still being written, so archiving it would
+  split one day across two runs and leave the archive looking complete when it is
+  not. Local logs therefore hold today and nothing else.
+- **Every archive write lands before anything is truncated.** A partial archive
+  followed by a truncate loses logs outright — worse than the disk it was freeing.
+- **A missing archive root aborts the run.** If the path is wrong or OneDrive has
+  not mounted, creating the folder ourselves would file logs into a directory that
+  never syncs — they would look safely archived while still on one disk.
+- **`pm2 reloadLogs` runs after truncating.** PM2 holds each log open at its own
+  write offset; once the file shrinks that offset is past the end and PM2 pads the
+  gap with NUL bytes. Skipping this is what corrupts rotated logs.
+- **It skips its own live logs** via PM2's `pm_out_log_path` / `pm_err_log_path`,
+  which it would otherwise truncate mid-write. Run by hand, it archives everything.
+- Day grouping reads the `2026-08-19T08:45:12: ` prefix PM2 writes (`time: true`).
+  All 56k existing lines carry it; a line without one inherits the day above it
+  rather than being dropped.
+- Folder is `2026-W34` by **ISO week-year**, not calendar year — so 2026-12-31 and
+  2027-01-01 file into the same week, which is the point of grouping by week.
+- Destination overridable with `LOG_ARCHIVE_DIR`.
+- **Nothing is ever deleted from the archive.** Pruning is a human decision.
+
+> 03:30 is chosen, not arbitrary: `bvc-fee-watch` fires on minutes divisible by 5,
+> `bvc-sis-health` on :02/:07/:12…, and `bvc-hourly-deploy` at :15. Nothing starts
+> at :30, so the truncate cannot race a poll mid-write.
 
 ### bvc-app (active development)
 Run from `src/bvc-app/` or use `--filter`:
@@ -401,11 +474,14 @@ src/webflow/
   extended-education-listing.html    # EE program page — searchable flat table
   extended-education-course.html     # EE course detail — same layout as OS, reads from /data/courses/
   checkout-cart.html                 # checkout page multi-step form: Start→Personal→Mailing (GENERATED from content.js — do not hand-edit)
+  program-requirements.html          # SNIPPET ONLY — the two loader tags for program-requirements.js/.css
+  extended-education-listing-cards.html  # SNIPPET ONLY — the one loader tag for ee-listing.js
 ```
 
-Two flavours of embed live here:
+Three flavours of embed live here:
 - **Inline snippets** (the course listing/detail files above) — self-contained HTML+CSS+JS pasted whole into an Embed block.
 - **Bundled-asset embeds** (`checkout-cart.html`, and the `os-course` / `ee-course` / `checkout` runtimes) — the HTML is just markup carrying `data-*` hooks; the CSS and JS are separate bundled files loaded from Vercel via `<link>` / `<script src>`. Source is `src/js/<name>/` + `src/css/<name>.css`, built by `js:build`. See the JS/CSS build commands above.
+- **Loader-tag snippets** (`program-requirements.html`, `extended-education-listing-cards.html`) — nothing is pasted into an Embed block at all. The file is documentation wrapped around the one or two `<script>`/`<link>` tags that go in the page's "Before `</head>`" custom code; the script finds its own mount. See "Extended Education course availability" below.
 
 Key conventions:
 - **Course detail embeds target `#courseComponent`** — the existing Webflow div on course pages.
@@ -426,6 +502,128 @@ Key conventions:
   - **Submission**: the Mailing step's **"Proceed to Payment"** button (`data-checkout-submit`) validates, then dispatches a `bvc:checkout-submit` DOM event. The separate `public/js/checkout.js` (source `src/js/checkout/index.js`) listens and runs the purchase: **create token → registration → submit-payment → redirect to the Flywire payment page**. It reads courses/fees from the session cart (`sessionStorage.cartItems` / `feeSession`) and richer fields from the form. Contract: `studentId:0`, **empty `studentPk`** (a non-empty value 500s for new registrations); coded enums (gender/language/legalStatus/ethnicity) pass through `*_MAP` tables in checkout.js with known-good defaults — fill them from the SiS enum to send real values.
   - **Page-owned scaffold**: the Webflow **page** provides `#shoppingCart` (the cart column) and optionally `#registerToCourse`. The embed must **not** declare those ids (a duplicate id shadows the page's, leaving its cart empty). checkout.js renders the cart into the page's `#shoppingCart` and re-renders it on every `bvc:checkout-step` event. Its `DOMContentLoaded` is null-guarded so missing scaffold never throws.
   - The course-page cart button ("Proceed to Checkout") in `os-course.js` / `ee-course.js` navigates to the checkout page with `?type=os` / `?type=ee`.
+
+### bvc-app — Extended Education course availability
+
+`/study/extended-education` renders its Courses grid from a Webflow collection
+list, so a card appears when an editor publishes a CMS record — which says
+nothing about whether the SIS has a section to sell. 21 of the 60 published
+records currently have none, so a third of the grid led to a course nobody
+could register for.
+
+`src/js/ee-listing/index.js` → `public/js/ee-listing.js` fixes that from the
+page's `<head>`. Loader tag and full setup notes:
+`src/webflow/extended-education-listing-cards.html`.
+
+```bash
+npm run generateExtendedEducationJson   # scripts/buildExtendedEducationCourses.mjs
+```
+
+- Data: `/data/extended-education-courses.json`, built by joining the Webflow
+  CMS snapshot (slugs, names, areas) with `coursesIndex.json`, the SIS list of
+  courses that have sections. It emits **every** published course with an
+  `available` flag — including the withheld ones — so the file records what was
+  hidden and why rather than silently shrinking. Runs inside `bvcapp-scripts`
+  and `hourly-scripts`, after `generateCourseData` writes the index.
+- **It refuses to write an empty availability list.** An extraction failure
+  would otherwise mark every course unavailable and blank the page.
+- **Externally-registered courses are kept.** PSKN and the two PMI courses set
+  `no-cart-ext-ed-course` with an `apply-now-link`; they are registered on a
+  third party's site and have no SIS offering by design. They are matched on
+  page slug, not course code — they have no course code at all, and Webflow
+  renders their code field as an empty `.w-dyn-bind-empty`.
+- Codes are compared whitespace-stripped and upper-cased: Webflow holds
+  `TECH 9400` where the SIS has `TECH9400`.
+
+**The script removes cards; it does not rebuild the grid.** That is the whole
+design decision, and it was arrived at the hard way. The first version rendered
+every card from the JSON with markup copying Webflow's classes and Finsweet
+attributes exactly. It looked right and it broke the page's filters. Measured
+against production:
+
+| approach | counters | filtering |
+|---|---|---|
+| `fsAttributes.destroy()` + `init()` | updated | **dead** — search and Area stopped filtering |
+| `CMSList.clearItems()` + `addItems()` | updated | **dead** — "Business" left all 38 valid, not 15 |
+| prune `CMSList.items` in place | needs a nudge | **intact** — "Business" → 15 of 38 |
+
+Finsweet keys each card to a `CMSItem` holding props it derived at index time.
+A replacement element loses that association however identical its HTML; the
+original element keeps it. So the JSON decides *which* courses appear and
+Webflow's own elements are reused for the ones that stay — which puts the
+identical set on the page, and keeps search, sort and the Area filter working.
+Verified live: trimmed to 38, "Business" matched 15 (15 on the page),
+"Technology" 11 (11 on the page), cleared 38.
+
+- The script drops the removed cards from `CMSList.items` / `validItems` /
+  `originalItemsOrder` as well as the DOM, then writes the `results-count` /
+  `items-count` elements directly — Finsweet does not re-render those just
+  because the list shrank, and left alone they claim 60 items over 39 cards.
+- If Finsweet has not initialised yet, none of that is needed: it indexes the
+  trimmed list itself. The instance lookup resolves to `null` and is skipped.
+- **Every failure path leaves the page as Webflow rendered it** — all cards
+  shown, nothing hidden, nothing invisible. That covers a hung fetch, a 404, an
+  empty dataset, and a card the dataset has never heard of (fail open: hide
+  what is known to be unsellable, not everything unexplained). A `visibility`
+  rule hides the grid while cards are being removed, with a hard failsafe timer
+  so a stall can never leave it invisible.
+- `renderMissing` (default off) appends cards for courses the SIS can sell that
+  have no Webflow record. There are none today, and such a card is the one
+  element Finsweet would not have indexed — invisible to search and filters.
+  The console names them either way; the real fix is the Webflow record.
+
+> Pre-existing and untouched: the "Starts in" month select filters on a `Month`
+> field no card has ever carried, so choosing a month empties the grid.
+
+### bvc-app — Course outline PDFs
+
+Outlines live in `src/bvc-app/public/data/course-outlines-pdf/` (6,051 files,
+~1.5 GB) and are served at `/data/course-outlines-pdf/{filename}`.
+
+**Vercel's static host 404s any filename containing a non-ASCII byte.** Verified
+against production: an ASCII name with spaces and parentheses serves `200`, while
+the same file carrying `U+00A0`, `U+2013` or `U+2019` in its name 404s no matter
+how the URL is percent-encoded. The file uploads fine and sits in
+`.vercel/output/static/` — it simply cannot be addressed.
+
+The DB export re-emits Word-style smart punctuation in course titles on every run,
+so this recurs. 152 files across 36 course codes were affected when first found
+(`U+00A0` no-break space ×113, `U+2013` en dash ×34, `U+2019` right quote ×5) —
+which broke the outline link on 6 program pages: 3DAM, AVFX (ANMO2101), DCSD,
+GASH, SW (HMSV1105), and ITS (TECH1203).
+
+```bash
+npm run sanitizeOutlines         # rename + rewrite URLs
+npm run sanitizeOutlines:check   # report only, touch nothing
+```
+
+`scripts/sanitize-outline-filenames.mjs` runs **first** in both `hourly-scripts`
+and `bvcapp-scripts`, because the generators resolve `pdfFilename` by reading the
+directory — the names have to be clean before they look.
+
+- **Only non-ASCII names are touched.** A plain-ASCII name is already addressable
+  however odd it looks — `SODV1400_Scripting  Fundamentals` ships a double space
+  and serves `200` — so renaming it would churn files for nothing.
+- Accents are folded to their base letter (NFD) before the strip, so a French
+  title degrades to `Cafe` rather than `Caf`. Anything still non-ASCII is dropped
+  rather than guessed at.
+- **A rename never overwrites an existing file.** Where an ASCII twin is already
+  present it is the one being served, so the odd-named duplicate is left alone.
+- **It rewrites the URLs too.** The `program-requirements` datasets are
+  hand-maintained JSON with the outline URL typed in (see
+  `generateProgramRequirements.mjs`), so renaming the file alone would leave those
+  links pointing at a name that no longer exists. All four mirrors are updated —
+  `public/data/static/` and the gitignored `src/data/static/` copy of both
+  `program-requirements/` and `program-requirements-by-code/`. The Open Studies
+  generators read the directory, so they need no rewrite.
+- Stale copies are dropped from `out/` and `.vercel/output/static/` so an earlier
+  build cannot carry an old name forward into the package.
+- `main()` is guarded on `process.argv[1]`: importing the module for its
+  `sanitize()` export must never rename anything.
+
+> **The hourly job does not publish PDFs at all.** `pipeline.mjs --data-only`
+> excludes `course-outlines-pdf` from its overlay (1.5 GB it never touches), so a
+> new or renamed outline reaches the site only on a full `node pipeline.mjs`.
 
 ### bvc-app — Cart availability checks
 
@@ -494,7 +692,6 @@ Unlike `showNotification`, it has no timer: it is torn down when the work ends,
 not 3 s later, because 3 s is meaningless against a 10.9 s median. Once the cart
 is open it hands off — the cart's own fee spinner takes over and the toast hides,
 so there are never two spinners claiming different things.
-
 
 **Extended Education has no international price and no additional fees.** Both
 were being displayed anyway, and both are now suppressed from the data rather
