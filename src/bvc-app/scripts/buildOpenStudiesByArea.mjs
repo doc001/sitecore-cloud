@@ -14,6 +14,7 @@
 
 import fs from "fs";
 import path from "path";
+import { resolveOutlinePdf } from "./lib/resolve-outline-pdf.mjs";
 
 const ROOT = process.cwd();
 const PDF_BASE = "https://bvc-app.vercel.app/data/course-outlines-pdf";
@@ -56,16 +57,17 @@ const pdfFiles = fs.existsSync(pdfDir)
   ? fs.readdirSync(pdfDir).filter((f) => /\.pdf$/i.test(f))
   : [];
 
-// Pick the best outline PDF for a SIS id: prefer the "_Current)" outline,
-// otherwise the latest by name. Files look like:
-//   ACCT1103_Introduction to Financial Accounting_(Fall 2023_Current).pdf
+// Outline resolution is shared with generateOpenStudiesPublicJson — see
+// scripts/lib/resolve-outline-pdf.mjs. The old local version matched only the
+// parenthesised naming generation, took the FIRST "_Current)" it happened to
+// see rather than the newest, and fell back to a lexicographic sort that ranks
+// "Winter 2021" above "Fall 2026". All three are fixed there.
+//
+// fallbackToLatest keeps this script's long-standing behaviour of showing a
+// superseded outline when no current one exists; the listing table is a
+// reference view, where a dated outline beats an empty cell.
 function resolvePdf(code) {
-  if (!code) return null;
-  const prefix = code.toUpperCase() + "_";
-  const matches = pdfFiles.filter((f) => f.toUpperCase().startsWith(prefix));
-  if (!matches.length) return null;
-  const current = matches.find((f) => /_current\)\.pdf$/i.test(f));
-  return current || matches.sort().pop();
+  return resolveOutlinePdf(code, pdfFiles, { fallbackToLatest: true });
 }
 
 // Credits as shown in the table, e.g. "3" -> "3.0", "4.5" -> "4.5".

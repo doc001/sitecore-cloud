@@ -621,6 +621,41 @@ directory — the names have to be clean before they look.
 - `main()` is guarded on `process.argv[1]`: importing the module for its
   `sanitize()` export must never rename anything.
 
+**Which outline a course gets is decided in one place**, `scripts/lib/resolve-outline-pdf.mjs`.
+Two scripts used to resolve it independently and disagreed about what a filename
+even looks like, because the export has emitted two naming generations:
+
+```
+ACCT1103_Introduction to Financial Accounting_Fall 2023_Current.pdf     (older)
+ACCT1103_Introduction to Financial Accounting_(Fall 2023_Current).pdf   (current)
+```
+
+`generateOpenStudiesPublicJson` matched only the bare form and
+`buildOpenStudiesByArea` only the parenthesised one. Measured over all 1,196 SIS
+ids holding an outline: **100 had only a parenthesised current outline** and so
+got no download link at all, and **217 more linked a stale term** — JUST1101
+served Winter 2025 while its Fall 2026 outline sat unused. Fixing it in one place
+means a third naming generation is one change, not three.
+
+- **Ordering is by term, not by string.** The old `buildOpenStudiesByArea` took
+  the first `_Current)` it happened to encounter and otherwise fell back to
+  `sort().pop()` — a lexicographic sort that ranks "Winter 2021" above
+  "Fall 2026". Both are now ranked on parsed `(season, year)`.
+- **Where both naming twins exist the parenthesised one wins.** They are
+  byte-identical for 700 of 703 courses; for the 3 that differ the parenthesised
+  file is the newer re-export.
+- **`fallbackToLatest` is opt-in.** Off for the course pages, so a course whose
+  outline was retired shows no link rather than a superseded one; on for the
+  listing table, where a dated outline beats an empty cell. That preserves what
+  each script already did.
+- Verified across the catalogue before and after: 100 courses gained a link,
+  217 moved to a genuinely newer term, 703 were same-term twin swaps, and
+  **0 regressed**. All 61 files the resolver picks for the live Open Studies
+  site return 200.
+
+> Extended Education has no outlines at all — `src/js/ee-course/index.js` sets
+> `pdfFilename: null` outright, so none of this applies to it.
+
 > **The hourly job does not publish PDFs at all.** `pipeline.mjs --data-only`
 > excludes `course-outlines-pdf` from its overlay (1.5 GB it never touches), so a
 > new or renamed outline reaches the site only on a full `node pipeline.mjs`.

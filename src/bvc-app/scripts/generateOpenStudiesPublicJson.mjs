@@ -9,6 +9,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 'fs';
+import { resolveOutlinePdf } from './lib/resolve-outline-pdf.mjs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -105,22 +106,13 @@ function formatDate(dateString) {
   }
 }
 
-const TERM_RANK = { Winter: 0, Spring: 1, Summer: 2, Fall: 3 };
-
-function parseTerm(filename) {
-  const match = filename.match(/_([A-Za-z]+)\s+(\d{4})_Current\.pdf$/);
-  if (!match) return 0;
-  const [, season, year] = match;
-  return parseInt(year) * 10 + (TERM_RANK[season] ?? 0);
-}
-
+// Outline resolution is shared with buildOpenStudiesByArea — see
+// scripts/lib/resolve-outline-pdf.mjs for why the two had to be unified.
+// No fallback here: a course whose outline has been retired shows no link
+// rather than a superseded one, which is the behaviour this script has always
+// had.
 function findCurrentPdf(sisId, allPdfs) {
-  const candidates = allPdfs.filter(
-    (f) => f.startsWith(`${sisId}_`) && f.endsWith('_Current.pdf')
-  );
-  if (candidates.length === 0) return null;
-  candidates.sort((a, b) => parseTerm(b) - parseTerm(a));
-  return candidates[0];
+  return resolveOutlinePdf(sisId, allPdfs);
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
