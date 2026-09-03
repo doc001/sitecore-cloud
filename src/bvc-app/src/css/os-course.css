@@ -455,6 +455,22 @@
 .cart-item-name {
   padding-right: 32px;
 }
+/* Touch targets. 28px is a comfortable mouse target but well under the ~44px a
+   finger needs, and this is the one destructive control in the cart — a miss
+   either does nothing or hits the course name. Grown only where the pointer is
+   actually coarse, so the desktop icon stays discreet. The name's reserved gutter
+   grows with it, otherwise a long title would run under the bigger button. */
+@media (pointer: coarse) {
+  .cart-item-details + .remove-item {
+    width: 40px;
+    height: 40px;
+    top: 6px;
+    font-size: 24px;
+  }
+  .cart-item-name {
+    padding-right: 44px;
+  }
+}
 .cart-total {
   font-size: 1.1em;
   font-weight: 700;

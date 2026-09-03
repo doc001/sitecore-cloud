@@ -564,6 +564,61 @@ read "Mondays" and the next read "TTh".
 - Verified against all 84 distinct schedule strings in the catalogue: 0 printed
   raw. The test drives the parser extracted from the BUILT bundle, not the source.
 
+**An offering with no price captures interest instead of selling.** Sitecore
+sends `fees: { domestic: null, international: null }` when nobody has entered a
+price — four Extended Education courses today (ADMN9302, DESN9315, ISEC9105,
+ISEC9208), one section each. `domesticAmount` coerced that null to `0`, so the
+page advertised **"$ 0 CAD" behind a live Add button** and a shopper could carry
+a free course to checkout. Confirmed on production before the fix.
+
+- **`sectionHasPrice()` gates everything.** When a course has NO sellable
+  section, `renderOffersColumn()` drops the entire offerings list — delivery
+  type, campus, date-range accordion, hours, registration window, schedule — and
+  renders the interest form. All of that describes an offering the shopper
+  cannot have, and sitting it next to "no offers are available" reads as a
+  contradiction. The heading becomes **"Register your interest"**, since "Enroll
+  now" over a panel with nothing to enrol in is its own small lie.
+- **Mixed courses keep what sells.** If some sections have a price and some do
+  not, the priced ones render normally and the priceless ones are left out, with
+  a console warning naming the count so a missing price is diagnosable rather
+  than invisible. No course is mixed today.
+- **The form is inline, not behind a button.** Once the panel carries no course
+  detail there is nothing for a modal to reveal, so the click was friction in
+  front of the only thing on offer.
+
+**`src/js/shared/interest-form.js`** holds both ends of the round trip — the
+course pages render the form, the Extended Education listing shows the popup
+ClickDimensions redirects back to.
+
+- Posts to the ClickDimensions form `aP8W4U9m7qUqri3nnRw6WT` with the same five
+  fields and reCAPTCHA as `/forms/program-form`, and the same hidden CRM fields
+  (`s_type`, `funnelStartingStage`, `initialTouchPoint`, `contact_type`,
+  `campaignType`) — they are how the lead is routed. **`cd_visitorkey` is
+  deliberately NOT copied**: ClickDimensions sets it per visitor, and a fixed
+  value would attribute every enquiry to one person.
+- **The course rides in `s_faqs`.** That field already submits the sentence "I
+  am interested. Contact me with more information."; it now names the course.
+  This is the ONLY thing that identifies the lead — the form has no course field
+  and redirects to one FIXED url, so nothing else carries it.
+- **The redirect is configured in ClickDimensions, not here.** The form has no
+  `ReturnUrl` field. It must point at `…/study/extended-education?m=success` and
+  `?m=error`. `readSubmissionOutcome()` also accepts a bare `?m-error`, which is
+  the literal form the redirect was specified in and parses as a parameter
+  *named* "m-error" rather than a value — keying only on `m` would show nothing
+  on every failed submission.
+- Success auto-closes after 10 s (measured 10.4 s); **an error does not**, because
+  the person has just lost what they typed. The marker is stripped from the URL
+  so a refresh cannot replay the popup.
+- **`fitRecaptcha()` measures rather than guesses.** The widget is a rigid
+  304×78 iframe Google will not reflow — the only thing in this form that cannot
+  adapt. It is scaled to the column's real width, re-fitting on resize and
+  orientation change. A media-query breakpoint would have to assume Webflow's
+  page gutters, which can change without us. Verified 430→280 px: fits at every
+  width, no horizontal page overflow.
+- The cart's remove control grows to 40×40 under `@media (pointer: coarse)` —
+  28 px is fine for a mouse and well under the ~44 px a finger needs, and it is
+  the one destructive control in the cart.
+
 **Cart copy lives in one `MSG` map per course bundle.** The strings had drifted
 apart in three ways at once: four nouns for the same thing ("this date", "this
 offering", "Item", "products"), inconsistent terminal punctuation, and a button

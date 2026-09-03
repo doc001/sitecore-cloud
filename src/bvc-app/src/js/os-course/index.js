@@ -20,6 +20,7 @@
  */
 import { fetchCartFees, feesForSku } from '../shared/fees.js';
 import { validateCart, readValidation, isConflict } from '../shared/validation.js';
+import { interestFormHtml, activateInterestForms } from '../shared/interest-form.js';
 
 (function () {
   'use strict';
@@ -570,6 +571,10 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       // keeps it. Compared as the rendered strings, which is what the shopper
       // actually sees — equal after rounding is equal on the page.
       hasDistinctInternationalPrice = null !== internationalPriceDisplay && internationalPriceDisplay !== domesticPriceDisplay,
+      // Belt and braces. renderOfferings() already filters priceless sections out,
+      // so this should never be false here — but if one ever reaches this far it
+      // must not render "$ 0 CAD" behind a live Add button.
+      hasPrice = sectionHasPrice(section),
       deliveryTypeName = resolveGuid(section.deliveryType),
       campusName = resolveGuid(section.campus),
       scheduleHtml = renderSchedule(section),
@@ -585,9 +590,58 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       // missing. Hiding the DISPLAY must not change the DATA.
       credits = section.credits || fallbackCredits,
       registrationHtml = section.registrationStart ? '<div class="detail-item"><div class="detail-label">Registration</div><div class="detail-value">' + formatDate(section.registrationStart) + (section.registrationEnd ? ' &ndash; ' + formatDate(section.registrationEnd) : '') + '</div></div>' : '';
-    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group">' + (parseFloat(credits) > 0 ? '<div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div>' : '') + '<div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section"><div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div>' + (hasDistinctInternationalPrice ? '<div class="student-type">Domestic Student</div>' : '') + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (hasDistinctInternationalPrice ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div><div class="action-section"><a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a><p class="additional-fees">Additional fees apply</p></div></div></div></div></div>';
+    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group">' + (parseFloat(credits) > 0 ? '<div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div>' : '') + '<div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section">' + (hasPrice ? '<div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div>' + (hasDistinctInternationalPrice ? '<div class="student-type">Domestic Student</div>' : '') + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (hasDistinctInternationalPrice ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div>' : '') + '<div class="action-section">' + (hasPrice ? '<a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a>' : '') + '<p class="additional-fees">Additional fees apply</p></div></div></div></div></div>';
   }
-  function renderOfferings(sections, courseName, defaultCredits) {
+  /**
+   * The right-hand offers column.
+   *
+   * "Enroll now" is only printed when there IS something to enrol in. A course
+   * whose every section lacks a price gets the interest panel under a heading
+   * that matches what the panel actually offers.
+   */
+  function renderOffersColumn(sections, courseName, defaultCredits, courseCode) {
+    if (!sections.length) return '<p class="no-sections">No sections currently available.</p>';
+    var sellable = sections.filter(sectionHasPrice),
+      heading = sellable.length ? 'Enroll now' : 'Register your interest';
+    return '<div class="enrollment-section"><div class="enrollment-header">' + heading + '</div>' + renderOfferings(sections, courseName, defaultCredits, courseCode) + '</div>';
+  }
+  /**
+   * Can this section actually be sold?
+   *
+   * Sitecore sends `fees: { domestic: null, international: null }` for offerings
+   * whose price has not been entered — four Extended Education courses today.
+   * `domesticAmount` coerced that null to 0, so the page advertised "$ 0 CAD"
+   * behind a live Add button and a shopper could take a free course to checkout.
+   */
+  function sectionHasPrice(section) {
+    return !!(section && section.fees && section.fees.domestic && parseFloat(section.fees.domestic.amount) > 0);
+  }
+  /**
+   * The interest panel shown in place of the offerings list.
+   *
+   * Nothing about the offering is printed — no dates, hours, registration window
+   * or schedule. All of that describes an offering the shopper cannot have, and
+   * showing it next to "no offers are available" reads as a contradiction rather
+   * than as an explanation.
+   */
+  function renderInterestPanel(courseName, courseCode) {
+    return (
+      '<div class="bvc-interest-panel"><p class="bvc-interest-note">No offers are available at the moment. ' +
+      'Please fill out the form and we will connect with you as soon as the course is available.</p>' +
+      interestFormHtml({ courseName: courseName, courseCode: courseCode }) +
+      '</div>'
+    );
+  }
+  function renderOfferings(sections, courseName, defaultCredits, courseCode) {
+    // Only sellable sections reach the list. When NONE are sellable the whole
+    // panel becomes the interest form — no delivery-type heading, no campus, no
+    // date range, nothing that implies there is something to enrol in. When some
+    // are, the shopper can buy those, and the priceless ones are simply left out
+    // rather than sitting alongside them advertising nothing.
+    var sellable = sections.filter(sectionHasPrice);
+    if (0 === sellable.length) return renderInterestPanel(courseName, courseCode);
+    if (sellable.length !== sections.length) console.warn('[Offerings] ' + (sections.length - sellable.length) + ' section(s) hidden — no price set in Sitecore.');
+    sections = sellable;
     var groupedByDeliveryThenCampus = (function (sortedSections) {
         var groups = {};
         sortedSections.forEach(function (section) {
@@ -947,6 +1001,10 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     container.querySelectorAll('.addtocartbutton').forEach(function (button) {
       button.addEventListener('click', handleAddToCart);
     });
+    // A course with nothing sellable renders the interest form in place of the
+    // offerings list; this draws its reCAPTCHA, which cannot self-render into
+    // markup written after the API's one automatic sweep of the document.
+    activateInterestForms(container);
     // Anything already refused during this session stays greyed out across
     // re-renders and back-navigation — sessionStorage, no network call.
     markKnownUnavailable(container);
@@ -1085,7 +1143,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             (courseDescription = courseData.description || ''),
             (courseCredits = Number(courseData.credits || 0)),
             (courseSections = Array.isArray(courseData.sections) ? courseData.sections : []),
-            '<div class="course-page-grid"><div class="course-info-col">' + (courseCredits > 0 ? '<div class="c-course_credits"><div class="c-course_credits-box"><div class="c-course_credits-txt">' + courseCredits + '</div><div>Credits</div></div></div>' : '') + (courseDescription ? '<h2 class="c-course__col1">Course Description</h2><div class="w-richtext"><p>' + courseDescription + '</p></div>' : '') + (pdfFilename ? '<div class="course-pdf-section"><a class="course-pdf-link" href="' + dataOrigin + '/data/course-outlines-pdf/' + encodeURIComponent(pdfFilename) + '" target="_blank" rel="noopener">Download Course Outline (PDF)</a></div>' : '') + '</div><div class="course-offers-col">' + (courseSections.length > 0 ? '<div class="enrollment-section"><div class="enrollment-header">Enroll now</div>' + renderOfferings(courseSections, courseName, courseCredits) + '</div>' : '<p class="no-sections">No sections currently available.</p>') + '</div></div>');
+            '<div class="course-page-grid"><div class="course-info-col">' + (courseCredits > 0 ? '<div class="c-course_credits"><div class="c-course_credits-box"><div class="c-course_credits-txt">' + courseCredits + '</div><div>Credits</div></div></div>' : '') + (courseDescription ? '<h2 class="c-course__col1">Course Description</h2><div class="w-richtext"><p>' + courseDescription + '</p></div>' : '') + (pdfFilename ? '<div class="course-pdf-section"><a class="course-pdf-link" href="' + dataOrigin + '/data/course-outlines-pdf/' + encodeURIComponent(pdfFilename) + '" target="_blank" rel="noopener">Download Course Outline (PDF)</a></div>' : '') + '</div><div class="course-offers-col">' + renderOffersColumn(courseSections, courseName, courseCredits, courseData.sisId) + '</div></div>');
           bindOfferings(courseComponent);
           console.log('[Init] Built from JSON. Done.');
         } catch (error) {
