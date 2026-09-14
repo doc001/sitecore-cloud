@@ -38,7 +38,9 @@
     "generateProgramRequirements": "node scripts/generateProgramRequirements.mjs",
     "generateProgramRequirements:check": "node scripts/generateProgramRequirements.mjs --check",
     "generateProgramRequirements:gate": "node scripts/generateProgramRequirements.mjs --check --strict",
-    "hourly-scripts": "npm run sanitizeOutlines && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateExtendedEducationJson && npm run prelaunch:build",
+    "hourly-scripts:base": "npm run sanitizeOutlines && npm run generateCourses && npm run generateMap && npm run generateCourseData && npm run generateExtendedEducationJson && npm run prelaunch:build",
+    "hourly-scripts:os": "npm run generateOpenStudies && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run prelaunch:build",
+    "hourly-scripts": "npm run hourly-scripts:base && npm run hourly-scripts:os",
     "bvcapp-scripts": "npm run sanitizeOutlines && npm run getWebflowData && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateExtendedEducationJson && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirements && npm run prelaunch:build",
     "build": "npm run js:build && npm run bvcapp-scripts && next build",
     "cleanup": "node scripts/cleanup-data.mjs"

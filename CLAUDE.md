@@ -217,6 +217,89 @@ from the outside. Detection and reporting are unchanged; only the veto is gone.
 - Exit codes: `0` = ran (with or without an anomaly), `1` = build/package/deploy failure.
   **Exit `2` no longer occurs.**
 
+### Open Studies empty-catalogue guard
+
+`generate-os-valid-courses.mjs` **refuses to write an empty `osValidCourses.json`**
+and exits 1. Zero is never a legitimate answer here: Open Studies has carried 61
+courses for as long as the script has run, and they do not all get withdrawn in the
+same hour.
+
+Between **2026-09-09 18:15 and 2026-09-14 12:15 the Credit Courses tree returned 0
+courses on 98 consecutive hourly runs**, and not one of them alerted. Every script
+in the chain obeyed the empty list and exited 0 — `extract-os-course-data` wrote no
+files, `generateOpenStudiesPublicJson` wrote an index with no categories,
+`buildOpenStudiesByArea` marked all 104 courses unavailable — so the pipeline
+reported success each hour while publishing an empty catalogue.
+
+- The message distinguishes **tree missing** from **tree present but sectionless**,
+  two different upstream faults needing two different people. The 2026-09 outage was
+  the second: the tree resolved fine, every course under it had lost its sections.
+- Override with `ALLOW_EMPTY_OS_COURSES=1` for a genuinely empty catalogue.
+- Same principle as `buildExtendedEducationCourses.mjs` refusing to write an empty
+  availability list.
+
+### The package prune
+
+`--data-only` overlays `public/data` onto `.vercel/output/static/data` with `cpSync`,
+which **only adds and overwrites — it has no concept of a file that should no longer
+exist**. Step 0 empties `public/data/{courses,oScourses,open-studies}`, which leaves
+the package as the only surviving copy of anything a run does not regenerate. So a
+course withdrawn upstream was never removed from the package, and was re-uploaded
+every hour, forever.
+
+Measured during the outage above: production served 61 `oScourses/*.json` and 122
+`open-studies/*.json` dated 09-09, while `index.json` — the one file its generator
+rewrites unconditionally — correctly reported an empty catalogue. Half the site
+stale, half empty, and no single file disagreeing with itself.
+
+The overlay now prunes those directories from the package before copying.
+
+- **The directory list is single-sourced** as `COURSE_DATA_DIRS` in `pipeline.mjs`,
+  split into `EE_DATA_DIRS` / `OS_DATA_DIRS`. The step-0 clean and the prune have to
+  name the same directories; them drifting apart is what the bug was.
+- **Never prune `staticData` itself.** Everything else under `data/` has to survive —
+  above all `course-outlines-pdf`, 1.5 GB the hourly job never touches and
+  deliberately excludes from the copy.
+- **Only prune what was actually regenerated** — see the split below.
+- The full build is unaffected: it already wipes `.vercel/output` wholesale.
+
+### The hourly refresh runs in two halves
+
+`hourly-scripts` = `hourly-scripts:base && hourly-scripts:os`, and `pipeline.mjs`
+runs the two **separately**, so they fail independently.
+
+| half | contents | a failure is |
+|---|---|---|
+| `hourly-scripts:base` | sanitizeOutlines, generateCourses, generateMap, generateCourseData, generateExtendedEducationJson, copy | **fatal** |
+| `hourly-scripts:os` | generateOpenStudies, ...Data, ...Json, ...ByArea, copy | **advisory** |
+
+They used to be one `&&` chain with Open Studies at step 3, so the empty-catalogue
+guard took Extended Education down with it. EE refreshed perfectly throughout the
+five-day OS outage; holding it would have traded one stale product for two — the
+same lesson the fee guard learned when it lost its veto.
+
+- **`generateMap` stays in the base half.** `sis-data-lookup.json` feeds both
+  products, so there is nothing worth publishing without it.
+- **Each half ends with its own `prelaunch:build`** (the `src/data` to `public/data`
+  copy), or EE would never reach `public/data` when the OS half aborts.
+- **On an OS failure the prune is scoped to `EE_DATA_DIRS`.** Step 0 has already
+  emptied the OS directories, so pruning them would delete the last good catalogue
+  from the package and publish nothing in its place — turning an advisory failure
+  into the exact outage the prune was added to prevent. The copy is additive, so
+  leaving them alone preserves them untouched.
+- The deploy then ships **fresh EE plus the Open Studies catalogue as last
+  published**: stale, but coherent and still registerable. The cart validates every
+  section against the SiS on Add, so a section withdrawn since the last good refresh
+  is refused at the point of sale rather than sold — see "Cart availability checks".
+- **The OS alert passes heartbeat `null`**, and the run's real outcome pings a few
+  steps later. The deploy genuinely happened, so the dead-man's switch keeps meaning
+  "did the run happen"; the OS condition rides on the Teams card instead. That card
+  has **no cooldown** — expect one per hour until upstream is fixed.
+- **`bvcapp-scripts` (the full build) is deliberately NOT split.** A full build
+  without OS data would emit a site with none of the 61
+  `/study/open-studies/courses/[sisID]` routes, so it should hard-fail. It does mean
+  no full build can ship while the catalogue is empty.
+
 ### Fee watcher (`sitecore-fee-watch.mjs`)
 
 Second PM2 app, `bvc-fee-watch`, cron `'0 */5 * * * *'`. Read-only GraphQL polls

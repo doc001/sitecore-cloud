@@ -79,6 +79,20 @@ const DEPLOY_ONLY = process.argv.includes('--deploy-only');
 // refreshes) but is skipped on --deploy-only (no new data that run).
 const DATA_ONLY = process.argv.includes('--data-only');
 
+// The course-data directories the hourly job regenerates from scratch on every
+// run. Named once because they have to be cleared in TWO places that must not
+// drift: public/data (the build INPUT, cleared in step 0) and
+// .vercel/output/static/data (the PACKAGE that actually ships, pruned in the
+// --data-only overlay). Clearing only the first is what let five days of
+// withdrawn courses keep shipping — see the prune for the full account.
+//
+// Split by product because the two halves of the hourly refresh now fail
+// independently: Extended Education must keep publishing when Open Studies is
+// broken upstream, and the prune has to follow whichever half actually ran.
+const EE_DATA_DIRS = ['courses'];
+const OS_DATA_DIRS = ['oScourses', 'open-studies'];
+const COURSE_DATA_DIRS = [...EE_DATA_DIRS, ...OS_DATA_DIRS];
+
 const ts = () => new Date().toISOString();
 
 /**
@@ -255,9 +269,7 @@ async function main() {
   const dataDirs = [
     join(BVC_APP, 'src', 'data', 'courses'),
     join(BVC_APP, 'src', 'data', 'oScourses'),
-    join(BVC_APP, 'public', 'data', 'courses'),
-    join(BVC_APP, 'public', 'data', 'oScourses'),
-    join(BVC_APP, 'public', 'data', 'open-studies'),
+    ...COURSE_DATA_DIRS.map((d) => join(BVC_APP, 'public', 'data', d)),
   ];
   //
   //    Wrapped in try/catch: this runs OUTSIDE the build's error handling, so an
@@ -296,14 +308,90 @@ async function main() {
   //    (source data changes every run), so disable both directions.
   try {
     if (DATA_ONLY) {
-      // Sitecore/Thesis course data only, then mirror src/data → public/data.
-      await runWithRetry('npm run hourly-scripts', BVC_APP, 3, 60_000);
+      // The hourly refresh runs in two halves that fail INDEPENDENTLY.
+      //
+      // They used to be one && -chain with Open Studies at step 3, so the OS
+      // empty-catalogue guard took Extended Education down with it — EE had been
+      // refreshing perfectly throughout the five-day OS outage, and holding it
+      // would have traded one stale product for two. Same lesson as the fee
+      // guard losing its veto: a held run drops that hour's REAL changes too.
+      //
+      // Half 1 — Extended Education plus the shared SIS lookups. A failure here
+      // is fatal: sis-data-lookup.json feeds both products, so there is nothing
+      // worth publishing without it.
+      await runWithRetry('npm run hourly-scripts:base', BVC_APP, 3, 60_000);
+
+      // Half 2 — Open Studies. A failure here is ADVISORY. The deploy goes
+      // ahead with freshly-built EE data and the Open Studies catalogue left
+      // exactly as it was last published: stale, but coherent and still
+      // registerable. That beats both alternatives — an empty OS catalogue
+      // (what shipped for five days) and holding EE hostage to it. The cart
+      // validates every section against the SiS on Add anyway, so a section
+      // withdrawn since the last good refresh is refused at the point of sale
+      // rather than sold — see "Cart availability checks" in CLAUDE.md.
+      let osRefreshed = true;
+      try {
+        await runWithRetry('npm run hourly-scripts:os', BVC_APP, 3, 60_000);
+      } catch (err) {
+        osRefreshed = false;
+        // heartbeat null: the run is still going and its real outcome pings a
+        // few steps later. Same reasoning as the fee-anomaly alert.
+        await notify(
+          'BVC Open Studies refresh FAILED — deploying without it',
+          'Open Studies data could not be refreshed after 3 attempts. Extended Education was ' +
+            'refreshed and IS being deployed; the Open Studies catalogue keeps the data from its ' +
+            'last good refresh and is going stale. Check the Credit Courses tree in Sitecore and ' +
+            'the SIS sync. This repeats every hour until it is fixed.',
+          true,
+          null
+        );
+      }
 
       // Overlay the refreshed JSON onto the packaged output from the last full
       // build. course-outlines-pdf is excluded deliberately: 1.5 GB of files this
       // job never touches, already sitting in the package.
       const publicData = join(BVC_APP, 'public', 'data');
       const staticData = join(BVC_APP, '.vercel', 'output', 'static', 'data');
+
+      // Prune the regenerated directories from the package BEFORE copying.
+      //
+      // cpSync only adds and overwrites — it has no concept of a file that
+      // should no longer exist — so a course withdrawn upstream was never
+      // removed from the package, and got re-uploaded every hour forever.
+      // Step 0 empties public/data/<dir>, which left the package as the only
+      // surviving copy: from 2026-09-09 to 2026-09-14 the site served 61
+      // oScourses/*.json and 122 open-studies/*.json dated 09-09, while
+      // index.json — the one file its generator rewrites unconditionally —
+      // correctly reported an empty catalogue. Half the site stale, half
+      // empty, and no single file disagreed with itself.
+      //
+      // Only regenerated directories are pruned, never staticData itself:
+      // everything else under data/ has to survive — above all
+      // course-outlines-pdf, 1.5 GB this job never touches and deliberately
+      // excludes from the copy below.
+      //
+      // Ordering matters: this runs only AFTER a half has succeeded, so a
+      // refusal upstream (an empty Sitecore catalogue, say) leaves that
+      // product's last good files in the package, intact and still deployable.
+      // Only prune what was actually regenerated. When the OS half failed, step
+      // 0 has already emptied public/data/oScourses and public/data/open-studies,
+      // so pruning them here would delete the last good catalogue from the
+      // package and publish nothing in its place — turning an advisory failure
+      // into the exact outage this prune was added to prevent. The copy below is
+      // additive, so leaving them alone preserves them untouched.
+      const refreshedDirs = osRefreshed ? COURSE_DATA_DIRS : EE_DATA_DIRS;
+      if (!osRefreshed) {
+        console.log(`[${ts()}] Open Studies not refreshed — leaving ${OS_DATA_DIRS.join(', ')} in the package as last published.`);
+      }
+
+      for (const dir of refreshedDirs) {
+        const packaged = join(staticData, dir);
+        if (existsSync(packaged)) {
+          removeDir(packaged);
+          console.log(`[${ts()}] Pruned from package: static/data/${dir}`);
+        }
+      }
+
       await copyWithRetry(publicData, staticData, {
         recursive: true,
         filter: (src) => !src.includes('course-outlines-pdf'),
