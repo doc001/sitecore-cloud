@@ -107,51 +107,41 @@ async function run() {
   }
 
   // ─────────────────────────────────────────────
-  // Empty-result guard — refuse to publish an empty catalogue.
+  // An EMPTY list is a legitimate answer, and is published as-is.
   //
-  // Zero is never a legitimate answer here: Open Studies has carried 61
-  // courses for as long as this script has run, and they do not all get
-  // withdrawn in the same hour. An empty result means Sitecore ANSWERED but
-  // had nothing to say — a sync fault, an unpublished tree, or an API key
-  // that resolves to an empty scope.
+  // This file is the availability signal. Zero courses with sections means
+  // Sitecore has no availability right now — a real state the site is built to
+  // show: the course pages fall through to the Webflow template's "There are no
+  // dates available for this course at the moment" copy, and
+  // buildOpenStudiesByArea marks all 104 courses "No availability this term".
+  // Refusing to write it would suppress a true answer and pin the site to a
+  // stale catalogue, selling sections Sitecore no longer has.
   //
-  // Writing [] is indistinguishable from "every course was withdrawn", and
-  // every downstream script obeys it faithfully: extract-os-course-data
-  // writes 0 files, generateOpenStudiesPublicJson writes an index with no
-  // categories, and buildOpenStudiesByArea marks all 104 courses
-  // unavailable. Every one of them exits 0, so the pipeline reports success.
+  // What IS a fault is not getting an answer at all. `rootResolved` separates
+  // the two, and it is the only distinction that matters here:
   //
-  // That is exactly what happened from 2026-09-09 to 2026-09-14: 98
-  // consecutive hourly runs published an empty Open Studies catalogue and
-  // not one of them raised an alert.
+  //   tree resolved + 0 courses  → Sitecore answered "nothing available". Publish it.
+  //   tree never resolved        → missing, unpublished, or an API key that cannot
+  //                                see it. We do not know what is available, and
+  //                                publishing [] would assert "nothing" on no
+  //                                evidence. Fail instead.
   //
-  // So: do not write, and exit non-zero. `hourly-scripts` is an && -chain, so
-  // nothing downstream runs; pipeline.mjs turns the non-zero exit into a
-  // "Course Data Refresh FAILED" alert and SKIPS the deploy, leaving the
-  // published catalogue exactly as it is. Same principle as
-  // buildExtendedEducationCourses.mjs refusing to write an empty
-  // availability list.
+  // A thrown query (network, auth, 5xx) is already fatal via run().catch below,
+  // which is the same principle: silence is not an answer.
   // ─────────────────────────────────────────────
   if (validCourses.length === 0) {
-    const cause = rootResolved
-      ? 'The Credit Courses tree resolved, but no course under it has a single section.'
-      : 'Sitecore returned no item at all for the Credit Courses path — the tree is missing, unpublished, or the API key cannot see it.';
-
-    if (process.env.ALLOW_EMPTY_OS_COURSES === '1') {
-      console.warn(`⚠️  0 valid courses. ${cause}`);
-      console.warn('⚠️  ALLOW_EMPTY_OS_COURSES=1 — writing the empty list anyway.');
-    } else {
+    if (!rootResolved) {
       for (const line of [
-        '❌ Sitecore returned 0 Open Studies courses with sections.',
-        `   ${cause}`,
-        `   ${OS_VALID_COURSES_PATH} was NOT written. Nothing downstream will run and the`,
-        '   deploy will be skipped, so the published catalogue stays exactly as it is',
-        '   rather than going empty.',
-        '   Check /sitecore/content/BVC/BVC/Data/SisData/Credit Courses and the SIS → Sitecore sync.',
-        '   To publish a genuinely empty catalogue on purpose: ALLOW_EMPTY_OS_COURSES=1',
+        '❌ Sitecore returned no item at all for the Credit Courses path.',
+        '   The tree is missing, unpublished, or the API key cannot see it — so we do',
+        `   NOT know what is available, and ${OS_VALID_COURSES_PATH} was not written.`,
+        '   Publishing an empty list here would claim "no availability" on no evidence.',
+        '   Check /sitecore/content/BVC/BVC/Data/SisData/Credit Courses.',
       ]) console.error(line);
       process.exit(1);
     }
+    console.warn('⚠️  Sitecore reports 0 Open Studies courses with sections — publishing an empty catalogue.');
+    console.warn('⚠️  Course pages will show the Webflow "no dates available" copy; the area listing will read "No availability this term".');
   }
 
   // Ensure target directory exists (safe on repeat runs)

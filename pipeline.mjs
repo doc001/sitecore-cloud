@@ -373,15 +373,25 @@ async function main() {
       // Ordering matters: this runs only AFTER a half has succeeded, so a
       // refusal upstream (an empty Sitecore catalogue, say) leaves that
       // product's last good files in the package, intact and still deployable.
-      // Only prune what was actually regenerated. When the OS half failed, step
-      // 0 has already emptied public/data/oScourses and public/data/open-studies,
-      // so pruning them here would delete the last good catalogue from the
-      // package and publish nothing in its place — turning an advisory failure
-      // into the exact outage this prune was added to prevent. The copy below is
-      // additive, so leaving them alone preserves them untouched.
+      // Prune what a half REGENERATED, and only that. The distinction is not
+      // "did we end up with data" — it is "did we get an answer".
+      //
+      // A half that succeeded is authoritative even when its answer is EMPTY.
+      // Zero courses with sections is Sitecore saying there is no availability
+      // right now, which the site is built to show (see the availability section
+      // in CLAUDE.md), so its directories are pruned and republished empty. That
+      // is the whole point: keeping the last non-empty catalogue is what left
+      // withdrawn sections on sale behind a live Add to Cart for five days.
+      //
+      // A half that FAILED is a different thing entirely — the tree was
+      // unreachable, or the query threw. We do not know what is available, and
+      // publishing empty directories would assert "nothing is available" on no
+      // evidence, taking the catalogue down over a network blip. So its
+      // directories are left exactly as last published. The copy is additive, so
+      // not pruning is all it takes to preserve them.
       const refreshedDirs = osRefreshed ? COURSE_DATA_DIRS : EE_DATA_DIRS;
       if (!osRefreshed) {
-        console.log(`[${ts()}] Open Studies not refreshed — leaving ${OS_DATA_DIRS.join(', ')} in the package as last published.`);
+        console.log(`[${ts()}] Open Studies did not answer — leaving ${OS_DATA_DIRS.join(', ')} as last published rather than claiming no availability.`);
       }
 
       for (const dir of refreshedDirs) {

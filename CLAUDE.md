@@ -217,26 +217,37 @@ from the outside. Detection and reporting are unchanged; only the veto is gone.
 - Exit codes: `0` = ran (with or without an anomaly), `1` = build/package/deploy failure.
   **Exit `2` no longer occurs.**
 
-### Open Studies empty-catalogue guard
+### Availability is what `osValidCourses.json` / `validCourses.json` mean
 
-`generate-os-valid-courses.mjs` **refuses to write an empty `osValidCourses.json`**
-and exits 1. Zero is never a legitimate answer here: Open Studies has carried 61
-courses for as long as the script has run, and they do not all get withdrawn in the
-same hour.
+**These two files ARE the availability signal, and an empty one is a legitimate
+answer that gets published as-is.** Open Studies and Extended Education both derive
+their availability from Sitecore; zero courses with sections means there is no
+availability right now, which is a real state the site is built to show:
 
-Between **2026-09-09 18:15 and 2026-09-14 12:15 the Credit Courses tree returned 0
-courses on 98 consecutive hourly runs**, and not one of them alerted. Every script
-in the chain obeyed the empty list and exited 0 — `extract-os-course-data` wrote no
-files, `generateOpenStudiesPublicJson` wrote an index with no categories,
-`buildOpenStudiesByArea` marked all 104 courses unavailable — so the pipeline
-reported success each hour while publishing an empty catalogue.
+| surface | what an empty list produces |
+|---|---|
+| Open Studies / Extended Ed course page | the **Webflow template's** own copy — "There are no dates available for this course at the moment. Please check back at a later date." The page is a Webflow template and exists independently of our data; with no JSON to fill `#courseComponent`, that copy is what remains |
+| Open Studies area listing | `open-studies-by-area.json` still lists **all 104 courses**, each reading "No availability this term" (`available: false`). This is the wanted behaviour — it is built from the Webflow CMS, and Sitecore only supplies the flag |
 
-- The message distinguishes **tree missing** from **tree present but sectionless**,
-  two different upstream faults needing two different people. The 2026-09 outage was
-  the second: the tree resolved fine, every course under it had lost its sections.
-- Override with `ALLOW_EMPTY_OS_COURSES=1` for a genuinely empty catalogue.
-- Same principle as `buildExtendedEducationCourses.mjs` refusing to write an empty
-  availability list.
+So nothing suppresses an empty result. `generate-os-valid-courses.mjs` writes `[]`
+and exits 0, and the pipeline publishes it. Pinning the site to the last non-empty
+catalogue instead would sell sections Sitecore no longer has.
+
+**What is a fault is not getting an answer at all.** `rootResolved` separates the
+two, and it is the only distinction the script makes:
+
+- **tree resolved + 0 courses** → Sitecore answered "nothing available". Publish it,
+  with a warning naming what the site will show.
+- **tree never resolved** → missing, unpublished, or an API key that cannot see it.
+  We do not know what is available, so publishing `[]` would assert "nothing" on no
+  evidence. Exits 1 without writing. A thrown query (network, auth, 5xx) is already
+  fatal for the same reason: silence is not an answer.
+
+> Historical note: from **2026-09-09 18:15 the Credit Courses tree returned 0
+> courses on 98 consecutive hourly runs** — the tree resolved fine, every course
+> under it had lost its sections. The site nonetheless kept showing courses, and
+> that was NOT this script's doing: the package was never pruned, so five-day-old
+> JSON kept being re-uploaded. See the prune below, which is the actual fix.
 
 ### The package prune
 
@@ -273,24 +284,33 @@ runs the two **separately**, so they fail independently.
 | `hourly-scripts:base` | sanitizeOutlines, generateCourses, generateMap, generateCourseData, generateExtendedEducationJson, copy | **fatal** |
 | `hourly-scripts:os` | generateOpenStudies, ...Data, ...Json, ...ByArea, copy | **advisory** |
 
-They used to be one `&&` chain with Open Studies at step 3, so the empty-catalogue
-guard took Extended Education down with it. EE refreshed perfectly throughout the
-five-day OS outage; holding it would have traded one stale product for two — the
-same lesson the fee guard learned when it lost its veto.
+They used to be one `&&` chain with Open Studies at step 3, so anything that stopped
+Open Studies stopped Extended Education with it. EE refreshed perfectly throughout
+the five-day OS outage; holding it would have traded one stale product for two — the
+same lesson the fee guard learned when it lost its veto. The split only matters for a
+genuine OS failure now that an empty catalogue is a success rather than an error, but
+that is exactly the case worth isolating.
 
 - **`generateMap` stays in the base half.** `sis-data-lookup.json` feeds both
   products, so there is nothing worth publishing without it.
 - **Each half ends with its own `prelaunch:build`** (the `src/data` to `public/data`
   copy), or EE would never reach `public/data` when the OS half aborts.
-- **On an OS failure the prune is scoped to `EE_DATA_DIRS`.** Step 0 has already
-  emptied the OS directories, so pruning them would delete the last good catalogue
-  from the package and publish nothing in its place — turning an advisory failure
-  into the exact outage the prune was added to prevent. The copy is additive, so
-  leaving them alone preserves them untouched.
-- The deploy then ships **fresh EE plus the Open Studies catalogue as last
-  published**: stale, but coherent and still registerable. The cart validates every
-  section against the SiS on Add, so a section withdrawn since the last good refresh
-  is refused at the point of sale rather than sold — see "Cart availability checks".
+- **The prune follows whether a half got an ANSWER, not whether it got data.**
+  A half that succeeded is authoritative even when its answer is empty, so its
+  directories are pruned and republished empty — that is how "no availability"
+  reaches the site, and keeping the last non-empty catalogue instead is what left
+  withdrawn sections on sale behind a live Add to Cart for five days.
+
+  A half that **failed** is the opposite case: the tree was unreachable or the query
+  threw, so we do not know what is available and publishing empty directories would
+  assert "nothing is available" on no evidence — taking the catalogue down over a
+  network blip. Its directories are left as last published; since the copy is
+  additive, not pruning is all that takes.
+- **Watch the red error on the course page.** With no per-course JSON,
+  `fetchCourseData()` throws and the catch in `src/js/os-course/index.js` appends
+  `Failed to load course data: HTTP 404` in red. It APPENDS, so the Webflow
+  template's "There are no dates available for this course at the moment" copy is
+  still there — the student sees the right message with a raw error stuck under it.
 - **The OS alert passes heartbeat `null`**, and the run's real outcome pings a few
   steps later. The deploy genuinely happened, so the dead-man's switch keeps meaning
   "did the run happen"; the OS condition rides on the Teams card instead. That card
