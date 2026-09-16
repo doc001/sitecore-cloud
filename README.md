@@ -257,6 +257,9 @@ npm run generateProgramTuition         # writes public/data/static/program-tuiti
 # then commit the JSON and deploy
 ```
 
+Full runbook, including how to point it at a different workbook and how to read
+its report: [`docs/program-tuition-refresh.md`](docs/program-tuition-refresh.md).
+
 ---
 
 # HOURLY AUTOMATED PIPELINE (PM2)

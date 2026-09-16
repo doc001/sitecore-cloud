@@ -686,10 +686,12 @@ CMS collection of hand-typed per-term prices. On 2026-09-15 that had PN missing
 Term 1, PSYN showing four empty International rows over `$0`, DDAS carrying its
 non-ETI price marked as ETI, and DD Term 4 typed `$4.290*`. It is now built
 from Finance's workbook. Loader tag and setup notes: `src/webflow/program-tuition.html`.
+On-demand refresh runbook: `docs/program-tuition-refresh.md`.
 
 ```bash
 npm run generateProgramTuition:check   # report only
 npm run generateProgramTuition         # writes public/data/static/program-tuition.json
+# --file <xlsx> / PROGRAM_TUITION_XLSX to read a workbook somewhere else
 ```
 
 - **Manual, not hourly.** The workbook lives on OneDrive
