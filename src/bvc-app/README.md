@@ -36,6 +36,10 @@ Individual data scripts:
 | `bvcapp-scripts` | Run full pipeline (all above + copy) | — |
 | `generateProgramTuition` | Program tuition from Finance's OneDrive workbook. **Manual — not in any build**, and the output is committed. | `public/data/static/program-tuition.json` |
 
+Every script in `scripts/` — what it needs, what breaks it, which are dead, and how
+to rebuild all data from scratch — is documented in
+[`docs/scripts-runbook.md`](../../docs/scripts-runbook.md).
+
 ## Data Sources
 
 - **Webflow API** (`WEBFLOW_API_KEY`) — CMS content (programs, events, news)

@@ -469,6 +469,9 @@ npm run build              # Full pipeline: data scripts → breadcrumbs → nex
 npm run lint               # ESLint
 ```
 
+Per-script sustainment reference (inputs, failure modes, dead scripts, recovery):
+`docs/scripts-runbook.md`.
+
 **Data pipeline scripts** (run before building when data changes):
 
 ```bash
