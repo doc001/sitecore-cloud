@@ -34,6 +34,7 @@ Individual data scripts:
 | `generateOpenStudiesJson` | Generate OS public index + per-course files | `public/data/open-studies/` |
 | `breadcrumbs:all` | Regenerate navigation breadcrumbs | `src/data/static/` |
 | `bvcapp-scripts` | Run full pipeline (all above + copy) | — |
+| `generateProgramTuition` | Program tuition from Finance's OneDrive workbook. **Manual — not in any build**, and the output is committed. | `public/data/static/program-tuition.json` |
 
 ## Data Sources
 
@@ -61,6 +62,19 @@ Standalone HTML snippets in `src/webflow/` are pasted into Webflow "Embed" block
 | `open-studies-course.html` | OS course detail — description, offerings, add-to-cart |
 | `extended-education-listing.html` | EE program page — searchable flat table |
 | `extended-education-course.html` | EE course detail — same layout as OS |
+
+Two files there are **not** pasted embeds — they document the loader tags that go in
+the Programs template's "Before `</head>`" custom code, once for every program:
+
+| File | Purpose |
+|---|---|
+| `program-requirements.html` | Loader tags for the course requirements accordion |
+| `program-tuition.html` | Loader tags for the Program Tuition tabs |
+
+`program-tuition.js` replaces only the tabs inside the template's existing
+`#Tuition-and-Fees` section, keeping its heading and disclaimer. A program the data
+doesn't cover — and any fetch or script failure — leaves the Webflow tuition table
+exactly as rendered. See CLAUDE.md → *bvc-app — Program tuition*.
 
 Course detail embeds render into the existing `#courseComponent` div and output `.addtocartbutton` elements compatible with the separate CartManager ecommerce script.
 

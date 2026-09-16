@@ -230,6 +230,33 @@ All Webflow embeds (course listings, course detail pages) load assets and data f
 <script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
 ```
 
+On the **Programs collection page template**, two more pairs go in "Before `</head>`"
+(once, not per program) — the course requirements accordion and the tuition tabs:
+
+```html
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/program-requirements.css" />
+<script src="https://bvc-app.vercel.app/js/program-requirements.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/program-tuition.css" />
+<script src="https://bvc-app.vercel.app/js/program-tuition.js" defer></script>
+```
+
+Setup notes live beside each one: `src/bvc-app/src/webflow/program-requirements.html`
+and `program-tuition.html`.
+
+### Program tuition is refreshed by hand
+
+`program-tuition.js` reads `/data/static/program-tuition.json`, generated from
+Finance's annual tuition workbook on OneDrive. **No build can reach that file**, so
+the hourly pipeline never refreshes it — it ships the committed copy. When Finance
+updates the workbook:
+
+```bash
+cd src/bvc-app
+npm run generateProgramTuition:check   # report only, writes nothing
+npm run generateProgramTuition         # writes public/data/static/program-tuition.json
+# then commit the JSON and deploy
+```
+
 ---
 
 # HOURLY AUTOMATED PIPELINE (PM2)
