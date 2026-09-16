@@ -578,6 +578,7 @@ src/webflow/
   extended-education-course.html     # EE course detail — same layout as OS, reads from /data/courses/
   checkout-cart.html                 # checkout page multi-step form: Start→Personal→Mailing (GENERATED from content.js — do not hand-edit)
   program-requirements.html          # SNIPPET ONLY — the two loader tags for program-requirements.js/.css
+  program-tuition.html               # SNIPPET ONLY — the two loader tags for program-tuition.js/.css
   extended-education-listing-cards.html  # SNIPPET ONLY — the one loader tag for ee-listing.js
 ```
 
@@ -677,6 +678,45 @@ Verified live: trimmed to 38, "Business" matched 15 (15 on the page),
 
 > Pre-existing and untouched: the "Starts in" month select filters on a `Month`
 > field no card has ever carried, so choosing a month empties the grid.
+
+### bvc-app — Program tuition
+
+The `#Tuition-and-Fees` section on the Webflow program template used to be a
+CMS collection of hand-typed per-term prices. On 2026-09-15 that had PN missing
+Term 1, PSYN showing four empty International rows over `$0`, DDAS carrying its
+non-ETI price marked as ETI, and DD Term 4 typed `$4.290*`. It is now built
+from Finance's workbook. Loader tag and setup notes: `src/webflow/program-tuition.html`.
+
+```bash
+npm run generateProgramTuition:check   # report only
+npm run generateProgramTuition         # writes public/data/static/program-tuition.json
+```
+
+- **Manual, not hourly.** The workbook lives on OneDrive
+  (`…\Matrix\Tuition & Fees_Matrix\Annual Tuition (Submitted)v2.xlsx`;
+  `--file` / `PROGRAM_TUITION_XLSX` override), so nothing in the build can
+  regenerate it. The JSON is written straight to `public/` and **tracked**;
+  the hourly `--data-only` overlay ships it as-is. Node reads the file even
+  while Excel holds it open.
+- `scripts/lib/read-xlsx.mjs` is a zero-dependency reader (built-in `zlib`),
+  cell values only. The sheet layout is located from its header row, and a
+  sheet that does not match throws rather than reading the wrong columns.
+- **ETI wins on Domestic** for the 11 programs on the ETI sheet, marked `*`
+  — the choice the CMS already made. `etiMarker: ''` in the config drops it.
+- Workbook codes are mapped to Webflow codes: `CSS→CSD`, `ITSS→ITSD`,
+  `JS→JSG`, `PON→PNRN-LPN` (same pairs as `generateProgramRequirements.mjs`).
+  **`ELL` is excluded**: it matches the english-for-academic-purposes page on
+  code, but the workbook's ELL row is "English Language Learning"; that page's
+  program is the workbook's `EAP`. `ITP` vs `UPGR-IFL` is likewise unmapped.
+  Don't guess either pairing; add it once the data owner confirms.
+- Display: whole dollars, total = sum of the **rounded** terms, so the rows on
+  screen add up (`$2,861 + $2,861 + $530 = $6,252`, not `$6,253`). Term 0 is
+  the annual figure, labelled "Annual tuition". An audience with no row gets
+  no tab, and a one-row table has no total row.
+- The script replaces only `.c-tabs`; the heading and disclaimer stay Webflow's.
+  **Every failure leaves the Webflow tabs untouched**, and the CSS hides them
+  for at most 3 s (a CSS-animation reveal, so even a script that never loads
+  cannot blank the section).
 
 ### bvc-app — Course outline PDFs
 
