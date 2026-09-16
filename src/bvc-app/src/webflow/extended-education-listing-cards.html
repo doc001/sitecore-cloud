@@ -1,0 +1,122 @@
+<!--
+  WEBFLOW SNIPPET — Extended Education course availability
+  ========================================================
+  Not a pasted embed. This is a hosted asset:
+
+    src/js/ee-listing/index.js  ->  public/js/ee-listing.js
+
+  Build it with `npm run js:build` (watch: `npm run js:watch`), same as
+  os-course / ee-course / checkout-cart / program-requirements.
+
+  There is no stylesheet to add. The script does not create any markup of its
+  own on this page — it removes cards Webflow already rendered — so the page
+  styles everything exactly as it does today.
+
+  ── WHAT TO PASTE ──────────────────────────────────────────────────────
+  Page settings for /study/extended-education → Custom code → "Before </head>".
+-->
+
+<script src="https://bvc-app.vercel.app/js/ee-listing.js"></script>
+
+<!--
+  Deliberately NOT deferred. The script has to claim the Courses list before
+  its unavailable cards paint, and a deferred script cannot run until parsing
+  is finished. It does no DOM work on execution — it starts the JSON fetch and
+  waits for the list to appear — so it does not block rendering.
+
+  ── DO THIS TOO (one attribute, worth it) ──────────────────────────────
+  In the Designer, select the *Courses* Collection List (the inner element
+  carrying the Finsweet attributes — class "c-collection-list-2grid
+  w-dyn-items", NOT the Certificates one) and add a custom attribute:
+
+      name   data-bvc-ee-listing
+      value  true
+
+  Without it the script still finds the list, by looking for the grid whose
+  cards link to /extended-education/… — the Certificates grid links to
+  /extended-education-certificate/… and is left alone. But that test cannot
+  pass until a course link has streamed into the page, whereas the attribute is
+  readable the instant the opening tag is parsed. The attribute is the
+  difference between "no flash" and "a brief flash of the removed cards".
+
+  ── WHAT IT CHANGES ────────────────────────────────────────────────────
+  Every course card whose course has nothing purchasable behind it is removed.
+  Which courses those are is decided by
+  https://bvc-app.vercel.app/data/extended-education-courses.json, which is
+  rebuilt hourly from the SIS. As of the last generation that is 21 of 60
+  published courses: the Webflow record exists but the SIS has no section to
+  sell, so the card led to a course nobody could register for.
+
+  Three courses with no SIS offering are KEPT: PSKN and the two PMI courses,
+  which are registered on a third party's site. They are marked
+  no-cart-ext-ed-course in the CMS and keep the same hidden-cart-glyph card
+  Webflow gives them today. They are matched by page slug, not course code —
+  they have no course code at all.
+
+  The Certificates grid above it is untouched.
+
+  ── THE FILTERS KEEP WORKING ───────────────────────────────────────────
+  Search, the Area checkboxes, the sort dropdown, the "Showing N results of N
+  items" counters and pagination are Finsweet Attributes bound to this list.
+  The script removes cards from Finsweet's own item list as well as from the
+  page, so it filters and counts against what is actually on screen.
+
+  Verified against production: with the grid trimmed to 38, ticking "Business"
+  matched 15 (15 Business cards on the page), "Technology" matched 11 (11 on
+  the page), and clearing returned 38.
+
+  This is why the script edits the page rather than rebuilding it. An earlier
+  version rendered the whole grid from the JSON with markup that copied
+  Webflow's classes and Finsweet attributes exactly — and broke the filters:
+  Finsweet keys each card to a CMSItem holding props it derived at index time,
+  and a replacement element loses that however identical its HTML. Both
+  fsAttributes.destroy()+init() and CMSList clearItems()+addItems() left
+  filtering dead while the counters still looked right.
+
+  Known pre-existing quirk, unrelated to this script: the "Starts in" month
+  select filters on a Month field that no card has ever carried, so choosing a
+  month empties the grid. That was true before and is still true after.
+
+  ── OPTIONS ────────────────────────────────────────────────────────────
+  All optional. Declare BEFORE the script tag above.
+
+      <script>
+        window.__EE_LISTING_CONFIG__ = {
+          dataOrigin: 'https://bvc-app-uat.vercel.app', // default: this script's origin
+          mount: '#my-list',       // if the list detection ever picks the wrong grid
+          showUnavailable: true,   // remove nothing, to see what would have gone
+          renderMissing: true,     // see below
+          revealMs: 6000           // failsafe before it gives up and shows every card
+        };
+      </script>
+
+  dataOrigin defaults to wherever ee-listing.js was served from, so the one tag
+  above keeps working unchanged when the site itself moves onto Vercel and
+  serves /js/* and /data/* from a single origin.
+
+  renderMissing appends a card for any course the SIS can sell that has no
+  Webflow record at all. There are none today, and it is off by default because
+  such a card is the one element on the page Finsweet would not have indexed —
+  it would be invisible to search and the Area filter. The console names them
+  either way; adding the record in Webflow is the real fix.
+
+  ── IF IT CANNOT LOAD ──────────────────────────────────────────────────
+  Every failure path leaves the page exactly as Webflow rendered it — every
+  card shown, nothing hidden, nothing invisible. A hung fetch, a 404 on the
+  JSON, or an empty dataset all end the same way, with a console warning under
+  [EEListing]. A card the dataset has never heard of is also left alone: the
+  script hides what is known to be unsellable, not everything it cannot
+  explain.
+
+  ── DATA ───────────────────────────────────────────────────────────────
+  Generated by scripts/buildExtendedEducationCourses.mjs (npm run
+  generateExtendedEducationJson), which runs inside `npm run bvcapp-scripts`
+  and `npm run hourly-scripts`:
+      /data/extended-education-courses.json
+
+  It joins the Webflow CMS snapshot (slugs, names, areas) with the SIS course
+  index that says what actually has sections, and emits every published course
+  with an `available` flag — including the withheld ones, so the file records
+  what was hidden and why rather than silently shrinking. Its console output
+  names every course it withheld.
+-->
