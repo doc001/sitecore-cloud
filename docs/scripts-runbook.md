@@ -20,11 +20,11 @@ most of this lives in `CLAUDE.md`.
 |---|---|---|
 | `hourly-scripts:base` | sanitizeOutlines → generateCourses → generateMap → generateCourseData → generateExtendedEducationJson → prelaunch:build | every hour via PM2; failure is **fatal** |
 | `hourly-scripts:os` | generateOpenStudies → generateOpenStudiesData → generateOpenStudiesJson → generateOpenStudiesByArea → prelaunch:build | every hour; failure is **advisory** |
-| `bvcapp-scripts` | sanitizeOutlines → getWebflowData → generateCourses → generateOpenStudies → generateMap → generateCourseData → generateOpenStudiesData → generateOpenStudiesJson → generateOpenStudiesByArea → generateExtendedEducationJson → generateNavigationBreadcrumbs → generateProgramRequirements → prelaunch:build | full build only (`npm run build`) |
+| `bvcapp-scripts` | sanitizeOutlines → getWebflowData → parsePrograms → generateCourses → generateOpenStudies → generateMap → generateCourseData → generateOpenStudiesData → generateOpenStudiesJson → generateOpenStudiesByArea → generateExtendedEducationJson → generateNavigationBreadcrumbs → generateProgramRequirements → prelaunch:build | full build only (`npm run build`) |
 | `build` | js:build → bvcapp-scripts → next build | full build / deploy |
 
 **Never run in any chain — you must run these by hand:**
-`generateProgramTuition`, `checkout-cart:html`, `parsePrograms`, `fetchCourseOutlines`,
+`generateProgramTuition`, `checkout-cart:html`, `fetchCourseOutlines`,
 `js:build:prod`, `generateProgramRequirements:gate`, `cleanup`.
 
 The hourly chain deliberately does **not** refresh Webflow CMS data, breadcrumbs,
@@ -135,6 +135,12 @@ Program tuition from Finance's OneDrive workbook →
 `public/data/static/program-tuition.json` (tracked, commit it).
 See [`program-tuition-refresh.md`](program-tuition-refresh.md).
 
+**`parsePrograms`** → `scripts/parsePrograms.mjs` · instant
+Flattens `src/data/cms/programs.json` into `programs.parsed.json`, which is where
+**every `/programs/[slug]` route comes from**. Runs in `bvcapp-scripts` right after
+`getWebflowData`. Refuses to write an empty result. See §4.2 for the filter that had
+to be fixed before it could be wired in.
+
 **`breadcrumbs:all`** → `scripts/generateNavigationBreadcrumbs.mjs`
 Writes `src/data/static/navigation-breadcrumbs.json` from the hand-maintained
 `src/data/navigation-data.json`. Missing navigation data → exit 1; an unexpected shape
@@ -239,7 +245,7 @@ half where failure stops the deploy — and inside `bvcapp-scripts`, but it is
 `src/webflow/extended-education-listing-cards.html`. A fresh clone cannot run the
 hourly pipeline, and if this laptop dies the script is gone. Commit all three.
 
-### 4.2 `/programs/[slug]` routes are built from a frozen snapshot
+### 4.2 `/programs/[slug]` routes were built from a frozen snapshot — FIXED 2026-09-16
 
 `src/app/programs/[slug]/page.tsx` imports `src/data/cms/programs.parsed.json`, which
 is written **only** by `scripts/parsePrograms.mjs` — and nothing runs that script: no
@@ -251,10 +257,29 @@ Measured today: 62 routes are built from it, **8 published programs have no rout
 while `/administrative-professional` returns 200), and **21 parsed entries point at
 slugs the CMS no longer has**.
 
-Whether that matters depends on who consumes those routes — the public site is
-Webflow — but as written the app cannot pick up a new or renamed program. Either wire
-`parsePrograms` into `bvcapp-scripts` ahead of `next build`, or delete it and read
-`programs.json` directly.
+**Fixed:** `parsePrograms` now runs in `bvcapp-scripts`, immediately after
+`getWebflowData` (which writes the `programs.json` it reads). It also refuses to write
+an empty result, since that would remove every program route from the build.
+
+**Its publication filter was wrong and had to be fixed first.** It filtered on
+`!isDraft`, and the Webflow API returns the **staged** list where `isDraft` marks any
+item with unpublished edits — not only items that never went live. 32 program records
+carry `isDraft` alongside a `lastPublished` date, including Practical Nurse,
+Administrative Professional, Human Resources and Software Development, all live on
+bowvalleycollege.ca. Running it as written produced **31 routes instead of 62 and
+deleted live pages**. The filter is now `!isArchived && !!lastPublished`, which yields
+63 routes: the 8 published programs that had none, plus 14 renamed slugs, while
+dropping 21 dead ones (spot-checked: `veterinary-office-assistant` and
+`justice-studies---general` are 301s on the live site, `university-transfer` and
+`cloud-computing` are 404s).
+
+> **The same trap is latent in two hourly scripts.** `buildExtendedEducationCourses.mjs`
+> and `buildOpenStudiesByArea.mjs` both use
+> `!isArchived && !isDraft && !!lastPublished`. Measured today it drops **nothing** —
+> no live Extended Ed (52), Open Studies (159) or program-area (8) record carries
+> `isDraft` — so they were left alone. The day an editor saves a draft edit to a live
+> course, that course silently vanishes from the listing. Check that first if a course
+> disappears for no reason.
 
 ### 4.3 Most scripts publish a partial result as a success
 
@@ -293,7 +318,6 @@ cd src/bvc-app
 npm install                      # from the REPO ROOT — this is a workspaces monorepo
 npm run bvcapp-scripts           # full data refresh, ~4-5 min
 npm run generateProgramTuition   # tuition is not in any chain
-node scripts/parsePrograms.mjs   # program routes are not in any chain either (§4.2)
 cd ../.. && npm run deploy:bvcapp
 ```
 

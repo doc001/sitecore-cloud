@@ -17,6 +17,7 @@
     "prelaunch:build": "node scripts/copy-folders.mjs",
     "postinstall": "flowbite-react patch",
     "getWebflowData": "node scripts/fetch-webflow-collections.mjs",
+    "parsePrograms": "node scripts/parsePrograms.mjs",
     "js:build": "node scripts/build-os-course.mjs",
     "js:build:prod": "node scripts/build-os-course.mjs --prod",
     "js:watch": "node scripts/build-os-course.mjs --watch",
@@ -43,7 +44,7 @@
     "hourly-scripts:base": "npm run sanitizeOutlines && npm run generateCourses && npm run generateMap && npm run generateCourseData && npm run generateExtendedEducationJson && npm run prelaunch:build",
     "hourly-scripts:os": "npm run generateOpenStudies && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run prelaunch:build",
     "hourly-scripts": "npm run hourly-scripts:base && npm run hourly-scripts:os",
-    "bvcapp-scripts": "npm run sanitizeOutlines && npm run getWebflowData && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateExtendedEducationJson && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirements && npm run prelaunch:build",
+    "bvcapp-scripts": "npm run sanitizeOutlines && npm run getWebflowData && npm run parsePrograms && npm run generateCourses && npm run generateOpenStudies && npm run generateMap && npm run generateCourseData && npm run generateOpenStudiesData && npm run generateOpenStudiesJson && npm run generateOpenStudiesByArea && npm run generateExtendedEducationJson && npm run generateNavigationBreadcrumbs && npm run generateProgramRequirements && npm run prelaunch:build",
     "build": "npm run js:build && npm run bvcapp-scripts && next build",
     "cleanup": "node scripts/cleanup-data.mjs"
   },
