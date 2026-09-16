@@ -201,13 +201,14 @@ Has an npm entry, is in no chain, and nothing live reads its output
 here). Its only consumers are the dead downloaders below. Keep it only if you want a
 manual Sitecore-inspection tool; it is not part of any flow.
 
-### Legacy PDF downloaders — dead, do not use
+### Legacy PDF downloaders — DELETED 2026-09-16
 
-Ten scripts from a 2025 attempt to pull outline PDFs out of Sitecore directly. They
-were all bypassed by the SharePoint sync and were untouched through the entire 2026
-outline rework.
+Ten scripts from a 2025 attempt to pull outline PDFs out of Sitecore directly, all
+bypassed by the SharePoint sync and untouched through the entire 2026 outline rework.
+Recorded here so nobody resurrects them expecting a working downloader; recover from
+git history if ever needed.
 
-| Script | What it did | Why it is dead |
+| Script | What it did | Why it was dead |
 |---|---|---|
 | `course_outlines_pdf.mjs` | GraphQL walk of outline items | no caller |
 | `downloadCoursePDFs.mjs` | download PDFs via media API | no caller, input file absent |
@@ -226,10 +227,14 @@ exist**; and they write to `public/data/course-outlines/pdf/`, which holds **0 f
 while the site serves `public/data/course-outlines-pdf/` with 6,051 — a different
 directory that the live resolver reads and none of them touch.
 
-> Two of them carry expired Sitecore session cookies in the source, and one uses CM
-> login credentials. That is the main reason to delete rather than merely ignore
-> them. Four stale JSON files in `public/data/course-outlines/` are read by no live
-> code either, but they may be a deliberate metadata archive — check before removing.
+> Two carried expired Sitecore session cookies in source and one used CM login
+> credentials, which is why they were deleted rather than left lying around. **Git
+> history still contains those cookies** — they expired in 2025, but treat them as
+> burned. Four stale JSON files in `public/data/course-outlines/` are read by no live
+> code either; they were **left in place** in case they are a deliberate metadata
+> archive. `generateOSCourses.mjs` is also dead (superseded by
+> `extract-os-course-data.mjs`, zero references, single 2026-06 commit) and was left
+> alone — it is not a downloader, and deleting it was not part of this pass.
 
 ---
 
