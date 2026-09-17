@@ -3,10 +3,18 @@
 The backend behind the Open Studies / Extended Ed cart and checkout: course
 availability, cart validation, fees, registration, and payment.
 
-**Everything in this file marked "observed" was established by calling the UAT API
-on 2026-08-17.** That matters because the published spec is incomplete in the one
+**Production is the environment that matters, and its origins are recorded under
+*Environments* below — verified 2026-08-19 by reading each proxy's `X-Api-Base`.**
+
+**The behavioural findings marked "observed" were established against UAT on
+2026-08-17**, and are labelled ⚠ UAT where prod has not been re-checked. Treat
+those as descriptions of the service, not of an environment: they are what the
+deployed code does, but the two blocking defects below were only ever reproduced
+on UAT and must be confirmed on prod before anyone acts on them.
+
+The published spec is no substitute: it is incomplete in the one
 place the cart depends on most — `/validation`'s success response has no schema at
-all — and because several documented shapes do not match what the deployed service
+all — and several documented shapes do not match what the deployed service
 actually returns. Where the two disagree, this file records both.
 
 - **Spec** (OpenAPI 3.0.1, `Thesis Extended Education v1`):
@@ -19,21 +27,43 @@ actually returns. Where the two disagree, this file records both.
 
 ## Calling it
 
-Everything goes through the Vercel payment proxy, which forwards to
-`devapi.bvc.dev/ths-extended-edu/v1/`. A bearer token is required on every call.
+Everything goes through a Vercel payment proxy, which forwards to the SiS backend
+for its environment. A bearer token is required on every call.
 
 ```
 POST {apiOrigin}/api/mstoken          body {}          -> { access_token }
 *    {apiOrigin}/api/bvcpayment?endpoint=<api path>    Authorization: Bearer <token>
 ```
 
-`apiOrigin` is `https://bvc-uat-api-proxy.vercel.app` (UAT) or
-`https://bvc-api-proxy.vercel.app` (prod). The `endpoint` value is passed
-**unescaped** by the probe scripts and by `os-course.js`; the slashes route fine.
+The `endpoint` value is passed **unescaped** by the probe scripts and by
+`os-course.js`; the slashes route fine.
 
-The backend can also be hit directly at
-`https://devapi.bvc.dev/ths-extended-edu/v1/<api path>` with the same token — useful
-for proving a fault is not the proxy's (see `fee-test-direct.ps1`).
+### Environments
+
+| | `apiOrigin` (proxy) | SiS backend it forwards to |
+|---|---|---|
+| **PROD** | `https://bvc-api-proxy.vercel.app` | `https://api.bowvalleycollege.ca/ths-extended-edu/v1` |
+| UAT | `https://bvc-uat-api-proxy.vercel.app` | `https://apim-bvc-uat-001.azure-api.net/ths-extended-edu/v1` |
+
+Production is what the live Webflow cart and `sis-health-watch.mjs` call — both
+default to `bvc-api-proxy.vercel.app` with no env override set.
+
+> **Do not take these from memory — ask the proxy.** Each one reports its own
+> upstream, answered from config without calling SiS:
+>
+> ```bash
+> curl -sI -X HEAD https://bvc-api-proxy.vercel.app/api/bvcpayment | grep -i x-api-base
+> ```
+>
+> That is how the table above was established, and `sis-health-watch.mjs` resolves
+> it the same way on every poll so its logs name the host they measured.
+
+> ⚠ **`devapi.bvc.dev` is not production and never was.** Earlier revisions of this
+> file, of `CLAUDE.md`, and of the watcher's alert text named it as the backend; it
+> is the *dev* host, still hardcoded in the retired `src/nextjs-jamstack` proxy
+> routes. Corrected 2026-08-19. The backend can be hit directly at
+> `<backend>/<api path>` with the same token — useful for proving a fault is not
+> the proxy's — but use the row above for the environment you mean.
 
 > **Transport is per-endpoint and inconsistent.** `submit-payment` takes everything
 > on the query string, `registration` takes a JSON body, `validation` takes a JSON
@@ -318,6 +348,13 @@ excludes `*.ps1` by default, since these carry tokens and secrets).
 
 Read-only probes (`validation`, `courseofferings`, `fee`) are safe to run at will.
 `studentpk-test.ps1` writes to the UAT SiS.
+
+> ⚠ **These scripts are hardcoded to non-prod.** `fee-test.ps1` and
+> `fee-test-direct.ps1` carry `bvc-uat-api-proxy.vercel.app` and `devapi.bvc.dev`
+> respectively. Point them at the PROD row above before quoting their output as
+> evidence of a production fault. For prod timings, prefer
+> `node sis-health-watch.mjs`, which stamps proxy, backend and offering into every
+> line it writes.
 
 ## Open questions for the SiS team
 

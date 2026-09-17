@@ -24,9 +24,17 @@
  *
  * The control that localises the fault: `/api/mstoken` is served by the SAME
  * Vercel project as the cart endpoints and stayed at 0.29–0.90 s across the same
- * window. The proxy is healthy; the leg it forwards to `devapi.bvc.dev` is not.
+ * window. The proxy is healthy; the leg it forwards to the SiS backend is not.
  * This watcher probes both, so every alert carries that comparison and nobody
  * has to re-derive it at 2 AM.
+ *
+ * WHICH BACKEND — asked, never assumed. The proxy reports its upstream in the
+ * `X-Api-Base` header on a HEAD, answered from proxy config without calling SiS,
+ * so every reading names the host it actually measured. Prod resolves to
+ * `api.bowvalleycollege.ca`; UAT to `apim-bvc-uat-001.azure-api.net`. This was
+ * previously a hardcoded `devapi.bvc.dev` in a comment and in the alert text —
+ * already wrong for prod, and it is the one fact the SiS team needs in order to
+ * trust a report at all.
  *
  * It only ever READS. No cart is created, no registration is submitted.
  *
@@ -76,23 +84,42 @@ const ts = () => new Date().toISOString();
 const warn = (m) => console.warn(`[${ts()}] ${m}`);
 
 /** Time one request. Never throws: a failure IS the measurement. */
-async function timed(label, url, init = {}) {
+async function timed(label, url, init = {}, endpoint = null) {
   const started = Date.now();
   try {
     const res = await fetch(url, { ...init, signal: AbortSignal.timeout(TIMEOUT_MS) });
     // Drain the body so the timing covers a full response rather than just the
     // headers — a backend that stalls mid-stream would otherwise look fast.
     await res.text().catch(() => '');
-    return { label, ms: Date.now() - started, status: res.status, ok: res.ok };
+    return { label, endpoint, ms: Date.now() - started, status: res.status, ok: res.ok };
   } catch (err) {
     const timedOut = err.name === 'TimeoutError' || err.name === 'AbortError';
     return {
       label,
+      endpoint,
       ms: Date.now() - started,
       status: timedOut ? 'timeout' : 'error',
       ok: false,
       error: err.message,
     };
+  }
+}
+
+/**
+ * Ask the proxy which SiS backend it forwards to. Answered from proxy config on
+ * a HEAD — no SiS call, nothing measurable — so it costs nothing to state the
+ * host on every poll rather than trust a comment. Returns null rather than
+ * throwing: not knowing the backend must never fail a poll.
+ */
+async function discoverBackend() {
+  try {
+    const res = await fetch(`${API_ORIGIN}/api/bvcpayment`, {
+      method: 'HEAD',
+      signal: AbortSignal.timeout(10_000),
+    });
+    return res.headers.get('x-api-base');
+  } catch {
+    return null;
   }
 }
 
@@ -115,7 +142,7 @@ async function runProbes() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({}),
-  });
+  }, '/api/mstoken (proxy-local, not SiS)');
 
   if (!token.ok) return { token, probes: [], fatal: `token endpoint returned ${token.status}` };
 
@@ -138,19 +165,25 @@ async function runProbes() {
   // degrading together on 2026-08-18, so probing only one would under-report;
   // probing all three tells the SiS team whether a fault is backend-wide or
   // confined to a single handler.
+  // The SiS paths are named constants so every log line, history row and Teams
+  // card can state WHICH endpoint was slow. The proxy is never the suspect — it
+  // is the control — so the path behind it is the part the SiS team needs to
+  // match against their own logs.
+  const OFFERINGS = `thesissitecorexm.api/courseofferings/${SKU}`;
+  const VALIDATION = 'thesissitecorexm.api/validation';
+  const FEE = `thesissitecorexm.api/fee/${SKU}/`;
+
   const probes = [
-    await timed('courseofferings (add to cart)', via(`thesissitecorexm.api/courseofferings/${SKU}`), {
-      headers: auth,
-    }),
+    await timed('courseofferings (add to cart)', via(OFFERINGS), { headers: auth }, OFFERINGS),
     // `validation` must take a JSON BODY — on the query string it answers 415.
-    await timed('validation (seat check)', `${API_ORIGIN}/api/bvcpayment?endpoint=thesissitecorexm.api/validation`, {
+    await timed('validation (seat check)', `${API_ORIGIN}/api/bvcpayment?endpoint=${VALIDATION}`, {
       method: 'POST',
       headers: auth,
       body: JSON.stringify({ studentId: '0', courseBeingAdded: Number(SKU), coursesInCart: [] }),
-    }),
+    }, VALIDATION),
     // Trailing slash is required and may be empty — that is the anonymous
     // fee preview. The literal string 'null' 404s. See docs/sis-api.md.
-    await timed('fee (checkout total)', via(`thesissitecorexm.api/fee/${SKU}/`), { headers: auth }),
+    await timed('fee (checkout total)', via(FEE), { headers: auth }, FEE),
   ];
 
   return { token, probes, fatal: null };
@@ -186,19 +219,39 @@ function printHistory() {
 async function main() {
   if (process.argv.includes('--history')) return printHistory();
 
+  const backend = await discoverBackend();
   const result = await runProbes();
   const { state, reason } = classify(result);
 
   const line = (p) =>
-    `  ${p.label.padEnd(30)} ${String((p.ms / 1000).toFixed(2) + 's').padStart(8)}  ${p.status}`;
+    `  ${p.label.padEnd(30)} ${String((p.ms / 1000).toFixed(2) + 's').padStart(8)}  ${p.status}` +
+    (p.endpoint ? `  ${p.endpoint}` : '');
   console.log(`[${ts()}] SiS health: ${state}`);
+  // Which environment produced this reading. Without it, a line from a run with
+  // SIS_API_ORIGIN pointed at UAT is indistinguishable from a prod one — and
+  // these logs are handed to the SiS team as evidence.
+  console.log(`  via proxy ${API_ORIGIN}  ·  sku ${SKU}`);
+  console.log(`  SiS backend ${backend ?? '(proxy reported no X-Api-Base)'}`);
   console.log(line(result.token));
   result.probes.forEach((p) => console.log(line(p)));
   if (reason) console.log(`  → ${reason}`);
 
   const timings = [result.token, ...result.probes]
-    .map((p) => `${p.label}=${(p.ms / 1000).toFixed(1)}s/${p.status}`)
+    .map((p) => `${p.label}=${(p.ms / 1000).toFixed(1)}s/${p.status}${p.endpoint ? ` [${p.endpoint}]` : ''}`)
     .join('  ');
+
+  // The Teams card renders these instead of the flat `timings` string, which is
+  // kept only for the history file. Reusing `line()` means the card and the
+  // console show byte-identical rows — one format to learn, not two.
+  const monoLines = [result.token, ...result.probes].map((p) => line(p).trimStart());
+
+  // Environment as structured rows rather than prose. Every card carries it,
+  // including recovery — "it recovered" is useless without "which one".
+  const cardFacts = [
+    { title: 'Proxy', value: API_ORIGIN },
+    { title: 'SiS backend', value: backend ?? 'unreported' },
+    { title: 'Offering', value: SKU },
+  ];
 
   const previous = existsSync(LAST_SEEN) ? JSON.parse(readFileSync(LAST_SEEN, 'utf8')) : {};
   const badRun = state === 'OK' ? 0 : (previous.badRun ?? 0) + 1;
@@ -206,6 +259,9 @@ async function main() {
   const current = {
     at: ts(),
     state,
+    origin: API_ORIGIN,
+    backend,
+    sku: SKU,
     reason,
     timings,
     badRun,
@@ -217,13 +273,23 @@ async function main() {
 
   // The heartbeat is what catches THIS watcher dying, the machine sleeping, or
   // the cron being deleted — none of which any local check can report, because a
-  // local watchdog dies with the machine it watches. A healthy poll pings
-  // success; a bad one pings /fail so the monitor escalates even when the Teams
-  // webhook is misconfigured. It gets its own URL because "SiS is unhealthy" and
-  // "the deploy pipeline failed" are different conditions needing different alarms.
+  // local watchdog dies with the machine it watches. It gets its own URL because
+  // "SiS is unhealthy" and "the deploy pipeline failed" are different conditions
+  // needing different alarms.
+  //
+  // IT USES THE SAME DEBOUNCE AS TEAMS, and must. Pinging the raw per-poll
+  // verdict flipped the check UP/DOWN on every blip: 15 transitions in three
+  // hours on 2026-08-19, arriving 8–10 min apart, from a backend that is erratic
+  // by nature. That is the exact noise `FAILS_BEFORE_ALERT` exists to absorb —
+  // one unlucky sample must not page anyone — so the channel meant to catch
+  // SILENCE had become the loudest one. A single bad poll now still pings
+  // success; only a sustained fault flips the check.
+  //
+  // The dead-man's-switch property is untouched: a poll that never runs sends
+  // nothing at all, which is what the monitor escalates on.
   await pingHeartbeat({
     baseUrl: process.env.HEARTBEAT_SIS_URL,
-    suffix: state === 'OK' ? '' : '/fail',
+    suffix: badRun >= FAILS_BEFORE_ALERT ? '/fail' : '',
     log: warn,
   });
 
@@ -233,7 +299,16 @@ async function main() {
   if (shouldAlert || recovered) {
     appendFileSync(
       HISTORY,
-      JSON.stringify({ at: current.at, from: current.alertedState, to: state, reason, timings }) + '\n'
+      JSON.stringify({
+        at: current.at,
+        from: current.alertedState,
+        to: state,
+        origin: API_ORIGIN,
+        backend,
+        sku: SKU,
+        reason,
+        timings,
+      }) + '\n'
     );
   }
 
@@ -242,10 +317,11 @@ async function main() {
       url: process.env.TEAMS_WEBHOOK_URL,
       title: 'SiS API recovered',
       message:
-        `The SiS Extended Education API is responding normally again.\n\n${timings}\n\n` +
-        `Add to Cart and checkout should be working. Run ` +
-        '`node sis-health-watch.mjs --history` for the incident timeline.',
+        'The SiS Extended Education API is responding normally again.\n\n' +
+        'Add to Cart and checkout should be working. Run "node sis-health-watch.mjs --history" ' +
+        'for the incident timeline.',
       isFailure: false,
+      extra: { facts: cardFacts, mono: monoLines },
       log: warn,
     });
     current.alertedState = 'OK';
@@ -278,12 +354,13 @@ async function main() {
     title: state === 'DOWN' ? 'SiS API DOWN — cart is broken' : 'SiS API degraded — cart is slow',
     message:
       `The SiS Extended Education API behind Add to Cart and checkout is ${state.toLowerCase()}.\n\n` +
-      `${reason}\n\nProbe timings:\n${timings}\n\n` +
+      `${reason}\n\n` +
       `The mstoken probe is the control — it runs on the same Vercel proxy project, so if it is fast ` +
-      `while the others are slow, the fault is the SiS backend (devapi.bvc.dev), not the proxy.\n\n` +
+      `while the others are slow, the fault is the SiS backend, not the proxy.\n\n` +
       `Shoppers see "Failed to check course availability" and cannot add courses. ` +
       `Sustained for ${badRun} consecutive poll(s). Further alerts suppressed for ${COOLDOWN_H}h.`,
     isFailure: true,
+    extra: { facts: cardFacts, mono: monoLines },
     log: warn,
   });
 

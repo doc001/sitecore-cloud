@@ -70,5 +70,30 @@ module.exports = {
       merge_logs: true,
       time: true,
     },
+    {
+      name: 'bvc-log-archive',
+      script: 'archive-logs.mjs',
+      // Daily at 03:30. Moves every COMPLETE day out of logs/ and into
+      // OneDrive under <ISO week>/<day>/, leaving only today local.
+      //
+      // Why it must leave this machine: logs/ is append-only and nothing prunes
+      // it — pipeline-out.log alone grows ~2 MB/day — but the real reason is that
+      // every log this project produces lives on ONE laptop. The SiS timings the
+      // SiS team is asked to act on die with it. OneDrive is backed up.
+      //
+      // 03:30 is the quietest slot: bvc-fee-watch fires on minutes divisible by 5,
+      // bvc-sis-health on :02/:07/:12…, and bvc-hourly-deploy at :15. Nothing
+      // starts at :30, so the truncate does not race a poll mid-write.
+      //
+      // SIX fields (leading 0 = second), for the same reason as every cron above:
+      // a five-field '30 3 * * *' matches on every second of that minute.
+      cron_restart: '0 30 3 * * *',
+      autorestart: false,
+      watch: false,
+      out_file: 'logs/log-archive-out.log',
+      error_file: 'logs/log-archive-error.log',
+      merge_logs: true,
+      time: true,
+    },
   ],
 };

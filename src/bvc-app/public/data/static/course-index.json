@@ -588,6 +588,80 @@
       }
     ]
   },
+  "ADDC2503": {
+    "code": "ADDC2503",
+    "title": "Comprehensive Program Planning",
+    "credits": 3,
+    "outline": {
+      "file": "ADDC2503_Comprehensive Program Planning_(Fall 2026_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ADDC2503_Comprehensive Program Planning_(Fall 2026_Current).pdf",
+      "courseName": "Comprehensive Program Planning",
+      "effectiveStartTerm": "Fall 2026",
+      "effectiveEndTerm": "Current",
+      "school": "School of Community Studies"
+    },
+    "programs": [
+      {
+        "program": "AASD - Addiction Studies Diploma",
+        "slug": "addiction-studies-diploma",
+        "requirementsFile": "AASD_-_Addiction_Studies_Diploma.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "ADDC2504": {
+    "code": "ADDC2504",
+    "title": "Leadership and Ethics: Professional Practice",
+    "credits": 3,
+    "outline": {
+      "file": "ADDC2504_Leadership and Ethics Professional Practice_(Fall 2026_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ADDC2504_Leadership and Ethics Professional Practice_(Fall 2026_Current).pdf",
+      "courseName": "Leadership and Ethics: Professional Practice",
+      "effectiveStartTerm": "Fall 2026",
+      "effectiveEndTerm": "Current",
+      "school": "School of Community Studies"
+    },
+    "programs": [
+      {
+        "program": "AASD - Addiction Studies Diploma",
+        "slug": "addiction-studies-diploma",
+        "requirementsFile": "AASD_-_Addiction_Studies_Diploma.json",
+        "termLabel": "Term 4",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "ADDC2996": {
+    "code": "ADDC2996",
+    "title": "Practicum I: Foundations of Addiction Counselling Practice",
+    "credits": 6,
+    "outline": null,
+    "programs": [
+      {
+        "program": "AASD - Addiction Studies Diploma",
+        "slug": "addiction-studies-diploma",
+        "requirementsFile": "AASD_-_Addiction_Studies_Diploma.json",
+        "termLabel": "Term 4",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "ADDC2997": {
+    "code": "ADDC2997",
+    "title": "Practicum II: Advanced Addiction Counselling Practice",
+    "credits": 6,
+    "outline": null,
+    "programs": [
+      {
+        "program": "AASD - Addiction Studies Diploma",
+        "slug": "addiction-studies-diploma",
+        "requirementsFile": "AASD_-_Addiction_Studies_Diploma.json",
+        "termLabel": "Term 4",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "ADMN1101": {
     "code": "ADMN1101",
     "title": "Introduction to Professional Keyboarding",
@@ -877,12 +951,19 @@
         "requirementsFile": "PN_-_Practical_Nurse_Diploma.json",
         "termLabel": "Term 1",
         "ruleType": "minimumGrade"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
   "ANMO1101": {
     "code": "ANMO1101",
-    "title": "Introduction to Animation Principles and Techniques",
+    "title": "3D Pipeline Fundamentals",
     "credits": 3,
     "outline": {
       "file": "ANMO1101_3D Pipeline Fundamentals_(Fall 2025_Current).pdf",
@@ -918,7 +999,7 @@
   },
   "ANMO1203": {
     "code": "ANMO1203",
-    "title": "3D Modelling I",
+    "title": "3D Modelling: Shaping Virtual Worlds",
     "credits": 3,
     "outline": {
       "file": "ANMO1203_3D Modelling Shaping Virtual Worlds_(Winter 2026_Current).pdf",
@@ -945,9 +1026,38 @@
       }
     ]
   },
+  "ANMO1400": {
+    "code": "ANMO1400",
+    "title": "Production Workflows: Behind the Scenes of Animation and VFX",
+    "credits": 3,
+    "outline": {
+      "file": "ANMO1400_Production Workflows Behind the Scenes of Animation and VFX_(Fall 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ANMO1400_Production Workflows Behind the Scenes of Animation and VFX_(Fall 2025_Current).pdf",
+      "courseName": "Production Workflows: Behind the Scenes of Animation and VFX",
+      "effectiveStartTerm": "Fall 2025",
+      "effectiveEndTerm": "Current",
+      "school": "Centre for Entertainment Arts"
+    },
+    "programs": [
+      {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 1",
+        "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+        "termLabel": "Term 1",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "ANMO1501": {
     "code": "ANMO1501",
-    "title": "Preproduction Principles for Animation",
+    "title": "Animation Principles: Breathing Life into Motion",
     "credits": 3,
     "outline": {
       "file": "ANMO1501_Animation Principles Breathing Life into Motion_(Winter 2026_Current).pdf",
@@ -976,7 +1086,7 @@
   },
   "ANMO2101": {
     "code": "ANMO2101",
-    "title": "3D Animation II",
+    "title": "3D Animation II",
     "credits": 3,
     "outline": {
       "file": "ANMO2101_3D Animation II_(Fall 2025_Current).pdf",
@@ -1005,7 +1115,7 @@
   },
   "ANMO2102": {
     "code": "ANMO2102",
-    "title": "Character Rigging",
+    "title": "Introduction to Rigging: Building Effective Skeletons",
     "credits": 3,
     "outline": {
       "file": "ANMO2102_Introduction to Rigging Building Effective Skeletons_(Fall 2026_Current).pdf",
@@ -1025,9 +1135,24 @@
       }
     ]
   },
+  "ANMO2104": {
+    "code": "ANMO2104",
+    "title": "Advanced Character Effects (CFX): Hair, Cloth, and Deformations",
+    "credits": 3,
+    "outline": null,
+    "programs": [
+      {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 5",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "ANMO2201": {
     "code": "ANMO2201",
-    "title": "3D Modelling II",
+    "title": "Intermediate Modeling and Look Development: Visual Storytelling Through Detail",
     "credits": 3,
     "outline": {
       "file": "ANMO2201_Intermediate Modeling and Look Development Visual Storytelling Through Detail_(Fall 2026_Current).pdf",
@@ -1049,7 +1174,7 @@
   },
   "ANMO2202": {
     "code": "ANMO2202",
-    "title": "3D Modelling III",
+    "title": "Advanced Modelling and Look Development: Designing the Details",
     "credits": 3,
     "outline": {
       "file": "ANMO2202_Advanced Modelling and Look Development Designing the Details_(Fall 2025_Current).pdf",
@@ -1071,7 +1196,7 @@
   },
   "ANMO2301": {
     "code": "ANMO2301",
-    "title": "Storyboarding: Camera Language and Animatics",
+    "title": "Performance in Animation: Expressive Motion",
     "credits": 3,
     "outline": {
       "file": "ANMO2301_Performance in Animation Expressive Motion_(Fall 2026_Current).pdf",
@@ -1091,9 +1216,31 @@
       }
     ]
   },
+  "ANMO2500": {
+    "code": "ANMO2500",
+    "title": "Capstone Development I: Planning for 3D Excellence",
+    "credits": 3,
+    "outline": {
+      "file": "ANMO2500_Capstone Development I Planning for 3D Excellence_(Fall 2026_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ANMO2500_Capstone Development I Planning for 3D Excellence_(Fall 2026_Current).pdf",
+      "courseName": "Capstone Development I: Planning for 3D Excellence",
+      "effectiveStartTerm": "Fall 2026",
+      "effectiveEndTerm": "Current",
+      "school": "Centre for Entertainment Arts"
+    },
+    "programs": [
+      {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 4",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "ANMO2501": {
     "code": "ANMO2501",
-    "title": "Previs and Postvis",
+    "title": "Advanced Performance in Animation: Emotional Storytelling",
     "credits": 3,
     "outline": {
       "file": "ANMO2501_Advanced Performance in Animation Emotional Storytelling_(Fall 2025_Current).pdf",
@@ -1115,7 +1262,7 @@
   },
   "ANMO2502": {
     "code": "ANMO2502",
-    "title": "3D Animation and 3D Modelling Industry Project I: Preproduction",
+    "title": "Industry Critique and Collaborative Presentation",
     "credits": 3,
     "outline": {
       "file": "ANMO2502_Industry Critique and Collaborative Presentation_(Fall 2025_Current).pdf",
@@ -1137,7 +1284,7 @@
   },
   "ANMO2503": {
     "code": "ANMO2503",
-    "title": "3D Animation and 3D Modelling Industry Project II: Production",
+    "title": "Capstone Refinement and Industry-Ready Development",
     "credits": 4,
     "outline": {
       "file": "ANMO2503_Capstone Refinement and Industry-Ready Development_(Fall 2025_Current).pdf",
@@ -1159,7 +1306,7 @@
   },
   "ANMO2504": {
     "code": "ANMO2504",
-    "title": "3D Animation and 3D Modelling Industry Project III: Industry Presentation and Critique",
+    "title": "Advanced Presentation and Industry Feedback",
     "credits": 4,
     "outline": {
       "file": "ANMO2504_Advanced Presentation and Industry Feedback_(Fall 2025_Current).pdf",
@@ -1179,9 +1326,24 @@
       }
     ]
   },
+  "ANMO2505": {
+    "code": "ANMO2505",
+    "title": "Capstone Production II: Creating the Vision",
+    "credits": 3,
+    "outline": null,
+    "programs": [
+      {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 5",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "ANMO2999": {
     "code": "ANMO2999",
-    "title": "3D Animation and 3D Modelling Capstone Project: Review, Post-Mortem, and Portfolio",
+    "title": "Career Preparation and Final Portfolio Polish Capstone",
     "credits": 5,
     "outline": {
       "file": "ANMO2999_Career Preparation and Final Portfolio Polish Capstone_(Fall 2025_Current).pdf",
@@ -1349,6 +1511,43 @@
       }
     ]
   },
+  "ARTF1998": {
+    "code": "ARTF1998",
+    "title": "Capstone in Foundation Arts: Portfolio Creation",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "FEA - Foundation in Entertainment Arts Certificate",
+        "slug": "foundation-in-entertainment-arts-certificate",
+        "requirementsFile": "FEA_-_Foundation_in_Entertainment_Arts_Certificate.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "BIOL0301": {
+    "code": "BIOL0301",
+    "title": "Biology 030",
+    "credits": 5,
+    "outline": {
+      "file": "BIOL0301_Biology 030_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL0301_Biology 030_(Winter 2025_Current).pdf",
+      "courseName": "Biology 030",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "BIOL1401": {
     "code": "BIOL1401",
     "title": "The Organization and Diversity of Life",
@@ -1417,6 +1616,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -1488,6 +1694,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -1559,6 +1772,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -1588,7 +1808,7 @@
         "slug": "machine-learning-analyst",
         "requirementsFile": "MLAD_-_Machine_Learning_Analyst.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -1603,7 +1823,7 @@
         "slug": "machine-learning-analyst",
         "requirementsFile": "MLAD_-_Machine_Learning_Analyst.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -1618,7 +1838,7 @@
         "slug": "machine-learning-analyst",
         "requirementsFile": "MLAD_-_Machine_Learning_Analyst.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -1725,6 +1945,28 @@
       }
     ]
   },
+  "CHEM0301": {
+    "code": "CHEM0301",
+    "title": "Chemistry 030",
+    "credits": 5,
+    "outline": {
+      "file": "CHEM0301_Chemistry 030_(Fall 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM0301_Chemistry 030_(Fall 2025_Current).pdf",
+      "courseName": "Chemistry 030",
+      "effectiveStartTerm": "Fall 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "CHEM1901": {
     "code": "CHEM1901",
     "title": "General Chemistry: Structure and Bonding",
@@ -1793,6 +2035,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -1864,6 +2113,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -2383,6 +2639,35 @@
         "requirementsFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
         "termLabel": "Term 3",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "COMM0103": {
+    "code": "COMM0103",
+    "title": "Post-Secondary Foundations",
+    "credits": 5,
+    "outline": {
+      "file": "COMM0103_Post-Secondary Foundations _(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMM0103_Post-Secondary Foundations _(Fall 2024_Current).pdf",
+      "courseName": "Post-Secondary Foundations ",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -2497,6 +2782,72 @@
         "requirementsFile": "HDA_-_Health_Data_Analytics.json",
         "termLabel": "Term 1",
         "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "COMM3201": {
+    "code": "COMM3201",
+    "title": "Intercultural Communication",
+    "credits": 3,
+    "outline": {
+      "file": "COMM3201_Intercultural Communication_(Fall 2020_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMM3201_Intercultural Communication_(Fall 2020_Current).pdf",
+      "courseName": "Intercultural Communication",
+      "effectiveStartTerm": "Fall 2020",
+      "effectiveEndTerm": "Current",
+      "school": "School of Community Studies"
+    },
+    "programs": [
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "COMP0101": {
+    "code": "COMP0101",
+    "title": "Microsoft Office 10",
+    "credits": 5,
+    "outline": {
+      "file": "COMP0101_Microsoft Office 10_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMP0101_Microsoft Office 10_(Spring 2022_Current).pdf",
+      "courseName": "Microsoft Office 10",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "COMP0702": {
+    "code": "COMP0702",
+    "title": "Microsoft Office Fundamentals",
+    "credits": 5,
+    "outline": {
+      "file": "COMP0702_Microsoft Office Fundamentals_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMP0702_Microsoft Office Fundamentals_(Fall 2024_Current).pdf",
+      "courseName": "Microsoft Office Fundamentals",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -5125,6 +5476,13 @@
         "requirementsFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
         "termLabel": "Term 3",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -5189,6 +5547,13 @@
         "requirementsFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
         "termLabel": "Term 3",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -5416,6 +5781,138 @@
         "requirementsFile": "EA_-_Education_Assistant__Certificate_.json",
         "termLabel": "Term 2",
         "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "ELA1104": {
+    "code": "ELA1104",
+    "title": "English Language Arts 10-2",
+    "credits": 5,
+    "outline": {
+      "file": "ELA1104_English Language Arts 10-2_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA1104_English Language Arts 10-2_(Spring 2025_Current).pdf",
+      "courseName": "English Language Arts 10-2",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELA1105": {
+    "code": "ELA1105",
+    "title": "English Language Arts 10-1",
+    "credits": 5,
+    "outline": {
+      "file": "ELA1105_English Language Arts 10-1_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA1105_English Language Arts 10-1_(Spring 2025_Current).pdf",
+      "courseName": "English Language Arts 10-1",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELA2104": {
+    "code": "ELA2104",
+    "title": "English Language Arts 20-2",
+    "credits": 5,
+    "outline": {
+      "file": "ELA2104_English Language Arts 20-2_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA2104_English Language Arts 20-2_(Spring 2025_Current).pdf",
+      "courseName": "English Language Arts 20-2",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELA2105": {
+    "code": "ELA2105",
+    "title": "English Language Arts 20-1",
+    "credits": 5,
+    "outline": {
+      "file": "ELA2105_English Language Arts 20-1_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA2105_English Language Arts 20-1_(Spring 2025_Current).pdf",
+      "courseName": "English Language Arts 20-1",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELA3104": {
+    "code": "ELA3104",
+    "title": "English Language Arts 30-2",
+    "credits": 5,
+    "outline": {
+      "file": "ELA3104_English Language Arts 30-2_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA3104_English Language Arts 30-2_(Spring 2025_Current).pdf",
+      "courseName": "English Language Arts 30-2",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELA3105": {
+    "code": "ELA3105",
+    "title": "English Language Arts 30-1",
+    "credits": 5,
+    "outline": {
+      "file": "ELA3105_English Language Arts 30-1_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA3105_English Language Arts 30-1_(Spring 2025_Current).pdf",
+      "courseName": "English Language Arts 30-1",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -5813,7 +6310,7 @@
   },
   "ELCC2996": {
     "code": "ELCC2996",
-    "title": "Practicum III: Strengthening Pedagogical Practice",
+    "title": "Seminar and Placement III: Outdoor Pedagogical Practice",
     "credits": 6,
     "outline": {
       "file": "ELCC2996_Seminar and Placement III Outdoor Pedagogical Practice_(Fall 2026_Current).pdf",
@@ -5835,7 +6332,7 @@
   },
   "ELCC2997": {
     "code": "ELCC2997",
-    "title": "Practicum IV: Deepening Professional Practice",
+    "title": "Seminar and Placement IV: Leading Relational Practice",
     "credits": 6,
     "outline": {
       "file": "ELCC2997_Seminar and Placement IV Leading Relational Practice_(Fall 2026_Current).pdf",
@@ -5852,6 +6349,251 @@
         "requirementsFile": "ECED_-_Early_Childhood_Education_and_Development_Diploma.json",
         "termLabel": "Term 4",
         "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "ELLA0111": {
+    "code": "ELLA0111",
+    "title": "Academic English 1: Academic Strategies and Application",
+    "credits": 3,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0112": {
+    "code": "ELLA0112",
+    "title": "Academic English 2: Academic Strategies and Application",
+    "credits": 3,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0120": {
+    "code": "ELLA0120",
+    "title": "Transition to Academic English",
+    "credits": 16,
+    "outline": {
+      "file": "ELLA0120_Transition to Academic English_(Winter 2021_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELLA0120_Transition to Academic English_(Winter 2021_Current).pdf",
+      "courseName": "Transition to Academic English",
+      "effectiveStartTerm": "Winter 2021",
+      "effectiveEndTerm": "Current",
+      "school": "School of Global Access"
+    },
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0121": {
+    "code": "ELLA0121",
+    "title": "Academic English 1",
+    "credits": 16,
+    "outline": {
+      "file": "ELLA0121_Academic English 1_(Winter 2021_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELLA0121_Academic English 1_(Winter 2021_Current).pdf",
+      "courseName": "Academic English 1",
+      "effectiveStartTerm": "Winter 2021",
+      "effectiveEndTerm": "Current",
+      "school": "School of Global Access"
+    },
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0122": {
+    "code": "ELLA0122",
+    "title": "Academic English 2",
+    "credits": 16,
+    "outline": {
+      "file": "ELLA0122_Academic English 2_(Winter 2021_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELLA0122_Academic English 2_(Winter 2021_Current).pdf",
+      "courseName": "Academic English 2",
+      "effectiveStartTerm": "Winter 2021",
+      "effectiveEndTerm": "Current",
+      "school": "School of Global Access"
+    },
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0123": {
+    "code": "ELLA0123",
+    "title": "Transition to Academic English I",
+    "credits": 16,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0124": {
+    "code": "ELLA0124",
+    "title": "Transition to Academic English II",
+    "credits": 16,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0211": {
+    "code": "ELLA0211",
+    "title": "Academic English 1: Listening and Speaking",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0212": {
+    "code": "ELLA0212",
+    "title": "Academic English 2: Advanced Listening and Speaking",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0311": {
+    "code": "ELLA0311",
+    "title": "Academic English 1: Reading and Writing",
+    "credits": 8,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ELLA0312": {
+    "code": "ELLA0312",
+    "title": "Academic English 2: Advanced Reading and Writing",
+    "credits": 8,
+    "outline": null,
+    "programs": [
+      {
+        "program": "ELL - English Language Learning",
+        "slug": "english-language-learning",
+        "requirementsFile": "ELL_-_English_Language_Learning.json",
+        "termLabel": "ELL Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ENGL0202": {
+    "code": "ENGL0202",
+    "title": "English 020-2",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ENGL0301": {
+    "code": "ENGL0301",
+    "title": "English 030-1",
+    "credits": 5,
+    "outline": {
+      "file": "ENGL0301_English 030-1_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL0301_English 030-1_(Spring 2025_Current).pdf",
+      "courseName": "English 030-1",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ENGL0302": {
+    "code": "ENGL0302",
+    "title": "English 030-2",
+    "credits": 5,
+    "outline": {
+      "file": "ENGL0302_English 030-2_(Spring 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL0302_English 030-2_(Spring 2025_Current).pdf",
+      "courseName": "English 030-2",
+      "effectiveStartTerm": "Spring 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -6006,7 +6748,14 @@
         "slug": "social-work-diploma",
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 1",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -6091,7 +6840,14 @@
         "slug": "social-work-diploma",
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 1",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -6135,6 +6891,13 @@
         "requirementsFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
         "termLabel": "Term 4",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -6171,6 +6934,13 @@
         "requirementsFile": "JS_-_Justice_Studies.json",
         "termLabel": "Term 4",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -6336,9 +7106,142 @@
       }
     ]
   },
+  "ESSK0101": {
+    "code": "ESSK0101",
+    "title": "Essential Skills for Working, Learning, Living",
+    "credits": 5,
+    "outline": {
+      "file": "ESSK0101_Essential Skills for Working, Learning, Living_(Fall 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0101_Essential Skills for Working, Learning, Living_(Fall 2022_Current).pdf",
+      "courseName": "Essential Skills for Working, Learning, Living",
+      "effectiveStartTerm": "Fall 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ESSK0104": {
+    "code": "ESSK0104",
+    "title": "Essential Skills for Communication",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ESSK0105": {
+    "code": "ESSK0105",
+    "title": "Communication Essentials",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ESSK0109": {
+    "code": "ESSK0109",
+    "title": "Workplace Math",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ESSK0303": {
+    "code": "ESSK0303",
+    "title": "Indigenous Pathways to Employment I",
+    "credits": 15,
+    "outline": {
+      "file": "ESSK0303_Indigenous Pathways to Employment 1_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0303_Indigenous Pathways to Employment 1_(Spring 2022_Current).pdf",
+      "courseName": "Indigenous Pathways to Employment 1",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ESSK0304": {
+    "code": "ESSK0304",
+    "title": "Indigenous Pathways to Employment II",
+    "credits": 15,
+    "outline": {
+      "file": "ESSK0304_Indigenous Pathways to Employment 2_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0304_Indigenous Pathways to Employment 2_(Spring 2022_Current).pdf",
+      "courseName": "Indigenous Pathways to Employment 2",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "ESSK0305": {
+    "code": "ESSK0305",
+    "title": "Indigenous Pathways to Employment III",
+    "credits": 15,
+    "outline": {
+      "file": "ESSK0305_Indigenous Pathways to Employment 3_(Fall 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0305_Indigenous Pathways to Employment 3_(Fall 2022_Current).pdf",
+      "courseName": "Indigenous Pathways to Employment 3",
+      "effectiveStartTerm": "Fall 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "FASD1101": {
     "code": "FASD1101",
-    "title": "Fetal Alcohol Spectrum Awareness for Human Service Professionals",
+    "title": "Fetal Alcohol Spectrum Awareness  for Human Service Professionals",
     "credits": 3,
     "outline": {
       "file": "FASD1101_Fetal Alcohol Spectrum Awareness  for Human Service Professionals_(Winter 2026_Current).pdf",
@@ -6712,6 +7615,13 @@
         "requirementsFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
         "termLabel": "Term 4",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -7164,7 +8074,7 @@
         "slug": "business-administration-supply-chain-management-diploma",
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -7651,7 +8561,7 @@
   },
   "HCAD1405": {
     "code": "HCAD1405",
-    "title": "Clinical Placement Experience 1",
+    "title": "Clinical Placement Experience I",
     "credits": 3,
     "outline": {
       "file": "HCAD1405_Clinical Placement Experience I_(Fall 2026_Current).pdf",
@@ -7717,7 +8627,7 @@
   },
   "HCAD1408": {
     "code": "HCAD1408",
-    "title": "Clinical Placement Experience 2",
+    "title": "Clinical Placement Experience II",
     "credits": 5,
     "outline": {
       "file": "HCAD1408_Clinical Placement Experience II_(Fall 2026_Current).pdf",
@@ -8176,6 +9086,13 @@
         "requirementsFile": "HRM_-_Human_Resources__Certificate_.json",
         "termLabel": "Term 1",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -8572,7 +9489,7 @@
         "slug": "business-administration-human-resources-diploma",
         "requirementsFile": "BAHR_-_Business_Administration_-_Human_Resources__Diploma_.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -8594,7 +9511,7 @@
         "slug": "business-administration-human-resources-diploma",
         "requirementsFile": "BAHR_-_Business_Administration_-_Human_Resources__Diploma_.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -8842,7 +9759,7 @@
         "slug": "interior-decorating-diploma",
         "requirementsFile": "IDMD_-_Interior_Decorating_Diploma.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -8952,7 +9869,7 @@
         "slug": "interior-decorating-diploma",
         "requirementsFile": "IDMD_-_Interior_Decorating_Diploma.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -8996,7 +9913,7 @@
         "slug": "interior-decorating-diploma",
         "requirementsFile": "IDMD_-_Interior_Decorating_Diploma.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -9084,7 +10001,7 @@
         "slug": "interior-decorating-diploma",
         "requirementsFile": "IDMD_-_Interior_Decorating_Diploma.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -9719,6 +10636,13 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 2",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -10860,6 +11784,292 @@
       }
     ]
   },
+  "MAT1791": {
+    "code": "MAT1791",
+    "title": "Mathematics 10 C",
+    "credits": 5,
+    "outline": {
+      "file": "MAT1791_Mathematics 10 C_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT1791_Mathematics 10 C_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 10 C",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT1793": {
+    "code": "MAT1793",
+    "title": "Mathematics 10-3",
+    "credits": 5,
+    "outline": {
+      "file": "MAT1793_Mathematics 10-3_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT1793_Mathematics 10-3_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 10-3",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT2791": {
+    "code": "MAT2791",
+    "title": "Mathematics 20-1",
+    "credits": 5,
+    "outline": {
+      "file": "MAT2791_Mathematics 20-1_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT2791_Mathematics 20-1_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 20-1",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT2792": {
+    "code": "MAT2792",
+    "title": "Mathematics 20-2",
+    "credits": 5,
+    "outline": {
+      "file": "MAT2792_Mathematics 20-2_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT2792_Mathematics 20-2_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 20-2",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT2793": {
+    "code": "MAT2793",
+    "title": "Mathematics 20-3",
+    "credits": 5,
+    "outline": {
+      "file": "MAT2793_Mathematics 20-3_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT2793_Mathematics 20-3_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 20-3",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT3211": {
+    "code": "MAT3211",
+    "title": "Mathematics 31",
+    "credits": 5,
+    "outline": {
+      "file": "MAT3211_Mathematics 31_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3211_Mathematics 31_(Spring 2022_Current).pdf",
+      "courseName": "Mathematics 31",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT3791": {
+    "code": "MAT3791",
+    "title": "Mathematics 30-1",
+    "credits": 5,
+    "outline": {
+      "file": "MAT3791_Mathematics 30-1_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3791_Mathematics 30-1_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 30-1",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT3792": {
+    "code": "MAT3792",
+    "title": "Mathematics 30-2",
+    "credits": 5,
+    "outline": {
+      "file": "MAT3792_Mathematics 30-2_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3792_Mathematics 30-2_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 30-2",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MAT3793": {
+    "code": "MAT3793",
+    "title": "Mathematics 30-3",
+    "credits": 5,
+    "outline": {
+      "file": "MAT3793_Mathematics 30-3_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3793_Mathematics 30-3_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 30-3",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MATH0301": {
+    "code": "MATH0301",
+    "title": "Mathematics 030-1",
+    "credits": 5,
+    "outline": {
+      "file": "MATH0301_Mathematics 030-1_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0301_Mathematics 030-1_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 030-1",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MATH0302": {
+    "code": "MATH0302",
+    "title": "Mathematics 030-2",
+    "credits": 5,
+    "outline": {
+      "file": "MATH0302_Mathematics 030-2_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0302_Mathematics 030-2_(Winter 2025_Current).pdf",
+      "courseName": "Mathematics 030-2",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MATH0703": {
+    "code": "MATH0703",
+    "title": "Basic Math III",
+    "credits": 5,
+    "outline": {
+      "file": "MATH0703_Basic Math 3_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0703_Basic Math 3_(Fall 2024_Current).pdf",
+      "courseName": "Basic Math 3",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "MATH0801": {
+    "code": "MATH0801",
+    "title": "Prep Math 10",
+    "credits": 5,
+    "outline": {
+      "file": "MATH0801_Prep Math 10_(Fall 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0801_Prep Math 10_(Fall 2025_Current).pdf",
+      "courseName": "Prep Math 10",
+      "effectiveStartTerm": "Fall 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "MATH1600": {
     "code": "MATH1600",
     "title": "Introduction to Statistics I",
@@ -10928,6 +12138,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -10999,6 +12216,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -11128,6 +12352,13 @@
         "requirementsFile": "MLAD_-_Machine_Learning_Analyst.json",
         "termLabel": "Term 1",
         "ruleType": "minimumGrade"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -11199,6 +12430,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -11277,6 +12515,13 @@
         "requirementsFile": "MLAD_-_Machine_Learning_Analyst.json",
         "termLabel": "Term 2",
         "ruleType": "minimumGrade"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -11951,7 +13196,7 @@
         "slug": "business-administration-certificate",
         "requirementsFile": "AFM_-_Business_Administration_Certificate.json",
         "termLabel": "Term 2",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -11973,7 +13218,7 @@
         "slug": "business-administration-certificate",
         "requirementsFile": "AFM_-_Business_Administration_Certificate.json",
         "termLabel": "Term 2",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -12250,6 +13495,13 @@
         "requirementsFile": "BARM_-_Business_Administration_-_Insurance_and_Risk_Management__Diploma_.json",
         "termLabel": "Term 2",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -12292,7 +13544,14 @@
         "slug": "business-administration-supply-chain-management-diploma",
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -12321,7 +13580,7 @@
         "slug": "business-administration-supply-chain-management-diploma",
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -12401,7 +13660,7 @@
         "slug": "business-administration-human-resources-diploma",
         "requirementsFile": "BAHR_-_Business_Administration_-_Human_Resources__Diploma_.json",
         "termLabel": "Term 4",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       },
       {
         "program": "BARM - Business Administration - Insurance and Risk Management  Diploma ",
@@ -12689,6 +13948,13 @@
         "requirementsFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
         "termLabel": "Term 3",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -13792,6 +15058,28 @@
       }
     ]
   },
+  "OTH1999": {
+    "code": "OTH1999",
+    "title": "Special Project 10",
+    "credits": 5,
+    "outline": {
+      "file": "OTH1999_Special Project 10_(Winter 2023_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/OTH1999_Special Project 10_(Winter 2023_Current).pdf",
+      "courseName": "Special Project 10",
+      "effectiveStartTerm": "Winter 2023",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "PHIL1201": {
     "code": "PHIL1201",
     "title": "Ethics",
@@ -13860,6 +15148,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -14281,6 +15576,28 @@
       }
     ]
   },
+  "PHYS0301": {
+    "code": "PHYS0301",
+    "title": "Physics 030",
+    "credits": 5,
+    "outline": {
+      "file": "PHYS0301_Physics 030_(Fall 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS0301_Physics 030_(Fall 2025_Current).pdf",
+      "courseName": "Physics 030",
+      "effectiveStartTerm": "Fall 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "PHYS1900": {
     "code": "PHYS1900",
     "title": "Mechanics",
@@ -14349,6 +15666,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -14420,6 +15744,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -14655,6 +15986,13 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 4",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -14720,6 +16058,35 @@
         "slug": "advanced-entertainment-arts-production-management-diploma",
         "requirementsFile": "AEA_-_Advanced_Entertainment_Arts_Production_Management__Diploma_.json",
         "termLabel": "Term 2",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "PROD1104": {
+    "code": "PROD1104",
+    "title": "Year One Retrospective Portfolio",
+    "credits": 3,
+    "outline": {
+      "file": "PROD1104_Year One Retrospective Portfolio_(Spring 2026_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PROD1104_Year One Retrospective Portfolio_(Spring 2026_Current).pdf",
+      "courseName": "Year One Retrospective Portfolio",
+      "effectiveStartTerm": "Spring 2026",
+      "effectiveEndTerm": "Current",
+      "school": "Centre for Entertainment Arts"
+    },
+    "programs": [
+      {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+        "termLabel": "Term 3",
         "ruleType": "completeAllCourses"
       }
     ]
@@ -15078,7 +16445,7 @@
   },
   "PSYC1101": {
     "code": "PSYC1101",
-    "title": "Introduction To Psychology",
+    "title": "Introduction to Psychology",
     "credits": 3,
     "outline": {
       "file": "PSYC1101_Introduction to Psychology_(Winter 2026_Current).pdf",
@@ -15172,6 +16539,13 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 1",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -15257,6 +16631,13 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 2",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -15364,6 +16745,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -15449,6 +16837,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -15534,6 +16929,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -15626,6 +17028,79 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 4",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "READ0103": {
+    "code": "READ0103",
+    "title": "Reading 3",
+    "credits": 5,
+    "outline": {
+      "file": "READ0103_Reading 3_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/READ0103_Reading 3_(Fall 2024_Current).pdf",
+      "courseName": "Reading 3",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "READ0104": {
+    "code": "READ0104",
+    "title": "Reading 4",
+    "credits": 5,
+    "outline": {
+      "file": "READ0104_Reading 4_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/READ0104_Reading 4_(Fall 2024_Current).pdf",
+      "courseName": "Reading 4",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "READ0105": {
+    "code": "READ0105",
+    "title": "Reading 5",
+    "credits": 5,
+    "outline": {
+      "file": "READ0105_Reading 5_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/READ0105_Reading 5_(Fall 2024_Current).pdf",
+      "courseName": "Reading 5",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -15717,6 +17192,50 @@
       }
     ]
   },
+  "SCIE0301": {
+    "code": "SCIE0301",
+    "title": "Science 030",
+    "credits": 5,
+    "outline": {
+      "file": "SCIE0301_Science 030_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCIE0301_Science 030_(Winter 2025_Current).pdf",
+      "courseName": "Science 030",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCIE0801": {
+    "code": "SCIE0801",
+    "title": "Science Preparation",
+    "credits": 5,
+    "outline": {
+      "file": "SCIE0801_Science Preparation_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCIE0801_Science Preparation_(Fall 2024_Current).pdf",
+      "courseName": "Science Preparation",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "SCMT2101": {
     "code": "SCMT2101",
     "title": "Introduction to Supply Chain Management",
@@ -15793,7 +17312,7 @@
         "slug": "business-administration-supply-chain-management-diploma",
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -15837,7 +17356,7 @@
         "slug": "business-administration-supply-chain-management-diploma",
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -15859,7 +17378,7 @@
         "slug": "business-administration-supply-chain-management-diploma",
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -15881,7 +17400,7 @@
         "slug": "business-administration-supply-chain-management-diploma",
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 3",
-        "ruleType": "minimumCreditsFromList"
+        "ruleType": ""
       }
     ]
   },
@@ -15931,7 +17450,7 @@
   },
   "SCMT2998": {
     "code": "SCMT2998",
-    "title": "Supply Chain Specialization: Capstone Project",
+    "title": "Supply Chain Specialization:  Capstone Project",
     "credits": 3,
     "outline": {
       "file": "SCMT2998_Supply Chain Specialization  Capstone Project_(Fall 2026_Current).pdf",
@@ -15970,6 +17489,219 @@
         "requirementsFile": "BASC_-_Business_Administration_-_Supply_Chain_Management__Diploma_.json",
         "termLabel": "Term 4",
         "ruleType": "minimumCreditsFromList"
+      }
+    ]
+  },
+  "SCN1270": {
+    "code": "SCN1270",
+    "title": "Science 10",
+    "credits": 5,
+    "outline": {
+      "file": "SCN1270_Science 10_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN1270_Science 10_(Winter 2025_Current).pdf",
+      "courseName": "Science 10",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN2231": {
+    "code": "SCN2231",
+    "title": "Biology 20",
+    "credits": 5,
+    "outline": {
+      "file": "SCN2231_Biology 20_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2231_Biology 20_(Winter 2025_Current).pdf",
+      "courseName": "Biology 20",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN2270": {
+    "code": "SCN2270",
+    "title": "Science 20",
+    "credits": 5,
+    "outline": {
+      "file": "SCN2270_Science 20_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2270_Science 20_(Winter 2025_Current).pdf",
+      "courseName": "Science 20",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN2288": {
+    "code": "SCN2288",
+    "title": "Science 24",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN2796": {
+    "code": "SCN2796",
+    "title": "Chemistry 20",
+    "credits": 5,
+    "outline": {
+      "file": "SCN2796_Chemistry 20_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2796_Chemistry 20_(Winter 2025_Current).pdf",
+      "courseName": "Chemistry 20",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN2797": {
+    "code": "SCN2797",
+    "title": "Physics 20",
+    "credits": 5,
+    "outline": {
+      "file": "SCN2797_Physics 20_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2797_Physics 20_(Winter 2025_Current).pdf",
+      "courseName": "Physics 20",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN3230": {
+    "code": "SCN3230",
+    "title": "Biology 30",
+    "credits": 5,
+    "outline": {
+      "file": "SCN3230_Biology 30_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3230_Biology 30_(Winter 2025_Current).pdf",
+      "courseName": "Biology 30",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN3270": {
+    "code": "SCN3270",
+    "title": "Science 30",
+    "credits": 5,
+    "outline": {
+      "file": "SCN3270_Science 30_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3270_Science 30_(Winter 2025_Current).pdf",
+      "courseName": "Science 30",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN3796": {
+    "code": "SCN3796",
+    "title": "Chemistry 30",
+    "credits": 5,
+    "outline": {
+      "file": "SCN3796_Chemistry 30_(Winter 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3796_Chemistry 30_(Winter 2025_Current).pdf",
+      "courseName": "Chemistry 30",
+      "effectiveStartTerm": "Winter 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SCN3797": {
+    "code": "SCN3797",
+    "title": "Physics 30",
+    "credits": 5,
+    "outline": {
+      "file": "SCN3797_Physics 30_(Fall 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3797_Physics 30_(Fall 2025_Current).pdf",
+      "courseName": "Physics 30",
+      "effectiveStartTerm": "Fall 2025",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -16062,6 +17794,13 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -16133,6 +17872,13 @@
         "requirementsFile": "GASD_-_General_Arts_and_Sciences_Diploma.json",
         "termLabel": "Term 3",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -16232,6 +17978,13 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -16317,6 +18070,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -16402,6 +18162,13 @@
         "requirementsFile": "GASH_-_General_Arts_and_Sciences_-_Health_Sciences.json",
         "termLabel": "Term 2",
         "ruleType": "minimumCreditsFromList"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -16612,7 +18379,7 @@
   },
   "SODV1400": {
     "code": "SODV1400",
-    "title": "Scripting Fundamentals",
+    "title": "Scripting  Fundamentals",
     "credits": 3,
     "outline": {
       "file": "SODV1400_Scripting  Fundamentals_(Fall 2026_Current).pdf",
@@ -16756,6 +18523,28 @@
       }
     ]
   },
+  "SODV2205": {
+    "code": "SODV2205",
+    "title": "Mobile Application Development with React Native I",
+    "credits": 3,
+    "outline": {
+      "file": "SODV2205_Mobile Application Development with React Native I_(Fall 2026_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SODV2205_Mobile Application Development with React Native I_(Fall 2026_Current).pdf",
+      "courseName": "Mobile Application Development with React Native I",
+      "effectiveStartTerm": "Fall 2026",
+      "effectiveEndTerm": "Current",
+      "school": "School of Technology"
+    },
+    "programs": [
+      {
+        "program": "SD - Software Development  Diploma ",
+        "slug": "software-development-diploma",
+        "requirementsFile": "SD_-_Software_Development__Diploma_.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "SODV2251": {
     "code": "SODV2251",
     "title": "Mobile Application Development I",
@@ -16817,6 +18606,28 @@
         "program": "ITS - Information Technology Systems  Diploma ",
         "slug": "information-technology-systems-diploma",
         "requirementsFile": "ITS_-_Information_Technology_Systems__Diploma_.json",
+        "termLabel": "Term 4",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "SODV2403": {
+    "code": "SODV2403",
+    "title": "Mobile Application Development with React Native II",
+    "credits": 3,
+    "outline": {
+      "file": "SODV2403_Mobile Application Development with React Native II_(Fall 2026_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SODV2403_Mobile Application Development with React Native II_(Fall 2026_Current).pdf",
+      "courseName": "Mobile Application Development with React Native II",
+      "effectiveStartTerm": "Fall 2026",
+      "effectiveEndTerm": "Current",
+      "school": "School of Technology"
+    },
+    "programs": [
+      {
+        "program": "SD - Software Development  Diploma ",
+        "slug": "software-development-diploma",
+        "requirementsFile": "SD_-_Software_Development__Diploma_.json",
         "termLabel": "Term 4",
         "ruleType": "completeAllCourses"
       }
@@ -17064,6 +18875,50 @@
       }
     ]
   },
+  "SOST0301": {
+    "code": "SOST0301",
+    "title": "Social Studies 030-1",
+    "credits": 5,
+    "outline": {
+      "file": "SOST0301_Social Studies 030-1_(Spring 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOST0301_Social Studies 030-1_(Spring 2024_Current).pdf",
+      "courseName": "Social Studies 030-1",
+      "effectiveStartTerm": "Spring 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SOST0302": {
+    "code": "SOST0302",
+    "title": "Social Studies 030-2",
+    "credits": 5,
+    "outline": {
+      "file": "SOST0302_Social Studies 030-2_(Spring 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOST0302_Social Studies 030-2_(Spring 2024_Current).pdf",
+      "courseName": "Social Studies 030-2",
+      "effectiveStartTerm": "Spring 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "SOWR1101": {
     "code": "SOWR1101",
     "title": "Introduction to Social Work",
@@ -17118,6 +18973,13 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 1",
         "ruleType": "minimumGrade"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
       }
     ]
   },
@@ -17429,6 +19291,197 @@
       }
     ]
   },
+  "SSN1154": {
+    "code": "SSN1154",
+    "title": "Aboriginal Studies 10",
+    "credits": 5,
+    "outline": {
+      "file": "SSN1154_Aboriginal Studies 10_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SSN1154_Aboriginal Studies 10_(Spring 2022_Current).pdf",
+      "courseName": "Aboriginal Studies 10",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SSN2154": {
+    "code": "SSN2154",
+    "title": "Aboriginal Studies 20",
+    "credits": 5,
+    "outline": {
+      "file": "SSN2154_Aboriginal Studies 20_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SSN2154_Aboriginal Studies 20_(Fall 2024_Current).pdf",
+      "courseName": "Aboriginal Studies 20",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SSN3154": {
+    "code": "SSN3154",
+    "title": "Aboriginal Studies 30",
+    "credits": 5,
+    "outline": {
+      "file": "SSN3154_Aboriginal Studies 30_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SSN3154_Aboriginal Studies 30_(Fall 2024_Current).pdf",
+      "courseName": "Aboriginal Studies 30",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SST1771": {
+    "code": "SST1771",
+    "title": "Social Studies 10-1",
+    "credits": 5,
+    "outline": null,
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SST1772": {
+    "code": "SST1772",
+    "title": "Social Studies 10-2",
+    "credits": 5,
+    "outline": {
+      "file": "SST1772_Social Studies 10-2_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST1772_Social Studies 10-2_(Spring 2022_Current).pdf",
+      "courseName": "Social Studies 10-2",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SST2771": {
+    "code": "SST2771",
+    "title": "Social Studies 20-1",
+    "credits": 5,
+    "outline": {
+      "file": "SST2771_Social Studies 20-1_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST2771_Social Studies 20-1_(Spring 2022_Current).pdf",
+      "courseName": "Social Studies 20-1",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SST2772": {
+    "code": "SST2772",
+    "title": "Social Studies 20-2",
+    "credits": 5,
+    "outline": {
+      "file": "SST2772_Social Studies 20-2_(Spring 2022_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST2772_Social Studies 20-2_(Spring 2022_Current).pdf",
+      "courseName": "Social Studies 20-2",
+      "effectiveStartTerm": "Spring 2022",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SST3771": {
+    "code": "SST3771",
+    "title": "Social Studies 30-1",
+    "credits": 5,
+    "outline": {
+      "file": "SST3771_Social Studies 30-1_(Spring 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST3771_Social Studies 30-1_(Spring 2024_Current).pdf",
+      "courseName": "Social Studies 30-1",
+      "effectiveStartTerm": "Spring 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "SST3772": {
+    "code": "SST3772",
+    "title": "Social Studies 30-2",
+    "credits": 5,
+    "outline": {
+      "file": "SST3772_Social Studies 30-2_(Spring 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST3772_Social Studies 30-2_(Spring 2024_Current).pdf",
+      "courseName": "Social Studies 30-2",
+      "effectiveStartTerm": "Spring 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
   "STAT1151": {
     "code": "STAT1151",
     "title": "Statistics I",
@@ -17563,7 +19616,7 @@
   },
   "TECH1203": {
     "code": "TECH1203",
-    "title": "Networking Protocols and Concepts",
+    "title": "Networking Protocols and Concepts",
     "credits": 3,
     "outline": {
       "file": "TECH1203_Networking Protocols and Concepts_(Fall 2024_Current).pdf",
@@ -18128,9 +20181,67 @@
       }
     ]
   },
+  "VFXP1203": {
+    "code": "VFXP1203",
+    "title": "Creative Development Foundations",
+    "credits": 3,
+    "outline": {
+      "file": "VFXP1203_Creative Development Foundations_(Fall 2025_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VFXP1203_Creative Development Foundations_(Fall 2025_Current).pdf",
+      "courseName": "Creative Development Foundations",
+      "effectiveStartTerm": "Fall 2025",
+      "effectiveEndTerm": "Current",
+      "school": "Centre for Entertainment Arts"
+    },
+    "programs": [
+      {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 1",
+        "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+        "termLabel": "Term 1",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "VFXP1204": {
+    "code": "VFXP1204",
+    "title": "Foundations in Houdini",
+    "credits": 3,
+    "outline": {
+      "file": "VFXP1204_Foundations in Houdini_(Spring 2026_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/VFXP1204_Foundations in Houdini_(Spring 2026_Current).pdf",
+      "courseName": "Foundations in Houdini",
+      "effectiveStartTerm": "Spring 2026",
+      "effectiveEndTerm": "Current",
+      "school": "Centre for Entertainment Arts"
+    },
+    "programs": [
+      {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "VFXP1301": {
     "code": "VFXP1301",
-    "title": "Cinematics for Visual Effects",
+    "title": "Crafting Visual Narratives",
     "credits": 3,
     "outline": {
       "file": "VFXP1301_Crafting Visual Narratives _(Fall 2025_Current).pdf",
@@ -18159,7 +20270,7 @@
   },
   "VFXP1501": {
     "code": "VFXP1501",
-    "title": "Compositing I",
+    "title": "Compositing Essentials: Blending Realities",
     "credits": 3,
     "outline": {
       "file": "VFXP1501_Compositing Essentials Blending Realities_(Winter 2026_Current).pdf",
@@ -18188,7 +20299,7 @@
   },
   "VFXP1601": {
     "code": "VFXP1601",
-    "title": "Fundamentals of Texturing and Lighting for Visual Effects",
+    "title": "Texturing and Lighting Foundations: Painting with Light",
     "credits": 3,
     "outline": {
       "file": "VFXP1601_Texturing and Lighting Foundations Painting with Light_(Winter 2026_Current).pdf",
@@ -18229,9 +20340,23 @@
     },
     "programs": [
       {
+        "program": "3DAM - Advanced 3D Animation and 3D Modeling Diploma",
+        "slug": "advanced-3d-animation-and-3d-modeling-diploma",
+        "requirementsFile": "3DAM_-_Advanced_3D_Animation_and_3D_Modeling_Diploma.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      },
+      {
         "program": "AFP - Advanced Film Production Diploma",
         "slug": "advanced-film-production-diploma",
         "requirementsFile": "AFP_-_Advanced_Film_Production_Diploma.json",
+        "termLabel": "Term 3",
+        "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
         "termLabel": "Term 3",
         "ruleType": "completeAllCourses"
       }
@@ -18239,7 +20364,7 @@
   },
   "VFXP2303": {
     "code": "VFXP2303",
-    "title": "Visual Effects: Simulation",
+    "title": "Intermediate Visual Effects Simulation: Creating Dynamic Realities",
     "credits": 3,
     "outline": {
       "file": "VFXP2303_Intermediate Visual Effects Simulation Creating Dynamic Realities_(Fall 2025_Current).pdf",
@@ -18261,7 +20386,7 @@
   },
   "VFXP2304": {
     "code": "VFXP2304",
-    "title": "Dynamics: Fluid Simulation",
+    "title": "Advanced Visual Effects Simulation: Dynamics in Motion",
     "credits": 3,
     "outline": {
       "file": "VFXP2304_Advanced Visual Effects Simulation Dynamics in Motion_(Fall 2025_Current).pdf",
@@ -18281,9 +20406,39 @@
       }
     ]
   },
+  "VFXP2305": {
+    "code": "VFXP2305",
+    "title": "Advanced Unreal for VFX",
+    "credits": 3,
+    "outline": null,
+    "programs": [
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+        "termLabel": "Term 5",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
+  "VFXP2306": {
+    "code": "VFXP2306",
+    "title": "Unreal for Virtual Production",
+    "credits": 3,
+    "outline": null,
+    "programs": [
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+        "termLabel": "Term 4",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "VFXP2503": {
     "code": "VFXP2503",
-    "title": "Visual Effects: Node-Based Compositing",
+    "title": "Capstone Production II: Advanced Compositing and Shot Finalization",
     "credits": 3,
     "outline": {
       "file": "VFXP2503_Capstone Production II Advanced Compositing and Shot Finalization_(Fall 2025_Current).pdf",
@@ -18305,7 +20460,7 @@
   },
   "VFXP2601": {
     "code": "VFXP2601",
-    "title": "Lighting for Visual Effects",
+    "title": "Intermediate Texturing and Lighting for Visual Effects: Painting with Realism",
     "credits": 3,
     "outline": {
       "file": "VFXP2601_Intermediate Texturing and Lighting for Visual Effects Painting with Realism_(Fall 2025_Current).pdf",
@@ -18327,7 +20482,7 @@
   },
   "VFXP2602": {
     "code": "VFXP2602",
-    "title": "Advanced Texturing and Lighting",
+    "title": "Advanced Texturing and Lighting for Visual Effects: Shaping Realism",
     "credits": 3,
     "outline": {
       "file": "VFXP2602_Advanced Texturing and Lighting for Visual Effects Shaping Realism_(Fall 2025_Current).pdf",
@@ -18347,9 +20502,24 @@
       }
     ]
   },
+  "VFXP2700": {
+    "code": "VFXP2700",
+    "title": "Capstone Development I: Compositing and Scene Preparation",
+    "credits": 3,
+    "outline": null,
+    "programs": [
+      {
+        "program": "AVFX - Advanced Visual Effects Diploma",
+        "slug": "advanced-visual-effects-diploma",
+        "requirementsFile": "AVFX_-_Advanced_Visual_Effects_Diploma.json",
+        "termLabel": "Term 4",
+        "ruleType": "completeAllCourses"
+      }
+    ]
+  },
   "VFXP2701": {
     "code": "VFXP2701",
-    "title": "Advanced Visual Effects Industry Project I: Preproduction",
+    "title": "Industry Critique and Collaborative Presentation",
     "credits": 3,
     "outline": {
       "file": "VFXP2701_Industry Critique and Collaborative Presentation_(Fall 2025_Current).pdf",
@@ -18371,7 +20541,7 @@
   },
   "VFXP2702": {
     "code": "VFXP2702",
-    "title": "Advanced Visual Effects Industry Project II: Production",
+    "title": "Capstone Refinement and Industry-Ready Development",
     "credits": 4,
     "outline": {
       "file": "VFXP2702_Capstone Refinement and Industry-Ready Development_(Fall 2025_Current).pdf",
@@ -18393,7 +20563,7 @@
   },
   "VFXP2703": {
     "code": "VFXP2703",
-    "title": "Advanced Visual Effects Industry Project III: Industry Presentation and Critique",
+    "title": "Advanced Presentation and Industry Feedback",
     "credits": 4,
     "outline": {
       "file": "VFXP2703_Advanced Presentation and Industry Feedback_(Fall 2025_Current).pdf",
@@ -18415,7 +20585,7 @@
   },
   "VFXP2999": {
     "code": "VFXP2999",
-    "title": "Advanced Visual Effects Capstone Project: Review, Post-Mortem, and Portfolio",
+    "title": "Career Preparation and Final Portfolio Polish Capstone",
     "credits": 5,
     "outline": {
       "file": "VFXP2999_Career Preparation and Final Portfolio Polish Capstone_(Fall 2025_Current).pdf",
@@ -18671,6 +20841,79 @@
         "requirementsFile": "SW_-_Social_Work__Diploma_.json",
         "termLabel": "Term 5",
         "ruleType": "completeAllCourses"
+      },
+      {
+        "program": "UT - University Transfer",
+        "slug": "university-transfer",
+        "requirementsFile": "UT_-_University_Transfer.json",
+        "termLabel": "University Transfer Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "WRIT0103": {
+    "code": "WRIT0103",
+    "title": "Writing 3",
+    "credits": 5,
+    "outline": {
+      "file": "WRIT0103_Writing 3_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WRIT0103_Writing 3_(Fall 2024_Current).pdf",
+      "courseName": "Writing 3",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "WRIT0104": {
+    "code": "WRIT0104",
+    "title": "Writing 4",
+    "credits": 5,
+    "outline": {
+      "file": "WRIT0104_Writing 4_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WRIT0104_Writing 4_(Fall 2024_Current).pdf",
+      "courseName": "Writing 4",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
+      }
+    ]
+  },
+  "WRIT0105": {
+    "code": "WRIT0105",
+    "title": "Writing 5",
+    "credits": 5,
+    "outline": {
+      "file": "WRIT0105_Writing 5_(Fall 2024_Current).pdf",
+      "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WRIT0105_Writing 5_(Fall 2024_Current).pdf",
+      "courseName": "Writing 5",
+      "effectiveStartTerm": "Fall 2024",
+      "effectiveEndTerm": "Current",
+      "school": "School of Foundational Learning"
+    },
+    "programs": [
+      {
+        "program": "UPGR - Upgrading",
+        "slug": "upgrading",
+        "requirementsFile": "UPGR_-_Upgrading.json",
+        "termLabel": "Upgrading Program Courses",
+        "ruleType": ""
       }
     ]
   }
