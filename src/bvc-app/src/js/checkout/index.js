@@ -190,6 +190,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
         });
       this.setupBillingAddressToggle();
       this.setupPostalCodeAutoFormat();
+      this.setupFeeTierToggle();
       this.createErrorElements();
       this.checkForPaymentErrors();
 
@@ -312,6 +313,51 @@ import { validateCart, readValidation } from '../shared/validation.js';
 
           event.target.value = value;
         });
+      }
+    }
+
+    setupFeeTierToggle() {
+      if (this.fields.citizenshipStatus) {
+        this.fields.citizenshipStatus.addEventListener('change', () => {
+          this.applyFeeTier();
+        });
+      }
+      this.applyFeeTier();
+    }
+
+    applyFeeTier() {
+      var citizenshipEl = this.fields.citizenshipStatus;
+      if (!citizenshipEl || !citizenshipEl.value) return;
+
+      var domestic = isDomesticLegalStatus(citizenshipEl.value);
+
+      var items;
+      try {
+        items = JSON.parse(sessionStorage.getItem('cartItems') || '[]');
+      } catch (error) {
+        return;
+      }
+      if (!Array.isArray(items) || 0 === items.length) return;
+
+      var changed = false;
+      items.forEach(function (item) {
+        if (null == item.domesticPrice && null == item.internationalPrice) return;
+        var newPrice = domestic
+          ? (null != item.domesticPrice ? item.domesticPrice : item.price)
+          : (null != item.internationalPrice ? item.internationalPrice : item.price);
+        var newTax = domestic
+          ? (null != item.domesticTax ? item.domesticTax : item.tax)
+          : (null != item.internationalTax ? item.internationalTax : item.tax);
+        if (item.price !== newPrice || item.tax !== newTax) {
+          item.price = newPrice;
+          item.tax = newTax;
+          changed = true;
+        }
+      });
+
+      if (changed) {
+        sessionStorage.setItem('cartItems', JSON.stringify(items));
+        this.loadCartItems();
       }
     }
 
