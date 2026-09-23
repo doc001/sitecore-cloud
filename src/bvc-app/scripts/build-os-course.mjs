@@ -8,6 +8,9 @@
 //   src/css/checkout-cart.css     -> public/css/checkout-cart.css (minified)
 //   src/js/program-requirements/index.js -> public/js/program-requirements.js  (self-contained IIFE)
 //   src/css/program-requirements.css     -> public/css/program-requirements.css (minified)
+//   src/js/program-tuition/index.js -> public/js/program-tuition.js  (self-contained IIFE)
+//   src/css/program-tuition.css     -> public/css/program-tuition.css (minified)
+//   src/js/ee-listing/index.js    -> public/js/ee-listing.js     (self-contained IIFE)
 //
 //   node scripts/build-os-course.mjs            one-off minified build
 //   node scripts/build-os-course.mjs --watch    rebuild all on every save
@@ -110,6 +113,38 @@ const targets = [
     legalComments: 'none',
     banner: { css: `/* program-requirements.css — ${GENERATED} */` },
   },
+  {
+    entryPoints: [path.join(root, 'src/js/program-tuition/index.js')],
+    outfile: path.join(root, 'public/js/program-tuition.js'),
+    bundle: true,
+    minify: isProd,
+    format: 'iife',
+    target: ['es2017'],
+    legalComments: 'none',
+    drop: isProd ? ['console', 'debugger'] : [],
+    banner: { js: `/* program-tuition.js — ${GENERATED} */` },
+  },
+  {
+    entryPoints: [path.join(root, 'src/css/program-tuition.css')],
+    outfile: path.join(root, 'public/css/program-tuition.css'),
+    bundle: true,
+    minify: isProd,
+    legalComments: 'none',
+    banner: { css: `/* program-tuition.css — ${GENERATED} */` },
+  },
+  // No paired stylesheet: the cards it renders carry the Extended Education
+  // page's own Webflow classes, so the page styles them.
+  {
+    entryPoints: [path.join(root, 'src/js/ee-listing/index.js')],
+    outfile: path.join(root, 'public/js/ee-listing.js'),
+    bundle: true,
+    minify: isProd,
+    format: 'iife',
+    target: ['es2017'],
+    legalComments: 'none',
+    drop: isProd ? ['console', 'debugger'] : [],
+    banner: { js: `/* ee-listing.js — ${GENERATED} */` },
+  },
 ];
 
 const watch = process.argv.includes('--watch');
@@ -121,5 +156,8 @@ if (watch) {
   console.log('👀 [webflow-assets] watching src/js + src/css → public/{js,css}/* (minified). Ctrl+C to stop.');
 } else {
   await Promise.all(targets.map((t) => esbuild.build(t)));
-  console.log(`✅ [webflow-assets] built os-course.js, os-course.css, checkout.js, ee-course.js, checkout-cart.js, checkout-cart.css, program-requirements.js, program-requirements.css (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
+  // Derived from `targets`, not hand-listed — the hand-written list had already
+  // drifted, so a newly added bundle looked like it had not been built.
+  const built = targets.map((t) => path.basename(t.outfile)).join(', ');
+  console.log(`✅ [webflow-assets] built ${built} (${isProd ? 'PROD: minified, logs stripped' : 'DEV/UAT: readable, logs kept'}).`);
 }

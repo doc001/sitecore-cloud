@@ -3,10 +3,18 @@
 The backend behind the Open Studies / Extended Ed cart and checkout: course
 availability, cart validation, fees, registration, and payment.
 
-**Everything in this file marked "observed" was established by calling the UAT API
-on 2026-08-17 and 2026-08-18.** That matters because the published spec is incomplete in the one
+**Production is the environment that matters, and its origins are recorded under
+*Environments* below — verified 2026-08-19 by reading each proxy's `X-Api-Base`.**
+
+**The behavioural findings marked "observed" were established against UAT on
+2026-08-17**, and are labelled ⚠ UAT where prod has not been re-checked. Treat
+those as descriptions of the service, not of an environment: they are what the
+deployed code does, but the two blocking defects below were only ever reproduced
+on UAT and must be confirmed on prod before anyone acts on them.
+
+The published spec is no substitute: it is incomplete in the one
 place the cart depends on most — `/validation`'s success response has no schema at
-all — and because several documented shapes do not match what the deployed service
+all — and several documented shapes do not match what the deployed service
 actually returns. Where the two disagree, this file records both.
 
 - **Spec** (OpenAPI 3.0.1, `Thesis Extended Education v1`):
@@ -19,27 +27,48 @@ actually returns. Where the two disagree, this file records both.
 
 ## Calling it
 
-Everything goes through the Vercel payment proxy, which forwards to
-`devapi.bvc.dev/ths-extended-edu/v1/`. A bearer token is required on every call.
+Everything goes through a Vercel payment proxy, which forwards to the SiS backend
+for its environment. A bearer token is required on every call.
 
 ```
 POST {apiOrigin}/api/mstoken          body {}          -> { access_token }
 *    {apiOrigin}/api/bvcpayment?endpoint=<api path>    Authorization: Bearer <token>
 ```
 
-`apiOrigin` is `https://bvc-uat-api-proxy.vercel.app` (UAT) or
-`https://bvc-api-proxy.vercel.app` (prod). The `endpoint` value is passed
-**unescaped** by the probe scripts and by `os-course.js`; the slashes route fine.
+The `endpoint` value is passed **unescaped** by the probe scripts and by
+`os-course.js`; the slashes route fine.
 
-The backend can also be hit directly at
-`https://devapi.bvc.dev/ths-extended-edu/v1/<api path>` with the same token — useful
-for proving a fault is not the proxy's (see `fee-test-direct.ps1`).
+### Environments
+
+| | `apiOrigin` (proxy) | SiS backend it forwards to |
+|---|---|---|
+| **PROD** | `https://bvc-api-proxy.vercel.app` | `https://api.bowvalleycollege.ca/ths-extended-edu/v1` |
+| UAT | `https://bvc-uat-api-proxy.vercel.app` | `https://apim-bvc-uat-001.azure-api.net/ths-extended-edu/v1` |
+
+Production is what the live Webflow cart and `sis-health-watch.mjs` call — both
+default to `bvc-api-proxy.vercel.app` with no env override set.
+
+> **Do not take these from memory — ask the proxy.** Each one reports its own
+> upstream, answered from config without calling SiS:
+>
+> ```bash
+> curl -sI -X HEAD https://bvc-api-proxy.vercel.app/api/bvcpayment | grep -i x-api-base
+> ```
+>
+> That is how the table above was established, and `sis-health-watch.mjs` resolves
+> it the same way on every poll so its logs name the host they measured.
+
+> ⚠ **`devapi.bvc.dev` is not production and never was.** Earlier revisions of this
+> file, of `CLAUDE.md`, and of the watcher's alert text named it as the backend; it
+> is the *dev* host, still hardcoded in the retired `src/nextjs-jamstack` proxy
+> routes. Corrected 2026-08-19. The backend can be hit directly at
+> `<backend>/<api path>` with the same token — useful for proving a fault is not
+> the proxy's — but use the row above for the environment you mean.
 
 > **Transport is per-endpoint and inconsistent.** `submit-payment` takes everything
 > on the query string, `registration` takes a JSON body, `validation` takes a JSON
-> body and **415s** on the query string, and `fee` accepts either a path segment or
-> the documented `?studentNo=` query. Do not infer one endpoint's transport from a
-> sibling's.
+> body and **415s** on the query string, and `fee` takes a path segment plus a query
+> param. Do not infer one endpoint's transport from a sibling's.
 
 ## Endpoint inventory
 
@@ -97,43 +126,24 @@ The spec declares `200: OK` with no content schema. What it actually returns:
 }
 ```
 
-### Error codes
+### Error codes seen so far
 
-The full set, from the service source (supplied by the SiS team 2026-08-18). Course
-codes land in `courseErrorResponses[].courseError[].code`; user errors land in
-`userError.errors[]` as plain strings.
+| `code` | Trigger | `description` |
+|---|---|---|
+| `Offering Missing` | offering withdrawn, id never existed, **section full**, or unregisterable for a reason `courseofferings` cannot see | `Registration failed. {offeringId} is no longer available.` |
+| `Timeblock Conflict` | two cart items clash | `This offering has a timeblock conflict with another course in your cart and cannot be registered.` |
 
-| Kind | Code / error | Fires when | Reachable anonymously? |
-|---|---|---|---|
-| course | `Offering Missing` | `Registration failed. {code} is no longer available.` | **yes** — the only one we have ever seen |
-| course | `Offering Full` | `Registration failed. {code} is full.` | in principle — **never observed**, see below |
-| course | `AlreadyRegistered` | learner already holds this offering | no — needs a real `studentId` |
-| user | `Hold` | account hold blocks registration | no |
-| user | `AlreadyEnrolled` / `AlreadyEnrolledV2` | already enrolled in the course | no |
-| user | `InternationalLearner` | learner is not domestic | no — depends on the learner record |
-| user | `MaximumNumberOfCredits` | credit cap exceeded | no |
-| user | `RegistrationRemoved` | a prior registration was removed | no |
-| user | *(timeblock)* | `One or more courses in your cart have time conflicts…` | **yes** |
+Both codes were provoked by probe; the list is **not authoritative**.
 
-**Everything except the two "yes" rows needs a real learner.** The public cart sends
-`studentId: "0"`, so `userError.errors` is always empty for it — confirmed by sweeping
-all 297 sections individually and provoking a 12-course, 36-credit cart. Those errors
-become reachable only once SSO supplies a real student id.
+`Offering Missing` is heavily overloaded. A garbage id (`999999999`), a withdrawn
+offering (`30838`), **and a full section** all return it identically, so the code
+alone never tells you why. Confirmed against all five catalogue sections the API
+reports as `seatsAreAvailable: 0` — every one returns `Offering Missing` from
+`/validation`.
 
-> ### ⚠ `Offering Full` is never emitted
->
-> A dedicated full code exists, yet across **all 297 sections** the only course code
-> returned is `Offering Missing` — 42 times. `PSYC1101-50` / `10730`, independently
-> confirmed full by the registrar, comes back `Offering Missing`, not `Offering Full`.
->
-> **This invalidates the earlier reading in this file that "`Offering Missing` is how
-> the API reports a full section".** With a distinct code available and unused, the
-> 42 are more likely genuinely absent from whatever set `/validation` consults —
-> while `/courseofferings` returns `200` with seats for the same ids, so the two
-> endpoints are reading different sources.
->
-> Until this is resolved **we cannot tell "full" from "withdrawn"**, which blocks any
-> UI that labels a section *Full* (see open question 2).
+> **So `/validation` does cover seats** — it refuses full sections, it just will not
+> say that is the reason. `/courseofferings/{id}` remains the only way to distinguish
+> *full* from *gone*, which matters only for the wording shown to the user.
 
 ### ⚠ Two UAT behaviours that block wiring this into the cart
 
@@ -172,13 +182,17 @@ observed result.
 **Until this is fixed, `/validation` cannot gate add-to-cart** — it would cap the
 cart at one course.
 
-**2. `/validation` rejects sections the site presents as available.**
+**2. `/validation` rejects 42 sections that `/courseofferings` reports as available.**
 
-Whole-catalogue sweep: **46 of 301** (2026-08-18; 42 of 297 the day before) return
-`Offering Missing` on their own. The set is not random — it is dominated by
-high-demand intro courses (**ENGL1201 ×10**, COMM1101 ×4, INDG1101 ×4, MGMT ×3,
-PSYC1101 ×2, plus SOCI, ANAT1101, HRES), and every section independently known to be
-full is in it.
+Whole-catalogue sweep: 42 of 297 return `Offering Missing` on their own. The set is
+not random.
+
+- **all 42 are Open Studies**; zero Extended Ed (all 84 EE sections pass)
+- **all 42 are credit-bearing** (41 × 3 credits, 1 × 6); the 84 zero-credit EE
+  sections all pass
+- heavily concentrated in high-demand intro courses — **ENGL1201 ×10**, COMM1101 ×4,
+  INDG1101 ×4, MGMT ×3, PSYC1101 ×2, plus SOCI, ANAT1101, HRES
+- **all 5 sections known to be full are in this set**
 
 **Confirmed against a real full section (2026-08-17).** `10730` / `PSYC1101-50` is
 known to be full in the SiS:
@@ -189,50 +203,18 @@ known to be full in the SiS:
 | `public/data` (what the site renders) | `seatsAvailable: true` — **wrong** |
 | `/validation` | `Offering Missing` — **correct** |
 
-**`/validation` leads `seatsAreAvailable` by at least a day.** Re-swept 2026-08-18:
-`PSYC1101-50` **and** `-51` are now `seatsAvailable: false` in `public/data`, which
-`/validation` had been reporting as unregisterable 24 hours earlier. Our generated
-data and `courseofferings` catch up eventually; validation is right first.
-
-#### `Offering Missing` has two causes, and `courseofferings` separates them
-
-| `courseofferings` | `/validation` | Meaning |
-|---|---|---|
-| `200`, seats reported | `Offering Missing` | **known but full** — e.g. `PSYC1101-50/10730`, `PSYC1101-51/10732` |
-| `404` | `Offering Missing` | **not in the SiS at all** — published to Sitecore but not yet propagated |
-
-The second case is real and visible: `SAFT9406-120…123` (skus `30799`, `30800`,
-`30801`, `30802`) appeared in the catalogue on 2026-08-17 with registration opening
-the same day for a 2026-09-09 class. Both endpoints refuse them, while the previous
-batch of the same course (`SAFT9406-116/117`, registration opened 2026-07-27) is
-accepted by both. The site lists all of them; only the older ones can be registered.
-
-This is why the add-to-cart path calls **both** endpoints rather than picking one:
-`courseofferings` distinguishes "not there yet" from "full", which `/validation`
-alone never can.
-
-#### Stability over 24 hours
-
-| | 2026-08-17 | 2026-08-18 |
-|---|---|---|
-| catalogue sections | 297 | 301 |
-| rejected solo | 42 | 46 |
-| freed up since yesterday | — | **0** |
-| newly rejected | — | 4 (the new `SAFT9406` batch) |
-| flagged full in `public/data` | 5 | 7 |
-
-Nothing that was refused yesterday became registerable today, and every new
-rejection is a newly-published section. Note the earlier "all rejections are Open
-Studies" observation **no longer holds** — the four `SAFT9406` sections are Extended
-Ed. That pattern was an artefact of the catalogue on the day.
+So `Offering Missing` is how this API reports a full section, **`/validation` is the
+only trustworthy seat check**, and `courseofferings.seatsAreAvailable` should not be
+used for one — it catches 5 of the 42.
 
 Two consequences:
 
-- The site advertises as available both the full sections and the not-yet-propagated
-  ones. The seat check at `os-course/index.js:554` passes all of them.
+- The public site is currently advertising roughly 37 full sections as available, and
+  the add-to-cart seat check at `os-course/index.js:554` passes them.
 - **Solo validation is safe and worth doing on its own.** A single-course cart cannot
-  trigger the conflict defect, so validating just the course being added — with no
-  cart context — is strictly better than the seat check and is not blocked by issue 1.
+  trigger the conflict defect (255 of 297 sections validate cleanly alone), so
+  validating just the course being added — independently of cart context — is
+  strictly better than the current seat check and is not blocked by issue 1.
 
 ### Rules for any client
 
@@ -312,71 +294,6 @@ const seats  = availabilityResp.data?.seatsAreAvailable;
 const isFull = seats === 0 || seats === 'Full';     // block only when definitely full
 ```
 
-## `/registration` — coded field constraints
-
-Verified against UAT 2026-08-20 by POSTing real registrations (`registration-codes-test.ps1`).
-Sitecore is the source of truth for these codes — but **two fields cannot carry a
-Sitecore SisId**, because the API constrains their format:
-
-| Field | Domain | Why |
-|---|---|---|
-| `gender` | **single character** — `M` `F` `X` `U` | bound to `System.Char`; `"21"` → `400 "Error converting value \"21\" to type 'System.Char'"` |
-| `country`, `country_Citizenship` | **ISO alpha-2** — `CA`, `PH` | `400 "Country code must consist of exactly 2 alphabetic characters"`; Sitecore's `CAN`/`USA`/`FRA` are three |
-| `legalStatus` | Sitecore SisId — `1716`, `2207` | plain string; accepted |
-| `language` | Sitecore SisId — `121`, `2110` | plain string; accepted |
-| `ethnicity` | Sitecore SisId — `2`, `18` | plain string; accepted |
-
-Sitecore's country SisIds are a mix of 146 two-character and 127 three-character
-codes, and even the two-character ones are not reliably ISO (`PO` for Poland, `XK`
-for the United Kingdom).
-
-**ISO overrides Sitecore for this field** (decision 2026-08-20). Everywhere else
-Sitecore is the source of truth, but country codes go out as ISO alpha-2, so the
-United Kingdom is `GB` rather than Sitecore's `XK`, and Poland `PL` rather than `PO`.
-
-`scripts/generate-form-options.mjs` resolves each country **from its name**, not its
-code — the code cannot be trusted, and `XK` is why: ICU resolves it happily, to
-**Kosovo**. Being well-formed is not the same as meaning the right country. Only when
-ICU does not recognise the Sitecore spelling ("Vietnam, Republic Of", "People's
-Republic of China", "American Somoa") does it fall back to the SisId, then to an
-ISO alpha-3 → alpha-2 table.
-
-> **ICU knows more codes than ISO assigns**, and the extras win a name lookup because
-> they sort after the canonical code — it maps `RH` to Zimbabwe, `UK` to the United
-> Kingdom, `SU` to Russia. Deprecated codes are therefore *detected*, not listed:
-> canonicalising `und-XX` returns a different region for an alias (`RH` → `ZW`,
-> `AN` → `CW`) and the same one for a live code. Only the exceptionally-reserved and
-> user-assigned codes, which alias nothing, are named explicitly.
-
-The four UK constituents Sitecore lists separately (`XF` England, `XG` Northern
-Ireland, `XH` Scotland, `XI` Wales) collapse to `GB`, so searching "Scotland" works.
-
-**253 of 273** countries end up with a valid code; the generator exits non-zero if
-any row would fail the 2-character rule. `form-options.json` carries
-`[isoAlpha2, sitecoreName, sisId]` so a mismatch traces back.
-
-> **Kosovo is the one casualty.** It has no officially assigned ISO alpha-2 — the
-> de-facto code is `XK`, which is exactly what Sitecore uses for the United Kingdom.
-> Emitting `XK` for Kosovo would file those learners as British in a SiS reading
-> Sitecore's table, so it is excluded instead. Needs a decision if any Kosovar
-> learner ever registers.
-
-**Nothing is validated beyond format.** Registrations 21–27 store `legalStatus=1`,
-`ethnicity=6`, `language=ENG` exactly as sent — values that exist nowhere in
-Sitecore. The API is a pass-through writer, so a wrong-but-well-formed code is
-accepted silently and only matters to whatever consumes the registration downstream.
-
-Two further observations:
-
-- **`feeGroup` is derived, not stored as sent.** The client sends `'Tuition'`;
-  reading a registration back gives `DOMESTIC`. Whether it is computed from
-  `legalStatus` or is simply a constant is **unresolved** — `GET /registration/{id}`
-  answers `500 "Object reference not set to an instance of an object."` for every
-  freshly-created registration (120–124), while older ones (21, 25) read fine. So we
-  could not read back what our probes stored.
-- `GET /student/{id}` returns *labels*, not codes — `legalStatus=Canadian`,
-  `countryCitizen=Canada` — so it cannot be used to infer the write domain.
-
 ## Spec vs. reality
 
 | # | Spec says | Actually | Impact |
@@ -386,31 +303,9 @@ Two further observations:
 | 3 | `studentId` is a `string` | non-numeric → `500` FormatException | must be digits in a string |
 | 4 | `CourseAvailability` is `"Full"` / `"Available"` | integer `0` / `1` | latent seat-check failure, above |
 | 5 | `additionalProperties: false` | unknown body properties are ignored, not rejected | don't rely on either behaviour |
-| 6 | `fee` takes `?studentNo=` (query) | **both** forms work, and the trailing slash is optional — `fee/815`, `fee/815/`, and `fee/815?studentNo=` all return the same 200 | the comment at `os-course.js:30-34` overstates the trailing slash as required |
+| 6 | `fee` takes `?studentNo=` (query) | client sends `fee/{skus}/{studentNo}` as a path segment, trailing slash required | see `os-course.js:30-34`; works, but is not what is documented |
 | 7 | `POST /registration` returns `Registration` | actual body wraps it — client reads `result.newRegistration.id` | `checkout/index.js:804` |
 | 8 | `Registration` includes `studentPk` and `studentNumber` | client sends an **empty** `studentPk` to `submit-payment` and never reads these back | see open questions |
-| 9 | 404s return `ProblemDetails` (`type`/`title`/`status`/`detail`/`instance`) | they return **`ApiErrorResult`** — `{errorId, errorMessage}` — with a genuinely useful message, e.g. `"Unable to find course offerings with ID 999999999."` | parse `errorMessage`, not `detail`; verified on `courseofferings`, `registration`, `payment` |
-| 10 | `GET /student/{id}` documents a 404 | **never 404s.** Any id, including `999999999`, returns `200` with a skeleton `Student` | cannot be used to test whether a student exists |
-| 11 | `AdditionalFee` has no `courseSku` | correct — it carries `offeringId` (section suffix, e.g. `93`), `programId` (`ACCT9103`), `programOfferingId` (`ACCT9103-93`) | **our code filters fees on `fee.courseSku`, a field that does not exist** — see below |
-| 12 | — | `GET /registration/1` → `500 "Object reference not set to an instance of an object."` | second unguarded null-ref on this API, alongside the `studentPk` one |
-
-### Per-item fee attribution is dead code
-
-`feesForSku()` in `src/js/shared/fees.js` — and the inline version it was extracted
-from — filters on `fee.courseSku === sku`. The API never returns that field, so
-`item.fees` is always `[]` and `item.feeSummary` always zero.
-
-This is pre-existing, not a regression, and the **displayed totals are unaffected**:
-the cart renders the cart-level `summary`, which is correct. Only a per-course fee
-breakdown would be empty.
-
-It is arguably unfixable as written, and the dedupe rule is why. Fees are
-cart-level, so `dedupeFees()` keeps one set by description — and for a two-course
-cart (`815` + `340`) every surviving line is stamped `programOfferingId:
-"ACCT9103-93"`, i.e. whichever course happened to be first. After dedupe there is no
-per-course attribution left to recover. Either drop the per-item fields or stop
-deduping, but they cannot both be right.
-
 
 ## Test fixtures
 
@@ -423,9 +318,8 @@ API is healthy.
 | `340` | live — `ACCT9103-93`, seats available, validates clean alone |
 | **any two live skus together** | `Timeblock Conflict` — see the blocking issues above |
 | `816`, `817`, `818`, `2595`, `10044` | live, seats available |
-| `3698`, `21669`, `22321`, `3410`, `19066`, `10730`, `10732` | **full** — `seatsAreAvailable: 0`; `/validation` calls them `Offering Missing`. The last two only became `false` in our data on 08-18, a day after validation flagged them |
-| `2162`, `4153`, `4157` | `courseofferings` `200`/seats, `/validation` `Offering Missing` — the "known but full" case |
-| `30799`, `30800`, `30801`, `30802` | `SAFT9406-120…123` — **404 on `courseofferings`** and `Offering Missing` on validation: published to Sitecore 08-17, not yet in the SiS |
+| `3698`, `21669`, `22321`, `3410`, `19066` | **full** — `seatsAreAvailable: 0`; `/validation` calls them `Offering Missing` |
+| `2162`, `4153`, `4157` | `courseofferings` says fine, `/validation` says `Offering Missing` |
 | `30836`, `30838`, `30839` | **dead — 404.** Hardcoded in `fee-test.ps1`, `studentpk-test.ps1`, `validation-test.ps1` |
 
 Our generated `seatsAvailable` matches the API exactly — the same five sections are
@@ -455,6 +349,13 @@ excludes `*.ps1` by default, since these carry tokens and secrets).
 Read-only probes (`validation`, `courseofferings`, `fee`) are safe to run at will.
 `studentpk-test.ps1` writes to the UAT SiS.
 
+> ⚠ **These scripts are hardcoded to non-prod.** `fee-test.ps1` and
+> `fee-test-direct.ps1` carry `bvc-uat-api-proxy.vercel.app` and `devapi.bvc.dev`
+> respectively. Point them at the PROD row above before quoting their output as
+> evidence of a production fault. For prod timings, prefer
+> `node sis-health-watch.mjs`, which stamps proxy, backend and offering into every
+> line it writes.
+
 ## Open questions for the SiS team
 
 1. **`Timeblock Conflict` is firing on non-overlapping courses** (blocking issue 1).
@@ -462,36 +363,27 @@ Read-only probes (`validation`, `courseofferings`, `fee`) are safe to run at wil
    `timeBlock.startTime`/`endTime` — which arrive as term spans at midnight — instead
    of the day/time in `schedule`? Does prod behave the same? Until this is fixed
    `/validation` cannot gate add-to-cart.
-2. **Confirm the two causes of `Offering Missing`.** We can now separate them with
-   `courseofferings` — `200` means known-but-full, `404` means not in the SiS at all
-   — and both are live: 42 of the former, 4 of the latter (`SAFT9406-120…123`,
-   published to Sitecore on 08-17 and still unregisterable). Is that reading right,
-   and **how long should propagation take?** Sections are on the public site now
-   that nobody can register.
-3. **Why is `seatsAreAvailable` behind?** `/validation` refused `PSYC1101-50/-51` a
-   full day before either `courseofferings` or our generated data marked them full.
-   Is the seat flag computed on a different schedule, and can it be made to agree?
-4. **Publish the `/validation` 200 schema**, and the full set of `code` values.
+2. **Are the 42 `Offering Missing` sections actually full?** (blocking issue 2).
+   They are all OS, all credit-bearing, and concentrated in high-demand courses,
+   which suggests `/validation` has the true seat state while
+   `courseofferings.seatsAreAvailable` is stale (it flags 5 of the 42). If so, the
+   site is showing ~37 full sections as available and `seatsAreAvailable` should not
+   be used as a seat check. Please confirm which source is authoritative.
+3. **Publish the `/validation` 200 schema**, and the full set of `code` values.
    Two are known; the cart has to behave sensibly for the rest.
-5. **Can `Offering Missing` be split?** It currently covers withdrawn, unknown, and
+4. **Can `Offering Missing` be split?** It currently covers withdrawn, unknown, and
    full. Distinct codes would let us tell a user *"this section filled up"* rather
    than a generic "no longer available".
-6. **`studentId` is documented nullable but is required** (divergence 2/3). Either
+5. **`studentId` is documented nullable but is required** (divergence 2/3). Either
    the annotation or the doc should change; today it leads straight into a 400.
-7. **`CourseAvailability` serialisation** (divergence 4) — is the integer form
+6. **`CourseAvailability` serialisation** (divergence 4) — is the integer form
    intentional and stable, or will it become the documented string?
-8. **`studentPk`.** `POST /registration` returns `studentPk` / `studentNumber`, and
+7. **`studentPk`.** `POST /registration` returns `studentPk` / `studentNumber`, and
    `submit-payment` accepts `studentPk` — but the client sends it empty.
    `checkout/index.js:16-17` records that a non-empty value 500s for new
    registrations, while `studentpk-test.ps1` expects the opposite (`'1'` → 200,
    empty → 500). One of those is stale. What is the correct value for a new
    anonymous registration, and should it come from the registration response?
-9. **`userError.errors`** — is it always plain strings, or can it carry
+8. **`userError.errors`** — is it always plain strings, or can it carry
    `{code, description}` objects like `courseError`? Only ever observed as strings,
    and only for the conflict case.
-10. **404 bodies are `ApiErrorResult`, not the documented `ProblemDetails`**
-    (divergence 9), and **`GET /student/{id}` never 404s** (divergence 10) — it
-    returns a skeleton record for any id, so it cannot answer "does this student
-    exist". Both look like doc bugs rather than service bugs; please confirm.
-11. **`GET /registration/1` returns a 500 null-ref** (divergence 12). Harmless to us
-    today, but it is the same unguarded-null class as the `studentPk` failure.

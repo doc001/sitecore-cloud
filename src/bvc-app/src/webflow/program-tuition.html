@@ -1,0 +1,54 @@
+<!--
+  WEBFLOW SNIPPET — Program Tuition
+  =================================
+  Not a pasted embed. The tuition tabs are a hosted asset pair:
+
+    src/js/program-tuition/index.js  ->  public/js/program-tuition.js
+    src/css/program-tuition.css      ->  public/css/program-tuition.css
+
+  Built by `npm run js:build`, same as program-requirements / os-course.
+
+  ── WHAT TO PASTE ──────────────────────────────────────────────────────
+  "Before </head>" custom code on the Programs collection page TEMPLATE
+  (Page settings → Custom code). Once, not per program.
+-->
+
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/program-tuition.css" />
+<script src="https://bvc-app.vercel.app/js/program-tuition.js" defer></script>
+
+<!--
+  ── WHAT IT DOES ───────────────────────────────────────────────────────
+  Finds the template's existing #Tuition-and-Fees section and replaces ONLY its
+  tabs component (.c-tabs) with Domestic / International tabs built from
+  /data/static/program-tuition.json. The "Program Tuition" heading and the
+  disclaimer under it stay as Webflow renders them — edit those in the Designer.
+
+  The template's inline "total cost" script can stay; it only touches
+  .tuition-wrapper / .total-cost, which the new markup does not use. Once this
+  is live everywhere it and the CMS tuition collection can be retired.
+
+  - Domestic shows the ETI price, with an asterisk, for the 11 programs that
+    have one (same as the CMS did). No asterisk:
+      <script>window.__PROGRAM_TUITION_CONFIG__ = { etiMarker: '' };</script>
+  - A tab appears only for an audience the workbook prices. Programs with no
+    international row (PSYN, RNPCP, DDAS, SDAS, OS) show Domestic only.
+  - Programs without terms (UT, UPGR, OS …) show one "Annual tuition" row.
+
+  ── WHICH PROGRAM IS SHOWN ─────────────────────────────────────────────
+  Looked up by URL slug. To make it explicit, add a custom attribute on the
+  #Tuition-and-Fees div bound to the Code field:
+      name  data-program-code     value  (bind Code)
+
+  ── FAIL OPEN ──────────────────────────────────────────────────────────
+  No data for the program, fetch failure, script blocked: the Webflow tabs are
+  left exactly as rendered. The CSS hides them for at most 3 s while the script
+  decides, so the section can never end up blank.
+
+  ── DATA ───────────────────────────────────────────────────────────────
+  scripts/generateProgramTuition.mjs reads Finance's workbook
+  ("Annual Tuition (Submitted)v2.xlsx" on OneDrive) and writes the tracked
+  public/data/static/program-tuition.json. NOT part of the hourly build — re-run
+  when the workbook changes, then commit and deploy:
+      npm run generateProgramTuition:check   # report only
+      npm run generateProgramTuition
+-->

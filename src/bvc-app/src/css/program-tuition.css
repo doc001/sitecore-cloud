@@ -1,0 +1,157 @@
+/*
+ * Program Tuition tabs — SOURCE
+ * EDIT THIS FILE. Do not edit public/css/program-tuition.css (generated).
+ *
+ * Colours and sizes follow the Webflow design-system variables the original
+ * tabs used, with literal fallbacks so the block renders the same on a page
+ * that does not define them.
+ */
+
+/*
+ * While program-tuition.js decides, the Webflow tabs stay hidden so the
+ * shopper never sees one set of prices replaced by another. The script adds
+ * .bvc-tuition-settled when it keeps them. If the script never runs at all,
+ * the animation reveals them after 3 s — a stalled script cannot blank the
+ * section.
+ */
+#Tuition-and-Fees:not(.bvc-tuition-settled) .c-tabs {
+  visibility: hidden;
+  animation: bvc-tuition-reveal 0s linear 3s forwards;
+}
+
+@keyframes bvc-tuition-reveal {
+  to { visibility: visible; }
+}
+
+.bvc-tuition {
+  --bvc-tuition-navy: var(--design-system-v1---navy--navy-100, #031a62);
+  --bvc-tuition-navy-70: var(--design-system-v1---navy--navy-70, #4e5e91);
+  --bvc-tuition-blue: var(--design-system-v1---blue--blue-100, #00a3ff);
+  --bvc-tuition-purple: var(--design-system-v1---purple--purple-100, #6a4cd7);
+
+  width: 100%;
+  margin-top: 2rem;
+  color: var(--bvc-tuition-navy);
+}
+
+/* ── tabs ─────────────────────────────────────────────────────────── */
+
+.bvc-tuition__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.bvc-tuition__tab {
+  appearance: none;
+  margin: 0;
+  padding: 9px 30px;
+  border: 0;
+  border-bottom: 1px solid var(--design-system-v1---purple--purple-60, #a694e7);
+  border-radius: 6px 6px 0 0;
+  background-color: var(--design-system-v1---navy-tr--navy-tr-05, #031a620d);
+  color: var(--bvc-tuition-navy-70);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.bvc-tuition__tab:hover {
+  color: var(--bvc-tuition-navy);
+}
+
+.bvc-tuition__tab[aria-selected="true"] {
+  background-image: linear-gradient(261deg, var(--bvc-tuition-blue), var(--bvc-tuition-purple));
+  border-bottom-color: transparent;
+  color: #fff;
+}
+
+.bvc-tuition__tab:focus-visible {
+  outline: 2px solid var(--bvc-tuition-purple);
+  outline-offset: 2px;
+}
+
+/* ── panel ────────────────────────────────────────────────────────── */
+
+.bvc-tuition__panel {
+  padding: 12px;
+  border-radius: 0 8px 8px 8px;
+  background-image: linear-gradient(
+    90deg,
+    var(--design-system-v1---purple-tr--purple-tr-05, #6a4cd70d),
+    var(--design-system-v1---blue-tr--blue-tr-05, #00a3ff0d)
+  );
+}
+
+.bvc-tuition__table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.bvc-tuition__table th,
+.bvc-tuition__table td {
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* The gutter between the two columns, split so both boxes stay equal width. */
+.bvc-tuition__table tr > :first-child { padding-right: 8px; }
+.bvc-tuition__table tr > :last-child { padding-left: 8px; }
+
+.bvc-tuition__table thead th {
+  padding-top: 12px;
+  color: var(--bvc-tuition-navy);
+  font-weight: 500;
+}
+
+.bvc-tuition__table tbody th {
+  font-weight: 400;
+}
+
+.bvc-tuition__cell {
+  display: block;
+  padding: 2px 8px;
+  border: 0.5px solid var(--design-system-v1---navy-tr--navy-tr-10, #031a621a);
+  background-color: #fff;
+  color: var(--bvc-tuition-navy);
+}
+
+.bvc-tuition__table tfoot th,
+.bvc-tuition__table tfoot td {
+  padding-top: 32px;
+  padding-bottom: 8px;
+}
+
+.bvc-tuition__total-label {
+  font-weight: 400;
+}
+
+.bvc-tuition__table tfoot .bvc-tuition__total-amount {
+  padding-left: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .bvc-tuition__tab {
+    flex: 1 1 0;
+    padding: 9px 12px;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .bvc-tuition__table tfoot .bvc-tuition__total-amount {
+    padding-left: 8px;
+  }
+}

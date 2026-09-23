@@ -8,18 +8,19 @@
  *   Sandbox (local mock + watch): npm run os-course:dev
  *
  * Loaded from Webflow via:
- *   <script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
+ *   <script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
  *
  * Endpoints/config are overridable. Set BEFORE this script loads:
  *   window.__OS_COURSE_CONFIG__ = { dataOrigin: '', apiOrigin: '', feeApplicantId: 1 };
  * Defaults (production):
- *   dataOrigin     : https://bvc-app-uat.vercel.app        (this app's /data/*)
- *   apiOrigin      : https://bvc-uat-api-proxy.vercel.app (mstoken, bvcpayment)
+ *   dataOrigin     : https://bvc-app.vercel.app        (this app's /data/*)
+ *   apiOrigin      : https://bvc-api-proxy.vercel.app (mstoken, bvcpayment)
  *   feeApplicantId : ''  (empty studentNo segment in `fee/{skus}/{studentNo}`; backend expects it)
  * ---------------------------------------------------------------------------
  */
 import { fetchCartFees, feesForSku } from '../shared/fees.js';
 import { validateCart, readValidation, isConflict } from '../shared/validation.js';
+import { interestFormHtml, activateInterestForms } from '../shared/interest-form.js';
 
 (function () {
   'use strict';
@@ -28,8 +29,8 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     window.__bvcOsCourseLoaded = true;
     console.log('[OS-Course] Script loaded');
     var _cfg = (typeof window !== 'undefined' && window.__OS_COURSE_CONFIG__) || {},
-      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app-uat.vercel.app',
-      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app',
+      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app.vercel.app',
+      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app',
       // Fee endpoint is `fee/{skus}/{studentNo}` where {studentNo} must be EMPTY for an
       // anonymous fee preview — the URL ends in a trailing slash (`fee/2595/`). Verified
       // 2026-07-28: empty → 200 with fee data; the literal string 'null' now 404s. The
@@ -89,7 +90,31 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     window.getMsToken = getMsToken;
     var inFlightTokenPromise = null,
       guidLookup = { '1AE082FF1070438CBAA776B245B6F75D': 'Any-time Online', C38BDD5C70E34955AD170B6C6A1EC5E8: 'AudioVideo Based Instruction', '481341DF9A144AC8A315112B97377EC9': 'Blended', '0102087B8DAB4E96B64F49185C0B1FF8': 'Blended Asynchronous', '914480483DE14389ABD9EE4F1D28589E': 'Blended Self-Paced', C45FFE750A404E30A906FC3C6FDD99FC: 'Blended Synchronous', '6BF78E16E03F462FAEE8F223086CFB35': 'Blended Synchronous Asynchronous', '5969AC19010546B5B9834F6F8D2F3B29': 'BVC Online', '2E7F9F03DDB84D6BB91FDC2D4464372A': 'Challenge', '6F3515869E4C4C5599F470A7A58B13F0': 'Combined Online', C5BAA31D7BC0449890F790E897A92261: 'Computer Assisted Instruction', '2B0F27FC3A764DBB941F2644DB71B7D6': 'Correspondence Based Instruction', E27E365D5A3341629CFDB4DB6DE64FCA: 'Distributed Learning ecampus 2', '467A978F3823421BBDF788D21BC7B09C': 'ECampus Alberta - online learning', B146327974D348BD8306F957AE47CECD: 'eCampusAlberta Online', EE331EC390BC4D329910C5911DF970A7: 'Face to Face Self-Paced', '939C8DACA6C1415EBC831B3F062D4250': 'Face to Face Synchronous', '8317C7933CC449C2984E7F1CCD6FF5B8': 'Flexclass', F8EBCF8BF2D147AA9F76522DCBEDFA75: 'Home Study', '9754E29DF0754139B125292A81550174': 'Hyflex', E9F804275D3C4B61A685F63DF5134F14: 'In Class', '8AFAF1DADDEF4B71AC14DA272E952D0A': 'Micro-Credential Assessment', '5D448378DA984E9986E737C02BEA8F46': 'Mixed', C570FE50B9824FD6906B571CDE435CF3: 'Off-Site', EC1C42ED10C54C1995A9F2CFEAC79CD9: 'Online Asynchronous', '9FA504584ED84FABB0748D043A306BC3': 'Online Self-Paced', '71159BEB070D42C981D9758B3108A0CD': 'Online Synchronous', F6250694BAD64615BCB91693A45D76C5: 'Online Synchronous Asynchronous', '40817BFE87E1432EB3E68929DF8C9965': 'Real-time Online', '60C2E33F37514B7E884D1BEFB7155785': 'Teleconferencing / Videoconferencing', '63ADFB9EB3484A00BD66C043F43DEBE4': 'Traditional and Self Paced', '05A8F1DF96624B67A7F9DC22C32B4A5F': 'Work Experience', '00D83EDBF5B642ADA6493FBFE3EC116A': 'Airdrie', '481D28AD75CA4F12B5B10C078AA05F35': 'Banff', '0B44F9AE85B9426F9A3876762BBA5B5A': 'Calgary', '8005CA67F70B43C2BBB5004FF89FA4E1': 'Calgary Downtown Campus', A9B98CE5F1D5460F8812E36A93FDF320: 'Cochrane', '82E8438804E84947BAAF251119943A6A': 'Distance Learning', '5AA49765063A4B0BB623C0404A92406A': 'High River', '2B4E485287444409AA1E828DA53BFC0C': 'Okotoks', D8ECBBFE90E944FA8526B7A90ED56FC5: 'Online', D532C4A03C6C42E99C3C5569D3B7F59F: 'Regional', '05A9B93BC41A4F5CBE72FC9B97548AFF': 'Rural', A7B3BDCF1E404C32890EF853D2DCFDF2: 'Strathmore', FBE851B811DA49F0A8795BD188113BDB: 'Three Gorges Medical College', AF5967FBE4D446E3BA1212EFEE54B86C: 'Three Hills', '1B561481FF05406A897B1FEB28F98004': 'Yukon' },
-      dayCodeMap = { M: 'Mondays', T: 'Tuesdays', W: 'Wednesdays', R: 'Thursdays', F: 'Fridays', S: 'Saturdays', U: 'Sundays' };
+      // Day codes as Sitecore actually emits them. Every one of the 14 distinct
+      // tokens in the catalogue uses ONE scheme — Su M T W Th F Sa — verified
+      // 2026-09-02 across all 100 EE + OS course files. Note what is NOT here:
+      // no `R` for Thursday, no bare `S` for Saturday, no `U` for Sunday. The old
+      // map was built for that other (registrar) scheme and keyed whole tokens
+      // against single letters, so only 'M', 'T', 'W' and 'F' ever matched —
+      // 'Th', 'Sa', 'MW', 'TTh', 'FSa', 'ThF' and the rest fell through and were
+      // printed raw. That is why the page showed "Mondays" on one row and "TTh"
+      // on the next.
+      //
+      // `R`/`S`/`U` are still accepted below as a defensive fallback in case
+      // upstream ever switches schemes; they cost nothing and cannot collide with
+      // today's data, because two-character codes are matched FIRST and matching
+      // is case-sensitive. The one genuine ambiguity is an upper-cased 'SU': it
+      // does not equal 'Su', so it parses as S + U — Saturdays, Sundays. No
+      // parser can resolve that without knowing the scheme, and upstream emits
+      // 'Su'; noted so a future reader is not surprised by it.
+      dayCodeMap = { Su: 'Sundays', M: 'Mondays', T: 'Tuesdays', W: 'Wednesdays', Th: 'Thursdays', F: 'Fridays', Sa: 'Saturdays', Tu: 'Tuesdays', R: 'Thursdays', S: 'Saturdays', U: 'Sundays' },
+      // Longest-first, so 'Th' is consumed before 'T' and 'Sa'/'Su' before 'S'.
+      dayCodeTokens = ['Su', 'Sa', 'Th', 'Tu', 'M', 'T', 'W', 'R', 'F', 'S', 'U'],
+      // The whole week paired with a zero-length midnight window is Sitecore's
+      // placeholder for "there is no scheduled meeting time" — 100 occurrences,
+      // and the ONLY thing that window is ever paired with. Rendered literally it
+      // claims the class meets every day at midnight.
+      NO_MEETING_TIME = 'Self-paced — study any time';
     window.toggleAccordion = function (accordionId) {
       var content = document.getElementById('accordion-' + accordionId);
       if (content) {
@@ -232,12 +257,12 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
               button.classList.add('in-cart');
               button.setAttribute('aria-disabled', 'true');
               button.title = 'Already in cart';
-              button.textContent = 'In cart';
+              button.textContent = LABEL.inCart;
             } else if (!unavailable) {
               button.classList.remove('in-cart');
               button.removeAttribute('aria-disabled');
               button.title = cartFull ? 'Cart is full (max 6)' : '';
-              button.textContent = 'Add';
+              button.textContent = LABEL.add;
               button.classList.toggle('in-cart', cartFull);
             }
           });
@@ -266,6 +291,43 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
           this.cartMessage = document.querySelector('.cart-message');
         },
       },
+      // Every user-facing string in one place, so the toast, the button `title`
+      // and the in-cart warning cannot drift apart — they had, in wording,
+      // punctuation and vocabulary ("date" / "offering" / "item" / "product" for
+      // the same thing). Convention: full sentences, terminal period, and ONE noun
+      // per concept — "this date" for the accordion the shopper opened (it is
+      // labelled with a date range; "offering" and "section" are internal words),
+      // "course" for a row in the cart. Verdict copy from the API follows the same
+      // rules in ../shared/validation.js.
+      MSG = {
+        cartFull: 'Your cart is full (maximum 6 courses).',
+        unavailable: 'This date is no longer available.',
+        noSeats: 'No seats are available for this date.',
+        alreadyInCart: 'This course is already in your cart.',
+        added: 'Added to your cart.',
+        addedNoFees: 'Added to your cart, but fees could not be calculated. Checkout is unavailable.',
+        removed: 'Removed from your cart.',
+        removedNoFees: 'Removed from your cart, but fees could not be recalculated. Checkout is unavailable.',
+        cartEmptied: 'Your cart is now empty.',
+        cartEmpty: 'Your cart is empty.',
+        removeFailed: 'That course could not be removed. Please try again.',
+        // Shown instead of a raw exception string. `error.message` was going
+        // straight to the shopper — "Failed to fetch", "Failed to check course
+        // availability (status 502)" — which is noise to them and detail to
+        // anyone else. The real error still goes to the console.
+        unexpected: 'Something went wrong. Please try again.',
+        // In-cart fee error. Same sentence shape as addedNoFees rather than the
+        // em-dash variant it used to carry.
+        feeError: 'Additional fees could not be calculated. Checkout is unavailable.',
+      },
+      // Button labels. Here too, not inline: each appears in three or four places
+      // and has to agree with the `title` set alongside it.
+      LABEL = {
+        add: 'Add',
+        inCart: 'In cart',
+        checking: 'Checking…',
+        unavailable: 'Unavailable',
+      },
       showNotification = function (message, type) {
         var notification = document.createElement('div');
         notification.className = 'notification notification-' + type;
@@ -274,6 +336,31 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         setTimeout(function () {
           notification.remove();
         }, 3e3);
+      },
+      // A busy indicator that OUTLIVES the click. showNotification expires on a
+      // 3 s timer, which is useless for a call whose median is 10.9 s; and the
+      // button alone cannot be relied on — it can be scrolled out of view, and a
+      // successful add slides the cart and its overlay over the top of it. This
+      // stays up for exactly as long as the work does.
+      busyToast = {
+        el: null,
+        show: function (message) {
+          if (!this.el) {
+            this.el = document.createElement('div');
+            this.el.className = 'bvc-busy-toast';
+            this.el.setAttribute('role', 'status');
+            this.el.setAttribute('aria-live', 'polite');
+            this.el.innerHTML = '<span class="bvc-btn-spinner" aria-hidden="true"></span><span class="bvc-busy-text"></span>';
+            document.body.appendChild(this.el);
+          }
+          this.el.querySelector('.bvc-busy-text').textContent = message;
+        },
+        hide: function () {
+          if (this.el) {
+            this.el.remove();
+            this.el = null;
+          }
+        },
       },
       unavailableStore = {
         sessionKey: 'unavailableCourses',
@@ -315,7 +402,9 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             if (unavailableStore.isUnavailable(sku)) return;
             document.querySelectorAll('.addtocartbutton[data-product-id="' + sku + '"]').forEach(function (button) {
               button.classList.remove('unavailable');
+              button.removeAttribute('aria-disabled');
               button.title = '';
+              button.textContent = LABEL.add;
             });
           });
         },
@@ -356,17 +445,88 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       day = yyyymmdd.substring(6, 8);
     return new Date(year, month - 1, day).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
+  /**
+   * Expand a Sitecore day code into full day names.
+   *
+   * Greedy longest-match: 'MTWThF' -> M, T, W, Th, F. Returns null when the token
+   * cannot be fully consumed, so callers can fall back to printing it verbatim —
+   * showing an unrecognised code is bad, but inventing days is worse.
+   */
+  function expandDayCode(code) {
+    var remaining = String(code || ''),
+      names = [];
+    while (remaining.length) {
+      for (var index = 0, matched = false; index < dayCodeTokens.length; index++) {
+        var token = dayCodeTokens[index];
+        if (0 === remaining.indexOf(token)) {
+          names.push(dayCodeMap[token]);
+          remaining = remaining.slice(token.length);
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) return null;
+    }
+    return names.length ? names : null;
+  }
+  /**
+   * Normalise one `schedule` string ("MW 3:30 PM - 4:50 PM") into what the page
+   * should print. Returns { day, hours }; an empty `hours` means there is no
+   * meeting time to show and callers must not render a time alongside it.
+   */
+  function parseSchedule(schedule) {
+    if (!schedule) return { day: '', hours: '' };
+    var parts = String(schedule).trim().split(/\s+/),
+      code = parts[0],
+      hours = parts.slice(1).join(' '),
+      names = expandDayCode(code);
+    // Placeholder: the full week AND a zero-length midnight window. Both are
+    // required — all seven days with real hours would be a genuine schedule.
+    if (names && 7 === names.length && /^12:00\s*AM\s*-\s*12:00\s*AM$/i.test(hours)) return { day: NO_MEETING_TIME, hours: '' };
+    return { day: names ? names.join(', ') : code, hours: hours };
+  }
+  /**
+   * The timeblocks worth printing, parsed, deduped and de-contradicted.
+   *
+   * Sitecore hands back two kinds of noise. Sections repeat an identical block —
+   * 'FSa 8:00 AM - 4:50 PM' twice on the same section — which rendered as the same
+   * line printed twice. And 18 sections (11 EE, 7 OS) carry the all-week midnight
+   * placeholder ALONGSIDE real meeting times, which reads as a section that both
+   * has no set time and meets on Fridays. Where a real block exists it is the
+   * truth, so the placeholder is dropped; where it is alone it is the only thing
+   * there is to say.
+   */
+  function scheduleBlocks(section) {
+    var parsedBlocks = (section.timeBlocks || []).map(function (timeBlock) {
+        return parseSchedule(timeBlock.schedule);
+      }),
+      seen = {},
+      unique = parsedBlocks.filter(function (block) {
+        if (!block.day) return false;
+        var key = block.day + '|' + block.hours;
+        return !seen[key] && (seen[key] = true);
+      }),
+      hasRealBlock = unique.some(function (block) {
+        return !!block.hours;
+      });
+    return hasRealBlock
+      ? unique.filter(function (block) {
+          return !!block.hours;
+        })
+      : unique;
+  }
   function renderSchedule(section) {
-    return Array.isArray(section.timeBlocks) && section.timeBlocks.length
+    var blocks = scheduleBlocks(section);
+    return blocks.length
       ? '<div class="timeblock-info"><div class="detail-label">Schedule</div><div class="timeblock-details">' +
-          section.timeBlocks
-            .map(function (timeBlock) {
-              var parsed = (function (schedule) {
-                if (!schedule) return { day: '', hours: '' };
-                var parts = schedule.trim().split(/\s+/);
-                return { day: dayCodeMap[parts[0]] || parts[0], hours: parts.slice(1).join(' ') };
-              })(timeBlock.schedule);
-              return '<div><span class="productdays">' + parsed.day + '</span>:<br/><span class="producthours">' + parsed.hours + '</span></div>';
+          blocks
+            .map(function (parsed) {
+              // No colon and no time element when there are no hours — otherwise
+              // the placeholder renders as "Self-paced — study any time:" with a
+              // dangling colon over an empty line.
+              return parsed.hours
+                ? '<div><span class="productdays">' + parsed.day + '</span>:<br/><span class="producthours">' + parsed.hours + '</span></div>'
+                : '<div><span class="productdays">' + parsed.day + '</span></div>';
             })
             .join('') +
           '</div></div>'
@@ -402,14 +562,87 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       internationalAmount = section.fees && section.fees.international && null != section.fees.international.amount ? section.fees.international.amount : null,
       internationalTax = (section.fees && section.fees.international && section.fees.international.tax) || 0,
       internationalPriceDisplay = null !== internationalAmount ? parseFloat(internationalAmount).toFixed(0) : null,
+      // Only show a second price when there IS a second price. Sitecore populates
+      // `international` for nearly every section, but for Extended Education it
+      // simply repeats the domestic amount — 83 of 83 sections carrying the field,
+      // across all 39 EE courses, verified 2026-09-02 — so the page was printing
+      // "$120 Domestic Student / $120 International Student" and inviting the
+      // reader to find a difference that is not there. Open Studies genuinely
+      // differs on all 221 of its sections (e.g. 646 vs 1678), so the same rule
+      // keeps it. Compared as the rendered strings, which is what the shopper
+      // actually sees — equal after rounding is equal on the page.
+      hasDistinctInternationalPrice = null !== internationalPriceDisplay && internationalPriceDisplay !== domesticPriceDisplay,
+      // Belt and braces. renderOfferings() already filters priceless sections out,
+      // so this should never be false here — but if one ever reaches this far it
+      // must not render "$ 0 CAD" behind a live Add button.
+      hasPrice = sectionHasPrice(section),
       deliveryTypeName = resolveGuid(section.deliveryType),
       campusName = resolveGuid(section.campus),
       scheduleHtml = renderSchedule(section),
+      // Credits are shown only when the section HAS credits. Extended Education
+      // carries `credits: 0` on all 126 of its sections (Open Studies is 3/4/6),
+      // so the page and the cart were both printing a literal "Credits 0".
+      // Data-driven rather than keyed off the bundle: an EE course that ever gains
+      // credits shows them, and OS is untouched.
+      //
+      // `data-product-credits` is deliberately still emitted at 0. Checkout reads
+      // it to decide whether the ASN field is required (any cartItems[].credits > 0),
+      // and a mixed EE + OS cart depends on the zero being present rather than
+      // missing. Hiding the DISPLAY must not change the DATA.
       credits = section.credits || fallbackCredits,
       registrationHtml = section.registrationStart ? '<div class="detail-item"><div class="detail-label">Registration</div><div class="detail-value">' + formatDate(section.registrationStart) + (section.registrationEnd ? ' &ndash; ' + formatDate(section.registrationEnd) : '') + '</div></div>' : '';
-    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group"><div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div><div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section"><div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">Domestic Student</div>' + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (null !== internationalPriceDisplay ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div><div class="action-section"><a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-intl-price="' + (null !== internationalPriceDisplay ? internationalPriceDisplay : domesticPriceDisplay) + '" data-product-intl-tax="' + parseFloat(null !== internationalAmount ? internationalTax : domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a><p class="additional-fees">Additional fees apply</p></div></div></div></div></div>';
+    return '<div class="accordion-item-' + accordionId + '"><button class="accordion-toggle" onclick="toggleAccordion(\'' + accordionId + '\')"><div class="date-range"><span class="productdates">' + formattedStart + ' &ndash; ' + formattedEnd + '</span><span class="dropdown-icon">&#9660;</span></div></button><div class="accordion-content" id="accordion-' + accordionId + '"><span class="productlocation" style="display:none;">' + campusName + '</span><div class="course-details"><div class="detail-group">' + (parseFloat(credits) > 0 ? '<div class="detail-item"><div class="detail-label">Credits</div><div class="detail-value">' + credits + '</div></div>' : '') + '<div class="detail-item"><div class="detail-label">Hours</div><div class="detail-value">' + section.hours + '</div></div>' + registrationHtml + scheduleHtml + '</div><div class="price-section">' + (hasPrice ? '<div class="price-info"><div class="price-display"><span class="currency">$</span><span class="price">' + domesticPriceDisplay + '</span><span class="currency-code">CAD</span></div>' + (hasDistinctInternationalPrice ? '<div class="student-type">Domestic Student</div>' : '') + (domesticTax > 0 ? '<div class="tax-note">+ $' + parseFloat(domesticTax).toFixed(2) + ' tax</div>' : '') + (hasDistinctInternationalPrice ? '<div class="price-display intl" style="margin-top:8px;"><span class="currency">$</span><span class="price">' + internationalPriceDisplay + '</span><span class="currency-code">CAD</span></div><div class="student-type">International Student</div>' : '') + '</div>' : '') + '<div class="action-section">' + (hasPrice ? '<a href="#" data-accordion-id="' + accordionId + '" data-product-name="' + productName + '" data-product-id="' + section.sisId + '" data-product-credits="' + credits + '" data-quantity="1" data-product-price="' + domesticPriceDisplay + '" data-product-tax="' + parseFloat(domesticTax).toFixed(2) + '" data-product-intl-price="' + (null !== internationalPriceDisplay ? internationalPriceDisplay : domesticPriceDisplay) + '" data-product-intl-tax="' + parseFloat(null !== internationalAmount ? internationalTax : domesticTax).toFixed(2) + '" data-product-delivery="' + deliveryTypeName + '" class="c-button_cart addtocartbutton w-button" tabindex="0">Add</a>' : '') + '<p class="additional-fees">Additional fees apply</p></div></div></div></div></div>';
   }
-  function renderOfferings(sections, courseName, defaultCredits) {
+  /**
+   * The right-hand offers column.
+   *
+   * "Enroll now" is only printed when there IS something to enrol in. A course
+   * whose every section lacks a price gets the interest panel under a heading
+   * that matches what the panel actually offers.
+   */
+  function renderOffersColumn(sections, courseName, defaultCredits, courseCode) {
+    if (!sections.length) return '<p class="no-sections">No sections currently available.</p>';
+    var sellable = sections.filter(sectionHasPrice),
+      heading = sellable.length ? 'Enroll now' : 'Register your interest';
+    return '<div class="enrollment-section"><div class="enrollment-header">' + heading + '</div>' + renderOfferings(sections, courseName, defaultCredits, courseCode) + '</div>';
+  }
+  /**
+   * Can this section actually be sold?
+   *
+   * Sitecore sends `fees: { domestic: null, international: null }` for offerings
+   * whose price has not been entered — four Extended Education courses today.
+   * `domesticAmount` coerced that null to 0, so the page advertised "$ 0 CAD"
+   * behind a live Add button and a shopper could take a free course to checkout.
+   */
+  function sectionHasPrice(section) {
+    return !!(section && section.fees && section.fees.domestic && parseFloat(section.fees.domestic.amount) > 0);
+  }
+  /**
+   * The interest panel shown in place of the offerings list.
+   *
+   * Nothing about the offering is printed — no dates, hours, registration window
+   * or schedule. All of that describes an offering the shopper cannot have, and
+   * showing it next to "no offers are available" reads as a contradiction rather
+   * than as an explanation.
+   */
+  function renderInterestPanel(courseName, courseCode) {
+    return (
+      '<div class="bvc-interest-panel"><p class="bvc-interest-note">No offers are available at the moment. ' +
+      'Please fill out the form and we will connect with you as soon as the course is available.</p>' +
+      interestFormHtml({ courseName: courseName, courseCode: courseCode }) +
+      '</div>'
+    );
+  }
+  function renderOfferings(sections, courseName, defaultCredits, courseCode) {
+    // Only sellable sections reach the list. When NONE are sellable the whole
+    // panel becomes the interest form — no delivery-type heading, no campus, no
+    // date range, nothing that implies there is something to enrol in. When some
+    // are, the shopper can buy those, and the priceless ones are simply left out
+    // rather than sitting alongside them advertising nothing.
+    var sellable = sections.filter(sectionHasPrice);
+    if (0 === sellable.length) return renderInterestPanel(courseName, courseCode);
+    if (sellable.length !== sections.length) console.warn('[Offerings] ' + (sections.length - sellable.length) + ' section(s) hidden — no price set in Sitecore.');
+    sections = sellable;
     var groupedByDeliveryThenCampus = (function (sortedSections) {
         var groups = {};
         sortedSections.forEach(function (section) {
@@ -452,7 +685,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     cartDom.cart.classList.add('open');
     cartDom.overlay.classList.add('open');
     if (cart.isCartFull()) {
-      cartDom.cartMessage.textContent = 'Maximum number of products (6) has been reached.';
+      cartDom.cartMessage.textContent = MSG.cartFull;
       cartDom.cartMessage.classList.add('visible');
     } else {
       cartDom.cartMessage.classList.remove('visible');
@@ -472,11 +705,22 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
           ? '<div class="cart-item-info"><span style="font-weight:600;">Schedule:</span></div>' +
             item.timeblocks
               .map(function (block) {
-                return '<div class="cart-item-info" style="padding-left:20px;">• ' + block.day + ': ' + block.hours + '</div>';
+                // Same rule as the accordion: no colon, no time, when the
+                // section has no meeting time to state.
+                return '<div class="cart-item-info" style="padding-left:20px;">• ' + block.day + (block.hours ? ': ' + block.hours : '') + '</div>';
               })
               .join('')
-          : '<div class="cart-item-info"><span style="font-weight:600;">Days:</span> ' + (item.productdays || 'Not specified') + '</div><div class="cart-item-info"><span style="font-weight:600;">Hours:</span> ' + (item.producthours || 'Not specified') + '</div>';
-      itemEl.innerHTML = '<button class="remove-item" data-sku="' + item.sku + '">Remove</button><div class="cart-item-details"><div><strong>' + (item.productName || item.sku) + '</strong></div><div class="cart-item-info"><span style="font-weight:600;">Credits: </span> ' + item.credits + '</div><div class="cart-item-info"><span style="font-weight:600;">Tuition:</span> $' + item.price + ' x ' + item.quantity + '</div>' + (parseFloat(item.tax) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Tuition Tax:</span> $' + parseFloat(item.tax).toFixed(2) + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Delivery:</span> ' + (item.productDelivery || 'Standard') + '</div><div class="cart-item-info"><span style="font-weight:600;">Dates:</span> ' + (item.productdates || 'Not specified') + '</div>' + scheduleHtml + '<div class="cart-item-info"><span style="font-weight:600;">Location:</span> ' + (item.productlocation || 'Not specified') + '</div></div>';
+          : '<div class="cart-item-info"><span style="font-weight:600;">Days:</span> ' + (item.productdays || 'Not specified') + '</div>' +
+            // "Hours: Not specified" underneath "Self-paced — study any time" is
+            // noise: the line above has already answered the question.
+            (item.producthours ? '<div class="cart-item-info"><span style="font-weight:600;">Hours:</span> ' + item.producthours + '</div>' : '');
+      // The remove control comes AFTER the details in source order and is pulled to
+      // the row's top-right by CSS (.cart-item was already position:relative for a
+      // fix that had never been written). It used to be emitted FIRST as a solid red
+      // "Remove" block, which put a destructive action where the row's heading
+      // belongs and pushed the course name below it. `aria-label` names the course,
+      // because "×" alone tells a screen-reader user nothing about what it removes.
+      itemEl.innerHTML = '<div class="cart-item-details"><div class="cart-item-name"><strong>' + (item.productName || item.sku) + '</strong></div>' + (parseFloat(item.credits) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Credits:</span> ' + item.credits + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Tuition:</span> $' + item.price + ' x ' + item.quantity + '</div>' + (parseFloat(item.tax) > 0 ? '<div class="cart-item-info"><span style="font-weight:600;">Tuition Tax:</span> $' + parseFloat(item.tax).toFixed(2) + '</div>' : '') + '<div class="cart-item-info"><span style="font-weight:600;">Delivery:</span> ' + (item.productDelivery || 'Standard') + '</div><div class="cart-item-info"><span style="font-weight:600;">Dates:</span> ' + (item.productdates || 'Not specified') + '</div>' + scheduleHtml + '<div class="cart-item-info"><span style="font-weight:600;">Location:</span> ' + (item.productlocation || 'Not specified') + '</div></div><button class="remove-item" type="button" data-sku="' + item.sku + '" title="Remove from cart" aria-label="Remove ' + (item.productName || item.sku) + ' from cart">&times;</button>';
       fragment.appendChild(itemEl);
     });
     cartDom.cartItemsContainer.innerHTML = '';
@@ -510,7 +754,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
         feeErrorEl.style.color = '#b00020';
         feeErrorEl.style.fontSize = '13px';
         feeErrorEl.style.margin = '8px 0';
-        feeErrorEl.textContent = 'Additional fees could not be calculated. Checkout is unavailable — please try again.';
+        feeErrorEl.textContent = MSG.feeError;
         cartDom.cartItemsContainer.appendChild(feeErrorEl);
       }
     }
@@ -548,7 +792,15 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       grandTotal = subtotal + taxTotal + feeSummary.totalAmount + feeSummary.totalTax,
       summaryEl = document.createElement('div');
     summaryEl.className = 'cart-summary';
-    summaryEl.innerHTML = '<hr /><div class="cart-item-info"><strong>Subtotal:</strong> $' + subtotal.toFixed(2) + '</div><div class="cart-item-info"><strong>Additional Fees:</strong> $' + feeSummary.totalAmount.toFixed(2) + '</div><div class="cart-item-info"><strong>Tax:</strong> $' + (taxTotal + feeSummary.totalTax).toFixed(2) + '</div>';
+    // Rows that would read $0.00 are omitted rather than printed. An Extended
+    // Education cart has no additional fees and often no tax, so it was showing
+    // two zero lines and inviting the shopper to wonder what they were for.
+    summaryEl.innerHTML =
+      '<hr /><div class="cart-item-info"><strong>Subtotal:</strong> $' +
+      subtotal.toFixed(2) +
+      '</div>' +
+      (feeSummary.totalAmount > 0 ? '<div class="cart-item-info"><strong>Additional Fees:</strong> $' + feeSummary.totalAmount.toFixed(2) + '</div>' : '') +
+      (taxTotal + feeSummary.totalTax > 0 ? '<div class="cart-item-info"><strong>Tax:</strong> $' + (taxTotal + feeSummary.totalTax).toFixed(2) + '</div>' : '');
     cartDom.cartItemsContainer.appendChild(summaryEl);
     cartDom.totalAmount.textContent = grandTotal.toFixed(2);
   }
@@ -557,10 +809,16 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
     var button = event.currentTarget;
     if (!button.classList.contains('in-cart') && !button.classList.contains('unavailable')) {
       if (cart.isCartFull()) {
-        showNotification('Maximum number of products (6) has been reached', 'error');
+        showNotification(MSG.cartFull, 'error');
         return void openCart();
       }
+      // The availability check is the ONLY SiS call standing between the click and
+      // the cart, and that backend has a measured 10.9 s median (CLAUDE.md). Say so
+      // in two places, because either one alone can go unseen: a spinner in the
+      // button itself, and a toast that survives the cart sliding over the button.
       button.classList.add('loading');
+      setButtonBusy(button, LABEL.checking);
+      busyToast.show('Checking availability…');
       try {
         var token = await getValidToken(),
           cartItem = (function (button) {
@@ -595,13 +853,16 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             }
             return item;
           })(button);
-        if (unavailableStore.isUnavailable(cartItem.sku)) return void showNotification('This date is not available', 'error');
+        if (unavailableStore.isUnavailable(cartItem.sku)) {
+          disableButton(button, MSG.unavailable);
+          return void showNotification(MSG.unavailable, 'error');
+        }
         var availabilityResp = await checkAvailability(cartItem.sku, token);
         if ((401 === availabilityResp.status && ((token = await getValidToken(true)), (availabilityResp = await checkAvailability(cartItem.sku, token))), 200 === availabilityResp.status)) {
           if (!availabilityResp.data || !availabilityResp.data.seatsAreAvailable) {
             unavailableStore.markAsUnavailable(cartItem.sku);
-            button.classList.add('unavailable');
-            return void showNotification('No seats available for this date', 'error');
+            disableButton(button, MSG.noSeats);
+            return void showNotification(MSG.noSeats, 'error');
           }
           // Empty context unless conflict checking is switched on, so the default is
           // the solo form: it answers "can this offering be registered at all", which
@@ -627,8 +888,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
               // itself, so it persists for the session like the seats check above.
               if (isConflict(verdict)) conflictStore.mark(cartItem.sku);
               else unavailableStore.markAsUnavailable(cartItem.sku);
-              button.classList.add('unavailable');
-              button.title = verdict.message;
+              disableButton(button, verdict.message);
               return void showNotification(verdict.message, 'error');
             }
           }
@@ -636,6 +896,10 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             cart.updateAddedButtonStates();
             renderCart(true);
             openCart();
+            // The cart is now on screen with its own fee-loading spinner, so it
+            // takes over as the indicator. Two spinners saying different things
+            // is worse feedback than one.
+            busyToast.hide();
             button.classList.remove('loading');
             var skus = cart.items.map(function (item) {
               return item.sku;
@@ -643,25 +907,29 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             try {
               await calculateFees(skus, token);
               renderCart();
-              showNotification('Item added to cart!', 'success');
+              showNotification(MSG.added, 'success');
             } catch (error) {
               console.error('Error checking fees:', error);
               sessionManager.clearFeeSession();
               renderCart();
-              showNotification('Item added, but fees could not be calculated. Checkout is unavailable.', 'error');
+              showNotification(MSG.addedNoFees, 'error');
             }
-          } else showNotification('Item is already in your cart', 'error');
+          } else showNotification(MSG.alreadyInCart, 'error');
         } else {
           if (404 !== availabilityResp.status) throw new Error('Failed to check course availability (status ' + availabilityResp.status + ')');
           unavailableStore.markAsUnavailable(cartItem.sku);
-          button.classList.add('unavailable');
-          showNotification('This date is not available', 'error');
+          disableButton(button, MSG.unavailable);
+          showNotification(MSG.unavailable, 'error');
         }
       } catch (error) {
         console.error('Error in handleAddToCart:', error);
-        showNotification(error.message, 'error');
+        showNotification(MSG.unexpected, 'error');
       } finally {
         button.classList.remove('loading');
+        busyToast.hide();
+        // Restore the label unless a terminal state already claimed it
+        // ("In cart" from updateAddedButtonStates, "Unavailable" from disableButton).
+        if (!button.classList.contains('in-cart') && !button.classList.contains('unavailable')) button.textContent = LABEL.add;
       }
     }
   }
@@ -714,114 +982,59 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       pdfFilename: matched ? matched.pdfFilename : null,
     };
   }
+  // Sections are rendered from the Sitecore data alone — no availability sweep.
+  //
+  // This used to time a `courseofferings` call PER section before showing the
+  // enrolment list, hiding any section that did not answer with seats. Three
+  // things were wrong with it. The seats flag it keyed on is not trustworthy
+  // (`seatsAreAvailable` reported seats for 37 of the 42 sections the SiS
+  // refuses to register — see docs/sis-api.md), so it hid the wrong rows. The
+  // calls are serial against a backend measured at a 10.9 s median and a 90 s
+  // max (see the SiS health watcher in CLAUDE.md), so the page sat behind a
+  // spinner for minutes. And any degradation there emptied the enrolment
+  // section entirely — a course with sections on sale rendered as "No sections
+  // currently available."
+  //
+  // Availability is now decided at the only moment it can be acted on: the Add
+  // click, in handleAddToCart(), which greys the button out when the SiS says
+  // no. One call, on demand, against the section the shopper actually chose.
   function bindOfferings(container) {
     container.querySelectorAll('.addtocartbutton').forEach(function (button) {
       button.addEventListener('click', handleAddToCart);
     });
+    // A course with nothing sellable renders the interest form in place of the
+    // offerings list; this draws its reCAPTCHA, which cannot self-render into
+    // markup written after the API's one automatic sweep of the document.
+    activateInterestForms(container);
+    // Anything already refused during this session stays greyed out across
+    // re-renders and back-navigation — sessionStorage, no network call.
+    markKnownUnavailable(container);
     cart.updateAddedButtonStates();
-    (async function (container) {
-      var buttons = container.querySelectorAll('.addtocartbutton');
-      if (0 !== buttons.length) {
-        var loadingOverlay,
-          enrollmentSection = container.querySelector('.enrollment-section');
-        if (enrollmentSection) {
-          enrollmentSection.style.position = 'relative';
-          (loadingOverlay = document.createElement('div')).className = 'availability-loading-overlay';
-          loadingOverlay.innerHTML = '<div class="availability-spinner"></div><div>Checking availability…</div>';
-          enrollmentSection.appendChild(loadingOverlay);
-        }
-        try {
-          var token;
-          try {
-            token = await getValidToken();
-          } catch (error) {
-            return void console.warn('[Availability] No token — skipping availability sweep.');
-          }
-          // A section can be unbuyable in two independent ways, and neither endpoint
-          // sees the other's case (docs/sis-api.md):
-          //   courseofferings 404          -> not in the SiS at all; published to
-          //                                   Sitecore but not yet propagated
-          //   validation `Offering Missing` -> the SiS knows it and refuses it — full.
-          //                                   courseofferings still reports seats here,
-          //                                   a day or more behind the truth
-          // So both run, and anything either one refuses is hidden rather than left on
-          // the page for someone to click and be turned away.
-          var jobs = [];
-          Array.prototype.forEach.call(buttons, function (button) {
-            var productId = button.getAttribute('data-product-id');
-            if (productId && !cart.isInCart(productId)) jobs.push({ button: button, sku: productId });
-          });
-
-          async function inspect(sku) {
-            var pair = await Promise.all([checkAvailability(sku, token), validateOnAdd ? validateCart({ apiOrigin: apiOrigin, sku: sku, cartSkus: [], token: token }) : null]);
-            if (401 === pair[0].status || (pair[1] && 401 === pair[1].status)) {
-              token = await getValidToken(true);
-              pair = await Promise.all([checkAvailability(sku, token), validateOnAdd ? validateCart({ apiOrigin: apiOrigin, sku: sku, cartSkus: [], token: token }) : null]);
-            }
-            var offering = pair[0],
-              seats = offering.data && offering.data.seatsAreAvailable,
-              // Documented as the string enum "Full"/"Available", serialised today as
-              // 0/1. Name both so a converter added upstream cannot silently turn every
-              // full section back into a bookable one.
-              isFull = 0 === seats || 'Full' === seats,
-              verdict = pair[1] ? readValidation(pair[1]) : null;
-            if (200 !== offering.status) return 'not in the SiS (' + offering.status + ')';
-            if (!offering.data || isFull) return 'no seats';
-            // A null verdict is "could not determine" — leave the section visible.
-            if (verdict && !verdict.ok) return 'validation: ' + verdict.codes.join(',');
-            return null;
-          }
-
-          // Bounded concurrency: a course can carry two dozen sections, and two calls
-          // each, run one after another, is ~50 round trips before the list settles.
-          var cursor = 0;
-          async function sweepWorker() {
-            while (cursor < jobs.length) {
-              var job = jobs[cursor++];
-              try {
-                var reason = await inspect(job.sku);
-                if (null === reason) {
-                  job.button.classList.remove('unavailable');
-                  job.button.title = '';
-                  job.button.textContent = 'Add';
-                } else {
-                  console.log('[Availability] hiding', job.sku, '—', reason);
-                  unavailableStore.markAsUnavailable(job.sku);
-                  var accordionEl = container.querySelector('.accordion-item-' + job.button.getAttribute('data-accordion-id'));
-                  accordionEl && (accordionEl.style.display = 'none');
-                }
-              } catch (error) {
-                // Fail open: a check that errors leaves the section on the page.
-                console.warn('Availability check failed for ' + job.sku, error);
-              }
-            }
-          }
-          await Promise.all([sweepWorker(), sweepWorker(), sweepWorker(), sweepWorker(), sweepWorker(), sweepWorker()]);
-          container.querySelectorAll('.offering-location').forEach(function (locationEl) {
-            var accordionItems = locationEl.querySelectorAll('[class^="accordion-item-"]');
-            Array.prototype.every.call(accordionItems, function (accordionItem) {
-              return 'none' === accordionItem.style.display;
-            }) && (locationEl.style.display = 'none');
-          });
-          container.querySelectorAll('.course-offering').forEach(function (offeringEl) {
-            var locations = offeringEl.querySelectorAll('.offering-location');
-            Array.prototype.every.call(locations, function (location) {
-              return 'none' === location.style.display;
-            }) && (offeringEl.style.display = 'none');
-          });
-          var offerings = container.querySelectorAll('.course-offering'),
-            hiddenOfferings = container.querySelectorAll('.course-offering[style*="display: none"]');
-          if (offerings.length > 0 && offerings.length === hiddenOfferings.length) {
-            var header = container.querySelector('.enrollment-header');
-            header && header.insertAdjacentHTML('afterend', '<p class="no-sections">No sections currently available.</p>');
-          }
-        } catch (error) {
-          console.error('Error during availability check:', error);
-        } finally {
-          loadingOverlay && loadingOverlay.remove();
-        }
-      }
-    })(container);
+  }
+  /**
+   * Re-apply the session's refusals to freshly-rendered buttons.
+   *
+   * Skips anything already in the cart: that button belongs to
+   * updateAddedButtonStates(), and greying it here would leave it stuck reading
+   * "In cart" after the item is removed instead of returning to "Add".
+   */
+  function markKnownUnavailable(container) {
+    (container || document).querySelectorAll('.addtocartbutton').forEach(function (button) {
+      var productId = button.getAttribute('data-product-id');
+      if (productId && !cart.isInCart(productId) && unavailableStore.isUnavailable(productId)) disableButton(button, MSG.unavailable);
+    });
+  }
+  /** Put one Add button into its busy state: spinner + label, still fully visible. */
+  function setButtonBusy(button, label) {
+    button.innerHTML = '<span class="bvc-btn-spinner" aria-hidden="true"></span>';
+    button.appendChild(document.createTextNode(label));
+  }
+  /** Grey out one Add button and say why. */
+  function disableButton(button, message) {
+    button.classList.add('unavailable');
+    button.setAttribute('aria-disabled', 'true');
+    button.title = message || MSG.unavailable;
+    button.textContent = LABEL.unavailable;
   }
   async function init() {
     console.log('[Init] Starting OS Course initialisation...');
@@ -837,7 +1050,11 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
       cartDom.closeButton.addEventListener('click', closeCart);
       cartDom.overlay.addEventListener('click', closeCart);
       cartDom.cartItemsContainer.addEventListener('click', function (event) {
-        event.target.matches('.remove-item') &&
+        // closest(), not matches(): the click can land on a child of the button.
+        // The sku is then read off THAT element rather than event.target, which
+        // would be the child and carry no data-sku.
+        var removeButton = event.target.closest('.remove-item');
+        removeButton &&
           (async function (sku) {
             try {
               if ((cart.removeItem(sku), 0 === cart.items.length)) {
@@ -846,7 +1063,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
                   sessionStorage.removeItem(key);
                 });
                 renderCart();
-                showNotification('Your cart is now empty.', 'success');
+                showNotification(MSG.cartEmptied, 'success');
                 cartDom.cartMessage.classList.remove('visible');
               } else {
                 try {
@@ -858,25 +1075,25 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
                     token,
                   );
                   renderCart();
-                  showNotification('Item removed from cart', 'success');
+                  showNotification(MSG.removed, 'success');
                 } catch (error) {
                   console.error('Failed to update fees after removal:', error);
                   sessionManager.clearFeeSession();
                   renderCart();
-                  showNotification('Item removed, but fees could not be recalculated. Checkout is unavailable.', 'warning');
+                  showNotification(MSG.removedNoFees, 'warning');
                 }
                 cartDom.cartMessage.classList.toggle('visible', cart.isCartFull());
               }
               cart.updateAddedButtonStates();
             } catch (error) {
               console.error('Error removing item:', error);
-              showNotification('Failed to remove item from cart', 'error');
+              showNotification(MSG.removeFailed, 'error');
             }
-          })(event.target.dataset.sku);
+          })(removeButton.dataset.sku);
       });
       document.querySelector('.checkout-button').addEventListener('click', function (event) {
         if (this.disabled) return void event.preventDefault();
-        cart.items.length > 0 ? (window.location.href = '../cart-checkout?type=os') : showNotification('Your cart is empty', 'error');
+        cart.items.length > 0 ? (window.location.href = '../cart-checkout?type=os') : showNotification(MSG.cartEmpty, 'error');
       });
       var openCartButton = document.querySelector('.opencartbutton');
       if ((openCartButton && openCartButton.addEventListener('click', openCart), console.log('[Init] Cart infrastructure ready'), courseComponent.querySelector('.addtocartbutton'))) {
@@ -927,7 +1144,7 @@ import { validateCart, readValidation, isConflict } from '../shared/validation.j
             (courseDescription = courseData.description || ''),
             (courseCredits = Number(courseData.credits || 0)),
             (courseSections = Array.isArray(courseData.sections) ? courseData.sections : []),
-            '<div class="course-page-grid"><div class="course-info-col">' + (courseCredits > 0 ? '<div class="c-course_credits"><div class="c-course_credits-box"><div class="c-course_credits-txt">' + courseCredits + '</div><div>Credits</div></div></div>' : '') + (courseDescription ? '<h2 class="c-course__col1">Course Description</h2><div class="w-richtext"><p>' + courseDescription + '</p></div>' : '') + (pdfFilename ? '<div class="course-pdf-section"><a class="course-pdf-link" href="' + dataOrigin + '/data/course-outlines-pdf/' + encodeURIComponent(pdfFilename) + '" target="_blank" rel="noopener">Download Course Outline (PDF)</a></div>' : '') + '</div><div class="course-offers-col">' + (courseSections.length > 0 ? '<div class="enrollment-section"><div class="enrollment-header">Enroll now</div>' + renderOfferings(courseSections, courseName, courseCredits) + '</div>' : '<p class="no-sections">No sections currently available.</p>') + '</div></div>');
+            '<div class="course-page-grid"><div class="course-info-col">' + (courseCredits > 0 ? '<div class="c-course_credits"><div class="c-course_credits-box"><div class="c-course_credits-txt">' + courseCredits + '</div><div>Credits</div></div></div>' : '') + (courseDescription ? '<h2 class="c-course__col1">Course Description</h2><div class="w-richtext"><p>' + courseDescription + '</p></div>' : '') + (pdfFilename ? '<div class="course-pdf-section"><a class="course-pdf-link" href="' + dataOrigin + '/data/course-outlines-pdf/' + encodeURIComponent(pdfFilename) + '" target="_blank" rel="noopener">Download Course Outline (PDF)</a></div>' : '') + '</div><div class="course-offers-col">' + renderOffersColumn(courseSections, courseName, courseCredits, courseData.sisId) + '</div></div>');
           bindOfferings(courseComponent);
           console.log('[Init] Built from JSON. Done.');
         } catch (error) {

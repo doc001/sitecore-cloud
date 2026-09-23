@@ -253,7 +253,7 @@
     const credits = Number(data.credits || 0);
     const sisId = data.sisId || '';
     const sections = Array.isArray(data.sections) ? data.sections : [];
-    const baseUrl = 'https://bvc-app-uat.vercel.app';
+    const baseUrl = 'https://bvc-app.vercel.app';
 
     const creditsHtml =
       credits > 0
@@ -362,7 +362,7 @@
     const container = document.getElementById('courseComponent');
     if (!container) return;
 
-    const baseUrl = 'https://bvc-app-uat.vercel.app';
+    const baseUrl = 'https://bvc-app.vercel.app';
     const courseKey = resolveCourseKey();
 
     if (!courseKey) {

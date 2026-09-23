@@ -7,12 +7,12 @@
  *   Watch : npm run js:watch      (rebuild on save)
  *
  * Loaded from Webflow on the cart-checkout page via:
- *   <script src="https://bvc-app-uat.vercel.app/js/checkout.js" defer></script>
+ *   <script src="https://bvc-app.vercel.app/js/checkout.js" defer></script>
  *
  * Config is overridable. Set BEFORE this script loads:
  *   window.__BVC_CHECKOUT_CONFIG__ = { apiOrigin: '', studentPk: '' };
  * Default (production):
- *   apiOrigin : https://bvc-uat-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
+ *   apiOrigin : https://bvc-api-proxy.vercel.app  (mstoken, bvcpayment proxy)
  *   studentPk : '' (empty — these are new/anonymous registrations; submit-payment
  *               null-refs with a 500 if a non-empty studentPk is sent)
  *
@@ -29,7 +29,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
 
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
-  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-uat-api-proxy.vercel.app';
+  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app';
   // Empty studentNo segment in `fee/{skus}/{studentNo}` — matches the course pages.
   var feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '';
   // Re-check the cart when the checkout page loads. The cart lives in sessionStorage
@@ -133,6 +133,94 @@ import { validateCart, readValidation } from '../shared/validation.js';
     return !code || -1 !== DOMESTIC_LEGAL_STATUS.indexOf(String(code));
   }
   window.bvcIsDomesticLegalStatus = isDomesticLegalStatus;
+
+  // --- submitting overlay -------------------------------------------------
+  //
+  // "Proceed to Payment" fires registration -> submit-payment -> a redirect to
+  // Flywire. Those are two SiS calls against a backend with a measured 10.9 s
+  // median and a 90 s worst case (CLAUDE.md, SiS health watcher), so the page
+  // sat completely inert for anything from seconds to a minute and a half —
+  // long enough that shoppers click again, and a second click here means a
+  // second registration.
+  //
+  // The overlay covers the viewport for that whole window: it blocks the repeat
+  // click, and it survives until the browser navigates away (or an error path
+  // takes it down explicitly), so there is no gap between "done" and "gone".
+  //
+  // Styles are injected rather than shipped in a stylesheet because checkout.js
+  // has no paired CSS bundle — the page loads checkout-cart.css, which this
+  // script must not depend on being present.
+  var SUBMIT_OVERLAY_ID = 'bvc-submitting-overlay';
+  var submitOverlay = {
+    injectStyles: function () {
+      if (document.getElementById(SUBMIT_OVERLAY_ID + '-styles')) return;
+      var style = document.createElement('style');
+      style.id = SUBMIT_OVERLAY_ID + '-styles';
+      style.textContent = [
+        '#' + SUBMIT_OVERLAY_ID + '{position:fixed;inset:0;z-index:2147483646;display:flex;flex-direction:column;',
+        'align-items:center;justify-content:center;gap:18px;background:rgba(255,255,255,.92);',
+        '-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);text-align:center;padding:24px;',
+        'font-family:inherit;color:#333;opacity:0;transition:opacity .15s ease-in}',
+        '#' + SUBMIT_OVERLAY_ID + '.is-visible{opacity:1}',
+        '#' + SUBMIT_OVERLAY_ID + ' .bvc-submitting-spinner{width:52px;height:52px;border:4px solid #dfe3e8;',
+        'border-top-color:#0066cc;border-radius:50%;animation:bvc-submitting-spin .8s linear infinite}',
+        '#' + SUBMIT_OVERLAY_ID + ' .bvc-submitting-title{font-size:1.15rem;font-weight:600;margin:0}',
+        '#' + SUBMIT_OVERLAY_ID + ' .bvc-submitting-note{font-size:.9rem;color:#666;margin:0;max-width:32rem}',
+        '@keyframes bvc-submitting-spin{to{transform:rotate(360deg)}}',
+        '@media (prefers-reduced-motion:reduce){#' + SUBMIT_OVERLAY_ID + ' .bvc-submitting-spinner{animation-duration:2.4s}',
+        '#' + SUBMIT_OVERLAY_ID + '{transition:none;opacity:1}}',
+      ].join('');
+      document.head.appendChild(style);
+    },
+    /** Show the overlay. `title` names the step so a long wait still reads as progress. */
+    show: function (title, note) {
+      try {
+        this.injectStyles();
+        var overlay = document.getElementById(SUBMIT_OVERLAY_ID);
+        if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.id = SUBMIT_OVERLAY_ID;
+          // aria-live so a screen reader announces the wait and each step change;
+          // aria-busy marks the page as working rather than broken.
+          overlay.setAttribute('role', 'status');
+          overlay.setAttribute('aria-live', 'polite');
+          overlay.innerHTML =
+            '<div class="bvc-submitting-spinner" aria-hidden="true"></div>' +
+            '<p class="bvc-submitting-title"></p>' +
+            '<p class="bvc-submitting-note"></p>';
+          document.body.appendChild(overlay);
+        }
+        overlay.querySelector('.bvc-submitting-title').textContent = title || 'Processing your registration…';
+        overlay.querySelector('.bvc-submitting-note').textContent = note || 'Please do not close or refresh this page. You will be taken to the payment page shortly.';
+        document.body.setAttribute('aria-busy', 'true');
+        // Next frame, so the opacity transition actually runs.
+        requestAnimationFrame(function () {
+          overlay.classList.add('is-visible');
+        });
+      } catch (error) {
+        // An overlay that throws must never be what stops a registration.
+        console.warn('[Checkout] Could not show the submitting overlay', error);
+      }
+    },
+    /** Update the copy without flashing the overlay off and on between the two calls. */
+    step: function (title, note) {
+      if (document.getElementById(SUBMIT_OVERLAY_ID)) this.show(title, note);
+    },
+    hide: function () {
+      try {
+        var overlay = document.getElementById(SUBMIT_OVERLAY_ID);
+        if (overlay) overlay.remove();
+        document.body.removeAttribute('aria-busy');
+      } catch (error) {
+        console.warn('[Checkout] Could not hide the submitting overlay', error);
+      }
+    },
+  };
+  // A shopper who backs into this page from Flywire gets it out of the bfcache
+  // with the overlay still painted. Clear it on restore.
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) submitOverlay.hide();
+  });
 
   // Shopping Cart and Form Integration
   class CheckoutFormHandler {
@@ -886,7 +974,26 @@ import { validateCart, readValidation } from '../shared/validation.js';
       return isValid;
     }
 
+    /**
+     * Thin wrapper around the real submit.
+     *
+     * The overlay covers the whole viewport, so ANY unhandled throw between
+     * raising it and the redirect would leave the shopper looking at a spinner
+     * that never resolves — worse than the blank wait it replaced. Every known
+     * failure inside runSubmit() takes the overlay down itself; this catches the
+     * ones nobody thought of.
+     */
     async handleSubmit(event) {
+      try {
+        await this.runSubmit(event);
+      } catch (error) {
+        console.error('[Checkout] Unhandled submit failure', error);
+        submitOverlay.hide();
+        this.showErrorMessage('Something went wrong while processing your registration. Please try again, or contact us if this keeps happening.');
+      }
+    }
+
+    async runSubmit(event) {
       if (event) {
         event.preventDefault();
       }
@@ -899,9 +1006,16 @@ import { validateCart, readValidation } from '../shared/validation.js';
       // it here rather than creating a registration that submit-payment will reject
       // with a generic "please try again" the shopper can do nothing about.
       // Fails open: repairCart() only ever returns items the API explicitly refused.
+      //
+      // The overlay goes up HERE, not after the repair: this call is itself a
+      // per-item round trip to the same slow backend, so the shopper is already
+      // waiting on it. It stays up until the browser leaves for Flywire, or an
+      // error path below takes it down.
+      submitOverlay.show('Checking your cart…', 'Confirming your courses are still available. Please do not close or refresh this page.');
       try {
         const droppedAtSubmit = await this.repairCart();
         if (droppedAtSubmit.length) {
+          submitOverlay.hide();
           this.showErrorMessage(
             1 === droppedAtSubmit.length
               ? `${droppedAtSubmit[0].productName || droppedAtSubmit[0].sku} is no longer available and has been removed. Please review your cart before continuing to payment.`
@@ -1030,6 +1144,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
         } else {
           console.log('Using existing token');
         }
+        submitOverlay.step('Processing your registration…', 'This can take up to a minute. Please do not close or refresh this page.');
         const endpoint = 'thesissitecorexm.api/registration/';
         const params = new URLSearchParams();
         params.append('endpoint', endpoint);
@@ -1062,15 +1177,17 @@ import { validateCart, readValidation } from '../shared/validation.js';
         await this.submitPayment(registrationId);
       } catch (error) {
         console.error('Registration error:', error);
-
-        // Show more specific error messages to the user
-        if (error.message.includes('token is missing') || error.message.includes('session has expired')) {
-          // alert(error.message);
-          // Optionally redirect to login page
-          // window.location.href = '/login';
-        } else {
-          //alert('Registration failed: ' + error.message);
-        }
+        // The overlay blocks the page, so every failure path MUST take it down —
+        // otherwise a failed registration leaves the shopper staring at a spinner
+        // that never resolves. This branch used to swallow the error entirely
+        // (the alerts below it were commented out), which was survivable only
+        // because nothing was covering the page.
+        submitOverlay.hide();
+        this.showErrorMessage(
+          error.message && (error.message.includes('token is missing') || error.message.includes('session has expired'))
+            ? error.message
+            : 'Registration failed: ' + (error.message || 'please try again, or contact us if this keeps happening.')
+        );
       }
     }
 
@@ -1127,6 +1244,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
         params.append('registrationId', registrationId);
         params.append('studentPk', studentPk);
 
+        submitOverlay.step('Preparing your payment…', 'Almost there — please do not close or refresh this page.');
         const payUrl = `${this.proxyBaseUrl}?${params.toString()}`;
         console.log('Submitting payment to:', payUrl);
 
@@ -1148,18 +1266,15 @@ import { validateCart, readValidation } from '../shared/validation.js';
 
         if (data.result && data.result.paymentUrl) {
           sessionStorage.setItem('bvcPayment', data.result.paymentUrl);
-          // The registration exists and payment is handed off, so the form draft has
-          // done its job — checkout-cart.js listens for this and drops it. Dispatch
-          // before navigating: dispatchEvent is synchronous, so the listener runs
-          // while this page is still alive. Leaving the draft would also risk a
-          // second registration if the shopper came back and resubmitted.
           document.dispatchEvent(new CustomEvent('bvc:checkout-complete', { detail: { registrationId: registrationId } }));
+          submitOverlay.step('Redirecting to the payment page…', 'Please do not close or refresh this page.');
           window.location.href = '../payment-page';
         } else {
           throw new Error('Payment URL not found in response.');
         }
       } catch (error) {
         console.error('Payment submission error:', error);
+        submitOverlay.hide();
         this.showErrorMessage(`Payment submission failed: ${error.message}`);
       }
     }

@@ -25,16 +25,16 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
 | Project | URL | Purpose |
 |---|---|---|
-| `bvc-app-uat` | https://bvc-app-uat.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
+| `bvc-app` | https://bvc-app.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
 
-**Webflow embeds reference `bvc-app-uat` for CSS, JS, and course data:**
+**Webflow embeds reference `bvc-app` for CSS, JS, and course data:**
 ```html
-<link rel="stylesheet" href="https://bvc-app-uat.vercel.app/css/os-course.css" />
-<script src="https://bvc-app-uat.vercel.app/js/ee-course.js" defer></script>
-<script src="https://bvc-app-uat.vercel.app/js/os-course.js" defer></script>
+<link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
+<script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
+<script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
 ```
 
-**All deployments target `bvc-app-uat`. Vercel is a static host only — it never rebuilds.**
+**All deployments target `bvc-app`. Vercel is a static host only — it never rebuilds.**
 The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`.
 
 On-demand deploy (same steps as the hourly PM2 cron):
@@ -50,7 +50,7 @@ npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
 npm run build:bvcapp       # Build bvc-app only (Turbo; pass -- --cache=local: to skip cache read AND write)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app-uat
+npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app
 ```
 
 ### Hourly Automated Pipeline (PM2)
@@ -120,6 +120,24 @@ must not become an outage.
 Fires on: Build FAILED, Package FAILED, Deploy FAILED, fee anomaly (advisory), and
 deploy-CLI-errored-but-published (advisory).
 
+**Card shape.** `sendTeams` takes an optional `extra: { facts, mono }`. `facts` are
+label/value rows appended above the standard Project/Host/Time; `mono` is an **array
+of lines** rendered as a monospace block. Callers that pass neither get the same card
+as before — `pipeline.mjs` and `sitecore-fee-watch.mjs` are unchanged.
+
+- **`mono` is one `TextBlock` per line, deliberately.** A single TextBlock containing
+  `\n` does not reliably break in Teams — Adaptive Card markdown wants a blank line —
+  which silently collapses a timings table into one run-on line.
+- The severity band is a `Container` with `style: attention | good`. That is what
+  replaced MessageCard's `themeColor` bar; the text inside must **not** set `color`,
+  or it renders Attention-red on an Attention-red band.
+- `msteams: { width: 'Full' }` — without it the card is narrow and monospace rows wrap,
+  which defeats the alignment.
+- **Adaptive Cards have no code spans.** Backticks render literally, so command names
+  in alert copy use plain quotes.
+- The legacy `*.office.com` MessageCard path folds `facts` and `mono` into the text
+  body — plainer, but it carries the same information.
+
 ### Deploy verification
 
 `vercel deploy` has exited non-zero on deploys that actually reached production —
@@ -135,7 +153,7 @@ requires it to be that exact deployment, and `Ready`.
 - **Inspect the alias, not the deployment.** `vercel inspect <deployment>` lists every
   alias the deployment has *ever* held, so a superseded one still looks aliased and
   would be waved through — confirmed against a real superseded deployment. Inspecting
-  `bvc-app-uat.vercel.app` instead resolves to whatever currently serves it.
+  `bvc-app.vercel.app` instead resolves to whatever currently serves it.
 - Anything unprovable is a failure: no URL in the output, `inspect` erroring, or the
   alias serving something else. A genuinely failed deploy leaves the alias on the
   previous deployment, so it still reports.
@@ -199,6 +217,109 @@ from the outside. Detection and reporting are unchanged; only the veto is gone.
 - Exit codes: `0` = ran (with or without an anomaly), `1` = build/package/deploy failure.
   **Exit `2` no longer occurs.**
 
+### Availability is what `osValidCourses.json` / `validCourses.json` mean
+
+**These two files ARE the availability signal, and an empty one is a legitimate
+answer that gets published as-is.** Open Studies and Extended Education both derive
+their availability from Sitecore; zero courses with sections means there is no
+availability right now, which is a real state the site is built to show:
+
+| surface | what an empty list produces |
+|---|---|
+| Open Studies / Extended Ed course page | the **Webflow template's** own copy — "There are no dates available for this course at the moment. Please check back at a later date." The page is a Webflow template and exists independently of our data; with no JSON to fill `#courseComponent`, that copy is what remains |
+| Open Studies area listing | `open-studies-by-area.json` still lists **all 104 courses**, each reading "No availability this term" (`available: false`). This is the wanted behaviour — it is built from the Webflow CMS, and Sitecore only supplies the flag |
+
+So nothing suppresses an empty result. `generate-os-valid-courses.mjs` writes `[]`
+and exits 0, and the pipeline publishes it. Pinning the site to the last non-empty
+catalogue instead would sell sections Sitecore no longer has.
+
+**What is a fault is not getting an answer at all.** `rootResolved` separates the
+two, and it is the only distinction the script makes:
+
+- **tree resolved + 0 courses** → Sitecore answered "nothing available". Publish it,
+  with a warning naming what the site will show.
+- **tree never resolved** → missing, unpublished, or an API key that cannot see it.
+  We do not know what is available, so publishing `[]` would assert "nothing" on no
+  evidence. Exits 1 without writing. A thrown query (network, auth, 5xx) is already
+  fatal for the same reason: silence is not an answer.
+
+> Historical note: from **2026-09-09 18:15 the Credit Courses tree returned 0
+> courses on 98 consecutive hourly runs** — the tree resolved fine, every course
+> under it had lost its sections. The site nonetheless kept showing courses, and
+> that was NOT this script's doing: the package was never pruned, so five-day-old
+> JSON kept being re-uploaded. See the prune below, which is the actual fix.
+
+### The package prune
+
+`--data-only` overlays `public/data` onto `.vercel/output/static/data` with `cpSync`,
+which **only adds and overwrites — it has no concept of a file that should no longer
+exist**. Step 0 empties `public/data/{courses,oScourses,open-studies}`, which leaves
+the package as the only surviving copy of anything a run does not regenerate. So a
+course withdrawn upstream was never removed from the package, and was re-uploaded
+every hour, forever.
+
+Measured during the outage above: production served 61 `oScourses/*.json` and 122
+`open-studies/*.json` dated 09-09, while `index.json` — the one file its generator
+rewrites unconditionally — correctly reported an empty catalogue. Half the site
+stale, half empty, and no single file disagreeing with itself.
+
+The overlay now prunes those directories from the package before copying.
+
+- **The directory list is single-sourced** as `COURSE_DATA_DIRS` in `pipeline.mjs`,
+  split into `EE_DATA_DIRS` / `OS_DATA_DIRS`. The step-0 clean and the prune have to
+  name the same directories; them drifting apart is what the bug was.
+- **Never prune `staticData` itself.** Everything else under `data/` has to survive —
+  above all `course-outlines-pdf`, 1.5 GB the hourly job never touches and
+  deliberately excludes from the copy.
+- **Only prune what was actually regenerated** — see the split below.
+- The full build is unaffected: it already wipes `.vercel/output` wholesale.
+
+### The hourly refresh runs in two halves
+
+`hourly-scripts` = `hourly-scripts:base && hourly-scripts:os`, and `pipeline.mjs`
+runs the two **separately**, so they fail independently.
+
+| half | contents | a failure is |
+|---|---|---|
+| `hourly-scripts:base` | sanitizeOutlines, generateCourses, generateMap, generateCourseData, generateExtendedEducationJson, copy | **fatal** |
+| `hourly-scripts:os` | generateOpenStudies, ...Data, ...Json, ...ByArea, copy | **advisory** |
+
+They used to be one `&&` chain with Open Studies at step 3, so anything that stopped
+Open Studies stopped Extended Education with it. EE refreshed perfectly throughout
+the five-day OS outage; holding it would have traded one stale product for two — the
+same lesson the fee guard learned when it lost its veto. The split only matters for a
+genuine OS failure now that an empty catalogue is a success rather than an error, but
+that is exactly the case worth isolating.
+
+- **`generateMap` stays in the base half.** `sis-data-lookup.json` feeds both
+  products, so there is nothing worth publishing without it.
+- **Each half ends with its own `prelaunch:build`** (the `src/data` to `public/data`
+  copy), or EE would never reach `public/data` when the OS half aborts.
+- **The prune follows whether a half got an ANSWER, not whether it got data.**
+  A half that succeeded is authoritative even when its answer is empty, so its
+  directories are pruned and republished empty — that is how "no availability"
+  reaches the site, and keeping the last non-empty catalogue instead is what left
+  withdrawn sections on sale behind a live Add to Cart for five days.
+
+  A half that **failed** is the opposite case: the tree was unreachable or the query
+  threw, so we do not know what is available and publishing empty directories would
+  assert "nothing is available" on no evidence — taking the catalogue down over a
+  network blip. Its directories are left as last published; since the copy is
+  additive, not pruning is all that takes.
+- **Watch the red error on the course page.** With no per-course JSON,
+  `fetchCourseData()` throws and the catch in `src/js/os-course/index.js` appends
+  `Failed to load course data: HTTP 404` in red. It APPENDS, so the Webflow
+  template's "There are no dates available for this course at the moment" copy is
+  still there — the student sees the right message with a raw error stuck under it.
+- **The OS alert passes heartbeat `null`**, and the run's real outcome pings a few
+  steps later. The deploy genuinely happened, so the dead-man's switch keeps meaning
+  "did the run happen"; the OS condition rides on the Teams card instead. That card
+  has **no cooldown** — expect one per hour until upstream is fixed.
+- **`bvcapp-scripts` (the full build) is deliberately NOT split.** A full build
+  without OS data would emit a site with none of the 61
+  `/study/open-studies/courses/[sisID]` routes, so it should hard-fail. It does mean
+  no full build can ship while the catalogue is empty.
+
 ### Fee watcher (`sitecore-fee-watch.mjs`)
 
 Second PM2 app, `bvc-fee-watch`, cron `'0 */5 * * * *'`. Read-only GraphQL polls
@@ -230,6 +351,115 @@ node sitecore-fee-watch.mjs --history  # every recorded flip, with __Updated sta
   upstream Sitecore write in the first place.
 - Always exits 0. Monitoring must never become an outage.
 
+### SiS health watcher (`sis-health-watch.mjs`)
+
+Third PM2 app, `bvc-sis-health`, cron `'0 2-59/5 * * * *'` — every 5 minutes, offset
+from `bvc-fee-watch` so the two never start in the same second. Read-only: it creates
+no cart and submits no registration.
+
+**The highest-severity watcher of the three.** The fee guard and fee watcher report
+wrong *prices*; this one reports a cart that cannot take an order at all. Nothing else
+touches the live API a shopper hits on Add to Cart — the fee watcher polls Sitecore
+Edge, a different system holding catalogue data.
+
+```bash
+node sis-health-watch.mjs            # one poll, prints per-probe timings
+node sis-health-watch.mjs --history  # recorded state changes
+```
+
+**It alerts on LATENCY, not status codes.** Measured 2026-08-18 against production —
+15 identical requests to `courseofferings/2428`:
+
+```
+min 2.8s   median 10.9s   max 90.3s   mean 31.5s      every one HTTP 200
+```
+
+SiS does not fail by answering wrong; it fails by answering late. The `504 Gateway
+Timeout` the browser shows is the Vercel proxy giving up on a call SiS would
+eventually have completed. **A status-code check would have reported everything
+healthy throughout the entire outage**, which is why this watcher times every probe
+and treats the status code as secondary.
+
+- Probes all three endpoints the cart depends on — `courseofferings` (add to cart),
+  `validation` (seat check), `fee` (checkout total). All three degraded together on
+  2026-08-18, so probing one would under-report.
+- **`mstoken` is the control, and every alert carries it.** It runs on the *same*
+  Vercel project as the cart endpoints and held 0.29–0.90 s while they ranged to 90 s.
+  Fast control + slow probes = the fault is the SiS backend, not the proxy. That
+  comparison is in the Teams card so nobody re-derives it under pressure.
+- **Every log line and alert names the environment it measured** — proxy origin,
+  SiS backend, offering id, and the endpoint path per probe. The backend is read
+  from the proxy's `X-Api-Base` header on each poll rather than hardcoded, because
+  a hardcoded one was already wrong: prod forwards to `api.bowvalleycollege.ca`,
+  UAT to `apim-bvc-uat-001.azure-api.net`, and **`devapi.bvc.dev` is the dev host
+  that these docs and the alert text wrongly named until 2026-08-19**. Without the
+  stamp, a log line from a run with `SIS_API_ORIGIN` pointed at UAT is
+  indistinguishable from a prod one — and these logs go to the SiS team as
+  evidence. See `docs/sis-api.md` → *Environments*.
+- `SLOW` at 8 s (`SIS_WATCH_SLOW_MS`) — above a healthy ~2 s call, below the 10.9 s
+  incident median. `DOWN` on non-2xx or past 30 s (`SIS_WATCH_TIMEOUT_MS`), because a
+  call that slow has already produced a 504 in someone's browser.
+- **Two consecutive bad polls before alerting** (`SIS_WATCH_FAILS_BEFORE_ALERT`). This
+  backend is erratic enough that one unlucky sample must not page anyone. Teams
+  alerts then cool down for 1 h (`SIS_WATCH_COOLDOWN_H`); a **recovery** message is
+  sent when it returns to OK, so an open alert never goes stale.
+- Its own heartbeat, `HEARTBEAT_SIS_URL` — success when healthy, `/fail` when not.
+  Separate from `HEARTBEAT_URL` because "SiS is unhealthy" and "the deploy pipeline
+  failed" are different conditions needing different alarms. This is also the only
+  thing that catches the watcher itself dying.
+- State: `.pipeline-state/sis-watch-last.json`; incidents: `sis-watch-history.jsonl`.
+- Always exits 0.
+
+> The repair is not in this repo. `bvc-api-proxy` is a separate Vercel project, and
+> the slow leg is the SiS backend behind it. This watcher exists to prove *when* it
+> degrades and hand the SiS team timestamps they can match to their own logs.
+
+### Log archiver (`archive-logs.mjs`)
+
+Fourth PM2 app, `bvc-log-archive`, cron `'0 30 3 * * *'` — daily at 03:30. Moves
+every **complete** day out of `logs/` into OneDrive, filed by ISO week and day:
+
+```
+C:\Users\jcueto\OneDrive - Bow Valley College\General\Matrix\Open Cart\
+  2026-W34\2026-08-19\pipeline-out.log, sis-health-out.log, fee-watch-out.log, …
+```
+
+```bash
+node archive-logs.mjs --dry-run   # report what would move, touch nothing
+node archive-logs.mjs             # archive and truncate
+```
+
+`logs/` is append-only and nothing prunes it — `pipeline-out.log` alone grows
+~2 MB/day. But disk is the lesser reason. **Every log this project produces lives
+on one laptop**, including the SiS timings the SiS team is being asked to act on;
+if that machine is rebuilt or lost, so is the entire record. OneDrive is backed up
+and shareable.
+
+- **Only complete days move.** Today is still being written, so archiving it would
+  split one day across two runs and leave the archive looking complete when it is
+  not. Local logs therefore hold today and nothing else.
+- **Every archive write lands before anything is truncated.** A partial archive
+  followed by a truncate loses logs outright — worse than the disk it was freeing.
+- **A missing archive root aborts the run.** If the path is wrong or OneDrive has
+  not mounted, creating the folder ourselves would file logs into a directory that
+  never syncs — they would look safely archived while still on one disk.
+- **`pm2 reloadLogs` runs after truncating.** PM2 holds each log open at its own
+  write offset; once the file shrinks that offset is past the end and PM2 pads the
+  gap with NUL bytes. Skipping this is what corrupts rotated logs.
+- **It skips its own live logs** via PM2's `pm_out_log_path` / `pm_err_log_path`,
+  which it would otherwise truncate mid-write. Run by hand, it archives everything.
+- Day grouping reads the `2026-08-19T08:45:12: ` prefix PM2 writes (`time: true`).
+  All 56k existing lines carry it; a line without one inherits the day above it
+  rather than being dropped.
+- Folder is `2026-W34` by **ISO week-year**, not calendar year — so 2026-12-31 and
+  2027-01-01 file into the same week, which is the point of grouping by week.
+- Destination overridable with `LOG_ARCHIVE_DIR`.
+- **Nothing is ever deleted from the archive.** Pruning is a human decision.
+
+> 03:30 is chosen, not arbitrary: `bvc-fee-watch` fires on minutes divisible by 5,
+> `bvc-sis-health` on :02/:07/:12…, and `bvc-hourly-deploy` at :15. Nothing starts
+> at :30, so the truncate cannot race a poll mid-write.
+
 ### bvc-app (active development)
 Run from `src/bvc-app/` or use `--filter`:
 
@@ -238,6 +468,9 @@ npm run dev                # Start dev server (auto-runs breadcrumb generation f
 npm run build              # Full pipeline: data scripts → breadcrumbs → next build
 npm run lint               # ESLint
 ```
+
+Per-script sustainment reference (inputs, failure modes, dead scripts, recovery):
+`docs/scripts-runbook.md`.
 
 **Data pipeline scripts** (run before building when data changes):
 
@@ -347,11 +580,15 @@ src/webflow/
   extended-education-listing.html    # EE program page — searchable flat table
   extended-education-course.html     # EE course detail — same layout as OS, reads from /data/courses/
   checkout-cart.html                 # checkout page multi-step form: Start→Personal→Mailing (GENERATED from content.js — do not hand-edit)
+  program-requirements.html          # SNIPPET ONLY — the two loader tags for program-requirements.js/.css
+  program-tuition.html               # SNIPPET ONLY — the two loader tags for program-tuition.js/.css
+  extended-education-listing-cards.html  # SNIPPET ONLY — the one loader tag for ee-listing.js
 ```
 
-Two flavours of embed live here:
+Three flavours of embed live here:
 - **Inline snippets** (the course listing/detail files above) — self-contained HTML+CSS+JS pasted whole into an Embed block.
 - **Bundled-asset embeds** (`checkout-cart.html`, and the `os-course` / `ee-course` / `checkout` runtimes) — the HTML is just markup carrying `data-*` hooks; the CSS and JS are separate bundled files loaded from Vercel via `<link>` / `<script src>`. Source is `src/js/<name>/` + `src/css/<name>.css`, built by `js:build`. See the JS/CSS build commands above.
+- **Loader-tag snippets** (`program-requirements.html`, `extended-education-listing-cards.html`) — nothing is pasted into an Embed block at all. The file is documentation wrapped around the one or two `<script>`/`<link>` tags that go in the page's "Before `</head>`" custom code; the script finds its own mount. See "Extended Education course availability" below.
 
 Key conventions:
 - **Course detail embeds target `#courseComponent`** — the existing Webflow div on course pages.
@@ -363,22 +600,221 @@ Key conventions:
 - **Accordion detail fields**: Credits (first), Fee, Dates, Days, Time. Seats are intentionally hidden (always show as available). Location is shown in the campus subheading rather than per-item.
 - **PDF course outlines** (OS only): fetched via `pdfFilename` from the course index JSON. Correct path is `/data/course-outlines-pdf/{pdfFilename}`. EE courses do not have PDF outlines.
 - **Responsive**: desktop uses CSS grid (4 columns); mobile (≤ 640px) switches to flex column. Desktop-only code cell (`.bvc-os-code-desktop`) is hidden on mobile; mobile top bar (`.bvc-os-row-top`) is hidden on desktop.
-- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-app-uat.vercel.app`.
-- **Checkout-cart embed**: a multi-step personal-info form (**Start → Personal → Mailing**; there is **no in-form payment tab and no in-form cart**), not a course renderer. Root hook is `[data-checkout]`; the runtime binds `data-*` attributes (`data-step`, `data-field`, `data-next/back`, `data-student-type`, terms/refund consent, `data-billing-same`, `data-billing-block`, `data-address-autocomplete`, `data-phone-combined`, `data-checkout-submit`). **The Webflow page holds a container and nothing else** — `<div data-checkout></div>` plus `<link .../css/checkout-cart.css>` and `<script .../js/checkout-cart.js defer>` in page settings. `checkout-cart.js` renders the form itself from `markup.js`, so a change to a field or an option list arrives with the next deploy instead of needing a re-paste. Markup already inside the container takes precedence, so pages that still paste `src/webflow/checkout-cart.html` keep working and can migrate individually — but a stale paste drifts from the bundle and fails silently, which is how `value="CAN"` stopped opening Indigenous Status. `npm run checkout-cart:html` regenerates that file from the same renderer, so the two cannot disagree. `content.js` is the single source of truth (fields, options, copy, MSAL, and the `googleMaps` / `phone` / `cart` config); regenerate markup with `npm run checkout-cart:html` — never hand-edit. Modules: `field / consent / stepper / validators / storage / msal-auth / address-autocomplete`.
+- **`data-base-url`** on the container div points to the Vercel deployment. Production Webflow embeds use `https://bvc-app.vercel.app`.
+- **Checkout-cart embed**: a multi-step personal-info form (**Start → Personal → Mailing**; there is **no in-form payment tab and no in-form cart**), not a course renderer. Root hook is `[data-checkout]`; the runtime binds `data-*` attributes (`data-step`, `data-field`, `data-next/back`, `data-student-type`, terms/refund consent, `data-billing-same`, `data-billing-block`, `data-address-autocomplete`, `data-phone-combined`, `data-checkout-submit`). Load order: `<link .../css/checkout-cart.css>` + `<script .../js/checkout-cart.js defer>` in page settings, then paste `src/webflow/checkout-cart.html` into an Embed. `content.js` is the single source of truth (fields, options, copy, MSAL, and the `googleMaps` / `phone` / `cart` config); regenerate markup with `npm run checkout-cart:html` — never hand-edit. Modules: `field / consent / stepper / validators / storage / msal-auth / address-autocomplete`.
   - **Mailing step** = a Mailing address + a Billing address (5 mandatory fields each: Street, City, Province, Postal Code, Country). "Billing Address same as above?" (`data-billing-same`, default checked) hides billing and exempts it from validation. Street fields have Google Places autocomplete (`address-autocomplete.js`) that fills the rest of the group — **inert until `config.googleMaps.apiKey` is set**; manual entry always works.
   - **Phone**: visible `#phoneNumber` (10 digits) plus a `phoneCountryCode` select (default **+1**, auto-follows the mailing Country). Submitted as a **combined hidden `#phone` = `+1XXXXXXXXXX`** (no separator).
   - **ASN** is visible/required **when the cart contains credit-bearing courses** (any `cartItems[].credits > 0`, falling back to `sessionStorage.totalCredits`), hidden and exempt from validation when none do. It is re-read on every step change. `?type` no longer gates it — a cart can mix Open Studies and Extended Ed items. The submitter mirrors this in `cartRequiresAsn()`.
   - **Field ids** are aligned to what the submitter reads via a `submitId` override (`postalCode→postalcode`, billing `streetAddress-2/city-2/province-2/postalCode-2/country-2`, OS asn `asn-os`, billing-same checkbox `checkbox`, terms `checkbox-2`).
   - **Submission**: the Mailing step's **"Proceed to Payment"** button (`data-checkout-submit`) validates, then dispatches a `bvc:checkout-submit` DOM event. The separate `public/js/checkout.js` (source `src/js/checkout/index.js`) listens and runs the purchase: **create token → registration → submit-payment → redirect to the Flywire payment page**. It reads courses/fees from the session cart (`sessionStorage.cartItems` / `feeSession`) and richer fields from the form. Contract: `studentId:0`, **empty `studentPk`** (a non-empty value 500s for new registrations); coded enums (gender/language/legalStatus/ethnicity) pass through `*_MAP` tables in checkout.js with known-good defaults — fill them from the SiS enum to send real values.
-  - **`#shoppingCart`**: the Webflow page may provide it (the cart column) along with `#registerToCourse`. If the page does not, `checkout-cart.js` creates `#shoppingCart` after the form — but **only when absent**, because a duplicate id shadows the page's and leaves its cart empty. A page that builds its own layout still owns the element and the placement; the runtime only fills the gap on a container-only page, where the cart stacks under the form. checkout.js renders the cart into the page's `#shoppingCart` and re-renders it on every `bvc:checkout-step` event. Its `DOMContentLoaded` is null-guarded so missing scaffold never throws.
+  - **Page-owned scaffold**: the Webflow **page** provides `#shoppingCart` (the cart column) and optionally `#registerToCourse`. The embed must **not** declare those ids (a duplicate id shadows the page's, leaving its cart empty). checkout.js renders the cart into the page's `#shoppingCart` and re-renders it on every `bvc:checkout-step` event. Its `DOMContentLoaded` is null-guarded so missing scaffold never throws.
   - The course-page cart button ("Proceed to Checkout") in `os-course.js` / `ee-course.js` navigates to the checkout page with `?type=os` / `?type=ee`.
+
+### bvc-app — Extended Education course availability
+
+`/study/extended-education` renders its Courses grid from a Webflow collection
+list, so a card appears when an editor publishes a CMS record — which says
+nothing about whether the SIS has a section to sell. 21 of the 60 published
+records currently have none, so a third of the grid led to a course nobody
+could register for.
+
+`src/js/ee-listing/index.js` → `public/js/ee-listing.js` fixes that from the
+page's `<head>`. Loader tag and full setup notes:
+`src/webflow/extended-education-listing-cards.html`.
+
+```bash
+npm run generateExtendedEducationJson   # scripts/buildExtendedEducationCourses.mjs
+```
+
+- Data: `/data/extended-education-courses.json`, built by joining the Webflow
+  CMS snapshot (slugs, names, areas) with `coursesIndex.json`, the SIS list of
+  courses that have sections. It emits **every** published course with an
+  `available` flag — including the withheld ones — so the file records what was
+  hidden and why rather than silently shrinking. Runs inside `bvcapp-scripts`
+  and `hourly-scripts`, after `generateCourseData` writes the index.
+- **It refuses to write an empty availability list.** An extraction failure
+  would otherwise mark every course unavailable and blank the page.
+- **Externally-registered courses are kept.** PSKN and the two PMI courses set
+  `no-cart-ext-ed-course` with an `apply-now-link`; they are registered on a
+  third party's site and have no SIS offering by design. They are matched on
+  page slug, not course code — they have no course code at all, and Webflow
+  renders their code field as an empty `.w-dyn-bind-empty`.
+- Codes are compared whitespace-stripped and upper-cased: Webflow holds
+  `TECH 9400` where the SIS has `TECH9400`.
+
+**The script removes cards; it does not rebuild the grid.** That is the whole
+design decision, and it was arrived at the hard way. The first version rendered
+every card from the JSON with markup copying Webflow's classes and Finsweet
+attributes exactly. It looked right and it broke the page's filters. Measured
+against production:
+
+| approach | counters | filtering |
+|---|---|---|
+| `fsAttributes.destroy()` + `init()` | updated | **dead** — search and Area stopped filtering |
+| `CMSList.clearItems()` + `addItems()` | updated | **dead** — "Business" left all 38 valid, not 15 |
+| prune `CMSList.items` in place | needs a nudge | **intact** — "Business" → 15 of 38 |
+
+Finsweet keys each card to a `CMSItem` holding props it derived at index time.
+A replacement element loses that association however identical its HTML; the
+original element keeps it. So the JSON decides *which* courses appear and
+Webflow's own elements are reused for the ones that stay — which puts the
+identical set on the page, and keeps search, sort and the Area filter working.
+Verified live: trimmed to 38, "Business" matched 15 (15 on the page),
+"Technology" 11 (11 on the page), cleared 38.
+
+- The script drops the removed cards from `CMSList.items` / `validItems` /
+  `originalItemsOrder` as well as the DOM, then writes the `results-count` /
+  `items-count` elements directly — Finsweet does not re-render those just
+  because the list shrank, and left alone they claim 60 items over 39 cards.
+- If Finsweet has not initialised yet, none of that is needed: it indexes the
+  trimmed list itself. The instance lookup resolves to `null` and is skipped.
+- **Every failure path leaves the page as Webflow rendered it** — all cards
+  shown, nothing hidden, nothing invisible. That covers a hung fetch, a 404, an
+  empty dataset, and a card the dataset has never heard of (fail open: hide
+  what is known to be unsellable, not everything unexplained). A `visibility`
+  rule hides the grid while cards are being removed, with a hard failsafe timer
+  so a stall can never leave it invisible.
+- `renderMissing` (default off) appends cards for courses the SIS can sell that
+  have no Webflow record. There are none today, and such a card is the one
+  element Finsweet would not have indexed — invisible to search and filters.
+  The console names them either way; the real fix is the Webflow record.
+
+> Pre-existing and untouched: the "Starts in" month select filters on a `Month`
+> field no card has ever carried, so choosing a month empties the grid.
+
+### bvc-app — Program tuition
+
+The `#Tuition-and-Fees` section on the Webflow program template used to be a
+CMS collection of hand-typed per-term prices. On 2026-09-15 that had PN missing
+Term 1, PSYN showing four empty International rows over `$0`, DDAS carrying its
+non-ETI price marked as ETI, and DD Term 4 typed `$4.290*`. It is now built
+from Finance's workbook. Loader tag and setup notes: `src/webflow/program-tuition.html`.
+On-demand refresh runbook: `docs/program-tuition-refresh.md`.
+
+```bash
+npm run generateProgramTuition:check   # report only
+npm run generateProgramTuition         # writes public/data/static/program-tuition.json
+# --file <xlsx> / PROGRAM_TUITION_XLSX to read a workbook somewhere else
+```
+
+- **Manual, not hourly.** The workbook lives on OneDrive
+  (`…\Matrix\Tuition & Fees_Matrix\Annual Tuition (Submitted)v2.xlsx`;
+  `--file` / `PROGRAM_TUITION_XLSX` override), so nothing in the build can
+  regenerate it. The JSON is written straight to `public/` and **tracked**;
+  the hourly `--data-only` overlay ships it as-is. Node reads the file even
+  while Excel holds it open.
+- `scripts/lib/read-xlsx.mjs` is a zero-dependency reader (built-in `zlib`),
+  cell values only. The sheet layout is located from its header row, and a
+  sheet that does not match throws rather than reading the wrong columns.
+- **ETI wins on Domestic** for the 11 programs on the ETI sheet, marked `*`
+  — the choice the CMS already made. `etiMarker: ''` in the config drops it.
+- Workbook codes are mapped to Webflow codes: `CSS→CSD`, `ITSS→ITSD`,
+  `JS→JSG`, `PON→PNRN-LPN` (same pairs as `generateProgramRequirements.mjs`).
+  **`ELL` is excluded**: it matches the english-for-academic-purposes page on
+  code, but the workbook's ELL row is "English Language Learning"; that page's
+  program is the workbook's `EAP`. `ITP` vs `UPGR-IFL` is likewise unmapped.
+  Don't guess either pairing; add it once the data owner confirms.
+- Display: whole dollars, total = sum of the **rounded** terms, so the rows on
+  screen add up (`$2,861 + $2,861 + $530 = $6,252`, not `$6,253`). Term 0 is
+  the annual figure, labelled "Annual tuition". An audience with no row gets
+  no tab, and a one-row table has no total row.
+- The script replaces only `.c-tabs`; the heading and disclaimer stay Webflow's.
+  **Every failure leaves the Webflow tabs untouched**, and the CSS hides them
+  for at most 3 s (a CSS-animation reveal, so even a script that never loads
+  cannot blank the section).
+
+### bvc-app — Course outline PDFs
+
+Outlines live in `src/bvc-app/public/data/course-outlines-pdf/` (6,051 files,
+~1.5 GB) and are served at `/data/course-outlines-pdf/{filename}`.
+
+**Vercel's static host 404s any filename containing a non-ASCII byte.** Verified
+against production: an ASCII name with spaces and parentheses serves `200`, while
+the same file carrying `U+00A0`, `U+2013` or `U+2019` in its name 404s no matter
+how the URL is percent-encoded. The file uploads fine and sits in
+`.vercel/output/static/` — it simply cannot be addressed.
+
+The DB export re-emits Word-style smart punctuation in course titles on every run,
+so this recurs. 152 files across 36 course codes were affected when first found
+(`U+00A0` no-break space ×113, `U+2013` en dash ×34, `U+2019` right quote ×5) —
+which broke the outline link on 6 program pages: 3DAM, AVFX (ANMO2101), DCSD,
+GASH, SW (HMSV1105), and ITS (TECH1203).
+
+```bash
+npm run sanitizeOutlines         # rename + rewrite URLs
+npm run sanitizeOutlines:check   # report only, touch nothing
+```
+
+`scripts/sanitize-outline-filenames.mjs` runs **first** in both `hourly-scripts`
+and `bvcapp-scripts`, because the generators resolve `pdfFilename` by reading the
+directory — the names have to be clean before they look.
+
+- **Only non-ASCII names are touched.** A plain-ASCII name is already addressable
+  however odd it looks — `SODV1400_Scripting  Fundamentals` ships a double space
+  and serves `200` — so renaming it would churn files for nothing.
+- Accents are folded to their base letter (NFD) before the strip, so a French
+  title degrades to `Cafe` rather than `Caf`. Anything still non-ASCII is dropped
+  rather than guessed at.
+- **A rename never overwrites an existing file.** Where an ASCII twin is already
+  present it is the one being served, so the odd-named duplicate is left alone.
+- **It rewrites the URLs too.** The `program-requirements` datasets are
+  hand-maintained JSON with the outline URL typed in (see
+  `generateProgramRequirements.mjs`), so renaming the file alone would leave those
+  links pointing at a name that no longer exists. All four mirrors are updated —
+  `public/data/static/` and the gitignored `src/data/static/` copy of both
+  `program-requirements/` and `program-requirements-by-code/`. The Open Studies
+  generators read the directory, so they need no rewrite.
+- Stale copies are dropped from `out/` and `.vercel/output/static/` so an earlier
+  build cannot carry an old name forward into the package.
+- `main()` is guarded on `process.argv[1]`: importing the module for its
+  `sanitize()` export must never rename anything.
+
+**Which outline a course gets is decided in one place**, `scripts/lib/resolve-outline-pdf.mjs`.
+Two scripts used to resolve it independently and disagreed about what a filename
+even looks like, because the export has emitted two naming generations:
+
+```
+ACCT1103_Introduction to Financial Accounting_Fall 2023_Current.pdf     (older)
+ACCT1103_Introduction to Financial Accounting_(Fall 2023_Current).pdf   (current)
+```
+
+`generateOpenStudiesPublicJson` matched only the bare form and
+`buildOpenStudiesByArea` only the parenthesised one. Measured over all 1,196 SIS
+ids holding an outline: **100 had only a parenthesised current outline** and so
+got no download link at all, and **217 more linked a stale term** — JUST1101
+served Winter 2025 while its Fall 2026 outline sat unused. Fixing it in one place
+means a third naming generation is one change, not three.
+
+- **Ordering is by term, not by string.** The old `buildOpenStudiesByArea` took
+  the first `_Current)` it happened to encounter and otherwise fell back to
+  `sort().pop()` — a lexicographic sort that ranks "Winter 2021" above
+  "Fall 2026". Both are now ranked on parsed `(season, year)`.
+- **Where both naming twins exist the parenthesised one wins.** They are
+  byte-identical for 700 of 703 courses; for the 3 that differ the parenthesised
+  file is the newer re-export.
+- **`fallbackToLatest` is opt-in.** Off for the course pages, so a course whose
+  outline was retired shows no link rather than a superseded one; on for the
+  listing table, where a dated outline beats an empty cell. That preserves what
+  each script already did.
+- Verified across the catalogue before and after: 100 courses gained a link,
+  217 moved to a genuinely newer term, 703 were same-term twin swaps, and
+  **0 regressed**. All 61 files the resolver picks for the live Open Studies
+  site return 200.
+
+> Extended Education has no outlines at all — `src/js/ee-course/index.js` sets
+> `pdfFilename: null` outright, so none of this applies to it.
+
+> **The hourly job does not publish PDFs at all.** `pipeline.mjs --data-only`
+> excludes `course-outlines-pdf` from its overlay (1.5 GB it never touches), so a
+> new or renamed outline reaches the site only on a full `node pipeline.mjs`.
 
 ### bvc-app — Cart availability checks
 
 Nothing is registerable just because it rendered. The course pages are statically
 generated hourly, and the cart then sits in `sessionStorage` for the whole session,
-so what the shopper sees can be hours stale. Three checks run against the SiS API —
-full API contract and its known defects are in **`docs/sis-api.md`**.
+so what the shopper sees can be hours stale. Four checks run against the SiS API,
+all of them on an action the shopper took — **none on page render**, see below.
+Full API contract and its known defects are in **`docs/sis-api.md`**.
 
 | When | Check | Catches |
 |---|---|---|
@@ -389,15 +825,9 @@ full API contract and its known defects are in **`docs/sis-api.md`**.
 
 **`seatsAreAvailable` is not a reliable seat check.** It reported seats for 37 of the
 42 sections the SiS refuses to register, including one confirmed full on the live
-site, and it lagged `/validation` by a full day on `PSYC1101-50/-51`. `/validation`
-is the trustworthy source, and it reports a full section as `Offering Missing` — the
-same code it uses for a withdrawn one, so user-facing copy has to stay generic.
-
-**Both endpoints are called on add for a reason.** `Offering Missing` has two causes,
-and only `courseofferings` separates them: a `200` alongside a validation refusal
-means *known but full*; a `404` means *not in the SiS at all* — a section published
-to Sitecore that has not propagated yet, which the site lists and nobody can
-register.
+site. `/validation` is the only trustworthy source, and it reports a full section as
+`Offering Missing` — the same code it uses for a withdrawn one, so user-facing copy
+has to stay generic.
 
 **Reading a validation response**: an invalid cart arrives as **HTTP 200** with the
 verdict in the body, so `response.ok` only ever means the call was well-formed. All
@@ -413,6 +843,207 @@ would otherwise be billed), rewrites `cartItems` / `feeSession` / `totalCredits`
 shows a notice naming what went, and dispatches `bvc:cart-updated` so the form
 re-evaluates ASN visibility. A non-empty result aborts the submit rather than
 creating a registration that `submit-payment` would reject.
+
+**Nothing is checked to RENDER a section** (changed 2026-09-01). The course pages
+draw their offerings from the Sitecore JSON alone. `bindOfferings()` used to run a
+serial `courseofferings` sweep across every section before revealing the enrolment
+list, hiding any that did not answer with seats — three failures in one:
+
+- it keyed on `seatsAreAvailable`, which is the unreliable flag above, so it hid
+  sections that were on sale and kept ones the SiS refuses;
+- the calls are serial against a 10.9 s-median backend, so the list sat behind a
+  "Checking availability…" spinner for minutes on a course with many sections;
+- **any SiS degradation emptied the page**. Every probe failing hid every section,
+  and the fallback copy said "No sections currently available." — a healthy
+  catalogue rendered as a course nobody could buy, with nothing to say otherwise.
+
+Availability is now decided at the only moment it can be acted on — the **Add**
+click. On a refusal the button greys out (`.unavailable`) and reads "Unavailable"
+with the reason in its `title`. Refusals persist for the session in
+`unavailableStore`, so a greyed button stays greyed across re-renders and
+back-navigation without another call.
+
+**The wait is signalled in two places, deliberately.** The button gets a spinner
+and a "Checking…" label at **full opacity** — the first version dimmed it to 0.6,
+which was reported as the button *disappearing* rather than working, and it is
+right: fading the one thing that changed is the opposite of feedback. Alongside it
+`busyToast` raises a fixed "Checking availability…" toast at `z-index: 10001`,
+above the sliding cart (9999) and its overlay (9998). Either indicator alone can
+go unseen — the button can be scrolled out of view or, on a successful add, be
+covered by the cart sliding over it; the toast is the one that survives both.
+Unlike `showNotification`, it has no timer: it is torn down when the work ends,
+not 3 s later, because 3 s is meaningless against a 10.9 s median. Once the cart
+is open it hands off — the cart's own fee spinner takes over and the toast hides,
+so there are never two spinners claiming different things.
+
+**Extended Education has no international price and no additional fees.** Both
+were being displayed anyway, and both are now suppressed from the data rather
+than by hardcoding a rule per product line.
+
+| | international set | differs from domestic | fee API returns |
+|---|---|---|---|
+| Extended Ed | 83 of 87 sections | **0** | `[]` (12 courses sampled) |
+| Open Studies | 221 of 221 | **221** (e.g. 646 vs 1678) | 4 fees, $225 |
+
+- **The second price renders only when it actually differs** — the rendered
+  strings are compared, so equal-after-rounding is equal on the page. Sitecore
+  populates `international` for nearly every EE section, but it just repeats the
+  domestic figure, so the page printed "$120 Domestic Student / $120
+  International Student" and invited the reader to hunt for a difference that is
+  not there. Verified across the whole catalogue: EE 0 of 87 sections show it,
+  OS 221 of 221 keep it, and **no course is mixed** — so the rule cannot half-
+  apply to anything. It is data-driven on purpose: if an EE course ever gains a
+  real international rate it appears without a code change.
+- **"Domestic Student" goes with it.** With no second price to contrast against,
+  the qualifier implies a distinction that does not exist.
+- **`ee-course` drops the "Additional fees apply" note.** The fee API returns an
+  empty set for every EE offering tested (12 sections, 12 different courses)
+  against 4 fees for every OS section, so the note promised a charge that never
+  arrives. **The fee call itself is deliberately kept on add-to-cart**: checkout
+  totals the cart from the session rather than re-asking the API, so skipping it
+  would silently undercharge if EE ever does gain fees.
+- **Zero-value cart rows are omitted.** An EE cart has no additional fees and
+  often no tax, and was printing two `$0.00` lines.
+
+**Credits are shown only when there are credits.** Extended Education carries
+`credits: 0` on all 126 of its sections (Open Studies is 3/4/6), so the accordion
+and the cart were both printing a literal "Credits 0". Data-driven like the price
+rule above, so an EE course that ever gains credits shows them. **The
+`data-product-credits` attribute is still emitted at 0** — checkout decides ASN
+visibility from `cartItems[].credits > 0`, and a mixed EE + OS cart needs the
+zero present rather than missing. Hiding the display must not change the data.
+
+**Schedule day codes are normalised by `parseSchedule()`.** Sitecore emits one
+scheme — **`Su M T W Th F Sa`** — confirmed across all 14 distinct tokens in the
+catalogue. Note what is absent: no `R` for Thursday, no bare `S`, no `U`. The old
+`dayCodeMap` was built for that other (registrar) scheme *and* looked up whole
+tokens as single letters, so only `M`/`T`/`W`/`F` ever matched — `Th`, `Sa`,
+`MW`, `TTh`, `FSa`, `ThF` all fell through and printed raw. That is why one row
+read "Mondays" and the next read "TTh".
+
+- Matching is **greedy longest-first** (`Su`,`Sa`,`Th`,`Tu` before `M`,`T`,`W`,
+  `F`), so `MTWThF` cannot mis-split. `R`/`S`/`U` are kept as a defensive
+  fallback against an upstream scheme change.
+- An unparseable token is **printed verbatim**, never guessed. Showing an
+  unrecognised code is bad; inventing days is worse.
+- **`SuMTWThFSa 12:00 AM - 12:00 AM` is a placeholder, not a schedule** — 100
+  occurrences (51 EE, 49 OS), the most common value in the data, and the only
+  thing that midnight window is ever paired with. Rendered literally it claims
+  the class meets every day at midnight. It now reads "Self-paced — study any
+  time" with no time. **Both conditions are required**: all seven days with real
+  hours is a genuine schedule and still renders as seven days.
+- Where there is no meeting time, the colon and the `Hours:` row are dropped in
+  both the accordion and the cart, rather than left dangling over an empty value.
+- **`scheduleBlocks()` removes two kinds of upstream noise** before rendering.
+  Sections repeat an identical block (`FSa 8:00 AM - 4:50 PM` twice on the same
+  section), which printed the same line twice; and **18 sections (11 EE, 7 OS)
+  carry the placeholder ALONGSIDE real meeting times**, which read as a section
+  that both has no set time and meets on Fridays. Duplicates are collapsed, and
+  where a real block exists it wins — the placeholder is only shown when it is
+  the only thing there is to say.
+- Verified against all 84 distinct schedule strings in the catalogue: 0 printed
+  raw. The test drives the parser extracted from the BUILT bundle, not the source.
+
+**An offering with no price captures interest instead of selling.** Sitecore
+sends `fees: { domestic: null, international: null }` when nobody has entered a
+price — four Extended Education courses today (ADMN9302, DESN9315, ISEC9105,
+ISEC9208), one section each. `domesticAmount` coerced that null to `0`, so the
+page advertised **"$ 0 CAD" behind a live Add button** and a shopper could carry
+a free course to checkout. Confirmed on production before the fix.
+
+- **`sectionHasPrice()` gates everything.** When a course has NO sellable
+  section, `renderOffersColumn()` drops the entire offerings list — delivery
+  type, campus, date-range accordion, hours, registration window, schedule — and
+  renders the interest form. All of that describes an offering the shopper
+  cannot have, and sitting it next to "no offers are available" reads as a
+  contradiction. The heading becomes **"Register your interest"**, since "Enroll
+  now" over a panel with nothing to enrol in is its own small lie.
+- **Mixed courses keep what sells.** If some sections have a price and some do
+  not, the priced ones render normally and the priceless ones are left out, with
+  a console warning naming the count so a missing price is diagnosable rather
+  than invisible. No course is mixed today.
+- **The form is inline, not behind a button.** Once the panel carries no course
+  detail there is nothing for a modal to reveal, so the click was friction in
+  front of the only thing on offer.
+
+**`src/js/shared/interest-form.js`** holds both ends of the round trip — the
+course pages render the form, the Extended Education listing shows the popup
+ClickDimensions redirects back to.
+
+- Posts to the ClickDimensions form `aP8W4U9m7qUqri3nnRw6WT` with the same five
+  fields and reCAPTCHA as `/forms/program-form`, and the same hidden CRM fields
+  (`s_type`, `funnelStartingStage`, `initialTouchPoint`, `contact_type`,
+  `campaignType`) — they are how the lead is routed. **`cd_visitorkey` is
+  deliberately NOT copied**: ClickDimensions sets it per visitor, and a fixed
+  value would attribute every enquiry to one person.
+- **The course rides in `s_faqs`.** That field already submits the sentence "I
+  am interested. Contact me with more information."; it now names the course.
+  This is the ONLY thing that identifies the lead — the form has no course field
+  and redirects to one FIXED url, so nothing else carries it.
+- **The redirect is configured in ClickDimensions, not here.** The form has no
+  `ReturnUrl` field. It must point at `…/study/extended-education?m=success` and
+  `?m=error`. `readSubmissionOutcome()` also accepts a bare `?m-error`, which is
+  the literal form the redirect was specified in and parses as a parameter
+  *named* "m-error" rather than a value — keying only on `m` would show nothing
+  on every failed submission.
+- Success auto-closes after 10 s (measured 10.4 s); **an error does not**, because
+  the person has just lost what they typed. The marker is stripped from the URL
+  so a refresh cannot replay the popup.
+- **`fitRecaptcha()` measures rather than guesses.** The widget is a rigid
+  304×78 iframe Google will not reflow — the only thing in this form that cannot
+  adapt. It is scaled to the column's real width, re-fitting on resize and
+  orientation change. A media-query breakpoint would have to assume Webflow's
+  page gutters, which can change without us. Verified 430→280 px: fits at every
+  width, no horizontal page overflow.
+- The cart's remove control grows to 40×40 under `@media (pointer: coarse)` —
+  28 px is fine for a mouse and well under the ~44 px a finger needs, and it is
+  the one destructive control in the cart.
+
+**Cart copy lives in one `MSG` map per course bundle.** The strings had drifted
+apart in three ways at once: four nouns for the same thing ("this date", "this
+offering", "Item", "products"), inconsistent terminal punctuation, and a button
+`title` that disagreed with the toast fired at the same moment. Worse,
+`showNotification(error.message)` put raw exception text in front of shoppers —
+"Failed to fetch", "Failed to check course availability (status 502)". Convention
+now: full sentences, terminal period, **"this date"** for the accordion the
+shopper opened (it is labelled with a date range — "offering"/"section" are
+internal words) and **"course"** for a cart row. `readValidation()` in
+`shared/validation.js` follows the same rules so API verdicts match. The raw
+error still reaches the console; the shopper gets `MSG.unexpected`.
+
+> Deliberate and preserved: **ee-course treats a failed fee calculation as
+> non-fatal** and still reports success, where os-course says checkout is
+> unavailable. That divergence is intentional (`// Fees are optional for EE`),
+> so only the wording was unified, not the behaviour.
+
+**The cart's remove control is an icon in the row's top-right**, not a red block
+above the course name. It used to be emitted *first* in the row markup and styled
+as a solid `#e74c3c` "Remove" button, which made the destructive action the
+loudest thing in every row and left the course name reading as its caption.
+`.cart-item` had carried `position: relative` all along for a fix that was never
+written. The control now renders last in source order, is pulled to the corner
+absolutely, and `.cart-item-name` reserves `padding-right: 32px` so a long course
+name wraps around it rather than under it (verified: 85-character name over three
+lines, 5 px clearance). The handler uses `closest('.remove-item')` and reads
+`data-sku` off that element rather than `event.target`, so a click landing on a
+child cannot lose the sku.
+
+**The checkout submit is covered by an overlay** (`submitOverlay` in
+`src/js/checkout/index.js`). "Proceed to Payment" fires validation → registration →
+`submit-payment` → the Flywire redirect: two SiS calls, so the page previously sat
+inert for anything up to ~90 s with no feedback, which invites a second click and a
+second registration. A fixed full-viewport overlay with a spinner goes up before the
+pre-submit repair, names each step as it advances, and blocks the repeat click. It
+is **never hidden on the success path** — the navigation is what removes it, so
+there is no bare-page gap before the redirect. Every failure path hides it
+explicitly, and `handleSubmit()` wraps `runSubmit()` so an unexpected throw cannot
+strand the shopper behind a spinner that never resolves. Styles are injected by the
+script rather than shipped in a stylesheet, because `checkout.js` has no paired CSS
+bundle and must not depend on `checkout-cart.css` being on the page.
+
+> Fixing that overlay exposed a second bug: the registration `catch` **swallowed
+> every error** — its two `alert()` calls were commented out — so a failed
+> registration did nothing visible at all. It now calls `showErrorMessage()`.
 
 **Config flags** — set before the scripts load, no rebuild needed:
 
@@ -465,7 +1096,22 @@ TEAMS_WEBHOOK_URL=
 # pipeline pings <url>/start, then <url> on success or <url>/fail on failure —
 # so the monitor alerts when a run stops happening at all.
 HEARTBEAT_URL=
+# Optional: separate dead-man's switch for the SiS health watcher. A DIFFERENT
+# check from HEARTBEAT_URL — "the cart's backend is unhealthy" and "the deploy
+# pipeline failed" need different alarms and different escalation.
+HEARTBEAT_SIS_URL=
 ```
+
+`sis-health-watch.mjs` also reads these, all optional with working defaults:
+
+| var | default | what it does |
+|---|---|---|
+| `SIS_API_ORIGIN` | `https://bvc-api-proxy.vercel.app` | proxy to probe; point at the UAT proxy to watch UAT |
+| `SIS_WATCH_SKU` | `2428` | offering id to time; change if that section is withdrawn |
+| `SIS_WATCH_SLOW_MS` | `8000` | at/over this, a probe is DEGRADED |
+| `SIS_WATCH_TIMEOUT_MS` | `30000` | give up and call it DOWN |
+| `SIS_WATCH_FAILS_BEFORE_ALERT` | `2` | consecutive bad polls before Teams fires |
+| `SIS_WATCH_COOLDOWN_H` | `1` | minimum gap between Teams alerts |
 
 **`src/nextjs-jamstack/` (uses root `.env` or `.env.local`)**
 ```

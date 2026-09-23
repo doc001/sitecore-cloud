@@ -1,7 +1,7 @@
 // api/bvcpayment.mjs
 // API Configuration
 const API_CONFIG = {
-    BASE_URL: 'https://apim-bvc-uat-001.azure-api.net/ths-extended-edu/v1'
+    BASE_URL: 'https://apim-bvc-prd-001.azure-api.net/extended-edu-registration/v1'
   };
   
   const corsHeaders = {

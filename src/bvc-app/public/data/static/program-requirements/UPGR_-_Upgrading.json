@@ -1,5 +1,408 @@
 {
     "sectionLabel": "Program Completion Requirements",
-    "groupings": [],
+    "groupings": [
+        {
+            "termLabel": "Upgrading Program Courses",
+            "totalCredits": 0,
+            "rules": [
+                {
+                    "ruleType": "",
+                    "description": "Placement in any of the following courses:",
+                    "courses": [
+                        {
+                            "code": "BIOL0301",
+                            "title": "Biology 030",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/BIOL0301_Biology 030_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "CHEM0301",
+                            "title": "Chemistry 030",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/CHEM0301_Chemistry 030_(Fall 2025_Current).pdf"
+                        },
+                        {
+                            "code": "COMP0101",
+                            "title": "Microsoft Office 10",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMP0101_Microsoft Office 10_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "COMP0702",
+                            "title": "Microsoft Office Fundamentals",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMP0702_Microsoft Office Fundamentals_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "ELA1104",
+                            "title": "English Language Arts 10-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA1104_English Language Arts 10-2_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ELA1105",
+                            "title": "English Language Arts 10-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA1105_English Language Arts 10-1_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ELA2104",
+                            "title": "English Language Arts 20-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA2104_English Language Arts 20-2_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ELA2105",
+                            "title": "English Language Arts 20-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA2105_English Language Arts 20-1_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ELA3104",
+                            "title": "English Language Arts 30-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA3104_English Language Arts 30-2_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ELA3105",
+                            "title": "English Language Arts 30-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ELA3105_English Language Arts 30-1_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ENGL0202",
+                            "title": "English 020-2",
+                            "credits": 5,
+                            "url": ""
+                        },
+                        {
+                            "code": "ENGL0301",
+                            "title": "English 030-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL0301_English 030-1_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ENGL0302",
+                            "title": "English 030-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ENGL0302_English 030-2_(Spring 2025_Current).pdf"
+                        },
+                        {
+                            "code": "ESSK0104",
+                            "title": "Essential Skills for Communication",
+                            "credits": 5,
+                            "url": ""
+                        },
+                        {
+                            "code": "ESSK0105",
+                            "title": "Communication Essentials",
+                            "credits": 5,
+                            "url": ""
+                        },
+                        {
+                            "code": "ESSK0109",
+                            "title": "Workplace Math",
+                            "credits": 5,
+                            "url": ""
+                        },
+                        {
+                            "code": "MAT1791",
+                            "title": "Mathematics 10 C",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT1791_Mathematics 10 C_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MAT1793",
+                            "title": "Mathematics 10-3",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT1793_Mathematics 10-3_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MAT2791",
+                            "title": "Mathematics 20-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT2791_Mathematics 20-1_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MAT2792",
+                            "title": "Mathematics 20-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT2792_Mathematics 20-2_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MAT2793",
+                            "title": "Mathematics 20-3",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT2793_Mathematics 20-3_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MAT3211",
+                            "title": "Mathematics 31",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3211_Mathematics 31_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "MAT3791",
+                            "title": "Mathematics 30-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3791_Mathematics 30-1_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MAT3792",
+                            "title": "Mathematics 30-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3792_Mathematics 30-2_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MAT3793",
+                            "title": "Mathematics 30-3",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MAT3793_Mathematics 30-3_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MATH0301",
+                            "title": "Mathematics 030-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0301_Mathematics 030-1_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MATH0302",
+                            "title": "Mathematics 030-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0302_Mathematics 030-2_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "MATH0703",
+                            "title": "Basic Math III",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0703_Basic Math 3_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "MATH0801",
+                            "title": "Prep Math 10",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/MATH0801_Prep Math 10_(Fall 2025_Current).pdf"
+                        },
+                        {
+                            "code": "OTH1999",
+                            "title": "Special Project 10",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/OTH1999_Special Project 10_(Winter 2023_Current).pdf"
+                        },
+                        {
+                            "code": "PHYS0301",
+                            "title": "Physics 030",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/PHYS0301_Physics 030_(Fall 2025_Current).pdf"
+                        },
+                        {
+                            "code": "READ0103",
+                            "title": "Reading 3",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/READ0103_Reading 3_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "READ0104",
+                            "title": "Reading 4",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/READ0104_Reading 4_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "READ0105",
+                            "title": "Reading 5",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/READ0105_Reading 5_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "SCIE0301",
+                            "title": "Science 030",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCIE0301_Science 030_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCIE0801",
+                            "title": "Science Preparation",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCIE0801_Science Preparation_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "SCN1270",
+                            "title": "Science 10",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN1270_Science 10_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN2231",
+                            "title": "Biology 20",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2231_Biology 20_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN2270",
+                            "title": "Science 20",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2270_Science 20_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN2288",
+                            "title": "Science 24",
+                            "credits": 5,
+                            "url": ""
+                        },
+                        {
+                            "code": "SCN2796",
+                            "title": "Chemistry 20",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2796_Chemistry 20_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN2797",
+                            "title": "Physics 20",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN2797_Physics 20_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN3230",
+                            "title": "Biology 30",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3230_Biology 30_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN3270",
+                            "title": "Science 30",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3270_Science 30_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN3796",
+                            "title": "Chemistry 30",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3796_Chemistry 30_(Winter 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SCN3797",
+                            "title": "Physics 30",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SCN3797_Physics 30_(Fall 2025_Current).pdf"
+                        },
+                        {
+                            "code": "SOST0301",
+                            "title": "Social Studies 030-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOST0301_Social Studies 030-1_(Spring 2024_Current).pdf"
+                        },
+                        {
+                            "code": "SOST0302",
+                            "title": "Social Studies 030-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SOST0302_Social Studies 030-2_(Spring 2024_Current).pdf"
+                        },
+                        {
+                            "code": "SSN1154",
+                            "title": "Aboriginal Studies 10",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SSN1154_Aboriginal Studies 10_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "SSN2154",
+                            "title": "Aboriginal Studies 20",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SSN2154_Aboriginal Studies 20_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "SSN3154",
+                            "title": "Aboriginal Studies 30",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SSN3154_Aboriginal Studies 30_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "SST1771",
+                            "title": "Social Studies 10-1",
+                            "credits": 5,
+                            "url": ""
+                        },
+                        {
+                            "code": "SST1772",
+                            "title": "Social Studies 10-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST1772_Social Studies 10-2_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "SST2771",
+                            "title": "Social Studies 20-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST2771_Social Studies 20-1_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "SST2772",
+                            "title": "Social Studies 20-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST2772_Social Studies 20-2_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "SST3771",
+                            "title": "Social Studies 30-1",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST3771_Social Studies 30-1_(Spring 2024_Current).pdf"
+                        },
+                        {
+                            "code": "SST3772",
+                            "title": "Social Studies 30-2",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/SST3772_Social Studies 30-2_(Spring 2024_Current).pdf"
+                        },
+                        {
+                            "code": "WRIT0103",
+                            "title": "Writing 3",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WRIT0103_Writing 3_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "WRIT0104",
+                            "title": "Writing 4",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WRIT0104_Writing 4_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "WRIT0105",
+                            "title": "Writing 5",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/WRIT0105_Writing 5_(Fall 2024_Current).pdf"
+                        },
+                        {
+                            "code": "ESSK0303",
+                            "title": "Indigenous Pathways to Employment I",
+                            "credits": 15,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0303_Indigenous Pathways to Employment 1_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "ESSK0304",
+                            "title": "Indigenous Pathways to Employment II",
+                            "credits": 15,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0304_Indigenous Pathways to Employment 2_(Spring 2022_Current).pdf"
+                        },
+                        {
+                            "code": "ESSK0305",
+                            "title": "Indigenous Pathways to Employment III",
+                            "credits": 15,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0305_Indigenous Pathways to Employment 3_(Fall 2022_Current).pdf"
+                        },
+                        {
+                            "code": "ESSK0101",
+                            "title": "Essential Skills for Working, Learning, Living",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/ESSK0101_Essential Skills for Working, Learning, Living_(Fall 2022_Current).pdf"
+                        },
+                        {
+                            "code": "COMM0103",
+                            "title": "Post-Secondary Foundations",
+                            "credits": 5,
+                            "url": "https://bvc-app.vercel.app/data/course-outlines-pdf/COMM0103_Post-Secondary Foundations _(Fall 2024_Current).pdf"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "grandTotalCredits": 0
 }

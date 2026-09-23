@@ -6,7 +6,7 @@
  *   Watch : npm run js:watch
  *
  * Covers BOTH: (1) the course component / offerings / accordion, and
- * (2) the sliding cart, overlay, notifications, availability spinner and
+ * (2) the sliding cart, overlay, notifications and
  * add-to-cart button states injected at runtime by os-course.js.
  * ---------------------------------------------------------------------------
  */
@@ -402,6 +402,19 @@
   margin: 4px 0;
   color: #444;
 }
+/* Remove control: a quiet icon in the row's top-right corner.
+   It used to be a solid red "Remove" block rendered BEFORE the course name, so
+   the loudest thing in every cart row was the destructive action and the course
+   it belonged to read as a caption underneath it. .cart-item has carried
+   position:relative all along for exactly this. The details column reserves
+   space on the right so a long course name can never run under the button. */
+/* Base style = the OLD red block. Kept deliberately as a fallback: os-course.css
+   and os-course.js are separate files, so a browser can briefly hold a cached
+   copy of one and a fresh copy of the other. Styling the new corner icon on a
+   bare `.remove-item` would then squeeze the old markup's "Remove" text into a
+   28px box. The corner treatment is therefore scoped to the NEW row structure
+   (button follows the details block); old markup keeps the old look until its
+   JS catches up, and neither combination renders broken. */
 .remove-item {
   background: #e74c3c;
   color: #fff;
@@ -412,8 +425,51 @@
   font-size: 0.8em;
   margin-bottom: 8px;
 }
+.cart-item-details + .remove-item {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #999;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
 .remove-item:hover {
   background: #c0392b;
+}
+.cart-item-details + .remove-item:hover,
+.cart-item-details + .remove-item:focus-visible {
+  background: #fdecea;
+  color: #c0392b;
+}
+.cart-item-name {
+  padding-right: 32px;
+}
+/* Touch targets. 28px is a comfortable mouse target but well under the ~44px a
+   finger needs, and this is the one destructive control in the cart — a miss
+   either does nothing or hits the course name. Grown only where the pointer is
+   actually coarse, so the desktop icon stays discreet. The name's reserved gutter
+   grows with it, otherwise a long title would run under the bigger button. */
+@media (pointer: coarse) {
+  .cart-item-details + .remove-item {
+    width: 40px;
+    height: 40px;
+    top: 6px;
+    font-size: 24px;
+  }
+  .cart-item-name {
+    padding-right: 44px;
+  }
 }
 .cart-total {
   font-size: 1.1em;
@@ -524,37 +580,68 @@
     opacity: 1;
   }
 }
-.availability-loading-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.85);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  font-size: 14px;
-  color: #555;
-  gap: 12px;
-  border-radius: 8px;
-}
-.availability-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid #ddd;
-  border-top-color: #0066cc;
-  border-radius: 50%;
-  animation: os-spin 0.8s linear infinite;
-}
+/* The .availability-loading-overlay / .availability-spinner pair that used to sit
+   here is gone with the render-time availability sweep: sections now render from
+   the Sitecore data alone, so nothing covers the enrolment list while it loads.
+   os-spin stays — .cart-fees-spinner still uses it. */
 @keyframes os-spin {
   to {
     transform: rotate(360deg);
   }
 }
+/* Busy state for the Add button.
+   NOT dimmed. Fading the only moving part of the page to 0.6 while a 10 s+ SiS
+   call runs reads as "the button went away", not as "the system is working" —
+   which is exactly how it was reported. Full opacity, an inline spinner, and a
+   min-width so swapping "Add" for "Checking…" does not make the row jump. */
 .addtocartbutton.loading {
-  opacity: 0.6;
+  opacity: 1;
   pointer-events: none;
   cursor: progress;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 7.5em;
+}
+.bvc-btn-spinner {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: os-spin 0.7s linear infinite;
+}
+/* Page-level busy toast.
+   The button alone is not enough feedback: it can be scrolled out of view, and
+   on a successful add the sliding cart and its overlay come down on top of it.
+   This sits above both, and unlike .notification it persists until the work
+   actually finishes rather than expiring on a 3 s timer. */
+.bvc-busy-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  background: #34495e;
+  color: #fff;
+  font-size: 0.9em;
+  z-index: 10001;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  animation: os-slide-in 0.3s;
+}
+.bvc-busy-toast .bvc-btn-spinner {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bvc-btn-spinner {
+    animation-duration: 2.4s;
+  }
 }
 .addtocartbutton.in-cart,
 .addtocartbutton:disabled {
