@@ -206,8 +206,15 @@ function verifyPublished(deployOut) {
 
 const warn = (msg) => console.warn(`[${ts()}] ${msg}`);
 
-const heartbeat = (suffix = '') =>
-  pingHeartbeat({ baseUrl: process.env.HEARTBEAT_URL, suffix, log: warn });
+// notify.mjs only logs a FAILED send, so a delivered alert used to leave no
+// trace at all — indistinguishable in the log from one that was never attempted.
+// Log every outcome, including "not configured".
+const heartbeat = async (suffix = '') => {
+  if (!process.env.HEARTBEAT_URL) return false;
+  const ok = await pingHeartbeat({ baseUrl: process.env.HEARTBEAT_URL, suffix, log: warn });
+  if (ok) console.log(`[${ts()}] Heartbeat "${suffix || 'success'}" sent`);
+  return ok;
+};
 
 /**
  * `heartbeatSignal` is the suffix sent to the monitor: '/fail' for a genuine
@@ -216,7 +223,13 @@ const heartbeat = (suffix = '') =>
 async function notify(title, message, isFailure = true, heartbeatSignal = '/fail') {
   console.error(`[${ts()}] ALERT: ${title} — ${message}`);
   notifier.notify({ title, message, sound: true });
-  await sendTeams({ url: process.env.TEAMS_WEBHOOK_URL, title, message, isFailure, log: warn });
+  if (!process.env.TEAMS_WEBHOOK_URL) {
+    warn('Teams alert NOT sent: TEAMS_WEBHOOK_URL is not set');
+  } else if (await sendTeams({ url: process.env.TEAMS_WEBHOOK_URL, title, message, isFailure, log: warn })) {
+    // Accepted, not delivered: a Workflows webhook answers 202 before the flow
+    // runs, so a broken flow shows up in Power Automate's run history, not here.
+    console.log(`[${ts()}] Teams alert accepted by webhook`);
+  }
   // `null` means "report this, but do not touch the monitor": the run is still
   // going and its real outcome will ping at the end. Anything else pings now, so
   // the monitor alerts immediately instead of waiting for a ping to go missing.
@@ -247,6 +260,8 @@ async function main() {
       ? 'DATA ONLY: hourly course refresh, no full build'
       : (IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS');
   console.log(`\n[${ts()}] ===== BVC pipeline started (${mode}) =====`);
+  const on = (v) => (process.env[v] ? 'on' : 'OFF (unset)');
+  console.log(`[${ts()}] Alerting: Teams ${on('TEAMS_WEBHOOK_URL')}, heartbeat ${on('HEARTBEAT_URL')}`);
   await heartbeat('/start');
 
   // Both light modes reuse the static output from the last full build.
