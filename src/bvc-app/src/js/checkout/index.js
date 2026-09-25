@@ -29,7 +29,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
 
   // --- config -------------------------------------------------------------
   var _cfg = (typeof window !== 'undefined' && window.__BVC_CHECKOUT_CONFIG__) || {};
-  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app';
+  var apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : __API_ORIGIN__;
   // Empty studentNo segment in `fee/{skus}/{studentNo}` — matches the course pages.
   var feeId = _cfg.feeApplicantId != null ? _cfg.feeApplicantId : '';
   // Re-check the cart when the checkout page loads. The cart lives in sessionStorage

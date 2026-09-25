@@ -29,8 +29,8 @@ import { interestFormHtml, activateInterestForms } from '../shared/interest-form
     window.__bvcOsCourseLoaded = true;
     console.log('[OS-Course] Script loaded');
     var _cfg = (typeof window !== 'undefined' && window.__OS_COURSE_CONFIG__) || {},
-      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : 'https://bvc-app.vercel.app',
-      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : 'https://bvc-api-proxy.vercel.app',
+      dataOrigin = _cfg.dataOrigin != null ? _cfg.dataOrigin : __DATA_ORIGIN__,
+      apiOrigin = _cfg.apiOrigin != null ? _cfg.apiOrigin : __API_ORIGIN__,
       // Fee endpoint is `fee/{skus}/{studentNo}` where {studentNo} must be EMPTY for an
       // anonymous fee preview — the URL ends in a trailing slash (`fee/2595/`). Verified
       // 2026-07-28: empty → 200 with fee data; the literal string 'null' now 404s. The

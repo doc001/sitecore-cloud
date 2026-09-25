@@ -56,7 +56,7 @@
 
   var CFG = window.__PROGRAM_REQUIREMENTS_CONFIG__ || {};
 
-  var FALLBACK_ORIGIN = 'https://bvc-app.vercel.app';
+  var FALLBACK_ORIGIN = __DATA_ORIGIN__;
   var INDEX_PATH = '/data/static/program-requirements-index.json';
   var BY_CODE_PATH = '/data/static/program-requirements-by-code/';
   // Open Studies has no term structure — it is a catalogue of individual courses

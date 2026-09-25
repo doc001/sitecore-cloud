@@ -20,7 +20,7 @@ export const config = {
    */
   dataOrigin:
     (typeof window !== 'undefined' && window.__CHECKOUT_CART_CONFIG__ && window.__CHECKOUT_CART_CONFIG__.dataOrigin) ||
-    'https://bvc-app-uat.vercel.app',
+    __DATA_ORIGIN__,
 
   // Shown next to the birth date field and used by the date validator.
   dateFormat: 'YYYY-MM-DD',
@@ -66,7 +66,7 @@ export const config = {
     scopes: ['openid', 'profile', 'email', 'https://bowvalleycollege.ca/ngew/test/login'],
     // v4 exposes initialize(); the 2.12.0 build in the original embed does not.
     msalCdn: 'https://alcdn.msauth.net/browser/4.5.0/js/msal-browser.min.js',
-    studentApiBase: 'https://bvc-api-proxy.vercel.app/api/bvcpayment/'
+    studentApiBase: __API_ORIGIN__ + '/api/bvcpayment/'
   },
 
   /**

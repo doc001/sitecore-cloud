@@ -1,7 +1,7 @@
 import { execSync, spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { mkdirSync, writeFileSync, cpSync, rmSync, existsSync } from 'fs';
+import { mkdirSync, writeFileSync, cpSync, rmSync, existsSync, readFileSync } from 'fs';
 import notifier from 'node-notifier';
 import dotenv from 'dotenv';
 import { checkFeeGuard } from './fee-guard.mjs';
@@ -11,12 +11,42 @@ const ROOT = dirname(fileURLToPath(import.meta.url));
 const BVC_APP = join(ROOT, 'src', 'bvc-app');
 const VERCEL = join(ROOT, 'node_modules', '.bin', process.platform === 'win32' ? 'vercel.cmd' : 'vercel');
 
-// Single source for the deploy target. These were repeated inline on the pull
-// and deploy lines; the verification step below has to inspect the SAME project,
-// so a drift between them would silently check the wrong thing.
+// Deploy target is read from .vercel/project.json — the project ID in that file
+// is the single source of truth. vercel pull/deploy use it directly, so switching
+// targets means running `vercel link` to point at a different project.
 const VERCEL_SCOPE = 'bvc-marketing-its';
-const VERCEL_PROJECT = 'bvc-app';
-const PROD_ALIAS = `${VERCEL_PROJECT}.vercel.app`;
+
+const KNOWN_PROJECTS = {
+  'prj_PZtz0RPNyD6BGcjg9QV1qmmkZj86': { env: 'UAT',  name: 'bvc-app-uat', alias: 'bvc-app-uat.vercel.app', apiProxy: 'bvc-uat-api-proxy.vercel.app' },
+  'prj_m8ejISVto6h6bwuerCjldml7dh8M':  { env: 'PROD', name: 'bvc-app',     alias: 'bvc-app.vercel.app',     apiProxy: 'bvc-api-proxy.vercel.app' },
+};
+
+function confirmDeployTarget() {
+  const projectJsonPath = join(BVC_APP, '.vercel', 'project.json');
+  if (!existsSync(projectJsonPath)) {
+    console.error(`[${ts()}] ERROR: ${projectJsonPath} not found — run "vercel link" first.`);
+    process.exit(1);
+  }
+  let proj;
+  try { proj = JSON.parse(readFileSync(projectJsonPath, 'utf8')); } catch (err) {
+    console.error(`[${ts()}] ERROR: could not read ${projectJsonPath}: ${err.message}`);
+    process.exit(1);
+  }
+  const id = proj.projectId || '(unknown)';
+  const known = KNOWN_PROJECTS[id];
+  if (!known) {
+    console.error(`[${ts()}] ERROR: project ID ${id} is not in the known list. Aborting.`);
+    console.error(`[${ts()}]   Add it to KNOWN_PROJECTS in pipeline.mjs if this is intentional.`);
+    process.exit(1);
+  }
+  console.log(`\n[${ts()}] ═══════════════════════════════════════════════`);
+  console.log(`[${ts()}]   Deploy target:  ${known.env}`);
+  console.log(`[${ts()}]   Project name:   ${known.name}`);
+  console.log(`[${ts()}]   Project ID:     ${id}`);
+  console.log(`[${ts()}]   Alias:          ${known.alias}`);
+  console.log(`[${ts()}] ═══════════════════════════════════════════════\n`);
+  return { id, env: known.env, name: known.name, alias: known.alias };
+}
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });
 
@@ -177,13 +207,13 @@ const stripAnsi = (s) => s.replace(ANSI_RE, '');
  * proven — no URL in the output, inspect erroring, alias serving something else —
  * counts as a failure.
  */
-function verifyPublished(deployOut) {
+function verifyPublished(deployOut, prodAlias) {
   const text = stripAnsi(deployOut);
   // The CLI prints `Production   https://<project>-<hash>-<team>.vercel.app`.
   const line = text.match(/Production\s+(https:\/\/[a-z0-9.-]+\.vercel\.app)/i);
   const url =
     (line && line[1]) ||
-    (text.match(/https:\/\/[a-z0-9-]+\.vercel\.app/gi) || []).find((u) => !u.endsWith(`//${PROD_ALIAS}`));
+    (text.match(/https:\/\/[a-z0-9-]+\.vercel\.app/gi) || []).find((u) => !u.endsWith(`//${prodAlias}`));
   if (!url) return { ok: false, reason: 'no deployment URL found in deploy output' };
 
   // Inspect the ALIAS, not our own deployment. Inspecting the deployment is not
@@ -191,7 +221,7 @@ function verifyPublished(deployOut) {
   // superseded deployment still reports the production alias and would be waved
   // through (verified 2026-08-14 against a real superseded deployment).
   // Inspecting the alias instead resolves to whatever is serving it right now.
-  const insp = runCapture(`"${VERCEL}" inspect ${PROD_ALIAS} --scope=${VERCEL_SCOPE}`, BVC_APP);
+  const insp = runCapture(`"${VERCEL}" inspect ${prodAlias} --scope=${VERCEL_SCOPE}`, BVC_APP);
   if (insp.code !== 0) return { ok: false, url, reason: `vercel inspect exited ${insp.code}` };
 
   const i = stripAnsi(insp.out);
@@ -199,8 +229,8 @@ function verifyPublished(deployOut) {
   const ready = /status\s+[^\S\n]*[●•]?\s*Ready/i.test(i);
 
   if (!serving) return { ok: false, url, reason: 'could not read the alias target from inspect' };
-  if (serving !== url) return { ok: false, url, reason: `${PROD_ALIAS} serves ${serving}, not this run's deployment` };
-  if (!ready) return { ok: false, url, reason: `${PROD_ALIAS} target is not Ready` };
+  if (serving !== url) return { ok: false, url, reason: `${prodAlias} serves ${serving}, not this run's deployment` };
+  if (!ready) return { ok: false, url, reason: `${prodAlias} target is not Ready` };
   return { ok: true, url };
 }
 
@@ -247,6 +277,9 @@ async function main() {
       ? 'DATA ONLY: hourly course refresh, no full build'
       : (IS_PROD ? 'PROD: minified JS, logs stripped' : 'UAT/DEV: readable JS');
   console.log(`\n[${ts()}] ===== BVC pipeline started (${mode}) =====`);
+  const deployTarget = confirmDeployTarget();
+  process.env.BVC_DATA_ORIGIN = `https://${deployTarget.alias}`;
+  process.env.BVC_API_ORIGIN = `https://${deployTarget.apiProxy}`;
   await heartbeat('/start');
 
   // Both light modes reuse the static output from the last full build.
@@ -482,32 +515,32 @@ async function main() {
 
   // 2. Upload pre-built static output — Vercel is a host only, no rebuild triggered
   try {
-    run(`"${VERCEL}" pull --yes --environment=production --scope=${VERCEL_SCOPE} --project=${VERCEL_PROJECT}`, BVC_APP);
+    run(`"${VERCEL}" pull --yes --environment=production --scope=${VERCEL_SCOPE}`, BVC_APP);
 
     const dep = runCapture(
-      `"${VERCEL}" deploy --prebuilt --prod --scope=${VERCEL_SCOPE} --project=${VERCEL_PROJECT}`,
+      `"${VERCEL}" deploy --prebuilt --prod --scope=${VERCEL_SCOPE}`,
       BVC_APP
     );
     if (dep.code !== 0) {
       // Non-zero is not proof of failure here — see verifyPublished().
-      const v = verifyPublished(dep.out);
+      const v = verifyPublished(dep.out, deployTarget.alias);
       if (!v.ok) throw new Error(`deploy exited ${dep.code} and could not be verified (${v.reason})`);
       warn(
-        `Deploy CLI exited ${dep.code}, but ${v.url} is Ready and holds ${PROD_ALIAS} — ` +
+        `Deploy CLI exited ${dep.code}, but ${v.url} is Ready and holds ${deployTarget.alias} — ` +
           `publishing succeeded. Treating as success.`
       );
       // Worth a human look (the CLI is erroring on a working deploy) but NOT a
       // failure, so the heartbeat is left to the real outcome below.
       await notify(
-        'BVC deploy CLI errored — published anyway',
-        `vercel deploy exited ${dep.code}, but ${v.url} is Ready and serving ${PROD_ALIAS}, ` +
+        `BVC deploy CLI errored — published anyway (${deployTarget.env})`,
+        `vercel deploy exited ${dep.code}, but ${v.url} is Ready and serving ${deployTarget.alias}, ` +
           `so the release did reach the site. Known intermittent "Not authorized" thrown after ` +
           `the upload is accepted. No action needed unless this becomes constant.`,
         true,
         null
       );
     }
-    console.log(`\n[${ts()}] Deploy succeeded`);
+    console.log(`\n[${ts()}] Deploy succeeded (${deployTarget.env}: ${deployTarget.name})`);
     // Advance the fee baseline only now — a failed run must leave it pointing at
     // the last dataset that actually reached the site. Since the guard no longer
     // vetoes, this normally advances every run, which is what makes the anomaly
@@ -516,8 +549,8 @@ async function main() {
     if (guard) guard.commit();
   } catch (err) {
     await notify(
-      'BVC Deploy FAILED',
-      `Deploy failed at ${new Date().toLocaleTimeString()}. Data is built locally — re-run deploy manually.`
+      `BVC Deploy FAILED (${deployTarget.env})`,
+      `Deploy to ${deployTarget.env} (${deployTarget.name}) failed at ${new Date().toLocaleTimeString()}. Data is built locally — re-run deploy manually.`
     );
     process.exit(1);
   }
