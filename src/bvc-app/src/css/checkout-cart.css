@@ -3,7 +3,14 @@
    the site's styles. Colours are custom properties: override them once in
    Webflow's site-wide custom code to match the brand. */
 
-[data-checkout] {
+/* Tokens live at :root, not on [data-checkout]. The runtime-created layout wrapper
+   is the form's PARENT and the cart column its SIBLING, so neither inherits anything
+   scoped to the form itself — their borders and radii silently fell back to initial.
+   Every name is --bvc- prefixed, so nothing here collides with the site's own.
+   `--bvc-checkout-css` is a sentinel: the runtime reads it to find out whether this
+   stylesheet actually applied, rather than trusting that a <link> tag exists. */
+:root {
+  --bvc-checkout-css: 1;
   --bvc-ink: #1c1c1c;
   --bvc-muted: #5c6470;
   --bvc-line: #cfd4dc;
@@ -12,7 +19,9 @@
   --bvc-error-bg: #fdf1f0;
   --bvc-radius: 6px;
   --bvc-gap: 1rem;
+}
 
+[data-checkout] {
   color: var(--bvc-ink);
   font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
   line-height: 1.5;
@@ -213,6 +222,188 @@
 @media (min-width: 40rem) {
   .bvc-choice { grid-template-columns: 1fr 1fr; }
 }
+
+/* --- "Other" typeahead -----------------------------------------------------
+   Revealed under a country/language select when OTHER is chosen; searches the
+   full Sitecore list. See src/js/checkout-cart/typeahead.js. */
+.bvc-typeahead {
+  position: relative;
+  margin-top: 0.5rem;
+}
+.bvc-typeahead[hidden] { display: none; }
+
+.bvc-typeahead__input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--bvc-line);
+  border-radius: var(--bvc-radius);
+  color: var(--bvc-ink);
+  font: inherit;
+}
+.bvc-typeahead__input:focus {
+  outline: 2px solid var(--bvc-accent);
+  outline-offset: 1px;
+}
+
+.bvc-typeahead__list {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  max-height: 15rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--bvc-line);
+  border-radius: var(--bvc-radius);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+.bvc-typeahead__list[hidden] { display: none; }
+
+.bvc-typeahead__list li {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+.bvc-typeahead__list li.is-active,
+.bvc-typeahead__list li:hover {
+  background: var(--bvc-error-bg);
+  background: #eef4fa;
+}
+
+.bvc-typeahead__hint {
+  margin: 0.25rem 0 0;
+  color: var(--bvc-muted);
+  font-size: 0.8125rem;
+}
+
+/* --- runtime-created layout -------------------------------------------------
+   Only applies when the bundle creates the cart column, i.e. a page carrying just
+   <div data-checkout></div>. A page that builds its own layout owns #shoppingCart
+   and never reaches this. Summary sits beside the form on desktop and below it on
+   narrow screens, and sticks while the form scrolls. */
+.bvc-checkout-layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .bvc-checkout-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+  }
+  .bvc-checkout-layout > .bvc-cart-column {
+    position: sticky;
+    /* Clears the site's fixed SEARCH/MENU header, which the summary scrolled
+       underneath at the previous 1.5rem. Raise --bvc-cart-sticky-top if the header
+       ever gets taller. */
+    top: var(--bvc-cart-sticky-top, 80px);
+    /* Never let a long summary outgrow the viewport and strand the total. */
+    max-height: calc(100vh - var(--bvc-cart-sticky-top, 80px) - 1rem);
+    overflow-y: auto;
+  }
+}
+
+/* --- runtime-created cart column ------------------------------------------
+   checkout.js renders the order summary into #shoppingCart. On a page that
+   hand-builds its layout, Webflow owns that element and this never applies. On a
+   page carrying only <div data-checkout></div>, the runtime creates it, and these
+   are the minimum styles that keep it legible when it does. */
+.bvc-cart-column {
+  margin-top: 2rem;
+  /* Padding comes from the #shoppingCart rule above — kept in one place so left and
+     right can never drift apart. */
+  border: 1px solid var(--bvc-line);
+  border-radius: var(--bvc-radius);
+}
+.bvc-cart-column:empty { display: none; }
+
+/* --- order summary (#shoppingCart) -----------------------------------------
+   checkout.js renders the summary with UNPREFIXED class names — cart-item,
+   cart-row, fee-item. Most of them are only defined in os-course.css, which styles
+   the sliding cart on course pages and is not loaded here, so on the checkout page
+   they inherited Webflow's global typography and came out oversized.
+   
+   Everything below is scoped under #shoppingCart. That keeps these generic names
+   from leaking into the site, and stops them colliding with os-course.css should
+   both ever load on one page.
+   
+   Scale the whole column from one place: */
+#shoppingCart {
+  --bvc-cart-scale: 95%;
+  --bvc-cart-pad: 1.25rem;
+  /* Padding lives on #shoppingCart, not .bvc-cart-column, so it applies whether the
+     runtime created the element or the Webflow page supplied it. box-sizing keeps the
+     padding inside the grid track instead of widening it. */
+  box-sizing: border-box;
+  padding: var(--bvc-cart-pad);
+  font-size: var(--bvc-cart-scale);
+  color: var(--bvc-ink);
+  line-height: 1.45;
+}
+#shoppingCart * { box-sizing: border-box; }
+
+#shoppingCart .bvc-cart-title {
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--bvc-accent);
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--bvc-accent);
+}
+#shoppingCart .bvc-cart-empty { color: var(--bvc-muted); }
+
+#shoppingCart .shopping-cart-items { display: grid; gap: 0.75rem; }
+
+#shoppingCart .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--bvc-line);
+}
+#shoppingCart .cart-item-details > div:first-child { font-size: 1.05em; margin-bottom: 0.2rem; }
+#shoppingCart .cart-item-info { font-size: 0.92em; color: var(--bvc-muted); }
+#shoppingCart .cart-item-info span { color: var(--bvc-ink); }
+#shoppingCart .cart-item-total { font-weight: 700; white-space: nowrap; }
+
+#shoppingCart .cart-session-fees { margin-top: 1rem; }
+#shoppingCart .cart-session-fees h5 {
+  margin: 0 0 0.5rem;
+  font-size: 1em;
+  font-weight: 700;
+}
+#shoppingCart .fee-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.2rem 0;
+  font-size: 0.92em;
+}
+#shoppingCart .fee-item-details strong { font-weight: 600; }
+#shoppingCart .fee-item-amount { white-space: nowrap; }
+
+#shoppingCart .cart-summary {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--bvc-line);
+}
+#shoppingCart .cart-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.15rem 0;
+}
+#shoppingCart .cart-row.total {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--bvc-line);
+  font-weight: 700;
+  font-size: 1.08em;
+}
+#shoppingCart .cart-value { white-space: nowrap; }
 
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }

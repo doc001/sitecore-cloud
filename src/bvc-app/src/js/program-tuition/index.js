@@ -51,7 +51,7 @@
 
   var CFG = window.__PROGRAM_TUITION_CONFIG__ || {};
 
-  var FALLBACK_ORIGIN = 'https://bvc-app.vercel.app';
+  var FALLBACK_ORIGIN = __DATA_ORIGIN__;
   var DATA_PATH = '/data/static/program-tuition.json';
   var CSS_PATH = '/css/program-tuition.css';
   // A dedicated mount renders the whole block into itself; the Webflow section

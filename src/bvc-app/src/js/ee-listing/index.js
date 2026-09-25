@@ -108,7 +108,7 @@ import { showResultPopup, readSubmissionOutcome } from '../shared/interest-form.
 
   var CFG = window.__EE_LISTING_CONFIG__ || {};
 
-  var FALLBACK_ORIGIN = 'https://bvc-app.vercel.app';
+  var FALLBACK_ORIGIN = __DATA_ORIGIN__;
   var DATA_PATH = '/data/extended-education-courses.json';
 
   // Only this page has a Courses grid to trim. The script is safe to load

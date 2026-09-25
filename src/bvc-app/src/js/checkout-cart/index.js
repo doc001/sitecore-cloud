@@ -11,18 +11,98 @@
  * live alongside this file.
  */
 
-import { config, features, fields as fieldDefinitions, steps } from './content.js';
+import { config, features, fields as fieldDefinitions, options, steps } from './content.js';
 import { createField } from './field.js';
 import { createConsent } from './consent.js';
 import { createStepper } from './stepper.js';
 import { createStudentAuth } from './msal-auth.js';
 import { initAddressAutocomplete } from './address-autocomplete.js';
-import { readDraft, writeDraft, debounce } from './storage.js';
+import { attachTypeahead } from './typeahead.js';
+import { renderFormInner } from './markup.js';
+import { readDraft, writeDraft, clearDraft, debounce } from './storage.js';
 import { earliestBirthDate, todayUTC, toISODateString } from './validators.js';
 
 function start() {
   const root = document.querySelector('[data-checkout]');
   if (!root) return; // Not the checkout page.
+
+  // --- the stylesheet ships with the script -------------------------------
+  //
+  // "Webflow only holds the JS reference" has to include the CSS, or the promise is
+  // half true: a page that forgets the <link> renders the whole form as raw browser
+  // inputs with no grid and no spacing, which is exactly what happened on first
+  // migration. Injecting it here means one script tag is genuinely all a page needs.
+  // An existing <link> or <style> wins, so a page that self-hosts the styles, or
+  // overrides them deliberately, is left alone.
+  function stylesheetApplied() {
+    // The sentinel is set on :root by checkout-cart.css. Reading it answers the only
+    // question that matters — did the stylesheet APPLY — where a querySelector for a
+    // <link> merely proves someone wrote a tag. A tag that 404s, is blocked, or was
+    // escaped by the page builder looks identical to a working one.
+    return '' !== getComputedStyle(document.documentElement).getPropertyValue('--bvc-checkout-css').trim();
+  }
+
+  function injectStylesheet() {
+    if (document.getElementById('bvc-checkout-cart-styles')) return;
+    const link = document.createElement('link');
+    link.id = 'bvc-checkout-cart-styles';
+    link.rel = 'stylesheet';
+    link.href = (config.dataOrigin || '') + '/css/checkout-cart.css';
+    document.head.appendChild(link);
+  }
+
+  // "Webflow only holds the JS reference" has to cover the CSS too, or a page missing
+  // the <link> renders as raw browser inputs with no grid — which is how the first
+  // migrated page looked. Inject when nothing has declared the stylesheet, then check
+  // the sentinel once everything has settled and inject anyway if it never applied.
+  function ensureStylesheet() {
+    if (!document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) {
+      injectStylesheet();
+    }
+    const verify = () => {
+      if (stylesheetApplied()) return;
+      console.warn('[checkout-cart] checkout-cart.css did not apply — injecting it from ' + (config.dataOrigin || '(relative)'));
+      injectStylesheet();
+    };
+    // Stylesheets resolve asynchronously, so re-check after load rather than now.
+    if ('complete' === document.readyState) setTimeout(verify, 0);
+    else window.addEventListener('load', verify, { once: true });
+  }
+  ensureStylesheet();
+
+  // --- the page supplies a container; the bundle supplies everything in it ---
+  //
+  // Webflow only has to hold <div data-checkout></div> and the script tag. Rendering
+  // here rather than pasting markup is what stops the two drifting: a pasted embed is
+  // updated by hand while the bundle ships with the pipeline, so every change to a
+  // field or an option list needed a re-paste, and a missed one failed silently.
+  //
+  // Markup already in the container wins, so a page that still pastes the embed keeps
+  // working and can be migrated on its own schedule. syncSelectOptions() below then
+  // repairs any stale option VALUES in that markup; this only covers the structure.
+  if (!root.querySelector('[data-field]')) {
+    root.innerHTML = renderFormInner();
+  }
+
+  // checkout.js renders the order summary into #shoppingCart, which has always been
+  // page-owned. On a page that no longer hand-builds anything there is nothing to own
+  // it, so provide it — but only when absent: two elements with that id would leave
+  // the page's own cart empty, which is the failure the id was documented against.
+  if (!document.getElementById('shoppingCart')) {
+    const cart = document.createElement('div');
+    cart.id = 'shoppingCart';
+    cart.className = 'bvc-cart-column';
+
+    // Form and order summary side by side. A page that builds its own layout already
+    // owns #shoppingCart, so this branch never runs there and Webflow keeps control;
+    // it only applies when the runtime is the one creating the column, where the
+    // alternative is the cart stacked a full page below the form.
+    const layout = document.createElement('div');
+    layout.className = 'bvc-checkout-layout';
+    root.insertAdjacentElement('beforebegin', layout);
+    layout.appendChild(root);
+    layout.appendChild(cart);
+  }
 
   // --- fields ------------------------------------------------------------
 
@@ -30,6 +110,77 @@ function start() {
   fieldDefinitions.forEach((definition) => {
     const field = createField(definition, root);
     if (field) fields.set(definition.name, field);
+  });
+
+  // --- keep the markup's <option> values in step with content.js -----------
+  //
+  // The embed HTML is pasted into Webflow by hand while the bundle is deployed by
+  // the pipeline, so the two drift apart whenever an option list changes — and a
+  // drifted value fails silently. When the SisId switch landed, pages still serving
+  // `<option value="CAN">` stopped opening Indigenous Status entirely, because the
+  // rule matches on "1716" and nothing ever equalled it.
+  //
+  // So content.js is the authority at runtime: any select whose values disagree is
+  // rebuilt from it. The current choice is carried across by its LABEL, which is what
+  // makes the migration invisible — "Canadian" stays selected while its value changes
+  // from CAN to 1716. Markup only has to supply the field, not its values.
+  function syncSelectOptions() {
+    fieldDefinitions.forEach((definition) => {
+      if ('select' !== definition.type || !definition.options) return;
+      const field = fields.get(definition.name);
+      const list = options[definition.options];
+      if (!field || !Array.isArray(list) || 'SELECT' !== field.control.tagName) return;
+
+      const select = field.control;
+      // Offset by one: index 0 is the "Please select…" placeholder.
+      const inSync = select.options.length === list.length + 1 &&
+        list.every((option, i) => select.options[i + 1] && select.options[i + 1].value === option.value);
+      if (inSync) return;
+
+      const chosen = select.selectedIndex > 0 ? select.options[select.selectedIndex] : null;
+      const chosenLabel = chosen ? chosen.textContent.trim() : null;
+      const placeholder = select.options[0] && '' === select.options[0].value
+        ? select.options[0].textContent
+        : 'Please select…';
+
+      select.innerHTML = '';
+      const blank = document.createElement('option');
+      blank.value = '';
+      blank.textContent = placeholder;
+      select.appendChild(blank);
+      list.forEach((option) => {
+        const node = document.createElement('option');
+        node.value = option.value;
+        node.textContent = option.label;
+        select.appendChild(node);
+      });
+
+      const match = chosenLabel && list.find((option) => option.label === chosenLabel);
+      if (match) select.value = match.value;
+      else if (definition.defaultValue) select.value = definition.defaultValue;
+      console.warn('[checkout-cart] rebuilt "' + definition.name + '" options — the embedded markup is out of date. Re-paste src/webflow/checkout-cart.html.');
+    });
+  }
+  syncSelectOptions();
+
+  // --- "Other" search over the full Sitecore lists ------------------------
+  //
+  // The country and language selects ship a curated shortlist plus an OTHER entry;
+  // picking OTHER opens a search over all 273 countries / 505 languages. The result
+  // is injected into the select as a real option, so validation and the submitter
+  // never see a special case — the control always holds a Sitecore SisId.
+  // form-options.json now carries a submittable 2-character code per country
+  // (generate-form-options.mjs converts Sitecore's three-character SisIds), so the
+  // country selects can search the full list without injecting a value /registration
+  // would reject.
+  [
+    ['countryOfCitizenship', 'countries'],
+    ['country', 'countries'],
+    ['billingCountry', 'countries'],
+    ['firstLanguage', 'languages'],
+  ].forEach(([name, listKey]) => {
+    const field = fields.get(name);
+    if (field && field.control && 'SELECT' === field.control.tagName) attachTypeahead(field.control, listKey, { dataOrigin: config.dataOrigin });
   });
 
   // Requirement 2.7.3, enforced by the browser as well as by us. Native
@@ -148,9 +299,23 @@ function start() {
 
   // --- draft persistence -------------------------------------------------
 
+  // Pre-SisId key. Bumping draftKey left the old one stranded in sessionStorage for
+  // the rest of the session; it holds the same personal data, so clear it too.
+  clearDraft('bvc.checkout.draft');
+
+  // checkout.js fires this once the registration exists and payment is handed off.
+  // The draft carries name, date of birth, email, phone, ASN and both addresses —
+  // it should not outlive the purchase on a shared machine.
+  document.addEventListener('bvc:checkout-complete', () => clearDraft(config.draftKey));
+
   const draft = readDraft(config.draftKey);
   fields.forEach((field) => {
-    if (draft[field.name]) field.control.value = draft[field.name];
+    const saved = draft[field.name];
+    if (!saved) return;
+    // A <select> silently goes blank when assigned a value it does not offer, which
+    // would also strand anything keyed off it. Skip rather than clear.
+    if ('SELECT' === field.control.tagName && !Array.prototype.some.call(field.control.options, (o) => o.value === saved)) return;
+    field.control.value = saved;
   });
   applyConditionals();
   applyAsnVisibility();

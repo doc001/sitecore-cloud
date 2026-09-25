@@ -3,6 +3,12 @@
 (() => {
   // src/js/checkout-cart/content.js
   var config = {
+    /**
+     * Where the Vercel-hosted JSON lives. The form is embedded on a Webflow page, so
+     * a relative /data/... URL would resolve against the Webflow domain. Override with
+     * window.__CHECKOUT_CART_CONFIG__ = { dataOrigin: '...' } before the script loads.
+     */
+    dataOrigin: typeof window !== "undefined" && window.__CHECKOUT_CART_CONFIG__ && window.__CHECKOUT_CART_CONFIG__.dataOrigin || "https://bvc-app-uat.vercel.app",
     // Shown next to the birth date field and used by the date validator.
     dateFormat: "YYYY-MM-DD",
     // Requirement 2.7.3 — no year earlier than 100 years prior.
@@ -24,7 +30,12 @@
      */
     hardDisableNext: false,
     // Draft answers survive a back-navigation or accidental refresh.
-    draftKey: "bvc.checkout.draft",
+    // Bump this whenever an option list's VALUES change. A draft saved under the old
+    // short codes ('CAN', 'EN', 'M') would otherwise be restored into selects that no
+    // longer contain them, leaving the control blank and the conditional fields —
+    // Indigenous Status, Country of Citizenship — silently unresolved. v2 = Sitecore
+    // SisIds, 2026-08-20.
+    draftKey: "bvc.checkout.draft.v2",
     // Requirement 7 — opens in a new tab.
     refundPolicyUrl: "https://bowvalleycollege.ca/about-us/policies/refund-policy",
     termsPolicyUrl: "https://bowvalleycollege.ca/about-us/policies",
@@ -35,7 +46,7 @@
       scopes: ["openid", "profile", "email", "https://bowvalleycollege.ca/ngew/test/login"],
       // v4 exposes initialize(); the 2.12.0 build in the original embed does not.
       msalCdn: "https://alcdn.msauth.net/browser/4.5.0/js/msal-browser.min.js",
-      studentApiBase: "https://bvc-api-proxy.vercel.app/api/bvcpayment/"
+      studentApiBase: "https://bvc-uat-api-proxy.vercel.app/api/bvcpayment/"
     },
     /**
      * Google Maps Places autocomplete for the address fields (NGEW-217).
@@ -64,6 +75,8 @@
      */
     phone: {
       defaultDialCode: "+1",
+      // Keyed on ISO alpha-2, matching the `country` option values — which are
+      // ISO, not Sitecore SisIds, because /registration requires 2 alpha chars.
       dialCodeByCountry: {
         CA: "+1",
         US: "+1",
@@ -127,7 +140,22 @@
         HN: "+504",
         SV: "+503",
         JM: "+1",
-        AU: "+61"
+        AU: "+61",
+        // The curated country list covers places the original table did not.
+        BS: "+1",
+        BE: "+32",
+        BG: "+359",
+        CR: "+506",
+        HT: "+509",
+        MU: "+230",
+        MM: "+95",
+        NZ: "+64",
+        RO: "+40",
+        RS: "+381",
+        SL: "+232",
+        CH: "+41",
+        TT: "+1",
+        UG: "+256"
       }
     },
     /**
@@ -142,6 +170,262 @@
       itemsKey: "cartItems",
       totalCreditsKey: "totalCredits"
     }
+  };
+  var optionalSuffix = "optional";
+  var options = {
+    // Requirement 2.9 — see Gender.png for business meaning names.
+    // EXCEPTION to the SisId rule below: /registration binds `gender` to a
+    // System.Char, so it takes a single letter and 400s on anything longer
+    // ("Error converting value \"21\" to type 'System.Char'", verified 2026-08-20).
+    // Labels come from Sitecore; the submitted value cannot. Sitecore's other three
+    // genders — Other (741), Information refused (1702), Not available (1703) — have
+    // no known letter, so they are not offered until the SiS team supplies one.
+    gender: [
+      { value: "M", label: "Male" },
+      { value: "F", label: "Female" },
+      { value: "X", label: "X (Non-Binary, Gender Diverse)" },
+      { value: "U", label: "Unreported" }
+    ],
+    // Requirement 2.11 — see PermanentResidentStatus.jpg.
+    // Drives BOTH the registration `legalStatus` and the domestic/international fee
+    // split. Domestic = Canadian, Permanent Resident, Refugee, Convention Refugee;
+    // Refugee Claimant is NOT (registrar, 2026-08-20). See DOMESTIC_LEGAL_STATUS.
+    citizenshipStatus: [
+      { value: "1716", label: "Canadian" },
+      { value: "1721", label: "Permanent Resident" },
+      { value: "2209", label: "Refugee" },
+      { value: "1717", label: "Convention Refugee" },
+      { value: "1722", label: "Refugee Claimant" },
+      { value: "2207", label: "Study Permit" },
+      { value: "2208", label: "Work Permit" },
+      { value: "1723", label: "Student Visa" },
+      { value: "1720", label: "Other Visa" },
+      { value: "1718", label: "Non-Canadian" },
+      { value: "2210", label: "Other" }
+    ],
+    // Requirement 2.12 — see Indigenous Status.png.
+    // Submitted as the registration `ethnicity` field.
+    indigenousStatus: [
+      { value: "16", label: "First Nations - Status" },
+      { value: "17", label: "First Nations - Non-Status" },
+      { value: "2", label: "M\xE9tis" },
+      { value: "4", label: "Inuit" },
+      { value: "18", label: "Not Applicable" }
+    ],
+    // Sitecore SisIds — `language` is a plain string on /registration and takes
+    // them (verified 2026-08-20). Curated from the languages of the college's
+    // student population; "Other" searches all 505 via the typeahead.
+    firstLanguage: [
+      { value: "121", label: "English" },
+      { value: "122", label: "French" },
+      { value: "124", label: "Spanish" },
+      { value: "1744", label: "Arabic" },
+      { value: "123", label: "German" },
+      { value: "1724", label: "Italian" },
+      { value: "1973", label: "Mandarin Chinese" },
+      { value: "2324", label: "Cantonese" },
+      { value: "2038", label: "Panjabi" },
+      { value: "2060", label: "Russian" },
+      { value: "2105", label: "Swahili" },
+      { value: "2146", label: "Urdu" },
+      { value: "1731", label: "Afrikaans" },
+      { value: "1787", label: "Bulgarian" },
+      { value: "1789", label: "Burmese" },
+      { value: "1357", label: "Dutch" },
+      { value: "1872", label: "Gujarati" },
+      { value: "1875", label: "Haitian Creole" },
+      { value: "1876", label: "Hausa" },
+      { value: "1878", label: "Hebrew" },
+      { value: "1882", label: "Hindi" },
+      { value: "1889", label: "Igbo" },
+      { value: "1895", label: "Indonesian" },
+      { value: "1902", label: "Japanese" },
+      { value: "1930", label: "Korean" },
+      { value: "1978", label: "Maori" },
+      { value: "2004", label: "Nepali" },
+      { value: "2042", label: "Persian" },
+      { value: "2047", label: "Portuguese" },
+      { value: "2056", label: "Romanian" },
+      { value: "2074", label: "Serbian" },
+      { value: "2077", label: "Shona" },
+      { value: "2110", label: "Tagalog" },
+      { value: "2115", label: "Tamil" },
+      { value: "2120", label: "Thai" },
+      { value: "2136", label: "Turkish" },
+      { value: "2143", label: "Ukrainian" },
+      { value: "2150", label: "Vietnamese" },
+      { value: "2164", label: "Yoruba" },
+      { value: "2171", label: "Zulu" },
+      { value: "OTHER", label: "Other (please specify)" }
+    ],
+    // Requirement 2.10 — first language. Extend freely.
+    // ISO alpha-2, NOT the Sitecore SisId. /registration validates these two
+    // fields as "exactly 2 alphabetic characters" and 400s on anything else, so
+    // Sitecore's mixed 2/3-char codes cannot be used here — Canada is CAN in
+    // Sitecore and CA to the API. Verified 2026-08-20; see docs/sis-api.md.
+    // The curated set is the college's actual student population.
+    countryOfCitizenship: [
+      { value: "BS", label: "Bahamas" },
+      { value: "BE", label: "Belgium" },
+      { value: "BR", label: "Brazil" },
+      { value: "BG", label: "Bulgaria" },
+      { value: "CM", label: "Cameroon" },
+      { value: "CA", label: "Canada" },
+      { value: "CL", label: "Chile" },
+      { value: "CN", label: "China" },
+      { value: "CO", label: "Colombia" },
+      { value: "CR", label: "Costa Rica" },
+      { value: "GH", label: "Ghana" },
+      { value: "HT", label: "Haiti" },
+      { value: "HN", label: "Honduras" },
+      { value: "HK", label: "Hong Kong" },
+      { value: "IN", label: "India" },
+      { value: "ID", label: "Indonesia" },
+      { value: "IR", label: "Iran" },
+      { value: "IL", label: "Israel" },
+      { value: "IT", label: "Italy" },
+      { value: "JM", label: "Jamaica" },
+      { value: "JP", label: "Japan" },
+      { value: "KE", label: "Kenya" },
+      { value: "MU", label: "Mauritius" },
+      { value: "MX", label: "Mexico" },
+      { value: "MA", label: "Morocco" },
+      { value: "MM", label: "Myanmar" },
+      { value: "NP", label: "Nepal" },
+      { value: "NZ", label: "New Zealand" },
+      { value: "NG", label: "Nigeria" },
+      { value: "PK", label: "Pakistan" },
+      { value: "PE", label: "Peru" },
+      { value: "PH", label: "Philippines" },
+      { value: "RO", label: "Romania" },
+      { value: "RU", label: "Russia" },
+      { value: "RS", label: "Serbia" },
+      { value: "SL", label: "Sierra Leone" },
+      { value: "ZA", label: "South Africa" },
+      { value: "KR", label: "South Korea" },
+      { value: "CH", label: "Switzerland" },
+      { value: "TW", label: "Taiwan" },
+      { value: "TH", label: "Thailand" },
+      { value: "TT", label: "Trinidad and Tobago" },
+      { value: "TR", label: "Turkey" },
+      { value: "UG", label: "Uganda" },
+      { value: "UA", label: "Ukraine" },
+      { value: "GB", label: "United Kingdom" },
+      { value: "US", label: "United States" },
+      { value: "VN", label: "Vietnam" },
+      { value: "ZW", label: "Zimbabwe" },
+      { value: "OTHER", label: "Other (please specify)" }
+    ],
+    /**
+     * Canadian provinces and territories. Values are the two-letter codes that
+     * Google Places returns as `administrative_area_level_1.short_name`, so an
+     * autocompleted address selects the right option with no translation.
+     */
+    province: [
+      { value: "AB", label: "Alberta" },
+      { value: "BC", label: "British Columbia" },
+      { value: "MB", label: "Manitoba" },
+      { value: "NB", label: "New Brunswick" },
+      { value: "NL", label: "Newfoundland and Labrador" },
+      { value: "NS", label: "Nova Scotia" },
+      { value: "NT", label: "Northwest Territories" },
+      { value: "NU", label: "Nunavut" },
+      { value: "ON", label: "Ontario" },
+      { value: "PE", label: "Prince Edward Island" },
+      { value: "QC", label: "Quebec" },
+      { value: "SK", label: "Saskatchewan" },
+      { value: "YT", label: "Yukon" }
+    ],
+    /**
+     * Mailing country. Values are ISO 3166-1 alpha-2 codes (Google Places
+     * `country.short_name`). Canada is the default; the list mirrors the
+     * international intake covered by countryOfCitizenship.
+     */
+    // ISO alpha-2, NOT the Sitecore SisId. /registration validates these two
+    // fields as "exactly 2 alphabetic characters" and 400s on anything else, so
+    // Sitecore's mixed 2/3-char codes cannot be used here — Canada is CAN in
+    // Sitecore and CA to the API. Verified 2026-08-20; see docs/sis-api.md.
+    // The curated set is the college's actual student population.
+    country: [
+      { value: "BS", label: "Bahamas" },
+      { value: "BE", label: "Belgium" },
+      { value: "BR", label: "Brazil" },
+      { value: "BG", label: "Bulgaria" },
+      { value: "CM", label: "Cameroon" },
+      { value: "CA", label: "Canada" },
+      { value: "CL", label: "Chile" },
+      { value: "CN", label: "China" },
+      { value: "CO", label: "Colombia" },
+      { value: "CR", label: "Costa Rica" },
+      { value: "GH", label: "Ghana" },
+      { value: "HT", label: "Haiti" },
+      { value: "HN", label: "Honduras" },
+      { value: "HK", label: "Hong Kong" },
+      { value: "IN", label: "India" },
+      { value: "ID", label: "Indonesia" },
+      { value: "IR", label: "Iran" },
+      { value: "IL", label: "Israel" },
+      { value: "IT", label: "Italy" },
+      { value: "JM", label: "Jamaica" },
+      { value: "JP", label: "Japan" },
+      { value: "KE", label: "Kenya" },
+      { value: "MU", label: "Mauritius" },
+      { value: "MX", label: "Mexico" },
+      { value: "MA", label: "Morocco" },
+      { value: "MM", label: "Myanmar" },
+      { value: "NP", label: "Nepal" },
+      { value: "NZ", label: "New Zealand" },
+      { value: "NG", label: "Nigeria" },
+      { value: "PK", label: "Pakistan" },
+      { value: "PE", label: "Peru" },
+      { value: "PH", label: "Philippines" },
+      { value: "RO", label: "Romania" },
+      { value: "RU", label: "Russia" },
+      { value: "RS", label: "Serbia" },
+      { value: "SL", label: "Sierra Leone" },
+      { value: "ZA", label: "South Africa" },
+      { value: "KR", label: "South Korea" },
+      { value: "CH", label: "Switzerland" },
+      { value: "TW", label: "Taiwan" },
+      { value: "TH", label: "Thailand" },
+      { value: "TT", label: "Trinidad and Tobago" },
+      { value: "TR", label: "Turkey" },
+      { value: "UG", label: "Uganda" },
+      { value: "UA", label: "Ukraine" },
+      { value: "GB", label: "United Kingdom" },
+      { value: "US", label: "United States" },
+      { value: "VN", label: "Vietnam" },
+      { value: "ZW", label: "Zimbabwe" },
+      { value: "OTHER", label: "Other (please specify)" }
+    ],
+    /**
+     * Phone dialling codes. Value is the code that gets prefixed to the number;
+     * Canada and the US both use +1, which is the default. Ordered by BVC intake
+     * volume, then alphabetical. The mailing Country can auto-select the matching
+     * entry via config.phone.dialCodeByCountry.
+     */
+    phoneCountryCode: [
+      { value: "+1", label: "+1 (Canada / United States)" },
+      { value: "+91", label: "+91 (India)" },
+      { value: "+63", label: "+63 (Philippines)" },
+      { value: "+234", label: "+234 (Nigeria)" },
+      { value: "+86", label: "+86 (China)" },
+      { value: "+92", label: "+92 (Pakistan)" },
+      { value: "+44", label: "+44 (United Kingdom)" },
+      { value: "+52", label: "+52 (Mexico)" },
+      { value: "+55", label: "+55 (Brazil)" },
+      { value: "+33", label: "+33 (France)" },
+      { value: "+49", label: "+49 (Germany)" },
+      { value: "+81", label: "+81 (Japan)" },
+      { value: "+82", label: "+82 (South Korea)" },
+      { value: "+84", label: "+84 (Vietnam)" },
+      { value: "+880", label: "+880 (Bangladesh)" },
+      { value: "+971", label: "+971 (United Arab Emirates)" },
+      { value: "+966", label: "+966 (Saudi Arabia)" },
+      { value: "+254", label: "+254 (Kenya)" },
+      { value: "+27", label: "+27 (South Africa)" },
+      { value: "+61", label: "+61 (Australia)" }
+    ]
   };
   var fields = [
     {
@@ -269,8 +553,8 @@
       required: true,
       validate: "choice",
       options: "indigenousStatus",
-      defaultValue: "NA",
-      showWhen: { field: "citizenshipStatus", equals: ["CAN"] }
+      defaultValue: "18",
+      showWhen: { field: "citizenshipStatus", equals: ["1716"] }
     },
     {
       // Requirement 2.13 — every non-Canadian status.
@@ -280,7 +564,7 @@
       required: true,
       validate: "choice",
       options: "countryOfCitizenship",
-      showWhen: { field: "citizenshipStatus", equals: ["PR", "REF", "STUDY", "WORK", "OTHER"] }
+      showWhen: { field: "citizenshipStatus", equals: ["1721", "2209", "1717", "1722", "2207", "2208", "1723", "1720", "1718", "2210"] }
     },
     // ==========================================================================
     // Mailing Information step
@@ -1034,14 +1318,14 @@
       const groupName = input.getAttribute("data-address-autocomplete");
       const group = groups[groupName];
       if (!group) return;
-      const options = {
+      const options2 = {
         fields: ["address_components"],
         types: ["address"]
       };
       if (Array.isArray(maps.countryRestriction) && maps.countryRestriction.length) {
-        options.componentRestrictions = { country: maps.countryRestriction };
+        options2.componentRestrictions = { country: maps.countryRestriction };
       }
-      const widget = new google.maps.places.Autocomplete(input, options);
+      const widget = new google.maps.places.Autocomplete(input, options2);
       widget.addListener("place_changed", () => {
         const place = widget.getPlace();
         if (!(place == null ? void 0 : place.address_components)) return;
@@ -1061,6 +1345,302 @@
     });
   }
 
+  // src/js/checkout-cart/typeahead.js
+  var ENDPOINT = "/data/form-options.json";
+  var MAX_RESULTS = 8;
+  var cache = null;
+  var inFlight = null;
+  async function loadOptions(dataOrigin) {
+    if (cache) return cache;
+    if (!inFlight) {
+      inFlight = fetch((dataOrigin || "") + ENDPOINT, { mode: "cors" }).then((r) => {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      }).then((json) => {
+        cache = json;
+        return json;
+      }).finally(() => {
+        inFlight = null;
+      });
+    }
+    return inFlight;
+  }
+  function score(name, query) {
+    const n = name.toLowerCase();
+    const i = n.indexOf(query);
+    if (i === -1) return -1;
+    return (i === 0 ? 0 : 100) + i + name.length / 1e3;
+  }
+  function search(list, query) {
+    const q = query.trim().toLowerCase();
+    if (q.length < 2) return [];
+    return list.map((row) => ({ code: row[0], name: row[1], s: score(row[1], q) })).filter((row) => row.s >= 0).sort((a, b) => a.s - b.s).slice(0, MAX_RESULTS);
+  }
+  function attachTypeahead(select, listKey, opts = {}) {
+    if (!select || select.dataset.typeaheadReady === "1") return;
+    select.dataset.typeaheadReady = "1";
+    const otherValue = opts.otherValue || "OTHER";
+    const wrapper = document.createElement("div");
+    wrapper.className = "bvc-typeahead";
+    wrapper.hidden = true;
+    wrapper.innerHTML = '<input type="text" class="bvc-typeahead__input" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" placeholder="Start typing to search\u2026"><ul class="bvc-typeahead__list" role="listbox" hidden></ul><p class="bvc-typeahead__hint">Search the full list.</p>';
+    select.insertAdjacentElement("afterend", wrapper);
+    const input = wrapper.querySelector(".bvc-typeahead__input");
+    const list = wrapper.querySelector(".bvc-typeahead__list");
+    let results = [];
+    let active = -1;
+    const closeList = () => {
+      list.hidden = true;
+      list.innerHTML = "";
+      input.setAttribute("aria-expanded", "false");
+      active = -1;
+    };
+    function pick2(row) {
+      let option = Array.prototype.find.call(select.options, (o) => o.value === row.code);
+      if (!option) {
+        option = document.createElement("option");
+        option.value = row.code;
+        option.textContent = row.name;
+        select.insertBefore(option, select.querySelector('option[value="' + otherValue + '"]'));
+      }
+      select.value = row.code;
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      select.dispatchEvent(new Event("input", { bubbles: true }));
+      wrapper.hidden = true;
+      input.value = "";
+      closeList();
+      if (typeof opts.onPick === "function") opts.onPick(row);
+    }
+    function render() {
+      if (!results.length) return closeList();
+      list.innerHTML = results.map((r, i) => '<li role="option" id="bvc-ta-' + i + '" aria-selected="' + (i === active) + '"' + (i === active ? ' class="is-active"' : "") + ">" + r.name + "</li>").join("");
+      list.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      Array.prototype.forEach.call(list.children, (li, i) => {
+        li.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+          pick2(results[i]);
+        });
+      });
+    }
+    async function onType() {
+      let data;
+      try {
+        data = await loadOptions(opts.dataOrigin);
+      } catch (error) {
+        console.warn("[Typeahead] could not load " + ENDPOINT, error);
+        wrapper.querySelector(".bvc-typeahead__hint").textContent = "Search is unavailable \u2014 please pick the closest match above.";
+        return;
+      }
+      results = search(data[listKey] || [], input.value);
+      active = results.length ? 0 : -1;
+      render();
+    }
+    input.addEventListener("input", onType);
+    input.addEventListener("blur", () => setTimeout(closeList, 120));
+    input.addEventListener("keydown", (event) => {
+      if (list.hidden) return;
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        active = (active + (event.key === "ArrowDown" ? 1 : results.length - 1)) % results.length;
+        render();
+      } else if (event.key === "Enter" && active > -1) {
+        event.preventDefault();
+        pick2(results[active]);
+      } else if (event.key === "Escape") {
+        closeList();
+      }
+    });
+    function sync() {
+      const on = select.value === otherValue;
+      wrapper.hidden = !on;
+      if (on) {
+        loadOptions(opts.dataOrigin).catch(() => {
+        });
+        input.focus();
+      } else {
+        closeList();
+      }
+    }
+    select.addEventListener("change", sync);
+    sync();
+  }
+
+  // src/js/checkout-cart/markup.js
+  var esc = (value) => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  var controlId = (field) => field.submitId || field.name;
+  function renderLabel(field) {
+    const suffix = field.required ? '<span class="bvc-field__required" aria-hidden="true">*</span>' : ` <span class="bvc-field__optional">(${optionalSuffix})</span>`;
+    return `<label class="bvc-field__label" for="${controlId(field)}">${esc(field.label)}${suffix}</label>`;
+  }
+  function renderControl(field) {
+    const describedBy = [
+      field.hint ? `${field.name}-hint` : null,
+      `${field.name}-error`
+    ].filter(Boolean).join(" ");
+    const shared = [
+      `id="${controlId(field)}"`,
+      `name="${field.name}"`,
+      field.required ? "required" : "",
+      `aria-describedby="${describedBy}"`,
+      field.autocomplete ? `autocomplete="${field.autocomplete}"` : ""
+    ].filter(Boolean).join(" ");
+    if (field.type === "select") {
+      const list = options[field.options] || [];
+      const items = list.map((option) => {
+        const selected = field.defaultValue === option.value ? " selected" : "";
+        return `        <option value="${esc(option.value)}"${selected}>${esc(option.label)}</option>`;
+      }).join("\n");
+      return `      <select ${shared}>
+        <option value="">Please select\u2026</option>
+${items}
+      </select>`;
+    }
+    const extras = [
+      `type="${field.type}"`,
+      field.maxLength ? `maxlength="${field.maxLength}"` : "",
+      field.inputMode ? `inputmode="${field.inputMode}"` : "",
+      // Street fields carry the Google Places hook; the value is the address
+      // group so the runtime fills the right siblings.
+      field.autocompleteAddress ? `data-address-autocomplete="${field.group}"` : ""
+    ].filter(Boolean).join(" ");
+    return `      <input ${shared} ${extras}>`;
+  }
+  function renderField(field) {
+    const hidden = field.showWhen ? " hidden" : "";
+    const wide = field.type === "select" && !field.narrow || field.name === "email" || field.addressRole === "street" ? " bvc-field--wide" : "";
+    const hint = field.hint ? `
+      <p class="bvc-field__hint" id="${field.name}-hint">${esc(field.hint)}</p>` : "";
+    const wrapper = `    <div class="bvc-field${wide}" data-field="${field.name}"${hidden}>
+      ${renderLabel(field)}
+${renderControl(field)}${hint}
+      <p class="bvc-field__error" id="${field.name}-error" data-error hidden></p>
+    </div>`;
+    if (field.name === "phone") {
+      return `${wrapper}
+    <input type="hidden" id="phone" name="phoneCombined" data-phone-combined>`;
+    }
+    return wrapper;
+  }
+  function renderProgress() {
+    const items = steps.map(
+      (step) => `    <li class="bvc-progress__item" data-progress-step="${step.id}">${esc(step.short)}</li>`
+    ).join("\n");
+    return `  <ol class="bvc-progress" aria-label="Checkout progress">
+${items}
+  </ol>`;
+  }
+  function renderStudentTypeStep() {
+    if (!features.studentSignIn) return "";
+    return `  <!-- Step 1 \u2014 current student or new student -->
+  <section class="bvc-step" data-step="student-type" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Have you studied at Bow Valley College before?</h2>
+    <p class="bvc-step__intro">Signing in fills in most of this form for you.</p>
+
+    <p class="bvc-notice" data-auth-notice hidden></p>
+
+    <div class="bvc-choice">
+      <button type="button" class="bvc-button" data-student-type="current">
+        I'm a current student \u2014 sign in
+      </button>
+      <button type="button" class="bvc-button bvc-button--secondary" data-student-type="new">
+        I'm a new student
+      </button>
+    </div>
+  </section>
+
+`;
+  }
+  var fieldsForStep = (stepId) => fields.filter((field) => (field.step || "personal") === stepId);
+  var inGroup = (list, group) => list.filter((field) => field.group === group);
+  function renderMailingStep() {
+    const mailingFields = fieldsForStep("mailing");
+    const mailingAddress = inGroup(mailingFields, "mailing");
+    const billingAddress = inGroup(mailingFields, "billing");
+    return `  <!-- Step 3 \u2014 Mailing Information (mailing + billing address) -->
+  <section class="bvc-step" data-step="mailing" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Mailing Information</h2>
+    <p class="bvc-step__intro">Start typing a street address to autofill. Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
+
+    <h3 class="bvc-subheading">Mailing Address</h3>
+    <div class="bvc-grid">
+${mailingAddress.map(renderField).join("\n")}
+    </div>
+
+    <label class="bvc-check bvc-check--billing">
+      <input type="checkbox" id="checkbox" data-billing-same checked>
+      <span>Billing Address same as above?</span>
+    </label>
+
+    <div class="bvc-billing" data-billing-block hidden>
+      <h3 class="bvc-subheading">Billing Address</h3>
+      <div class="bvc-grid">
+${billingAddress.map(renderField).join("\n")}
+      </div>
+    </div>
+
+    <p class="bvc-summary" data-error-summary role="alert" hidden></p>
+
+    <div class="bvc-actions">
+      <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
+      <button type="button" class="bvc-button" data-checkout-submit>Proceed to Payment</button>
+    </div>
+  </section>`;
+  }
+  function renderFormInner() {
+    return `${renderProgress()}
+
+${renderStudentTypeStep()}
+  <!-- Personal Information -->
+  <section class="bvc-step" data-step="personal" hidden>
+    <h2 class="bvc-step__heading" data-step-heading>Personal Information</h2>
+    <p class="bvc-step__intro">Fields marked <span class="bvc-field__required" aria-hidden="true">*</span> are required.</p>
+
+    <div class="bvc-grid">
+${fieldsForStep("personal").map(renderField).join("\n")}
+    </div>
+
+    <!-- Requirement 6 \u2014 terms and conditions -->
+    <div class="bvc-consent">
+      <h3 class="bvc-consent__title" id="terms-title">Terms and Conditions</h3>
+      <div class="bvc-terms-box" data-terms-scroll role="region" aria-labelledby="terms-title" tabindex="0">
+        <!-- Replace with the approved terms copy, or a Webflow Rich Text element. -->
+        <p>Paste the full terms and conditions here.</p>
+      </div>
+      <p class="bvc-field__hint" data-terms-hint>Scroll to the end of the terms to enable the checkbox below.</p>
+      <label class="bvc-check">
+        <input type="checkbox" id="checkbox-2" data-terms-accept disabled>
+        <span>I have read and accept the terms and conditions.</span>
+      </label>
+      <p class="bvc-field__error" data-terms-error hidden></p>
+    </div>
+
+    <!-- Requirement 7 \u2014 refund policies and extension processes -->
+    <div class="bvc-consent">
+      <h3 class="bvc-consent__title">Refund Policies and Extension Processes</h3>
+      <p>
+        <a href="${esc(config.refundPolicyUrl)}" target="_blank" rel="noopener noreferrer" data-refund-link>
+          Read the refund policies and extension processes (opens in a new tab)
+        </a>
+      </p>
+      <label class="bvc-check">
+        <input type="checkbox" data-refund-accept>
+        <span>I have read and understood the refund policies and extension processes.</span>
+      </label>
+      <p class="bvc-field__error" data-refund-error hidden></p>
+    </div>
+
+    <p class="bvc-summary" data-error-summary role="alert" hidden></p>
+
+    <div class="bvc-actions">
+      <button type="button" class="bvc-button bvc-button--secondary" data-back>Back</button>
+      <button type="button" class="bvc-button" data-next>Continue to Mailing Information</button>
+    </div>
+  </section>
+
+${renderMailingStep()}`;
+  }
+
   // src/js/checkout-cart/storage.js
   function readDraft(key) {
     try {
@@ -1078,6 +1658,12 @@
       return false;
     }
   }
+  function clearDraft(key) {
+    try {
+      sessionStorage.removeItem(key);
+    } catch (e) {
+    }
+  }
   function debounce(fn, wait = 300) {
     let timer = null;
     return (...args) => {
@@ -1091,10 +1677,86 @@
     var _a, _b, _c;
     const root = document.querySelector("[data-checkout]");
     if (!root) return;
+    function stylesheetApplied() {
+      return "" !== getComputedStyle(document.documentElement).getPropertyValue("--bvc-checkout-css").trim();
+    }
+    function injectStylesheet() {
+      if (document.getElementById("bvc-checkout-cart-styles")) return;
+      const link = document.createElement("link");
+      link.id = "bvc-checkout-cart-styles";
+      link.rel = "stylesheet";
+      link.href = (config.dataOrigin || "") + "/css/checkout-cart.css";
+      document.head.appendChild(link);
+    }
+    function ensureStylesheet() {
+      if (!document.querySelector('link[href*="checkout-cart.css"], style[data-checkout-cart-styles]')) {
+        injectStylesheet();
+      }
+      const verify = () => {
+        if (stylesheetApplied()) return;
+        console.warn("[checkout-cart] checkout-cart.css did not apply \u2014 injecting it from " + (config.dataOrigin || "(relative)"));
+        injectStylesheet();
+      };
+      if ("complete" === document.readyState) setTimeout(verify, 0);
+      else window.addEventListener("load", verify, { once: true });
+    }
+    ensureStylesheet();
+    if (!root.querySelector("[data-field]")) {
+      root.innerHTML = renderFormInner();
+    }
+    if (!document.getElementById("shoppingCart")) {
+      const cart = document.createElement("div");
+      cart.id = "shoppingCart";
+      cart.className = "bvc-cart-column";
+      const layout = document.createElement("div");
+      layout.className = "bvc-checkout-layout";
+      root.insertAdjacentElement("beforebegin", layout);
+      layout.appendChild(root);
+      layout.appendChild(cart);
+    }
     const fields2 = /* @__PURE__ */ new Map();
     fields.forEach((definition) => {
       const field = createField(definition, root);
       if (field) fields2.set(definition.name, field);
+    });
+    function syncSelectOptions() {
+      fields.forEach((definition) => {
+        if ("select" !== definition.type || !definition.options) return;
+        const field = fields2.get(definition.name);
+        const list = options[definition.options];
+        if (!field || !Array.isArray(list) || "SELECT" !== field.control.tagName) return;
+        const select = field.control;
+        const inSync = select.options.length === list.length + 1 && list.every((option, i) => select.options[i + 1] && select.options[i + 1].value === option.value);
+        if (inSync) return;
+        const chosen = select.selectedIndex > 0 ? select.options[select.selectedIndex] : null;
+        const chosenLabel = chosen ? chosen.textContent.trim() : null;
+        const placeholder = select.options[0] && "" === select.options[0].value ? select.options[0].textContent : "Please select\u2026";
+        select.innerHTML = "";
+        const blank = document.createElement("option");
+        blank.value = "";
+        blank.textContent = placeholder;
+        select.appendChild(blank);
+        list.forEach((option) => {
+          const node = document.createElement("option");
+          node.value = option.value;
+          node.textContent = option.label;
+          select.appendChild(node);
+        });
+        const match = chosenLabel && list.find((option) => option.label === chosenLabel);
+        if (match) select.value = match.value;
+        else if (definition.defaultValue) select.value = definition.defaultValue;
+        console.warn('[checkout-cart] rebuilt "' + definition.name + '" options \u2014 the embedded markup is out of date. Re-paste src/webflow/checkout-cart.html.');
+      });
+    }
+    syncSelectOptions();
+    [
+      ["countryOfCitizenship", "countries"],
+      ["country", "countries"],
+      ["billingCountry", "countries"],
+      ["firstLanguage", "languages"]
+    ].forEach(([name, listKey]) => {
+      const field = fields2.get(name);
+      if (field && field.control && "SELECT" === field.control.tagName) attachTypeahead(field.control, listKey, { dataOrigin: config.dataOrigin });
     });
     const birthDate = fields2.get("birthDate");
     if (birthDate) {
@@ -1160,9 +1822,14 @@
       const digits = ((phoneNumberField == null ? void 0 : phoneNumberField.value) || "").replace(/\D/g, "");
       phoneCombined.value = digits ? `${code}${digits}` : "";
     }
+    clearDraft("bvc.checkout.draft");
+    document.addEventListener("bvc:checkout-complete", () => clearDraft(config.draftKey));
     const draft = readDraft(config.draftKey);
     fields2.forEach((field) => {
-      if (draft[field.name]) field.control.value = draft[field.name];
+      const saved = draft[field.name];
+      if (!saved) return;
+      if ("SELECT" === field.control.tagName && !Array.prototype.some.call(field.control.options, (o) => o.value === saved)) return;
+      field.control.value = saved;
     });
     applyConditionals();
     applyAsnVisibility();
