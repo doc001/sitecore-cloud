@@ -1,4 +1,4 @@
-import { execSync, spawnSync } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { mkdirSync, writeFileSync, cpSync, rmSync, existsSync, readFileSync } from 'fs';
@@ -159,14 +159,49 @@ async function copyWithRetry(from, to, options, attempts = 5) {
   }
 }
 
+/**
+ * Last N non-blank lines of some output, ANSI-stripped and length-capped — the
+ * part of a failed command worth putting in front of a human. npm and turbo end
+ * a failure with the script name and the error, so the tail is where it is.
+ */
+function tailLines(text, n = 15, width = 220) {
+  return stripAnsi(text)
+    .split(/\r?\n/)
+    .map((l) => l.trimEnd())
+    .filter((l) => l.trim())
+    .slice(-n)
+    .map((l) => (l.length > width ? l.slice(0, width) + '…' : l));
+}
+
+/**
+ * Run a command, streaming its output to our own stdout/stderr (so it still
+ * reaches logs/pipeline-*.log live, with PM2's timestamps) while keeping the
+ * last ~16 KB. On a non-zero exit the error carries `cmd`, `exitCode` and
+ * `tail`, which is what lets an alert say WHAT failed instead of just "failed".
+ *
+ * It used to be execSync with inherited stdio, which left nothing to quote.
+ */
 function run(cmd, cwd = ROOT) {
   console.log(`\n[${ts()}] ▶ ${cmd}`);
   // windowsHide stops the shell PM2 spawns here from flashing up a console window
   // every few seconds during a run. It only covers the shells this line creates —
   // npm/turbo spawn their own nested `cmd /d /s /c` children we don't control, so
-  // some windows may still appear. Harmless either way; stdio is still inherited,
-  // so all output continues to reach logs/pipeline-out.log.
-  execSync(cmd, { stdio: 'inherit', cwd, shell: true, windowsHide: true });
+  // some windows may still appear.
+  return new Promise((resolve, reject) => {
+    const child = spawn(cmd, { cwd, shell: true, windowsHide: true, stdio: ['inherit', 'pipe', 'pipe'] });
+    let buf = '';
+    const keep = (chunk) => {
+      buf += chunk.toString('utf8');
+      if (buf.length > 32_768) buf = buf.slice(-16_384);
+    };
+    child.stdout.on('data', (c) => { process.stdout.write(c); keep(c); });
+    child.stderr.on('data', (c) => { process.stderr.write(c); keep(c); });
+    child.on('error', (err) => reject(Object.assign(err, { cmd, tail: tailLines(buf) })));
+    child.on('close', (code) => {
+      if (code === 0) return resolve();
+      reject(Object.assign(new Error(`Command exited ${code}: ${cmd}`), { cmd, exitCode: code, tail: tailLines(buf) }));
+    });
+  });
 }
 
 /**
@@ -252,12 +287,56 @@ const heartbeat = async (suffix = '') => {
  * `heartbeatSignal` is the suffix sent to the monitor: '/fail' for a genuine
  * breakage, '' for "this run completed as designed" (see the fee-guard branch).
  */
-async function notify(title, message, isFailure = true, heartbeatSignal = '/fail') {
+// PM2 (`time: true`) stamps each log line in LOCAL time as 2026-09-24T08:15:02,
+// so the alert quotes the run start in that exact form — searchable as-is.
+const pm2Stamp = (d) => {
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+};
+const RUN_STARTED = new Date();
+
+/**
+ * Where to read the rest. Every alert carries this: "Deploy FAILED" with no
+ * pointer used to send whoever read it hunting through two log files and an
+ * archive for the right hour.
+ */
+function logFacts() {
+  return [
+    { title: 'Run started', value: pm2Stamp(RUN_STARTED) },
+    { title: 'Full log', value: `${join(ROOT, 'logs', 'pipeline-out.log')} (search for the run-start stamp)` },
+    { title: 'Errors/warnings', value: join(ROOT, 'logs', 'pipeline-error.log') },
+    { title: 'After 03:30 next day', value: 'archived to OneDrive …\\Matrix\\Open Cart\\<week>\\<date>\\' },
+  ];
+}
+
+/**
+ * `detail` (optional) says WHAT failed: `step` (which stage), `err` (its
+ * `cmd` / `exitCode` / `tail` come from run()), and `next` (what to do about it).
+ */
+function detailExtra({ step, err, next } = {}) {
+  const facts = [];
+  if (step) facts.push({ title: 'Failed step', value: step });
+  if (err?.cmd) facts.push({ title: 'Command', value: err.cmd });
+  if (err?.exitCode != null) facts.push({ title: 'Exit code', value: String(err.exitCode) });
+  // run()'s own "Command exited N: cmd" would only repeat the two rows above;
+  // anything else (a verification reason, an fs error) is the actual diagnosis.
+  if (err && !/^Command exited/.test(err.message)) {
+    facts.push({ title: 'Error', value: `${err.code && typeof err.code === 'string' ? err.code + ': ' : ''}${err.message}` });
+  }
+  if (next) facts.push({ title: 'Next step', value: next });
+  facts.push(...logFacts());
+  const mono = err?.tail?.length ? ['Last output before the failure:', ...err.tail] : [];
+  return { facts, mono };
+}
+
+async function notify(title, message, isFailure = true, heartbeatSignal = '/fail', detail) {
+  const extra = detailExtra(detail);
   console.error(`[${ts()}] ALERT: ${title} — ${message}`);
+  for (const f of extra.facts.slice(0, -logFacts().length)) console.error(`[${ts()}]   ${f.title}: ${f.value}`);
   notifier.notify({ title, message, sound: true });
   if (!process.env.TEAMS_WEBHOOK_URL) {
     warn('Teams alert NOT sent: TEAMS_WEBHOOK_URL is not set');
-  } else if (await sendTeams({ url: process.env.TEAMS_WEBHOOK_URL, title, message, isFailure, log: warn })) {
+  } else if (await sendTeams({ url: process.env.TEAMS_WEBHOOK_URL, title, message, isFailure, extra, log: warn })) {
     // Accepted, not delivered: a Workflows webhook answers 202 before the flow
     // runs, so a broken flow shows up in Power Automate's run history, not here.
     console.log(`[${ts()}] Teams alert accepted by webhook`);
@@ -272,11 +351,11 @@ async function notify(title, message, isFailure = true, heartbeatSignal = '/fail
 async function runWithRetry(cmd, cwd = ROOT, maxAttempts = 3, retryDelayMs = 60_000) {
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
-      run(cmd, cwd);
+      await run(cmd, cwd);
       return;
     } catch (err) {
       if (attempt < maxAttempts) {
-        console.log(`\n[${ts()}] Attempt ${attempt}/${maxAttempts} failed — retrying in ${retryDelayMs / 1000}s...`);
+        console.log(`\n[${ts()}] Attempt ${attempt}/${maxAttempts} failed (${err.message}) — retrying in ${retryDelayMs / 1000}s...`);
         await new Promise(resolve => setTimeout(resolve, retryDelayMs));
       } else {
         throw err;
@@ -305,7 +384,10 @@ async function main() {
     if (!existsSync(packaged)) {
       await notify(
         'BVC Deploy FAILED',
-        `Nothing to build on: .vercel/output/static is missing. Run the full pipeline (node pipeline.mjs) first.`
+        `Nothing to build on: .vercel/output/static is missing. Run the full pipeline (node pipeline.mjs) first.`,
+        true,
+        '/fail',
+        { step: 'Startup — checking for the last full build\'s package', next: 'Run "node pipeline.mjs" (full build) from the repo root.' }
       );
       process.exit(1);
     }
@@ -337,7 +419,10 @@ async function main() {
     await notify(
       'BVC Pre-clean FAILED',
       `Could not clear stale course data (${err.code || 'error'}: ${err.path || err.message}). ` +
-        'Usually a Windows file lock — antivirus, an open editor, or a concurrent run. Nothing was deployed.'
+        'Usually a Windows file lock — antivirus, an open editor, or a concurrent run. Nothing was deployed.',
+      true,
+      '/fail',
+      { step: '0. Pre-clean of course data folders', err, next: 'Close whatever holds the file, then wait for the next hourly run or run "node pipeline.mjs --data-only".' }
     );
     process.exit(1);
   }
@@ -393,7 +478,8 @@ async function main() {
             'last good refresh and is going stale. Check the Credit Courses tree in Sitecore and ' +
             'the SIS sync. This repeats every hour until it is fixed.',
           true,
-          null
+          null,
+          { step: '1. Open Studies refresh (npm run hourly-scripts:os)', err, next: 'Read the output below; then check the Credit Courses tree in Sitecore.' }
         );
       }
 
@@ -465,7 +551,18 @@ async function main() {
   } catch (err) {
     await notify(
       DATA_ONLY ? 'BVC Course Data Refresh FAILED' : 'BVC Build FAILED',
-      `${DATA_ONLY ? 'Course data refresh' : 'Build'} failed after 3 attempts at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
+      `${DATA_ONLY ? 'Course data refresh' : 'Build'} failed${err.cmd ? ' after 3 attempts' : ''} at ${new Date().toLocaleTimeString()}. Nothing was deployed — the site keeps the previous data.`,
+      true,
+      '/fail',
+      {
+        step: DATA_ONLY
+          ? (err.cmd ? '1. Extended Education refresh (npm run hourly-scripts:base)' : '1. Copying refreshed data into .vercel/output')
+          : '1. Full build (npm run build:bvcapp)',
+        err,
+        next: DATA_ONLY
+          ? 'Fix the error below, then run "node pipeline.mjs --data-only" (or wait for the next hourly run).'
+          : 'Fix the error below, then run "node pipeline.mjs".',
+      }
     );
     process.exit(1);
   }
@@ -524,24 +621,36 @@ async function main() {
     } catch (err) {
       await notify(
         'BVC Package FAILED',
-        `Packaging out/ failed at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`
+        `Packaging out/ failed at ${new Date().toLocaleTimeString()}. Deploy skipped — run pipeline.mjs manually.`,
+        true,
+        '/fail',
+        { step: '1c. Packaging out/ into .vercel/output', err, next: 'Usually disk space or a file lock. Fix, then run "node pipeline.mjs".' }
       );
       process.exit(1);
     }
   }
 
   // 2. Upload pre-built static output — Vercel is a host only, no rebuild triggered
+  // Which sub-step is running, so a Deploy FAILED alert can say pull vs upload
+  // vs verification — they fail for entirely different reasons.
+  let deployStep = '2a. vercel pull (refresh project link + env)';
   try {
-    run(`"${VERCEL}" pull --yes --environment=production --scope=${VERCEL_SCOPE}`, BVC_APP);
+    await run(`"${VERCEL}" pull --yes --environment=production --scope=${VERCEL_SCOPE}`, BVC_APP);
 
-    const dep = runCapture(
-      `"${VERCEL}" deploy --prebuilt --prod --scope=${VERCEL_SCOPE}`,
-      BVC_APP
-    );
+    deployStep = `2b. vercel deploy --prebuilt (upload to ${deployTarget.env}: ${deployTarget.name})`;
+    const deployCmd = `"${VERCEL}" deploy --prebuilt --prod --scope=${VERCEL_SCOPE}`;
+    const dep = runCapture(deployCmd, BVC_APP);
     if (dep.code !== 0) {
       // Non-zero is not proof of failure here — see verifyPublished().
+      deployStep = `2c. Verifying ${deployTarget.alias} after deploy exited ${dep.code}`;
       const v = verifyPublished(dep.out, deployTarget.alias);
-      if (!v.ok) throw new Error(`deploy exited ${dep.code} and could not be verified (${v.reason})`);
+      if (!v.ok) {
+        throw Object.assign(new Error(`deploy exited ${dep.code} and could not be verified (${v.reason})`), {
+          cmd: deployCmd,
+          exitCode: dep.code,
+          tail: tailLines(dep.out),
+        });
+      }
       warn(
         `Deploy CLI exited ${dep.code}, but ${v.url} is Ready and holds ${deployTarget.alias} — ` +
           `publishing succeeded. Treating as success.`
@@ -567,7 +676,18 @@ async function main() {
   } catch (err) {
     await notify(
       `BVC Deploy FAILED (${deployTarget.env})`,
-      `Deploy to ${deployTarget.env} (${deployTarget.name}) failed at ${new Date().toLocaleTimeString()}. Data is built locally — re-run deploy manually.`
+      `Deploy to ${deployTarget.env} (${deployTarget.name}) failed at ${new Date().toLocaleTimeString()}. ` +
+        `${deployTarget.alias} is still serving the previous deployment. ` +
+        `Data is built locally, so only the upload needs retrying.`,
+      true,
+      '/fail',
+      {
+        step: deployStep,
+        err,
+        next: 'Run "node pipeline.mjs --deploy-only" from the repo root (uploads the existing package, no rebuild). ' +
+          'If the output below says "Not authorized" or "You do not have access to the specified account", ' +
+          'the Vercel login on this machine has expired — run "npx vercel login" first.',
+      }
     );
     process.exit(1);
   }
@@ -577,7 +697,7 @@ async function main() {
   //    on disk may be the inputs for a later manual build.
   if (!DEPLOY_ONLY) {
     try {
-      run('node scripts/cleanup-data.mjs', BVC_APP);
+      await run('node scripts/cleanup-data.mjs', BVC_APP);
     } catch (err) {
       console.warn(`[${ts()}] Cleanup warning (non-fatal):`, err.message);
     }
