@@ -1,5 +1,5 @@
 // Auto-generated TypeScript definitions for SIS data
-// Generated at: 2026-09-17T22:15:12.358Z
+// Generated at: 2026-09-25T03:39:19.633Z
 
 export interface SisItem {
   id: string;
@@ -32,6 +32,11 @@ export interface SisData {
     campuses: SisDataCategory;
     feeTypes: SisDataCategory;
     timeBlocks: SisDataCategory;
+    genders: SisDataCategory;
+    legalStatuses: SisDataCategory;
+    aboriginalStatus: SisDataCategory;
+    countries: SisDataCategory;
+    languages: SisDataCategory;
   };
 }
 
@@ -54,6 +59,31 @@ export interface SisLookupMap {
       bySlug: Record<string, SisItem>;
     };
     timeBlocks: {
+      byId: Record<string, SisItem>;
+      byName: Record<string, SisItem>;
+      bySlug: Record<string, SisItem>;
+    };
+    genders: {
+      byId: Record<string, SisItem>;
+      byName: Record<string, SisItem>;
+      bySlug: Record<string, SisItem>;
+    };
+    legalStatuses: {
+      byId: Record<string, SisItem>;
+      byName: Record<string, SisItem>;
+      bySlug: Record<string, SisItem>;
+    };
+    aboriginalStatus: {
+      byId: Record<string, SisItem>;
+      byName: Record<string, SisItem>;
+      bySlug: Record<string, SisItem>;
+    };
+    countries: {
+      byId: Record<string, SisItem>;
+      byName: Record<string, SisItem>;
+      bySlug: Record<string, SisItem>;
+    };
+    languages: {
       byId: Record<string, SisItem>;
       byName: Record<string, SisItem>;
       bySlug: Record<string, SisItem>;
