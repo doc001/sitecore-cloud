@@ -1,16 +1,16 @@
 {
-  "id": "A7A0BD97DFB84A5CA1E7BDFBEACC461A",
+  "id": "7E04F576C99D4544AF4C00008ADDB795",
   "sisId": "MMPR9107",
   "name": "Maintenance Information Management",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "E79CF0243A4645E0A433EA02E16D318D",
-      "name": "MMPR9107-90",
+      "id": "FD4EF4C1634B4AAFB55E4D5FF032FA21",
+      "name": "MMPR9107-90-25854",
       "sisId": "25854",
-      "deliveryType": "{12AB09BC-DB16-4EE8-B4AF-B6CFA0614BCA}",
-      "campus": "{182B9255-88E1-412F-919F-4C12ABBDE679}",
+      "deliveryType": "{96890E9F-E8E7-40F5-8208-B6B1F6F81EB4}",
+      "campus": "{3343E716-A4C4-4D45-A66B-0E7EACA9A85D}",
       "hours": 30,
       "credits": 0,
       "registrationStart": "20260709T000000",
@@ -19,43 +19,10 @@
       "endDate": "20261212T000000",
       "seatsAvailable": true,
       "fees": {
-        "domestic": {
-          "amount": 925,
-          "tax": 0,
-          "feeType": "{F09ED9DB-FED3-4B6D-AE77-0AFA2C2CDEB7}"
-        },
-        "international": {
-          "amount": 925,
-          "tax": 0,
-          "feeType": "{A5DC2F12-707A-4205-BF36-BAE02C4159A1}"
-        }
+        "domestic": null,
+        "international": null
       },
-      "timeBlocks": [
-        {
-          "sisId": "18786",
-          "name": "18786",
-          "startTime": "20261113T000000",
-          "endTime": "20261212T000000",
-          "frequency": "Weekly",
-          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
-        },
-        {
-          "sisId": "19076",
-          "name": "19076",
-          "startTime": "20261113T000000",
-          "endTime": "20261114T000000",
-          "frequency": "Weekly",
-          "schedule": "FSa 8:00 AM - 4:50 PM"
-        },
-        {
-          "sisId": "19139",
-          "name": "19139",
-          "startTime": "20261211T000000",
-          "endTime": "20261212T000000",
-          "frequency": "Weekly",
-          "schedule": "FSa 8:00 AM - 4:50 PM"
-        }
-      ]
+      "timeBlocks": []
     }
   ]
 }

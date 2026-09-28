@@ -1,16 +1,16 @@
 {
-  "id": "90531C1F75D1404FA40788187CE7AC48",
+  "id": "B7AD232C2DB143DD9E367B067B5F7A17",
   "sisId": "MMPR9106",
   "name": "Maintenance Work Management",
   "description": "",
   "credits": 0,
   "sections": [
     {
-      "id": "C3FFB53B53464A65811B168DC1220E5F",
-      "name": "MMPR9106-90",
+      "id": "521C8C9D21EE4D36A697DF9016656689",
+      "name": "MMPR9106-90-25931",
       "sisId": "25931",
-      "deliveryType": "{12AB09BC-DB16-4EE8-B4AF-B6CFA0614BCA}",
-      "campus": "{182B9255-88E1-412F-919F-4C12ABBDE679}",
+      "deliveryType": "{96890E9F-E8E7-40F5-8208-B6B1F6F81EB4}",
+      "campus": "{3343E716-A4C4-4D45-A66B-0E7EACA9A85D}",
       "hours": 30,
       "credits": 0,
       "registrationStart": "20260709T000000",
@@ -19,43 +19,10 @@
       "endDate": "20261121T000000",
       "seatsAvailable": true,
       "fees": {
-        "domestic": {
-          "amount": 925,
-          "tax": 0,
-          "feeType": "{F09ED9DB-FED3-4B6D-AE77-0AFA2C2CDEB7}"
-        },
-        "international": {
-          "amount": 925,
-          "tax": 0,
-          "feeType": "{A5DC2F12-707A-4205-BF36-BAE02C4159A1}"
-        }
+        "domestic": null,
+        "international": null
       },
-      "timeBlocks": [
-        {
-          "sisId": "18787",
-          "name": "18787",
-          "startTime": "20261023T000000",
-          "endTime": "20261121T000000",
-          "frequency": "Weekly",
-          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
-        },
-        {
-          "sisId": "19071",
-          "name": "19071",
-          "startTime": "20261023T000000",
-          "endTime": "20261024T000000",
-          "frequency": "Weekly",
-          "schedule": "FSa 8:00 AM - 4:50 PM"
-        },
-        {
-          "sisId": "19135",
-          "name": "19135",
-          "startTime": "20261120T000000",
-          "endTime": "20261121T000000",
-          "frequency": "Weekly",
-          "schedule": "FSa 8:00 AM - 4:50 PM"
-        }
-      ]
+      "timeBlocks": []
     }
   ]
 }

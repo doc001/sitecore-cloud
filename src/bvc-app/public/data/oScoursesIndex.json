@@ -1,5 +1,63 @@
 {
-  "generatedAt": "2026-09-24T14:16:07.091Z",
-  "totalCourses": 0,
-  "courses": []
+  "generatedAt": "2026-09-28T20:15:36.044Z",
+  "totalCourses": 3,
+  "courses": [
+    {
+      "sisId": "ANAT1101",
+      "name": "Anatomy and Physiology",
+      "credits": 6,
+      "sectionCount": 2,
+      "fileName": "course-ANAT1101.json",
+      "cartItems": [
+        {
+          "sectionName": "ANAT1101-51",
+          "sisId": "19980",
+          "schedule": "MT 6:00 PM - 8:50 PM"
+        },
+        {
+          "sectionName": "ANAT1101-80",
+          "sisId": "17915",
+          "schedule": "MT 9:00 AM - 11:50 AM"
+        }
+      ]
+    },
+    {
+      "sisId": "COMM1101",
+      "name": "Interpersonal Relationships And Communication Skills",
+      "credits": 3,
+      "sectionCount": 2,
+      "fileName": "course-COMM1101.json",
+      "cartItems": [
+        {
+          "sectionName": "COMM1101-50",
+          "sisId": "20688",
+          "schedule": "M 6:00 PM - 8:50 PM"
+        },
+        {
+          "sectionName": "COMM1101-51",
+          "sisId": "20011",
+          "schedule": "T 6:00 PM - 8:50 PM"
+        }
+      ]
+    },
+    {
+      "sisId": "ENGL1201",
+      "name": "English Composition",
+      "credits": 3,
+      "sectionCount": 2,
+      "fileName": "course-ENGL1201.json",
+      "cartItems": [
+        {
+          "sectionName": "ENGL1201-20",
+          "sisId": "19989",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        },
+        {
+          "sectionName": "ENGL1201-21",
+          "sisId": "19995",
+          "schedule": "SuMTWThFSa 12:00 AM - 12:00 AM"
+        }
+      ]
+    }
+  ]
 }
