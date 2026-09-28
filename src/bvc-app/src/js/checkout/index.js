@@ -181,9 +181,15 @@ import { validateCart, readValidation } from '../shared/validation.js';
           overlay = document.createElement('div');
           overlay.id = SUBMIT_OVERLAY_ID;
           // aria-live so a screen reader announces the wait and each step change;
-          // aria-busy marks the page as working rather than broken.
-          overlay.setAttribute('role', 'status');
+          // aria-busy marks the page as working rather than broken. alertdialog
+          // + aria-modal tells assistive tech the form behind is out of reach.
+          overlay.setAttribute('role', 'alertdialog');
+          overlay.setAttribute('aria-modal', 'true');
           overlay.setAttribute('aria-live', 'polite');
+          // Lock scrolling behind the overlay; only on first show, since step()
+          // re-enters here and would otherwise save 'hidden' as the original.
+          this.scrollLock = document.body.style.overflow;
+          document.body.style.overflow = 'hidden';
           overlay.innerHTML =
             '<div class="bvc-submitting-spinner" aria-hidden="true"></div>' +
             '<p class="bvc-submitting-title"></p>' +
@@ -209,7 +215,10 @@ import { validateCart, readValidation } from '../shared/validation.js';
     hide: function () {
       try {
         var overlay = document.getElementById(SUBMIT_OVERLAY_ID);
-        if (overlay) overlay.remove();
+        if (overlay) {
+          overlay.remove();
+          document.body.style.overflow = this.scrollLock || '';
+        }
         document.body.removeAttribute('aria-busy');
       } catch (error) {
         console.warn('[Checkout] Could not hide the submitting overlay', error);
@@ -230,6 +239,8 @@ import { validateCart, readValidation } from '../shared/validation.js';
       this.form = document.getElementById('email-form') || document.querySelector('[data-checkout]');
       this.shoppingCartElement = document.getElementById('shoppingCart');
       this.registerButton = document.getElementById('registerToCourse');
+      // Set for the whole registration -> payment hand-off; see handleSubmit().
+      this.submitting = false;
       // Save type globally
       const urlParams = new URLSearchParams(window.location.search);
       this.type = urlParams.get('type');
@@ -875,10 +886,14 @@ import { validateCart, readValidation } from '../shared/validation.js';
       let isValid = true;
       const errors = {};
 
-      // Clear previous errors
-      const errorElements = document.querySelectorAll('.error');
-      errorElements.forEach((el) => {
+      // Clear previous errors. Two shapes: the legacy .error nodes, and the
+      // form's own .bvc-field__error[data-error], which are hidden when empty.
+      document.querySelectorAll('.error').forEach((el) => {
         el.textContent = '';
+      });
+      document.querySelectorAll('[data-error]').forEach((el) => {
+        el.textContent = '';
+        el.hidden = true;
       });
 
       Object.values(this.fields).forEach((field) => {
@@ -956,9 +971,10 @@ import { validateCart, readValidation } from '../shared/validation.js';
       if (termsCheckbox && !termsCheckbox.checked) {
         errors.terms = 'You must accept the terms and conditions';
         isValid = false;
-        const termsError = document.getElementById('terms-error');
+        const termsError = document.getElementById('terms-error') || document.querySelector('[data-terms-error]');
         if (termsError) {
           termsError.textContent = errors.terms;
+          termsError.hidden = false;
         }
       }
 
@@ -967,9 +983,14 @@ import { validateCart, readValidation } from '../shared/validation.js';
           const errorElement = document.getElementById(`${field}-error`);
           if (errorElement) {
             errorElement.textContent = errors[field];
+            errorElement.hidden = false;
           }
         }
       });
+
+      // Kept for the summary in handleSubmit: a field that fails here can live on
+      // a step that is not on screen, so the per-field message alone is invisible.
+      this.validationErrors = errors;
 
       return isValid;
     }
@@ -988,6 +1009,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
         await this.runSubmit(event);
       } catch (error) {
         console.error('[Checkout] Unhandled submit failure', error);
+        this.submitting = false;
         submitOverlay.hide();
         this.showErrorMessage('Something went wrong while processing your registration. Please try again, or contact us if this keeps happening.');
       }
@@ -997,10 +1019,24 @@ import { validateCart, readValidation } from '../shared/validation.js';
       if (event) {
         event.preventDefault();
       }
-      // Validate the form
-      if (!this.validateForm()) {
+      // The overlay blocks the pointer, but not the Enter key and not a second
+      // dispatch of bvc:checkout-submit — and a second pass through here would
+      // create a second registration for the same cart.
+      if (this.submitting) {
         return;
       }
+      // Validate the form
+      if (!this.validateForm()) {
+        const messages = Object.keys(this.validationErrors || {}).map((key) => this.validationErrors[key]);
+        this.showErrorMessage(
+          messages.length
+            ? `Please correct the following before continuing: ${messages.join('; ')}.`
+            : 'Please check your details before continuing.'
+        );
+        return;
+      }
+      // Held until the redirect; every way out below clears it again.
+      this.submitting = true;
       // Last line of defence. The load-time repair can be minutes old by now — a
       // section can fill while the shopper works through the three form steps. Catch
       // it here rather than creating a registration that submit-payment will reject
@@ -1015,6 +1051,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
       try {
         const droppedAtSubmit = await this.repairCart();
         if (droppedAtSubmit.length) {
+          this.submitting = false;
           submitOverlay.hide();
           this.showErrorMessage(
             1 === droppedAtSubmit.length
@@ -1182,6 +1219,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
         // that never resolves. This branch used to swallow the error entirely
         // (the alerts below it were commented out), which was survivable only
         // because nothing was covering the page.
+        this.submitting = false;
         submitOverlay.hide();
         this.showErrorMessage(
           error.message && (error.message.includes('token is missing') || error.message.includes('session has expired'))
@@ -1274,6 +1312,7 @@ import { validateCart, readValidation } from '../shared/validation.js';
         }
       } catch (error) {
         console.error('Payment submission error:', error);
+        this.submitting = false;
         submitOverlay.hide();
         this.showErrorMessage(`Payment submission failed: ${error.message}`);
       }
