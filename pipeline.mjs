@@ -45,7 +45,7 @@ function confirmDeployTarget() {
   console.log(`[${ts()}]   Project ID:     ${id}`);
   console.log(`[${ts()}]   Alias:          ${known.alias}`);
   console.log(`[${ts()}] ═══════════════════════════════════════════════\n`);
-  return { id, env: known.env, name: known.name, alias: known.alias };
+  return { id, env: known.env, name: known.name, alias: known.alias, apiProxy: known.apiProxy };
 }
 
 dotenv.config({ path: join(BVC_APP, '.env.local') });

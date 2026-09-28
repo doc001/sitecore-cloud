@@ -203,21 +203,65 @@ The `bvc-app` Next.js application deploys to Vercel under the `bvc-marketing-its
 
 ## Vercel Projects
 
-| Project | URL | Purpose |
-|---|---|---|
-| `bvc-app` | https://bvc-app.vercel.app | **Production** — sole deployment target; all Webflow embeds load CSS/JS/data from here |
+| Env | Project | Site / data origin | API proxy |
+|---|---|---|---|
+| UAT | `bvc-app-uat` | https://bvc-app-uat.vercel.app | https://bvc-uat-api-proxy.vercel.app |
+| PROD | `bvc-app` | https://bvc-app.vercel.app | https://bvc-api-proxy.vercel.app |
 
 **Vercel is a static host only.** The site is built locally; the pre-built `out/` folder is packaged and uploaded directly using `vercel deploy --prebuilt`. Vercel never runs a build on its servers.
 
 ## Deploying
 
-All deployments target `bvc-app`. Run on demand from the repo root:
+Two independent settings decide what a deploy does. Neither implies the other.
+
+| Setting | Controlled by | Decides |
+|---|---|---|
+| **Target** (UAT or PROD) | the Vercel link in `src/bvc-app/.vercel/project.json` | which project receives the upload, **and** which data origin + API proxy get baked into the JS bundles |
+| **Build flavour** | the `--prod` flag | whether the Webflow embed bundles are minified with `console`/`debugger` stripped |
+
+**There is no `--uat` flag.** UAT is not selected by a flag — it is whatever
+the machine is linked to. `--prod` does **not** switch the target to production;
+it only minifies. A UAT-linked run with `--prod` still deploys to UAT.
+
+### 1. Check / set the target
+
+Every run prints the target it resolved before doing anything:
+
+```
+Deploy target:  UAT
+Project name:   bvc-app-uat
+```
+
+The project ID in `project.json` must be one of the two in `KNOWN_PROJECTS`
+(`pipeline.mjs`); anything else aborts the run. To switch, re-link from
+`src/bvc-app/` (the file is git-ignored, so this is per machine):
 
 ```powershell
-npm run deploy:bvcapp   # runs the full pipeline: build → package → deploy → cleanup
-# or equivalently:
-node pipeline.mjs
+cd src/bvc-app
+npx vercel link --yes --scope=bvc-marketing-its --project=bvc-app-uat   # UAT
+npx vercel link --yes --scope=bvc-marketing-its --project=bvc-app       # PROD
 ```
+
+The pipeline sets `BVC_DATA_ORIGIN` / `BVC_API_ORIGIN` from the target, and
+`scripts/build-os-course.mjs` bakes them into every bundle as `__DATA_ORIGIN__` /
+`__API_ORIGIN__`. A standalone `npm run js:build` (no pipeline) has no target and
+falls back to the **UAT** origins — never deploy bundles built that way to PROD.
+
+### 2. Run the pipeline (from the repo root)
+
+| Target | Command | Result |
+|---|---|---|
+| UAT | `npm run deploy:bvcapp` (= `node pipeline.mjs`) | full build, readable JS |
+| PROD | `npm run deploy:bvcapp:prod` (= `node pipeline.mjs --prod`) | full build, minified JS |
+| either | `npm run deploy:bvcapp:only` (`--deploy-only`) | re-upload the existing `.vercel/output/`, no build |
+| either | `npm run deploy:bvcapp:hourly` (`--data-only`) | refresh course JSON only, reuse the last full build's JS |
+
+- **Production = PROD link + `--prod`.** Linking to PROD but forgetting `--prod`
+  ships readable, console-logging bundles to production. `STRIP_DEBUG=true` is
+  equivalent to `--prod`.
+- `--deploy-only` and `--data-only` do not rebuild the JS, so the bundles keep
+  the origins and minification of the **last full build**. After switching the
+  link, always run a full build before either of these.
 
 ## Webflow Embed Asset URLs
 
@@ -272,7 +316,7 @@ its report: [`docs/program-tuition-refresh.md`](docs/program-tuition-refresh.md)
 |---|---|
 | Build | `npm run build:bvcapp -- --cache=local:` — fetches data from Webflow + Sitecore XMC, generates breadcrumbs, runs Next.js static export → `out/`. Cache read *and* write are disabled: `--force` only skips the read, and the resulting ~200 MB/run write into `.turbo/cache` (never pruned by Turbo) once filled the disk. |
 | Package | Copies `out/` into `.vercel/output/static/` with a `config.json` (Vercel Build Output API v3) |
-| Link project | `vercel pull` — refreshes `.vercel/project.json` for `bvc-app` |
+| Link project | `vercel pull` — refreshes settings for the project already linked in `.vercel/project.json` (it does not change the target; see [Deploying](#deploying)) |
 | Deploy | `vercel deploy --prebuilt` — uploads static files; Vercel does not rebuild |
 | Cleanup | Removes intermediate JSON files from `src/data/` |
 

@@ -23,24 +23,57 @@ Both apps deploy to Vercel under the `bvc-marketing-its` scope.
 
 ### Vercel Projects (bvc-app)
 
-| Project | URL | Purpose |
-|---|---|---|
-| `bvc-app` | https://bvc-app.vercel.app | **Production** — sole deployment target; Webflow embeds load all CSS/JS/data from here |
+| Env | Project | Site / data origin | API proxy |
+|---|---|---|---|
+| UAT | `bvc-app-uat` | https://bvc-app-uat.vercel.app | https://bvc-uat-api-proxy.vercel.app |
+| PROD | `bvc-app` | https://bvc-app.vercel.app | https://bvc-api-proxy.vercel.app |
 
-**Webflow embeds reference `bvc-app` for CSS, JS, and course data:**
+**Production Webflow embeds reference `bvc-app` for CSS, JS, and course data** (UAT pages use `bvc-app-uat`):
 ```html
 <link rel="stylesheet" href="https://bvc-app.vercel.app/css/os-course.css" />
 <script src="https://bvc-app.vercel.app/js/ee-course.js" defer></script>
 <script src="https://bvc-app.vercel.app/js/os-course.js" defer></script>
 ```
 
-**All deployments target `bvc-app`. Vercel is a static host only — it never rebuilds.**
+**Vercel is a static host only — it never rebuilds.**
 The pipeline builds locally, packages `out/` as Vercel Build Output API v3, then uploads with `--prebuilt`.
 
-On-demand deploy (same steps as the hourly PM2 cron):
-```bash
-npm run deploy:bvcapp   # or: node pipeline.mjs
-```
+### Deploy target vs `--prod` — two independent settings
+
+| Setting | Controlled by | Decides |
+|---|---|---|
+| **Target** (UAT/PROD) | Vercel link: `src/bvc-app/.vercel/project.json` (git-ignored, per machine) | which project gets the upload, **and** the data origin + API proxy baked into every JS bundle |
+| **Build flavour** | `--prod` flag (or `STRIP_DEBUG=true`) | minify + strip `console`/`debugger` from the Webflow embed bundles |
+
+- **There is no `--uat` flag.** UAT is simply what the machine is linked to. `--prod`
+  does **not** switch the target — a UAT-linked `--prod` run still deploys to UAT.
+- `confirmDeployTarget()` in `pipeline.mjs` resolves the project ID against
+  `KNOWN_PROJECTS`, prints the target, and aborts on an unknown ID. It then sets
+  `BVC_DATA_ORIGIN` / `BVC_API_ORIGIN`, which `scripts/build-os-course.mjs` defines as
+  `__DATA_ORIGIN__` / `__API_ORIGIN__` in every bundle (e.g. `checkout/index.js` builds
+  its payment proxy URL from `__API_ORIGIN__`).
+- A standalone `npm run js:build` has no target and falls back to the **UAT** origins.
+- Switch target (from `src/bvc-app/`):
+  `npx vercel link --yes --scope=bvc-marketing-its --project=bvc-app-uat` (UAT) or
+  `--project=bvc-app` (PROD). `vercel pull` does **not** change the target.
+
+| Target | Command |
+|---|---|
+| UAT | `npm run deploy:bvcapp` (`node pipeline.mjs`) — full build, readable JS |
+| PROD | `npm run deploy:bvcapp:prod` (`node pipeline.mjs --prod`) — full build, minified |
+| either | `npm run deploy:bvcapp:only` (`--deploy-only`) — re-upload existing `.vercel/output/`, no build |
+| either | `npm run deploy:bvcapp:hourly` (`--data-only`) — course JSON only, reuses last full build's JS |
+
+**Production = PROD link + `--prod`.** A PROD link without `--prod` ships readable,
+console-logging bundles to production. `--deploy-only` / `--data-only` never rebuild
+the JS, so they carry the origins and minification of the **last full build** — after
+switching the link, always run a full build first.
+
+> `confirmDeployTarget()` once returned the target without `apiProxy`, so the pipeline
+> set `BVC_API_ORIGIN=https://undefined`. `build-os-course.mjs` only falls back when
+> the var is *unset*, so that string would have been baked into `checkout.js`, sending
+> registration/payment to `https://undefined/api/bvcpayment`. Fixed 2026-09-28 before
+> it deployed. Keep the returned object in step with `KNOWN_PROJECTS`.
 
 ## Commands
 
@@ -50,7 +83,8 @@ npm run build              # Build all workspaces
 npm run build:jamstack     # Build nextjs-jamstack only
 npm run build:bvcapp       # Build bvc-app only (Turbo; pass -- --cache=local: to skip cache read AND write)
 npm run deploy:jamstack    # Deploy nextjs-jamstack to Vercel prod
-npm run deploy:bvcapp      # Full pipeline: vercel pull → build → package → deploy --prebuilt to bvc-app
+npm run deploy:bvcapp      # Full pipeline: build → package → vercel pull → deploy --prebuilt to the LINKED project (readable JS)
+npm run deploy:bvcapp:prod # Same, minified — use for production (see "Deploy target vs --prod")
 ```
 
 ### Hourly Automated Pipeline (PM2)
