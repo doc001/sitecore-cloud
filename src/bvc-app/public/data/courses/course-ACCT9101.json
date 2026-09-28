@@ -17,7 +17,7 @@
       "registrationEnd": "20270115T000000",
       "startDate": "20270116T000000",
       "endDate": "20270313T000000",
-      "seatsAvailable": true,
+      "seatsAvailable": false,
       "fees": {
         "domestic": {
           "amount": 500,
@@ -53,10 +53,18 @@
       "registrationEnd": "20270112T000000",
       "startDate": "20270113T000000",
       "endDate": "20270513T000000",
-      "seatsAvailable": true,
+      "seatsAvailable": false,
       "fees": {
-        "domestic": null,
-        "international": null
+        "domestic": {
+          "amount": 500,
+          "tax": 0,
+          "feeType": "{F09ED9DB-FED3-4B6D-AE77-0AFA2C2CDEB7}"
+        },
+        "international": {
+          "amount": 500,
+          "tax": 0,
+          "feeType": "{A5DC2F12-707A-4205-BF36-BAE02C4159A1}"
+        }
       },
       "timeBlocks": [
         {
@@ -81,7 +89,7 @@
       "registrationEnd": "20270209T000000",
       "startDate": "20270210T000000",
       "endDate": "20270610T000000",
-      "seatsAvailable": true,
+      "seatsAvailable": false,
       "fees": {
         "domestic": {
           "amount": 500,
@@ -117,7 +125,7 @@
       "registrationEnd": "20270309T000000",
       "startDate": "20270310T000000",
       "endDate": "20270710T000000",
-      "seatsAvailable": true,
+      "seatsAvailable": false,
       "fees": {
         "domestic": {
           "amount": 500,
@@ -153,7 +161,7 @@
       "registrationEnd": "20270413T000000",
       "startDate": "20270414T000000",
       "endDate": "20270814T000000",
-      "seatsAvailable": true,
+      "seatsAvailable": false,
       "fees": {
         "domestic": {
           "amount": 500,

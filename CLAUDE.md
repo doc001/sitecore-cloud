@@ -72,8 +72,9 @@ switching the link, always run a full build first.
 > `confirmDeployTarget()` once returned the target without `apiProxy`, so the pipeline
 > set `BVC_API_ORIGIN=https://undefined`. `build-os-course.mjs` only falls back when
 > the var is *unset*, so that string would have been baked into `checkout.js`, sending
-> registration/payment to `https://undefined/api/bvcpayment`. Fixed 2026-09-28 before
-> it deployed. Keep the returned object in step with `KNOWN_PROJECTS`.
+> registration/payment to `https://undefined/api/bvcpayment`. Fixed on `vercel-prod`
+> 2026-09-25 and independently on `vercel-uat` 2026-09-28, before either deployed.
+> Keep the returned object in step with `KNOWN_PROJECTS`.
 
 ## Commands
 
@@ -153,6 +154,16 @@ must not become an outage.
 
 Fires on: Build FAILED, Package FAILED, Deploy FAILED, fee anomaly (advisory), and
 deploy-CLI-errored-but-published (advisory).
+
+**Every pipeline alert says where to look.** `notify()` takes an optional `detail`
+(`step`, `err`, `next`) and the card carries: the failed step (deploy is split into
+2a pull / 2b upload / 2c verification), the command, exit code, error, a "Next step",
+the run-start stamp in PM2's log format, the log paths, and the last ~15 lines of
+the failing command's output. `run()` tees output (live to the log, tail kept for
+the alert), which is why it is async. Every send is also logged — "Teams alert
+accepted by webhook", "Heartbeat … sent", or why not — because a delivered alert
+used to leave no trace. Until 2026-09-24 a failure card said only "Deploy failed
+at <time>" and the verification reason was discarded entirely.
 
 **Card shape.** `sendTeams` takes an optional `extra: { facts, mono }`. `facts` are
 label/value rows appended above the standard Project/Host/Time; `mono` is an **array
