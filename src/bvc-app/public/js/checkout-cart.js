@@ -8,7 +8,7 @@
      * a relative /data/... URL would resolve against the Webflow domain. Override with
      * window.__CHECKOUT_CART_CONFIG__ = { dataOrigin: '...' } before the script loads.
      */
-    dataOrigin: typeof window !== "undefined" && window.__CHECKOUT_CART_CONFIG__ && window.__CHECKOUT_CART_CONFIG__.dataOrigin || "https://bvc-app-uat.vercel.app",
+    dataOrigin: typeof window !== "undefined" && window.__CHECKOUT_CART_CONFIG__ && window.__CHECKOUT_CART_CONFIG__.dataOrigin || "https://bvc-app.vercel.app",
     // Shown next to the birth date field and used by the date validator.
     dateFormat: "YYYY-MM-DD",
     // Requirement 2.7.3 — no year earlier than 100 years prior.
@@ -46,7 +46,7 @@
       scopes: ["openid", "profile", "email", "https://bowvalleycollege.ca/ngew/test/login"],
       // v4 exposes initialize(); the 2.12.0 build in the original embed does not.
       msalCdn: "https://alcdn.msauth.net/browser/4.5.0/js/msal-browser.min.js",
-      studentApiBase: "https://bvc-uat-api-proxy.vercel.app/api/bvcpayment/"
+      studentApiBase: "https://bvc-api-proxy.vercel.app/api/bvcpayment/"
     },
     /**
      * Google Maps Places autocomplete for the address fields (NGEW-217).

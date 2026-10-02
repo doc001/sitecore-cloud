@@ -116,7 +116,7 @@
     }
     window.__bvcEeListingLoaded = true;
     var CFG = window.__EE_LISTING_CONFIG__ || {};
-    var FALLBACK_ORIGIN = "https://bvc-app-uat.vercel.app";
+    var FALLBACK_ORIGIN = "https://bvc-app.vercel.app";
     var DATA_PATH = "/data/extended-education-courses.json";
     var PAGE_PATTERN = CFG.pagePattern === void 0 ? /\/study\/extended-education\/?$/i : CFG.pagePattern;
     var EXPLICIT_SELECTOR = "[data-bvc-ee-listing]";

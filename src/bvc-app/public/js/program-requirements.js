@@ -10,7 +10,7 @@
     }
     window.__bvcProgramRequirementsLoaded = true;
     var CFG = window.__PROGRAM_REQUIREMENTS_CONFIG__ || {};
-    var FALLBACK_ORIGIN = "https://bvc-app-uat.vercel.app";
+    var FALLBACK_ORIGIN = "https://bvc-app.vercel.app";
     var INDEX_PATH = "/data/static/program-requirements-index.json";
     var BY_CODE_PATH = "/data/static/program-requirements-by-code/";
     var OS_BY_AREA_PATH = "/data/open-studies-by-area.json";

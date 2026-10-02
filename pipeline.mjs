@@ -630,6 +630,41 @@ async function main() {
     }
   }
 
+  // 1d. Origin guard — the packaged cart bundles must call THIS target's proxy.
+  //     BVC_API_ORIGIN is baked in at bundle time, and build-os-course.mjs falls
+  //     back to UAT when it is missing. Turbo 2's strict env mode silently dropped
+  //     it (turbo.json declared only STRIP_DEBUG), so every full build from
+  //     81d5e345 shipped the UAT proxy to production — and every Add to cart on
+  //     www.bowvalleycollege.ca died on CORS. Fatal on a full build (never ship
+  //     new wrong bundles); advisory on --data-only/--deploy-only, which reuse
+  //     the last build's JS and cannot fix it — holding them would only drop the
+  //     hour's data too.
+  {
+    const jsDir = join(BVC_APP, '.vercel', 'output', 'static', 'js');
+    const bad = [];
+    for (const f of ['os-course.js', 'ee-course.js', 'checkout.js', 'checkout-cart.js']) {
+      const p = join(jsDir, f);
+      if (!existsSync(p)) { bad.push(`${f}: missing`); continue; }
+      const found = [...new Set(readFileSync(p, 'utf8').match(/https:\/\/bvc[a-z-]*api-proxy\.vercel\.app/g) || [])];
+      const wrong = found.filter((o) => o !== `https://${deployTarget.apiProxy}`);
+      if (wrong.length || !found.length) bad.push(`${f}: ${found.join(', ') || 'no proxy origin'}`);
+    }
+    if (bad.length) {
+      const fatal = !DATA_ONLY && !DEPLOY_ONLY;
+      await notify(
+        fatal ? 'BVC Deploy FAILED' : 'BVC wrong API proxy in production bundles',
+        `Cart bundles do not point at ${deployTarget.apiProxy} (${deployTarget.env}): ${bad.join('; ')}.` +
+          (fatal ? ' Nothing was deployed.' : ' Deploying data anyway; the JS needs a full build.'),
+        true,
+        fatal ? '/fail' : null,
+        { step: '1d. Origin guard on packaged bundles', next: 'Check BVC_API_ORIGIN reaches the build (turbo.json "env"), then run "node pipeline.mjs".' }
+      );
+      if (fatal) process.exit(1);
+    } else {
+      console.log(`[${ts()}] Origin guard: bundles call ${deployTarget.apiProxy}`);
+    }
+  }
+
   // 2. Upload pre-built static output — Vercel is a host only, no rebuild triggered
   // Which sub-step is running, so a Deploy FAILED alert can say pull vs upload
   // vs verification — they fail for entirely different reasons.
