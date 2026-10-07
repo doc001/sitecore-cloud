@@ -4,7 +4,7 @@
       "build": {
         "dependsOn": ["^build"],
         "outputs": [".next/**", "!.next/cache/**", "out/**", "dist/**"],
-        "env": ["STRIP_DEBUG"]
+        "env": ["STRIP_DEBUG", "BVC_DATA_ORIGIN", "BVC_API_ORIGIN"]
       },
       "check-types": {
         "dependsOn": ["^check-types"]
