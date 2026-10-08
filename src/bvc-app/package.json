@@ -32,6 +32,7 @@
     "generateOpenStudiesJson": "node scripts/generateOpenStudiesPublicJson.mjs",
     "generateOpenStudiesByArea": "node scripts/buildOpenStudiesByArea.mjs",
     "generateExtendedEducationJson": "node scripts/buildExtendedEducationCourses.mjs",
+    "generateCareerAdvisorData": "node scripts/buildCareerAdvisorData.mjs",
     "sanitizeOutlines": "node scripts/sanitize-outline-filenames.mjs",
     "sanitizeOutlines:check": "node scripts/sanitize-outline-filenames.mjs --dry-run",
     "fetchCourseOutlines": "node scripts/fetchCourseOutlines.mjs",
@@ -49,6 +50,7 @@
     "cleanup": "node scripts/cleanup-data.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.132.1",
     "@headlessui/react": "^2.2.2",
     "@tailwindcss/postcss": "^4.1.6",
     "@tailwindcss/vite": "^4.1.6",
@@ -62,6 +64,7 @@
     "framer-motion": "^12.10.4",
     "graphql": "^16.11.0",
     "graphql-request": "^7.2.0",
+    "jspdf": "^4.2.1",
     "next": "16.2.6",
     "prop-types": "^15.8.1",
     "react": "^19.2.4",

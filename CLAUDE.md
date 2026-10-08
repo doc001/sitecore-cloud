@@ -1145,6 +1145,11 @@ HEARTBEAT_URL=
 # check from HEARTBEAT_URL — "the cart's backend is unhealthy" and "the deploy
 # pipeline failed" need different alarms and different escalation.
 HEARTBEAT_SIS_URL=
+# Optional, TEMPORARY: Anthropic API key for the /career-advisor page. The browser
+# calls Claude directly with it. Unset, the quiz still works and shows the
+# persona's programs; career matches and chat are skipped. Also run
+# `npm run generateCareerAdvisorData` once to build public/data/career-advisor/.
+NEXT_PUBLIC_ANTHROPIC_API_KEY=
 ```
 
 `sis-health-watch.mjs` also reads these, all optional with working defaults:
