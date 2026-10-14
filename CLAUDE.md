@@ -1150,6 +1150,11 @@ HEARTBEAT_SIS_URL=
 # persona's programs; career matches and chat are skipped. Also run
 # `npm run generateCareerAdvisorData` once to build public/data/career-advisor/.
 NEXT_PUBLIC_ANTHROPIC_API_KEY=
+# Needed only by `npm run generateCareerAdvisorData`: curriculum (CM) API token
+# for an account that can view programs and courses. KUALI_BASE_URL is optional.
+# That script scrapes alis and the curriculum API itself; it no longer reads the
+# AlisCareerAdvisor / KualiAdmissions dumps.
+KUALI_TOKEN=
 ```
 
 `sis-health-watch.mjs` also reads these, all optional with working defaults:
